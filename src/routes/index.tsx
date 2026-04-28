@@ -144,7 +144,7 @@ function Index() {
               Building systems<br />that <em>run themselves.</em>
             </h1>
             <p className="hero-desc fade-up d3">
-              I'm Kamil Jan. I build businesses, design the systems behind them, and let the team run the day-to-day.
+              I'm Kamil Jan. I build businesses and design the systems behind them.
             </p>
             <div className="hero-actions fade-up d4">
               <a href="#projects" className="btn btn-primary">See my projects <Arrow /></a>
