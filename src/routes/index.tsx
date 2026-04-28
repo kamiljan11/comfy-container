@@ -257,7 +257,7 @@ function Index() {
         <div className="container">
           <div className="section-eyebrow"><span>Work with me</span></div>
           <h2>How I can<br /><em>actually help</em></h2>
-          <p className="section-sub">For founders who'd rather ship the system than deck the pitch.</p>
+          
 
           <div className="services-grid">
             {services.map((s) => (
