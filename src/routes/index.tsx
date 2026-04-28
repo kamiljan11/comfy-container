@@ -87,7 +87,7 @@ const projects = [
   },
   {
     href: "https://www.sleipnirtours.is/",
-    wordmark: "Sl",
+    logo: "/logos/sleipnir.png",
     title: "Sleipnir Glacier Tours",
     desc: "Client work — built and ran their full commercial stack: Bokun setup, Google & Meta Ads, influencer partnerships, custom tour products, event representation, and pricing strategy.",
     domain: "sleipnirtours.is",
