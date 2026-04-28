@@ -278,8 +278,8 @@ function Index() {
           <h2>Let's <em>talk.</em></h2>
           <p className="contact-intro">If you're building something real and want to move faster, reach out.</p>
           <div className="contact-actions">
-            <a href="mailto:hello@kamiljan.com" className="btn btn-primary"><Mail size={16} strokeWidth={1.5} /> hello@kamiljan.com</a>
-            <a href="https://www.linkedin.com/in/myspiritway/" target="_blank" rel="noreferrer" className="btn btn-ghost"><Linkedin size={16} strokeWidth={1.5} /> LinkedIn</a>
+            <a href="mailto:hello@kamiljan.com" className="btn btn-primary"><Mail size={16} strokeWidth={1.5} /><span>hello@kamiljan.com</span></a>
+            <a href="https://www.linkedin.com/in/myspiritway/" target="_blank" rel="noreferrer" className="btn btn-ghost"><Linkedin size={16} strokeWidth={1.5} /><span>LinkedIn</span></a>
           </div>
         </div>
       </section>
