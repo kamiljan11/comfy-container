@@ -90,7 +90,7 @@ const projects = [
 const timeline = [
   { year: "2013", event: "Started leading at 17. First team, fifty people." },
   { year: "2015", event: "Opened my first business — an outdoor advertising agency. Founded a non-profit on the side: public breathwork, mindfulness, and meditation programs that ran for three years." },
-  { year: "2016", event: "Top-performing sales rep for mBank — loans and insurance products. Sales as a craft, not a hustle." },
+  { year: "2016", event: "Top-performing sales rep for mBank — loans and insurance products." },
   { year: "2018", event: "Moved to Iceland. New country, new market, same building habit." },
   { year: "2019", event: "Eight-plus parallel income streams. Crypto, trading, festival ops — learning to spread bets and run them in parallel." },
   { year: "2022", event: "Two years running marketing and operations for Sleipnir Glacier Tours — Bokun, Meta/Google Ads, partner network, sales channels." },
