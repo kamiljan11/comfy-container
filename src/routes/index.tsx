@@ -156,7 +156,7 @@ function Index() {
               </div>
               <div className="hero-meta-divider"></div>
               <div className="hero-meta-item">
-                <span className="hero-meta-num">'15</span>
+                <span className="hero-meta-num">'13</span>
                 <span className="hero-meta-label">Building since</span>
               </div>
             </div>
