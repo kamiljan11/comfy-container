@@ -85,6 +85,13 @@ const projects = [
     desc: "CRM for solar audit and sales teams. Job pipeline, roles (admin / sales rep / auditor), team notes, audit photos, and push notifications — runs like a native mobile app.",
     domain: "ekomoc.pl",
   },
+  {
+    href: "https://www.sleipnirtours.is/",
+    wordmark: "Sl",
+    title: "Sleipnir Glacier Tours",
+    desc: "Client work — built and ran their full commercial stack: Bokun setup, Google & Meta Ads, influencer partnerships, custom tour products, event representation, and pricing strategy.",
+    domain: "sleipnirtours.is",
+  },
 ];
 
 const timeline = [
