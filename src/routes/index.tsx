@@ -93,7 +93,7 @@ const timeline = [
   { year: "2016", event: "Top-performing sales rep for mBank — loans and insurance products." },
   { year: "2018", event: "Moved to Iceland." },
   { year: "2019", event: "Running 8 parallel income streams — crypto, trading, and festival operations." },
-  { year: "2022", event: "Two years running marketing and operations for Sleipnir Glacier Tours — Bokun, Meta/Google Ads, partner network, sales channels." },
+  { year: "2022", event: "Two years in Icelandic tourism — marketing and operations for Sleipnir Glacier Tours (Bokun, Meta/Google Ads, partner network, sales channels)." },
   { year: "2024", event: "Started Heartless Marketing — full-stack agency for Polish-Icelandic operators. Market data eventually reshaped it into Reykjawwwik.is, productized." },
   { year: "2025", event: "Facilitating Dynamic Meditation sessions on festival stages across Europe — Czech Republic, Poland, and beyond." },
   { year: "2026", event: "Five active ventures across four industries. MAS Group launches Parts, Prints, Rental, Logistics. Flyt.is, QuickFix.is, Reykjawwwik.is, MySpiritWay running in parallel." },
