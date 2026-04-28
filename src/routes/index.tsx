@@ -181,7 +181,6 @@ function Index() {
                 <span className="dropcap">F</span>irst team I led was 50 people. I was 17. That set the pattern — find a system, take responsibility, make it run.
               </p>
               <p>
-                Moved from Poland to Iceland in December 2018 and haven't stopped building since.
                 Today I run five active ventures across four industries — auto parts, freight, handyman services, websites, and coaching — alongside trusted teams in Iceland and Poland.
               </p>
               <p>
