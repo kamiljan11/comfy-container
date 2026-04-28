@@ -168,6 +168,7 @@ h2 em { font-style: italic; color: var(--teal-2); }
 
 #services { background: var(--bg-2); }
 .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+.services-grid .service-item:nth-child(3) { grid-column: 1 / -1; }
 .service-item { padding: 36px 32px; background: var(--bg-3); border: 1px solid var(--border); border-radius: 14px; margin: 6px; transition: border-color 0.2s; }
 .service-item:hover { border-color: var(--border-2); }
 .service-num { font-family: 'DM Serif Display', serif; font-size: 13px; color: var(--teal); margin-bottom: 20px; display: block; }
