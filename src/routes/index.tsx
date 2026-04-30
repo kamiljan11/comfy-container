@@ -113,7 +113,7 @@ const _values = [
 ];
 
 const services = [
-  { num: "01", title: "Business Architecture", desc: "Designing how a company actually operates end-to-end — team protocols, handoff systems, and custom internal tooling so the business runs without depending on any one person." },
+  { num: "01", title: "Business Architecture", desc: "Designing how a company actually operates end-to-end — team protocols, handoff systems, and custom internal tooling. The result: businesses that are profitable and don't drain your time." },
   { num: "02", title: "Marketing & Sales Funnels", desc: "Fully managed sales funnels — Meta Ads ecosystems, landing pages, email flows, conversion tracking. Building funnels that turn traffic into B2B and B2C contracts." },
   { num: "03", title: "Co-founding, Advisory & Hire", desc: "Open to the right projects as co-founder, builder, or advisor — and available for hire on focused engagements. Especially AI tooling, B2B, and ventures with a clear distribution path." },
 ];
