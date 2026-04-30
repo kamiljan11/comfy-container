@@ -290,11 +290,12 @@ footer p { color: var(--muted); font-size: 13px; }
   .about-narrow .about-text p { font-size: 16px; }
   .dropcap { font-size: 44px; padding: 4px 10px 0 0; }
   .about-values { grid-template-columns: 1fr; }
-  .project-row { grid-template-columns: 44px 1fr; gap: 14px; padding: 20px; }
+  .project-row { grid-template-columns: 44px 1fr auto; gap: 14px; padding: 20px; }
   .project-emoji { width: 44px; height: 44px; }
   .project-title { font-size: 16px; }
   .project-desc { font-size: 13px; }
-  .project-right { display: none; }
+  .project-right { min-width: 0; align-self: center; }
+  .project-domain { display: none; }
   .services-grid { grid-template-columns: 1fr; }
   .services-grid .service-item:nth-child(3) { grid-column: auto; }
   .service-item { padding: 28px 24px; margin: 4px 0; }
