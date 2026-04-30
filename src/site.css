@@ -268,18 +268,52 @@ footer p { color: var(--muted); font-size: 13px; }
   .timeline::before { left: 56px; }
   .timeline-item { grid-template-columns: 48px 16px 1fr; gap: 10px; }
   .timeline-year { font-size: 18px; }
-  nav { padding: 16px 24px; }
+  nav { padding: 12px 20px; }
+  .nav-logo { height: 44px; }
+  .nav-logo img { height: 64px; }
   .nav-links { display: none; }
-  section { padding: 64px 24px; }
-  .hero { padding: 100px 24px 60px; }
-  .hero-inner { grid-template-columns: 1fr; gap: 56px; }
+  section { padding: 56px 20px; }
+  .hero { padding: 90px 20px 48px; min-height: auto; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
   .hero-photo-wrap { order: -1; }
-  .photo-frame { width: 260px; height: 300px; margin: 0 auto; }
+  .photo-frame { width: 240px; max-width: 240px; aspect-ratio: 1/1.1; margin: 0 auto; }
+  h1 { font-size: clamp(38px, 10vw, 56px); margin-bottom: 20px; }
+  .hero-desc { font-size: 16px; margin-bottom: 32px; }
+  .hero-actions { margin-bottom: 32px; }
+  .hero-actions .btn { flex: 1; justify-content: center; }
+  .hero-meta { gap: 16px; flex-wrap: wrap; }
+  .hero-meta-num { font-size: 22px; }
+  .hero-meta-label { font-size: 11px; }
+  h2 { font-size: clamp(28px, 8vw, 40px); }
+  .section-sub, .contact-intro { font-size: 16px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-narrow .about-text p { font-size: 16px; }
+  .dropcap { font-size: 44px; padding: 4px 10px 0 0; }
   .about-values { grid-template-columns: 1fr; }
-  .project-row { grid-template-columns: 48px 1fr; gap: 16px; }
+  .project-row { grid-template-columns: 44px 1fr; gap: 14px; padding: 20px; }
+  .project-emoji { width: 44px; height: 44px; }
+  .project-title { font-size: 16px; }
+  .project-desc { font-size: 13px; }
   .project-right { display: none; }
   .services-grid { grid-template-columns: 1fr; }
+  .services-grid .service-item:nth-child(3) { grid-column: auto; }
+  .service-item { padding: 28px 24px; margin: 4px 0; }
   .contact-wrap { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 16px; padding: 24px; }
+  .contact-actions { width: 100%; }
+  .contact-actions .btn { flex: 1; justify-content: center; }
+  .best-fit { padding: 22px 20px; }
+  footer { flex-direction: column; gap: 16px; padding: 24px; text-align: center; }
+}
+
+@media (max-width: 420px) {
+  nav { padding: 10px 16px; }
+  .nav-logo img { height: 56px; }
+  section { padding: 48px 18px; }
+  .hero { padding: 80px 18px 40px; }
+  h1 { font-size: clamp(34px, 9.5vw, 46px); line-height: 1.05; }
+  .hero-meta-divider { display: none; }
+  .hero-meta { gap: 20px; }
+  .project-row { padding: 18px 16px; gap: 12px; }
+  .project-subs { gap: 4px; }
+  .sub-pill { font-size: 10px; padding: 3px 8px; }
 }
