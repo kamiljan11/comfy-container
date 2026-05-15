@@ -141,7 +141,7 @@ function Index() {
               <span>Iceland-based entrepreneur</span>
             </div>
             <h1 className="fade-up d2">
-              Building systems<br />that <em>run themselves.</em>
+              Building systems<br />that <em>run themselves..</em>
             </h1>
             <p className="hero-desc fade-up d3">
               I'm Kamil Jan. I build businesses and design the systems behind them.
