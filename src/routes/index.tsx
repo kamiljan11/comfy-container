@@ -1,261 +1,384 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import {
-  Hammer, FlaskConical, Waves, Map,
-  Mail, Linkedin, Handshake,
-} from "lucide-react";
-import { JourneyPath, InkPine } from "@/components/Ornaments";
+import { createFileRoute } from '@tanstack/react-router'
+import { useEffect, useRef } from 'react'
+import Hero3D from '../components/Hero3D'
 
-const YouTubeIcon = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-  </svg>
-);
+export const Route = createFileRoute('/')({ component: HomePage })
 
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
+// ── Cursor ──────────────────────────────────────────────
 function Cursor() {
-  const dot = useRef<HTMLDivElement>(null);
-  const ring = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
-    const move = (e: MouseEvent) => {
-      if (dot.current) { dot.current.style.left = e.clientX + "px"; dot.current.style.top = e.clientY + "px"; }
-      if (ring.current) { ring.current.style.left = e.clientX + "px"; ring.current.style.top = e.clientY + "px"; }
-      const t = e.target as HTMLElement;
-      const hover = !!t.closest("a, button, input, textarea, .project-row, .value-card, .service-item, .contact-link, .timeline-item");
-      document.body.classList.toggle("cursor-hover", hover);
-    };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
-  return (<>
-    <div ref={ring} className="cursor-ring" />
-    <div ref={dot} className="cursor-dot" />
-  </>);
-}
+    let mx = 0, my = 0, rx = 0, ry = 0, raf = 0
 
-const Arrow = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX; my = e.clientY
+      if (dotRef.current) {
+        dotRef.current.style.left = `${mx}px`
+        dotRef.current.style.top = `${my}px`
+      }
+    }
+    const tick = () => {
+      rx += (mx - rx) * 0.11
+      ry += (my - ry) * 0.11
+      if (ringRef.current) {
+        ringRef.current.style.left = `${rx}px`
+        ringRef.current.style.top = `${ry}px`
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    const hover = () => ringRef.current?.classList.add('hovering')
+    const unhover = () => ringRef.current?.classList.remove('hovering')
 
-const projects = [
-  {
-    href: "https://masgroup.is",
-    logo: "/logos/masgroup.png",
-    title: "MAS Group Iceland",
-    desc: "Parent company for B2B automotive, print, rental, and logistics operations across Iceland.",
-    domain: "masgroup.is",
-    subs: [
-      { name: "MAS Parts", href: "https://masparts.is" },
-      { name: "MAS Prints", href: "https://masprints.is" },
-      { name: "Mountain Car Rental", href: "https://mountaincarrental.is" },
-      { name: "MAS Logistics", href: "https://maslogistics.is" },
-    ],
-  },
-  {
-    href: "https://flyt.is",
-    logo: "/logos/flyt.png",
-    title: "Flyt",
-    desc: "Iceland's freight marketplace. Compare quotes from verified transport providers.",
-    domain: "flyt.is",
-  },
-  {
-    href: "https://quickfix.is",
-    logo: "/logos/quickfix.png",
-    title: "QuickFix",
-    desc: "Polish handyman services in Reykjavík. Fast, reliable home repairs.",
-    domain: "quickfix.is",
-  },
-  {
-    href: "https://reykjawwwik.is",
-    wordmark: "Rwww",
-    title: "Reykjawwwik.is",
-    desc: "Productized agency for Icelandic SMBs. Starts with a managed website, expands into ads, content, and AI automation as the business grows.",
-    domain: "reykjawwwik.is",
-  },
-  {
-    href: "https://myspiritway.org",
-    logo: "/logos/myspiritway.png",
-    title: "MySpiritWay",
-    desc: "Educational platform — \"Simplified Practical Spirituality.\" 100+ page guidebook, 7-Ways framework, Activation Sessions. Mentorship for spiritual entrepreneurs.",
-    domain: "myspiritway.org",
-  },
-  {
-    href: "#",
-    logo: "/logos/ekomoc.png",
-    title: "Ekomoc CRM",
-    desc: "CRM for solar audit and sales teams. Job pipeline, roles (admin / sales rep / auditor), team notes, audit photos, and push notifications — runs like a native mobile app.",
-    domain: "ekomoc.pl",
-  },
-  {
-    href: "https://www.sleipnirtours.is/",
-    logo: "/logos/sleipnir.png",
-    title: "Sleipnir Glacier Tours",
-    desc: "Client work — built and ran their full commercial stack: Bokun setup, Google & Meta Ads, influencer partnerships, custom tour products, event representation, and pricing strategy.",
-    domain: "sleipnirtours.is",
-  },
-];
+    document.addEventListener('mousemove', onMove)
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', hover)
+      el.addEventListener('mouseleave', unhover)
+    })
+    raf = requestAnimationFrame(tick)
+    return () => {
+      document.removeEventListener('mousemove', onMove)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
 
-const timeline = [
-  { year: "2013", event: "Started leading at 17. First team, fifty people." },
-  { year: "2015", event: "Opened my first business — an outdoor advertising agency. Founded a non-profit on the side: public breathwork, mindfulness, and meditation programs that ran for three years." },
-  { year: "2016", event: "Top-performing sales rep for mBank — loans and insurance products." },
-  { year: "2019", event: "Running 8 parallel income streams — crypto, trading, and festival operations." },
-  { year: "2022", event: "Two years in Icelandic tourism — marketing and operations for Sleipnir Glacier Tours (Bokun, Meta/Google Ads, partner network, sales channels)." },
-  { year: "2024", event: "Started Heartless Marketing — full-stack agency for Polish-Icelandic operators. Market data eventually reshaped it into Reykjawwwik.is, productized." },
-  { year: "2025", event: "Five active ventures across four industries. MAS Group launches Parts, Prints, Rental, Logistics. Flyt.is, QuickFix.is, Reykjawwwik.is, MySpiritWay running in parallel." },
-  { year: "Along the way", event: "Travelling the world and facilitating Dynamic Meditation sessions on festival stages across Europe — Czech Republic, Poland, and beyond." },
-];
-
-const _values = [
-  { Icon: Hammer, title: "Build, then step back", desc: "Systems that run without me. Maximum leverage, minimum friction." },
-  { Icon: FlaskConical, title: "Test, don't assume", desc: "Every idea is a hypothesis. Real data over intuition." },
-  { Icon: Waves, title: "Fluid, not rigid", desc: "Auto parts, AI, coaching — the model is what matters." },
-  { Icon: Map, title: "Freedom-first", desc: "Location independent, laptop-based, global ambition from Iceland." },
-];
-
-const services = [
-  { num: "01", title: "Business Architecture", desc: "Designing how a company actually operates end-to-end — team protocols, handoff systems, and custom internal tooling. The result: businesses that are profitable and don't drain your time." },
-  { num: "02", title: "Marketing & Sales Funnels", desc: "Fully managed sales funnels — Meta Ads and Google Ads ecosystems, landing pages, email flows, conversion tracking. Building funnels that turn traffic into B2B and B2C contracts." },
-  { num: "03", title: "Co-founding, Advisory & Hire", desc: "Open to the right projects as co-founder, builder, or advisor — and available for hire on focused engagements. Especially AI tooling, B2B, and ventures with a clear distribution path." },
-];
-
-function Index() {
   return (
     <>
+      <div ref={dotRef} className="cursor-dot" />
+      <div ref={ringRef} className="cursor-ring" />
+    </>
+  )
+}
+
+// ── Data ─────────────────────────────────────────────────
+const PROJECTS = [
+  {
+    num: '01',
+    name: 'MAS Group',
+    outcome: "Iceland's largest Polish-operated B2B group — auto parts, print, logistics, rental — running on dedicated teams.",
+    tags: ['Operations', 'B2B'],
+    year: '2021–now',
+  },
+  {
+    num: '02',
+    name: 'Flyt',
+    outcome: "Iceland's first freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.",
+    tags: ['Marketplace', 'SaaS'],
+    year: '2023',
+  },
+  {
+    num: '03',
+    name: 'QuickFix',
+    outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.',
+    tags: ['Brand', 'Growth'],
+    year: '2022',
+  },
+  {
+    num: '04',
+    name: 'Reykjawwwik',
+    outcome: 'Productized web agency for Icelandic SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.',
+    tags: ['Agency', 'Product'],
+    year: '2023',
+  },
+  {
+    num: '05',
+    name: 'MySpiritWay',
+    outcome: 'Educational platform — 100+ page guidebook, 7-week framework, Skool community, and weekly YouTube content engine.',
+    tags: ['Education', 'Content'],
+    year: '2024',
+  },
+  {
+    num: '06',
+    name: 'Ekomoc CRM',
+    outcome: 'Solar audit and sales CRM — job pipeline, role-based access (admin / sales / auditor), team notes, audit photo uploads.',
+    tags: ['SaaS', 'CRM'],
+    year: '2024',
+  },
+]
+
+const CAPABILITIES = [
+  {
+    num: '01',
+    title: 'Systems Architecture',
+    desc: 'From blank-page chaos to documented, delegatable operations. I design the SOPs, CRMs, ERPs, and team protocols that let businesses run without the founder in the room.',
+    tags: ['Operations Design', 'Custom ERPs', 'SOPs & Delegation', 'Team Protocols'],
+  },
+  {
+    num: '02',
+    title: 'Growth & Distribution',
+    desc: 'Performance media and full-funnel systems. Meta, Google, email sequences, landing pages, and conversion tracking — built to compound and outlast any single campaign.',
+    tags: ['Meta & Google Ads', 'Funnel Architecture', 'Email Sequences', 'Conversion Tracking'],
+  },
+  {
+    num: '03',
+    title: 'AI Automation',
+    desc: 'LLM workflows, voice agents, MCP servers, and custom AI tools that work in production — not just demos. I build, deploy, and document everything so your team can maintain it.',
+    tags: ['LLM Workflows', 'Voice Agents', 'MCP Servers', 'Custom AI Tools'],
+  },
+]
+
+const TIMELINE = [
+  {
+    year: '2024 – Present',
+    role: 'AI Automation Architect',
+    company: 'MAS Group / Independent',
+    desc: 'Building LLM-powered workflows, RetellAI voice agents, and MCP servers. Deployed AI tooling across freight, auto parts, and service businesses. Full pipeline from spec to production.',
+  },
+  {
+    year: '2023 – Present',
+    role: 'Founder & Product Lead',
+    company: 'Flyt — Freight Marketplace',
+    desc: "Designed and launched Iceland's first freight comparison platform. Led product, operations, and commercial partnerships from zero to live users.",
+  },
+  {
+    year: '2022 – Present',
+    role: 'Founder',
+    company: 'Reykjawwwik Digital Agency',
+    desc: 'Productized web agency for Icelandic SMBs. Built the service model, pricing structure, delivery workflow, and client acquisition system entirely from scratch.',
+  },
+  {
+    year: '2021 – Present',
+    role: 'CEO & Operator',
+    company: 'MAS Group Iceland',
+    desc: 'Built a multi-vertical B2B group (auto parts, print, freight, rental) from zero. Recruited and managed dedicated department leads across 4 verticals. Still operating.',
+  },
+  {
+    year: '2019 – 2021',
+    role: 'Growth & Operations',
+    company: 'Startups — Poland & Iceland',
+    desc: 'Led growth, ops, and market expansion across early-stage startups. Built playbooks for customer acquisition, team hiring, and scaling operations beyond the founding team.',
+  },
+]
+
+const ENGAGE = [
+  {
+    mode: 'Co-Founder',
+    title: 'Build something together',
+    desc: 'Equity-based. I come in at pre-revenue or early traction and work as a full operator — product, ops, growth, and team building. Not a consultant. A co-founder.',
+    detail: 'Pre-revenue or early traction · Equity · Full commitment',
+    href: '#contact',
+    cta: "Let's talk",
+  },
+  {
+    mode: 'Advisory / Project',
+    title: 'Defined scope, real output',
+    desc: '30–90 day engagements with a specific deliverable. System builds, growth sprints, AI automation rollouts. I go deep, deliver, and document everything so it outlasts the engagement.',
+    detail: '30–90 days · Defined deliverable · Fractional',
+    href: '#contact',
+    cta: 'Start a project',
+  },
+  {
+    mode: 'Hire',
+    title: 'Head of Ops / Growth / AI',
+    desc: "Remote-first. I'm most effective in companies where someone needs to own the operational and growth layer — or build the AI automation infrastructure from scratch.",
+    detail: 'In-house or remote · Head of Ops / Growth / AI',
+    href: 'mailto:mountainallservice@gmail.com',
+    cta: 'Get in touch',
+  },
+]
+
+// ── Page ─────────────────────────────────────────────────
+function HomePage() {
+  const pageRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement
+            const siblings = Array.from(el.parentElement?.children ?? [])
+            const idx = siblings.indexOf(el)
+            el.style.transitionDelay = `${idx * 0.08}s`
+            el.classList.add('visible')
+            observer.unobserve(el)
+          }
+        })
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
+    )
+    document
+      .querySelectorAll('.work-row, .cap-card, .tl-item, .engage-card')
+      .forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={pageRef}>
       <Cursor />
-      <nav>
-        <a href="#" className="nav-logo"><img src="/signature.png" alt="Kamil Jan" /></a>
+
+      {/* ── Nav ── */}
+      <nav className="nav">
+        <div className="nav-logo">
+          K<span>J</span>
+        </div>
         <ul className="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#services">Work with me</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#engage">Engage</a></li>
         </ul>
+        <div className="nav-right">
+          <div className="nav-avail">
+            <span className="avail-dot" />
+            Available
+          </div>
+          <a href="#contact" className="nav-cta">
+            Let&apos;s talk
+          </a>
+        </div>
       </nav>
 
-      <section className="hero" id="home">
-        <div className="hero-glow"></div>
-        <div className="hero-inner">
-          <div>
-            <div className="hero-eyebrow fade-up d1">
-              <div className="hero-eyebrow-line"></div>
-              <span>Iceland-based entrepreneur</span>
+      {/* ── Hero ── */}
+      <section className="hero">
+        <div className="hero-canvas-wrap">
+          <Hero3D />
+        </div>
+        <div className="hero-fade-top" />
+        <div className="hero-fade-bottom" />
+        <div className="hero-content">
+          <p className="hero-eyebrow">Entrepreneur &amp; Systems Builder — Reykjavík</p>
+          <h1 className="hero-h1">
+            I build businesses.<br />
+            Then I <em>scale them.</em>
+          </h1>
+          <p className="hero-sub">
+            Operator, builder, and AI automation architect.
+            I turn complex problems into clean, delegatable systems that run without you.
+          </p>
+          <div className="hero-actions">
+            <a href="#engage" className="btn-primary">
+              Work with me
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+            <a href="#work" className="btn-ghost">See my work</a>
+          </div>
+          <div className="hero-stats">
+            <div>
+              <div className="hero-stat-val">6<span>+</span></div>
+              <div className="hero-stat-lbl">Businesses built</div>
             </div>
-            <h1 className="fade-up d2">
-              Building systems<br />that <em>run themselves..</em>
-            </h1>
-            <p className="hero-desc fade-up d3">
-              I'm Kamil Jan. I build businesses and design the systems behind them.
+            <div>
+              <div className="hero-stat-val">4</div>
+              <div className="hero-stat-lbl">Active verticals</div>
+            </div>
+            <div>
+              <div className="hero-stat-val">300<span>+</span></div>
+              <div className="hero-stat-lbl">Jobs completed</div>
+            </div>
+            <div>
+              <div className="hero-stat-val">5<span>yr</span></div>
+              <div className="hero-stat-lbl">Operating in Iceland</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── About ── */}
+      <section className="about" id="about">
+        <div className="container">
+          <span className="section-label">About</span>
+          <div className="about-inner">
+            <p className="about-p">
+              I moved to Iceland in 2019 with nothing but a plan and a high tolerance for
+              ambiguity. Since then I&apos;ve built <strong>MAS Group</strong> — Iceland&apos;s largest
+              Polish-operated B2B operation — launched a freight marketplace, a productized agency,
+              a handyman brand, and several software tools. The common thread:{' '}
+              <strong>operational clarity</strong> and systems that outlast me.
             </p>
-            <div className="hero-actions fade-up d4">
-              <a href="#projects" className="btn btn-primary">See my projects <Arrow /></a>
-              <a href="#contact" className="btn btn-ghost">Let's talk</a>
-            </div>
-            <div className="hero-meta fade-up d5">
-              <div className="hero-meta-item">
-                <span className="hero-meta-num">5+</span>
-                <span className="hero-meta-label">Active ventures</span>
-              </div>
-              <div className="hero-meta-divider"></div>
-              <div className="hero-meta-item">
-                <span className="hero-meta-num">4</span>
-                <span className="hero-meta-label">Industries</span>
-              </div>
-              <div className="hero-meta-divider"></div>
-              <div className="hero-meta-item">
-                <span className="hero-meta-num">2013</span>
-                <span className="hero-meta-label">Building since</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="hero-photo-wrap fade-up d3">
-            <div className="photo-frame">
-              <img src="/kamil.png" alt="Kamil Jan" />
-            </div>
-          </div>
-        </div>
-        <JourneyPath className="hero-journey" />
-      </section>
-
-      <section id="about">
-        <div className="container">
-          <div className="about-narrow">
-            <div className="section-eyebrow"><span>About</span></div>
-            <h2>Hands-on,<br /><em>then hands-off.</em></h2>
-            <div className="about-text">
-              <p>
-                <span className="dropcap">F</span>irst team I led was 50 people. I was 17. That set the pattern — find a system, take responsibility, make it run.
-              </p>
-              <p>
-                Today I run five active ventures across four industries — auto parts, freight, handyman services, websites, and coaching — alongside trusted teams in Iceland and Poland.
-              </p>
-              <p>
-                My role is to design how a business operates and then step out of its way. Team protocols, handoff systems, custom ERPs in Google Apps Script + Twilio, Meta Ads at scale, AI-assisted everything. If a process repeats more than three times, I'm already drafting the script that removes it.
-              </p>
-              <p>
-                Three pillars run through everything I do: <strong>entrepreneurship</strong>, <strong>AI automation</strong>, and <strong>spiritual practice</strong>.
-                I'm a 200h yoga teacher and author of <em>Simplified Practical Spirituality</em> — a 100+ page guidebook condensing 12 years of practice into a daily framework. The systems mind and the contemplative mind aren't opposites for me; they sharpen each other.
-              </p>
-            </div>
-            <div className="about-quote">
-              <p>"I don't guess which project will win. I let the market decide."</p>
-            </div>
+            <p className="about-p">
+              My background spans growth marketing, product, operations, and AI automation. I don&apos;t
+              specialize in one lane — I own the whole machine. Whether it&apos;s designing a CRM from
+              scratch, running Meta campaigns, or deploying a voice agent, I bring the same
+              discipline: <strong>document it, delegate it, make it run without you</strong>. I also
+              carry a quiet spiritual practice that keeps me grounded — it shapes how I lead and
+              build, though it rarely comes up in a pitch deck.
+            </p>
           </div>
         </div>
       </section>
 
-      <section id="timeline" className="section-tight timeline-section">
-        <InkPine className="timeline-tree" />
+      {/* ── Work ── */}
+      <section className="work" id="work">
         <div className="container">
-          <div className="section-eyebrow"><span>Timeline</span></div>
-          <h2>How I got <em>here.</em></h2>
-          <ol className="timeline">
-            {timeline.map((t, i) => (
-              <li key={t.year} className="timeline-item" style={{ ['--i' as string]: i }}>
-                <div className="timeline-year">{t.year}</div>
-                <div className="timeline-dot"></div>
-                <div className="timeline-body">
-                  <div className="timeline-event">{t.event}</div>
+          <span className="section-label">Selected Work</span>
+          <div className="work-table">
+            {PROJECTS.map((p) => (
+              <div key={p.num} className="work-row">
+                <div className="work-num">{p.num}</div>
+                <div>
+                  <div className="work-name">{p.name}</div>
+                  <div className="work-outcome">{p.outcome}</div>
                 </div>
-              </li>
+                <div className="work-tags">
+                  {p.tags.map((t) => (
+                    <span key={t} className="work-tag">{t}</span>
+                  ))}
+                </div>
+                <div className="work-year">{p.year}</div>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
-      <section id="projects">
+      {/* ── Capabilities ── */}
+      <section className="cap" id="capabilities">
         <div className="container">
-          <div className="section-eyebrow"><span>Projects</span></div>
-          <h2>What I've <em>built</em></h2>
-
-          <div className="projects-list">
-            {projects.map((p) => (
-              <div key={p.title} className="project-row">
-                <a href={p.href} target="_blank" rel="noreferrer" className={`project-emoji${p.wordmark ? " project-emoji-text" : ""}`} aria-label={p.title}>
-                  {p.logo ? <img src={p.logo} alt={p.title} /> : p.wordmark ? <span className="wordmark">{p.wordmark}</span> : null}
-                </a>
-                <div className="project-body">
-                  <a href={p.href} target="_blank" rel="noreferrer" className="project-title-link">
-                    <div className="project-title">{p.title}</div>
-                  </a>
-                  <div className="project-desc">{p.desc}</div>
-                  {p.subs && (
-                    <div className="project-subs">
-                      {p.subs.map((s) => (
-                        <a key={s.name} href={s.href} target="_blank" rel="noreferrer" className="sub-pill">{s.name}</a>
-                      ))}
-                    </div>
-                  )}
+          <span className="section-label">Capabilities</span>
+          <div className="cap-grid">
+            {CAPABILITIES.map((c) => (
+              <div key={c.num} className="cap-card">
+                <div className="cap-num">{c.num}</div>
+                <div className="cap-title">{c.title}</div>
+                <div className="cap-desc">{c.desc}</div>
+                <div className="cap-tags">
+                  {c.tags.map((t) => (
+                    <span key={t} className="cap-tag">{t}</span>
+                  ))}
                 </div>
-                <a href={p.href} target="_blank" rel="noreferrer" className="project-right">
-                  {p.domain && <span className="project-domain">{p.domain}</span>}
-                  <span className="project-arrow"><Arrow /></span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Timeline ── */}
+      <section className="timeline" id="timeline">
+        <div className="container">
+          <span className="section-label">Timeline</span>
+          <div className="tl-list">
+            {TIMELINE.map((item, i) => (
+              <div key={i} className="tl-item">
+                <div className="tl-year">{item.year}</div>
+                <div className="tl-role">{item.role}</div>
+                <div className="tl-company">{item.company}</div>
+                <div className="tl-desc">{item.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Engage ── */}
+      <section className="engage" id="engage">
+        <div className="container">
+          <span className="section-label">Work With Me</span>
+          <div className="engage-grid">
+            {ENGAGE.map((e, i) => (
+              <div key={i} className="engage-card">
+                <div className="engage-mode">{e.mode}</div>
+                <div className="engage-title">{e.title}</div>
+                <div className="engage-desc">{e.desc}</div>
+                <div className="engage-detail">{e.detail}</div>
+                <a href={e.href} className="engage-cta">
+                  {e.cta}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </a>
               </div>
             ))}
@@ -263,41 +386,36 @@ function Index() {
         </div>
       </section>
 
-      <section id="services">
+      {/* ── Contact ── */}
+      <section className="contact" id="contact">
         <div className="container">
-          <div className="section-eyebrow"><span>Work with me</span></div>
-          <h2>How I can<br /><em>actually help</em></h2>
-          
-
-          <div className="services-grid">
-            {services.map((s) => (
-              <div key={s.num} className="service-item">
-                <span className="service-num">{s.num}</span>
-                <div className="service-title">{s.title}</div>
-                <div className="service-desc">{s.desc}</div>
-              </div>
-            ))}
+          <div className="contact-inner">
+            <h2 className="contact-h2">Ready to build something serious?</h2>
+            <p className="contact-sub">
+              Whether you have a specific project in mind or just want to explore what&apos;s
+              possible — send me a message. I respond to every relevant inquiry personally.
+            </p>
+            <a href="mailto:mountainallservice@gmail.com" className="contact-email">
+              mountainallservice@gmail.com
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>
 
-      <section id="contact">
-        <div className="container contact-clean">
-          <Handshake size={48} strokeWidth={1.2} className="contact-hands" />
-          <div className="section-eyebrow"><span>Contact</span></div>
-          <h2>Let's <em>talk.</em></h2>
-          <p className="contact-intro">If you're building something real and want to move faster, reach out.</p>
-          <div className="contact-actions">
-            <a href="mailto:hello@kamiljan.com" className="btn btn-primary"><Mail size={16} strokeWidth={1.5} /><span>hello@kamiljan.com</span></a>
-            <a href="https://www.linkedin.com/in/myspiritway/" target="_blank" rel="noreferrer" className="btn btn-ghost"><Linkedin size={16} strokeWidth={1.5} /><span>LinkedIn</span></a>
-            <a href="https://www.youtube.com/@kamiljan11" target="_blank" rel="noreferrer" className="btn btn-ghost"><YouTubeIcon size={16} /><span>YouTube</span></a>
-          </div>
+      {/* ── Footer ── */}
+      <footer className="footer">
+        <div className="footer-logo">
+          K<span>J</span>
         </div>
-      </section>
-
-      <footer>
-        <p>© 2026 Kamil Jan — kamiljan.com</p>
+        <div className="footer-copy">© 2025 Kamil Jan. Built in Reykjavík.</div>
+        <div className="footer-links">
+          <a href="https://github.com/mountainallservice" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/kamiljan" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
       </footer>
-    </>
-  );
+    </div>
+  )
 }
