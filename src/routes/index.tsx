@@ -410,10 +410,13 @@ function HomePage() {
         <div className="footer-logo">
           K<span>J</span>
         </div>
-        <div className="footer-copy">© 2025 Kamil Jan. Built in Reykjavík.</div>
+        <div className="footer-copy">
+          &copy; {new Date().getFullYear()} Kamil Jan &mdash; Reykjav&iacute;k, Iceland
+        </div>
         <div className="footer-links">
           <a href="https://github.com/mountainallservice" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://linkedin.com/in/kamiljan" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="mailto:mountainallservice@gmail.com">Email</a>
         </div>
       </footer>
     </div>
