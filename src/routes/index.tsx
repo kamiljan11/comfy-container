@@ -11,7 +11,6 @@ function Cursor() {
 
   useEffect(() => {
     let mx = 0, my = 0, rx = 0, ry = 0, raf = 0
-
     const onMove = (e: MouseEvent) => {
       mx = e.clientX; my = e.clientY
       if (dotRef.current) {
@@ -30,17 +29,13 @@ function Cursor() {
     }
     const hover = () => ringRef.current?.classList.add('hovering')
     const unhover = () => ringRef.current?.classList.remove('hovering')
-
     document.addEventListener('mousemove', onMove)
     document.querySelectorAll('a, button').forEach(el => {
       el.addEventListener('mouseenter', hover)
       el.addEventListener('mouseleave', unhover)
     })
     raf = requestAnimationFrame(tick)
-    return () => {
-      document.removeEventListener('mousemove', onMove)
-      cancelAnimationFrame(raf)
-    }
+    return () => { document.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf) }
   }, [])
 
   return (
@@ -53,129 +48,32 @@ function Cursor() {
 
 // ── Data ─────────────────────────────────────────────────
 const PROJECTS = [
-  {
-    num: '01',
-    name: 'MAS Group',
-    outcome: "Iceland's largest Polish-operated B2B group — auto parts, print, logistics, rental — running on dedicated teams.",
-    tags: ['Operations', 'B2B'],
-    year: '2021–now',
-  },
-  {
-    num: '02',
-    name: 'Flyt',
-    outcome: "Iceland's first freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.",
-    tags: ['Marketplace', 'SaaS'],
-    year: '2023',
-  },
-  {
-    num: '03',
-    name: 'QuickFix',
-    outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.',
-    tags: ['Brand', 'Growth'],
-    year: '2022',
-  },
-  {
-    num: '04',
-    name: 'Reykjawwwik',
-    outcome: 'Productized web agency for Icelandic SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.',
-    tags: ['Agency', 'Product'],
-    year: '2023',
-  },
-  {
-    num: '05',
-    name: 'MySpiritWay',
-    outcome: 'Educational platform — 100+ page guidebook, 7-week framework, Skool community, and weekly YouTube content engine.',
-    tags: ['Education', 'Content'],
-    year: '2024',
-  },
-  {
-    num: '06',
-    name: 'Ekomoc CRM',
-    outcome: 'Solar audit and sales CRM — job pipeline, role-based access (admin / sales / auditor), team notes, audit photo uploads.',
-    tags: ['SaaS', 'CRM'],
-    year: '2024',
-  },
+  { num: '01', name: 'MAS Group', outcome: "Iceland's largest Polish-operated B2B group — auto parts, print, logistics, rental — running on dedicated teams.", tags: ['Operations', 'B2B'], year: '2021–now' },
+  { num: '02', name: 'Flyt', outcome: "Iceland's first freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.", tags: ['Marketplace', 'SaaS'], year: '2023' },
+  { num: '03', name: 'QuickFix', outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.', tags: ['Brand', 'Growth'], year: '2022' },
+  { num: '04', name: 'Reykjawwwik', outcome: 'Productized web agency for Icelandic SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.', tags: ['Agency', 'Product'], year: '2023' },
+  { num: '05', name: 'MySpiritWay', outcome: 'Educational platform — 100+ page guidebook, 7-week framework, Skool community, and weekly YouTube content engine.', tags: ['Education', 'Content'], year: '2024' },
+  { num: '06', name: 'Ekomoc CRM', outcome: 'Solar audit and sales CRM — job pipeline, role-based access (admin / sales / auditor), team notes, audit photo uploads.', tags: ['SaaS', 'CRM'], year: '2024' },
 ]
 
 const CAPABILITIES = [
-  {
-    num: '01',
-    title: 'Systems Architecture',
-    desc: 'From blank-page chaos to documented, delegatable operations. I design the SOPs, CRMs, ERPs, and team protocols that let businesses run without the founder in the room.',
-    tags: ['Operations Design', 'Custom ERPs', 'SOPs & Delegation', 'Team Protocols'],
-  },
-  {
-    num: '02',
-    title: 'Growth & Distribution',
-    desc: 'Performance media and full-funnel systems. Meta, Google, email sequences, landing pages, and conversion tracking — built to compound and outlast any single campaign.',
-    tags: ['Meta & Google Ads', 'Funnel Architecture', 'Email Sequences', 'Conversion Tracking'],
-  },
-  {
-    num: '03',
-    title: 'AI Automation',
-    desc: 'LLM workflows, voice agents, MCP servers, and custom AI tools that work in production — not just demos. I build, deploy, and document everything so your team can maintain it.',
-    tags: ['LLM Workflows', 'Voice Agents', 'MCP Servers', 'Custom AI Tools'],
-  },
+  { num: '01', title: 'Systems Architecture', desc: 'From blank-page chaos to documented, delegatable operations. I design the SOPs, CRMs, ERPs, and team protocols that let businesses run without the founder in the room.', tags: ['Operations Design', 'Custom ERPs', 'SOPs & Delegation', 'Team Protocols'] },
+  { num: '02', title: 'Growth & Distribution', desc: 'Performance media and full-funnel systems. Meta, Google, email sequences, landing pages, and conversion tracking — built to compound and outlast any single campaign.', tags: ['Meta & Google Ads', 'Funnel Architecture', 'Email Sequences', 'Conversion Tracking'] },
+  { num: '03', title: 'AI Automation', desc: 'LLM workflows, voice agents, MCP servers, and custom AI tools that work in production — not just demos. I build, deploy, and document everything so your team can maintain it.', tags: ['LLM Workflows', 'Voice Agents', 'MCP Servers', 'Custom AI Tools'] },
 ]
 
 const TIMELINE = [
-  {
-    year: '2024 – Present',
-    role: 'AI Automation Architect',
-    company: 'MAS Group / Independent',
-    desc: 'Building LLM-powered workflows, RetellAI voice agents, and MCP servers. Deployed AI tooling across freight, auto parts, and service businesses. Full pipeline from spec to production.',
-  },
-  {
-    year: '2023 – Present',
-    role: 'Founder & Product Lead',
-    company: 'Flyt — Freight Marketplace',
-    desc: "Designed and launched Iceland's first freight comparison platform. Led product, operations, and commercial partnerships from zero to live users.",
-  },
-  {
-    year: '2022 – Present',
-    role: 'Founder',
-    company: 'Reykjawwwik Digital Agency',
-    desc: 'Productized web agency for Icelandic SMBs. Built the service model, pricing structure, delivery workflow, and client acquisition system entirely from scratch.',
-  },
-  {
-    year: '2021 – Present',
-    role: 'CEO & Operator',
-    company: 'MAS Group Iceland',
-    desc: 'Built a multi-vertical B2B group (auto parts, print, freight, rental) from zero. Recruited and managed dedicated department leads across 4 verticals. Still operating.',
-  },
-  {
-    year: '2019 – 2021',
-    role: 'Growth & Operations',
-    company: 'Startups — Poland & Iceland',
-    desc: 'Led growth, ops, and market expansion across early-stage startups. Built playbooks for customer acquisition, team hiring, and scaling operations beyond the founding team.',
-  },
+  { year: '2024 – Present', role: 'AI Automation Architect', company: 'MAS Group / Independent', desc: 'Building LLM-powered workflows, RetellAI voice agents, and MCP servers. Deployed AI tooling across freight, auto parts, and service businesses. Full pipeline from spec to production.' },
+  { year: '2023 – Present', role: 'Founder & Product Lead', company: 'Flyt — Freight Marketplace', desc: "Designed and launched Iceland's first freight comparison platform. Led product, operations, and commercial partnerships from zero to live users." },
+  { year: '2022 – Present', role: 'Founder', company: 'Reykjawwwik Digital Agency', desc: 'Productized web agency for Icelandic SMBs. Built the service model, pricing structure, delivery workflow, and client acquisition system entirely from scratch.' },
+  { year: '2021 – Present', role: 'CEO & Operator', company: 'MAS Group Iceland', desc: 'Built a multi-vertical B2B group (auto parts, print, freight, rental) from zero. Recruited and managed dedicated department leads across 4 verticals. Still operating.' },
+  { year: '2019 – 2021', role: 'Growth & Operations', company: 'Startups — Poland & Iceland', desc: 'Led growth, ops, and market expansion across early-stage startups. Built playbooks for customer acquisition, team hiring, and scaling operations beyond the founding team.' },
 ]
 
 const ENGAGE = [
-  {
-    mode: 'Co-Founder',
-    title: 'Build something together',
-    desc: 'Equity-based. I come in at pre-revenue or early traction and work as a full operator — product, ops, growth, and team building. Not a consultant. A co-founder.',
-    detail: 'Pre-revenue or early traction · Equity · Full commitment',
-    href: '#contact',
-    cta: "Let's talk",
-  },
-  {
-    mode: 'Advisory / Project',
-    title: 'Defined scope, real output',
-    desc: '30–90 day engagements with a specific deliverable. System builds, growth sprints, AI automation rollouts. I go deep, deliver, and document everything so it outlasts the engagement.',
-    detail: '30–90 days · Defined deliverable · Fractional',
-    href: '#contact',
-    cta: 'Start a project',
-  },
-  {
-    mode: 'Hire',
-    title: 'Head of Ops / Growth / AI',
-    desc: "Remote-first. I'm most effective in companies where someone needs to own the operational and growth layer — or build the AI automation infrastructure from scratch.",
-    detail: 'In-house or remote · Head of Ops / Growth / AI',
-    href: 'mailto:mountainallservice@gmail.com',
-    cta: 'Get in touch',
-  },
+  { mode: 'Co-Founder', title: 'Build something together', desc: 'Equity-based. I come in at pre-revenue or early traction and work as a full operator — product, ops, growth, and team building. Not a consultant. A co-founder.', detail: 'Pre-revenue or early traction · Equity · Full commitment', href: '#contact', cta: "Let's talk" },
+  { mode: 'Advisory / Project', title: 'Defined scope, real output', desc: '30–90 day engagements with a specific deliverable. System builds, growth sprints, AI automation rollouts. I go deep, deliver, and document everything so it outlasts the engagement.', detail: '30–90 days · Defined deliverable · Fractional', href: '#contact', cta: 'Start a project' },
+  { mode: 'Hire', title: 'Head of Ops / Growth / AI', desc: "Remote-first. I'm most effective in companies where someone needs to own the operational and growth layer — or build the AI automation infrastructure from scratch.", detail: 'In-house or remote · Head of Ops / Growth / AI', href: 'mailto:mountainallservice@gmail.com', cta: 'Get in touch' },
 ]
 
 // ── Page ─────────────────────────────────────────────────
@@ -198,9 +96,7 @@ function HomePage() {
       },
       { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
     )
-    document
-      .querySelectorAll('.work-row, .cap-card, .tl-item, .engage-card')
-      .forEach((el) => observer.observe(el))
+    document.querySelectorAll('.work-row, .cap-card, .tl-item, .engage-card').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [])
 
@@ -210,9 +106,7 @@ function HomePage() {
 
       {/* ── Nav ── */}
       <nav className="nav">
-        <div className="nav-logo">
-          K<span>J</span>
-        </div>
+        <div className="nav-logo">K<span>J</span></div>
         <ul className="nav-links">
           <li><a href="#work">Work</a></li>
           <li><a href="#capabilities">Capabilities</a></li>
@@ -220,28 +114,20 @@ function HomePage() {
           <li><a href="#engage">Engage</a></li>
         </ul>
         <div className="nav-right">
-          <div className="nav-avail">
-            <span className="avail-dot" />
-            Available
-          </div>
-          <a href="#contact" className="nav-cta">
-            Let&apos;s talk
-          </a>
+          <div className="nav-avail"><span className="avail-dot" />Available</div>
+          <a href="#contact" className="nav-cta">Let&apos;s talk</a>
         </div>
       </nav>
 
       {/* ── Hero ── */}
       <section className="hero">
-        <div className="hero-canvas-wrap">
-          <Hero3D />
-        </div>
+        <div className="hero-canvas-wrap"><Hero3D /></div>
         <div className="hero-fade-top" />
         <div className="hero-fade-bottom" />
         <div className="hero-content">
           <p className="hero-eyebrow">Entrepreneur &amp; Systems Builder — Reykjavík</p>
           <h1 className="hero-h1">
-            I build businesses.<br />
-            Then I <em>scale them.</em>
+            I build businesses.<br />Then I <em>scale them.</em>
           </h1>
           <p className="hero-sub">
             Operator, builder, and AI automation architect.
@@ -250,29 +136,15 @@ function HomePage() {
           <div className="hero-actions">
             <a href="#engage" className="btn-primary">
               Work with me
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
             <a href="#work" className="btn-ghost">See my work</a>
           </div>
           <div className="hero-stats">
-            <div>
-              <div className="hero-stat-val">6<span>+</span></div>
-              <div className="hero-stat-lbl">Businesses built</div>
-            </div>
-            <div>
-              <div className="hero-stat-val">4</div>
-              <div className="hero-stat-lbl">Active verticals</div>
-            </div>
-            <div>
-              <div className="hero-stat-val">300<span>+</span></div>
-              <div className="hero-stat-lbl">Jobs completed</div>
-            </div>
-            <div>
-              <div className="hero-stat-val">5<span>yr</span></div>
-              <div className="hero-stat-lbl">Operating in Iceland</div>
-            </div>
+            <div><div className="hero-stat-val">6<span>+</span></div><div className="hero-stat-lbl">Businesses built</div></div>
+            <div><div className="hero-stat-val">4</div><div className="hero-stat-lbl">Active verticals</div></div>
+            <div><div className="hero-stat-val">300<span>+</span></div><div className="hero-stat-lbl">Jobs completed</div></div>
+            <div><div className="hero-stat-val">5<span>yr</span></div><div className="hero-stat-lbl">Operating in Iceland</div></div>
           </div>
         </div>
       </section>
@@ -281,22 +153,29 @@ function HomePage() {
       <section className="about" id="about">
         <div className="container">
           <span className="section-label">About</span>
-          <div className="about-inner">
-            <p className="about-p">
-              I moved to Iceland in 2019 with nothing but a plan and a high tolerance for
-              ambiguity. Since then I&apos;ve built <strong>MAS Group</strong> — Iceland&apos;s largest
-              Polish-operated B2B operation — launched a freight marketplace, a productized agency,
-              a handyman brand, and several software tools. The common thread:{' '}
-              <strong>operational clarity</strong> and systems that outlast me.
-            </p>
-            <p className="about-p">
-              My background spans growth marketing, product, operations, and AI automation. I don&apos;t
-              specialize in one lane — I own the whole machine. Whether it&apos;s designing a CRM from
-              scratch, running Meta campaigns, or deploying a voice agent, I bring the same
-              discipline: <strong>document it, delegate it, make it run without you</strong>. I also
-              carry a quiet spiritual practice that keeps me grounded — it shapes how I lead and
-              build, though it rarely comes up in a pitch deck.
-            </p>
+          <div className="about-grid">
+            <div className="about-inner">
+              <p className="about-p">
+                I moved to Iceland in 2019 with nothing but a plan and a high tolerance for
+                ambiguity. Since then I&apos;ve built <strong>MAS Group</strong> — Iceland&apos;s largest
+                Polish-operated B2B operation — launched a freight marketplace, a productized agency,
+                a handyman brand, and several software tools. The common thread:{' '}
+                <strong>operational clarity</strong> and systems that outlast me.
+              </p>
+              <p className="about-p">
+                My background spans growth marketing, product, operations, and AI automation. I don&apos;t
+                specialize in one lane — I own the whole machine. Whether it&apos;s designing a CRM from
+                scratch, running Meta campaigns, or deploying a voice agent, I bring the same
+                discipline: <strong>document it, delegate it, make it run without you</strong>. I also
+                carry a quiet spiritual practice that keeps me grounded — it shapes how I lead and
+                build, though it rarely comes up in a pitch deck.
+              </p>
+            </div>
+            <div className="about-photo-wrap">
+              <div className="about-photo">
+                <img src="/kamil.png" alt="Kamil Jan" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -313,11 +192,7 @@ function HomePage() {
                   <div className="work-name">{p.name}</div>
                   <div className="work-outcome">{p.outcome}</div>
                 </div>
-                <div className="work-tags">
-                  {p.tags.map((t) => (
-                    <span key={t} className="work-tag">{t}</span>
-                  ))}
-                </div>
+                <div className="work-tags">{p.tags.map((t) => <span key={t} className="work-tag">{t}</span>)}</div>
                 <div className="work-year">{p.year}</div>
               </div>
             ))}
@@ -335,11 +210,7 @@ function HomePage() {
                 <div className="cap-num">{c.num}</div>
                 <div className="cap-title">{c.title}</div>
                 <div className="cap-desc">{c.desc}</div>
-                <div className="cap-tags">
-                  {c.tags.map((t) => (
-                    <span key={t} className="cap-tag">{t}</span>
-                  ))}
-                </div>
+                <div className="cap-tags">{c.tags.map((t) => <span key={t} className="cap-tag">{t}</span>)}</div>
               </div>
             ))}
           </div>
@@ -376,9 +247,7 @@ function HomePage() {
                 <div className="engage-detail">{e.detail}</div>
                 <a href={e.href} className="engage-cta">
                   {e.cta}
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </a>
               </div>
             ))}
@@ -397,22 +266,19 @@ function HomePage() {
             </p>
             <a href="mailto:mountainallservice@gmail.com" className="contact-email">
               mountainallservice@gmail.com
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                <path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
+            <div className="contact-sig">
+              <img src="/signature.png" alt="Kamil Jan" />
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── Footer ── */}
       <footer className="footer">
-        <div className="footer-logo">
-          K<span>J</span>
-        </div>
-        <div className="footer-copy">
-          &copy; {new Date().getFullYear()} Kamil Jan &mdash; Reykjav&iacute;k, Iceland
-        </div>
+        <div className="footer-logo">K<span>J</span></div>
+        <div className="footer-copy">&copy; {new Date().getFullYear()} Kamil Jan &mdash; Reykjav&iacute;k, Iceland</div>
         <div className="footer-links">
           <a href="https://github.com/mountainallservice" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://linkedin.com/in/kamiljan" target="_blank" rel="noreferrer">LinkedIn</a>
