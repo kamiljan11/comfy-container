@@ -290,6 +290,7 @@ function Index() {
           <div className="contact-actions">
             <a href="mailto:hello@kamiljan.com" className="btn btn-primary"><Mail size={16} strokeWidth={1.5} /><span>hello@kamiljan.com</span></a>
             <a href="https://www.linkedin.com/in/myspiritway/" target="_blank" rel="noreferrer" className="btn btn-ghost"><Linkedin size={16} strokeWidth={1.5} /><span>LinkedIn</span></a>
+            <a href="https://www.youtube.com/@kamiljan11" target="_blank" rel="noreferrer" className="btn btn-ghost"><YouTubeIcon size={16} /><span>YouTube</span></a>
           </div>
         </div>
       </section>
