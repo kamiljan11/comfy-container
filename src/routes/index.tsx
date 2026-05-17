@@ -67,12 +67,54 @@ function Marquee() {
 }
 
 const PROJECTS = [
-  { num: '01', name: 'MAS Group', outcome: "Iceland's largest Polish-operated B2B group — auto parts, print, logistics, rental — running on dedicated teams.", tags: ['Operations', 'B2B'], year: '2021–now' },
-  { num: '02', name: 'Flyt', outcome: "Iceland's first freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.", tags: ['Marketplace', 'SaaS'], year: '2023' },
-  { num: '03', name: 'QuickFix', outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.', tags: ['Brand', 'Growth'], year: '2022' },
-  { num: '04', name: 'Reykjawwwik', outcome: 'Productized web agency for Icelandic SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.', tags: ['Agency', 'Product'], year: '2023' },
-  { num: '05', name: 'MySpiritWay', outcome: 'Educational platform — guidebook, 7-week framework, Skool community, and weekly YouTube content engine.', tags: ['Education', 'Content'], year: '2024' },
-  { num: '06', name: 'Ekomoc CRM', outcome: 'Solar audit and sales CRM — job pipeline, role-based access, team notes, and audit photo uploads.', tags: ['SaaS', 'CRM'], year: '2024' },
+  {
+    num: '01',
+    logo: '/logos/masgroup.png',
+    name: 'MAS Group',
+    outcome: "Iceland's largest Polish-operated B2B group — auto parts, print, logistics, rental — running on dedicated teams.",
+    tags: ['Operations', 'B2B'],
+    year: '2021–now'
+  },
+  {
+    num: '02',
+    logo: '/logos/flyt.png',
+    name: 'Flyt',
+    outcome: "Iceland's first freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.",
+    tags: ['Marketplace', 'SaaS'],
+    year: '2023'
+  },
+  {
+    num: '03',
+    logo: '/logos/quickfix.png',
+    name: 'QuickFix',
+    outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.',
+    tags: ['Brand', 'Growth'],
+    year: '2022'
+  },
+  {
+    num: '04',
+    logo: '/logos/reykjawwwik.png',
+    name: 'Reykjawwwik',
+    outcome: 'Productized web agency for Icelandic SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.',
+    tags: ['Agency', 'Product'],
+    year: '2023'
+  },
+  {
+    num: '05',
+    logo: '/logos/myspiritway.png',
+    name: 'MySpiritWay',
+    outcome: 'Educational platform — guidebook, 7-week framework, Skool community, and weekly YouTube content engine.',
+    tags: ['Education', 'Content'],
+    year: '2024'
+  },
+  {
+    num: '06',
+    logo: '/logos/ekomoc.png',
+    name: 'Ekomoc CRM',
+    outcome: 'Solar audit and sales CRM — job pipeline, role-based access, team notes, and audit photo uploads.',
+    tags: ['SaaS', 'CRM'],
+    year: '2024'
+  },
 ]
 
 const CAPABILITIES = [
@@ -249,7 +291,9 @@ function HomePage() {
           <div className="work-table">
             {PROJECTS.map((p) => (
               <div key={p.num} className="work-row">
-                <div className="work-num">{p.num}</div>
+                <div className="work-logo">
+                  <img src={p.logo} alt={p.name} />
+                </div>
                 <div>
                   <div className="work-name">{p.name}</div>
                   <div className="work-outcome">{p.outcome}</div>
@@ -346,7 +390,7 @@ function HomePage() {
               <a href="https://youtube.com/@myspiritway" target="_blank" rel="noreferrer">YouTube</a>
             </div>
             <div className="contact-sig">
-              <img src="/signature.png" alt="Kamil Jan" />
+              <img src="/signature.png" alt="Kamil Jan signature" />
             </div>
           </div>
         </div>
