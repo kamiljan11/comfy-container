@@ -71,7 +71,7 @@ const PROJECTS = [
     num: '01',
     logo: '/logos/masgroup.png',
     name: 'MAS Group',
-    outcome: "Iceland's largest Polish-operated B2B group — auto parts, print, logistics, rental — running on dedicated teams.",
+    outcome: 'Multi-vertical B2B group — auto parts, print, logistics, rental — built from zero and running on dedicated department leads.',
     tags: ['Operations', 'B2B'],
     year: '2021–now'
   },
@@ -79,7 +79,7 @@ const PROJECTS = [
     num: '02',
     logo: '/logos/flyt.png',
     name: 'Flyt',
-    outcome: "Iceland's first freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.",
+    outcome: 'First-of-its-kind freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.',
     tags: ['Marketplace', 'SaaS'],
     year: '2023'
   },
@@ -95,7 +95,7 @@ const PROJECTS = [
     num: '04',
     logo: '/logos/reykjawwwik.png',
     name: 'Reykjawwwik',
-    outcome: 'Productized web agency for Icelandic SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.',
+    outcome: 'Productized web agency for local SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.',
     tags: ['Agency', 'Product'],
     year: '2023'
   },
@@ -140,10 +140,10 @@ const CAPABILITIES = [
 
 const TIMELINE = [
   { year: '2024 – Present', role: 'AI Automation Architect', company: 'MAS Group / Independent', desc: 'Building LLM-powered workflows, RetellAI voice agents, and MCP servers. Deployed AI tooling across freight, auto parts, and service businesses.' },
-  { year: '2023 – Present', role: 'Founder & Product Lead', company: 'Flyt — Freight Marketplace', desc: "Designed and launched Iceland's first freight comparison platform. Led product, operations, and commercial partnerships from zero to live users." },
-  { year: '2022 – Present', role: 'Founder', company: 'Reykjawwwik Digital Agency', desc: 'Productized web agency for Icelandic SMBs. Built the service model, pricing structure, delivery workflow, and client acquisition system from scratch.' },
-  { year: '2021 – Present', role: 'CEO & Operator', company: 'MAS Group Iceland', desc: 'Built a multi-vertical B2B group (auto parts, print, freight, rental) from zero. Recruited and managed dedicated department leads across 4 verticals.' },
-  { year: '2019 – 2021', role: 'Growth & Operations', company: 'Startups — Poland & Iceland', desc: 'Led growth, ops, and market expansion across early-stage startups. Built playbooks for customer acquisition, team hiring, and scaling operations.' },
+  { year: '2023 – Present', role: 'Founder & Product Lead', company: 'Flyt — Freight Marketplace', desc: 'Designed and launched a first-of-its-kind freight comparison platform. Led product, operations, and commercial partnerships from zero to live users.' },
+  { year: '2022 – Present', role: 'Founder', company: 'Reykjawwwik Digital Agency', desc: 'Productized web agency for local SMBs. Built the service model, pricing structure, delivery workflow, and client acquisition system from scratch.' },
+  { year: '2021 – Present', role: 'CEO & Operator', company: 'MAS Group', desc: 'Built a multi-vertical B2B group (auto parts, print, freight, rental) from zero. Recruited and managed dedicated department leads across 4 verticals.' },
+  { year: '2019 – 2021', role: 'Growth & Operations', company: 'Early-stage Startups', desc: 'Led growth, ops, and market expansion across early-stage startups. Built playbooks for customer acquisition, team hiring, and scaling operations.' },
 ]
 
 const ENGAGE = [
@@ -168,7 +168,7 @@ const ENGAGE = [
   {
     mode: 'Hire',
     title: 'Head of Ops / Growth / AI',
-    desc: "Remote-first. Most effective in companies where someone needs to own the operational and growth layer — or build the AI automation infrastructure from scratch.",
+    desc: 'Remote-first. Most effective in companies where someone needs to own the operational and growth layer — or build the AI automation infrastructure from scratch.',
     detail: 'In-house or remote · Head of Ops / Growth / AI',
     href: 'mailto:hello@kamiljan.com',
     cta: 'Get in touch',
@@ -221,7 +221,7 @@ function HomePage() {
         <div className="hero-fade-top" />
         <div className="hero-fade-bottom" />
         <div className="hero-content">
-          <p className="hero-eyebrow">Entrepreneur &amp; Systems Builder &mdash; Iceland-based</p>
+          <p className="hero-eyebrow">Entrepreneur &amp; Operator &mdash; Building Remotely</p>
           <h1 className="hero-h1">
             Built from zero.<br />
             Running <em>without me.</em>
@@ -257,10 +257,11 @@ function HomePage() {
             <div className="about-inner">
               <p className="about-p">
                 I moved to Iceland in 2019 with nothing but a plan and a high tolerance
-                for ambiguity. Since then I&apos;ve built <strong>MAS Group</strong> —
-                Iceland&apos;s largest Polish-operated B2B operation — launched a freight
-                marketplace, a productized agency, a handyman brand, and several software
-                tools. The common thread: <strong>systems that run without me</strong>.
+                for ambiguity. Since then I&apos;ve built <strong>MAS Group</strong> from
+                zero — a multi-vertical B2B operation spanning auto parts, print, freight,
+                and rental — alongside a freight marketplace, a productized agency, a
+                handyman brand, and several software tools. The common thread:{' '}
+                <strong>systems that run without me</strong>.
               </p>
               <p className="about-p">
                 My background spans growth marketing, product, operations, and AI
@@ -272,7 +273,7 @@ function HomePage() {
                 though it rarely comes up in a pitch deck.
               </p>
               <div className="about-meta">
-                <div className="about-meta-item"><span>2019</span>Arrived in Iceland</div>
+                <div className="about-meta-item"><span>2019</span>Started building</div>
                 <div className="about-meta-item"><span>4</span>Active verticals</div>
                 <div className="about-meta-item"><span>6+</span>Businesses built</div>
               </div>
