@@ -20,29 +20,39 @@ function ScrollProg() {
   return <div ref={barRef} className="scroll-prog" />
 }
 
-/* ── Custom cursor ── */
+/* ── Custom cursor — SVG arrow pointer ── */
 function Cursor() {
-  const dotRef = useRef<HTMLDivElement>(null)
-  const ringRef = useRef<HTMLDivElement>(null)
+  const ptrRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    let mx = 0, my = 0, rx = 0, ry = 0, raf = 0
     const onMove = (e: MouseEvent) => {
-      mx = e.clientX; my = e.clientY
-      if (dotRef.current) { dotRef.current.style.left = `${mx}px`; dotRef.current.style.top = `${my}px` }
+      if (ptrRef.current) {
+        ptrRef.current.style.left = `${e.clientX}px`
+        ptrRef.current.style.top = `${e.clientY}px`
+      }
     }
-    const tick = () => {
-      rx += (mx - rx) * 0.11; ry += (my - ry) * 0.11
-      if (ringRef.current) { ringRef.current.style.left = `${rx}px`; ringRef.current.style.top = `${ry}px` }
-      raf = requestAnimationFrame(tick)
-    }
-    const hover = () => ringRef.current?.classList.add('hovering')
-    const unhover = () => ringRef.current?.classList.remove('hovering')
+    const hover = () => ptrRef.current?.classList.add('hovering')
+    const unhover = () => ptrRef.current?.classList.remove('hovering')
     document.addEventListener('mousemove', onMove)
-    document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', hover); el.addEventListener('mouseleave', unhover) })
-    raf = requestAnimationFrame(tick)
-    return () => { document.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf) }
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', hover)
+      el.addEventListener('mouseleave', unhover)
+    })
+    return () => document.removeEventListener('mousemove', onMove)
   }, [])
-  return (<><div ref={dotRef} className="cursor-dot" /><div ref={ringRef} className="cursor-ring" /></>)
+  return (
+    <div ref={ptrRef} className="cursor-ptr">
+      <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M1.5 1.5L1.5 19L6 14.5L9 22L11.5 21L8.5 13.5H15L1.5 1.5Z"
+          fill="#0891b2"
+          stroke="#040c14"
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
+  )
 }
 
 /* ── Marquee strip ── */
