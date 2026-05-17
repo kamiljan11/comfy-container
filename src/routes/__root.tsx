@@ -24,6 +24,53 @@ const WEBSITE_SCHEMA = {
   "description": "Portfolio of Kamil Jan — entrepreneur, operator, and AI automation architect based in Reykjavík, Iceland."
 };
 
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who is Kamil Jan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kamil Jan is an entrepreneur, operator, and AI automation architect based in Reykjavík, Iceland. He is the founder of MAS Group, Flyt, Reykjawwwik, and QuickFix — with 5+ years building B2B operations across Iceland."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does Kamil Jan do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kamil Jan builds businesses and the systems that run them. He specializes in systems architecture, AI automation (LLM workflows, voice agents, MCP servers), and growth marketing. He is available as a co-founder, advisor, or senior hire."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Kamil Jan available for hire or co-founding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Kamil Jan is available as an equity co-founder at pre-revenue or early traction stage, for 30–90 day advisory and project engagements, or as a full-time Head of Operations, Growth, or AI. Contact him at hello@kamiljan.com."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I contact Kamil Jan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can reach Kamil Jan by email at hello@kamiljan.com, or find him on LinkedIn at linkedin.com/in/myspiritway."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What AI tools and technologies does Kamil Jan work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kamil Jan works with LLM workflows, RetellAI voice agents, MCP servers, Cloudflare Workers, TanStack Router, Three.js, n8n, fal.ai, Twilio, Supabase, Meta Ads, and Playwright — among others. He builds and deploys AI tooling in production, not just demos."
+      }
+    }
+  ]
+};
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -83,6 +130,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }} />
       </head>
       <body>
         {children}
