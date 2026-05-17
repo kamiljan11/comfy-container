@@ -224,7 +224,8 @@ function HomePage() {
           <p className="hero-eyebrow">Entrepreneur &amp; Operator &mdash; Building Remotely</p>
           <h1 className="hero-h1">
             Built from zero.<br />
-            Running <em>without me.</em>
+            Running without<br />
+            <em>me.</em>
           </h1>
           <p className="hero-sub">
             Operator, builder, and AI architect. I design the systems, ship the product,
