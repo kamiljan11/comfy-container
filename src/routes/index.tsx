@@ -392,6 +392,8 @@ function HomePage() {
               <a href="https://linkedin.com/in/myspiritway" target="_blank" rel="noreferrer">LinkedIn</a>
               &middot;
               <a href="https://youtube.com/@kamiljan11" target="_blank" rel="noreferrer">YouTube</a>
+              &middot;
+              <a href="https://github.com/mountainallservice" target="_blank" rel="noreferrer">GitHub</a>
             </div>
             <div className="contact-sig">
               <img src="/signature.png" alt="Kamil Jan signature" />
