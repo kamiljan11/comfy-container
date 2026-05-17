@@ -200,7 +200,9 @@ function HomePage() {
 
       {/* ── Nav ── */}
       <nav className="nav">
-        <div className="nav-logo">K<span>J</span></div>
+        <a href="/" className="nav-sig-wrap">
+          <img src="/signature.png" alt="Kamil Jan" className="nav-sig" />
+        </a>
         <ul className="nav-links">
           <li><a href="#work">Work</a></li>
           <li><a href="#capabilities">Capabilities</a></li>
@@ -219,7 +221,7 @@ function HomePage() {
         <div className="hero-fade-top" />
         <div className="hero-fade-bottom" />
         <div className="hero-content">
-          <p className="hero-eyebrow">Entrepreneur &amp; Systems Builder &mdash; Reykjav&iacute;k</p>
+          <p className="hero-eyebrow">Entrepreneur &amp; Systems Builder &mdash; Iceland-based</p>
           <h1 className="hero-h1">
             Built from zero.<br />
             Running <em>without me.</em>
@@ -238,7 +240,7 @@ function HomePage() {
           <div className="hero-stats">
             <div><div className="hero-stat-val">6<span>+</span></div><div className="hero-stat-lbl">Businesses built</div></div>
             <div><div className="hero-stat-val">4</div><div className="hero-stat-lbl">Active verticals</div></div>
-            <div><div className="hero-stat-val">5<span>yr</span></div><div className="hero-stat-lbl">Iceland track record</div></div>
+            <div><div className="hero-stat-val">5<span>yr</span></div><div className="hero-stat-lbl">Operator track record</div></div>
             <div><div className="hero-stat-val">300<span>+</span></div><div className="hero-stat-lbl">Ops delivered</div></div>
           </div>
         </div>
@@ -398,8 +400,8 @@ function HomePage() {
 
       {/* ── Footer ── */}
       <footer className="footer">
-        <div className="footer-logo">K<span>J</span></div>
-        <div className="footer-copy">&copy; {new Date().getFullYear()} Kamil Jan &mdash; Reykjav&iacute;k</div>
+        <img src="/signature.png" alt="Kamil Jan" className="footer-sig" />
+        <div className="footer-copy">&copy; {new Date().getFullYear()} Kamil Jan &mdash; kamiljan.com</div>
         <div className="footer-links">
           <a href="https://youtube.com/@myspiritway" target="_blank" rel="noreferrer">YouTube</a>
           <a href="https://linkedin.com/in/myspiritway" target="_blank" rel="noreferrer">LinkedIn</a>
