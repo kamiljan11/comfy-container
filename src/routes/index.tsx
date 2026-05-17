@@ -391,7 +391,7 @@ function HomePage() {
               or find me on
               <a href="https://linkedin.com/in/myspiritway" target="_blank" rel="noreferrer">LinkedIn</a>
               &middot;
-              <a href="https://youtube.com/@myspiritway" target="_blank" rel="noreferrer">YouTube</a>
+              <a href="https://youtube.com/@kamiljan11" target="_blank" rel="noreferrer">YouTube</a>
             </div>
             <div className="contact-sig">
               <img src="/signature.png" alt="Kamil Jan signature" />
@@ -405,7 +405,7 @@ function HomePage() {
         <img src="/signature.png" alt="Kamil Jan" className="footer-sig" />
         <div className="footer-copy">&copy; {new Date().getFullYear()} Kamil Jan &mdash; kamiljan.com</div>
         <div className="footer-links">
-          <a href="https://youtube.com/@myspiritway" target="_blank" rel="noreferrer">YouTube</a>
+          <a href="https://youtube.com/@kamiljan11" target="_blank" rel="noreferrer">YouTube</a>
           <a href="https://linkedin.com/in/myspiritway" target="_blank" rel="noreferrer">LinkedIn</a>
           <a href="https://github.com/mountainallservice" target="_blank" rel="noreferrer">GitHub</a>
         </div>
