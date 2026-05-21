@@ -3,10 +3,12 @@ import type { ReactNode } from 'react'
 
 const NAV_LINKS = [
   { to: '/spirituality', label: 'Home' },
-  { to: '/spirituality/sps', label: 'The Book (Full)' },
-  { to: '/spirituality/sps2', label: 'Short Version' },
+  { to: '/spirituality/sps', label: 'The Book' },
+  { to: '/spirituality/sps2', label: 'Short' },
   { to: '/spirituality/dmt', label: 'DMT' },
   { to: '/spirituality/iyss', label: 'IYSS' },
+  { to: '/spirituality/clarity', label: 'Clarity Call' },
+  { to: '/spirituality/blog', label: 'Blog' },
   { to: '/spirituality/about', label: 'About' },
   { to: '/spirituality/support', label: 'Support' },
   { to: '/spirituality/contact', label: 'Contact' },
@@ -23,17 +25,18 @@ export default function SpiritualityLayout({ children, title, eyebrow }: Props) 
     <div className="min-h-screen bg-[#06090a] text-white">
       {/* Top nav */}
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#06090a]/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
-          <Link to="/" className="text-sm font-semibold tracking-wide text-white/80 hover:text-white transition-colors">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
+          <Link to="/" className="text-sm font-semibold tracking-wide text-white/80 hover:text-white transition-colors shrink-0">
             ← Kamil Jan
           </Link>
-          <div className="hidden md:flex items-center gap-1 text-xs">
+          <div className="hidden lg:flex items-center gap-0.5 text-xs flex-wrap justify-end">
             {NAV_LINKS.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                className="px-3 py-2 rounded-md text-white/60 hover:text-white hover:bg-white/5 transition-all"
-                activeProps={{ className: 'px-3 py-2 rounded-md text-white bg-white/10' }}
+                className="px-2.5 py-2 rounded-md text-white/60 hover:text-white hover:bg-white/5 transition-all whitespace-nowrap"
+                activeProps={{ className: 'px-2.5 py-2 rounded-md text-white bg-white/10 whitespace-nowrap' }}
+                activeOptions={{ exact: true }}
               >
                 {l.label}
               </Link>
