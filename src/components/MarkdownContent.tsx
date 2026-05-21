@@ -14,43 +14,95 @@ import { Fragment } from 'react'
  *  - --- horizontal rules
  */
 
-function renderInline(text: string, keyPrefix: string) {
-  // Process inline markdown: links, bold, italic, code
-  const parts: Array<string | { type: string; text: string; href?: string }> = []
-  let remaining = text
-  // Links first
-  remaining = remaining.replace(
-    /\[([^\]]+)\]\(([^)]+)\)/g,
-    (_m, label: string, href: string) => `LINK${label}${href}`,
-  )
-  // Bold
-  remaining = remaining.replace(/\*\*([^*]+)\*\*/g, 'BOLD$1')
-  // Italic (single *)
-  remaining = remaining.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, 'ITAL$1')
-  // Code
-  remaining = remaining.replace(/`([^`]+)`/g, 'CODE$1')
+type InlineToken =
+  | { type: 'text'; content: string }
+  | { type: 'bold'; content: string }
+  | { type: 'italic'; content: string }
+  | { type: 'code'; content: string }
+  | { type: 'link'; content: string; href: string }
 
-  const segments = remaining.split('').filter(Boolean)
-  return segments.map((seg, i) => {
-    if (seg.startsWith('BOLD')) return <strong key={`${keyPrefix}-${i}`}>{seg.slice(5)}</strong>
-    if (seg.startsWith('ITAL')) return <em key={`${keyPrefix}-${i}`}>{seg.slice(5)}</em>
-    if (seg.startsWith('CODE')) return <code key={`${keyPrefix}-${i}`} className="rounded bg-white/10 px-1.5 py-0.5 text-sm">{seg.slice(5)}</code>
-    if (seg.startsWith('LINK')) {
-      const [, body] = seg.split('LINK')
-      const [label, href] = body.split('')
-      const external = href.startsWith('http')
-      return (
-        <a
-          key={`${keyPrefix}-${i}`}
-          href={href}
-          {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
-          className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300"
-        >
-          {label}
-        </a>
-      )
+function tokenizeInline(input: string): InlineToken[] {
+  const tokens: InlineToken[] = []
+  let remaining = input
+
+  while (remaining.length > 0) {
+    const linkMatch = remaining.match(/^\[([^\]]+)\]\(([^)]+)\)/)
+    if (linkMatch) {
+      tokens.push({ type: 'link', content: linkMatch[1], href: linkMatch[2] })
+      remaining = remaining.slice(linkMatch[0].length)
+      continue
     }
-    return <Fragment key={`${keyPrefix}-${i}`}>{seg}</Fragment>
+
+    const boldMatch = remaining.match(/^\*\*([^*]+)\*\*/)
+    if (boldMatch) {
+      tokens.push({ type: 'bold', content: boldMatch[1] })
+      remaining = remaining.slice(boldMatch[0].length)
+      continue
+    }
+
+    const italMatch = remaining.match(/^\*([^*\n]+)\*/)
+    if (italMatch) {
+      tokens.push({ type: 'italic', content: italMatch[1] })
+      remaining = remaining.slice(italMatch[0].length)
+      continue
+    }
+
+    const codeMatch = remaining.match(/^`([^`]+)`/)
+    if (codeMatch) {
+      tokens.push({ type: 'code', content: codeMatch[1] })
+      remaining = remaining.slice(codeMatch[0].length)
+      continue
+    }
+
+    // Consume text up to the next potential marker
+    const nextSpecial = remaining.search(/[*`[]/)
+    if (nextSpecial === -1) {
+      tokens.push({ type: 'text', content: remaining })
+      break
+    }
+    if (nextSpecial === 0) {
+      // marker char but no valid match — emit single char as text
+      tokens.push({ type: 'text', content: remaining[0] })
+      remaining = remaining.slice(1)
+    } else {
+      tokens.push({ type: 'text', content: remaining.slice(0, nextSpecial) })
+      remaining = remaining.slice(nextSpecial)
+    }
+  }
+
+  return tokens
+}
+
+function renderInline(text: string, keyPrefix: string) {
+  return tokenizeInline(text).map((tok, i) => {
+    const k = `${keyPrefix}-${i}`
+    switch (tok.type) {
+      case 'bold':
+        return <strong key={k}>{tok.content}</strong>
+      case 'italic':
+        return <em key={k}>{tok.content}</em>
+      case 'code':
+        return (
+          <code key={k} className="rounded bg-white/10 px-1.5 py-0.5 text-sm">
+            {tok.content}
+          </code>
+        )
+      case 'link': {
+        const external = tok.href.startsWith('http')
+        return (
+          <a
+            key={k}
+            href={tok.href}
+            {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+            className="text-cyan-400 underline underline-offset-2 hover:text-cyan-300"
+          >
+            {tok.content}
+          </a>
+        )
+      }
+      default:
+        return <Fragment key={k}>{tok.content}</Fragment>
+    }
   })
 }
 
