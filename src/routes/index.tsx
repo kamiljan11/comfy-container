@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import Hero3D from '../components/Hero3D'
 
@@ -83,7 +83,8 @@ const PROJECTS = [
     name: 'MAS Group',
     outcome: 'Multi-vertical B2B group — auto parts, print, logistics, rental — built from zero and running on dedicated department leads.',
     tags: ['Operations', 'B2B'],
-    year: '2021–now'
+    year: '2021–now',
+    href: null as string | null,
   },
   {
     num: '02',
@@ -91,7 +92,8 @@ const PROJECTS = [
     name: 'Flyt',
     outcome: 'First-of-its-kind freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.',
     tags: ['Marketplace', 'SaaS'],
-    year: '2023'
+    year: '2023',
+    href: null as string | null,
   },
   {
     num: '03',
@@ -99,7 +101,8 @@ const PROJECTS = [
     name: 'QuickFix',
     outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.',
     tags: ['Brand', 'Growth'],
-    year: '2022'
+    year: '2022',
+    href: null as string | null,
   },
   {
     num: '04',
@@ -107,15 +110,17 @@ const PROJECTS = [
     name: 'Reykjawwwik',
     outcome: 'Productized web agency for local SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.',
     tags: ['Agency', 'Product'],
-    year: '2023'
+    year: '2023',
+    href: null as string | null,
   },
   {
     num: '05',
     logo: '/logos/myspiritway.png',
     name: 'MySpiritWay',
-    outcome: 'Educational platform — guidebook, 7-week framework, Skool community, and weekly YouTube content engine.',
+    outcome: 'Educational platform — the Simplified Practical Spirituality guidebook, activation sessions (DMT, IYSS), and community. Now living at kamiljan.com/spirituality.',
     tags: ['Education', 'Content'],
-    year: '2024'
+    year: '2024',
+    href: '/spirituality',
   },
   {
     num: '06',
@@ -123,7 +128,8 @@ const PROJECTS = [
     name: 'Ekomoc CRM',
     outcome: 'Solar audit and sales CRM — job pipeline, role-based access, team notes, and audit photo uploads.',
     tags: ['SaaS', 'CRM'],
-    year: '2024'
+    year: '2024',
+    href: null as string | null,
   },
 ]
 
@@ -218,6 +224,7 @@ function HomePage() {
           <li><a href="#capabilities">Capabilities</a></li>
           <li><a href="#timeline">Timeline</a></li>
           <li><a href="#engage">Engage</a></li>
+          <li><Link to="/spirituality">Spiritual Path</Link></li>
         </ul>
         <div className="nav-right">
           <div className="nav-avail"><span className="avail-dot" />Available</div>
@@ -303,24 +310,34 @@ function HomePage() {
         <div className="container">
           <span className="section-label">Selected Work</span>
           <div className="work-table">
-            {PROJECTS.map((p) => (
-              <div key={p.num} className="work-row">
-                <div className="work-logo">
-                  <img src={p.logo} alt={p.name} />
-                </div>
-                <div>
-                  <div className="work-name">{p.name}</div>
-                  <div className="work-outcome">{p.outcome}</div>
-                </div>
-                <div className="work-tags">
-                  {p.tags.map((t) => <span key={t} className="work-tag">{t}</span>)}
-                </div>
-                <div className="work-year">{p.year}</div>
-                <svg className="work-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </div>
-            ))}
+            {PROJECTS.map((p) => {
+              const inner = (
+                <>
+                  <div className="work-logo">
+                    <img src={p.logo} alt={p.name} />
+                  </div>
+                  <div>
+                    <div className="work-name">{p.name}</div>
+                    <div className="work-outcome">{p.outcome}</div>
+                  </div>
+                  <div className="work-tags">
+                    {p.tags.map((t) => <span key={t} className="work-tag">{t}</span>)}
+                  </div>
+                  <div className="work-year">{p.year}</div>
+                  <svg className="work-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </>
+              )
+              if (p.href) {
+                return (
+                  <Link key={p.num} to={p.href} className="work-row work-row-link">
+                    {inner}
+                  </Link>
+                )
+              }
+              return <div key={p.num} className="work-row">{inner}</div>
+            })}
           </div>
         </div>
       </section>
