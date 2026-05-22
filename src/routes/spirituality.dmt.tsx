@@ -2,7 +2,23 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 
-export const Route = createFileRoute('/spirituality/dmt')({ component: DmtPage })
+export const Route = createFileRoute('/spirituality/dmt')({
+  head: () => ({
+    meta: [
+      { title: 'Dynamic Meditation Technique (DMT)' },
+      { name: 'description', content: 'A live audio practice rooted in the 8 Limbs of Yoga. Accelerate the evolution of consciousness.' },
+      { property: 'og:title', content: 'Dynamic Meditation Technique (DMT)' },
+      { property: 'og:description', content: 'A live audio practice rooted in the 8 Limbs of Yoga. Accelerate the evolution of consciousness.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/dmt' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/dmt' },
+    ],
+  }),
+  component: DmtPage,
+})
 
 const HIGHLIGHTS = [
   { emoji: '🌀', title: 'Ten years of refinement', desc: 'Built and polished over a decade of personal and spiritual practice.' },
