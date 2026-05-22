@@ -2,7 +2,23 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 
-export const Route = createFileRoute('/spirituality/support')({ component: SupportPage })
+export const Route = createFileRoute('/spirituality/support')({
+  head: () => ({
+    meta: [
+      { title: 'Support the Mission — Fair Exchange Model' },
+      { name: 'description', content: 'Give what feels right. The work is offered on the Fair Exchange Model — accessible, intentional, real.' },
+      { property: 'og:title', content: 'Support the Mission — Fair Exchange Model' },
+      { property: 'og:description', content: 'Give what feels right. The work is offered on the Fair Exchange Model — accessible, intentional, real.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/support' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/support' },
+    ],
+  }),
+  component: SupportPage,
+})
 
 const SHARE_URL = 'https://kamiljan.com/spirituality/support'
 
