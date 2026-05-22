@@ -13,19 +13,16 @@ export interface SubscribePayload {
  * Newsletter opt-in server function.
  *
  * Flow:
- *   1. Validate email.
+ *   1. Validate email (inline, since this @tanstack/react-start version
+ *      doesn't expose the chained .validator()).
  *   2. Persist subscriber (Cloudflare KV when wired up; in-memory stub for now).
  *   3. Notify Kamil that a new lead came in.
  *   4. Kick off the welcome sequence for the new subscriber.
- *
- * Every step is pluggable — see ./email.ts and ./subscribers.ts.
  */
-export const subscribeToNewsletter = createServerFn({ method: 'POST' })
-  .validator((data: SubscribePayload) => {
-    if (!data.email?.includes('@')) throw new Error('Valid email is required')
-    return data
-  })
-  .handler(async ({ data }) => {
+export const subscribeToNewsletter = createServerFn({ method: 'POST' }).handler(
+  async ({ data }: { data: SubscribePayload }) => {
+    if (!data?.email?.includes('@')) throw new Error('Valid email is required')
+
     const subscriber = {
       email: data.email.trim().toLowerCase(),
       name: data.name?.trim() || undefined,
@@ -47,4 +44,5 @@ export const subscribeToNewsletter = createServerFn({ method: 'POST' })
     await startWelcomeSequence({ email: subscriber.email, name: subscriber.name })
 
     return { ok: true, subscribedAt: subscriber.subscribedAt }
-  })
+  },
+)
