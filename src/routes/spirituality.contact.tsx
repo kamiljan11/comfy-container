@@ -3,7 +3,23 @@ import { useState } from 'react'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 import { submitContactForm } from '../lib/contact.functions'
 
-export const Route = createFileRoute('/spirituality/contact')({ component: ContactPage })
+export const Route = createFileRoute('/spirituality/contact')({
+  head: () => ({
+    meta: [
+      { title: 'Contact Kamil Jan' },
+      { name: 'description', content: 'Get in touch — questions, feedback, partnerships. I read every message that comes in.' },
+      { property: 'og:title', content: 'Contact Kamil Jan' },
+      { property: 'og:description', content: 'Get in touch — questions, feedback, partnerships. I read every message that comes in.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/contact' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/contact' },
+    ],
+  }),
+  component: ContactPage,
+})
 
 const EMAIL = 'hello@kamiljan.com'
 
