@@ -23,6 +23,9 @@ export const Route = createFileRoute('/spirituality/iyss')({
 const MANDALA_URL =
   'https://d1yei2z3i6k35z.cloudfront.net/6584575/67420ebe3e1cb_DALLE2024-11-2317.19.54-Amesmerizingsceneofagoldenglowingorbemittingradiantlightsurroundedbydarkness.Theorbisatthecenterandintricatesacredgeometrysh.webp'
 
+const GUIDE_PORTRAIT_URL =
+  'https://d1yei2z3i6k35z.cloudfront.net/6584575/67423572662b3_Untitleddesign1.jpg'
+
 const SOUNDS_LIKE_YOU = [
   'You feel like you keep repeating the same negative patterns.',
   'It is hard to relax or feel at peace with yourself.',
@@ -31,12 +34,36 @@ const SOUNDS_LIKE_YOU = [
 ] as const
 
 const BENEFITS = [
-  { title: 'Release emotional trauma', desc: 'Gently process and let go of past pain. Create space for emotional balance.' },
-  { title: 'Reduce stress, deeply relax', desc: 'Guided breathwork and calming audio frequencies dissolve tension.' },
-  { title: 'Accelerate spiritual growth', desc: 'Remove emotional blocks and connect with your higher self.' },
-  { title: 'Deep self-awareness', desc: 'See hidden patterns and behaviours holding you back — and how to release them.' },
-  { title: 'Envision a positive future', desc: 'Guided visualisations help you imagine a brighter, more fulfilling life.' },
-  { title: 'Complete life satisfaction', desc: 'Integrate past experience. Find clarity. Build inner peace.' },
+  {
+    title: 'Release emotional trauma',
+    desc: 'Gently process and let go of past pain. Create space for emotional balance.',
+    icon: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/674222f6f28b5_DALLE2024-11-2318.45.59-AsimpleminimalisticiconrepresentingReleaseEmotionalTrauma.Thedesignfeaturesahumansilhouettewithasoftglowingheartandgentleupwa.webp',
+  },
+  {
+    title: 'Reduce stress, deeply relax',
+    desc: 'Guided breathwork and calming audio frequencies dissolve tension.',
+    icon: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/674233af3a819_DALLE2024-11-2319.43.10-AminimalisticiconrepresentingSupportCompleteLifeSatisfaction.Theiconfeaturesahumansilhouettesurroundedbyaradiantcircularglowsym.webp',
+  },
+  {
+    title: 'Accelerate spiritual growth',
+    desc: 'Remove emotional blocks and connect with your higher self.',
+    icon: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6742339ed3995_DALLE2024-11-2319.43.14-AminimalisticiconrepresentingAccelerateSpiritualGrowth.Thedesignfeaturesahumansilhouettewithsoftradiantlightbeamsemanatingupward.webp',
+  },
+  {
+    title: 'Deep self-awareness',
+    desc: 'See hidden patterns and behaviours holding you back — and how to release them.',
+    icon: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6742230908f5b_DALLE2024-11-2318.46.05-AcleanandminimalisticiconrepresentingDeepSelf-Awareness.Thedesignfeaturesahumansilhouettewithaglowinglightradiatingfromthehead.webp',
+  },
+  {
+    title: 'Envision a positive future',
+    desc: 'Guided visualisations help you imagine a brighter, more fulfilling life.',
+    icon: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6742337e4a852_DALLE2024-11-2319.43.22-AminimalisticiconrepresentingEnvisionaPositiveFuture.Thedesignfeaturesahumansilhouettestandingwithanoutstretchedarmpointingtowar.webp',
+  },
+  {
+    title: 'Complete life satisfaction',
+    desc: 'Integrate past experience. Find clarity. Build inner peace.',
+    icon: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6742338ff1dc8_DALLE2024-11-2319.48.59-AminimalisticiconrepresentingSupportCompleteLifeSatisfaction.Theiconfeaturesacleanandmodernwheeldividedintobalancedsectionssymb.webp',
+  },
 ] as const
 
 const STEPS = [
@@ -89,11 +116,11 @@ function IyssPage() {
               <span className="text-xs text-white/55">Prepare headphones. Find a quiet 45–60 min.</span>
             </div>
           </div>
-          {/* Sacred geometry mandala — actual artwork from myspiritway.org */}
+          {/* Golden orb hero — real artwork from myspiritway.org */}
           <div className="relative aspect-square rounded-2xl border border-amber-300/20 overflow-hidden bg-[#06090a]">
             <img
               src={MANDALA_URL}
-              alt="Golden sacred geometry mandala — a glowing orb at the centre surrounded by concentric rings, polyhedra, and stars."
+              alt="Golden glowing orb emitting radiant light, surrounded by intricate sacred geometry."
               loading="eager"
               className="absolute inset-0 h-full w-full object-cover"
             />
@@ -139,6 +166,7 @@ function IyssPage() {
         <div className="grid gap-4 md:grid-cols-2">
           {BENEFITS.map((b, i) => (
             <div key={i} className="rounded-lg border border-white/10 bg-white/[0.02] p-6">
+              <img src={b.icon} alt="" loading="lazy" className="h-14 w-14 mb-3 opacity-90" />
               <h3 className="text-sm uppercase tracking-wider font-semibold text-amber-200/90">{b.title}</h3>
               <p className="mt-2 text-sm md:text-base text-white/75 leading-relaxed">{b.desc}</p>
             </div>
@@ -166,6 +194,36 @@ function IyssPage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      {/* ── Meet Your Guide ─────────────────────────────────────────── */}
+      <section className="py-20 border-t border-white/5">
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Meet your guide</p>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-10">
+          Kamil Jan
+        </h2>
+        <div className="grid gap-8 md:grid-cols-[280px,1fr] items-start">
+          <div className="relative aspect-square w-full max-w-[280px] rounded-2xl overflow-hidden border border-amber-300/20 bg-[#06090a]">
+            <img
+              src={GUIDE_PORTRAIT_URL}
+              alt="Kamil Jan — guide for the Integrate Your Shattered Self practice."
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
+          <div className="space-y-4 text-base md:text-lg text-white/80 leading-relaxed">
+            <p>
+              Twelve years of dedicated practice — meditation, breathwork, somatic release, energy work,
+              shadow integration. Hundreds of hours sitting with my own wounds and with other people&apos;s.
+              I&apos;ve studied across traditions and brought what works back to the cushion.
+            </p>
+            <p>
+              IYSS is my synthesis: the integration techniques that actually move stuck emotion and
+              return you to wholeness, stripped of dogma. No belief required — just presence, breath,
+              and the willingness to feel what arises.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* ── Listen card ─────────────────────────────────────────────── */}
