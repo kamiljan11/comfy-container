@@ -9,7 +9,7 @@ export const Route = createFileRoute('/spirituality/about')({
       { property: 'og:title', content: 'About Kamil Jan — Teacher of Practical Spirituality' },
       { property: 'og:description', content: 'Twelve years on the path. The story behind MySpiritWay and the simplified practical spirituality method.' },
       { property: 'og:url', content: 'https://kamiljan.com/spirituality/about' },
-      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { property: 'og:image', content: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/67f16bad13d72_Zrzutekranu2025-04-05174257.jpg' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
     links: [
@@ -19,10 +19,33 @@ export const Route = createFileRoute('/spirituality/about')({
   component: AboutPage,
 })
 
+// ── Real CloudFront assets pulled from myspiritway.org/aboutkamiljan ──────
+const MSW_LOGO = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65f2f1ab9ea9a_Untitleddesign.png'
+const PORTRAIT = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/67f16bad13d72_Zrzutekranu2025-04-05174257.jpg'
+
+const MEMORY_PHOTOS = [
+  {
+    src: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/67f16bad13d72_Zrzutekranu2025-04-05174257.jpg',
+    caption: 'Studio session, 2025',
+  },
+  {
+    src: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/660c0839aab6d_FB_IMG_1696238558446.jpg',
+    caption: 'Festival Wibracje, Poland',
+  },
+  {
+    src: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65ff15fd13741_FB_IMG_1696238558446.jpg',
+    caption: 'On the road, Europe',
+  },
+  {
+    src: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/691b4c7d405d3_ChatGPTImageNov17202504_24_44PM.png',
+    caption: 'Teaching online',
+  },
+] as const
+
 const PILLARS = [
-  { icon: '🧭', title: 'Practical wisdom', desc: 'No abstraction-for-its-own-sake. Tools that work inside a real life with bills and responsibilities.' },
-  { icon: '🌱', title: 'Lived experience', desc: 'Everything taught has been tested on my own body first. If it doesn’t hold up in daily life, it doesn’t make the page.' },
-  { icon: '🤝', title: 'Friend, not guru', desc: 'I’m on the same path as you. The title is shorthand. What matters is walking it together.' },
+  { icon: 'compass', title: 'Practical wisdom', desc: 'No abstraction-for-its-own-sake. Tools that work inside a real life with bills and responsibilities.' },
+  { icon: 'seed', title: 'Lived experience', desc: 'Everything taught has been tested on my own body first. If it doesn’t hold up in daily life, it doesn’t make the page.' },
+  { icon: 'handshake', title: 'Friend, not guru', desc: 'I’m on the same path as you. The title is shorthand. What matters is walking it together.' },
 ] as const
 
 const TIMELINE = [
@@ -32,9 +55,50 @@ const TIMELINE = [
   { period: 'Now', title: 'Teaching by structuring', desc: 'Distilling what I found into a practical path others can actually walk — without taking 12 years to get there.' },
 ] as const
 
+function PillarGlyph({ kind }: { kind: string }) {
+  if (kind === 'compass') {
+    return (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 text-amber-300" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <circle cx="12" cy="12" r="9" />
+        <polygon points="14.5 9.5 9.5 11.5 9.5 14.5 14.5 12.5" />
+      </svg>
+    )
+  }
+  if (kind === 'seed') {
+    return (
+      <svg viewBox="0 0 24 24" className="w-6 h-6 text-amber-300" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M12 21c0-4 0-8 0-12" />
+        <path d="M12 9c-3 0-6-2-6-6 4 0 6 2 6 6z" />
+        <path d="M12 13c3 0 6-2 6-6-4 0-6 2-6 6z" />
+      </svg>
+    )
+  }
+  return (
+    <svg viewBox="0 0 24 24" className="w-6 h-6 text-amber-300" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M11 11l-3-3a2 2 0 1 1 2.8-2.8L14 8" />
+      <path d="M13 13l3 3a2 2 0 1 0 2.8-2.8L16 11" />
+      <path d="M8 14l3 3" />
+      <path d="M14 8l3 3" />
+    </svg>
+  )
+}
+
 function AboutPage() {
   return (
     <SpiritualityLayout>
+      {/* ── MySpiritWay brand mark ───────────────────────────────────── */}
+      <div className="flex flex-col items-center justify-center pt-6 pb-2">
+        <img
+          src={MSW_LOGO}
+          alt="MySpiritWay"
+          className="h-12 md:h-14 w-auto opacity-90"
+          loading="eager"
+        />
+        <p className="mt-2 text-[10px] uppercase tracking-[0.3em] text-white/40">
+          myspiritway.org
+        </p>
+      </div>
+
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section className="relative -mx-6 px-6 pt-2 pb-16 md:pb-20">
         <div
@@ -62,8 +126,8 @@ function AboutPage() {
         <div className="grid gap-10 md:grid-cols-[1fr,1.4fr] items-start">
           <div className="rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-amber-500/[0.12] via-pink-500/[0.06] to-purple-500/[0.08]">
             <img
-              src="/kamil.png"
-              alt="Kamil Jan portrait"
+              src={PORTRAIT}
+              alt="Kamil Jan — portrait, seated in front of a magenta lamp"
               className="h-full w-full object-cover aspect-[4/5]"
               loading="lazy"
             />
@@ -99,7 +163,7 @@ function AboutPage() {
         <div className="grid gap-4 md:grid-cols-3">
           {PILLARS.map((p, i) => (
             <div key={i} className="rounded-xl border border-amber-300/15 bg-gradient-to-b from-amber-500/[0.05] to-transparent p-6">
-              <div className="text-3xl mb-3" aria-hidden>{p.icon}</div>
+              <div className="mb-3"><PillarGlyph kind={p.icon} /></div>
               <h3 className="text-base font-semibold text-white">{p.title}</h3>
               <p className="mt-2 text-sm text-white/65 leading-relaxed">{p.desc}</p>
             </div>
@@ -141,6 +205,34 @@ function AboutPage() {
             guidebook, the activation sessions, the writing — all of it points toward one thing: a path
             anyone can walk, starting today.
           </p>
+        </div>
+      </section>
+
+      {/* ── Photo memory strip ───────────────────────────────────────── */}
+      <section className="py-16 border-t border-white/5">
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Memory strip</p>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-8">
+          Moments along the way.
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {MEMORY_PHOTOS.map((photo, i) => (
+            <figure
+              key={i}
+              className="group rounded-xl overflow-hidden border border-white/10 bg-white/[0.02]"
+            >
+              <div className="aspect-square overflow-hidden bg-black/40">
+                <img
+                  src={photo.src}
+                  alt={photo.caption}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <figcaption className="px-3 py-2 text-[11px] uppercase tracking-[0.18em] text-white/55">
+                {photo.caption}
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
