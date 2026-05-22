@@ -1,7 +1,23 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 
-export const Route = createFileRoute('/spirituality/')({ component: SpiritualityHub })
+export const Route = createFileRoute('/spirituality/')({
+  head: () => ({
+    meta: [
+      { title: 'Practical Spirituality — Kamil Jan' },
+      { name: 'description', content: 'Twelve years of practical wisdom synthesised. A spiritual path for modern life.' },
+      { property: 'og:title', content: 'Practical Spirituality — Kamil Jan' },
+      { property: 'og:description', content: 'Twelve years of practical wisdom synthesised. A spiritual path for modern life.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality' },
+    ],
+  }),
+  component: SpiritualityHub,
+})
 
 /**
  * Mirrors the linktree-style landing currently live at myspiritway.org/ —
