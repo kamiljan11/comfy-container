@@ -2,7 +2,23 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 import NewsletterSignup from '../components/NewsletterSignup'
 
-export const Route = createFileRoute('/spirituality/dmtpractice')({ component: DmtPracticePage })
+export const Route = createFileRoute('/spirituality/dmtpractice')({
+  head: () => ({
+    meta: [
+      { title: 'Try DMT — Live Practice' },
+      { name: 'description', content: 'Sit with the practice. 45 minutes of guided audio. Find a quiet space, headphones recommended.' },
+      { property: 'og:title', content: 'Try DMT — Live Practice' },
+      { property: 'og:description', content: 'Sit with the practice. 45 minutes of guided audio. Find a quiet space, headphones recommended.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/dmtpractice' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/dmtpractice' },
+    ],
+  }),
+  component: DmtPracticePage,
+})
 
 const STAGES = [
   {
