@@ -10,7 +10,7 @@ export const Route = createFileRoute('/spirituality/iyss')({
       { property: 'og:title', content: 'Integrate Your Shattered Self' },
       { property: 'og:description', content: 'A 21-day guided integration practice. Heal wounds, release trapped emotions, return to wholeness.' },
       { property: 'og:url', content: 'https://kamiljan.com/spirituality/iyss' },
-      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { property: 'og:image', content: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/67420ebe3e1cb_DALLE2024-11-2317.19.54-Amesmerizingsceneofagoldenglowingorbemittingradiantlightsurroundedbydarkness.Theorbisatthecenterandintricatesacredgeometrysh.webp' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
     links: [
@@ -19,6 +19,9 @@ export const Route = createFileRoute('/spirituality/iyss')({
   }),
   component: IyssPage,
 })
+
+const MANDALA_URL =
+  'https://d1yei2z3i6k35z.cloudfront.net/6584575/67420ebe3e1cb_DALLE2024-11-2317.19.54-Amesmerizingsceneofagoldenglowingorbemittingradiantlightsurroundedbydarkness.Theorbisatthecenterandintricatesacredgeometrysh.webp'
 
 const SOUNDS_LIKE_YOU = [
   'You feel like you keep repeating the same negative patterns.',
@@ -86,15 +89,19 @@ function IyssPage() {
               <span className="text-xs text-white/55">Prepare headphones. Find a quiet 45–60 min.</span>
             </div>
           </div>
-          {/* Sacred geometry visual */}
-          <div className="relative aspect-square rounded-2xl border border-amber-300/20 bg-gradient-to-br from-[#0e2030] via-[#1a1530] to-[#0a0f1a] overflow-hidden">
-            <div aria-hidden className="absolute inset-0">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-3/4 w-3/4 rounded-full border border-amber-300/30" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/2 w-1/2 rounded-full border border-amber-300/40" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/4 w-1/4 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 blur-sm" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-amber-100" />
-            </div>
-            <div className="absolute bottom-4 left-4 right-4 text-center text-xs text-amber-200/60 italic">
+          {/* Sacred geometry mandala — actual artwork from myspiritway.org */}
+          <div className="relative aspect-square rounded-2xl border border-amber-300/20 overflow-hidden bg-[#06090a]">
+            <img
+              src={MANDALA_URL}
+              alt="Golden sacred geometry mandala — a glowing orb at the centre surrounded by concentric rings, polyhedra, and stars."
+              loading="eager"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-[#06090a]/60 via-transparent to-transparent"
+            />
+            <div className="absolute bottom-4 left-4 right-4 text-center text-xs text-amber-200/80 italic drop-shadow">
               21 days of integration · then weekly maintenance
             </div>
           </div>
@@ -163,25 +170,48 @@ function IyssPage() {
 
       {/* ── Listen card ─────────────────────────────────────────────── */}
       <section id="listen" className="py-20 border-t border-white/5">
-        <div className="relative overflow-hidden rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-500/[0.10] via-amber-500/[0.04] to-transparent p-8 md:p-12 text-center">
-          <p className="text-xs uppercase tracking-[0.25em] text-amber-300 mb-3">Ready?</p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
-            Put on your headphones.
-          </h2>
-          <p className="text-base text-white/75 leading-relaxed mb-8 max-w-xl mx-auto">
-            45–60 minutes. Quiet space. Headphones recommended. Nothing else to do — just receive.
-          </p>
-          <a
-            href="https://www.myspiritway.org/iyss#listen"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block rounded-md bg-amber-300 px-8 py-4 text-base font-semibold text-[#06090a] hover:bg-amber-200 transition-all"
-          >
-            Listen to recording →
-          </a>
-          <p className="mt-4 text-xs text-white/40 italic">
-            (Audio player being migrated. Original session available at the link above.)
-          </p>
+        <div className="relative overflow-hidden rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-500/[0.10] via-amber-500/[0.04] to-transparent p-8 md:p-12">
+          <div className="grid gap-8 md:grid-cols-[1fr,1.4fr] items-center">
+            {/* Audio thumbnail — mandala artwork */}
+            <div className="relative aspect-square rounded-xl overflow-hidden border border-amber-300/30 bg-[#06090a] mx-auto w-full max-w-xs md:max-w-none">
+              <img
+                src={MANDALA_URL}
+                alt="Integrate Your Shattered Self — guided audio session cover."
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-[#06090a]/70 via-transparent to-transparent"
+              />
+              {/* Play icon overlay */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="h-16 w-16 rounded-full bg-amber-300/90 flex items-center justify-center shadow-lg backdrop-blur-sm">
+                  <span className="ml-1 text-[#06090a] text-2xl" aria-hidden>▶</span>
+                </div>
+              </div>
+            </div>
+            <div className="text-center md:text-left">
+              <p className="text-xs uppercase tracking-[0.25em] text-amber-300 mb-3">Ready?</p>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
+                Put on your headphones.
+              </h2>
+              <p className="text-base text-white/75 leading-relaxed mb-8 max-w-xl">
+                45–60 minutes. Quiet space. Headphones recommended. Nothing else to do — just receive.
+              </p>
+              <a
+                href="https://www.myspiritway.org/iyss-recording"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block rounded-md bg-amber-300 px-8 py-4 text-base font-semibold text-[#06090a] hover:bg-amber-200 transition-all"
+              >
+                Listen to recording →
+              </a>
+              <p className="mt-4 text-xs text-white/40 italic">
+                (Audio player being migrated. Original session available at the link above.)
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
