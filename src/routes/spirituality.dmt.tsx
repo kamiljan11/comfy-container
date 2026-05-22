@@ -21,9 +21,25 @@ export const Route = createFileRoute('/spirituality/dmt')({
 })
 
 // ── Real photography from myspiritway.org CloudFront CDN ──
-const HERO_CIRCLE_PHOTO = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d211fd285ac_Snapinsta.app_234080060_361649882303649_4034891747535150283_n_1080.jpg'
+const HERO_PORTRAIT_PHOTO = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d211fd285ac_Snapinsta.app_234080060_361649882303649_4034891747535150283_n_1080.jpg'
 const KAMIL_PORTRAIT_PHOTO = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65b37a3b275af_kamiljanmyspiritway2.jpg'
 const FIELD_SESSION_PHOTO = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/660c0839aab6d_FB_IMG_1696238558446.jpg'
+
+// ── Benefit icons from Systeme.io CloudFront (1:1 with myspiritway.org/dmt) ──
+const BENEFIT_ICONS = {
+  emotionalRelease: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d219599b42f_1.png',
+  traumaProcessing: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d21960d6041_2.png',
+  deepTransformation: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d21968b3d16_3.png',
+  intuitiveGuidance: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d2196fccdb9_4.png',
+  deepMeditation: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d219791ef44_5.png',
+  energyHealing: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d2198006766_6.png',
+  manifestation: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d219a504083_7.png',
+  spiritualAwakening: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65d219ad056f4_8.png',
+} as const
+
+// ── Testimonial avatars from Systeme.io CloudFront ──
+const TESTIMONIAL_AVATAR_RADEK = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/662807e164f79_1.png'
+const TESTIMONIAL_AVATAR_NIKOLA = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/662808019289f_2.png'
 
 const HIGHLIGHTS = [
   { emoji: '🌀', title: 'Ten years of refinement', desc: 'Built and polished over a decade of personal and spiritual practice.' },
@@ -32,19 +48,19 @@ const HIGHLIGHTS = [
 ] as const
 
 const BENEFITS = [
-  { title: 'Emotional release', desc: 'A safe container for releasing built-up stress and suppressed emotions.' },
-  { title: 'Trauma processing', desc: 'Secure space for confronting and working through past wounds.' },
-  { title: 'Deep transformation', desc: 'Unlocks new levels of self-awareness and accelerates spiritual growth.' },
-  { title: 'Intuitive guidance', desc: 'Opens perception beyond ordinary senses — clarity for decisions.' },
-  { title: 'Deep meditation', desc: 'From the first session, reach a state of profound peace.' },
-  { title: 'Energy healing', desc: 'Balances the body’s energy system; releases blockages.' },
-  { title: 'Spiritual awakening', desc: 'Access previously unreachable layers of consciousness.' },
-  { title: 'Supercharge manifestation', desc: 'Raise your consciousness to become a magnet for what aligns.' },
+  { title: 'Emotional release', desc: 'A safe container for releasing built-up stress and suppressed emotions.', icon: BENEFIT_ICONS.emotionalRelease },
+  { title: 'Trauma processing', desc: 'Secure space for confronting and working through past wounds.', icon: BENEFIT_ICONS.traumaProcessing },
+  { title: 'Deep transformation', desc: 'Unlocks new levels of self-awareness and accelerates spiritual growth.', icon: BENEFIT_ICONS.deepTransformation },
+  { title: 'Intuitive guidance', desc: 'Opens perception beyond ordinary senses — clarity for decisions.', icon: BENEFIT_ICONS.intuitiveGuidance },
+  { title: 'Deep meditation', desc: 'From the first session, reach a state of profound peace.', icon: BENEFIT_ICONS.deepMeditation },
+  { title: 'Energy healing', desc: 'Balances the body’s energy system; releases blockages.', icon: BENEFIT_ICONS.energyHealing },
+  { title: 'Supercharge manifestation', desc: 'Raise your consciousness to become a magnet for what aligns.', icon: BENEFIT_ICONS.manifestation },
+  { title: 'Spiritual awakening', desc: 'Access previously unreachable layers of consciousness.', icon: BENEFIT_ICONS.spiritualAwakening },
 ] as const
 
 const FIELD_PHOTOS = [
   {
-    src: HERO_CIRCLE_PHOTO,
+    src: HERO_PORTRAIT_PHOTO,
     caption: 'Festival group circle — practitioners holding the practice together, Poland.',
     alt: 'Group of practitioners sitting in a circle on grass with festival tents in the background',
   },
@@ -56,9 +72,9 @@ const FIELD_PHOTOS = [
 ] as const
 
 const TESTIMONIALS = [
-  { quote: 'It simply helped me become a better person. Thanks a lot.', name: 'Radek Polewczak', role: 'Practitioner' },
-  { quote: 'I tried many types of meditation but could never focus. Through this process, I finally tasted real stillness.', name: 'Nikola Turek', role: 'Practitioner' },
-  { quote: 'After years of searching, I found a structure that organises spiritual knowledge in a way that actually helps.', name: 'Monika Muracka', role: 'Practitioner' },
+  { quote: 'It simply helped me become a better person. Thanks a lot.', name: 'Radek Polewczak', role: 'Practitioner', avatar: TESTIMONIAL_AVATAR_RADEK },
+  { quote: 'I tried many types of meditation but could never focus. Through this process, I finally tasted real stillness.', name: 'Nikola Turek', role: 'Practitioner', avatar: TESTIMONIAL_AVATAR_NIKOLA },
+  { quote: 'After years of searching, I found a structure that organises spiritual knowledge in a way that actually helps.', name: 'Monika Muracka', role: 'Practitioner', avatar: null },
 ] as const
 
 const FAQS = [
@@ -75,52 +91,60 @@ function DmtPage() {
     <SpiritualityLayout>
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section className="relative -mx-6 px-6 pt-2 pb-16 md:pb-20">
-        {/* Real festival meditation-circle photo as full-bleed backdrop */}
+        {/* Subtle ambient backdrop (no longer a photo — photo is now an image card alongside text) */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10 rounded-b-3xl overflow-hidden"
         >
-          <img
-            src={HERO_CIRCLE_PHOTO}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-            loading="eager"
-          />
-          {/* Dark gradient overlay for legibility */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(180deg, rgba(6,9,10,0.55) 0%, rgba(10,26,32,0.70) 50%, rgba(6,9,10,0.92) 100%)',
+                'linear-gradient(180deg, rgba(10,26,32,0.55) 0%, rgba(6,9,10,0.92) 100%)',
             }}
           />
-          {/* Warm + cool ambient tint to keep brand palette */}
           <div
-            className="absolute inset-0 mix-blend-soft-light opacity-70"
+            className="absolute inset-0 opacity-70"
             style={{
               backgroundImage:
-                'radial-gradient(ellipse at 30% 20%, rgba(220,160,80,0.35), transparent 55%),' +
-                'radial-gradient(ellipse at 80% 90%, rgba(80,140,160,0.30), transparent 55%)',
+                'radial-gradient(ellipse at 30% 20%, rgba(220,160,80,0.20), transparent 55%),' +
+                'radial-gradient(ellipse at 80% 90%, rgba(80,140,160,0.18), transparent 55%)',
             }}
           />
         </div>
-        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/90 mb-4 mt-4">Activation Session</p>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]">
-          Dynamic Meditation<br />
-          <span className="italic font-light text-amber-200">Technique (DMT).</span>
-        </h1>
-        <p className="mt-8 text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl drop-shadow-[0_1px_10px_rgba(0,0,0,0.55)]">
-          A live practice that accelerates the evolution of consciousness. Rooted in the ancient 8 Limbs of
-          Yoga — a complete system guiding the seeker toward higher consciousness and deep union with all
-          that is.
-        </p>
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Link to="/spirituality/dmtpractice" className="rounded-md bg-amber-300 px-7 py-3 text-sm font-semibold text-[#06090a] hover:bg-amber-200 transition-all shadow-lg shadow-black/30">
-            Try the session online →
-          </Link>
-          <a href="#benefits" className="rounded-md border border-white/25 bg-white/[0.08] backdrop-blur-sm px-7 py-3 text-sm text-white hover:bg-white/15 transition-all">
-            See benefits
-          </a>
+
+        <div className="grid gap-10 md:grid-cols-[1.2fr,1fr] items-center">
+          {/* Left: hero text */}
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-amber-300/90 mb-4 mt-4">Activation Session</p>
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.55)]">
+              Dynamic Meditation<br />
+              <span className="italic font-light text-amber-200">Technique (DMT).</span>
+            </h1>
+            <p className="mt-8 text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl drop-shadow-[0_1px_10px_rgba(0,0,0,0.55)]">
+              A live practice that accelerates the evolution of consciousness. Rooted in the ancient 8 Limbs of
+              Yoga — a complete system guiding the seeker toward higher consciousness and deep union with all
+              that is.
+            </p>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Link to="/spirituality/dmtpractice" className="rounded-md bg-amber-300 px-7 py-3 text-sm font-semibold text-[#06090a] hover:bg-amber-200 transition-all shadow-lg shadow-black/30">
+                Try the session online →
+              </Link>
+              <a href="#benefits" className="rounded-md border border-white/25 bg-white/[0.08] backdrop-blur-sm px-7 py-3 text-sm text-white hover:bg-white/15 transition-all">
+                See benefits
+              </a>
+            </div>
+          </div>
+
+          {/* Right: real Kamil hero portrait */}
+          <div className="aspect-square rounded-2xl overflow-hidden border border-amber-300/20 bg-[#0a1a20] shadow-2xl shadow-black/40">
+            <img
+              src={HERO_PORTRAIT_PHOTO}
+              alt="Kamil Jan — Dynamic Meditation Technique practitioner portrait"
+              className="h-full w-full object-cover"
+              loading="eager"
+            />
+          </div>
         </div>
       </section>
 
@@ -143,11 +167,11 @@ function DmtPage() {
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Kamil Jan</h2>
         <p className="text-sm uppercase tracking-wider text-amber-200/80 mb-6">Practical Spiritual Teacher</p>
         <div className="grid gap-8 md:grid-cols-[1fr,1.6fr] items-start">
-          {/* Real sky / Kamil portrait photo from myspiritway CloudFront */}
+          {/* Real Kamil portrait from myspiritway CloudFront */}
           <div className="rounded-xl overflow-hidden border border-white/10 aspect-[4/5] bg-[#0a1a20]">
             <img
               src={KAMIL_PORTRAIT_PHOTO}
-              alt="Kamil Jan — sky portrait, MySpiritWay"
+              alt="Kamil Jan — MySpiritWay portrait"
               className="h-full w-full object-cover"
               loading="lazy"
             />
@@ -187,6 +211,13 @@ function DmtPage() {
         <div className="grid gap-3 md:grid-cols-2">
           {BENEFITS.map((b, i) => (
             <div key={i} className="rounded-md border border-white/10 bg-white/[0.02] p-5">
+              <img
+                src={b.icon}
+                alt=""
+                aria-hidden
+                className="h-12 w-12 mb-3 opacity-90"
+                loading="lazy"
+              />
               <h3 className="text-sm uppercase tracking-wider font-semibold text-amber-200/90">{b.title}</h3>
               <p className="mt-2 text-sm text-white/75 leading-relaxed">{b.desc}</p>
             </div>
@@ -232,6 +263,21 @@ function DmtPage() {
         <div className="grid gap-5 md:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
             <figure key={i} className="rounded-xl border border-white/10 bg-white/[0.03] p-6 flex flex-col">
+              {t.avatar ? (
+                <img
+                  src={t.avatar}
+                  alt={`${t.name} — practitioner avatar`}
+                  className="h-16 w-16 rounded-full object-cover border border-amber-300/20 mb-4"
+                  loading="lazy"
+                />
+              ) : (
+                <div
+                  aria-hidden
+                  className="h-16 w-16 rounded-full mb-4 flex items-center justify-center text-2xl font-semibold text-amber-200 bg-amber-300/10 border border-amber-300/20"
+                >
+                  {t.name.charAt(0)}
+                </div>
+              )}
               <div className="text-3xl text-amber-300/80 leading-none mb-3" aria-hidden>&ldquo;</div>
               <blockquote className="flex-1 text-sm md:text-base text-white/80 leading-relaxed italic">
                 {t.quote}
