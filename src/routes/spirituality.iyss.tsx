@@ -2,7 +2,23 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 
-export const Route = createFileRoute('/spirituality/iyss')({ component: IyssPage })
+export const Route = createFileRoute('/spirituality/iyss')({
+  head: () => ({
+    meta: [
+      { title: 'Integrate Your Shattered Self' },
+      { name: 'description', content: 'A 21-day guided integration practice. Heal wounds, release trapped emotions, return to wholeness.' },
+      { property: 'og:title', content: 'Integrate Your Shattered Self' },
+      { property: 'og:description', content: 'A 21-day guided integration practice. Heal wounds, release trapped emotions, return to wholeness.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/iyss' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/iyss' },
+    ],
+  }),
+  component: IyssPage,
+})
 
 const SOUNDS_LIKE_YOU = [
   'You feel like you keep repeating the same negative patterns.',
