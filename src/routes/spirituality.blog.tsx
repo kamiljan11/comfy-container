@@ -2,7 +2,23 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 import NewsletterSignup from '../components/NewsletterSignup'
 
-export const Route = createFileRoute('/spirituality/blog')({ component: BlogPage })
+export const Route = createFileRoute('/spirituality/blog')({
+  head: () => ({
+    meta: [
+      { title: 'Notes from the Path — Spirituality Blog' },
+      { name: 'description', content: 'Practical reflections, frameworks, and tools as I encounter them on the path.' },
+      { property: 'og:title', content: 'Notes from the Path — Spirituality Blog' },
+      { property: 'og:description', content: 'Practical reflections, frameworks, and tools as I encounter them on the path.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/blog' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/blog' },
+    ],
+  }),
+  component: BlogPage,
+})
 
 const TAGS = ['All', 'Practice', 'Reflection', 'Frameworks', 'Spiritual Marketing'] as const
 
