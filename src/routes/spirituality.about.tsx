@@ -1,7 +1,23 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 
-export const Route = createFileRoute('/spirituality/about')({ component: AboutPage })
+export const Route = createFileRoute('/spirituality/about')({
+  head: () => ({
+    meta: [
+      { title: 'About Kamil Jan — Teacher of Practical Spirituality' },
+      { name: 'description', content: 'Twelve years on the path. The story behind MySpiritWay and the simplified practical spirituality method.' },
+      { property: 'og:title', content: 'About Kamil Jan — Teacher of Practical Spirituality' },
+      { property: 'og:description', content: 'Twelve years on the path. The story behind MySpiritWay and the simplified practical spirituality method.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/about' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/about' },
+    ],
+  }),
+  component: AboutPage,
+})
 
 const PILLARS = [
   { icon: '🧭', title: 'Practical wisdom', desc: 'No abstraction-for-its-own-sake. Tools that work inside a real life with bills and responsibilities.' },
