@@ -1,257 +1,161 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useEffect } from 'react'
 import SpiritualityLayout from '../components/SpiritualityLayout'
-import NewsletterSignup from '../components/NewsletterSignup'
 
 export const Route = createFileRoute('/spirituality/')({ component: SpiritualityHub })
 
-const CORE_TRANSFORMATIONS = [
-  {
-    icon: '✨',
-    title: 'Accelerate the Evolution of Consciousness',
-    desc: 'Begin to see life through a more awakened lens. Deeper clarity, expanded awareness, a more complete sense of reality.',
-  },
-  {
-    icon: '💫',
-    title: 'Reduce Unnecessary Suffering',
-    desc: 'Free yourself from patterns that create inner struggle. With deeper understanding, life becomes lighter, simpler, more meaningful.',
-  },
-  {
-    icon: '🌿',
-    title: 'Achieve Complete Lasting Life Happiness',
-    desc: 'Discover what truly matters. A steady satisfaction that doesn\'t fade — because it comes from within.',
-  },
-] as const
-
-const SEVEN_WAYS = [
-  { emoji: '🧠', title: 'The Evolutionary Mindset', desc: 'A lens that welcomes growth, curiosity, and resilience.' },
-  { emoji: '💖', title: 'Always Try Your Very Best', desc: 'A simple commitment that transforms how you show up.' },
-  { emoji: '🧘', title: 'Formal Spiritual Practice', desc: 'Daily morning and evening practice. The quiet foundation.' },
-  { emoji: '👁️', title: 'Micro-Awareness', desc: 'Notice thoughts, feelings, body, speech, behaviour as they arise.' },
-  { emoji: '🤔', title: 'Deep Reflection', desc: 'Slow down. Examine. Let insight emerge naturally.' },
-  { emoji: '🌿', title: 'Conscious Healthy Lifestyle', desc: 'Sleep, nourishment, movement, connection — lived as practice.' },
-  { emoji: '✨', title: 'Cultivate Spiritual Sensitivity', desc: 'Tune in to the subtle. Presence, intuition, sacredness in the ordinary.' },
-] as const
-
-const OFFERINGS = [
-  {
-    to: '/spirituality/sps',
-    eyebrow: 'The Complete Book',
-    title: 'Simplified Practical Spirituality',
-    desc: '12 years of practical wisdom synthesised. ~90 A4 pages of essence, structure, and direct application.',
-    cta: 'Read the book →',
-    featured: true,
-  },
-  {
-    to: '/spirituality/sps2',
-    eyebrow: 'Short Version',
-    title: 'Simplified Practical Spirituality²',
-    desc: 'Distilled summary of the full book. ~66 minute read — the essence without losing depth.',
-    cta: 'Read the short version →',
-  },
-  {
-    to: '/spirituality/dmt',
-    eyebrow: 'Activation Session',
-    title: 'Dynamic Meditation Technique',
-    desc: 'A powerful breath-based practice rooted in the 8 Limbs of Yoga. Once a week.',
-    cta: 'Learn the practice →',
-  },
-  {
-    to: '/spirituality/iyss',
-    eyebrow: 'Activation Session',
-    title: 'Integrate Your Shattered Self',
-    desc: 'A 21-day practice for integrating fragmented parts of the self. Shadow work, trauma processing, wholeness.',
-    cta: 'Start the integration →',
-  },
-  {
-    to: '/spirituality/clarity',
-    eyebrow: '1:1 Consultation',
-    title: 'Clarity Call',
-    desc: 'A focused 1:1 session with Kamil. Spiritual practice, life direction, integration of insights — concrete next steps.',
-    cta: 'Book the call →',
-  },
-  {
-    to: '/spirituality/spiritual-marketing',
-    eyebrow: 'Conscious Business',
-    title: 'Spiritual Marketing',
-    desc: 'Marketing aligned with consciousness — for teachers, coaches, healers, creators who want to grow without compromising integrity.',
-    cta: 'Explore →',
-  },
-] as const
-
-const MICRO_DEFINITIONS = [
-  'Practical spirituality is applying spiritual insight in everyday choices.',
-  'Practical spirituality is bringing awareness into the ordinary moments of life.',
-  'Practical spirituality is living a life that unites mind, body, and spirit.',
-  'Practical spirituality is letting presence guide how we speak, act, and relate.',
-  'Practical spirituality is turning understanding into lived experience.',
-] as const
-
+/**
+ * Mirrors the linktree-style landing currently live at myspiritway.org/ —
+ * mountain backdrop, pastel centered card, profile + welcome, then three
+ * sections: Spiritual Marketing, Practical Spirituality, Contact Me.
+ */
 function SpiritualityHub() {
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('sp-visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' })
-    document.querySelectorAll('.sp-fade').forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <SpiritualityLayout>
-      {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="relative -mx-6 -mt-12 overflow-hidden bg-gradient-to-b from-amber-500/[0.07] via-transparent to-transparent">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-32 left-1/2 -translate-x-1/2 h-72 w-72 rounded-full bg-amber-400/10 blur-[120px]" />
-          <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-rose-400/[0.07] blur-[140px]" />
-        </div>
-        <div className="relative mx-auto max-w-3xl px-6 pt-20 pb-16 md:pt-32 md:pb-24">
-          <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-6">MySpiritWay · Practical Spirituality</p>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[0.95] text-white">
-            A practical path<br />
-            <span className="italic font-light text-amber-200">for modern life.</span>
-          </h1>
-          <p className="mt-8 text-lg md:text-xl text-white/75 leading-relaxed max-w-2xl">
-            Twelve years of exploring spiritual, religious, and philosophical traditions — distilled into
-            a clear, accessible path that fits inside a real life. No retreats required. No dogma. Just
-            practical methods that work.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Link to="/spirituality/sps" className="rounded-md bg-amber-300 px-6 py-3 text-sm font-semibold text-[#06090a] hover:bg-amber-200 transition-all">
-              Read the book
-            </Link>
-            <Link to="/spirituality/clarity" className="rounded-md border border-white/15 bg-white/[0.04] px-6 py-3 text-sm text-white hover:bg-white/10 transition-all">
-              Book a 1:1 call
-            </Link>
-          </div>
-          <div className="mt-12 flex flex-wrap items-baseline gap-x-10 gap-y-4 text-white/60">
-            <div><span className="text-2xl font-semibold text-white">12</span><span className="ml-2 text-sm">years of practice</span></div>
-            <div><span className="text-2xl font-semibold text-white">~90</span><span className="ml-2 text-sm">pages distilled</span></div>
-            <div><span className="text-2xl font-semibold text-white">7</span><span className="ml-2 text-sm">ways of the path</span></div>
-          </div>
-        </div>
-      </section>
+    <SpiritualityLayout fullBleed>
+      {/* Mountain backdrop */}
+      <div
+        aria-hidden
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage:
+            'radial-gradient(ellipse at 50% 30%, rgba(180,210,220,0.20), transparent 55%),' +
+            'linear-gradient(180deg, #0e2a35 0%, #1a3a44 35%, #2d5360 65%, #4a7a85 100%)',
+        }}
+      />
+      <div
+        aria-hidden
+        className="fixed inset-0 -z-10 opacity-60"
+        style={{
+          backgroundImage:
+            'radial-gradient(ellipse at 15% 75%, rgba(255,255,255,0.10), transparent 35%),' +
+            'radial-gradient(ellipse at 85% 80%, rgba(255,255,255,0.08), transparent 35%),' +
+            'radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.12), transparent 45%)',
+        }}
+      />
 
-      {/* ── 3 Core Transformations ───────────────────────────────────────────── */}
-      <section className="py-20 md:py-28">
-        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Core Transformations</p>
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-12">
-          Three shifts that unlock everything else.
-        </h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {CORE_TRANSFORMATIONS.map((t, i) => (
-            <div key={i} className="sp-fade rounded-lg border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-7 hover:border-amber-300/30 transition-all">
-              <div className="text-3xl mb-4">{t.icon}</div>
-              <h3 className="text-lg font-semibold text-white mb-3 leading-snug">{t.title}</h3>
-              <p className="text-sm text-white/65 leading-relaxed">{t.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <div className="flex justify-center px-4 py-10 md:py-16">
+        <article className="w-full max-w-2xl rounded-3xl bg-gradient-to-b from-[#f6f4ea] via-[#e8f0e4] to-[#dfeef0] text-slate-800 shadow-2xl shadow-black/30 overflow-hidden">
+          {/* ── Profile header ─────────────────────────────────────────────────────────── */}
+          <header className="px-8 pt-12 pb-8 text-center bg-gradient-to-b from-white/40 to-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Kamil Jan</h2>
+            <p className="mt-1 text-sm text-slate-600">@myspiritway</p>
 
-      {/* ── 7 Ways of the Practical Spiritual Path ───────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-white/5">
-        <div className="max-w-2xl mb-14">
-          <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">The Practical Spiritual Path</p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
-            Seven ways. Lived daily.
-          </h2>
-          <p className="text-base text-white/70 leading-relaxed">
-            Each one supports the evolution of consciousness, reduces suffering, and brings life into
-            steadier alignment. Small, consistent steps — not big leaps.
-          </p>
-        </div>
-        <div className="grid gap-3 md:grid-cols-2">
-          {SEVEN_WAYS.map((w, i) => (
-            <div key={i} className="sp-fade flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.02] p-5 hover:bg-white/[0.04] hover:border-white/15 transition-all">
-              <div className="text-2xl shrink-0 leading-none mt-0.5">{w.emoji}</div>
-              <div>
-                <div className="text-base font-semibold text-white">{w.title}</div>
-                <div className="mt-1 text-sm text-white/60 leading-relaxed">{w.desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Featured offerings ──────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-white/5">
-        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Where to begin</p>
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-12">
-          The full library, in one place.
-        </h2>
-        <div className="grid gap-5 md:grid-cols-2">
-          {OFFERINGS.map((o, i) => (
-            <Link
-              key={i}
-              to={o.to}
-              className={`sp-fade group block rounded-xl border bg-gradient-to-br p-7 transition-all ${
-                o.featured
-                  ? 'md:col-span-2 border-amber-300/30 from-amber-500/[0.10] via-amber-500/[0.04] to-transparent hover:from-amber-500/[0.16] hover:border-amber-300/50'
-                  : 'border-white/10 from-white/[0.04] to-transparent hover:border-white/20 hover:from-white/[0.07]'
-              }`}
+            <a
+              href="https://www.youtube.com/@myspiritway"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-teal-700 text-white shadow-md hover:bg-teal-600 transition-colors"
+              aria-label="YouTube channel @myspiritway"
             >
-              <div className={`text-[10px] uppercase tracking-[0.2em] mb-3 ${o.featured ? 'text-amber-300' : 'text-amber-300/80'}`}>
-                {o.eyebrow}
-              </div>
-              <h3 className={`font-bold text-white mb-3 leading-tight ${o.featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>
-                {o.title}
-              </h3>
-              <p className={`text-white/70 leading-relaxed ${o.featured ? 'text-base md:text-lg max-w-2xl' : 'text-sm'}`}>
-                {o.desc}
-              </p>
-              <div className="mt-5 text-sm font-medium text-amber-200 group-hover:text-amber-100">
-                {o.cta}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M23.498 6.186a2.999 2.999 0 0 0-2.111-2.122C19.503 3.5 12 3.5 12 3.5s-7.503 0-9.387.564A2.999 2.999 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a2.999 2.999 0 0 0 2.111 2.122C4.497 20.5 12 20.5 12 20.5s7.503 0 9.387-.564a2.999 2.999 0 0 0 2.111-2.122C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z" />
+              </svg>
+            </a>
+          </header>
 
-      {/* ── Micro definitions strip ──────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-white/5">
-        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-6">What practical spirituality is</p>
-        <ul className="space-y-3">
-          {MICRO_DEFINITIONS.map((d, i) => (
-            <li key={i} className="sp-fade flex gap-4 text-base md:text-lg text-white/80 leading-relaxed">
-              <span className="text-amber-300/80 mt-1">⁂</span>
-              <span>{d}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* ── Support / Newsletter / Footer ────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 border-t border-white/5">
-        <div className="grid gap-12 md:grid-cols-[1.2fr,1fr] items-start">
-          <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Join the community</p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
-              Practical insights, in your inbox.
-            </h2>
-            <p className="text-base text-white/70 leading-relaxed max-w-md">
-              No pitch decks. No funnels. Just useful notes from the path — sent when there's actually
-              something worth sharing.
+          {/* ── Welcome ───────────────────────────────────────────────────────────────────── */}
+          <div className="px-8 pt-2 pb-6 text-center">
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+              Hello and Welcome! <span aria-hidden>🙏</span>
+            </h1>
+            <p className="mt-3 text-base md:text-lg text-slate-700">
+              It&apos;s Kamil Jan – Spiritual Business Architect &amp; Entrepreneur
             </p>
           </div>
-          <NewsletterSignup
-            source="spirituality-hub"
-            tag="main-page"
-            heading="Subscribe"
-            subheading="Updates about newest projects + practical insights."
-            buttonLabel="Join the community"
-          />
-        </div>
-      </section>
 
-      <style>{`
-        .sp-fade { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .sp-visible { opacity: 1; transform: translateY(0); }
-      `}</style>
+          {/* ── "I can help you" ─────────────────────────────────────────────────────────── */}
+          <div className="px-8 pb-6">
+            <h3 className="font-semibold text-slate-900 mb-3">I can help you:</h3>
+            <ul className="space-y-2 text-slate-700">
+              <li className="flex gap-2"><span aria-hidden>👉</span><span>Attract clients who align with your values and work.</span></li>
+              <li className="flex gap-2"><span aria-hidden>👉</span><span>Turn your spiritual calling into dependable, honest monthly income.</span></li>
+              <li className="flex gap-2"><span aria-hidden>👉</span><span>Build ethical, effective systems and processes that are clean and feel authentic.</span></li>
+            </ul>
+            <p className="mt-5 text-slate-700">
+              I also support people in accelerating their evolution of consciousness through practical core spiritual teachings.
+            </p>
+          </div>
+
+          {/* ── Spiritual Marketing ─────────────────────────────────────────────────────────── */}
+          <section className="px-6 md:px-8 pt-2 pb-2">
+            <h3 className="text-xl font-bold text-slate-900 mb-4">Spiritual Marketing</h3>
+            <div className="space-y-3">
+              <Link to="/spirituality/clarity" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
+                <div className="w-1/3 bg-[#1d4a55] flex items-center justify-center">
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="text-amber-200/90"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+                </div>
+                <div className="flex-1 px-6 py-6 text-center">
+                  <div className="text-xs uppercase tracking-widest text-amber-200/90 font-semibold">FREE</div>
+                  <div className="mt-1 text-xl font-bold">Clarity Call</div>
+                </div>
+              </Link>
+              <Link to="/spirituality/spiritual-marketing" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
+                <div className="w-1/3 bg-[#1d4a55] flex items-center justify-center">
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="text-amber-200/90"><path d="M3 3v18h18" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg>
+                </div>
+                <div className="flex-1 px-6 py-6 text-center">
+                  <div className="text-xl font-bold">Marketing Services</div>
+                </div>
+              </Link>
+              <a href="https://www.youtube.com/playlist?list=PLLLDxDP58sn-SndDWhiFe3iuotoiDnMrI" target="_blank" rel="noreferrer" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
+                <div className="w-1/3 bg-[#1d4a55] flex items-center justify-center">
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" className="text-amber-200/90"><path d="M23.498 6.186a2.999 2.999 0 0 0-2.111-2.122C19.503 3.5 12 3.5 12 3.5s-7.503 0-9.387.564A2.999 2.999 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a2.999 2.999 0 0 0 2.111 2.122C4.497 20.5 12 20.5 12 20.5s7.503 0 9.387-.564a2.999 2.999 0 0 0 2.111-2.122C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z" /></svg>
+                </div>
+                <div className="flex-1 px-6 py-6 text-center">
+                  <div className="text-xl font-bold">YouTube Playlist</div>
+                </div>
+              </a>
+              <Link to="/spirituality/marketing-training" className="block rounded-2xl bg-white/50 text-slate-800 hover:bg-white/70 px-6 py-3 text-center text-sm font-medium transition-colors">
+                Articles &amp; Free Resources →
+              </Link>
+            </div>
+          </section>
+
+          {/* ── Practical Spirituality ─────────────────────────────────────────────────────────── */}
+          <section className="px-6 md:px-8 pt-6 pb-2">
+            <h3 className="text-xl font-bold text-slate-900 mb-4">Practical Spirituality</h3>
+            <Link to="/spirituality/sps" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
+              <div className="w-1/3 bg-gradient-to-br from-[#0a1e30] via-[#0f2840] to-[#1a3a55] flex items-center justify-center py-6 text-center">
+                <div className="px-2">
+                  <div className="text-[8px] tracking-[0.2em] text-amber-200/90">THE SIMPLIFIED</div>
+                  <div className="text-[10px] tracking-[0.18em] font-bold text-amber-200">PRACTICAL</div>
+                  <div className="text-[10px] tracking-[0.18em] font-bold text-amber-200 mb-1">SPIRITUALITY</div>
+                  <div className="my-1 text-2xl text-amber-300/90" aria-hidden>🌀</div>
+                  <div className="text-[7px] leading-tight text-amber-100/90">ACCELERATE EVOLUTION OF<br />CONSCIOUSNESS</div>
+                  <div className="text-[7px] leading-tight text-amber-100/90 mt-0.5">REDUCE UNNECESSARY SUFFERING</div>
+                  <div className="text-[7px] leading-tight text-amber-100/90">ACHIEVE LASTING LIFE HAPPINESS</div>
+                  <div className="mt-2 text-[9px] font-bold text-white tracking-wider">KAMIL JAN</div>
+                  <div className="text-[6px] text-amber-200/70 mt-0.5">FROM THE CREATOR OF MySpiritWay</div>
+                </div>
+              </div>
+              <div className="flex-1 px-6 py-6 flex items-center justify-center text-center">
+                <div className="text-lg md:text-xl font-bold leading-snug">
+                  The Simplified<br />Practical Spirituality<br />Guide Book
+                </div>
+              </div>
+            </Link>
+            <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
+              <Link to="/spirituality/sps2" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">Short Version →</Link>
+              <Link to="/spirituality/dmt" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">DMT Practice →</Link>
+              <Link to="/spirituality/iyss" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">Integrate Shattered Self →</Link>
+              <Link to="/spirituality/about" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">About Kamil Jan →</Link>
+            </div>
+          </section>
+
+          {/* ── Contact Me ──────────────────────────────────────────────────────────────── */}
+          <section className="px-6 md:px-8 pt-6">
+            <Link to="/spirituality/contact" className="block rounded-2xl bg-[#1d4f9c] hover:bg-[#1d4f9c]/90 text-white text-center py-5 text-xl font-bold shadow-lg transition-colors">
+              Contact Me
+            </Link>
+          </section>
+
+          {/* ── Footer ───────────────────────────────────────────────────────────────────── */}
+          <footer className="px-8 pt-8 pb-6 text-center text-xs text-slate-500">
+            <Link to="/spirituality/support" className="underline underline-offset-2 hover:text-slate-700">Support the mission</Link>
+            <span className="mx-2">·</span>
+            <a href="/privacy" className="underline underline-offset-2 hover:text-slate-700">Privacy Policy</a>
+          </footer>
+        </article>
+      </div>
     </SpiritualityLayout>
   )
 }
