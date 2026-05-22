@@ -17,7 +17,7 @@ export const Route = createFileRoute('/spirituality/sps')({
       { property: 'og:title', content: 'Simplified Practical Spirituality — The Complete Book' },
       { property: 'og:description', content: 'The complete guidebook. ~90 A4 pages distilling 12 years of practice. Read free online.' },
       { property: 'og:url', content: 'https://kamiljan.com/spirituality/sps' },
-      { property: 'og:image', content: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6810c129f1983_65f2f1ab9ea9a_Untitleddesign.png' },
+      { property: 'og:image', content: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6857fcb59df54_Beztytułu.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
     links: [
@@ -32,61 +32,64 @@ const sps = [part1, part2, part3, part4, part5, part6].join('\n\n')
 /** CloudFront CDN images carried over from the original myspiritway.org/sps page. */
 const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/6584575'
 
-/** Hero / OpenGraph image for the book. */
-const HERO_IMAGE = `${CDN}/6810c129f1983_65f2f1ab9ea9a_Untitleddesign.png`
-
 /** The actual SPS book cover ("THE SIMPLIFIED PRACTICAL SPIRITUALITY"). */
 const BOOK_COVER = `${CDN}/6857fcb59df54_Beztytułu.png`
 
-/** Public-domain & fair-use art plates used throughout the original page. */
-const IMAGE_PLATES: Array<{ src: string; caption: string }> = [
-  {
-    src: `${CDN}/67bf446952d4b_Untitleddesign1.jpg`,
-    caption: '"Symbolic Peace" sculpture by Mathew Rosenblatt & Liquid PXL — Toronto Distillery District, 2023.',
-  },
-  {
-    src: `${CDN}/67eea7c228bf1_At_Eternitys_Gate_-_Vincent_Van_Gogh.jpg`,
-    caption: '"Sorrowing Old Man (At Eternity\'s Gate)" — Vincent van Gogh.',
-  },
-  {
-    src: `${CDN}/67eda8397d647_europe.mpi.p1.100.jpg`,
-    caption: 'William Blake, "The Ancient of Days", 1794.',
-  },
+/** Kamil's portrait at Rishikesh, 2024 — used in the hero caption strip. */
+const KAMIL_PORTRAIT = `${CDN}/65d211fd285ac_Snapinsta.app_234080060_361649882303649_4034891747535150283_n_1080.jpg`
+
+/**
+ * Visual companion: classical, alchemical, and devotional art that
+ * accompanies the book on myspiritway.org/sps. Public-domain or fair-use.
+ */
+const ART_PLATES: Array<{ src: string; caption: string }> = [
   {
     src: `${CDN}/67ee8fffb5c3d_WilliamPrestonakaBro.WilliamPreston17421818-TheEyeOfProvidence..jpg`,
-    caption: 'William Preston (1742–1818) — "The Eye of Providence".',
-  },
-  {
-    src: `${CDN}/67eee31f2c27a_ENBwGi2X0AAxG85-1424540358.jpeg`,
-    caption: 'The Great Lost Labyrinth of Egypt.',
-  },
-  {
-    src: `${CDN}/67eea0188fc9a_Jacobs-Dream-1805-2.webp`,
-    caption: '"Jacob\'s Dream" — William Blake.',
+    caption: 'Eye of Providence — William Preston (1742–1818)',
   },
   {
     src: `${CDN}/67ee99e952620_Oversoul-Alex-Grey-2.webp`,
-    caption: '"Oversoul" — Alex Grey.',
+    caption: 'Alex Grey — Oversoul',
   },
   {
     src: `${CDN}/67ee9ca45ca9e_The-Green-Lion-Devouring-the-Sun-D.-Stolcius-von-Stolcenberg-Viridarium-chymicum.webp`,
-    caption: '"The Green Lion Devouring the Sun" — D. Stolcius von Stolcenberg, Viridarium chymicum.',
+    caption: 'Green Lion Devouring the Sun — Stolcius, Viridarium chymicum',
+  },
+  {
+    src: `${CDN}/67eea0188fc9a_Jacobs-Dream-1805-2.webp`,
+    caption: "Jacob's Dream (1805)",
   },
   {
     src: `${CDN}/67eea5f6ec0f0_PainttheUniverse.jpg`,
-    caption: '"The Universe" — Lindsay Manolakos.',
+    caption: 'Paint the Universe — Lindsay Manolakos',
+  },
+  {
+    src: `${CDN}/67eea7c228bf1_At_Eternitys_Gate_-_Vincent_Van_Gogh.jpg`,
+    caption: "Van Gogh — At Eternity's Gate",
   },
   {
     src: `${CDN}/67eea7f0a692c_Emblem21MichaelMaierAtalantaFugiens1617.webp`,
-    caption: 'Emblem 21 — Michael Maier, Atalanta Fugiens, 1617.',
-  },
-  {
-    src: `${CDN}/67eece9a60b84_Zrzutekranu2025-04-03180801.png`,
-    caption: '"Spiritual Pilgrim" — wood engraving, from Camille Flammarion\'s "L\'atmosphère: météorologie populaire" (1888). Color: Gunther Scholl.',
+    caption: 'Atalanta Fugiens, Emblem 21 — Michael Maier (1617)',
   },
   {
     src: `${CDN}/67eecd95d0a3e_Michelangelo_-_Creation_of_Adam_cropped.jpg`,
-    caption: 'Michelangelo — "Creation of Adam".',
+    caption: 'Michelangelo — Creation of Adam',
+  },
+  {
+    src: `${CDN}/67bf446952d4b_Untitleddesign1.jpg`,
+    caption: 'Section intro — symbolic peace',
+  },
+  {
+    src: `${CDN}/67eda8397d647_europe.mpi.p1.100.jpg`,
+    caption: 'Europe religious map (historical)',
+  },
+  {
+    src: `${CDN}/67eece9a60b84_Zrzutekranu2025-04-03180801.png`,
+    caption: 'Diagram — the spiritual pilgrim crosses the firmament',
+  },
+  {
+    src: `${CDN}/6857fcb59df54_Beztytułu.png`,
+    caption: 'Cover graphic — SPS guidebook',
   },
 ]
 
@@ -226,23 +229,25 @@ function SpsPage() {
       </div>
 
       {/* ──────────────────────────────────────────────────────────────────
-          HERO — book cover + author info (mirrors the live myspiritway.org
-          page where the cover is the first big visual the reader meets).
+          HERO — real SPS book cover + headline, two-column layout.
+          Mirrors the live myspiritway.org/sps page where the cover is the
+          first big visual the reader meets.
           ────────────────────────────────────────────────────────────────── */}
-      <section className="mb-12 grid items-center gap-8 sm:grid-cols-[minmax(0,1fr),minmax(0,1.2fr)] sm:gap-12">
+      <section className="mb-10 grid items-center gap-8 sm:grid-cols-[minmax(0,1fr),minmax(0,1.1fr)] sm:gap-12">
         <div className="order-2 sm:order-1">
           <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-amber-300/80">
-            The Complete Guidebook
+            The Complete Book
           </p>
-          <h1 className="mb-4 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mb-5 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-6xl">
             Simplified Practical Spirituality
           </h1>
-          <p className="mb-5 max-w-prose text-white/70">
-            12 years of spiritual research, distilled. ~90 A4 pages of universal wisdom,
-            practical tools, and real exercises — written in straightforward language so
-            you can weave it into a modern, busy life.
+          <p className="mb-6 max-w-prose text-lg leading-relaxed text-white/70">
+            12 years of practice and research, distilled into ~90 A4 pages of
+            universal wisdom, practical tools, and real exercises — written in
+            straightforward language so you can weave it into a modern, busy
+            life.
           </p>
-          <div className="mb-6 flex flex-wrap items-center gap-3 text-sm">
+          <div className="flex flex-wrap items-center gap-3 text-sm">
             <span className="rounded-full border border-amber-300/30 bg-amber-300/[0.08] px-3 py-1 text-amber-200">
               {readingLabel}
             </span>
@@ -253,28 +258,35 @@ function SpsPage() {
               by Kamil Jan
             </span>
           </div>
-          <p className="text-sm text-white/55">
-            Teacher of Practical Spirituality — last edit: July 2025
-          </p>
         </div>
         <div className="order-1 sm:order-2">
-          <div className="relative mx-auto max-w-md">
+          <div className="relative mx-auto w-full max-w-sm">
             <div
               aria-hidden
-              className="absolute inset-0 -z-10 translate-x-3 translate-y-4 rounded-2xl bg-amber-300/10 blur-2xl"
+              className="absolute inset-0 -z-10 translate-x-3 translate-y-5 rounded-2xl bg-amber-500/20 blur-3xl"
             />
             <img
               src={BOOK_COVER}
               alt="Simplified Practical Spirituality — book cover"
               loading="eager"
-              className="w-full rounded-xl shadow-2xl shadow-amber-300/10 ring-1 ring-white/10"
+              className="aspect-[3/4] w-full rounded-lg object-cover shadow-2xl shadow-amber-500/30 ring-1 ring-white/10"
             />
           </div>
         </div>
       </section>
 
-      {/* Reading-time line (rendered above the grid, full width) */}
-      <p className="mb-6 text-sm italic text-white/55">{readingLabel}</p>
+      {/* Caption strip — Kamil portrait + provenance line */}
+      <div className="mb-12 flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+        <img
+          src={KAMIL_PORTRAIT}
+          alt="Kamil Jan in Rishikesh, India, 2024"
+          loading="lazy"
+          className="h-16 w-16 flex-none rounded-full object-cover ring-2 ring-amber-300/40"
+        />
+        <p className="text-sm leading-relaxed text-white/65">
+          Rishikesh, India · 2024 · 12 years distilled into ~90 pages.
+        </p>
+      </div>
 
       {/* Mobile hint — dismissible */}
       {!hintDismissed && (
@@ -350,84 +362,50 @@ function SpsPage() {
 
         {/* Article — wrapped so we can inject ids + apply drop cap */}
         <div ref={articleRef} className="sps-article min-w-0">
-          {/* Frontispiece — small book-cover thumbnail above the first paragraph,
-              like a printed book's title page. */}
-          <div className="mb-8 flex items-center gap-4 rounded-lg border border-white/10 bg-white/[0.03] p-4">
-            <img
-              src={BOOK_COVER}
-              alt="SPS book cover thumbnail"
-              loading="lazy"
-              className="h-20 w-16 flex-none rounded object-cover ring-1 ring-white/10 sm:h-24 sm:w-20"
-            />
-            <div className="min-w-0">
-              <p className="text-[11px] uppercase tracking-[0.2em] text-amber-300/70">
-                Frontispiece
-              </p>
-              <p className="mt-1 text-base font-semibold text-white/90">
-                Simplified Practical Spirituality
-              </p>
-              <p className="text-sm text-white/55">
-                A complete guidebook · Kamil Jan · July 2025
-              </p>
-            </div>
-          </div>
-
           <MarkdownContent source={sps} />
         </div>
       </div>
 
       {/* ──────────────────────────────────────────────────────────────────
-          IMAGE PLATES — the public-domain & fair-use spiritual artworks
-          from the original myspiritway.org/sps page, preserved as an
-          optional accordion so the reading flow above stays clean.
+          VISUAL COMPANION — classical & alchemical art plates from the
+          original myspiritway.org/sps page. Collapsed accordion so the
+          reading flow above stays clean.
           ────────────────────────────────────────────────────────────────── */}
       <details className="mt-16 rounded-xl border border-white/10 bg-white/[0.03]">
         <summary className="cursor-pointer select-none px-5 py-4 text-sm font-medium text-amber-200/90 hover:text-amber-100">
-          Image plates from the original page ({IMAGE_PLATES.length})
+          Visual companion: classical &amp; alchemical art plates ({ART_PLATES.length})
         </summary>
         <div className="px-5 pb-6 pt-2">
           <p className="mb-5 max-w-prose text-sm text-white/55">
-            These spiritual artworks accompany the chapters on the original
-            myspiritway.org/sps page. Public-domain or fair-use; original
-            captions preserved.
+            These artworks accompany the chapters on the original
+            myspiritway.org/sps page — public-domain or fair-use, with the
+            original captions preserved.
           </p>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {IMAGE_PLATES.map((plate) => (
+          <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {ART_PLATES.map((plate) => (
               <figure
                 key={plate.src}
-                className="overflow-hidden rounded-lg border border-white/10 bg-black/20"
+                className="overflow-hidden"
               >
                 <a
                   href={plate.src}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="block aspect-square overflow-hidden bg-black/40"
+                  className="block overflow-hidden rounded-lg bg-black/40 ring-1 ring-white/10"
                 >
                   <img
                     src={plate.src}
                     alt={plate.caption}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                    className="aspect-square w-full rounded-lg object-cover transition-transform duration-300 hover:scale-105"
                   />
                 </a>
-                <figcaption className="p-3 text-xs leading-snug text-white/60">
+                <figcaption className="mt-2 text-xs italic leading-snug text-white/60">
                   {plate.caption}
                 </figcaption>
               </figure>
             ))}
           </div>
-          {/* Reference to the original hero illustration so it isn't lost. */}
-          <p className="mt-5 text-xs text-white/40">
-            Hero illustration source:{' '}
-            <a
-              href={HERO_IMAGE}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-amber-300/70 underline-offset-2 hover:underline"
-            >
-              Untitled design (book cover + galaxy)
-            </a>
-          </p>
         </div>
       </details>
 
