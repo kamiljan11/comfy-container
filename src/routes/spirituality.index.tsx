@@ -9,7 +9,7 @@ export const Route = createFileRoute('/spirituality/')({
       { property: 'og:title', content: 'Practical Spirituality — Kamil Jan' },
       { property: 'og:description', content: 'Twelve years of practical wisdom synthesised. A spiritual path for modern life.' },
       { property: 'og:url', content: 'https://kamiljan.com/spirituality' },
-      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { property: 'og:image', content: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65ff15fd13741_FB_IMG_1696238558446.jpg' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
     links: [
@@ -20,39 +20,61 @@ export const Route = createFileRoute('/spirituality/')({
 })
 
 /**
- * Mirrors the linktree-style landing currently live at myspiritway.org/ —
- * mountain backdrop, pastel centered card, profile + welcome, then three
- * sections: Spiritual Marketing, Practical Spirituality, Contact Me.
+ * 1:1 visual clone of myspiritway.org/ —
+ * - Actual mountain photograph as fixed full-bleed backdrop (CloudFront asset)
+ * - Centered pastel linktree-style card
+ * - Real ChatGPT-generated card thumbnails for Spiritual Marketing tiles
+ * - Real book-cover image for the Simplified Practical Spirituality tile
+ * - MySpiritWay logo (Asphalt-typography with leaf glyph) in the profile header
+ *
+ * All CloudFront URLs reference Kamil's permanent uploads at
+ *   https://d1yei2z3i6k35z.cloudfront.net/6584575/
+ * They are content-addressed by hash and remain available after Systeme.io ends.
  */
+
+// ── CloudFront asset URLs (Kamil Jan's permanent uploads) ──
+const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/6584575'
+const IMG = {
+  // Mountain photograph — the dominant landscape used as the page backdrop
+  mountainBackdrop: `${CDN}/6914ce520822c_UntitledMediumBannerUSLandscape2.png`,
+  // MySpiritWay logo — Asphalt typography with leaf/heart glyph
+  logo: `${CDN}/69123fae6467a_Untitleddesign9.png`,
+  // Spiritual Marketing card thumbnails (ChatGPT-generated, Nov 17 2025)
+  clarityCall: `${CDN}/691b494212723_ChatGPTImageNov17202504_10_59PM.png`,
+  marketingServices: `${CDN}/691b4a9020aa6_ChatGPTImageNov17202504_17_10PM.png`,
+  articles: `${CDN}/691b4b5767076_ChatGPTImageNov17202504_20_31PM.png`,
+  youtubePlaylist: `${CDN}/691b4c7d405d3_ChatGPTImageNov17202504_24_44PM.png`,
+  // The Simplified Practical Spirituality book cover
+  spsBookCover: `${CDN}/69125643ec811_6857e82d4ad8b_Bez%20tytu%C5%82u.png`,
+}
+
 function SpiritualityHub() {
   return (
     <SpiritualityLayout fullBleed>
-      {/* Mountain backdrop */}
-      <div
-        aria-hidden
-        className="fixed inset-0 -z-10"
-        style={{
-          backgroundImage:
-            'radial-gradient(ellipse at 50% 30%, rgba(180,210,220,0.20), transparent 55%),' +
-            'linear-gradient(180deg, #0e2a35 0%, #1a3a44 35%, #2d5360 65%, #4a7a85 100%)',
-        }}
-      />
-      <div
-        aria-hidden
-        className="fixed inset-0 -z-10 opacity-60"
-        style={{
-          backgroundImage:
-            'radial-gradient(ellipse at 15% 75%, rgba(255,255,255,0.10), transparent 35%),' +
-            'radial-gradient(ellipse at 85% 80%, rgba(255,255,255,0.08), transparent 35%),' +
-            'radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.12), transparent 45%)',
-        }}
-      />
+      {/* ── Mountain photograph backdrop (fixed, full-bleed) ───────────────────────────── */}
+      <div aria-hidden className="fixed inset-0 -z-10">
+        <img
+          src={IMG.mountainBackdrop}
+          alt=""
+          className="h-full w-full object-cover object-center"
+          loading="eager"
+          fetchPriority="high"
+        />
+        {/* Legibility overlay — dim the photo just enough so the pastel card pops */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0e2a35]/30 via-[#0e2a35]/40 to-[#0e2a35]/60" />
+      </div>
 
       <div className="flex justify-center px-4 py-10 md:py-16">
-        <article className="w-full max-w-2xl rounded-3xl bg-gradient-to-b from-[#f6f4ea] via-[#e8f0e4] to-[#dfeef0] text-slate-800 shadow-2xl shadow-black/30 overflow-hidden">
+        <article className="w-full max-w-2xl rounded-3xl bg-gradient-to-b from-[#f6f4ea] via-[#e8f0e4] to-[#dfeef0] text-slate-800 shadow-2xl shadow-black/40 overflow-hidden ring-1 ring-white/30">
           {/* ── Profile header ─────────────────────────────────────────────────────────── */}
-          <header className="px-8 pt-12 pb-8 text-center bg-gradient-to-b from-white/40 to-transparent">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Kamil Jan</h2>
+          <header className="px-8 pt-10 pb-6 text-center bg-gradient-to-b from-white/40 to-transparent">
+            <img
+              src={IMG.logo}
+              alt="MySpiritWay logo"
+              className="mx-auto h-20 w-auto md:h-24 select-none"
+              loading="eager"
+            />
+            <h2 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Kamil Jan</h2>
             <p className="mt-1 text-sm text-slate-600">@myspiritway</p>
 
             <a
@@ -95,53 +117,88 @@ function SpiritualityHub() {
           <section className="px-6 md:px-8 pt-2 pb-2">
             <h3 className="text-xl font-bold text-slate-900 mb-4">Spiritual Marketing</h3>
             <div className="space-y-3">
+
+              {/* FREE Clarity Call */}
               <Link to="/spirituality/clarity" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
-                <div className="w-1/3 bg-[#1d4a55] flex items-center justify-center">
-                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="text-amber-200/90"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+                <div className="w-1/3 bg-[#0a2a30] flex items-center justify-center overflow-hidden">
+                  <img
+                    src={IMG.clarityCall}
+                    alt="Clarity Call — notebook and tablet"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="flex-1 px-6 py-6 text-center">
                   <div className="text-xs uppercase tracking-widest text-amber-200/90 font-semibold">FREE</div>
                   <div className="mt-1 text-xl font-bold">Clarity Call</div>
                 </div>
               </Link>
+
+              {/* Marketing Services */}
               <Link to="/spirituality/spiritual-marketing" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
-                <div className="w-1/3 bg-[#1d4a55] flex items-center justify-center">
-                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" className="text-amber-200/90"><path d="M3 3v18h18" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></svg>
+                <div className="w-1/3 bg-[#0a2a30] flex items-center justify-center overflow-hidden">
+                  <img
+                    src={IMG.marketingServices}
+                    alt="Marketing Services — devices and analytics"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="flex-1 px-6 py-6 text-center">
                   <div className="text-xl font-bold">Marketing Services</div>
                 </div>
               </Link>
-              <a href="https://www.youtube.com/playlist?list=PLLLDxDP58sn-SndDWhiFe3iuotoiDnMrI" target="_blank" rel="noreferrer" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
-                <div className="w-1/3 bg-[#1d4a55] flex items-center justify-center">
-                  <svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" className="text-amber-200/90"><path d="M23.498 6.186a2.999 2.999 0 0 0-2.111-2.122C19.503 3.5 12 3.5 12 3.5s-7.503 0-9.387.564A2.999 2.999 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a2.999 2.999 0 0 0 2.111 2.122C4.497 20.5 12 20.5 12 20.5s7.503 0 9.387-.564a2.999 2.999 0 0 0 2.111-2.122C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z" /></svg>
+
+              {/* Articles */}
+              <Link to="/spirituality/marketing-training" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
+                <div className="w-1/3 bg-[#0a2a30] flex items-center justify-center overflow-hidden">
+                  <img
+                    src={IMG.articles}
+                    alt="Articles — writing and notes"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex-1 px-6 py-6 text-center">
+                  <div className="text-xl font-bold">Articles</div>
+                </div>
+              </Link>
+
+              {/* YouTube Playlist */}
+              <a
+                href="https://www.youtube.com/playlist?list=PLLLDxDP58sn-SndDWhiFe3iuotoiDnMrI"
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors"
+              >
+                <div className="w-1/3 bg-[#0a2a30] flex items-center justify-center overflow-hidden">
+                  <img
+                    src={IMG.youtubePlaylist}
+                    alt="YouTube Playlist — headphones"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="flex-1 px-6 py-6 text-center">
                   <div className="text-xl font-bold">YouTube Playlist</div>
                 </div>
               </a>
-              <Link to="/spirituality/marketing-training" className="block rounded-2xl bg-white/50 text-slate-800 hover:bg-white/70 px-6 py-3 text-center text-sm font-medium transition-colors">
-                Articles &amp; Free Resources →
-              </Link>
             </div>
           </section>
 
           {/* ── Practical Spirituality ─────────────────────────────────────────────────────────── */}
-          <section className="px-6 md:px-8 pt-6 pb-2">
+          <section className="px-6 md:px-8 pt-8 pb-2">
             <h3 className="text-xl font-bold text-slate-900 mb-4">Practical Spirituality</h3>
-            <Link to="/spirituality/sps" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
-              <div className="w-1/3 bg-gradient-to-br from-[#0a1e30] via-[#0f2840] to-[#1a3a55] flex items-center justify-center py-6 text-center">
-                <div className="px-2">
-                  <div className="text-[8px] tracking-[0.2em] text-amber-200/90">THE SIMPLIFIED</div>
-                  <div className="text-[10px] tracking-[0.18em] font-bold text-amber-200">PRACTICAL</div>
-                  <div className="text-[10px] tracking-[0.18em] font-bold text-amber-200 mb-1">SPIRITUALITY</div>
-                  <div className="my-1 text-2xl text-amber-300/90" aria-hidden>🌀</div>
-                  <div className="text-[7px] leading-tight text-amber-100/90">ACCELERATE EVOLUTION OF<br />CONSCIOUSNESS</div>
-                  <div className="text-[7px] leading-tight text-amber-100/90 mt-0.5">REDUCE UNNECESSARY SUFFERING</div>
-                  <div className="text-[7px] leading-tight text-amber-100/90">ACHIEVE LASTING LIFE HAPPINESS</div>
-                  <div className="mt-2 text-[9px] font-bold text-white tracking-wider">KAMIL JAN</div>
-                  <div className="text-[6px] text-amber-200/70 mt-0.5">FROM THE CREATOR OF MySpiritWay</div>
-                </div>
+
+            {/* The Simplified Practical Spirituality Guide Book — actual cover */}
+            <Link to="/spirituality/sps2" className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors">
+              <div className="w-1/3 bg-[#0a1e30] flex items-center justify-center overflow-hidden">
+                <img
+                  src={IMG.spsBookCover}
+                  alt="The Simplified Practical Spirituality Guide Book cover — dark blue with galaxy, by Kamil Jan"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <div className="flex-1 px-6 py-6 flex items-center justify-center text-center">
                 <div className="text-lg md:text-xl font-bold leading-snug">
@@ -149,8 +206,10 @@ function SpiritualityHub() {
                 </div>
               </div>
             </Link>
+
+            {/* Other practice links */}
             <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
-              <Link to="/spirituality/sps2" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">Short Version →</Link>
+              <Link to="/spirituality/sps" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">Full Version →</Link>
               <Link to="/spirituality/dmt" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">DMT Practice →</Link>
               <Link to="/spirituality/iyss" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">Integrate Shattered Self →</Link>
               <Link to="/spirituality/about" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">About Kamil Jan →</Link>
@@ -158,10 +217,14 @@ function SpiritualityHub() {
           </section>
 
           {/* ── Contact Me ──────────────────────────────────────────────────────────────── */}
-          <section className="px-6 md:px-8 pt-6">
+          <section className="px-6 md:px-8 pt-8">
             <Link to="/spirituality/contact" className="block rounded-2xl bg-[#1d4f9c] hover:bg-[#1d4f9c]/90 text-white text-center py-5 text-xl font-bold shadow-lg transition-colors">
               Contact Me
             </Link>
+            <div className="mt-3 flex justify-center gap-4 text-sm">
+              <a href="https://wa.me/3548888901" target="_blank" rel="noreferrer" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-2 font-medium text-slate-800 transition-colors">WhatsApp</a>
+              <a href="mailto:kamiljan@myspiritway.org" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-2 font-medium text-slate-800 transition-colors">Email</a>
+            </div>
           </section>
 
           {/* ── Footer ───────────────────────────────────────────────────────────────────── */}
