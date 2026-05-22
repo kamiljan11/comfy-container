@@ -25,12 +25,14 @@ const BOOKING_URL = 'https://calendar.google.com/calendar/appointments/AcZssZ3qX
 
 // ── Real assets pulled from myspiritway.org/clarity CloudFront CDN ─────────
 const IMG = {
-  // Notebook + iPad "Clarity Call" thumbnail (purpose / soul client / offer / content / traffic / ads written by hand)
-  callThumb: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/690f6b705eae5_Untitled1080x1080px.jpg',
+  // Hero / section graphic 1080×1080 — notebook + iPad "Clarity Call" thumbnail
+  hero: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/690f6b705eae5_Untitled1080x1080px.jpg',
+  // Decorative downward arrow used as section separator
+  arrow: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/68e6a291984f9_arrow_down_spiritual_business.jpg',
   // Kamil Jan portrait for the Your Mentor section
   kamil: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/68e6a764052e2_kamiljanpracticalmarketing.jpg',
-  // 7 Modules illustration
-  modules: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6901318f3d2e8_Purpouse2.png',
+  // Bottom signup / checklist visual
+  signup: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6901318f3d2e8_Purpouse2.png',
   // How-to-book step visuals
   stepCalendar: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6904d7dc6d030_calendar.jpg',
   stepPrep: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/690f6e8da5eb5_Untitled718x610px.jpg',
@@ -79,10 +81,26 @@ const SEVEN_MODULES = [
 ] as const
 
 const BOOK_STEPS = [
-  { img: IMG.stepCalendar, title: 'Calendar', desc: 'Click the button and pick a time on the calendar that works for you.' },
-  { img: IMG.stepPrep, title: 'Prep Questions', desc: 'Answer short prep questions: name, email, niche, links, and what is not working right now.' },
-  { img: IMG.stepMeet, title: 'Confirmation', desc: 'You will receive an email confirmation with the meeting link, followed by automatic reminders.' },
-  { img: IMG.stepMeeting, title: 'The Clarity Meeting', desc: 'Together we review your current state and you leave with a clear, practical plan.' },
+  {
+    img: IMG.stepCalendar,
+    title: 'Choose a time',
+    desc: 'Pick a slot that suits you on the booking calendar.',
+  },
+  {
+    img: IMG.stepPrep,
+    title: 'Prep your questions',
+    desc: 'Send a couple of lines about where you are and what you want to walk away with.',
+  },
+  {
+    img: IMG.stepMeet,
+    title: 'Get the link',
+    desc: 'Confirmation email with your Google Meet link arrives instantly.',
+  },
+  {
+    img: IMG.stepMeeting,
+    title: 'Meet for clarity',
+    desc: 'Forty-five focused minutes. Walk away with a plan you can implement today.',
+  },
 ] as const
 
 const FAQS = [
@@ -93,23 +111,36 @@ const FAQS = [
   { q: 'Do you work outside English?', a: 'Yes. I adapt to other languages where I can; let me know your preference when booking.' },
 ] as const
 
+function ArrowDivider() {
+  return (
+    <div className="flex justify-center py-8" aria-hidden>
+      <img
+        src={IMG.arrow}
+        alt=""
+        className="w-12 md:w-14 h-auto opacity-70"
+        loading="lazy"
+      />
+    </div>
+  )
+}
+
 function ClarityPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0)
 
   return (
     <SpiritualityLayout>
-      {/* ── Hero with real photo backdrop + notebook thumbnail ──────────── */}
+      {/* ── Hero with real photo backdrop + 1080×1080 square card ──────── */}
       <section className="relative -mx-6 px-6 pt-2 pb-16 md:pb-20 overflow-hidden">
         {/* Background photo layer (~30% opacity) */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: `url(${IMG.callThumb})` }}
+          style={{ backgroundImage: `url(${IMG.hero})` }}
         />
         {/* Dark gradient over the photo for legibility */}
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-br from-[#06090a]/85 via-[#06090a]/70 to-[#06090a]/95" />
 
-        <div className="grid md:grid-cols-[1fr_auto] gap-10 items-center">
+        <div className="grid gap-10 md:grid-cols-[1.2fr,1fr] items-center">
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-4">
               Spiritual Marketing for Spiritual Businesses
@@ -146,13 +177,13 @@ function ClarityPage() {
             </div>
           </div>
 
-          {/* Side image — notebook + iPad "Clarity Call" thumbnail */}
-          <div className="hidden md:block w-[320px] lg:w-[360px] shrink-0">
-            <div className="relative rounded-xl overflow-hidden border border-amber-200/20 shadow-[0_20px_60px_-15px_rgba(252,211,77,0.25)]">
+          {/* Side image — 1080×1080 square card */}
+          <div className="w-full">
+            <div className="aspect-square rounded-2xl overflow-hidden border border-amber-200/20 shadow-[0_20px_60px_-15px_rgba(252,211,77,0.25)]">
               <img
-                src={IMG.callThumb}
+                src={IMG.hero}
                 alt="A notebook beside an iPad showing the Clarity Call modules — purpose, soul client, offer, content, traffic, ads."
-                className="w-full h-auto block"
+                className="w-full h-full object-cover block"
                 loading="eager"
               />
             </div>
@@ -161,22 +192,10 @@ function ClarityPage() {
             </p>
           </div>
         </div>
-
-        {/* Mobile-only: surface the same thumbnail below the hero copy */}
-        <div className="md:hidden mt-10">
-          <div className="rounded-xl overflow-hidden border border-amber-200/20">
-            <img
-              src={IMG.callThumb}
-              alt="A notebook beside an iPad showing the Clarity Call modules — purpose, soul client, offer, content, traffic, ads."
-              className="w-full h-auto block"
-              loading="eager"
-            />
-          </div>
-          <p className="mt-3 text-[11px] uppercase tracking-wider text-white/40 text-center">
-            What we walk through on the call
-          </p>
-        </div>
       </section>
+
+      {/* Decorative arrow: Hero → What You Receive */}
+      <ArrowDivider />
 
       {/* ── What You Receive ───────────────────────────────────────────── */}
       <section className="py-16 border-t border-white/5">
@@ -208,28 +227,26 @@ function ClarityPage() {
           today, and you leave knowing exactly where to apply pressure first.
         </p>
 
-        <div className="grid md:grid-cols-[260px_1fr] gap-8 items-start">
-          <div className="hidden md:block rounded-xl overflow-hidden border border-white/10">
-            <img src={IMG.modules} alt="Seven modules illustration" className="w-full h-auto block" loading="lazy" />
-          </div>
-          <div className="grid gap-3">
-            {SEVEN_MODULES.map((m, i) => (
-              <div key={i} className="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.02] p-5">
-                <div className="text-lg font-semibold shrink-0 leading-none mt-0.5 text-amber-300 w-7 text-center">{m.icon}</div>
-                <div>
-                  <div className="text-base font-semibold text-white">{m.name}</div>
-                  <div className="mt-1 text-sm text-white/65 leading-relaxed italic">&ldquo;{m.q}&rdquo;</div>
-                </div>
+        <div className="grid gap-3">
+          {SEVEN_MODULES.map((m, i) => (
+            <div key={i} className="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.02] p-5">
+              <div className="text-lg font-semibold shrink-0 leading-none mt-0.5 text-amber-300 w-7 text-center">{m.icon}</div>
+              <div>
+                <div className="text-base font-semibold text-white">{m.name}</div>
+                <div className="mt-1 text-sm text-white/65 leading-relaxed italic">&ldquo;{m.q}&rdquo;</div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── Your Mentor (portrait left, text right) ────────────────────── */}
+      {/* Decorative arrow: Modules → Who You'll Meet */}
+      <ArrowDivider />
+
+      {/* ── Who You'll Meet / Your Mentor (portrait left, text right) ──── */}
       <section className="py-16 border-t border-white/5">
-        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Your mentor</p>
-        <div className="grid md:grid-cols-[280px_1fr] gap-10 items-start">
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Who you&apos;ll meet</p>
+        <div className="grid gap-8 md:grid-cols-[280px,1fr] items-start">
           <div className="relative">
             <div className="rounded-xl overflow-hidden border border-amber-200/20 shadow-[0_15px_40px_-15px_rgba(252,211,77,0.2)]">
               <img
@@ -266,32 +283,38 @@ function ClarityPage() {
         </div>
       </section>
 
-      {/* ── How to Book (four steps with real visuals) ─────────────────── */}
+      {/* ── How to Book — four illustrated steps ───────────────────────── */}
       <section className="py-16 border-t border-white/5">
         <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">How to book</p>
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
-          Two audits per day. Mon–Fri.
+          Four simple steps to your Clarity Call.
         </h2>
         <p className="text-base text-white/75 max-w-2xl mb-10">
           To stay present, do quality work, and maintain a healthy life–work balance, only two calls are
-          available per day. Over time, these may no longer be free.
+          available per day, Monday–Friday. Over time, these may no longer be free.
         </p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        <div className="grid gap-5 md:grid-cols-4">
           {BOOK_STEPS.map((s, i) => (
             <div key={i} className="rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
               <div className="aspect-[4/3] overflow-hidden bg-white/5">
                 <img src={s.img} alt={s.title} className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="p-4">
-                <div className="text-xs uppercase tracking-wider text-amber-300/80 mb-1">Step {i + 1}</div>
-                <div className="text-base font-semibold text-white">{s.title}</div>
+                <div className="text-xs font-mono text-amber-300 mb-1">{String(i + 1).padStart(2, '0')}</div>
+                <h3 className="text-base font-semibold text-white">{s.title}</h3>
                 <p className="mt-1.5 text-sm text-white/65 leading-relaxed">{s.desc}</p>
               </div>
             </div>
           ))}
         </div>
+      </section>
 
+      {/* Decorative arrow: How to Book → Booking calendar CTA */}
+      <ArrowDivider />
+
+      {/* ── Booking calendar CTA (preserved) ───────────────────────────── */}
+      <section className="py-12">
         <div className="rounded-lg border border-cyan-400/30 bg-cyan-400/5 p-6 text-center">
           <p className="text-sm text-white/80 mb-4">Choose the date and time that suits you:</p>
           <a
@@ -335,26 +358,39 @@ function ClarityPage() {
         </div>
       </section>
 
-      {/* ── Final CTA ─────────────────────────────────────────────────── */}
-      <section className="py-20 border-t border-white/5 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
-          Ready when you are.
-        </h2>
-        <p className="text-base text-white/70 mb-8 max-w-xl mx-auto">
-          Forty-five minutes. Free. No pitch. Either we&apos;re a fit and we keep going, or you leave with
-          a practical plan and we wish each other well.
-        </p>
-        <a
-          href={BOOKING_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-block rounded-md bg-amber-300 px-8 py-4 text-base font-semibold text-[#06090a] hover:bg-amber-200 transition-all"
-        >
-          Book your Clarity Call →
-        </a>
-        <p className="mt-6 text-sm text-white/50">
-          Or write directly: <a href="mailto:hello@kamiljan.com" className="text-amber-200 hover:text-amber-100 underline underline-offset-2">hello@kamiljan.com</a>
-        </p>
+      {/* ── Final CTA with side illustration (Purpouse2) ───────────────── */}
+      <section className="py-20 border-t border-white/5">
+        <div className="grid gap-10 md:grid-cols-[1fr,280px] items-center">
+          <div className="text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
+              Ready when you are.
+            </h2>
+            <p className="text-base text-white/70 mb-8 max-w-xl md:mx-0 mx-auto">
+              Forty-five minutes. Free. No pitch. Either we&apos;re a fit and we keep going, or you leave
+              with a practical plan and we wish each other well.
+            </p>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block rounded-md bg-amber-300 px-8 py-4 text-base font-semibold text-[#06090a] hover:bg-amber-200 transition-all"
+            >
+              Book your Clarity Call →
+            </a>
+            <p className="mt-6 text-sm text-white/50">
+              Or write directly: <a href="mailto:hello@kamiljan.com" className="text-amber-200 hover:text-amber-100 underline underline-offset-2">hello@kamiljan.com</a>
+            </p>
+          </div>
+
+          <div className="hidden md:block">
+            <img
+              src={IMG.signup}
+              alt="Spiritual business purpose checklist illustration"
+              className="w-full h-auto block"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </section>
 
       <p className="mt-12 text-xs text-white/30 italic">
