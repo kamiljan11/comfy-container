@@ -1,19 +1,161 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 
 export const Route = createFileRoute('/spirituality/about')({ component: AboutPage })
 
+const PILLARS = [
+  { icon: '🧭', title: 'Practical wisdom', desc: 'No abstraction-for-its-own-sake. Tools that work inside a real life with bills and responsibilities.' },
+  { icon: '🌱', title: 'Lived experience', desc: 'Everything taught has been tested on my own body first. If it doesn’t hold up in daily life, it doesn’t make the page.' },
+  { icon: '🤝', title: 'Friend, not guru', desc: 'I’m on the same path as you. The title is shorthand. What matters is walking it together.' },
+] as const
+
+const TIMELINE = [
+  { period: 'Early years', title: 'Family, lessons, responsibility', desc: 'Growing up in a family with both warmth and conflict — and developing an early need to find solutions that could end suffering.' },
+  { period: 'The questioning', title: 'Noticing the unseen', desc: 'A young awareness that the world I saw wasn’t the same world most people saw. Subtle patterns, threads behind things.' },
+  { period: 'The search', title: '12 years of seeking', desc: 'Following spiritual, religious, and philosophical traditions wherever they led. Hours and years of practice, study, and direct experience.' },
+  { period: 'Now', title: 'Teaching by structuring', desc: 'Distilling what I found into a practical path others can actually walk — without taking 12 years to get there.' },
+] as const
+
 function AboutPage() {
   return (
-    <SpiritualityLayout eyebrow="About" title="Kamil Jan — Teacher of Practical Spirituality">
-      <p className="text-lg text-white/85 leading-relaxed mb-6">Welcome to MySpiritWay (or actually, YourSpiritWay). I'd like you to see me as a friend on the same path. However, for the sake of structure, you can call me a Practical Spiritual Teacher.</p>
-      <p className="text-base text-white/75 leading-relaxed mb-4">My quest for knowledge and understanding has always been present, fuelled by life events and inner calling. Over the years I followed the thread of what many traditions call God — the deep, ever-present reality that connects everything. Each step revealed another layer, and at some point a quiet happiness began to fill my being.</p>
-      <p className="text-base text-white/75 leading-relaxed mb-4">One of my primary ongoing tasks over the years has been to develop a practical, step-by-step path toward complete life satisfaction. The main focus: enhance a person's consciousness through tools that actually work in everyday life.</p>
-      <p className="text-base text-white/75 leading-relaxed mb-4">I actively work to expand the set of practical tools and continuously follow the process of deep inner evolution, sharing new findings with the supportive community.</p>
-      <p className="text-base text-white/75 leading-relaxed mb-8">My biggest dream is to create a self-sufficient village where people will live in a healthy, balanced way and support each other's creative potential.</p>
+    <SpiritualityLayout>
+      {/* ── Hero ────────────────────────────────────────────────────────── */}
+      <section className="relative -mx-6 px-6 pt-2 pb-16 md:pb-20">
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 rounded-b-3xl overflow-hidden"
+          style={{
+            backgroundImage:
+              'radial-gradient(ellipse at 20% 30%, rgba(220,180,90,0.15), transparent 55%),' +
+              'radial-gradient(ellipse at 80% 70%, rgba(140,90,200,0.12), transparent 55%),' +
+              'linear-gradient(180deg, #0a0e1a 0%, #0e1a25 60%, #06090a 100%)',
+          }}
+        />
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-4 mt-4">About</p>
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-white">
+          Kamil Jan —<br />
+          <span className="italic font-light text-amber-200">teacher of practical spirituality.</span>
+        </h1>
+        <p className="mt-8 text-lg md:text-xl text-white/85 leading-relaxed max-w-3xl">
+          My name is Kamil Jan, and I am a Practical Spiritual Teacher — your friend on this journey.
+        </p>
+      </section>
 
-      <p className="mt-12 text-sm text-white/40 italic">Extended bio + photos are being moved over. For now you can also read the original:</p>
-      <a href="https://www.myspiritway.org/aboutkamiljan" target="_blank" rel="noreferrer" className="mt-3 inline-block rounded-md border border-cyan-400/30 bg-cyan-400/10 px-6 py-3 text-cyan-100 hover:bg-cyan-400/20 transition-all">Read the original →</a>
+      {/* ── Portrait + intro bio ─────────────────────────────────────── */}
+      <section className="py-16 border-t border-white/5">
+        <div className="grid gap-10 md:grid-cols-[1fr,1.4fr] items-start">
+          <div className="rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-amber-500/[0.12] via-pink-500/[0.06] to-purple-500/[0.08]">
+            <img
+              src="/kamil.png"
+              alt="Kamil Jan portrait"
+              className="h-full w-full object-cover aspect-[4/5]"
+              loading="lazy"
+            />
+          </div>
+          <div className="space-y-5 text-white/85 leading-relaxed">
+            <p>
+              Sharing my story has always been somewhat challenging. My memories often feel blurred, and
+              recalling specific events seems distant — perhaps because I integrated many lessons into the
+              present moment without holding onto intense emotional attachments. Even when life threw
+              difficulties my way, I rarely held onto them in a way that caused lasting trauma. It seemed
+              natural to let go and move forward, weaving each lesson into the fabric of who I am now.
+            </p>
+            <p>
+              From a young age I sensed I didn&apos;t see the world the way most people did. In everyday
+              moments I would notice subtle patterns and connections that others seemed to miss. That
+              quiet noticing became the seed of what later became this work.
+            </p>
+            <p>
+              The thread I followed — across traditions, practices, teachers, and direct experience —
+              led to one stable insight: the path can be made simpler. What used to take decades can be
+              compressed without losing depth. That&apos;s what I do here.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3 pillars ─────────────────────────────────────────────────── */}
+      <section className="py-16 border-t border-white/5">
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">How I teach</p>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-10">
+          Three commitments.
+        </h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          {PILLARS.map((p, i) => (
+            <div key={i} className="rounded-xl border border-amber-300/15 bg-gradient-to-b from-amber-500/[0.05] to-transparent p-6">
+              <div className="text-3xl mb-3" aria-hidden>{p.icon}</div>
+              <h3 className="text-base font-semibold text-white">{p.title}</h3>
+              <p className="mt-2 text-sm text-white/65 leading-relaxed">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Timeline ─────────────────────────────────────────────────── */}
+      <section className="py-16 border-t border-white/5">
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">The path</p>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-10">
+          How I got here.
+        </h2>
+        <ol className="space-y-4">
+          {TIMELINE.map((t, i) => (
+            <li key={i} className="flex gap-6 rounded-lg border border-white/10 bg-white/[0.02] p-6">
+              <div className="text-xs uppercase tracking-widest text-amber-200/70 font-semibold shrink-0 w-28 pt-1">
+                {t.period}
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-white">{t.title}</h3>
+                <p className="mt-1.5 text-sm md:text-base text-white/75 leading-relaxed">{t.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* ── Mission ──────────────────────────────────────────────────── */}
+      <section className="py-16 border-t border-white/5">
+        <div className="rounded-2xl border border-amber-300/20 bg-gradient-to-br from-amber-500/[0.08] via-amber-500/[0.02] to-transparent p-8 md:p-12">
+          <p className="text-xs uppercase tracking-[0.25em] text-amber-300 mb-3">Mission</p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6">
+            Make the path practical. Make it accessible.
+          </h2>
+          <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-3xl">
+            My biggest dream is to help build a community where people live in a healthy, balanced way and
+            support each other&apos;s creative and spiritual potential. The Simplified Practical Spirituality
+            guidebook, the activation sessions, the writing — all of it points toward one thing: a path
+            anyone can walk, starting today.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Where to go next ─────────────────────────────────────────── */}
+      <section className="py-16 border-t border-white/5">
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Start here</p>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-10">
+          Where to begin.
+        </h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          <Link to="/spirituality/sps" className="block rounded-xl border border-white/10 bg-white/[0.02] p-6 hover:border-amber-300/30 hover:bg-amber-500/[0.04] transition-all">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-amber-300/80 mb-2">Read</div>
+            <h3 className="text-base font-semibold text-white mb-1">The complete book</h3>
+            <p className="text-sm text-white/65">Simplified Practical Spirituality — full guidebook.</p>
+          </Link>
+          <Link to="/spirituality/dmt" className="block rounded-xl border border-white/10 bg-white/[0.02] p-6 hover:border-amber-300/30 hover:bg-amber-500/[0.04] transition-all">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-amber-300/80 mb-2">Practise</div>
+            <h3 className="text-base font-semibold text-white mb-1">Dynamic Meditation</h3>
+            <p className="text-sm text-white/65">Live audio practice. 45 minutes. Find a quiet space.</p>
+          </Link>
+          <Link to="/spirituality/clarity" className="block rounded-xl border border-white/10 bg-white/[0.02] p-6 hover:border-amber-300/30 hover:bg-amber-500/[0.04] transition-all">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-amber-300/80 mb-2">Talk</div>
+            <h3 className="text-base font-semibold text-white mb-1">1:1 Clarity Call</h3>
+            <p className="text-sm text-white/65">Free 45-minute conversation. No pitch — just clarity.</p>
+          </Link>
+        </div>
+      </section>
+
+      <p className="mt-12 text-xs text-white/30 italic">
+        Migrated from myspiritway.org/aboutkamiljan. <Link to="/spirituality" className="underline hover:text-white/60">Back to spirituality home →</Link>
+      </p>
     </SpiritualityLayout>
   )
 }
