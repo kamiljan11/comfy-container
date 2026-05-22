@@ -18,7 +18,9 @@ interface Props {
   children: ReactNode
   title?: string
   eyebrow?: string
-  /** When true, skips the inner max-w-3xl container so the route owns full-bleed layout. */
+  /** When true, skips the inner max-w-3xl container so the route owns full-bleed layout.
+   *  Also renders a minimal floating nav (no link strip) so the route's own content
+   *  is the focus — used for the linktree-style /spirituality hub. */
   fullBleed?: boolean
 }
 
@@ -28,38 +30,60 @@ export default function SpiritualityLayout({ children, title, eyebrow, fullBleed
       {/* Default dark bg — routes can override via portal-style fixed background. */}
       {!fullBleed && <div aria-hidden className="fixed inset-0 -z-20 bg-[#06090a]" />}
 
-      {/* Top nav */}
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#06090a]/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
-          <Link to="/" className="group flex items-center gap-2 text-sm font-semibold tracking-wide text-white/80 hover:text-white transition-colors shrink-0">
-            <span className="text-amber-300/80 group-hover:text-amber-200">←</span>
-            <span>Kamil Jan</span>
-            <span className="hidden sm:inline text-white/30">/</span>
-            <span className="hidden sm:inline text-amber-200/90">spirituality</span>
-          </Link>
-          <div className="hidden lg:flex items-center gap-0.5 text-xs flex-wrap justify-end">
-            {NAV_LINKS.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                className="px-2.5 py-2 rounded-md text-white/70 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap"
-                activeProps={{ className: 'px-2.5 py-2 rounded-md text-amber-200 bg-amber-300/15 whitespace-nowrap' }}
-                activeOptions={{ exact: !!l.exact }}
-              >
-                {l.label}
-              </Link>
-            ))}
+      {/* ── Top nav ──────────────────────────────────────────────────────────────── */}
+      {fullBleed ? (
+        // Minimal nav — used on the linktree hub. Only "← Back to kamiljan.com" + CTA.
+        <nav className="absolute top-0 inset-x-0 z-50">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-5">
+            <Link
+              to="/"
+              className="group inline-flex items-center gap-2 rounded-full bg-black/30 backdrop-blur-md px-4 py-2 text-xs font-medium tracking-wide text-white/85 hover:text-white hover:bg-black/50 transition-colors"
+            >
+              <span className="text-amber-300/90 group-hover:text-amber-200" aria-hidden>←</span>
+              <span>kamiljan.com</span>
+            </Link>
+            <Link
+              to="/spirituality/clarity"
+              className="hidden sm:inline-flex rounded-full bg-amber-300/95 px-4 py-2 text-xs font-semibold text-[#06090a] hover:bg-amber-200 transition-colors"
+            >
+              Book a Clarity Call
+            </Link>
           </div>
-          <Link
-            to="/spirituality/clarity"
-            className="hidden md:inline-flex rounded-md border border-amber-300/40 bg-amber-300/15 px-4 py-2 text-xs font-medium text-amber-100 hover:bg-amber-300/25 transition-all whitespace-nowrap"
-          >
-            Book a Clarity Call
-          </Link>
-        </div>
-      </nav>
+        </nav>
+      ) : (
+        // Full nav — used on inner pages.
+        <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#06090a]/85 backdrop-blur-xl">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
+            <Link to="/" className="group flex items-center gap-2 text-sm font-semibold tracking-wide text-white/80 hover:text-white transition-colors shrink-0">
+              <span className="text-amber-300/80 group-hover:text-amber-200">←</span>
+              <span>Kamil Jan</span>
+              <span className="hidden sm:inline text-white/30">/</span>
+              <span className="hidden sm:inline text-amber-200/90">spirituality</span>
+            </Link>
+            <div className="hidden lg:flex items-center gap-1 text-xs flex-wrap justify-end">
+              {NAV_LINKS.map((l) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  className="px-3 py-2 rounded-md text-white/70 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap"
+                  activeProps={{ className: 'px-3 py-2 rounded-md text-amber-200 bg-amber-300/15 whitespace-nowrap' }}
+                  activeOptions={{ exact: !!l.exact }}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+            <Link
+              to="/spirituality/clarity"
+              className="hidden md:inline-flex rounded-md border border-amber-300/40 bg-amber-300/15 px-4 py-2 text-xs font-medium text-amber-100 hover:bg-amber-300/25 transition-all whitespace-nowrap"
+            >
+              Book a Clarity Call
+            </Link>
+          </div>
+        </nav>
+      )}
 
-      {/* Header (only shown when title/eyebrow provided AND not full-bleed) */}
+      {/* ── Header (only shown when title/eyebrow provided AND not full-bleed) ───── */}
       {!fullBleed && (title || eyebrow) && (
         <header className="relative overflow-hidden border-b border-white/10 bg-[#06090a]">
           <div className="absolute inset-0 pointer-events-none">
@@ -78,14 +102,14 @@ export default function SpiritualityLayout({ children, title, eyebrow, fullBleed
         </header>
       )}
 
-      {/* Main content */}
+      {/* ── Main content ─────────────────────────────────────────────────────────── */}
       {fullBleed ? (
         <main className="relative">{children}</main>
       ) : (
         <main className="mx-auto max-w-3xl px-6 py-12 bg-[#06090a]">{children}</main>
       )}
 
-      {/* Footer (only on non-fullBleed pages — fullBleed pages provide their own) */}
+      {/* ── Footer (only on non-fullBleed pages — fullBleed pages provide their own) */}
       {!fullBleed && (
         <footer className="mt-24 border-t border-white/10 bg-gradient-to-b from-[#06090a] to-[#06090a]/95">
           <div className="mx-auto max-w-6xl px-6 py-14">
