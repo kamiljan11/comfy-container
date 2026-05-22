@@ -11,7 +11,7 @@ export const Route = createFileRoute('/spirituality/sps2')({
       { property: 'og:title', content: 'Simplified Practical Spirituality² — Short Version' },
       { property: 'og:description', content: 'The full book in 66 minutes. The essence without losing depth.' },
       { property: 'og:url', content: 'https://kamiljan.com/spirituality/sps2' },
-      { property: 'og:image', content: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/684eeba14ef85_683494b851212_398144160_6738014629569555_892258626759783772_n1.jpg' },
+      { property: 'og:image', content: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6857e82d4ad8b_Beztytułu.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
     links: [
@@ -23,7 +23,8 @@ export const Route = createFileRoute('/spirituality/sps2')({
 
 const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/6584575'
 
-const HERO_IMG = `${CDN}/684eeba14ef85_683494b851212_398144160_6738014629569555_892258626759783772_n1.jpg`
+const BOOK_COVER_IMG = `${CDN}/6857e82d4ad8b_Beztytułu.png`
+const KAMIL_PORTRAIT_IMG = `${CDN}/684eeba14ef85_683494b851212_398144160_6738014629569555_892258626759783772_n1.jpg`
 
 const TRANSFORMATIONS = [
   {
@@ -40,6 +41,55 @@ const TRANSFORMATIONS = [
     img: `${CDN}/684edbe4ba0e7_ChatGPTImageJun15202504_42_35PM.png`,
     title: 'Achieve Complete Lasting Life Happiness',
     desc: 'Discover what truly matters to you. As awareness reaches neglected areas of your life, a deeper satisfaction emerges — one that does not fade, because it comes from within.',
+  },
+] as const
+
+// 9 chapters with 1:1 paired topic header images and audio narration MP3s.
+const CHAPTERS = [
+  {
+    title: 'The Essence of Suffering',
+    img: `${CDN}/685af2e564313_whatiscoreofsufferingfin.jpg`,
+    mp3: `${CDN}/686a60c812398_coreofsuffering.mp3`,
+  },
+  {
+    title: 'What is Spirituality?',
+    img: `${CDN}/685af6cac5f67_spirituality.jpg`,
+    mp3: `${CDN}/686a60ddf410c_whatisspirituality.mp3`,
+  },
+  {
+    title: 'What is Consciousness?',
+    img: `${CDN}/685af6d741941_concioussnes.jpg`,
+    mp3: `${CDN}/686a60f50dc4b_whatisconcioussnes.mp3`,
+  },
+  {
+    title: 'What is the Evolution of Consciousness?',
+    img: `${CDN}/685af6ea84dac_evolution.jpg`,
+    mp3: `${CDN}/686a611270d91_whatisevolution.mp3`,
+  },
+  {
+    title: 'Levels of Consciousness',
+    img: `${CDN}/685af721245c4_levels.jpg`,
+    mp3: `${CDN}/686a6128aa3e1_whatarelevelsofconcioussness.mp3`,
+  },
+  {
+    title: 'Peak Experiences',
+    img: `${CDN}/685af72fb4840_peak.jpg`,
+    mp3: `${CDN}/686a61b3d669e_peakexperiences.mp3`,
+  },
+  {
+    title: 'Why Evolution Should Be Central',
+    img: `${CDN}/685b0321428de_central.jpg`,
+    mp3: `${CDN}/686a61e1a7a4b_whyevolutioncentral.mp3`,
+  },
+  {
+    title: 'Complete Lasting Life Happiness',
+    img: `${CDN}/685efe8bc78a2_completelasting.jpg`,
+    mp3: `${CDN}/686a62033c8f5_whatislifehappines.mp3`,
+  },
+  {
+    title: 'What is Practical Spirituality?',
+    img: `${CDN}/685effdf518c2_practicalspirituality.jpg`,
+    mp3: `${CDN}/686a7983601f8_whatisthepracticalspirtiaulity.mp3`,
   },
 ] as const
 
@@ -82,7 +132,7 @@ function Sps2Page() {
           }}
         />
         <div className="grid gap-10 md:grid-cols-[1.1fr,1fr] items-center">
-          <div>
+          <div className="relative">
             <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-4 mt-4">
               Short Version · 66-minute read
             </p>
@@ -109,18 +159,35 @@ function Sps2Page() {
                 Try DMT meditation
               </Link>
             </div>
+
+            {/* Kamil portrait — small inset */}
+            <div className="mt-10 flex items-center gap-4">
+              <div className="h-20 w-20 shrink-0 rounded-full overflow-hidden border border-white/15 shadow-lg shadow-black/40">
+                <img
+                  src={KAMIL_PORTRAIT_IMG}
+                  alt="Kamil Jan — author portrait"
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                />
+              </div>
+              <p className="text-xs text-white/55 italic leading-snug">
+                Rishikesh, India · 2024
+              </p>
+            </div>
           </div>
+
+          {/* Book cover — the new primary hero image */}
           <figure className="relative">
-            <div className="rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] bg-gradient-to-br from-amber-500/10 via-cyan-500/10 to-purple-500/10">
+            <div className="aspect-[3/4] rounded-lg overflow-hidden shadow-2xl shadow-amber-500/20 border border-white/10 bg-gradient-to-br from-amber-500/10 via-cyan-500/10 to-purple-500/10">
               <img
-                src={HERO_IMG}
-                alt="Kamil Jan seated in Rishikesh, India — 2024"
+                src={BOOK_COVER_IMG}
+                alt="The Simplified Practical Spirituality² — book cover"
                 className="h-full w-full object-cover"
                 loading="eager"
               />
             </div>
             <figcaption className="mt-3 text-xs text-white/55 italic text-right pr-1">
-              Rishikesh, India — 2024
+              The Simplified Practical Spirituality² — Guidebook
             </figcaption>
           </figure>
         </div>
@@ -152,6 +219,58 @@ function Sps2Page() {
               <div className="p-6">
                 <h3 className="text-base md:text-lg font-semibold text-white">{t.title}</h3>
                 <p className="mt-3 text-sm text-white/70 leading-relaxed">{t.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Chapters at a glance (preview strip with audio) ─────────────── */}
+      <section className="py-16 border-t border-white/5">
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Chapters at a glance</p>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-3">
+          Each chapter is also audio-narrated.
+        </h2>
+        <p className="text-base text-white/65 mb-10 max-w-2xl">
+          Nine chapters — read the text below, or press play and listen.
+        </p>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {CHAPTERS.map((c, i) => (
+            <article
+              key={i}
+              className="rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden flex flex-col hover:border-amber-300/30 transition-colors"
+            >
+              <div className="aspect-video overflow-hidden bg-black/30 rounded-t-lg">
+                <img
+                  src={c.img}
+                  alt={c.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-5 flex flex-col gap-3 flex-1">
+                <h3 className="text-base md:text-lg font-semibold text-white leading-snug">
+                  <span className="text-amber-300/70 mr-2 tabular-nums">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  {c.title}
+                </h3>
+                <a
+                  href={c.mp3}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto inline-flex items-center gap-2 text-sm text-amber-200 hover:text-amber-100 transition-colors"
+                >
+                  <span
+                    aria-hidden
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-amber-300/15 border border-amber-300/30 text-amber-200"
+                  >
+                    ▶
+                  </span>
+                  <span className="underline-offset-2 hover:underline">
+                    Listen to chapter
+                  </span>
+                </a>
               </div>
             </article>
           ))}
