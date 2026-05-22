@@ -32,6 +32,7 @@ const IMG = {
   gears: `${CDN}/6584575/690762ac46571_gears.gif`,
   arrowDown: `${CDN}/6584575/68e6a291984f9_arrow_down_spiritual_business.jpg`,
   kamil: `${CDN}/6584575/68ecee9666ca3_kamiljanpciture3.jpg`,
+  qualityIntro: `${CDN}/6584575/6907dc6a52bd3_BlackandWhiteGradientModernComingSoonSquareInstagramPost1.jpg`,
   trustExperience: `${CDN}/6584575/690759398cbd7_ChatGPTImageNov2202501_14_24PM.png`,
   trustSlots: `${CDN}/6584575/6922dbedbc565_ChatGPTImageNov23202510_03_17AM.png`,
   trustPrice: `${CDN}/6584575/69075892d453f_ChatGPTImageNov2202501_11_38PM.png`,
@@ -92,10 +93,10 @@ const PROCESS_STEPS = [
 ] as const
 
 const TRUST_BADGES = [
-  { icon: IMG.trustExperience, title: '10+ Years of Experience', desc: 'Marketing know-how blended with spirituality so the work is authentic and works in the real world.' },
-  { icon: IMG.trustSlots, title: 'Only 10 Open Slots', desc: 'To keep quality high I work with no more than 10–12 creators at a time.' },
-  { icon: IMG.trustPrice, title: 'Price Will Go Up', desc: 'Once the calendar fills, prices increase. Book now to lock in today’s rate.' },
-  { icon: IMG.trustGuarantee, title: 'Money-Back Guarantee', desc: 'Try one 90-minute session. If I can’t help — full refund within 24 hours.' },
+  { icon: IMG.trustExperience, title: '10+ Years Experience' },
+  { icon: IMG.trustSlots, title: 'Only 10 Open Slots' },
+  { icon: IMG.trustPrice, title: 'Price Will Go Up' },
+  { icon: IMG.trustGuarantee, title: 'Money Back Guarantee' },
 ] as const
 
 const FAQS = [
@@ -166,6 +167,40 @@ function SpiritualMarketingPage() {
         </div>
       </section>
 
+      {/* ── Quality intro card ────────────────────────────────────────── */}
+      <section className="py-12">
+        <div className="grid gap-8 md:grid-cols-[1fr_2fr] items-center rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8">
+          <img
+            src={IMG.qualityIntro}
+            alt="We deeply believe in quality"
+            className="w-full rounded-xl object-cover aspect-square"
+            loading="lazy"
+          />
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">A note before we begin</p>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-4">
+              We deeply believe in quality.
+            </h2>
+            <p className="text-base md:text-lg text-white/80 leading-relaxed">
+              This work is for conscious creators who want to grow without compromising the soul of
+              what they do. No mass-market shortcuts, no hype, no manipulation. Just clear strategy,
+              honest systems, and the kind of slow-built trust that compounds for years.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Decorative arrow separator ────────────────────────────────── */}
+      <div className="flex justify-center py-2">
+        <img
+          src={IMG.arrowDown}
+          alt=""
+          aria-hidden
+          className="w-[70px] h-auto opacity-70"
+          loading="lazy"
+        />
+      </div>
+
       {/* ── Testimonials strip ────────────────────────────────────────── */}
       <section className="py-16">
         <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">From practitioners</p>
@@ -196,59 +231,57 @@ function SpiritualMarketingPage() {
         </div>
       </section>
 
-      {/* ── Mentor / Kamil intro ──────────────────────────────────────── */}
+      {/* ── Why structure ─────────────────────────────────────────────── */}
       <section className="py-16 border-t border-white/5">
-        <div className="grid gap-10 md:grid-cols-[260px_1fr] items-start">
-          <div className="relative">
-            <img
-              src={IMG.kamil}
-              alt="Kamil Jan, Spiritual Business Mentor"
-              className="w-full max-w-[260px] rounded-2xl border border-white/10 object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Your mentor</p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Kamil Jan</h2>
-            <p className="text-sm text-amber-200/80 mb-5 italic">Spiritual Business Mentor</p>
-            <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-2xl">
-              When I first recognised my spiritual gifts, sharing them online was harder than I expected.
-              That set me on a path of aligning with my true self. After years of learning, building, and
-              testing, I developed a practical formula that brings spirituality and business together so
-              meaningful work reaches the people it is meant to serve. Today I use it to help others find
-              the same alignment.
-            </p>
-          </div>
+        <div className="max-w-3xl">
+          <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Why it works</p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6">
+            Structure serves spirit.
+          </h2>
+          <p className="text-lg text-white/80 leading-relaxed">
+            Spirit-led work doesn&apos;t mean unstructured work. The most aligned offers, the deepest reach,
+            the cleanest sales conversations — all run on simple systems. Structure removes friction so
+            the gift can flow.
+          </p>
+          <p className="mt-4 text-base text-white/65 leading-relaxed">
+            What we build together: clarity on purpose and soul client, an offer that resonates, content that
+            attracts the right people, traffic that compounds, systems that run without you, and honest sales
+            conversations.
+          </p>
         </div>
       </section>
 
-      {/* ── Why structure ─────────────────────────────────────────────── */}
+      {/* ── Why work with me — trust badges ───────────────────────────── */}
       <section className="py-16 border-t border-white/5">
-        <div className="grid gap-10 md:grid-cols-[1fr_280px] items-center">
-          <div className="max-w-3xl">
-            <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Why it works</p>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-6">
-              Structure serves spirit.
-            </h2>
-            <p className="text-lg text-white/80 leading-relaxed">
-              Spirit-led work doesn&apos;t mean unstructured work. The most aligned offers, the deepest reach,
-              the cleanest sales conversations — all run on simple systems. Structure removes friction so
-              the gift can flow.
-            </p>
-            <p className="mt-4 text-base text-white/65 leading-relaxed">
-              What we build together: clarity on purpose and soul client, an offer that resonates, content that
-              attracts the right people, traffic that compounds, systems that run without you, and honest sales
-              conversations.
-            </p>
-          </div>
-          <img
-            src={IMG.gears}
-            alt="Spiritual business gears — every part working together"
-            className="w-full max-w-[280px] mx-auto object-contain"
-            loading="lazy"
-          />
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Why work with me</p>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-10">
+          Four reasons to start now.
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-5">
+          {TRUST_BADGES.map((b, i) => (
+            <div key={i} className="flex flex-col items-center text-center">
+              <img
+                src={b.icon}
+                alt={b.title}
+                className="w-full max-w-[220px] h-auto object-contain mb-3"
+                loading="lazy"
+              />
+              <p className="text-sm md:text-base font-medium text-white">{b.title}</p>
+            </div>
+          ))}
         </div>
       </section>
+
+      {/* ── Decorative arrow separator ────────────────────────────────── */}
+      <div className="flex justify-center py-2">
+        <img
+          src={IMG.arrowDown}
+          alt=""
+          aria-hidden
+          className="w-[70px] h-auto opacity-70"
+          loading="lazy"
+        />
+      </div>
 
       {/* ── 3 Paths ────────────────────────────────────────────────────── */}
       <section id="paths" className="py-20 border-t border-white/5">
@@ -266,11 +299,11 @@ function SpiritualMarketingPage() {
                   : 'border-white/10 bg-white/[0.02] hover:border-white/20'
               }`}
             >
-              <div className="mb-4 flex items-center justify-center h-32 rounded-xl bg-white/[0.03] border border-white/5 overflow-hidden">
+              <div className="aspect-video rounded-lg overflow-hidden mb-5">
                 <img
                   src={p.icon}
                   alt=""
-                  className="h-28 w-auto object-contain"
+                  className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
@@ -304,9 +337,17 @@ function SpiritualMarketingPage() {
       {/* ── Practical Spiritual Process ───────────────────────────────── */}
       <section className="py-20 border-t border-white/5">
         <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">The process</p>
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-8">
           Four steps. No mystery.
         </h2>
+        <div className="mb-10 flex justify-center">
+          <img
+            src={IMG.gears}
+            alt="The 7-module spiritual business system — every part working together"
+            className="w-full max-w-md rounded-lg"
+            loading="lazy"
+          />
+        </div>
         <ol className="grid gap-4 md:grid-cols-2">
           {PROCESS_STEPS.map((s) => (
             <li key={s.n} className="rounded-lg border border-white/10 bg-white/[0.02] p-6">
@@ -316,28 +357,6 @@ function SpiritualMarketingPage() {
             </li>
           ))}
         </ol>
-      </section>
-
-      {/* ── Trust badges row ──────────────────────────────────────────── */}
-      <section className="py-16 border-t border-white/5">
-        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Why work with me</p>
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-10">
-          We deeply believe in the quality of our meaningful work.
-        </h2>
-        <div className="grid gap-5 md:grid-cols-4">
-          {TRUST_BADGES.map((b, i) => (
-            <div key={i} className="rounded-xl border border-white/10 bg-white/[0.02] p-6 text-center">
-              <img
-                src={b.icon}
-                alt=""
-                className="mx-auto mb-4 h-20 w-20 object-contain"
-                loading="lazy"
-              />
-              <h3 className="text-base font-semibold text-white mb-2">{b.title}</h3>
-              <p className="text-xs text-white/65 leading-relaxed">{b.desc}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* ── Meditation card ───────────────────────────────────────────── */}
@@ -382,6 +401,38 @@ function SpiritualMarketingPage() {
               )}
             </button>
           ))}
+        </div>
+      </section>
+
+      {/* ── Your Spiritual Business Mentor ────────────────────────────── */}
+      <section className="py-16 border-t border-white/5">
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Meet your guide</p>
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-8">
+          Your Spiritual Business Mentor.
+        </h2>
+        <div className="grid gap-8 md:grid-cols-[280px,1fr] items-start">
+          <img
+            src={IMG.kamil}
+            alt="Kamil Jan, Spiritual Business Mentor"
+            className="w-full max-w-[280px] rounded-2xl border border-white/10 object-cover"
+            loading="lazy"
+          />
+          <div>
+            <h3 className="text-2xl font-bold text-white mb-1">Kamil Jan</h3>
+            <p className="text-sm text-amber-200/80 mb-5 italic">Spiritual Business Mentor</p>
+            <p className="text-base md:text-lg text-white/80 leading-relaxed mb-4">
+              When I first recognised my spiritual gifts, sharing them online was harder than I expected.
+              That set me on a path of aligning with my true self. After years of learning, building, and
+              testing, I developed a practical formula that brings spirituality and business together so
+              meaningful work reaches the people it is meant to serve.
+            </p>
+            <p className="text-base md:text-lg text-white/80 leading-relaxed">
+              Today I use that same system to help conscious creators — coaches, healers, teachers, and
+              practitioners — turn their gifts into work that sustains them. The mission stays simple:
+              integrity-aligned growth, no manipulation, no hype, just clear strategy and the kind of
+              trust that compounds for years.
+            </p>
+          </div>
         </div>
       </section>
 
