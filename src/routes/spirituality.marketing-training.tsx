@@ -2,7 +2,23 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 import NewsletterSignup from '../components/NewsletterSignup'
 
-export const Route = createFileRoute('/spirituality/marketing-training')({ component: MarketingTrainingPage })
+export const Route = createFileRoute('/spirituality/marketing-training')({
+  head: () => ({
+    meta: [
+      { title: 'Szkolenie z Marketingu — Marketing dla Świadomych Twórców' },
+      { name: 'description', content: 'Praktyczne szkolenie marketingowe po polsku. Bez manipulacji. Bez wypalenia.' },
+      { property: 'og:title', content: 'Szkolenie z Marketingu — Marketing dla Świadomych Twórców' },
+      { property: 'og:description', content: 'Praktyczne szkolenie marketingowe po polsku. Bez manipulacji. Bez wypalenia.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/marketing-training' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/marketing-training' },
+    ],
+  }),
+  component: MarketingTrainingPage,
+})
 
 const AUDIENCE = [
   {
