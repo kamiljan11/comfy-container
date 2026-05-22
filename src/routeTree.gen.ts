@@ -9,38 +9,218 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpiritualityRouteImport } from './routes/spirituality'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SpiritualityIndexRouteImport } from './routes/spirituality.index'
+import { Route as SpiritualitySupportRouteImport } from './routes/spirituality.support'
+import { Route as SpiritualitySps2RouteImport } from './routes/spirituality.sps2'
+import { Route as SpiritualitySpsRouteImport } from './routes/spirituality.sps'
+import { Route as SpiritualitySpiritualMarketingRouteImport } from './routes/spirituality.spiritual-marketing'
+import { Route as SpiritualityMarketingTrainingRouteImport } from './routes/spirituality.marketing-training'
+import { Route as SpiritualityIyssRouteImport } from './routes/spirituality.iyss'
+import { Route as SpiritualityDmtpracticeRouteImport } from './routes/spirituality.dmtpractice'
+import { Route as SpiritualityDmtRouteImport } from './routes/spirituality.dmt'
+import { Route as SpiritualityContactRouteImport } from './routes/spirituality.contact'
+import { Route as SpiritualityClarityRouteImport } from './routes/spirituality.clarity'
+import { Route as SpiritualityBlogRouteImport } from './routes/spirituality.blog'
+import { Route as SpiritualityAboutRouteImport } from './routes/spirituality.about'
 
+const SpiritualityRoute = SpiritualityRouteImport.update({
+  id: '/spirituality',
+  path: '/spirituality',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SpiritualityIndexRoute = SpiritualityIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualitySupportRoute = SpiritualitySupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualitySps2Route = SpiritualitySps2RouteImport.update({
+  id: '/sps2',
+  path: '/sps2',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualitySpsRoute = SpiritualitySpsRouteImport.update({
+  id: '/sps',
+  path: '/sps',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualitySpiritualMarketingRoute =
+  SpiritualitySpiritualMarketingRouteImport.update({
+    id: '/spiritual-marketing',
+    path: '/spiritual-marketing',
+    getParentRoute: () => SpiritualityRoute,
+  } as any)
+const SpiritualityMarketingTrainingRoute =
+  SpiritualityMarketingTrainingRouteImport.update({
+    id: '/marketing-training',
+    path: '/marketing-training',
+    getParentRoute: () => SpiritualityRoute,
+  } as any)
+const SpiritualityIyssRoute = SpiritualityIyssRouteImport.update({
+  id: '/iyss',
+  path: '/iyss',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualityDmtpracticeRoute = SpiritualityDmtpracticeRouteImport.update({
+  id: '/dmtpractice',
+  path: '/dmtpractice',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualityDmtRoute = SpiritualityDmtRouteImport.update({
+  id: '/dmt',
+  path: '/dmt',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualityContactRoute = SpiritualityContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualityClarityRoute = SpiritualityClarityRouteImport.update({
+  id: '/clarity',
+  path: '/clarity',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualityBlogRoute = SpiritualityBlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
+const SpiritualityAboutRoute = SpiritualityAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => SpiritualityRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/spirituality': typeof SpiritualityRouteWithChildren
+  '/spirituality/about': typeof SpiritualityAboutRoute
+  '/spirituality/blog': typeof SpiritualityBlogRoute
+  '/spirituality/clarity': typeof SpiritualityClarityRoute
+  '/spirituality/contact': typeof SpiritualityContactRoute
+  '/spirituality/dmt': typeof SpiritualityDmtRoute
+  '/spirituality/dmtpractice': typeof SpiritualityDmtpracticeRoute
+  '/spirituality/iyss': typeof SpiritualityIyssRoute
+  '/spirituality/marketing-training': typeof SpiritualityMarketingTrainingRoute
+  '/spirituality/spiritual-marketing': typeof SpiritualitySpiritualMarketingRoute
+  '/spirituality/sps': typeof SpiritualitySpsRoute
+  '/spirituality/sps2': typeof SpiritualitySps2Route
+  '/spirituality/support': typeof SpiritualitySupportRoute
+  '/spirituality/': typeof SpiritualityIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/spirituality/about': typeof SpiritualityAboutRoute
+  '/spirituality/blog': typeof SpiritualityBlogRoute
+  '/spirituality/clarity': typeof SpiritualityClarityRoute
+  '/spirituality/contact': typeof SpiritualityContactRoute
+  '/spirituality/dmt': typeof SpiritualityDmtRoute
+  '/spirituality/dmtpractice': typeof SpiritualityDmtpracticeRoute
+  '/spirituality/iyss': typeof SpiritualityIyssRoute
+  '/spirituality/marketing-training': typeof SpiritualityMarketingTrainingRoute
+  '/spirituality/spiritual-marketing': typeof SpiritualitySpiritualMarketingRoute
+  '/spirituality/sps': typeof SpiritualitySpsRoute
+  '/spirituality/sps2': typeof SpiritualitySps2Route
+  '/spirituality/support': typeof SpiritualitySupportRoute
+  '/spirituality': typeof SpiritualityIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/spirituality': typeof SpiritualityRouteWithChildren
+  '/spirituality/about': typeof SpiritualityAboutRoute
+  '/spirituality/blog': typeof SpiritualityBlogRoute
+  '/spirituality/clarity': typeof SpiritualityClarityRoute
+  '/spirituality/contact': typeof SpiritualityContactRoute
+  '/spirituality/dmt': typeof SpiritualityDmtRoute
+  '/spirituality/dmtpractice': typeof SpiritualityDmtpracticeRoute
+  '/spirituality/iyss': typeof SpiritualityIyssRoute
+  '/spirituality/marketing-training': typeof SpiritualityMarketingTrainingRoute
+  '/spirituality/spiritual-marketing': typeof SpiritualitySpiritualMarketingRoute
+  '/spirituality/sps': typeof SpiritualitySpsRoute
+  '/spirituality/sps2': typeof SpiritualitySps2Route
+  '/spirituality/support': typeof SpiritualitySupportRoute
+  '/spirituality/': typeof SpiritualityIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/spirituality'
+    | '/spirituality/about'
+    | '/spirituality/blog'
+    | '/spirituality/clarity'
+    | '/spirituality/contact'
+    | '/spirituality/dmt'
+    | '/spirituality/dmtpractice'
+    | '/spirituality/iyss'
+    | '/spirituality/marketing-training'
+    | '/spirituality/spiritual-marketing'
+    | '/spirituality/sps'
+    | '/spirituality/sps2'
+    | '/spirituality/support'
+    | '/spirituality/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/spirituality/about'
+    | '/spirituality/blog'
+    | '/spirituality/clarity'
+    | '/spirituality/contact'
+    | '/spirituality/dmt'
+    | '/spirituality/dmtpractice'
+    | '/spirituality/iyss'
+    | '/spirituality/marketing-training'
+    | '/spirituality/spiritual-marketing'
+    | '/spirituality/sps'
+    | '/spirituality/sps2'
+    | '/spirituality/support'
+    | '/spirituality'
+  id:
+    | '__root__'
+    | '/'
+    | '/spirituality'
+    | '/spirituality/about'
+    | '/spirituality/blog'
+    | '/spirituality/clarity'
+    | '/spirituality/contact'
+    | '/spirituality/dmt'
+    | '/spirituality/dmtpractice'
+    | '/spirituality/iyss'
+    | '/spirituality/marketing-training'
+    | '/spirituality/spiritual-marketing'
+    | '/spirituality/sps'
+    | '/spirituality/sps2'
+    | '/spirituality/support'
+    | '/spirituality/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SpiritualityRoute: typeof SpiritualityRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/spirituality': {
+      id: '/spirituality'
+      path: '/spirituality'
+      fullPath: '/spirituality'
+      preLoaderRoute: typeof SpiritualityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +228,139 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/spirituality/': {
+      id: '/spirituality/'
+      path: '/'
+      fullPath: '/spirituality/'
+      preLoaderRoute: typeof SpiritualityIndexRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/support': {
+      id: '/spirituality/support'
+      path: '/support'
+      fullPath: '/spirituality/support'
+      preLoaderRoute: typeof SpiritualitySupportRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/sps2': {
+      id: '/spirituality/sps2'
+      path: '/sps2'
+      fullPath: '/spirituality/sps2'
+      preLoaderRoute: typeof SpiritualitySps2RouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/sps': {
+      id: '/spirituality/sps'
+      path: '/sps'
+      fullPath: '/spirituality/sps'
+      preLoaderRoute: typeof SpiritualitySpsRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/spiritual-marketing': {
+      id: '/spirituality/spiritual-marketing'
+      path: '/spiritual-marketing'
+      fullPath: '/spirituality/spiritual-marketing'
+      preLoaderRoute: typeof SpiritualitySpiritualMarketingRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/marketing-training': {
+      id: '/spirituality/marketing-training'
+      path: '/marketing-training'
+      fullPath: '/spirituality/marketing-training'
+      preLoaderRoute: typeof SpiritualityMarketingTrainingRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/iyss': {
+      id: '/spirituality/iyss'
+      path: '/iyss'
+      fullPath: '/spirituality/iyss'
+      preLoaderRoute: typeof SpiritualityIyssRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/dmtpractice': {
+      id: '/spirituality/dmtpractice'
+      path: '/dmtpractice'
+      fullPath: '/spirituality/dmtpractice'
+      preLoaderRoute: typeof SpiritualityDmtpracticeRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/dmt': {
+      id: '/spirituality/dmt'
+      path: '/dmt'
+      fullPath: '/spirituality/dmt'
+      preLoaderRoute: typeof SpiritualityDmtRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/contact': {
+      id: '/spirituality/contact'
+      path: '/contact'
+      fullPath: '/spirituality/contact'
+      preLoaderRoute: typeof SpiritualityContactRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/clarity': {
+      id: '/spirituality/clarity'
+      path: '/clarity'
+      fullPath: '/spirituality/clarity'
+      preLoaderRoute: typeof SpiritualityClarityRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/blog': {
+      id: '/spirituality/blog'
+      path: '/blog'
+      fullPath: '/spirituality/blog'
+      preLoaderRoute: typeof SpiritualityBlogRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
+    '/spirituality/about': {
+      id: '/spirituality/about'
+      path: '/about'
+      fullPath: '/spirituality/about'
+      preLoaderRoute: typeof SpiritualityAboutRouteImport
+      parentRoute: typeof SpiritualityRoute
+    }
   }
 }
 
+interface SpiritualityRouteChildren {
+  SpiritualityAboutRoute: typeof SpiritualityAboutRoute
+  SpiritualityBlogRoute: typeof SpiritualityBlogRoute
+  SpiritualityClarityRoute: typeof SpiritualityClarityRoute
+  SpiritualityContactRoute: typeof SpiritualityContactRoute
+  SpiritualityDmtRoute: typeof SpiritualityDmtRoute
+  SpiritualityDmtpracticeRoute: typeof SpiritualityDmtpracticeRoute
+  SpiritualityIyssRoute: typeof SpiritualityIyssRoute
+  SpiritualityMarketingTrainingRoute: typeof SpiritualityMarketingTrainingRoute
+  SpiritualitySpiritualMarketingRoute: typeof SpiritualitySpiritualMarketingRoute
+  SpiritualitySpsRoute: typeof SpiritualitySpsRoute
+  SpiritualitySps2Route: typeof SpiritualitySps2Route
+  SpiritualitySupportRoute: typeof SpiritualitySupportRoute
+  SpiritualityIndexRoute: typeof SpiritualityIndexRoute
+}
+
+const SpiritualityRouteChildren: SpiritualityRouteChildren = {
+  SpiritualityAboutRoute: SpiritualityAboutRoute,
+  SpiritualityBlogRoute: SpiritualityBlogRoute,
+  SpiritualityClarityRoute: SpiritualityClarityRoute,
+  SpiritualityContactRoute: SpiritualityContactRoute,
+  SpiritualityDmtRoute: SpiritualityDmtRoute,
+  SpiritualityDmtpracticeRoute: SpiritualityDmtpracticeRoute,
+  SpiritualityIyssRoute: SpiritualityIyssRoute,
+  SpiritualityMarketingTrainingRoute: SpiritualityMarketingTrainingRoute,
+  SpiritualitySpiritualMarketingRoute: SpiritualitySpiritualMarketingRoute,
+  SpiritualitySpsRoute: SpiritualitySpsRoute,
+  SpiritualitySps2Route: SpiritualitySps2Route,
+  SpiritualitySupportRoute: SpiritualitySupportRoute,
+  SpiritualityIndexRoute: SpiritualityIndexRoute,
+}
+
+const SpiritualityRouteWithChildren = SpiritualityRoute._addFileChildren(
+  SpiritualityRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SpiritualityRoute: SpiritualityRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
