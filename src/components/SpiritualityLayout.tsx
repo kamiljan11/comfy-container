@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 
 const NAV_LINKS = [
-  { to: '/spirituality', label: 'Home' },
+  { to: '/spirituality', label: 'Home', exact: true },
   { to: '/spirituality/sps', label: 'The Book' },
   { to: '/spirituality/sps2', label: 'Short' },
   { to: '/spirituality/dmt', label: 'DMT' },
@@ -24,10 +24,13 @@ export default function SpiritualityLayout({ children, title, eyebrow }: Props) 
   return (
     <div className="min-h-screen bg-[#06090a] text-white">
       {/* Top nav */}
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#06090a]/80 backdrop-blur-md">
+      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#06090a]/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
-          <Link to="/" className="text-sm font-semibold tracking-wide text-white/80 hover:text-white transition-colors shrink-0">
-            ← Kamil Jan
+          <Link to="/" className="group flex items-center gap-2 text-sm font-semibold tracking-wide text-white/80 hover:text-white transition-colors shrink-0">
+            <span className="text-amber-300/80 group-hover:text-amber-200">←</span>
+            <span>Kamil Jan</span>
+            <span className="hidden sm:inline text-white/30">/</span>
+            <span className="hidden sm:inline text-amber-200/90">spirituality</span>
           </Link>
           <div className="hidden lg:flex items-center gap-0.5 text-xs flex-wrap justify-end">
             {NAV_LINKS.map((l) => (
@@ -35,25 +38,34 @@ export default function SpiritualityLayout({ children, title, eyebrow }: Props) 
                 key={l.to}
                 to={l.to}
                 className="px-2.5 py-2 rounded-md text-white/60 hover:text-white hover:bg-white/5 transition-all whitespace-nowrap"
-                activeProps={{ className: 'px-2.5 py-2 rounded-md text-white bg-white/10 whitespace-nowrap' }}
-                activeOptions={{ exact: true }}
+                activeProps={{ className: 'px-2.5 py-2 rounded-md text-amber-200 bg-amber-300/10 whitespace-nowrap' }}
+                activeOptions={{ exact: !!l.exact }}
               >
                 {l.label}
               </Link>
             ))}
           </div>
+          <Link
+            to="/spirituality/clarity"
+            className="hidden md:inline-flex rounded-md border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-xs font-medium text-amber-100 hover:bg-amber-300/20 transition-all whitespace-nowrap"
+          >
+            Book a Clarity Call
+          </Link>
         </div>
       </nav>
 
-      {/* Header */}
+      {/* Header (only shown when title/eyebrow provided) */}
       {(title || eyebrow) && (
-        <header className="border-b border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent">
-          <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
+        <header className="relative overflow-hidden border-b border-white/10">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-amber-400/[0.06] blur-[140px]" />
+          </div>
+          <div className="relative mx-auto max-w-3xl px-6 py-16 md:py-24">
             {eyebrow && (
-              <p className="text-xs uppercase tracking-widest text-cyan-400/80 mb-4">{eyebrow}</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-5">{eyebrow}</p>
             )}
             {title && (
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.05] text-white">
                 {title}
               </h1>
             )}
@@ -65,26 +77,31 @@ export default function SpiritualityLayout({ children, title, eyebrow }: Props) 
       <main className="mx-auto max-w-3xl px-6 py-12">{children}</main>
 
       {/* Footer */}
-      <footer className="mt-24 border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-6 py-12">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <footer className="mt-24 border-t border-white/10 bg-gradient-to-b from-transparent to-amber-500/[0.03]">
+        <div className="mx-auto max-w-6xl px-6 py-14">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div>
-              <p className="text-sm font-semibold mb-1">MySpiritWay — Practical Spirituality</p>
+              <p className="text-base font-semibold text-white mb-1">MySpiritWay — Practical Spirituality</p>
               <p className="text-xs text-white/50">
                 A teaching of Kamil Jan · Now lives at{' '}
-                <Link to="/" className="underline hover:text-white">kamiljan.com</Link>
+                <Link to="/" className="text-amber-200 hover:text-amber-100 underline underline-offset-2">kamiljan.com</Link>
+              </p>
+              <p className="mt-3 text-[11px] text-white/40 italic max-w-md">
+                This work is offered on the Fair Exchange Model — give what feels right, share what helps.
               </p>
             </div>
-            <div className="flex flex-wrap gap-4 text-xs text-white/50">
-              <a href="https://youtube.com/@myspiritway" target="_blank" rel="noreferrer" className="hover:text-white">YouTube</a>
-              <a href="https://www.instagram.com/myspiritway" target="_blank" rel="noreferrer" className="hover:text-white">Instagram</a>
-              <a href="https://www.tiktok.com/@myspiritway" target="_blank" rel="noreferrer" className="hover:text-white">TikTok</a>
-              <a href="https://www.facebook.com/MySpiritWay" target="_blank" rel="noreferrer" className="hover:text-white">Facebook</a>
-              <a href="mailto:hello@kamiljan.com" className="hover:text-white">hello@kamiljan.com</a>
+            <div className="flex flex-col md:items-end gap-3 text-xs">
+              <div className="flex flex-wrap gap-4 text-white/50">
+                <a href="https://youtube.com/@myspiritway" target="_blank" rel="noreferrer" className="hover:text-amber-200 transition-colors">YouTube</a>
+                <a href="https://www.instagram.com/myspiritway" target="_blank" rel="noreferrer" className="hover:text-amber-200 transition-colors">Instagram</a>
+                <a href="https://www.tiktok.com/@myspiritway" target="_blank" rel="noreferrer" className="hover:text-amber-200 transition-colors">TikTok</a>
+                <a href="https://www.facebook.com/MySpiritWay" target="_blank" rel="noreferrer" className="hover:text-amber-200 transition-colors">Facebook</a>
+              </div>
+              <a href="mailto:hello@kamiljan.com" className="text-amber-200 hover:text-amber-100 font-medium">hello@kamiljan.com</a>
             </div>
           </div>
-          <p className="mt-8 text-[10px] text-white/30 tracking-wider">
-            © {new Date().getFullYear()} Kamil Jan · This work is offered on the Fair Exchange Model.
+          <p className="mt-10 text-[10px] text-white/30 tracking-wider">
+            © {new Date().getFullYear()} Kamil Jan · All work shared from the heart.
           </p>
         </div>
       </footer>
