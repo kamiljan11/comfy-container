@@ -10,7 +10,7 @@ export const Route = createFileRoute('/spirituality/clarity')({
       { property: 'og:title', content: 'Book a Clarity Call — Spiritual Business Audit' },
       { property: 'og:description', content: "Free 45-minute Clarity Call. Find what's not aligned in your spiritual business. Map your next 3 steps." },
       { property: 'og:url', content: 'https://kamiljan.com/spirituality/clarity' },
-      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { property: 'og:image', content: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/690f6b705eae5_Untitled1080x1080px.jpg' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
     links: [
@@ -22,6 +22,21 @@ export const Route = createFileRoute('/spirituality/clarity')({
 
 // TODO replace with the live Google Calendar booking URL
 const BOOKING_URL = 'https://calendar.google.com/calendar/appointments/AcZssZ3qXq8Wbu2cqI82BYwSNlYAhf4XBHJ4lFa_TBg=?gv=true'
+
+// ── Real assets pulled from myspiritway.org/clarity CloudFront CDN ─────────
+const IMG = {
+  // Notebook + iPad "Clarity Call" thumbnail (purpose / soul client / offer / content / traffic / ads written by hand)
+  callThumb: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/690f6b705eae5_Untitled1080x1080px.jpg',
+  // Kamil Jan portrait for the Your Mentor section
+  kamil: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/68e6a764052e2_kamiljanpracticalmarketing.jpg',
+  // 7 Modules illustration
+  modules: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6901318f3d2e8_Purpouse2.png',
+  // How-to-book step visuals
+  stepCalendar: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6904d7dc6d030_calendar.jpg',
+  stepPrep: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/690f6e8da5eb5_Untitled718x610px.jpg',
+  stepMeet: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/690f6f4b25705_Google-Meet-PWA-Chromebook-Chrome-OS.webp',
+  stepMeeting: 'https://d1yei2z3i6k35z.cloudfront.net/6584575/6910723bdd520_Untitleddesign11.jpg',
+} as const
 
 const TRUST_BADGES = [
   'no sales pitch',
@@ -54,13 +69,20 @@ const WHAT_YOU_RECEIVE = [
 ] as const
 
 const SEVEN_MODULES = [
-  { icon: '🌟', name: 'Purpose', q: 'Why do I feel called to do this work — and how does that guide my offers?' },
-  { icon: '🕊️', name: 'Soul Client', q: 'Who is my ideal client and what are they truly seeking?' },
-  { icon: '📣', name: 'Viral Offer', q: 'How do I design an offer that resonates and spreads naturally?' },
-  { icon: '✍️', name: 'Content', q: 'What do I publish so the right people find me consistently?' },
-  { icon: '📊', name: 'Traffic', q: 'How do I reach more aligned people without burning out?' },
-  { icon: '🛠️', name: 'Systems', q: 'Which simple systems let the work run without me being everywhere?' },
-  { icon: '💸', name: 'Pricing & Sales', q: 'How do I price my work with integrity and have honest sales conversations?' },
+  { icon: 'P', name: 'Purpose', q: 'Why do I feel called to do this work — and how does that guide my offers?' },
+  { icon: 'S', name: 'Soul Client', q: 'Who is my ideal client and what are they truly seeking?' },
+  { icon: 'V', name: 'Viral Offer', q: 'How do I design an offer that resonates and spreads naturally?' },
+  { icon: 'C', name: 'Content', q: 'What do I publish so the right people find me consistently?' },
+  { icon: 'T', name: 'Traffic', q: 'How do I reach more aligned people without burning out?' },
+  { icon: 'X', name: 'Systems', q: 'Which simple systems let the work run without me being everywhere?' },
+  { icon: '$', name: 'Pricing & Sales', q: 'How do I price my work with integrity and have honest sales conversations?' },
+] as const
+
+const BOOK_STEPS = [
+  { img: IMG.stepCalendar, title: 'Calendar', desc: 'Click the button and pick a time on the calendar that works for you.' },
+  { img: IMG.stepPrep, title: 'Prep Questions', desc: 'Answer short prep questions: name, email, niche, links, and what is not working right now.' },
+  { img: IMG.stepMeet, title: 'Confirmation', desc: 'You will receive an email confirmation with the meeting link, followed by automatic reminders.' },
+  { img: IMG.stepMeeting, title: 'The Clarity Meeting', desc: 'Together we review your current state and you leave with a clear, practical plan.' },
 ] as const
 
 const FAQS = [
@@ -76,40 +98,83 @@ function ClarityPage() {
 
   return (
     <SpiritualityLayout>
-      {/* ── Hero ────────────────────────────────────────────────────────── */}
-      <section className="relative -mx-6 px-6 pt-2 pb-16 md:pb-20">
-        <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-4">
-          Spiritual Marketing for Spiritual Businesses
-        </p>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-white">
-          Find what&apos;s not aligned —<br />
-          <span className="italic font-light text-amber-200">and gently unlock your financial abundance.</span>
-        </h1>
-        <p className="mt-8 text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl">
-          Book a FREE 45-minute Clarity Call. We&apos;ll review the key parts of your spiritual business,
-          uncover the closest energy block between you and aligned soul clients, and map your next three
-          strategic steps.
-        </p>
-        <p className="mt-4 text-base text-white/65 max-w-2xl">
-          For spiritual creators, teachers, and healers who value integrity.
-        </p>
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-md bg-amber-300 px-6 py-3 text-sm font-semibold text-[#06090a] hover:bg-amber-200 transition-all"
-          >
-            Book your Clarity Call
-          </a>
-          <span className="text-xs text-white/50">Booking calendar opens in a new tab.</span>
+      {/* ── Hero with real photo backdrop + notebook thumbnail ──────────── */}
+      <section className="relative -mx-6 px-6 pt-2 pb-16 md:pb-20 overflow-hidden">
+        {/* Background photo layer (~30% opacity) */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-cover bg-center opacity-30"
+          style={{ backgroundImage: `url(${IMG.callThumb})` }}
+        />
+        {/* Dark gradient over the photo for legibility */}
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-br from-[#06090a]/85 via-[#06090a]/70 to-[#06090a]/95" />
+
+        <div className="grid md:grid-cols-[1fr_auto] gap-10 items-center">
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-4">
+              Spiritual Marketing for Spiritual Businesses
+            </p>
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-white">
+              Find what&apos;s not aligned —<br />
+              <span className="italic font-light text-amber-200">and gently unlock your financial abundance.</span>
+            </h1>
+            <p className="mt-8 text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl">
+              Book a FREE 45-minute Clarity Call. We&apos;ll review the key parts of your spiritual business,
+              uncover the closest energy block between you and aligned soul clients, and map your next three
+              strategic steps.
+            </p>
+            <p className="mt-4 text-base text-white/65 max-w-2xl">
+              For spiritual creators, teachers, and healers who value integrity.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-md bg-amber-300 px-6 py-3 text-sm font-semibold text-[#06090a] hover:bg-amber-200 transition-all"
+              >
+                Book your Clarity Call
+              </a>
+              <span className="text-xs text-white/50">Booking calendar opens in a new tab.</span>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2 text-[11px] uppercase tracking-wider">
+              {TRUST_BADGES.map((b) => (
+                <span key={b} className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-white/70">
+                  {b}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Side image — notebook + iPad "Clarity Call" thumbnail */}
+          <div className="hidden md:block w-[320px] lg:w-[360px] shrink-0">
+            <div className="relative rounded-xl overflow-hidden border border-amber-200/20 shadow-[0_20px_60px_-15px_rgba(252,211,77,0.25)]">
+              <img
+                src={IMG.callThumb}
+                alt="A notebook beside an iPad showing the Clarity Call modules — purpose, soul client, offer, content, traffic, ads."
+                className="w-full h-auto block"
+                loading="eager"
+              />
+            </div>
+            <p className="mt-3 text-[11px] uppercase tracking-wider text-white/40 text-center">
+              What we walk through on the call
+            </p>
+          </div>
         </div>
-        <div className="mt-6 flex flex-wrap gap-2 text-[11px] uppercase tracking-wider">
-          {TRUST_BADGES.map((b) => (
-            <span key={b} className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-white/70">
-              {b}
-            </span>
-          ))}
+
+        {/* Mobile-only: surface the same thumbnail below the hero copy */}
+        <div className="md:hidden mt-10">
+          <div className="rounded-xl overflow-hidden border border-amber-200/20">
+            <img
+              src={IMG.callThumb}
+              alt="A notebook beside an iPad showing the Clarity Call modules — purpose, soul client, offer, content, traffic, ads."
+              className="w-full h-auto block"
+              loading="eager"
+            />
+          </div>
+          <p className="mt-3 text-[11px] uppercase tracking-wider text-white/40 text-center">
+            What we walk through on the call
+          </p>
         </div>
       </section>
 
@@ -142,50 +207,91 @@ function ClarityPage() {
           A focused walk through seven modules of your spiritual business. We diagnose where each one stands
           today, and you leave knowing exactly where to apply pressure first.
         </p>
-        <div className="grid gap-3">
-          {SEVEN_MODULES.map((m, i) => (
-            <div key={i} className="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.02] p-5">
-              <div className="text-2xl shrink-0 leading-none mt-0.5">{m.icon}</div>
-              <div>
-                <div className="text-base font-semibold text-white">{m.name}</div>
-                <div className="mt-1 text-sm text-white/65 leading-relaxed italic">&ldquo;{m.q}&rdquo;</div>
+
+        <div className="grid md:grid-cols-[260px_1fr] gap-8 items-start">
+          <div className="hidden md:block rounded-xl overflow-hidden border border-white/10">
+            <img src={IMG.modules} alt="Seven modules illustration" className="w-full h-auto block" loading="lazy" />
+          </div>
+          <div className="grid gap-3">
+            {SEVEN_MODULES.map((m, i) => (
+              <div key={i} className="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.02] p-5">
+                <div className="text-lg font-semibold shrink-0 leading-none mt-0.5 text-amber-300 w-7 text-center">{m.icon}</div>
+                <div>
+                  <div className="text-base font-semibold text-white">{m.name}</div>
+                  <div className="mt-1 text-sm text-white/65 leading-relaxed italic">&ldquo;{m.q}&rdquo;</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── Your Mentor ────────────────────────────────────────────────── */}
+      {/* ── Your Mentor (portrait left, text right) ────────────────────── */}
       <section className="py-16 border-t border-white/5">
         <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">Your mentor</p>
-        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
-          Kamil Jan
-        </h2>
-        <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-2xl">
-          Creator of MySpiritWay and author of the Practical Spirituality guidebook. I help spiritual
-          creators build simple, ethical paths from content to clients — without losing authenticity.
-          Nearly a decade in digital marketing.
-        </p>
-        <p className="mt-4 text-base text-white/70 leading-relaxed max-w-2xl">
-          I deeply believe that together we can help raise the collective consciousness and bring more
-          spiritual qualities into the world.
-        </p>
-        <p className="mt-6 text-sm text-white/60 italic">
-          No pressure, just clarity. This is not a sales call — if there&apos;s a fit, we talk next steps.
-          If not, you leave with a plan you can implement starting today.
-        </p>
+        <div className="grid md:grid-cols-[280px_1fr] gap-10 items-start">
+          <div className="relative">
+            <div className="rounded-xl overflow-hidden border border-amber-200/20 shadow-[0_15px_40px_-15px_rgba(252,211,77,0.2)]">
+              <img
+                src={IMG.kamil}
+                alt="Kamil Jan — practical spiritual teacher and spiritual business mentor"
+                className="w-full h-auto block"
+                loading="lazy"
+              />
+            </div>
+            <p className="mt-3 text-center text-sm italic text-white/60">Kamil Jan</p>
+          </div>
+
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
+              Kamil Jan
+            </h2>
+            <p className="text-sm uppercase tracking-[0.2em] text-amber-300/70 mb-4">
+              Practical Spiritual Teacher &amp; Spiritual Business Mentor
+            </p>
+            <p className="text-base md:text-lg text-white/80 leading-relaxed">
+              Creator of MySpiritWay and author of the Practical Spirituality guidebook. I help spiritual
+              creators build simple, ethical paths from content to clients — without losing authenticity.
+              Nearly a decade in digital marketing.
+            </p>
+            <p className="mt-4 text-base text-white/70 leading-relaxed">
+              I deeply believe that together we can help raise the collective consciousness and bring more
+              spiritual qualities into the world.
+            </p>
+            <p className="mt-6 text-sm text-white/60 italic">
+              No pressure, just clarity. This is not a sales call — if there&apos;s a fit, we talk next steps.
+              If not, you leave with a plan you can implement starting today.
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* ── How to Book ────────────────────────────────────────────────── */}
+      {/* ── How to Book (four steps with real visuals) ─────────────────── */}
       <section className="py-16 border-t border-white/5">
         <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-3">How to book</p>
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-5">
           Two audits per day. Mon–Fri.
         </h2>
-        <p className="text-base text-white/75 max-w-2xl mb-8">
+        <p className="text-base text-white/75 max-w-2xl mb-10">
           To stay present, do quality work, and maintain a healthy life–work balance, only two calls are
           available per day. Over time, these may no longer be free.
         </p>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+          {BOOK_STEPS.map((s, i) => (
+            <div key={i} className="rounded-lg border border-white/10 bg-white/[0.02] overflow-hidden">
+              <div className="aspect-[4/3] overflow-hidden bg-white/5">
+                <img src={s.img} alt={s.title} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="p-4">
+                <div className="text-xs uppercase tracking-wider text-amber-300/80 mb-1">Step {i + 1}</div>
+                <div className="text-base font-semibold text-white">{s.title}</div>
+                <p className="mt-1.5 text-sm text-white/65 leading-relaxed">{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
         <div className="rounded-lg border border-cyan-400/30 bg-cyan-400/5 p-6 text-center">
           <p className="text-sm text-white/80 mb-4">Choose the date and time that suits you:</p>
           <a
