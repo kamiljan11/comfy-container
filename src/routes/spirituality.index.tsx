@@ -22,30 +22,31 @@ export const Route = createFileRoute('/spirituality/')({
 /**
  * 1:1 visual clone of myspiritway.org/ — linktree-style hub.
  *
- * Layout notes:
- * - Mountain-toned CSS gradient backdrop (no photo): deep teal sky → mid teal →
- *   warm slate base, with radial highlights to mimic atmosphere/peak lighting.
- * - Centered pastel card (max-w-2xl) with rounded-3xl corners.
- * - Round profile portrait sits centred at the top above the "Kamil Jan" heading.
- * - Every two-column card uses `items-stretch` + `min-h-[140px]` so the dark-teal
- *   right half matches the image height and its title is vertically centred via
- *   `flex items-center justify-center`.
+ * Background and card images are the actual CloudFront URLs pulled from the
+ * computed CSS of the live myspiritway.org page (verified 2026-05-22):
+ *   - Mountain landscape: 6914ce520822c_UntitledMediumBannerUSLandscape2.png
+ *   - Pastel card gradient overlay: 69124335ecedc_Untitleddesign9.png
  *
- * All CloudFront URLs reference Kamil's permanent uploads at
- *   https://d1yei2z3i6k35z.cloudfront.net/6584575/
+ * Layout:
+ *   - Mountain photo fixed full-bleed behind everything
+ *   - Centered pastel card (max-w-2xl) with rounded-3xl corners
+ *   - Profile section sits naturally lower thanks to header padding + empty space
+ *   - All marketing tiles use items-stretch + flex justify-center for proper
+ *     vertical centring of the title block in the dark-teal right half
  */
 
-// ── CloudFront asset URLs (Kamil Jan's permanent uploads) ──
 const CDN = 'https://d1yei2z3i6k35z.cloudfront.net/6584575'
 const IMG = {
-  // Round profile portrait — centred at top of the card
+  // Full-bleed mountain landscape behind the card
+  mountainBg: `${CDN}/6914ce520822c_UntitledMediumBannerUSLandscape2.png`,
+  // Pastel card gradient overlay (cream → mint → lavender → cyan)
+  cardGradient: `${CDN}/69124335ecedc_Untitleddesign9.png`,
+  // Round profile portrait — centred at top of the card (Kamil Jan brand mark)
   profile: `${CDN}/69123fae6467a_Untitleddesign9.png`,
   // Spiritual Marketing card thumbnails (ChatGPT-generated, Nov 17 2025)
   clarityCall: `${CDN}/691b494212723_ChatGPTImageNov17202504_10_59PM.png`,
   marketingServices: `${CDN}/691b4a9020aa6_ChatGPTImageNov17202504_17_10PM.png`,
   youtubePlaylist: `${CDN}/691b4c7d405d3_ChatGPTImageNov17202504_24_44PM.png`,
-  // Articles & Free Resources thumbnail
-  articles: `${CDN}/691b4b5767076_ChatGPTImageNov17202504_20_31PM.png`,
   // The Simplified Practical Spirituality book cover
   spsBookCover: `${CDN}/69125643ec811_6857e82d4ad8b_Bez%20tytu%C5%82u.png`,
 }
@@ -53,33 +54,39 @@ const IMG = {
 function SpiritualityHub() {
   return (
     <SpiritualityLayout fullBleed>
-      {/* ── Mountain-toned gradient backdrop (fixed, full-bleed) ────────────────────── */}
+      {/* ── Mountain landscape backdrop (fixed, full-bleed, actual photo) ─────────── */}
       <div
         aria-hidden
-        className="fixed inset-0 -z-10"
+        className="fixed inset-0 -z-10 bg-[#0e2a35]"
         style={{
-          backgroundImage: [
-            // Soft "sun" highlight near the upper-right
-            'radial-gradient(ellipse at 75% 18%, rgba(255, 220, 170, 0.18), transparent 55%)',
-            // Cooler atmosphere wash near the lower-left
-            'radial-gradient(ellipse at 20% 80%, rgba(74, 122, 133, 0.35), transparent 60%)',
-            // Base sky-to-foothills vertical gradient
-            'linear-gradient(180deg, #0e2a35 0%, #1a3a44 35%, #2d5360 65%, #4a7a85 100%)',
-          ].join(', '),
+          backgroundImage: `url('${IMG.mountainBg}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       />
+      {/* Subtle darkening overlay so the card pops */}
+      <div aria-hidden className="fixed inset-0 -z-10 bg-black/10" />
 
       <div className="flex justify-center px-4 py-10 md:py-16">
-        <article className="w-full max-w-2xl rounded-3xl bg-gradient-to-b from-[#f6f4ea] via-[#e8f0e4] to-[#dfeef0] text-slate-800 shadow-2xl shadow-black/40 overflow-hidden ring-1 ring-white/30">
+        <article
+          className="relative w-full max-w-2xl rounded-3xl text-slate-800 shadow-2xl shadow-black/40 overflow-hidden ring-1 ring-white/40"
+          style={{
+            backgroundImage: `linear-gradient(180deg, rgba(246,244,234,0.92) 0%, rgba(232,240,228,0.92) 35%, rgba(223,238,240,0.92) 70%, rgba(220,225,238,0.92) 100%), url('${IMG.cardGradient}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundBlendMode: 'overlay',
+          }}
+        >
           {/* ── Profile header (centred portrait + name + handle + YouTube icon) ───── */}
-          <header className="px-8 pt-10 pb-6 text-center bg-gradient-to-b from-white/40 to-transparent">
+          <header className="px-8 pt-12 pb-6 text-center">
             <img
               src={IMG.profile}
               alt="Kamil Jan"
-              className="mx-auto h-24 w-24 rounded-full object-cover ring-4 ring-white/70 shadow-md select-none"
+              className="mx-auto h-24 w-24 rounded-full object-cover ring-4 ring-white/80 shadow-lg select-none"
               loading="eager"
             />
-            <h2 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Kamil Jan</h2>
+            <h2 className="mt-5 text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Kamil Jan</h2>
             <p className="mt-1 text-sm text-slate-600">@myspiritway</p>
 
             <a
@@ -128,7 +135,7 @@ function SpiritualityHub() {
                 to="/spirituality/clarity"
                 className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors min-h-[140px]"
               >
-                <div className="w-1/3 bg-[#0a2a30] overflow-hidden">
+                <div className="w-1/3 bg-[#0a2a30] overflow-hidden shrink-0">
                   <img
                     src={IMG.clarityCall}
                     alt="Clarity Call"
@@ -138,8 +145,8 @@ function SpiritualityHub() {
                 </div>
                 <div className="flex-1 flex items-center justify-center px-6 py-6 text-center">
                   <div>
-                    <div className="text-xs uppercase tracking-widest text-amber-200/90 font-semibold">FREE</div>
-                    <div className="mt-1 text-xl font-bold">Clarity Call</div>
+                    <div className="text-xs uppercase tracking-[0.18em] font-bold" style={{ color: '#fbbf24' }}>FREE</div>
+                    <div className="mt-1 text-xl font-bold text-white">Clarity Call</div>
                   </div>
                 </div>
               </Link>
@@ -149,7 +156,7 @@ function SpiritualityHub() {
                 to="/spirituality/spiritual-marketing"
                 className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors min-h-[140px]"
               >
-                <div className="w-1/3 bg-[#0a2a30] overflow-hidden">
+                <div className="w-1/3 bg-[#0a2a30] overflow-hidden shrink-0">
                   <img
                     src={IMG.marketingServices}
                     alt="Marketing Services"
@@ -158,7 +165,7 @@ function SpiritualityHub() {
                   />
                 </div>
                 <div className="flex-1 flex items-center justify-center px-6 py-6 text-center">
-                  <div className="text-xl font-bold">Marketing Services</div>
+                  <div className="text-xl font-bold text-white">Marketing Services</div>
                 </div>
               </Link>
 
@@ -169,7 +176,7 @@ function SpiritualityHub() {
                 rel="noreferrer"
                 className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors min-h-[140px]"
               >
-                <div className="w-1/3 bg-[#0a2a30] overflow-hidden">
+                <div className="w-1/3 bg-[#0a2a30] overflow-hidden shrink-0">
                   <img
                     src={IMG.youtubePlaylist}
                     alt="YouTube Playlist"
@@ -178,7 +185,7 @@ function SpiritualityHub() {
                   />
                 </div>
                 <div className="flex-1 flex items-center justify-center px-6 py-6 text-center">
-                  <div className="text-xl font-bold">YouTube Playlist</div>
+                  <div className="text-xl font-bold text-white">YouTube Playlist</div>
                 </div>
               </a>
             </div>
@@ -196,12 +203,11 @@ function SpiritualityHub() {
           <section className="px-6 md:px-8 pt-8 pb-2">
             <h3 className="text-xl font-bold text-slate-900 mb-4">Practical Spirituality</h3>
 
-            {/* The Simplified Practical Spirituality Guide Book — actual cover */}
             <Link
               to="/spirituality/sps"
               className="group flex items-stretch rounded-2xl bg-[#0f3a44] text-white shadow-lg overflow-hidden hover:bg-[#13434f] transition-colors min-h-[160px]"
             >
-              <div className="w-1/3 bg-[#0a1e30] overflow-hidden">
+              <div className="w-1/3 bg-[#0a1e30] overflow-hidden shrink-0">
                 <img
                   src={IMG.spsBookCover}
                   alt="The Simplified Practical Spirituality Guide Book cover — dark blue with galaxy, by Kamil Jan"
@@ -210,13 +216,12 @@ function SpiritualityHub() {
                 />
               </div>
               <div className="flex-1 flex items-center justify-center px-6 py-6 text-center">
-                <div className="text-lg md:text-xl font-bold leading-snug">
+                <div className="text-lg md:text-xl font-bold leading-snug text-white">
                   The Simplified<br />Practical Spirituality<br />Guide Book
                 </div>
               </div>
             </Link>
 
-            {/* Other practice links — 2×2 pastel grid */}
             <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
               <Link to="/spirituality/sps2" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">Short Version →</Link>
               <Link to="/spirituality/dmt" className="rounded-xl bg-white/55 hover:bg-white/75 px-4 py-3 text-center font-medium text-slate-800 transition-colors">DMT Practice →</Link>
