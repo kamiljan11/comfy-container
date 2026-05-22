@@ -22,6 +22,13 @@ export const Route = createFileRoute('/spirituality/support')({
 
 const SHARE_URL = 'https://kamiljan.com/spirituality/support'
 
+const BRAND_MARK_URL = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65f2f1ab9ea9a_Untitleddesign.png'
+const BTC_QR_URL = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/67d98f462827f_484172646_1141710261026737_3886101644250262580_n.jpg'
+const ETH_QR_URL = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/67e9c468cb494_486068020_1685111692420873_2519918393272156060_n.jpg'
+const WIRE_ICON_URL = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/65b3f0ce5db2f_Untitleddesign5.png'
+const BMC_QR_URL = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/67e9c09f82966_bmc_qr.png'
+const KOFI_QR_URL = 'https://d1yei2z3i6k35z.cloudfront.net/6584575/67e9c500b4308_qrcode.png'
+
 const WAYS = [
   {
     icon: '💛',
@@ -69,8 +76,8 @@ const CARD_LINKS = [
 ] as const
 
 const MONTHLY_LINKS = [
-  { name: 'Buy Me a Coffee', href: 'https://buymeacoffee.com/myspiritway' },
-  { name: 'Ko-Fi', href: 'https://ko-fi.com/myspiritway' },
+  { name: 'Buy Me a Coffee', href: 'https://buymeacoffee.com/myspiritway', qr: BMC_QR_URL },
+  { name: 'Ko-Fi', href: 'https://ko-fi.com/myspiritway', qr: KOFI_QR_URL },
 ] as const
 
 const BTC_ADDRESS = 'bc1qmz0ydhuvlax9s8n6zgvxw5cvs5fucl0tt0jc23'
@@ -103,6 +110,12 @@ function SupportPage() {
     <SpiritualityLayout>
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section className="relative -mx-6 px-6 pt-2 pb-16 md:pb-20">
+        <img
+          src={BRAND_MARK_URL}
+          alt="MySpiritWay"
+          className="h-16 md:h-20 w-auto mb-6 opacity-90"
+          loading="eager"
+        />
         <p className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-4">
           Fair Exchange Model
         </p>
@@ -218,21 +231,33 @@ function SupportPage() {
             </div>
           </div>
 
-          {/* Monthly */}
+          {/* Monthly Support Options */}
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
             <div className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-2">Monthly recurring</div>
-            <p className="text-sm text-white/65 mb-5">For those who&apos;d like to give a little, regularly — stability matters.</p>
-            <div className="flex flex-wrap gap-3">
+            <p className="text-sm text-white/65 mb-5">For those who&apos;d like to give a little, regularly — stability matters. Scan the QR with your phone or tap the link.</p>
+            <div className="grid gap-6 md:grid-cols-2">
               {MONTHLY_LINKS.map((l) => (
-                <a
+                <div
                   key={l.name}
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-md border border-white/20 bg-white/[0.05] px-5 py-2.5 text-sm text-white hover:bg-white/10 transition-all"
+                  className="flex flex-col items-center gap-4 rounded-lg border border-white/10 bg-white/[0.02] p-5"
                 >
-                  {l.name} →
-                </a>
+                  <div className="rounded-md bg-white p-2">
+                    <img
+                      src={l.qr}
+                      alt={`${l.name} QR code`}
+                      className="h-40 w-40 object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full text-center rounded-md border border-white/20 bg-white/[0.05] px-5 py-2.5 text-sm text-white hover:bg-white/10 transition-all"
+                  >
+                    {l.name} →
+                  </a>
+                </div>
               ))}
             </div>
           </div>
@@ -240,46 +265,77 @@ function SupportPage() {
           {/* Crypto */}
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
             <div className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-2">Crypto</div>
-            <p className="text-sm text-white/65 mb-5">Send to either address below — copy and paste from your wallet.</p>
+            <p className="text-sm text-white/65 mb-5">Scan the QR with your wallet, or copy and paste the address.</p>
 
-            <div className="space-y-4">
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-xs uppercase tracking-wider text-white/60">BTC</p>
-                  <button
-                    type="button"
-                    onClick={() => copy('btc', BTC_ADDRESS)}
-                    className="rounded-md border border-white/20 bg-white/[0.05] px-3 py-1 text-[11px] font-medium text-white hover:bg-white/10 transition-all"
-                  >
-                    {copied === 'btc' ? 'Copied' : 'Copy'}
-                  </button>
+            <div className="space-y-6">
+              {/* BTC */}
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                <div className="rounded-md bg-white p-2 shrink-0">
+                  <img
+                    src={BTC_QR_URL}
+                    alt="BTC payment QR code"
+                    className="h-40 w-40 md:h-48 md:w-48 object-contain"
+                    loading="lazy"
+                  />
                 </div>
-                <code className="block text-xs font-mono text-white/85 bg-black/40 p-3 rounded-md break-all border border-white/5">
-                  {BTC_ADDRESS}
-                </code>
+                <div className="w-full">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs uppercase tracking-wider text-white/60">BTC</p>
+                    <button
+                      type="button"
+                      onClick={() => copy('btc', BTC_ADDRESS)}
+                      className="rounded-md border border-white/20 bg-white/[0.05] px-3 py-1 text-[11px] font-medium text-white hover:bg-white/10 transition-all"
+                    >
+                      {copied === 'btc' ? 'Copied' : 'Copy'}
+                    </button>
+                  </div>
+                  <code className="block text-xs font-mono text-white/85 bg-black/40 p-3 rounded-md break-all border border-white/5">
+                    {BTC_ADDRESS}
+                  </code>
+                </div>
               </div>
 
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-xs uppercase tracking-wider text-white/60">ETH <span className="text-white/40 normal-case">· min 0.1 ETH</span></p>
-                  <button
-                    type="button"
-                    onClick={() => copy('eth', ETH_ADDRESS)}
-                    className="rounded-md border border-white/20 bg-white/[0.05] px-3 py-1 text-[11px] font-medium text-white hover:bg-white/10 transition-all"
-                  >
-                    {copied === 'eth' ? 'Copied' : 'Copy'}
-                  </button>
+              {/* ETH */}
+              <div className="flex flex-col md:flex-row items-center gap-6">
+                <div className="rounded-md bg-white p-2 shrink-0">
+                  <img
+                    src={ETH_QR_URL}
+                    alt="ETH payment QR code"
+                    className="h-40 w-40 md:h-48 md:w-48 object-contain"
+                    loading="lazy"
+                  />
                 </div>
-                <code className="block text-xs font-mono text-white/85 bg-black/40 p-3 rounded-md break-all border border-white/5">
-                  {ETH_ADDRESS}
-                </code>
+                <div className="w-full">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs uppercase tracking-wider text-white/60">ETH <span className="text-white/40 normal-case">· min 0.1 ETH</span></p>
+                    <button
+                      type="button"
+                      onClick={() => copy('eth', ETH_ADDRESS)}
+                      className="rounded-md border border-white/20 bg-white/[0.05] px-3 py-1 text-[11px] font-medium text-white hover:bg-white/10 transition-all"
+                    >
+                      {copied === 'eth' ? 'Copied' : 'Copy'}
+                    </button>
+                  </div>
+                  <code className="block text-xs font-mono text-white/85 bg-black/40 p-3 rounded-md break-all border border-white/5">
+                    {ETH_ADDRESS}
+                  </code>
+                </div>
               </div>
             </div>
           </div>
 
           {/* SWIFT */}
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-6 md:p-7">
-            <div className="text-xs uppercase tracking-[0.25em] text-amber-300/80 mb-2">SWIFT wire</div>
+            <div className="flex items-center gap-3 mb-2">
+              <img
+                src={WIRE_ICON_URL}
+                alt=""
+                aria-hidden="true"
+                className="h-9 w-9 object-contain opacity-90"
+                loading="lazy"
+              />
+              <div className="text-xs uppercase tracking-[0.25em] text-amber-300/80">SWIFT wire</div>
+            </div>
             <p className="text-sm text-white/65 mb-5">For bank transfers — multi-currency supported.</p>
             <dl className="grid gap-3 sm:grid-cols-[160px_1fr]">
               {SWIFT_LINES.map((row) => {
