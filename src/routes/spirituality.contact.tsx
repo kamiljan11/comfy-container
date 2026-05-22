@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import SpiritualityLayout from '../components/SpiritualityLayout'
-import { submitContactForm } from '../server/contact'
+import { submitContactForm } from '../lib/contact.functions'
 
 export const Route = createFileRoute('/spirituality/contact')({ component: ContactPage })
 

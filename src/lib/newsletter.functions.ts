@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
-import { sendEmail, startWelcomeSequence } from './email'
-import { saveSubscriber } from './subscribers'
+import { sendEmail, startWelcomeSequence } from '../server/email.server'
+import { saveSubscriber } from '../server/subscribers.server'
 
 export interface SubscribePayload {
   email: string

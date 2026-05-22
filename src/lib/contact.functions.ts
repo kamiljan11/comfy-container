@@ -1,5 +1,5 @@
 import { createServerFn } from '@tanstack/react-start'
-import { sendEmail } from './email'
+import { sendEmail } from '../server/email.server'
 
 /**
  * Contact form server function — receives form data and routes it through
