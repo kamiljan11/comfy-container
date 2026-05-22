@@ -2,7 +2,23 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 
-export const Route = createFileRoute('/spirituality/clarity')({ component: ClarityPage })
+export const Route = createFileRoute('/spirituality/clarity')({
+  head: () => ({
+    meta: [
+      { title: 'Book a Clarity Call — Spiritual Business Audit' },
+      { name: 'description', content: "Free 45-minute Clarity Call. Find what's not aligned in your spiritual business. Map your next 3 steps." },
+      { property: 'og:title', content: 'Book a Clarity Call — Spiritual Business Audit' },
+      { property: 'og:description', content: "Free 45-minute Clarity Call. Find what's not aligned in your spiritual business. Map your next 3 steps." },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/clarity' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/clarity' },
+    ],
+  }),
+  component: ClarityPage,
+})
 
 // TODO replace with the live Google Calendar booking URL
 const BOOKING_URL = 'https://calendar.google.com/calendar/appointments/AcZssZ3qXq8Wbu2cqI82BYwSNlYAhf4XBHJ4lFa_TBg=?gv=true'
