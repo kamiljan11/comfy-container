@@ -2,7 +2,23 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import SpiritualityLayout from '../components/SpiritualityLayout'
 
-export const Route = createFileRoute('/spirituality/spiritual-marketing')({ component: SpiritualMarketingPage })
+export const Route = createFileRoute('/spirituality/spiritual-marketing')({
+  head: () => ({
+    meta: [
+      { title: 'Spiritual Marketing for Spiritual Businesses' },
+      { name: 'description', content: 'Turn your clarity into results. Build, grow, or refine your spiritual business with integrity.' },
+      { property: 'og:title', content: 'Spiritual Marketing for Spiritual Businesses' },
+      { property: 'og:description', content: 'Turn your clarity into results. Build, grow, or refine your spiritual business with integrity.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/spiritual-marketing' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/spiritual-marketing' },
+    ],
+  }),
+  component: SpiritualMarketingPage,
+})
 
 const TESTIMONIALS = [
   {
