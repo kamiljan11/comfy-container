@@ -9,7 +9,23 @@ import part4 from '../content/spirituality/sps-part-4.md?raw'
 import part5 from '../content/spirituality/sps-part-5.md?raw'
 import part6 from '../content/spirituality/sps-part-6.md?raw'
 
-export const Route = createFileRoute('/spirituality/sps')({ component: SpsPage })
+export const Route = createFileRoute('/spirituality/sps')({
+  head: () => ({
+    meta: [
+      { title: 'Simplified Practical Spirituality — The Complete Book' },
+      { name: 'description', content: 'The complete guidebook. ~90 A4 pages distilling 12 years of practice. Read free online.' },
+      { property: 'og:title', content: 'Simplified Practical Spirituality — The Complete Book' },
+      { property: 'og:description', content: 'The complete guidebook. ~90 A4 pages distilling 12 years of practice. Read free online.' },
+      { property: 'og:url', content: 'https://kamiljan.com/spirituality/sps' },
+      { property: 'og:image', content: 'https://kamiljan.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://kamiljan.com/spirituality/sps' },
+    ],
+  }),
+  component: SpsPage,
+})
 
 const sps = [part1, part2, part3, part4, part5, part6].join('\n\n')
 
