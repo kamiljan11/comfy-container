@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { subscribeToNewsletter } from '../server/newsletter'
+import { subscribeToNewsletter } from '../lib/newsletter.functions'
 
 interface Props {
   source?: string
