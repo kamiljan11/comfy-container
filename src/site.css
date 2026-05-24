@@ -2,7 +2,6 @@
    kamiljan.com — Design System v5
    Syne (headings) + Inter (body)
    Ocean palette: deep navy bg | sea-cyan accents
-   Sections: distinct bg treatments so nothing blends
    ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&display=swap");
@@ -87,7 +86,7 @@ body::before {
   pointer-events: none;
 }
 
-/* ── Custom cursor — SVG arrow pointer ── */
+/* ── Custom cursor ── */
 .cursor-ptr {
   position: fixed;
   top: 0;
@@ -101,12 +100,8 @@ body::before {
 .cursor-ptr.hovering {
   filter: drop-shadow(0 2px 18px rgba(34, 211, 238, 0.85));
 }
-.cursor-ptr path {
-  transition: fill 0.15s;
-}
-.cursor-ptr.hovering path {
-  fill: #a5f3fc;
-}
+.cursor-ptr path { transition: fill 0.15s; }
+.cursor-ptr.hovering path { fill: #a5f3fc; }
 
 /* ── Nav ── */
 .nav {
@@ -117,7 +112,7 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
-  height: 64px;
+  height: 68px;
   background: rgba(6, 16, 26, 0.82);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
@@ -125,13 +120,13 @@ body::before {
 }
 .nav-sig-wrap { display: flex; align-items: center; flex-shrink: 0; }
 .nav-sig {
-  height: 32px;
+  height: 52px;
   width: auto;
-  filter: invert(1) brightness(1.2);
+  filter: invert(1) brightness(1.3);
   opacity: 1;
   transition: opacity 0.25s;
 }
-.nav-sig-wrap:hover .nav-sig { opacity: 0.7; }
+.nav-sig-wrap:hover .nav-sig { opacity: 0.75; }
 .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
 .nav-links a {
   font-size: 12px;
@@ -172,20 +167,15 @@ body::before {
   background: none;
   border: 1px solid var(--surface-2);
   color: var(--text-2);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 5px 11px;
+  font-size: 18px;
+  padding: 4px 8px;
   border-radius: 6px;
-  transition: border-color 0.2s, color 0.2s;
+  transition: border-color 0.2s;
   font-family: var(--font-body);
   flex-shrink: 0;
+  line-height: 1;
 }
-.lang-toggle:hover {
-  border-color: var(--teal);
-  color: var(--teal);
-}
+.lang-toggle:hover { border-color: var(--teal); }
 
 /* ── Layout ── */
 section { position: relative; z-index: 1; }
@@ -209,15 +199,6 @@ section { position: relative; z-index: 1; }
   flex-shrink: 0;
 }
 
-/* ── Section divider line ── */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--teal-dim) 30%, var(--teal) 50%, var(--teal-dim) 70%, transparent 100%);
-  opacity: 0.5;
-  position: relative;
-  z-index: 1;
-}
-
 /* ── Hero ── */
 .hero {
   position: relative;
@@ -226,7 +207,7 @@ section { position: relative; z-index: 1; }
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  padding-top: 64px;
+  padding-top: 68px;
   background: var(--bg-deep);
 }
 .hero-canvas-wrap { position: absolute; inset: 0; z-index: 0; }
@@ -318,12 +299,7 @@ section { position: relative; z-index: 1; }
   to { transform: translateX(-50%); }
 }
 
-/* ───────────────────────────────────────────────────────
-   SECTION BACKGROUNDS
-   Each section has a unique visual treatment
-─────────────────────────────────────────────────────── */
-
-/* ── About: bg-alt + warm teal radial top-right + dot grid ── */
+/* ── About ── */
 .about {
   padding: 120px 0;
   background: var(--bg-alt);
@@ -349,7 +325,7 @@ section { position: relative; z-index: 1; }
   opacity: 0.6;
 }
 
-/* ── Work: bg-deep + subtle diagonal stripe ── */
+/* ── Work ── */
 .work {
   padding: 80px 0 120px;
   background: var(--bg-deep);
@@ -380,7 +356,7 @@ section { position: relative; z-index: 1; }
   pointer-events: none;
 }
 
-/* ── Capabilities: bg-alt + center mesh + top glow bar ── */
+/* ── Capabilities ── */
 .cap {
   padding: 80px 0 120px;
   background: var(--bg-alt);
@@ -405,36 +381,10 @@ section { position: relative; z-index: 1; }
   pointer-events: none;
 }
 
-/* ── Timeline: bg + left teal glow beam ── */
-.timeline {
-  padding: 80px 0 120px;
-  background: var(--bg);
-  position: relative;
-  overflow: hidden;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; left: 0;
-  width: 340px;
-  background: linear-gradient(90deg, rgba(8,145,178,0.07) 0%, transparent 100%);
-  pointer-events: none;
-}
-.timeline::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: -60px;
-  transform: translateY(-50%);
-  width: 320px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at left, rgba(34,211,238,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-/* ── Engage: bg-alt + spotlight from top-center ── */
+/* ── Engage ── */
 .engage {
   padding: 80px 0 120px;
-  background: var(--bg-alt);
+  background: var(--bg);
   position: relative;
   overflow: hidden;
 }
@@ -456,7 +406,7 @@ section { position: relative; z-index: 1; }
   pointer-events: none;
 }
 
-/* ── Contact: bg-deep + large ocean-depth glow ── */
+/* ── Contact ── */
 .contact {
   padding: 80px 0 140px;
   text-align: center;
@@ -484,7 +434,7 @@ section { position: relative; z-index: 1; }
   opacity: 0.5;
 }
 
-/* ── Footer: bg-alt ── */
+/* ── Footer ── */
 .footer {
   background: var(--bg-alt);
   padding: 36px 40px;
@@ -496,9 +446,7 @@ section { position: relative; z-index: 1; }
   z-index: 1;
 }
 
-/* ─────────────────────────────────
-   ABOUT internals
-───────────────────────────────── */
+/* ── About internals ── */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -513,15 +461,36 @@ section { position: relative; z-index: 1; }
   line-height: 0.8; float: left; margin-right: 12px; margin-top: 10px; color: var(--teal-2);
 }
 .about-p strong { color: var(--text); font-weight: 500; }
-.about-meta {
-  display: flex; align-items: center; gap: 24px;
-  margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border);
+
+/* ── About milestones (inline timeline) ── */
+.about-milestones {
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
-.about-meta-item { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-.about-meta-item span {
-  display: block; font-family: var(--font-head); font-weight: 800; font-size: 22px;
-  letter-spacing: -0.03em; color: var(--teal-2); text-transform: none; margin-bottom: 2px;
+.about-ms {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 18px;
+  align-items: baseline;
 }
+.about-ms-year {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+.about-ms-desc {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
 .about-photo-wrap { position: sticky; top: 88px; }
 .about-photo {
   position: relative; border-radius: var(--r-lg); overflow: hidden;
@@ -566,7 +535,6 @@ section { position: relative; z-index: 1; }
 .work-row.visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s var(--ease-expo), transform 0.6s var(--ease-expo), background 0.2s; }
 .work-row:hover { background: var(--surface-2); }
 
-/* Project logos — white silhouette → full colour on hover */
 .work-logo {
   width: 44px; height: 44px; border-radius: 10px; overflow: hidden;
   background: var(--surface-2); border: 1px solid var(--border-2);
@@ -623,27 +591,6 @@ section { position: relative; z-index: 1; }
 .cap-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .cap-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; padding: 5px 12px; background: transparent; border: 1px solid var(--border-2); border-radius: 100px; color: var(--text-2); }
 
-/* ── Timeline internals ── */
-.tl-list {
-  margin-left: 16px; padding-left: 32px;
-  border-left: 1px solid var(--border);
-  display: flex; flex-direction: column;
-  position: relative; z-index: 1;
-}
-.tl-item { position: relative; padding-bottom: 52px; opacity: 0; transform: translateX(-10px); }
-.tl-item:last-child { padding-bottom: 0; }
-.tl-item.visible { opacity: 1; transform: translateX(0); transition: opacity 0.6s var(--ease-expo), transform 0.6s var(--ease-expo); }
-.tl-item::before {
-  content: ''; position: absolute; left: -38px; top: 5px;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--teal);
-  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--teal-dim);
-}
-.tl-year { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; color: var(--teal); margin-bottom: 8px; text-transform: uppercase; }
-.tl-role { font-family: var(--font-head); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; color: var(--text); margin-bottom: 4px; }
-.tl-company { font-size: 13px; font-weight: 500; color: var(--text-2); margin-bottom: 12px; }
-.tl-desc { font-size: 14px; color: var(--text-2); line-height: 1.7; max-width: 560px; }
-
 /* ── Engage internals ── */
 .engage-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
@@ -698,7 +645,7 @@ section { position: relative; z-index: 1; }
 .contact-alts a { color: var(--text-2); font-weight: 500; transition: color 0.2s; }
 .contact-alts a:hover { color: var(--teal-2); }
 
-/* ── Signature (contact + footer + nav) ── */
+/* ── Signature ── */
 .contact-sig { margin-top: 64px; display: flex; justify-content: center; }
 .contact-sig img {
   height: 90px; width: auto;
@@ -715,11 +662,10 @@ section { position: relative; z-index: 1; }
 .footer-links a { font-size: 12px; color: var(--muted); transition: color 0.2s; }
 .footer-links a:hover { color: var(--text-2); }
 
-/* ── Section label (relative z-index fix) ── */
+/* ── Section label z-index ── */
 .about .section-label,
 .work .section-label,
 .cap .section-label,
-.timeline .section-label,
 .engage .section-label,
 .contact .section-label { position: relative; z-index: 1; }
 
@@ -740,12 +686,13 @@ section { position: relative; z-index: 1; }
 @media (max-width: 768px) {
   .nav { padding: 0 20px; height: 60px; }
   .nav-links { display: none; }
-  .nav-sig { height: 26px; }
+  .nav-sig { height: 40px; }
   .hero-content { padding: 0 20px; }
   .container { padding: 0 20px; }
   .hero-stats { gap: 28px; flex-wrap: wrap; padding-bottom: 56px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-photo-wrap { position: static; order: -1; max-width: 280px; }
+  .about-milestones { gap: 12px; }
   .work-row { grid-template-columns: 44px 1fr; gap: 16px; padding: 18px 20px; }
   .work-tags, .work-year { display: none; }
   .work-arrow { display: none; }
@@ -756,15 +703,13 @@ section { position: relative; z-index: 1; }
   .about-p { font-size: 16px; }
   .hero-sub { font-size: 16px; }
   .contact-email { font-size: 16px; }
-  .about-meta { flex-wrap: wrap; gap: 16px; }
   .contact-sig img { height: 70px; }
   .footer-sig { height: 28px; }
   .about::before, .about::after { display: none; }
   .work::before, .work::after { display: none; }
   .cap::after { display: none; }
-  .timeline::before, .timeline::after { display: none; }
   .engage::after { display: none; }
   .contact::before, .contact::after { display: none; }
   .cursor-ptr { display: none; }
-  .lang-toggle { font-size: 9px; padding: 4px 9px; }
+  .lang-toggle { font-size: 16px; padding: 3px 7px; }
 }
