@@ -6,7 +6,6 @@ interface SiteTranslation {
     capabilities: string
     timeline: string
     engage: string
-    spiritual: string
     available: string
     cta: string
   }
@@ -53,7 +52,6 @@ export const T: Record<Lang, SiteTranslation> = {
       capabilities: 'Capabilities',
       timeline: 'Timeline',
       engage: 'Engage',
-      spiritual: 'Spiritual Path',
       available: 'Available',
       cta: "Let's talk",
     },
@@ -97,7 +95,7 @@ export const T: Record<Lang, SiteTranslation> = {
       { outcome: 'First-of-its-kind freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.' },
       { outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.' },
       { outcome: 'Productized web agency for local SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.' },
-      { outcome: 'Educational platform — the Simplified Practical Spirituality guidebook, activation sessions (DMT, IYSS), and community. Now living at kamiljan.com/spirituality.' },
+      { outcome: 'Educational platform — the Simplified Practical Spirituality guidebook, activation sessions, and community.' },
       { outcome: 'Solar audit and sales CRM — job pipeline, role-based access, team notes, and audit photo uploads.' },
     ],
     caps: [
@@ -148,7 +146,6 @@ export const T: Record<Lang, SiteTranslation> = {
       capabilities: 'Kompetencje',
       timeline: 'Historia',
       engage: 'Współpraca',
-      spiritual: 'Duchowa Ŝciężka',
       available: 'Dostępny',
       cta: 'Porozmawiajmy',
     },
@@ -192,7 +189,7 @@ export const T: Record<Lang, SiteTranslation> = {
       { outcome: 'Pierwszy tego rodzaju marketplace do transportu towarów. Porównuj i rezerwuj oferty od zweryfikowanych przewoźników morskich, lotniczych i drogowych.' },
       { outcome: 'Marka handymana uruchomiona w 72h — system brandingowy, reklamy Meta i sprzedaż przez WhatsApp. 300+ zrealizowanych zleceń.' },
       { outcome: 'Produktizowana agencja webowa dla lokalnych MŚP. Strony, reklamy i treści done-for-you — jedna miesięczna cena, bez niespodzilanek.' },
-      { outcome: 'Platforma edukacyjna — poradnik Simplified Practical Spirituality, sesje aktywacji (DMT, IYSS) i społeczność. Mieszka teraz pod kamiljan.com/spirituality.' },
+      { outcome: 'Platforma edukacyjna — poradnik Simplified Practical Spirituality, sesje aktywacji i społeczność.' },
       { outcome: 'CRM do audytów i sprzedaży solarnej — pipeline zleceń, dostęp oparty na rolach, notatki zespołu i przesłanie zdjęć z audytów.' },
     ],
     caps: [
