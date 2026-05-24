@@ -54,8 +54,9 @@ function Cursor() {
 
 /* ── Marquee strip ── */
 const STACK = [
-  'TypeScript', 'Cloudflare Workers', 'Three.js', 'TanStack Router',
-  'RetellAI', 'n8n', 'fal.ai', 'Twilio', 'Supabase', 'Meta Ads', 'OpenAI', 'Playwright'
+  'React', 'TypeScript', 'Lovable', 'Vercel', 'Supabase',
+  'Cloudflare Workers', 'n8n', 'RetellAI', 'Meta Ads', 'Google Ads',
+  'fal.ai', 'OpenAI', 'Twilio', 'Playwright',
 ]
 
 function Marquee() {
@@ -83,7 +84,7 @@ const PROJECT_META = [
   { num: '06', logo: '/logos/ekomoc.png', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
 ]
 
-const CAP_NUMS = ['01', '02', '03']
+const CAP_NUMS = ['01', '02', '03', '04']
 
 const ENGAGE_META = [
   { href: '#contact', featured: true },
