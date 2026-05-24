@@ -180,6 +180,7 @@ function HomePage() {
           </div>
           <div className="hero-stats">
             <div><div className="hero-stat-val">6<span>+</span></div><div className="hero-stat-lbl">{t.stats[0]}</div></div>
+            <div><div className="hero-stat-val">2019</div><div className="hero-stat-lbl">{t.about.meta[0]}</div></div>
             <div><div className="hero-stat-val">5<span>yr</span></div><div className="hero-stat-lbl">{t.stats[2]}</div></div>
           </div>
         </div>
@@ -200,11 +201,6 @@ function HomePage() {
               <p className="about-p">
                 {t.about.p2a}<strong>{t.about.p2b}</strong>{t.about.p2c}
               </p>
-              <div className="about-meta">
-                <div className="about-meta-item"><span>2019</span>{t.about.meta[0]}</div>
-                <div className="about-meta-item"><span>4</span>{t.about.meta[1]}</div>
-                <div className="about-meta-item"><span>6+</span>{t.about.meta[2]}</div>
-              </div>
             </div>
             <div className="about-photo-wrap">
               <div className="about-photo">
