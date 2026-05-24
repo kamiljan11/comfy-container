@@ -173,8 +173,7 @@ function HomePage() {
           </div>
           <div className="hero-stats">
             <div><div className="hero-stat-val">6<span>+</span></div><div className="hero-stat-lbl">{t.stats[0]}</div></div>
-            <div><div className="hero-stat-val">2019</div><div className="hero-stat-lbl">{t.about.meta[0]}</div></div>
-            <div><div className="hero-stat-val">5<span>yr</span></div><div className="hero-stat-lbl">{t.stats[2]}</div></div>
+            <div><div className="hero-stat-val">14<span>yr</span></div><div className="hero-stat-lbl">{t.about.meta[0]}</div></div>
           </div>
         </div>
       </section>
@@ -194,14 +193,6 @@ function HomePage() {
               <p className="about-p">
                 {t.about.p2a}<strong>{t.about.p2b}</strong>{t.about.p2c}
               </p>
-              <div className="about-milestones">
-                {t.about.milestones.map((m, i) => (
-                  <div key={i} className="about-ms">
-                    <span className="about-ms-year">{m.year}</span>
-                    <span className="about-ms-desc">{m.desc}</span>
-                  </div>
-                ))}
-              </div>
             </div>
             <div className="about-photo-wrap">
               <div className="about-photo">
