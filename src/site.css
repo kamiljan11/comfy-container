@@ -157,6 +157,26 @@ body::before {
 }
 .nav-cta:hover { background: var(--teal-2); color: #06101a; transform: translateY(-1px); }
 
+/* ── Language toggle ── */
+.lang-toggle {
+  background: none;
+  border: 1px solid var(--surface-2);
+  color: var(--text-2);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 6px;
+  transition: border-color 0.2s, color 0.2s;
+  font-family: var(--font-body);
+  flex-shrink: 0;
+}
+.lang-toggle:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
 /* ── Layout ── */
 section { position: relative; z-index: 1; }
 .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
@@ -736,4 +756,5 @@ section { position: relative; z-index: 1; }
   .engage::after { display: none; }
   .contact::before, .contact::after { display: none; }
   .cursor-ptr { display: none; }
+  .lang-toggle { font-size: 9px; padding: 4px 9px; }
 }
