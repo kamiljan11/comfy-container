@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Hero3D from '../components/Hero3D'
+import { T, type Lang } from '../i18n'
 
 export const Route = createFileRoute('/')({ component: HomePage })
 
@@ -76,123 +77,50 @@ function Marquee() {
   )
 }
 
-const PROJECTS = [
-  {
-    num: '01',
-    logo: '/logos/masgroup.png',
-    name: 'MAS Group',
-    outcome: 'Multi-vertical B2B group — auto parts, print, logistics, rental — built from zero and running on dedicated department leads.',
-    tags: ['Operations', 'B2B'],
-    year: '2021–now',
-    href: null as string | null,
-  },
-  {
-    num: '02',
-    logo: '/logos/flyt.png',
-    name: 'Flyt',
-    outcome: 'First-of-its-kind freight marketplace. Compare and book quotes from verified transport providers across sea, air, and road.',
-    tags: ['Marketplace', 'SaaS'],
-    year: '2023',
-    href: null as string | null,
-  },
-  {
-    num: '03',
-    logo: '/logos/quickfix.png',
-    name: 'QuickFix',
-    outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.',
-    tags: ['Brand', 'Growth'],
-    year: '2022',
-    href: null as string | null,
-  },
-  {
-    num: '04',
-    logo: '/logos/reykjawwwik.png',
-    name: 'Reykjawwwik',
-    outcome: 'Productized web agency for local SMBs. Done-for-you websites, ads, and content — one monthly price, no surprises.',
-    tags: ['Agency', 'Product'],
-    year: '2023',
-    href: null as string | null,
-  },
-  {
-    num: '05',
-    logo: '/logos/myspiritway.png',
-    name: 'MySpiritWay',
-    outcome: 'Educational platform — the Simplified Practical Spirituality guidebook, activation sessions (DMT, IYSS), and community. Now living at kamiljan.com/spirituality.',
-    tags: ['Education', 'Content'],
-    year: '2024',
-    href: '/spirituality',
-  },
-  {
-    num: '06',
-    logo: '/logos/ekomoc.png',
-    name: 'Ekomoc CRM',
-    outcome: 'Solar audit and sales CRM — job pipeline, role-based access, team notes, and audit photo uploads.',
-    tags: ['SaaS', 'CRM'],
-    year: '2024',
-    href: null as string | null,
-  },
+/* ── Static structural data (merged with translations in render) ── */
+const PROJECT_META = [
+  { num: '01', logo: '/logos/masgroup.png', name: 'MAS Group', tags: ['Operations', 'B2B'], year: '2021–now', href: null as string | null },
+  { num: '02', logo: '/logos/flyt.png', name: 'Flyt', tags: ['Marketplace', 'SaaS'], year: '2023', href: null as string | null },
+  { num: '03', logo: '/logos/quickfix.png', name: 'QuickFix', tags: ['Brand', 'Growth'], year: '2022', href: null as string | null },
+  { num: '04', logo: '/logos/reykjawwwik.png', name: 'Reykjawwwik', tags: ['Agency', 'Product'], year: '2023', href: null as string | null },
+  { num: '05', logo: '/logos/myspiritway.png', name: 'MySpiritWay', tags: ['Education', 'Content'], year: '2024', href: '/spirituality' },
+  { num: '06', logo: '/logos/ekomoc.png', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
 ]
 
-const CAPABILITIES = [
-  {
-    num: '01',
-    title: 'Systems Architecture',
-    desc: 'From blank-page chaos to documented, delegatable operations. I design the SOPs, CRMs, ERPs, and team protocols that let businesses run without the founder in the room.',
-    tags: ['Operations Design', 'Custom ERPs', 'SOPs & Delegation', 'Team Protocols']
-  },
-  {
-    num: '02',
-    title: 'Growth & Distribution',
-    desc: 'Performance media and full-funnel systems. Meta, Google, email sequences, landing pages, and conversion tracking — built to compound and outlast any single campaign.',
-    tags: ['Meta & Google Ads', 'Funnel Architecture', 'Email Sequences', 'Conversion Tracking']
-  },
-  {
-    num: '03',
-    title: 'AI Automation',
-    desc: 'LLM workflows, voice agents, MCP servers, and custom AI tools that run in production — not just demos. I build, deploy, and document everything so your team can maintain it.',
-    tags: ['LLM Workflows', 'Voice Agents', 'MCP Servers', 'Custom AI Tools']
-  },
+const CAP_NUMS = ['01', '02', '03']
+
+const TIMELINE_META = [
+  { year: '2024 – Present', company: 'MAS Group / Independent' },
+  { year: '2023 – Present', company: 'Flyt — Freight Marketplace' },
+  { year: '2022 – Present', company: 'Reykjawwwik Digital Agency' },
+  { year: '2021 – Present', company: 'MAS Group' },
+  { year: '2019 – 2021', company: 'Early-stage Startups' },
 ]
 
-const TIMELINE = [
-  { year: '2024 – Present', role: 'AI Automation Architect', company: 'MAS Group / Independent', desc: 'Building LLM-powered workflows, RetellAI voice agents, and MCP servers. Deployed AI tooling across freight, auto parts, and service businesses.' },
-  { year: '2023 – Present', role: 'Founder & Product Lead', company: 'Flyt — Freight Marketplace', desc: 'Designed and launched a first-of-its-kind freight comparison platform. Led product, operations, and commercial partnerships from zero to live users.' },
-  { year: '2022 – Present', role: 'Founder', company: 'Reykjawwwik Digital Agency', desc: 'Productized web agency for local SMBs. Built the service model, pricing structure, delivery workflow, and client acquisition system from scratch.' },
-  { year: '2021 – Present', role: 'CEO & Operator', company: 'MAS Group', desc: 'Built a multi-vertical B2B group (auto parts, print, freight, rental) from zero. Recruited and managed dedicated department leads across 4 verticals.' },
-  { year: '2019 – 2021', role: 'Growth & Operations', company: 'Early-stage Startups', desc: 'Led growth, ops, and market expansion across early-stage startups. Built playbooks for customer acquisition, team hiring, and scaling operations.' },
-]
-
-const ENGAGE = [
-  {
-    mode: 'Co-Founder',
-    title: 'Build something together',
-    desc: 'Equity-based. I come in at pre-revenue or early traction and work as a full operator — product, ops, growth, and team building. Not a consultant. A co-founder.',
-    detail: 'Pre-revenue or early traction · Equity · Full commitment',
-    href: '#contact',
-    cta: "Let's talk",
-    featured: true,
-  },
-  {
-    mode: 'Advisory / Project',
-    title: 'Defined scope, real output',
-    desc: '30–90 day engagements with a specific deliverable. System builds, growth sprints, AI automation rollouts. I go deep, deliver, and document everything.',
-    detail: '30–90 days · Defined deliverable · Fractional',
-    href: '#contact',
-    cta: 'Start a project',
-    featured: false,
-  },
-  {
-    mode: 'Hire',
-    title: 'Head of Ops / Growth / AI',
-    desc: 'Remote-first. Most effective in companies where someone needs to own the operational and growth layer — or build the AI automation infrastructure from scratch.',
-    detail: 'In-house or remote · Head of Ops / Growth / AI',
-    href: 'mailto:hello@kamiljan.com',
-    cta: 'Get in touch',
-    featured: false,
-  },
+const ENGAGE_META = [
+  { href: '#contact', featured: true },
+  { href: '#contact', featured: false },
+  { href: 'mailto:hello@kamiljan.com', featured: false },
 ]
 
 function HomePage() {
+  const [lang, setLang] = useState<Lang>(() => {
+    if (typeof window === 'undefined') return 'en'
+    const saved = localStorage.getItem('kj-lang') as Lang
+    if (saved === 'en' || saved === 'pl') return saved
+    return navigator.language.startsWith('pl') ? 'pl' : 'en'
+  })
+
+  const toggleLang = () => {
+    setLang(l => {
+      const next: Lang = l === 'en' ? 'pl' : 'en'
+      if (typeof window !== 'undefined') localStorage.setItem('kj-lang', next)
+      return next
+    })
+  }
+
+  const t = T[lang]
+
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -220,15 +148,18 @@ function HomePage() {
           <img src="/signature.png" alt="Kamil Jan" className="nav-sig" />
         </a>
         <ul className="nav-links">
-          <li><a href="#work">Work</a></li>
-          <li><a href="#capabilities">Capabilities</a></li>
-          <li><a href="#timeline">Timeline</a></li>
-          <li><a href="#engage">Engage</a></li>
-          <li><Link to="/spirituality">Spiritual Path</Link></li>
+          <li><a href="#work">{t.nav.work}</a></li>
+          <li><a href="#capabilities">{t.nav.capabilities}</a></li>
+          <li><a href="#timeline">{t.nav.timeline}</a></li>
+          <li><a href="#engage">{t.nav.engage}</a></li>
+          <li><Link to="/spirituality">{t.nav.spiritual}</Link></li>
         </ul>
         <div className="nav-right">
-          <div className="nav-avail"><span className="avail-dot" />Available</div>
-          <a href="#contact" className="nav-cta">Let&apos;s talk</a>
+          <button className="lang-toggle" onClick={toggleLang} aria-label="Switch language">
+            {lang === 'en' ? 'PL' : 'EN'}
+          </button>
+          <div className="nav-avail"><span className="avail-dot" />{t.nav.available}</div>
+          <a href="#contact" className="nav-cta">{t.nav.cta}</a>
         </div>
       </nav>
 
@@ -238,28 +169,24 @@ function HomePage() {
         <div className="hero-fade-top" />
         <div className="hero-fade-bottom" />
         <div className="hero-content">
-          <p className="hero-eyebrow">Entrepreneur &amp; Operator &mdash; Building Remotely</p>
+          <p className="hero-eyebrow">{t.hero.eyebrow}</p>
           <h1 className="hero-h1">
-            Built from zero.<br />
-            Running without<br />
-            <em>me.</em>
+            {t.hero.h1a}<br />
+            {t.hero.h1b} <em>{t.hero.h1em}</em>
           </h1>
-          <p className="hero-sub">
-            Operator, builder, and AI architect. I design the systems, ship the product,
-            and deploy the automation — then hand you everything documented and running.
-          </p>
+          <p className="hero-sub">{t.hero.sub}</p>
           <div className="hero-actions">
             <a href="#engage" className="btn-primary">
-              Work with me
+              {t.hero.cta}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
-            <a href="#work" className="btn-ghost">See my work</a>
+            <a href="#work" className="btn-ghost">{t.hero.ctaGhost}</a>
           </div>
           <div className="hero-stats">
-            <div><div className="hero-stat-val">6<span>+</span></div><div className="hero-stat-lbl">Businesses built</div></div>
-            <div><div className="hero-stat-val">4</div><div className="hero-stat-lbl">Active verticals</div></div>
-            <div><div className="hero-stat-val">5<span>yr</span></div><div className="hero-stat-lbl">Operator track record</div></div>
-            <div><div className="hero-stat-val">300<span>+</span></div><div className="hero-stat-lbl">Ops delivered</div></div>
+            <div><div className="hero-stat-val">6<span>+</span></div><div className="hero-stat-lbl">{t.stats[0]}</div></div>
+            <div><div className="hero-stat-val">4</div><div className="hero-stat-lbl">{t.stats[1]}</div></div>
+            <div><div className="hero-stat-val">5<span>yr</span></div><div className="hero-stat-lbl">{t.stats[2]}</div></div>
+            <div><div className="hero-stat-val">300<span>+</span></div><div className="hero-stat-lbl">{t.stats[3]}</div></div>
           </div>
         </div>
       </section>
@@ -270,30 +197,19 @@ function HomePage() {
       {/* ── About ── */}
       <section className="about" id="about">
         <div className="container">
-          <span className="section-label">About</span>
+          <span className="section-label">{t.about.label}</span>
           <div className="about-grid">
             <div className="about-inner">
               <p className="about-p">
-                I moved to Iceland in 2019 with nothing but a plan and a high tolerance
-                for ambiguity. Since then I&apos;ve built <strong>MAS Group</strong> from
-                zero — a multi-vertical B2B operation spanning auto parts, print, freight,
-                and rental — alongside a freight marketplace, a productized agency, a
-                handyman brand, and several software tools. The common thread:{' '}
-                <strong>systems that run without me</strong>.
+                {t.about.p1a}<strong>{t.about.p1b}</strong>{t.about.p1c}<strong>{t.about.p1d}</strong>{t.about.p1e}
               </p>
               <p className="about-p">
-                My background spans growth marketing, product, operations, and AI
-                automation. I don&apos;t specialize in one lane — I own the whole machine.
-                Whether it&apos;s designing a CRM from scratch, running Meta campaigns, or
-                deploying a voice agent, the discipline is the same:{' '}
-                <strong>document it, delegate it, make it run</strong>. I also carry a
-                quiet spiritual practice that keeps me grounded — it shapes how I lead,
-                though it rarely comes up in a pitch deck.
+                {t.about.p2a}<strong>{t.about.p2b}</strong>{t.about.p2c}
               </p>
               <div className="about-meta">
-                <div className="about-meta-item"><span>2019</span>Started building</div>
-                <div className="about-meta-item"><span>4</span>Active verticals</div>
-                <div className="about-meta-item"><span>6+</span>Businesses built</div>
+                <div className="about-meta-item"><span>2019</span>{t.about.meta[0]}</div>
+                <div className="about-meta-item"><span>4</span>{t.about.meta[1]}</div>
+                <div className="about-meta-item"><span>6+</span>{t.about.meta[2]}</div>
               </div>
             </div>
             <div className="about-photo-wrap">
@@ -308,9 +224,10 @@ function HomePage() {
       {/* ── Work ── */}
       <section className="work" id="work">
         <div className="container">
-          <span className="section-label">Selected Work</span>
+          <span className="section-label">{t.work.label}</span>
           <div className="work-table">
-            {PROJECTS.map((p) => {
+            {PROJECT_META.map((p, i) => {
+              const outcome = t.projects[i]?.outcome ?? ''
               const inner = (
                 <>
                   <div className="work-logo">
@@ -318,10 +235,10 @@ function HomePage() {
                   </div>
                   <div>
                     <div className="work-name">{p.name}</div>
-                    <div className="work-outcome">{p.outcome}</div>
+                    <div className="work-outcome">{outcome}</div>
                   </div>
                   <div className="work-tags">
-                    {p.tags.map((t) => <span key={t} className="work-tag">{t}</span>)}
+                    {p.tags.map((tag) => <span key={tag} className="work-tag">{tag}</span>)}
                   </div>
                   <div className="work-year">{p.year}</div>
                   <svg className="work-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -345,14 +262,14 @@ function HomePage() {
       {/* ── Capabilities ── */}
       <section className="cap" id="capabilities">
         <div className="container">
-          <span className="section-label">Capabilities</span>
+          <span className="section-label">{t.capabilities.label}</span>
           <div className="cap-grid">
-            {CAPABILITIES.map((c) => (
-              <div key={c.num} className="cap-card">
-                <div className="cap-num">{c.num}</div>
+            {t.caps.map((c, i) => (
+              <div key={i} className="cap-card">
+                <div className="cap-num">{CAP_NUMS[i]}</div>
                 <div className="cap-title">{c.title}</div>
                 <div className="cap-desc">{c.desc}</div>
-                <div className="cap-tags">{c.tags.map((t) => <span key={t} className="cap-tag">{t}</span>)}</div>
+                <div className="cap-tags">{c.tags.map((tag) => <span key={tag} className="cap-tag">{tag}</span>)}</div>
               </div>
             ))}
           </div>
@@ -362,16 +279,19 @@ function HomePage() {
       {/* ── Timeline ── */}
       <section className="timeline" id="timeline">
         <div className="container">
-          <span className="section-label">Timeline</span>
+          <span className="section-label">{t.timeline.label}</span>
           <div className="tl-list">
-            {TIMELINE.map((item, i) => (
-              <div key={i} className="tl-item">
-                <div className="tl-year">{item.year}</div>
-                <div className="tl-role">{item.role}</div>
-                <div className="tl-company">{item.company}</div>
-                <div className="tl-desc">{item.desc}</div>
-              </div>
-            ))}
+            {TIMELINE_META.map((meta, i) => {
+              const item = t.timelineItems[i]
+              return (
+                <div key={i} className="tl-item">
+                  <div className="tl-year">{meta.year}</div>
+                  <div className="tl-role">{item?.role}</div>
+                  <div className="tl-company">{meta.company}</div>
+                  <div className="tl-desc">{item?.desc}</div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -379,22 +299,25 @@ function HomePage() {
       {/* ── Engage ── */}
       <section className="engage" id="engage">
         <div className="container">
-          <span className="section-label">Work With Me</span>
+          <span className="section-label">{t.engage.label}</span>
           <div className="engage-grid">
-            {ENGAGE.map((e, i) => (
-              <div key={i} className={`engage-card${e.featured ? ' featured' : ''}`}>
-                <div className="engage-mode">{e.mode}</div>
-                <div className="engage-title">{e.title}</div>
-                <div className="engage-desc">{e.desc}</div>
-                <div className="engage-detail">{e.detail}</div>
-                <a href={e.href} className="engage-cta">
-                  {e.cta}
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-              </div>
-            ))}
+            {ENGAGE_META.map((meta, i) => {
+              const e = t.engageModes[i]
+              return (
+                <div key={i} className={`engage-card${meta.featured ? ' featured' : ''}`}>
+                  <div className="engage-mode">{e?.mode}</div>
+                  <div className="engage-title">{e?.title}</div>
+                  <div className="engage-desc">{e?.desc}</div>
+                  <div className="engage-detail">{e?.detail}</div>
+                  <a href={meta.href} className="engage-cta">
+                    {e?.cta}
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -403,11 +326,8 @@ function HomePage() {
       <section className="contact" id="contact">
         <div className="container">
           <div className="contact-inner">
-            <h2 className="contact-h2">Ready to build something serious?</h2>
-            <p className="contact-sub">
-              Whether you have a specific project in mind or just want to explore
-              what&apos;s possible — I respond to every relevant inquiry personally.
-            </p>
+            <h2 className="contact-h2">{t.contact.h2}</h2>
+            <p className="contact-sub">{t.contact.sub}</p>
             <a href="mailto:hello@kamiljan.com" className="contact-email">
               hello@kamiljan.com
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -415,7 +335,7 @@ function HomePage() {
               </svg>
             </a>
             <div className="contact-alts">
-              or find me on
+              {t.contact.findMe}
               <a href="https://linkedin.com/in/myspiritway" target="_blank" rel="noreferrer">LinkedIn</a>
               &middot;
               <a href="https://youtube.com/@kamiljan11" target="_blank" rel="noreferrer">YouTube</a>
