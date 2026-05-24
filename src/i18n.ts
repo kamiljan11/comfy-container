@@ -31,10 +31,10 @@ interface SiteTranslation {
     p2b: string
     p2c: string
     meta: string[]
+    milestones: Array<{ year: string; desc: string }>
   }
   work: { label: string }
   capabilities: { label: string }
-  timeline: { label: string }
   engage: { label: string }
   contact: {
     h2: string
@@ -43,7 +43,6 @@ interface SiteTranslation {
   }
   projects: Array<{ outcome: string }>
   caps: Array<{ title: string; desc: string; tags: string[] }>
-  timelineItems: Array<{ role: string; desc: string }>
   engageModes: Array<{ mode: string; title: string; desc: string; detail: string; cta: string }>
 }
 
@@ -79,10 +78,14 @@ export const T: Record<Lang, SiteTranslation> = {
       p2b: 'Sleipnir Glacier Tours',
       p2c: ' from scratch — that\'s when it clicked. I ran a spiritual foundation, wrote three books on consciousness, and kept building: MAS Group, five more ventures, an independent sales force across six products. All of it leads to the same thing now: helping founders build companies that run without them.',
       meta: ['Started building', 'Active verticals', 'Businesses built'],
+      milestones: [
+        { year: '2019', desc: 'Moved to Iceland. Rebuilt from zero — retail, social media, co-launched Sleipnir Glacier Tours.' },
+        { year: '2021', desc: 'CEO & Operator. Built MAS Group from scratch across auto parts, print, freight, and rental.' },
+        { year: '2024', desc: 'AI Architect. Independent — deploying LLM workflows and voice agents across MAS and client ventures.' },
+      ],
     },
     work: { label: 'Selected Work' },
     capabilities: { label: 'Capabilities' },
-    timeline: { label: 'Timeline' },
     engage: { label: 'Work With Me' },
     contact: {
       h2: 'Ready to build something serious?',
@@ -113,13 +116,6 @@ export const T: Record<Lang, SiteTranslation> = {
         desc: 'LLM workflows, voice agents, MCP servers, and custom AI tools that run in production — not just demos. I build, deploy, and document everything so your team can maintain it.',
         tags: ['LLM Workflows', 'Voice Agents', 'MCP Servers', 'Custom AI Tools'],
       },
-    ],
-    timelineItems: [
-      { role: 'AI Automation Architect', desc: 'Building LLM-powered workflows, RetellAI voice agents, and MCP servers. Deployed AI tooling across freight, auto parts, and service businesses.' },
-      { role: 'Founder & Product Lead', desc: 'Designed and launched a first-of-its-kind freight comparison platform. Led product, operations, and commercial partnerships from zero to live users.' },
-      { role: 'Founder', desc: 'Productized web agency for local SMBs. Built the service model, pricing structure, delivery workflow, and client acquisition system from scratch.' },
-      { role: 'CEO & Operator', desc: 'Built a multi-vertical B2B group (auto parts, print, freight, rental) from zero. Recruited and managed dedicated department leads across 4 verticals.' },
-      { role: 'Growth & Operations', desc: 'Led growth, ops, and market expansion across early-stage startups. Built playbooks for customer acquisition, team hiring, and scaling operations.' },
     ],
     engageModes: [
       {
@@ -175,12 +171,16 @@ export const T: Record<Lang, SiteTranslation> = {
       p1e: '. Potem przeniosłem się na Islandię bez niczego i zacząłem od nowa.',
       p2a: 'Pracowałem na zmiany w handlu, poznawałem rynek i w końcu współtworzyłem ',
       p2b: 'Sleipnir Glacier Tours',
-      p2c: ' od podstaw — wtedy wszystko zaskoczyło. Prowadziłem fundację duchową, napisałem trzy książki o świadomości i budowałem dalej: MAS Group, pięć kolejnych przedsięwzięć, niezależny zespół sprzedaży obsługujący sześć produktów. To wszystko prowadzi teraz do jednego: pomagam założycielom budować firmy, które działają bez nich.',
+      p2c: ' od podstaw — wtedy wszystko zaskoczyło. Prowadziłem fundację duchową, napisałem trzy książki o świadomości i budowałem dalej: MAS Group, pięć kolejnych przedsięwzięć, niezależny zespół sprzedaży. To wszystko prowadzi teraz do jednego: pomagam założycielom budować firmy, które działają bez nich.',
       meta: ['Rok początku', 'Aktywnych pionów', 'Zbudowanych biznesów'],
+      milestones: [
+        { year: '2019', desc: 'Przeprowadzka na Islandię. Od zera — handel, media społecznościowe, współtworzenie Sleipnir Glacier Tours.' },
+        { year: '2021', desc: 'CEO i Operator. Zbudowałem MAS Group od zera — części, druk, logistyka, wynajem.' },
+        { year: '2024', desc: 'Architekt AI. Niezależnie — wdrażam workflowy LLM i agenty głosowe w MAS i projektach klientów.' },
+      ],
     },
     work: { label: 'Wybrane Projekty' },
     capabilities: { label: 'Kompetencje' },
-    timeline: { label: 'Historia' },
     engage: { label: 'Współpraca' },
     contact: {
       h2: 'Gotowy zbudować coś poważnego?',
@@ -211,13 +211,6 @@ export const T: Record<Lang, SiteTranslation> = {
         desc: 'Workflowy LLM, agenty głosowe, serwery MCP i niestandardowe narzędzia AI działające na produkcji — nie tylko demo. Buduję, wdrażam i dokumentuję wszystko, by Twój zespół mógł to utrzymać.',
         tags: ['Workflowy LLM', 'Agenty Głosowe', 'Serwery MCP', 'Narzędzia AI'],
       },
-    ],
-    timelineItems: [
-      { role: 'Architekt Automatyzacji AI', desc: 'Buduję workflowy zasilane LLM, agenty głosowe RetellAI i serwery MCP. Wdrożyłem narzędzia AI w branżach: logistyka, części samochodowe i usługi.' },
-      { role: 'Założyciel i Lider Produktu', desc: 'Zaprojektowałem i uruchomiłem pierwszy w swoim rodzaju portal do porównywania cen transportu. Prowadziłem produkt, operacje i partnerstwa komercyjne od zera do żywych użytkowników.' },
-      { role: 'Założyciel', desc: 'Produktizowana agencja webowa dla lokalnych MŚP. Zbudowałem model usługi, strukturę cenową, workflow dostawy i system pozyskiwania klientów od zera.' },
-      { role: 'CEO i Operator', desc: 'Zbudowałem wielobranżową grupę B2B (części samochodowe, druk, logistyka, wynajem) od zera. Rekrutowałem i zarządzałem dedykowanymi liderami działów w 4 pionach.' },
-      { role: 'Wzrost i Operacje', desc: 'Prowadziłem wzrost, operacje i ekspansję rynkową w early-stage startupach. Tworzyłem playbooki do pozyskiwania klientów, rekrutacji i skalowania.' },
     ],
     engageModes: [
       {
