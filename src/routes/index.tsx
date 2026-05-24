@@ -45,11 +45,7 @@ function Cursor() {
       <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M1.5 1.5L1.5 19L6 14.5L9 22L11.5 21L8.5 13.5H15L1.5 1.5Z"
-          fill="#0891b2"
-          stroke="#040c14"
-          strokeWidth="1.8"
-          strokeLinejoin="round"
-          strokeLinecap="round"
+          fill="#22d3ee"
         />
       </svg>
     </div>
@@ -184,9 +180,7 @@ function HomePage() {
           </div>
           <div className="hero-stats">
             <div><div className="hero-stat-val">6<span>+</span></div><div className="hero-stat-lbl">{t.stats[0]}</div></div>
-            <div><div className="hero-stat-val">4</div><div className="hero-stat-lbl">{t.stats[1]}</div></div>
             <div><div className="hero-stat-val">5<span>yr</span></div><div className="hero-stat-lbl">{t.stats[2]}</div></div>
-            <div><div className="hero-stat-val">300<span>+</span></div><div className="hero-stat-lbl">{t.stats[3]}</div></div>
           </div>
         </div>
       </section>
