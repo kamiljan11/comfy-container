@@ -73,7 +73,7 @@ function Marquee() {
   )
 }
 
-/* ── Static structural data (merged with translations in render) ── */
+/* ── Static structural data ── */
 const PROJECT_META = [
   { num: '01', logo: '/logos/masgroup.png', name: 'MAS Group', tags: ['Operations', 'B2B'], year: '2021–now', href: null as string | null },
   { num: '02', logo: '/logos/flyt.png', name: 'Flyt', tags: ['Marketplace', 'SaaS'], year: '2023', href: null as string | null },
@@ -84,14 +84,6 @@ const PROJECT_META = [
 ]
 
 const CAP_NUMS = ['01', '02', '03']
-
-const TIMELINE_META = [
-  { year: '2024 – Present', company: 'MAS Group / Independent' },
-  { year: '2023 – Present', company: 'Flyt — Freight Marketplace' },
-  { year: '2022 – Present', company: 'Reykjawwwik Digital Agency' },
-  { year: '2021 – Present', company: 'MAS Group' },
-  { year: '2019 – 2021', company: 'Early-stage Startups' },
-]
 
 const ENGAGE_META = [
   { href: '#contact', featured: true },
@@ -129,7 +121,7 @@ function HomePage() {
         }
       })
     }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' })
-    document.querySelectorAll('.work-row, .cap-card, .tl-item, .engage-card').forEach((el) => observer.observe(el))
+    document.querySelectorAll('.work-row, .cap-card, .engage-card').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [])
 
@@ -146,7 +138,7 @@ function HomePage() {
         <ul className="nav-links">
           <li><a href="#work">{t.nav.work}</a></li>
           <li><a href="#capabilities">{t.nav.capabilities}</a></li>
-          <li><a href="#timeline">{t.nav.timeline}</a></li>
+          <li><a href="#about">{t.nav.timeline}</a></li>
           <li><a href="#engage">{t.nav.engage}</a></li>
           <li><Link to="/spirituality">{t.nav.spiritual}</Link></li>
         </ul>
@@ -201,6 +193,14 @@ function HomePage() {
               <p className="about-p">
                 {t.about.p2a}<strong>{t.about.p2b}</strong>{t.about.p2c}
               </p>
+              <div className="about-milestones">
+                {t.about.milestones.map((m, i) => (
+                  <div key={i} className="about-ms">
+                    <span className="about-ms-year">{m.year}</span>
+                    <span className="about-ms-desc">{m.desc}</span>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="about-photo-wrap">
               <div className="about-photo">
@@ -262,26 +262,6 @@ function HomePage() {
                 <div className="cap-tags">{c.tags.map((tag) => <span key={tag} className="cap-tag">{tag}</span>)}</div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Timeline ── */}
-      <section className="timeline" id="timeline">
-        <div className="container">
-          <span className="section-label">{t.timeline.label}</span>
-          <div className="tl-list">
-            {TIMELINE_META.map((meta, i) => {
-              const item = t.timelineItems[i]
-              return (
-                <div key={i} className="tl-item">
-                  <div className="tl-year">{meta.year}</div>
-                  <div className="tl-role">{item?.role}</div>
-                  <div className="tl-company">{meta.company}</div>
-                  <div className="tl-desc">{item?.desc}</div>
-                </div>
-              )
-            })}
           </div>
         </div>
       </section>
