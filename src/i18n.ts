@@ -3,9 +3,10 @@ export type Lang = 'en' | 'pl'
 interface SiteTranslation {
   nav: {
     work: string
+    about: string
     capabilities: string
-    timeline: string
     engage: string
+    contact: string
     available: string
     cta: string
   }
@@ -49,9 +50,10 @@ export const T: Record<Lang, SiteTranslation> = {
   en: {
     nav: {
       work: 'Work',
+      about: 'About',
       capabilities: 'Capabilities',
-      timeline: 'Timeline',
       engage: 'Engage',
+      contact: 'Contact',
       available: 'Available',
       cta: "Let's talk",
     },
@@ -143,9 +145,10 @@ export const T: Record<Lang, SiteTranslation> = {
   pl: {
     nav: {
       work: 'Projekty',
+      about: 'O mnie',
       capabilities: 'Kompetencje',
-      timeline: 'Historia',
       engage: 'Współpraca',
+      contact: 'Kontakt',
       available: 'Dostępny',
       cta: 'Porozmawiajmy',
     },

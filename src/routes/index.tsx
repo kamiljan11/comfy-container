@@ -132,14 +132,15 @@ function HomePage() {
 
       {/* ── Nav ── */}
       <nav className="nav">
-        <a href="/" className="nav-sig-wrap">
+        <a href="/" className="nav-sig-wrap" aria-label="Kamil Jan">
           <img src="/signature.png" alt="Kamil Jan" className="nav-sig" />
         </a>
         <ul className="nav-links">
           <li><a href="#work">{t.nav.work}</a></li>
+          <li><a href="#about">{t.nav.about}</a></li>
           <li><a href="#capabilities">{t.nav.capabilities}</a></li>
-          <li><a href="#about">{t.nav.timeline}</a></li>
           <li><a href="#engage">{t.nav.engage}</a></li>
+          <li><a href="#contact">{t.nav.contact}</a></li>
         </ul>
         <div className="nav-right">
           <button className="lang-toggle" onClick={toggleLang} aria-label="Switch language">
