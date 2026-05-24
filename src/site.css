@@ -566,7 +566,7 @@ section { position: relative; z-index: 1; }
 
 /* ── Capabilities internals ── */
 .cap-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
   position: relative; z-index: 1;
 }
 .cap-card {
@@ -682,7 +682,6 @@ section { position: relative; z-index: 1; }
   .about-grid { grid-template-columns: 1fr 240px; gap: 48px; }
   .work-row { grid-template-columns: 56px 1fr 140px; gap: 20px; }
   .work-year { display: none; }
-  .cap-grid { grid-template-columns: repeat(2, 1fr); }
   .engage-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
