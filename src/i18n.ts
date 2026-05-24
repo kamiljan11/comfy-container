@@ -89,7 +89,7 @@ export const T: Record<Lang, SiteTranslation> = {
     engage: { label: 'Work With Me' },
     contact: {
       h2: 'Ready to build something serious?',
-      sub: "Whether you have a specific project in mind or just want to explore what's possible — I respond to every relevant inquiry personally.",
+      sub: "Whether you have a specific project in mind or just want to explore what's possible — I respond to every relevant inquiry personally, sometimes with a bit of automation in the background :)",
       findMe: 'or find me on',
     },
     projects: [
@@ -184,7 +184,7 @@ export const T: Record<Lang, SiteTranslation> = {
     engage: { label: 'Współpraca' },
     contact: {
       h2: 'Gotowy zbudować coś poważnego?',
-      sub: 'Czy masz konkretny projekt, czy chcesz tylko sprawdzić możliwości — osobiście odpowiadam na każde trafne zapytanie.',
+      sub: 'Czy masz konkretny projekt, czy chcesz tylko sprawdzić możliwości — osobiście odpowiadam na każde trafne zapytanie, czasem z odrobiną automatyzacji w tle :)',
       findMe: 'lub znajdź mnie na',
     },
     projects: [
