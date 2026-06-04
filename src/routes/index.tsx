@@ -3,6 +3,30 @@ import { useEffect, useRef, useState } from 'react'
 import Hero3D from '../components/Hero3D'
 import { T, type Lang } from '../i18n'
 
+/* ── Flags ── */
+function FlagPL() {
+  return (
+    <svg width="22" height="15" viewBox="0 0 22 15" className="flag-svg" aria-hidden="true">
+      <rect width="22" height="15" rx="2.5" fill="#fff" />
+      <path d="M0 7.5h22V12.5a2.5 2.5 0 0 1-2.5 2.5h-17A2.5 2.5 0 0 1 0 12.5V7.5Z" fill="#dc143c" />
+    </svg>
+  )
+}
+function FlagGB() {
+  return (
+    <svg width="22" height="15" viewBox="0 0 60 30" className="flag-svg" aria-hidden="true">
+      <clipPath id="gb-r"><rect width="60" height="30" rx="5" /></clipPath>
+      <g clipPath="url(#gb-r)">
+        <rect width="60" height="30" fill="#012169" />
+        <path d="M0,0 60,30 M60,0 0,30" stroke="#fff" strokeWidth="6" />
+        <path d="M0,0 60,30 M60,0 0,30" stroke="#c8102e" strokeWidth="4" />
+        <path d="M30,0 V30 M0,15 H60" stroke="#fff" strokeWidth="10" />
+        <path d="M30,0 V30 M0,15 H60" stroke="#c8102e" strokeWidth="6" />
+      </g>
+    </svg>
+  )
+}
+
 /* ── Count-up stat ── */
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0)
@@ -197,7 +221,7 @@ function HomePage() {
         </ul>
         <div className="nav-right">
           <button className="lang-toggle" onClick={toggleLang} aria-label="Switch language">
-            {lang === 'en' ? '🇵🇱' : '🇬🇧'}
+            {lang === 'en' ? <FlagPL /> : <FlagGB />}
           </button>
           <div className="nav-avail"><span className="avail-dot" />{t.nav.available}</div>
           <a href="#contact" className="nav-cta">{t.nav.cta}</a>
