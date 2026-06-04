@@ -76,7 +76,7 @@ export const T: Record<Lang, SiteTranslation> = {
       p1e: '. Then I moved to Iceland with nothing and started over.',
       p2a: 'I worked retail shifts, learned the market, and co-launched ',
       p2b: 'Sleipnir Glacier Tours',
-      p2c: " from scratch — that's when it clicked. Since then I've built MAS Group across five verticals, launched Reykjawwwik, QuickFix, and MySpiritWay, led teams across multiple businesses, and shipped everything myself — the code, the ads, the automations, the systems. I also talk about it publicly, because building in the open is how I learn best.",
+      p2c: " from scratch — that's when it clicked. Since then I've built MAS Group across five verticals, managed and trained sales teams, hired and directed developers, and designed business systems from the ground up. I don't just ship the code — I run the operation. I'm also the author of a practical spirituality guide that took six years to write, because the same discipline that builds a business builds everything else.",
       meta: ['Years building', 'Active verticals', 'Businesses built'],
       milestones: [
         { year: '2012', desc: 'Started building at 16. First network, first company, field sales — top performer by 18.' },
@@ -97,6 +97,7 @@ export const T: Record<Lang, SiteTranslation> = {
       { outcome: 'Built a custom B2B operations platform — pricing calculators per product line, quote-to-order pipeline with 13-stage tracking, commission management, and role-based access for clients, sales reps, and admins. Deployed across MAS Group\'s auto parts, print, and logistics verticals.' },
       { outcome: 'Built a group-order and import platform for Iceland — pooled container campaigns with deposit-and-refund logic, on-demand import quotes from any EU retailer, and an admin dashboard with bulk notifications, campaign tracking, and real-time revenue metrics.' },
       { outcome: 'Built a multi-language marketing site (EN / PL / IS) for a Reykjavík handyman brand — service pages, before/after gallery, floating WhatsApp contact, and a deposit-saver landing page. Full brand and sales flow deployed in 72h. 300+ jobs completed.' },
+      { outcome: 'Built the full operation from scratch — website, pricing structure, influencer marketing, trade fair presence, and on-glacier guiding. Ran the project end-to-end including custom tour design. 4.9★ across 388 verified reviews, 1,000+ five-star guests.' },
       { outcome: 'Built a full SaaS platform for a web agency — multi-market pricing engine across 10 countries with geo-detection, lead-to-contract pipeline, admin CRM, PDF contract generation with per-country VAT logic, and push notifications. React + Supabase.' },
       { outcome: 'Built a field-sales CRM for energy audit teams — 9-stage order pipeline, role-based access (salesperson / auditor / admin), automated DOCX/PDF generation for government funding contracts, map view, push notifications, and performance leaderboard.' },
     ],
@@ -176,7 +177,7 @@ export const T: Record<Lang, SiteTranslation> = {
       p1e: '. Potem przeniosłem się na Islandię bez niczego i zacząłem od nowa.',
       p2a: 'Pracowałem na zmiany w handlu, poznawałem rynek i współtworzyłem ',
       p2b: 'Sleipnir Glacier Tours',
-      p2c: ' od podstaw — wtedy wszystko zaskoczyło. Od tamtej pory zbudowałem MAS Group w pięciu pionach, uruchomiłem Reykjawwwik, QuickFix i MySpiritWay, prowadziłem zespoły w kilku firmach i osobiście dostarczałem każdy element — kod, reklamy, automatyzacje, systemy. Opowiadam o tym publicznie, bo budowanie w otwartości to najlepszy sposób żeby się uczyć.',
+      p2c: ' od podstaw — wtedy wszystko zaskoczyło. Od tamtej pory zbudowałem MAS Group w pięciu pionach, zarządzałem i szkoliłem handlowców, zatrudniałem i kierowałem deweloperami, projektowałem architektury biznesowe od zera. Nie tylko wysyłam kod — prowadzę całą operację. Jestem też autorem praktycznego poradnika duchowości, który pisałem sześć lat — bo ta sama dyscyplina która buduje biznes, buduje wszystko inne.',
       meta: ['Lat budowania', 'Aktywnych pionów', 'Zbudowanych biznesów'],
       milestones: [
         { year: '2012', desc: 'Zacząłem budować w wieku 16 lat. Pierwsza sieć, pierwsza firma, sprzedaż terenowa — najlepszy sprzedawca w wieku 18 lat.' },
@@ -197,6 +198,7 @@ export const T: Record<Lang, SiteTranslation> = {
       { outcome: 'Zbudowałem własną platformę operacyjną B2B — kalkulatory cen per linia produktów, pipeline ofert z 13-etapowym śledzeniem, zarządzanie prowizjami i dostęp oparty na rolach dla klientów, handlowców i adminów. Wdrożone w pionach części, druku i logistyki MAS Group.' },
       { outcome: 'Zbudowałem platformę zbiorowych zamówień i importu na Islandię — grupowe kampanie kontenerowe z logiką depozytu i zwrotu, zapytania o import z dowolnego sklepu w UE, panel admina z masowymi powiadomieniami i śledzeniem przychodów w czasie rzeczywistym.' },
       { outcome: 'Zbudowałem wielojęzyczną stronę marketingową (EN / PL / IS) dla reykjavíkskiej marki handymana — strony usług, galeria przed/po, pływający widget WhatsApp i dedykowana strona kaucyjna. Pełna marka i flow sprzedaży w 72h. 300+ zleceń.' },
+      { outcome: 'Zbudowałem cały biznes od zera — stronę, strukturę cenową, influencer marketing, obecność na targach i prowadzenie wycieczek na lodowcu. Projekt od A do Z, łącznie z designem wycieczek na zamówienie. 4.9★ z 388 zweryfikowanych opinii, 1000+ gości z 5 gwiazdkami.' },
       { outcome: 'Zbudowałem pełną platformę SaaS dla agencji webowej — silnik cenowy na 10 rynkach z geolokalizacją, pipeline od leada do umowy, CRM dla admina, generowanie PDF umów z logiką VAT per kraj i push notyfikacje. React + Supabase.' },
       { outcome: 'Zbudowałem CRM dla zespołów sprzedaży audytów energetycznych — 9-etapowy pipeline zamówień, dostęp oparty na rolach (handlowiec / audytor / admin), automatyczne generowanie DOCX/PDF dla wniosków Czyste Powietrze, widok mapy, push notyfikacje i tabela wyników.' },
     ],
