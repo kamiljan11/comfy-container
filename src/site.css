@@ -544,7 +544,7 @@ section { position: relative; z-index: 1; }
   transition: border-color 0.3s, background 0.3s;
 }
 .work-row:hover .work-logo { border-color: var(--border-teal); background: rgba(255,255,255,0.06); }
-.work-logo img { opacity: 0.8; object-fit: contain; }
+.work-logo img { opacity: 0.75; object-fit: contain; filter: brightness(0) invert(1); }
 .work-row:hover .work-logo img { opacity: 1; }
 
 .work-name { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--text); letter-spacing: -0.015em; margin-bottom: 5px; }
