@@ -94,7 +94,7 @@ export const T: Record<Lang, SiteTranslation> = {
       findMe: 'or find me on',
     },
     projects: [
-      { outcome: 'Multi-vertical B2B group — auto parts, print, logistics, and rental — built from zero with dedicated department leads and documented operations.' },
+      { outcome: 'Multi-vertical B2B group — auto parts, print, logistics, and rental. Built a custom internal platform connecting clients, sales reps, and admins across the full order lifecycle: pricing calculators, quote pipelines, commission tracking, contracts, and delivery.' },
       { outcome: 'First-of-its-kind freight marketplace for Iceland. Compare and book quotes from verified transport providers across sea, air, and road.' },
       { outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.' },
       { outcome: 'Done-for-you web agency for Icelandic SMBs. Built the full product system — base plan, addon packages, and upgrade tiers — delivered under one monthly price.' },
@@ -195,7 +195,7 @@ export const T: Record<Lang, SiteTranslation> = {
       findMe: 'lub znajdź mnie na',
     },
     projects: [
-      { outcome: 'Wielobranżowa grupa B2B — części samochodowe, druk, logistyka i wynajem — zbudowana od zera z dedykowanymi liderami działów i udokumentowanymi operacjami.' },
+      { outcome: 'Wielobranżowa grupa B2B — części samochodowe, druk, logistyka i wynajem. Zbudowałem własną platformę spinającą klientów, handlowców i adminów przez cały proces: kalkulatory cen, pipeline ofert, prowizje, umowy i dostawy.' },
       { outcome: 'Pierwszy tego rodzaju marketplace do transportu towarów na Islandii. Porównuj i rezerwuj oferty od zweryfikowanych przewoźników morskich, lotniczych i drogowych.' },
       { outcome: 'Marka handymana uruchomiona w 72h — system brandingowy, reklamy Meta i sprzedaż przez WhatsApp. 300+ zrealizowanych zleceń.' },
       { outcome: 'Agencja webowa done-for-you dla islandzkich MŚP. Zbudowałem pełny system produktowy — plan bazowy, pakiety dodatków i poziomy upgrade — jedna miesięczna cena.' },
