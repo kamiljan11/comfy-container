@@ -503,8 +503,8 @@ section { position: relative; z-index: 1; }
   width: 100%; height: auto; object-fit: cover; display: block;
   filter: grayscale(20%) contrast(1.05);
   transition: filter 0.5s, transform 0.5s;
-  mask-image: radial-gradient(ellipse 78% 88% at 52% 38%, black 35%, transparent 78%);
-  -webkit-mask-image: radial-gradient(ellipse 78% 88% at 52% 38%, black 35%, transparent 78%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
 }
 .about-photo:hover img { filter: grayscale(0%) contrast(1.05); transform: scale(1.02); }
 
