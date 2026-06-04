@@ -80,8 +80,7 @@ const PROJECT_META = [
   { num: '02', logo: '/logos/flyt.png', name: 'Flyt', tags: ['Marketplace', 'SaaS'], year: '2023', href: null as string | null },
   { num: '03', logo: '/logos/quickfix.png', name: 'QuickFix', tags: ['Brand', 'Growth'], year: '2022', href: null as string | null },
   { num: '04', logo: '/logos/reykjawwwik.png', name: 'Reykjawwwik', tags: ['Agency', 'Product'], year: '2023', href: null as string | null },
-  { num: '05', logo: '/logos/myspiritway.png', name: 'MySpiritWay', tags: ['Education', 'Content'], year: '2024', href: null as string | null },
-  { num: '06', logo: '/logos/ekomoc.png', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
+  { num: '05', logo: '/logos/ekomoc.png', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
 ]
 
 const CAP_NUMS = ['01', '02', '03', '04']
