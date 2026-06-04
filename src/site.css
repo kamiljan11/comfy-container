@@ -621,6 +621,31 @@ section { position: relative; z-index: 1; }
 .engage-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--teal-2); transition: gap 0.2s var(--ease-expo); }
 .engage-cta:hover { gap: 14px; }
 
+/* ── Contact photo ── */
+.contact-photo {
+  position: absolute;
+  bottom: 0;
+  right: 5%;
+  height: 88%;
+  width: auto;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(30%) contrast(1.05) brightness(0.8);
+  mask-image:
+    linear-gradient(to top, transparent 0%, black 22%),
+    linear-gradient(to right, transparent 0%, black 12%),
+    linear-gradient(to left, transparent 0%, black 20%);
+  -webkit-mask-image:
+    linear-gradient(to top, transparent 0%, black 22%),
+    linear-gradient(to right, transparent 0%, black 12%),
+    linear-gradient(to left, transparent 0%, black 20%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
 /* ── Contact internals ── */
 .contact-inner { max-width: 620px; margin: 0 auto; position: relative; z-index: 1; }
 .contact-h2 {
@@ -831,5 +856,6 @@ section { position: relative; z-index: 1; }
   .engage::after { display: none; }
   .contact::before, .contact::after { display: none; }
   .cursor-ptr { display: none; }
+  .contact-photo { display: none; }
   .lang-toggle { font-size: 16px; padding: 3px 7px; }
 }

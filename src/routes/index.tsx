@@ -339,6 +339,7 @@ function HomePage() {
 
       {/* ── Contact ── */}
       <section className="contact" id="contact">
+        <img src="/kamil-suit.png" alt="" className="contact-photo" aria-hidden="true" />
         <div className="container">
           <div className="contact-inner">
             <h2 className="contact-h2">{t.contact.h2}</h2>
