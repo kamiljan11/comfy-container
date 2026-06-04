@@ -34,7 +34,7 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 body {
   background: var(--bg);
   color: var(--text);
@@ -235,7 +235,7 @@ section { position: relative; z-index: 1; }
 }
 .hero-h1 {
   font-family: var(--font-head); font-weight: 800;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(2.2rem, 7vw, 5.5rem);
   line-height: 1.03; letter-spacing: -0.035em; color: var(--text); margin-bottom: 28px;
   opacity: 0; animation: fade-up 0.9s var(--ease-expo) 0.45s forwards;
 }
@@ -816,6 +816,14 @@ section { position: relative; z-index: 1; }
 }
 
 /* ── Responsive ── */
+@media (max-width: 380px) {
+  .hero-h1 { font-size: 1.95rem; }
+  .hero-sub { font-size: 14px; }
+  .cap-card, .engage-card { padding: 22px 18px; }
+  .contact-h2 { font-size: 1.7rem; }
+  .mobile-float-cta { padding: 12px 28px; font-size: 13px; }
+}
+
 @media (max-width: 1024px) {
   .about-grid { grid-template-columns: 1fr 240px; gap: 48px; }
   .work-row { grid-template-columns: 56px 1fr 140px; gap: 20px; }
@@ -823,39 +831,95 @@ section { position: relative; z-index: 1; }
   .engage-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-  .nav { padding: 0 20px; height: 70px; }
+  /* ── Nav ── */
+  .nav { padding: 0 16px; height: 64px; }
   .nav-links { display: none; }
-  .nav-sig { height: 41px; max-width: 130px; }
-  .nav-sig-wrap { min-width: 87px; }
+  .nav-sig { height: 38px; max-width: 120px; }
+  .nav-sig-wrap { min-width: 80px; }
   .hamburger { display: flex; }
   .nav-avail { display: none; }
   .nav-cta { display: none; }
   .mobile-float-cta { display: flex; align-items: center; }
-  .hero { padding-top: 70px; }
-  .hero-content { padding: 0 20px; }
-  .container { padding: 0 20px; }
-  .hero-stats { gap: 28px; flex-wrap: wrap; padding-bottom: 56px; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .about-photo-wrap { position: static; order: -1; max-width: 280px; }
-  .about-milestones { gap: 12px; }
-  .work-row { grid-template-columns: 44px 1fr; gap: 16px; padding: 18px 20px; }
+
+  /* ── Hero ── */
+  .hero { padding-top: 64px; min-height: 100svh; }
+  .hero-content { padding: 0 16px; }
+  .hero-eyebrow { font-size: 10px; margin-bottom: 18px; letter-spacing: 0.16em; }
+  .hero-sub { font-size: 15px; line-height: 1.65; margin-bottom: 32px; max-width: 100%; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .btn-primary { width: 100%; justify-content: center; padding: 14px 24px; font-size: 14px; }
+  .btn-ghost { width: 100%; justify-content: center; padding: 13px 24px; font-size: 14px; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; padding: 32px 0 80px; }
+  .hero-stat-val { font-size: 2rem; }
+  .hero-stat-lbl { font-size: 11px; }
+
+  /* ── Layout ── */
+  .container { padding: 0 16px; }
+  .section-label { margin-bottom: 28px; font-size: 10px; }
+
+  /* ── About ── */
+  .about { padding: 60px 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .about-photo-wrap { order: -1; height: 260px; width: 100%; }
+  .about-photo { height: 260px; border-radius: var(--r-lg); overflow: hidden; }
+  .about-photo img { height: 260px; object-fit: cover; object-position: center top; border-radius: var(--r-lg); }
+  .about-p { font-size: 15px; line-height: 1.75; margin-bottom: 18px; }
+  .about-p:first-of-type::first-letter { font-size: 3rem; margin-right: 8px; }
+  .about-milestones { gap: 10px; margin-top: 24px; }
+  .about-ms { grid-template-columns: 38px 1fr; gap: 12px; }
+  .about-ms-desc { font-size: 12px; }
+  .about::before, .about::after { display: none; }
+
+  /* ── Work ── */
+  .work { padding: 56px 0 72px; }
+  .work-table { border-radius: var(--r); }
+  .work-row { grid-template-columns: 40px 1fr; gap: 14px; padding: 16px 16px; }
+  .work-row:hover { transform: none; }
   .work-tags, .work-year { display: none; }
   .work-arrow { display: none; }
-  .cap-grid { grid-template-columns: 1fr; }
-  .engage-grid { grid-template-columns: 1fr; }
-  .footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 20px; }
-  .footer-links { justify-content: center; }
-  .about-p { font-size: 16px; }
-  .hero-sub { font-size: 16px; }
-  .contact-email { font-size: 16px; }
-  .contact-sig img { height: 70px; }
-  .footer-sig { height: 28px; }
-  .about::before, .about::after { display: none; }
+  .work-name { font-size: 14px; margin-bottom: 3px; }
+  .work-outcome { font-size: 12px; line-height: 1.5; }
+  .work-logo { width: 40px; height: 40px; border-radius: 8px; }
+  .work-logo img { width: 32px; height: 32px; }
   .work::before, .work::after { display: none; }
+
+  /* ── Capabilities ── */
+  .cap { padding: 56px 0 72px; }
+  .cap-grid { grid-template-columns: 1fr; gap: 12px; }
+  .cap-card { padding: 28px 22px; }
+  .cap-card.visible:hover { transform: none; }
+  .cap-num { margin-bottom: 14px; }
+  .cap-title { font-size: 17px; margin-bottom: 10px; }
+  .cap-desc { font-size: 13px; margin-bottom: 20px; }
   .cap::after { display: none; }
+
+  /* ── Engage ── */
+  .engage { padding: 56px 0 100px; }
+  .engage-grid { grid-template-columns: 1fr; gap: 12px; }
+  .engage-card { padding: 28px 22px; }
+  .engage-card.visible:hover { transform: none; }
+  .engage-title { font-size: 18px; }
+  .engage-desc { font-size: 13px; }
   .engage::after { display: none; }
+
+  /* ── Contact ── */
+  .contact { padding: 56px 0 100px; }
+  .contact-h2 { font-size: clamp(1.7rem, 8vw, 2.5rem); margin-bottom: 14px; }
+  .contact-sub { font-size: 15px; margin-bottom: 32px; }
+  .contact-email { font-size: 15px; flex-wrap: wrap; justify-content: center; }
+  .contact-sig img { height: 60px; }
   .contact::before, .contact::after { display: none; }
-  .cursor-ptr { display: none; }
   .contact-photo { display: none; }
-  .lang-toggle { font-size: 16px; padding: 3px 7px; }
+
+  /* ── Footer ── */
+  .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
+  .footer-links { justify-content: center; gap: 20px; }
+  .footer-sig { height: 26px; }
+
+  /* ── Misc ── */
+  .cursor-ptr { display: none; }
+  .lang-toggle { font-size: 15px; padding: 3px 7px; }
+  .scroll-prog { height: 2px; }
+  .marquee-item { font-size: 10px; padding-right: 36px; }
+  .marquee-sep { margin-right: 36px; }
 }
