@@ -3,6 +3,35 @@ import { useEffect, useRef, useState } from 'react'
 import Hero3D from '../components/Hero3D'
 import { T, type Lang } from '../i18n'
 
+/* ── Count-up stat ── */
+function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
+  const [count, setCount] = useState(0)
+  const [started, setStarted] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = ref.current; if (!el) return
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setStarted(true); obs.disconnect() } }, { threshold: 0.5 })
+    obs.observe(el); return () => obs.disconnect()
+  }, [])
+  useEffect(() => {
+    if (!started) return
+    const dur = 1600; let t0: number | null = null
+    const step = (ts: number) => {
+      if (!t0) t0 = ts
+      const p = Math.min((ts - t0) / dur, 1)
+      setCount(Math.floor((1 - Math.pow(1 - p, 3)) * value))
+      if (p < 1) requestAnimationFrame(step); else setCount(value)
+    }
+    requestAnimationFrame(step)
+  }, [started, value])
+  return (
+    <div ref={ref}>
+      <div className="hero-stat-val">{count}<span>{suffix}</span></div>
+      <div className="hero-stat-lbl">{label}</div>
+    </div>
+  )
+}
+
 export const Route = createFileRoute('/')({ component: HomePage })
 
 /* ── Scroll progress ── */
@@ -99,6 +128,8 @@ function HomePage() {
     if (saved === 'en' || saved === 'pl') return saved
     return navigator.language.startsWith('pl') ? 'pl' : 'en'
   })
+  const [menuOpen, setMenuOpen] = useState(false)
+  const btnRef = useRef<HTMLAnchorElement>(null)
 
   const toggleLang = () => {
     setLang(l => {
@@ -107,6 +138,15 @@ function HomePage() {
       return next
     })
   }
+
+  const onBtnMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const b = btnRef.current; if (!b) return
+    const r = b.getBoundingClientRect()
+    const x = (e.clientX - r.left - r.width / 2) * 0.3
+    const y = (e.clientY - r.top - r.height / 2) * 0.3
+    b.style.transform = `translate(${x}px, ${y}px) translateY(-2px)`
+  }
+  const onBtnLeave = () => { if (btnRef.current) btnRef.current.style.transform = '' }
 
   const t = T[lang]
 
@@ -131,6 +171,16 @@ function HomePage() {
       <ScrollProg />
       <Cursor />
 
+      {/* ── Mobile menu overlay ── */}
+      <div className={`mobile-menu${menuOpen ? ' open' : ''}`} onClick={() => setMenuOpen(false)}>
+        <a href="#work">{t.nav.work}</a>
+        <a href="#about">{t.nav.about}</a>
+        <a href="#capabilities">{t.nav.capabilities}</a>
+        <a href="#engage">{t.nav.engage}</a>
+        <div className="mobile-menu-divider" />
+        <a href="#contact" className="mobile-menu-cta">{t.nav.cta}</a>
+      </div>
+
       {/* ── Nav ── */}
       <nav className="nav">
         <a href="/" className="nav-sig-wrap" aria-label="Kamil Jan">
@@ -149,6 +199,9 @@ function HomePage() {
           </button>
           <div className="nav-avail"><span className="avail-dot" />{t.nav.available}</div>
           <a href="#contact" className="nav-cta">{t.nav.cta}</a>
+          <button className={`hamburger${menuOpen ? ' open' : ''}`} onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
+            <span /><span /><span />
+          </button>
         </div>
       </nav>
 
@@ -165,15 +218,15 @@ function HomePage() {
           </h1>
           <p className="hero-sub">{t.hero.sub}</p>
           <div className="hero-actions">
-            <a href="#engage" className="btn-primary">
+            <a ref={btnRef} href="#engage" className="btn-primary" onMouseMove={onBtnMove} onMouseLeave={onBtnLeave}>
               {t.hero.cta}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
             <a href="#work" className="btn-ghost">{t.hero.ctaGhost}</a>
           </div>
           <div className="hero-stats">
-            <div><div className="hero-stat-val">6<span>+</span></div><div className="hero-stat-lbl">{t.stats[0]}</div></div>
-            <div><div className="hero-stat-val">14<span>yr</span></div><div className="hero-stat-lbl">{t.about.meta[0]}</div></div>
+            <StatCounter value={6} suffix="+" label={t.stats[0]} />
+            <StatCounter value={14} suffix="yr" label={t.about.meta[0]} />
           </div>
         </div>
       </section>
@@ -310,6 +363,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Mobile float CTA ── */}
+      <a href="#contact" className="mobile-float-cta">{t.nav.cta}</a>
 
       {/* ── Footer ── */}
       <footer className="footer">
