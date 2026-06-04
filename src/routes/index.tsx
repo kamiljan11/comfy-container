@@ -177,19 +177,22 @@ function HomePage() {
   const t = T[lang]
 
   useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>('.work-row, .cap-card, .engage-card')
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const el = entry.target as HTMLElement
           const idx = Array.from(el.parentElement?.children ?? []).indexOf(el)
-          el.style.transitionDelay = `${idx * 0.08}s`
+          el.style.transitionDelay = `${idx * 0.06}s`
           el.classList.add('visible')
           observer.unobserve(el)
         }
       })
-    }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' })
-    document.querySelectorAll('.work-row, .cap-card, .engage-card').forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' })
+    els.forEach((el) => observer.observe(el))
+    // safety net — never leave a card stuck invisible if the observer misses
+    const safety = setTimeout(() => els.forEach((el) => el.classList.add('visible')), 1400)
+    return () => { observer.disconnect(); clearTimeout(safety) }
   }, [])
 
   return (

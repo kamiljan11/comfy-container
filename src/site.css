@@ -871,6 +871,9 @@ section { position: relative; z-index: 1; }
   .nav-cta { display: none; }
   .wa-float { display: flex; }
 
+  /* reveal-on-scroll off on mobile — content always visible (fixes invisible-card glitch) */
+  .work-row, .cap-card, .engage-card { opacity: 1 !important; transform: none !important; }
+
   /* ── Hero ── */
   .hero { padding-top: 64px; min-height: 100svh; }
   .hero-content { padding: 0 16px; }
