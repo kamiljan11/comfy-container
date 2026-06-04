@@ -118,11 +118,11 @@ body::before {
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid var(--border);
 }
-.nav-sig-wrap { display: flex; align-items: center; flex-shrink: 0; min-width: 190px; }
+.nav-sig-wrap { display: flex; align-items: center; flex-shrink: 0; min-width: 162px; }
 .nav-sig {
-  height: 136px;
+  height: 116px;
   width: auto;
-  max-width: 323px;
+  max-width: 275px;
   display: block;
   filter: brightness(0) invert(1) brightness(1.15);
   opacity: 0.95;
@@ -683,8 +683,8 @@ section { position: relative; z-index: 1; }
 @media (max-width: 768px) {
   .nav { padding: 0 20px; height: 70px; }
   .nav-links { display: none; }
-  .nav-sig { height: 48px; max-width: 153px; }
-  .nav-sig-wrap { min-width: 102px; }
+  .nav-sig { height: 41px; max-width: 130px; }
+  .nav-sig-wrap { min-width: 87px; }
   .hero { padding-top: 70px; }
   .hero-content { padding: 0 20px; }
   .container { padding: 0 20px; }
