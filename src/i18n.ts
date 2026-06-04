@@ -94,12 +94,12 @@ export const T: Record<Lang, SiteTranslation> = {
       findMe: 'or find me on',
     },
     projects: [
-      { outcome: 'Multi-vertical B2B group — auto parts, print, logistics, and rental. Built a custom internal platform connecting clients, sales reps, and admins across the full order lifecycle: pricing calculators, quote pipelines, commission tracking, contracts, and delivery.' },
-      { outcome: 'First-of-its-kind freight marketplace for Iceland. Compare and book quotes from verified transport providers across sea, air, and road.' },
-      { outcome: 'Handyman brand deployed in 72h — brand system, Meta ads, and WhatsApp-first sales flow. 300+ jobs completed.' },
-      { outcome: 'Done-for-you web agency for Icelandic SMBs. Built the full product system — base plan, addon packages, and upgrade tiers — delivered under one monthly price.' },
+      { outcome: 'Built a custom B2B operations platform — pricing calculators per product line, quote-to-order pipeline with 13-stage tracking, commission management, and role-based access for clients, sales reps, and admins. Deployed across MAS Group\'s auto parts, print, and logistics verticals.' },
+      { outcome: 'Built a group-order and import platform for Iceland — pooled container campaigns with deposit-and-refund logic, on-demand import quotes from any EU retailer, and an admin dashboard with bulk notifications, campaign tracking, and real-time revenue metrics.' },
+      { outcome: 'Built a multi-language marketing site (EN / PL / IS) for a Reykjavík handyman brand — service pages, before/after gallery, floating WhatsApp contact, and a deposit-saver landing page. Full brand and sales flow deployed in 72h. 300+ jobs completed.' },
+      { outcome: 'Built a full SaaS platform for a web agency — multi-market pricing engine across 10 countries with geo-detection, lead-to-contract pipeline, admin CRM, PDF contract generation with per-country VAT logic, and push notifications. React + Supabase.' },
       { outcome: 'Educational platform — the Simplified Practical Spirituality guidebook, activation sessions, and online community.' },
-      { outcome: 'Solar audit and sales CRM — job pipeline, role-based access, team notes, and audit photo uploads. Built and deployed for a field sales team.' },
+      { outcome: 'Built a field-sales CRM for energy audit teams — 9-stage order pipeline, role-based access (salesperson / auditor / admin), automated DOCX/PDF generation for government funding contracts, map view, push notifications, and performance leaderboard.' },
     ],
     caps: [
       {
@@ -195,12 +195,12 @@ export const T: Record<Lang, SiteTranslation> = {
       findMe: 'lub znajdź mnie na',
     },
     projects: [
-      { outcome: 'Wielobranżowa grupa B2B — części samochodowe, druk, logistyka i wynajem. Zbudowałem własną platformę spinającą klientów, handlowców i adminów przez cały proces: kalkulatory cen, pipeline ofert, prowizje, umowy i dostawy.' },
-      { outcome: 'Pierwszy tego rodzaju marketplace do transportu towarów na Islandii. Porównuj i rezerwuj oferty od zweryfikowanych przewoźników morskich, lotniczych i drogowych.' },
-      { outcome: 'Marka handymana uruchomiona w 72h — system brandingowy, reklamy Meta i sprzedaż przez WhatsApp. 300+ zrealizowanych zleceń.' },
-      { outcome: 'Agencja webowa done-for-you dla islandzkich MŚP. Zbudowałem pełny system produktowy — plan bazowy, pakiety dodatków i poziomy upgrade — jedna miesięczna cena.' },
+      { outcome: 'Zbudowałem własną platformę operacyjną B2B — kalkulatory cen per linia produktów, pipeline ofert z 13-etapowym śledzeniem, zarządzanie prowizjami i dostęp oparty na rolach dla klientów, handlowców i adminów. Wdrożone w pionach części, druku i logistyki MAS Group.' },
+      { outcome: 'Zbudowałem platformę zbiorowych zamówień i importu na Islandię — grupowe kampanie kontenerowe z logiką depozytu i zwrotu, zapytania o import z dowolnego sklepu w UE, panel admina z masowymi powiadomieniami i śledzeniem przychodów w czasie rzeczywistym.' },
+      { outcome: 'Zbudowałem wielojęzyczną stronę marketingową (EN / PL / IS) dla reykjavíkskiej marki handymana — strony usług, galeria przed/po, pływający widget WhatsApp i dedykowana strona kaucyjna. Pełna marka i flow sprzedaży w 72h. 300+ zleceń.' },
+      { outcome: 'Zbudowałem pełną platformę SaaS dla agencji webowej — silnik cenowy na 10 rynkach z geolokalizacją, pipeline od leada do umowy, CRM dla admina, generowanie PDF umów z logiką VAT per kraj i push notyfikacje. React + Supabase.' },
       { outcome: 'Platforma edukacyjna — poradnik Simplified Practical Spirituality, sesje aktywacji i społeczność online.' },
-      { outcome: 'CRM do audytów i sprzedaży solarnej — pipeline zleceń, dostęp oparty na rolach, notatki zespołu i przesyłanie zdjęć. Zbudowany i wdrożony dla zespołu sprzedaży terenowej.' },
+      { outcome: 'Zbudowałem CRM dla zespołów sprzedaży audytów energetycznych — 9-etapowy pipeline zamówień, dostęp oparty na rolach (handlowiec / audytor / admin), automatyczne generowanie DOCX/PDF dla wniosków Czyste Powietrze, widok mapy, push notyfikacje i tabela wyników.' },
     ],
     caps: [
       {
