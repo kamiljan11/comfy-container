@@ -47,26 +47,25 @@ function RotatingWord({ lang }: { lang: Lang }) {
 /* ── Count-up stat ── */
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0)
-  const [started, setStarted] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const el = ref.current; if (!el) return
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setStarted(true); obs.disconnect() } }, { threshold: 0.5 })
-    obs.observe(el); return () => obs.disconnect()
-  }, [])
-  useEffect(() => {
-    if (!started) return
-    const dur = 1600; let t0: number | null = null
+    // start straight from page load — hero stats are above the fold, no scroll gating
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCount(value)
+      return
+    }
+    const dur = 1600; let t0: number | null = null; let raf = 0
     const step = (ts: number) => {
       if (!t0) t0 = ts
       const p = Math.min((ts - t0) / dur, 1)
       setCount(Math.floor((1 - Math.pow(1 - p, 3)) * value))
-      if (p < 1) requestAnimationFrame(step); else setCount(value)
+      if (p < 1) raf = requestAnimationFrame(step); else setCount(value)
     }
-    requestAnimationFrame(step)
-  }, [started, value])
+    // small delay so the count rises in sync with the hero stats fading in
+    const timer = window.setTimeout(() => { raf = requestAnimationFrame(step) }, 750)
+    return () => { clearTimeout(timer); cancelAnimationFrame(raf) }
+  }, [value])
   return (
-    <div ref={ref}>
+    <div>
       <div className="hero-stat-val">{count}<span>{suffix}</span></div>
       <div className="hero-stat-lbl">{label}</div>
     </div>
