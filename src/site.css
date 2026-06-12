@@ -275,6 +275,8 @@ section { position: relative; z-index: 1; }
 }
 .hero-h1 .line-mask:nth-child(1) .line-in { animation-delay: 0.45s; }
 .hero-h1 .line-mask:nth-child(2) .line-in { animation-delay: 0.52s; }
+.hero-h1 .line-mask:nth-child(3) .line-in { animation-delay: 0.59s; }
+.hero-rot { white-space: nowrap; }
 @keyframes line-rise { from { transform: translateY(110%); } to { transform: translateY(0); } }
 .contact-h2 .line-in { display: block; transform: translateY(110%); transition: transform 0.85s var(--ease-expo); }
 .contact-h2.h2-in .line-in { transform: translateY(0); }
@@ -1069,4 +1071,75 @@ section { position: relative; z-index: 1; }
   .scroll-prog { height: 2px; }
   .marquee-item { font-size: 10px; padding-right: 36px; }
   .marquee-sep { margin-right: 36px; }
+}
+
+/* ════════════════ MAXED BAJERY (test branch) ════════════════ */
+
+/* rotating colored hero word */
+.hero-rot { display: inline-block; }
+.hero-rot-in {
+  display: inline-block;
+  background: linear-gradient(120deg, var(--teal-2) 20%, #a8ecf8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: rot-in 0.55s var(--ease-expo) both;
+  will-change: transform, opacity, filter;
+}
+@keyframes rot-in {
+  from { transform: translateY(0.4em); opacity: 0; filter: blur(6px); }
+  to   { transform: translateY(0); opacity: 1; filter: blur(0); }
+}
+
+/* aurora animated gradient blobs in hero */
+.aurora { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; mix-blend-mode: screen; opacity: 0.55; }
+.aurora::before, .aurora::after { content: ''; position: absolute; width: 65vw; height: 65vw; border-radius: 50%; filter: blur(90px); }
+.aurora::before { background: radial-gradient(circle, rgba(34,211,238,0.45), transparent 60%); top: -25%; left: -10%; animation: aurora1 16s ease-in-out infinite; }
+.aurora::after  { background: radial-gradient(circle, rgba(8,145,178,0.40), transparent 60%); bottom: -25%; right: -8%; animation: aurora2 20s ease-in-out infinite; }
+@keyframes aurora1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(12%,10%) scale(1.25); } }
+@keyframes aurora2 { 0%,100% { transform: translate(0,0) scale(1.1); } 50% { transform: translate(-10%,-8%) scale(0.9); } }
+
+/* blinking terminal caret after section labels */
+.section-label::after {
+  content: ''; width: 7px; height: 12px; margin-left: 3px; flex-shrink: 0;
+  background: var(--teal-2); display: inline-block;
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+@keyframes caret-blink { 0%,50% { opacity: 1; } 50.01%,100% { opacity: 0; } }
+
+/* rotating conic border on the featured engage card */
+@property --bd-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.engage-card.featured::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 3;
+  padding: 1.5px; pointer-events: none;
+  background: conic-gradient(from var(--bd-angle), transparent 0%, var(--teal-2) 12%, transparent 30%, transparent 70%, var(--teal-2) 88%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: bd-rotate 4s linear infinite;
+}
+@keyframes bd-rotate { to { --bd-angle: 360deg; } }
+
+/* sticky section-index counter (left gutter) */
+.section-index {
+  position: fixed; left: 22px; top: 50%; transform: translateY(-50%);
+  z-index: 90; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-family: var(--font-head); font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--text-2); mix-blend-mode: difference;
+}
+.si-cur { color: var(--teal-2); }
+.si-bar { width: 1px; height: 64px; background: var(--border-2); position: relative; overflow: hidden; }
+.si-fill { position: absolute; top: 0; left: 0; width: 100%; background: var(--teal-2); }
+.si-tot { color: var(--muted); }
+
+/* scroll-velocity skew on the tech marquee */
+.marquee { transform: skewX(var(--skew, 0deg)); transition: transform 0.25s ease-out; }
+
+/* 3D tilt on cards (combines with the cursor glow) */
+.cap-card, .engage-card { transform-style: preserve-3d; }
+.cap-card.visible:hover, .engage-card.visible:hover {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
+}
+
+@media (max-width: 900px) { .section-index { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .section-label::after, .engage-card.featured::after { animation: none !important; }
+  .marquee { transform: none !important; }
 }

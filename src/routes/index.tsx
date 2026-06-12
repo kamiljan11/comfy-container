@@ -27,6 +27,23 @@ function FlagGB() {
   )
 }
 
+/* ── Rotating colored hero word ── */
+const HERO_ROT: Record<Lang, string[]> = {
+  en: ['themselves.', 'on autopilot.', 'without you.', '24/7.', 'while you sleep.'],
+  pl: ['same.', 'na autopilocie.', 'bez ciebie.', '24/7.', 'gdy śpisz.'],
+}
+function RotatingWord({ lang }: { lang: Lang }) {
+  const words = HERO_ROT[lang]
+  const [i, setI] = useState(0)
+  useEffect(() => {
+    setI(0)
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = setInterval(() => setI(p => (p + 1) % words.length), 2400)
+    return () => clearInterval(id)
+  }, [lang]) // eslint-disable-line react-hooks/exhaustive-deps
+  return <em className="hero-rot"><span key={i} className="hero-rot-in">{words[i]}</span></em>
+}
+
 /* ── Count-up stat ── */
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0)
@@ -156,6 +173,8 @@ function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [openCap, setOpenCap] = useState<number | null>(0)
   const [openEngage, setOpenEngage] = useState<number | null>(0)
+  const [secIdx, setSecIdx] = useState(1)
+  const [secTotal, setSecTotal] = useState(6)
   const btnRef = useRef<HTMLAnchorElement>(null)
 
   const toggleLang = () => {
@@ -206,7 +225,7 @@ function HomePage() {
     return () => { observer.disconnect(); clearTimeout(safety) }
   }, [])
 
-  // cursor-follow glow on capability/engage cards (desktop only, one passive listener)
+  // cursor-follow glow + 3D tilt on cards (desktop only, one passive listener)
   useEffect(() => {
     if (!window.matchMedia('(hover: hover)').matches) return
     const onMove = (e: PointerEvent) => {
@@ -214,17 +233,58 @@ function HomePage() {
       const glow = card?.querySelector<HTMLElement>('.card-glow')
       if (!card || !glow) return
       const r = card.getBoundingClientRect()
-      glow.style.setProperty('--mx', `${e.clientX - r.left}px`)
-      glow.style.setProperty('--my', `${e.clientY - r.top}px`)
+      const mx = e.clientX - r.left, my = e.clientY - r.top
+      glow.style.setProperty('--mx', `${mx}px`)
+      glow.style.setProperty('--my', `${my}px`)
+      card.style.setProperty('--rx', `${((my / r.height) - 0.5) * -7}deg`)
+      card.style.setProperty('--ry', `${((mx / r.width) - 0.5) * 7}deg`)
     }
     document.addEventListener('pointermove', onMove, { passive: true })
     return () => document.removeEventListener('pointermove', onMove)
+  }, [])
+
+  // sticky section index counter (MAX)
+  useEffect(() => {
+    const secs = [...document.querySelectorAll('section')]
+    setSecTotal(secs.length)
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const i = secs.indexOf(e.target as HTMLElement)
+          if (i >= 0) setSecIdx(i + 1)
+        }
+      })
+    }, { threshold: 0.5 })
+    secs.forEach((s) => obs.observe(s))
+    return () => obs.disconnect()
+  }, [])
+
+  // scroll-velocity skew on the tech marquee (MAX)
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const el = document.querySelector<HTMLElement>('.marquee')
+    if (!el) return
+    let last = window.scrollY, raf = 0
+    const loop = () => {
+      const y = window.scrollY
+      const skew = Math.max(-7, Math.min(7, (y - last) * 0.35))
+      el.style.setProperty('--skew', `${skew}deg`)
+      last = y
+      raf = requestAnimationFrame(loop)
+    }
+    raf = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(raf)
   }, [])
 
   return (
     <div>
       <ScrollProg />
       <Cursor />
+      <div className="section-index" aria-hidden="true">
+        <span className="si-cur">{String(secIdx).padStart(2, '0')}</span>
+        <span className="si-bar"><span className="si-fill" style={{ height: `${(secIdx / secTotal) * 100}%` }} /></span>
+        <span className="si-tot">{String(secTotal).padStart(2, '0')}</span>
+      </div>
 
       {/* ── Mobile menu overlay ── */}
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`} onClick={() => setMenuOpen(false)}>
@@ -263,13 +323,15 @@ function HomePage() {
       {/* ── Hero ── */}
       <section className="hero">
         <div className="hero-canvas-wrap"><Hero3D /></div>
+        <div className="aurora" aria-hidden="true" />
         <div className="hero-fade-top" />
         <div className="hero-fade-bottom" />
         <div className="hero-content">
           <p className="hero-eyebrow">{t.hero.eyebrow}</p>
           <h1 className="hero-h1">
             <span className="line-mask"><span className="line-in">{t.hero.h1a}</span></span>
-            <span className="line-mask"><span className="line-in">{t.hero.h1b} <em>{t.hero.h1em}</em></span></span>
+            <span className="line-mask"><span className="line-in">{t.hero.h1b}</span></span>
+            <span className="line-mask"><span className="line-in"><RotatingWord lang={lang} /></span></span>
           </h1>
           <p className="hero-sub">{t.hero.sub}</p>
           <div className="hero-actions">
