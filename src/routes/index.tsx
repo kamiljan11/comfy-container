@@ -142,6 +142,7 @@ const CAP_NUMS = ['01', '02', '03', '04']
 const ENGAGE_META = [
   { href: '#contact', featured: true },
   { href: '#contact', featured: false },
+  { href: '#contact', featured: false },
   { href: 'mailto:hello@kamiljan.com', featured: false },
 ]
 

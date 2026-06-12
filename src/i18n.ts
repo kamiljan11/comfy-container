@@ -58,11 +58,11 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: "Let's talk",
     },
     hero: {
-      eyebrow: 'Builder · Entrepreneur · Digital Nomad',
+      eyebrow: 'Builder · AI Enablement · Team Coach',
       h1a: 'I build things',
       h1b: 'that run',
       h1em: 'themselves.',
-      sub: 'I write the code, run the ads, build the automations, and lead the team. Solo founders and companies hire me when they need someone who can actually do all of it.',
+      sub: "I write the code, run the ads, build the AI automations — and I lead and train the teams that run them. I ship AI in production and get people to actually use it. Most coaches can't build; most builders can't teach. I do both.",
       cta: 'Work with me',
       ctaGhost: 'See my work',
     },
@@ -76,7 +76,7 @@ export const T: Record<Lang, SiteTranslation> = {
       p1e: '. Then I moved to Iceland with nothing and started over.',
       p2a: 'I worked retail shifts, learned the market, and co-launched ',
       p2b: 'Sleipnir Glacier Tours',
-      p2c: " from scratch — that's when it clicked. Since then I've built MAS Group across five verticals, managed and trained sales teams, hired and directed developers, and designed business systems from the ground up. I don't just ship the code — I run the operation. I'm also the author of a practical spirituality guide that took six years to write, because the same discipline that builds a business builds everything else.",
+      p2c: " from scratch — that's when it clicked. Since then I've built MAS Group across five verticals, managed and trained sales teams, hired and directed developers, and designed business systems from the ground up. I don't just ship the code — I run the operation, then train the people so it keeps running without me. That's also why I spent six years writing a practical spirituality guide — taking something genuinely complex and making it simple to follow. Making the complicated usable by other people is the through-line of everything I do.",
       meta: ['Years building', 'Active verticals', 'Businesses built'],
       milestones: [
         { year: '2012', desc: 'Started building at 16. First network, first company, field sales — top performer by 18.' },
@@ -104,7 +104,7 @@ export const T: Record<Lang, SiteTranslation> = {
     caps: [
       {
         title: 'Websites & Products',
-        desc: 'From idea to live product — I build it myself. Full-stack: Lovable, React, TypeScript, Vercel, Supabase, Cloudflare Workers. You get a shipped product, not a prototype handed to a dev.',
+        desc: 'From idea to live product — I build it myself. Full-stack: Lovable, React, TypeScript, Vercel, Supabase, Cloudflare Workers. You get a shipped product running in production, not a prototype handed to a dev.',
         tags: ['Lovable', 'React / TypeScript', 'Vercel + Supabase', 'Cloudflare Workers'],
       },
       {
@@ -119,7 +119,7 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         title: 'Strategy, Leadership & Consulting',
-        desc: "I've built, led, and trained teams across five companies — from field sales reps to developers. Whether you need an operator, a coach who makes complex things simple, or someone to run a department, I've been in the room and know what it takes to execute.",
+        desc: "I've built, led, and trained teams across five companies — from field sales reps to developers. I've taught people to actually adopt new tools and processes, not just sit through a deck. A coach who makes complex things simple — and who's done the building, so the advice comes from shipping, not slides.",
         tags: ['Team Leadership', 'Coaching & Training', 'Business Operations', 'Consulting'],
       },
     ],
@@ -139,10 +139,17 @@ export const T: Record<Lang, SiteTranslation> = {
         cta: 'Start a project',
       },
       {
+        mode: 'Build With Your Team',
+        title: 'I build it — and train your team to own it',
+        desc: 'An AI enablement engagement: I ship a real workflow into production while your team learns to run it — structured training plus hands-on coaching, complex tools turned into simple daily habits. Done-with-you, not done-and-gone, so your people can keep it going without me.',
+        detail: 'Enablement · Train-while-building · Documented handoff',
+        cta: 'Build with your team',
+      },
+      {
         mode: 'Hire Me',
         title: 'Full-time or long-term',
-        desc: 'Open to both employment and long-term project engagements. Remote-first. Most effective where someone needs to own the product, growth, or operations layer — or build the AI infrastructure from scratch.',
-        detail: 'Full-time or contract · Remote-first · Head of Ops / Growth / AI',
+        desc: "Open to both employment and long-term project engagements. Remote-first. Most effective where someone needs to build the AI infrastructure from scratch and get a team to actually use it — I've done both in my own companies. Equally strong owning the product, growth, or operations layer.",
+        detail: 'Full-time or contract · Remote-first · AI Coach / Enablement Lead · Head of AI / Ops',
         cta: 'Get in touch',
       },
     ],
@@ -159,11 +166,11 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: 'Porozmawiajmy',
     },
     hero: {
-      eyebrow: 'Budowniczy · Przedsiębiorca · Digital Nomad',
+      eyebrow: 'Budowniczy · Wdrażanie AI · Coach zespołu',
       h1a: 'Buduję rzeczy,',
       h1b: 'które działają',
       h1em: 'same.',
-      sub: 'Piszę kod, prowadzę reklamy, buduję automatyzacje i zarządzam zespołem. Solo-founderzy i firmy współpracują ze mną, gdy potrzebują kogoś kto faktycznie to wszystko potrafi.',
+      sub: 'Piszę kod, prowadzę reklamy, buduję automatyzacje AI — i prowadzę oraz szkolę zespoły, które potem samodzielnie je obsługują. Wdrażam AI na produkcji i sprawiam, że ludzie naprawdę z niego korzystają. Większość coachów nie umie budować, większość builderów nie umie uczyć. Ja robię jedno i drugie.',
       cta: 'Współpracujmy',
       ctaGhost: 'Moje projekty',
     },
@@ -177,7 +184,7 @@ export const T: Record<Lang, SiteTranslation> = {
       p1e: '. Potem przeniosłem się na Islandię bez niczego i zacząłem od nowa.',
       p2a: 'Pracowałem na zmiany w handlu, poznawałem rynek i współtworzyłem ',
       p2b: 'Sleipnir Glacier Tours',
-      p2c: ' od podstaw — wtedy wszystko zaskoczyło. Od tamtej pory zbudowałem MAS Group w pięciu pionach, zarządzałem i szkoliłem handlowców, zatrudniałem i kierowałem deweloperami, projektowałem architektury biznesowe od zera. Nie tylko wysyłam kod — prowadzę całą operację. Jestem też autorem praktycznego poradnika duchowości, który pisałem sześć lat — bo ta sama dyscyplina która buduje biznes, buduje wszystko inne.',
+      p2c: ' od podstaw — wtedy wszystko zaskoczyło. Od tamtej pory zbudowałem MAS Group w pięciu pionach, zarządzałem i szkoliłem handlowców, zatrudniałem i kierowałem deweloperami, projektowałem architektury biznesowe od zera. Nie tylko wysyłam kod — prowadzę całą operację, a potem szkolę ludzi, żeby działała beze mnie. Dlatego też przez sześć lat pisałem praktyczny poradnik duchowości — biorąc coś naprawdę skomplikowanego i robiąc z tego coś prostego w praktyce. Sprawianie, że skomplikowane rzeczy stają się zrozumiałe i użyteczne dla innych, to wspólny mianownik wszystkiego, co robię.',
       meta: ['Lat budowania', 'Aktywnych pionów', 'Zbudowanych biznesów'],
       milestones: [
         { year: '2012', desc: 'Zacząłem budować w wieku 16 lat. Pierwsza sieć, pierwsza firma, sprzedaż terenowa — najlepszy sprzedawca w wieku 18 lat.' },
@@ -205,7 +212,7 @@ export const T: Record<Lang, SiteTranslation> = {
     caps: [
       {
         title: 'Strony i Produkty',
-        desc: 'Od pomysłu do działającego produktu — buduję to osobiście. Full-stack: Lovable, React, TypeScript, Vercel, Supabase, Cloudflare Workers. Dostajesz gotowy produkt, nie prototyp przekazany deweloperowi.',
+        desc: 'Od pomysłu do działającego produktu — buduję to osobiście. Full-stack: Lovable, React, TypeScript, Vercel, Supabase, Cloudflare Workers. Dostajesz produkt działający na produkcji, nie prototyp przekazany deweloperowi.',
         tags: ['Lovable', 'React / TypeScript', 'Vercel + Supabase', 'Cloudflare Workers'],
       },
       {
@@ -220,7 +227,7 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         title: 'Strategia, Przywództwo i Consulting',
-        desc: 'Budowałem, prowadziłem i szkoliłem zespoły w pięciu firmach — od handlowców po deweloperów. Czy potrzebujesz operatora, trenera który upraszcza złożone rzeczy, czy kogoś kto poprowadzi dział — byłem w tym pokoju i wiem co jest potrzebne do realizacji.',
+        desc: 'Budowałem, prowadziłem i szkoliłem zespoły w pięciu firmach — od handlowców po deweloperów. Uczyłem ludzi, żeby naprawdę zaczęli używać nowych narzędzi i procesów, a nie tylko odsiedzieli prezentację. Coach, który upraszcza złożone rzeczy — i który sam to wszystko zbudował, więc rada bierze się z wdrażania, nie ze slajdów.',
         tags: ['Przywództwo Zespołu', 'Szkolenia i Coaching', 'Operacje Biznesowe', 'Consulting'],
       },
     ],
@@ -240,10 +247,17 @@ export const T: Record<Lang, SiteTranslation> = {
         cta: 'Zacznij projekt',
       },
       {
+        mode: 'Buduję z Twoim Zespołem',
+        title: 'Buduję — i uczę Twój zespół to prowadzić',
+        desc: 'Wdrożenie AI z naciskiem na ludzi: wdrażam realny workflow na produkcję, a Twój zespół uczy się go obsługiwać — ustrukturyzowane szkolenie plus praktyczny coaching, złożone narzędzia zamienione w proste codzienne nawyki. Buduję z Tobą, nie buduję i znikam, żeby Twoi ludzie mogli to prowadzić beze mnie.',
+        detail: 'Wdrożenie · Szkolę w trakcie budowy · Udokumentowane przekazanie',
+        cta: 'Zbuduj z zespołem',
+      },
+      {
         mode: 'Zatrudnij Mnie',
         title: 'Etat lub długoterminowo',
-        desc: 'Otwarty zarówno na zatrudnienie, jak i długoterminowe projekty. Remote-first. Najskuteczniejszy tam, gdzie ktoś musi przejąć warstwę produktową, wzrostową lub operacyjną — albo zbudować infrastrukturę AI od zera.',
-        detail: 'Etat lub kontrakt · Remote-first · Head of Ops / Growth / AI',
+        desc: 'Otwarty zarówno na zatrudnienie, jak i długoterminowe projekty. Remote-first. Najskuteczniejszy tam, gdzie trzeba zbudować infrastrukturę AI od zera i sprawić, żeby zespół naprawdę z niej korzystał — jedno i drugie robiłem we własnych firmach. Równie mocny w przejęciu warstwy produktowej, wzrostowej lub operacyjnej.',
+        detail: 'Etat lub kontrakt · Remote-first · AI Coach / Lead ds. wdrażania AI · Head of AI / Ops',
         cta: 'Skontaktuj się',
       },
     ],
