@@ -1003,7 +1003,16 @@ section { position: relative; z-index: 1; }
 
   /* ── Misc ── */
   .cursor-ptr { display: none; }
-  .lang-toggle { padding: 4px 6px; }
+  /* ── Tap targets ≥ 44px (mobile audit) ── */
+  .lang-toggle { min-width: 44px; min-height: 44px; padding: 0; }
+  .hamburger { width: 44px; height: 44px; }
+  .nav-sig-wrap { min-height: 44px; }
+  .cap-head, .engage-head { min-height: 44px; }
+  .engage-cta { padding: 11px 0; }
+  .contact-email { padding: 10px 0; }
+  .contact-alts { gap: 2px 14px; flex-wrap: wrap; }
+  .contact-alts a { padding: 13px 6px; }
+  .footer-links a { padding: 14px 6px; }
   .scroll-prog { height: 2px; }
   .marquee-item { font-size: 10px; padding-right: 36px; }
   .marquee-sep { margin-right: 36px; }

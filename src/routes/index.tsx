@@ -129,12 +129,12 @@ function Marquee() {
 
 /* ── Static structural data ── */
 const PROJECT_META = [
-  { num: '01', logo: '/logos/masgroup.png', name: 'MAS Group', tags: ['Operations', 'B2B'], year: '2021–now', href: null as string | null },
-  { num: '02', logo: '/logos/flyt.png', name: 'Flyt', tags: ['Marketplace', 'SaaS'], year: '2023', href: null as string | null },
-  { num: '03', logo: '/logos/quickfix.png', name: 'QuickFix', tags: ['Brand', 'Growth'], year: '2022', href: null as string | null },
-  { num: '04', logo: '/logos/sleipnir.png', name: 'Sleipnir Glacier Tours', tags: ['Tourism', 'Operations'], year: '2019–2022', href: null as string | null },
+  { num: '01', logo: '/logos/masgroup.webp', name: 'MAS Group', tags: ['Operations', 'B2B'], year: '2021–now', href: null as string | null },
+  { num: '02', logo: '/logos/flyt.webp', name: 'Flyt', tags: ['Marketplace', 'SaaS'], year: '2023', href: null as string | null },
+  { num: '03', logo: '/logos/quickfix.webp', name: 'QuickFix', tags: ['Brand', 'Growth'], year: '2022', href: null as string | null },
+  { num: '04', logo: '/logos/sleipnir.webp', name: 'Sleipnir Glacier Tours', tags: ['Tourism', 'Operations'], year: '2019–2022', href: null as string | null },
   { num: '05', logo: '/logos/reykjawwwik.svg', name: 'Reykjawwwik', tags: ['Agency', 'Product'], year: '2023', href: null as string | null },
-  { num: '06', logo: '/logos/ekomoc.png', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
+  { num: '06', logo: '/logos/ekomoc.webp', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
 ]
 
 const CAP_NUMS = ['01', '02', '03', '04']
@@ -214,7 +214,7 @@ function HomePage() {
       {/* ── Nav ── */}
       <nav className="nav">
         <a href="/" className="nav-sig-wrap" aria-label="Kamil Jan">
-          <img src="/signature.png" alt="Kamil Jan" className="nav-sig" />
+          <img src="/signature.webp" alt="Kamil Jan" className="nav-sig" />
         </a>
         <ul className="nav-links">
           <li><a href="#work">{t.nav.work}</a></li>
@@ -279,7 +279,7 @@ function HomePage() {
             </div>
             <div className="about-photo-wrap">
               <div className="about-photo">
-                <img src="/kamil.png" alt="Kamil Jan" />
+                <img src="/kamil.webp" alt="Kamil Jan" loading="lazy" decoding="async" width="760" height="760" />
               </div>
             </div>
           </div>
@@ -296,7 +296,7 @@ function HomePage() {
               const inner = (
                 <>
                   <div className="work-logo">
-                    <img src={p.logo} alt={p.name} />
+                    <img src={p.logo} alt={p.name} loading="lazy" decoding="async" width="36" height="36" />
                   </div>
                   <div>
                     <div className="work-name">{p.name}</div>
@@ -390,7 +390,7 @@ function HomePage() {
 
       {/* ── Contact ── */}
       <section className="contact" id="contact">
-        <img src="/kamil-suit.png" alt="" className="contact-photo" aria-hidden="true" />
+        <img src="/kamil-suit.webp" alt="" className="contact-photo" aria-hidden="true" loading="lazy" decoding="async" width="675" height="900" />
         <div className="container">
           <div className="contact-inner">
             <h2 className="contact-h2">{t.contact.h2}</h2>
@@ -410,7 +410,7 @@ function HomePage() {
               <a href="https://github.com/mountainallservice" target="_blank" rel="noreferrer">GitHub</a>
             </div>
             <div className="contact-sig">
-              <img src="/signature.png" alt="Kamil Jan signature" />
+              <img src="/signature.webp" alt="Kamil Jan signature" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
@@ -426,7 +426,7 @@ function HomePage() {
 
       {/* ── Footer ── */}
       <footer className="footer">
-        <img src="/signature.png" alt="Kamil Jan" className="footer-sig" />
+        <img src="/signature.webp" alt="Kamil Jan" className="footer-sig" loading="lazy" decoding="async" />
         <div className="footer-copy">&copy; {new Date().getFullYear()} Kamil Jan &mdash; kamiljan.com</div>
         <div className="footer-links">
           <a href="https://youtube.com/@kamiljan11" target="_blank" rel="noreferrer">YouTube</a>
