@@ -707,12 +707,12 @@ section { position: relative; z-index: 1; }
   width: auto;
   object-fit: contain;
   object-position: bottom;
-  filter: saturate(0.92) contrast(1.02) brightness(0.9);
+  filter: grayscale(62%) saturate(0.85) contrast(1.04) brightness(0.82);
   mask-image: linear-gradient(to top, transparent 0%, black 13%);
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 13%);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.88;
+  opacity: 0.8;
 }
 
 /* ── Contact internals ── */
