@@ -32,6 +32,18 @@
   --r-lg: 20px;
 }
 
+/* ── Reduced motion — respect user preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track { animation: none !important; }
+  .scroll-prog, .avail-dot, .wa-ring, .work-swipe-hint { animation: none !important; }
+}
+
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
