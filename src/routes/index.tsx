@@ -279,7 +279,7 @@ function HomePage() {
             </div>
             <div className="about-photo-wrap">
               <div className="about-photo">
-                <img src="/kamil.webp" alt="Kamil Jan" loading="lazy" decoding="async" width="760" height="760" />
+                <img src="/kamil-suit.webp" alt="Kamil Jan" loading="lazy" decoding="async" width="675" height="900" />
               </div>
             </div>
           </div>
@@ -390,7 +390,7 @@ function HomePage() {
 
       {/* ── Contact ── */}
       <section className="contact" id="contact">
-        <img src="/kamil-suit.webp" alt="" className="contact-photo" aria-hidden="true" loading="lazy" decoding="async" width="675" height="900" />
+        <img src="/kamil.webp" alt="" className="contact-photo" aria-hidden="true" loading="lazy" decoding="async" width="760" height="760" />
         <div className="container">
           <div className="contact-inner">
             <h2 className="contact-h2">{t.contact.h2}</h2>
