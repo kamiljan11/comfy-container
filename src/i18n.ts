@@ -114,13 +114,13 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         title: 'AI & Automation',
-        desc: 'n8n workflows, voice agents, WhatsApp bots, LLM integrations — running in production. I build, deploy, and hand you the documentation so your team can maintain it without me.',
-        tags: ['n8n Workflows', 'Voice Agents', 'WhatsApp Bots', 'LLM Integrations'],
+        desc: "n8n workflows, voice agents, WhatsApp bots, LLM integrations — running in production. But building is only half of it: I coach teams to actually adopt AI, turn complex tools into simple daily habits, and leave behind documentation and AI champions who keep it running without me.",
+        tags: ['n8n Workflows', 'Voice Agents', 'LLM Integrations', 'AI Enablement'],
       },
       {
         title: 'Strategy, Leadership & Consulting',
-        desc: "I've built and led teams across five companies. Whether you need an operator, a thinking partner, or someone to run a department — I've been in the room and know what it actually takes to execute.",
-        tags: ['Team Leadership', 'Business Operations', 'Consulting', 'SOPs & Delegation'],
+        desc: "I've built, led, and trained teams across five companies — from field sales reps to developers. Whether you need an operator, a coach who makes complex things simple, or someone to run a department, I've been in the room and know what it takes to execute.",
+        tags: ['Team Leadership', 'Coaching & Training', 'Business Operations', 'Consulting'],
       },
     ],
     engageModes: [
@@ -215,13 +215,13 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         title: 'AI i Automatyzacja',
-        desc: 'Workflowy n8n, agenty głosowe, boty WhatsApp, integracje LLM — działające na produkcji. Buduję, wdrażam i przekazuję dokumentację, żeby Twój zespół mógł to utrzymać beze mnie.',
-        tags: ['Workflowy n8n', 'Agenty Głosowe', 'Boty WhatsApp', 'Integracje LLM'],
+        desc: 'Workflowy n8n, agenty głosowe, boty WhatsApp, integracje LLM — działające na produkcji. Ale budowanie to połowa roboty: szkolę zespoły z realnej adopcji AI, zamieniam złożone narzędzia w proste codzienne nawyki i zostawiam dokumentację oraz AI championów, którzy utrzymają to beze mnie.',
+        tags: ['Workflowy n8n', 'Agenty Głosowe', 'Integracje LLM', 'Wdrażanie AI'],
       },
       {
         title: 'Strategia, Przywództwo i Consulting',
-        desc: 'Budowałem i prowadziłem zespoły w pięciu firmach. Czy potrzebujesz operatora, partnera do myślenia, czy kogoś kto poprowadzi dział — byłem w tym pokoju i wiem co faktycznie jest potrzebne do realizacji.',
-        tags: ['Przywództwo Zespołu', 'Operacje Biznesowe', 'Consulting', 'SOPy i Delegowanie'],
+        desc: 'Budowałem, prowadziłem i szkoliłem zespoły w pięciu firmach — od handlowców po deweloperów. Czy potrzebujesz operatora, trenera który upraszcza złożone rzeczy, czy kogoś kto poprowadzi dział — byłem w tym pokoju i wiem co jest potrzebne do realizacji.',
+        tags: ['Przywództwo Zespołu', 'Szkolenia i Coaching', 'Operacje Biznesowe', 'Consulting'],
       },
     ],
     engageModes: [
