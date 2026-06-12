@@ -27,6 +27,23 @@ function FlagGB() {
   )
 }
 
+/* ── Rotating colored hero word ── */
+const HERO_ROT: Record<Lang, string[]> = {
+  en: ['themselves.', 'on autopilot.', 'without you.', '24/7.', 'while you sleep.'],
+  pl: ['same.', 'na autopilocie.', 'bez ciebie.', '24/7.', 'gdy śpisz.'],
+}
+function RotatingWord({ lang }: { lang: Lang }) {
+  const words = HERO_ROT[lang]
+  const [i, setI] = useState(0)
+  useEffect(() => {
+    setI(0)
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = setInterval(() => setI(p => (p + 1) % words.length), 2400)
+    return () => clearInterval(id)
+  }, [lang]) // eslint-disable-line react-hooks/exhaustive-deps
+  return <em className="hero-rot"><span key={i} className="hero-rot-in">{words[i]}</span></em>
+}
+
 /* ── Count-up stat ── */
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
   const [count, setCount] = useState(0)
@@ -263,13 +280,15 @@ function HomePage() {
       {/* ── Hero ── */}
       <section className="hero">
         <div className="hero-canvas-wrap"><Hero3D /></div>
+        <div className="aurora" aria-hidden="true" />
         <div className="hero-fade-top" />
         <div className="hero-fade-bottom" />
         <div className="hero-content">
           <p className="hero-eyebrow">{t.hero.eyebrow}</p>
           <h1 className="hero-h1">
             <span className="line-mask"><span className="line-in">{t.hero.h1a}</span></span>
-            <span className="line-mask"><span className="line-in">{t.hero.h1b} <em>{t.hero.h1em}</em></span></span>
+            <span className="line-mask"><span className="line-in">{t.hero.h1b}</span></span>
+            <span className="line-mask"><span className="line-in"><RotatingWord lang={lang} /></span></span>
           </h1>
           <p className="hero-sub">{t.hero.sub}</p>
           <div className="hero-actions">
