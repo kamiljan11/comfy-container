@@ -643,20 +643,20 @@ section { position: relative; z-index: 1; }
   width: auto;
   object-fit: cover;
   object-position: top;
-  filter: grayscale(30%) contrast(1.05) brightness(0.8);
+  filter: grayscale(82%) contrast(1.06) brightness(0.66);
   mask-image:
-    linear-gradient(to top, transparent 0%, black 22%),
-    linear-gradient(to right, transparent 0%, black 12%),
-    linear-gradient(to left, transparent 0%, black 20%);
+    linear-gradient(to top, transparent 0%, black 28%),
+    linear-gradient(to right, transparent 0%, black 32%),
+    linear-gradient(to left, transparent 0%, black 16%);
   -webkit-mask-image:
-    linear-gradient(to top, transparent 0%, black 22%),
-    linear-gradient(to right, transparent 0%, black 12%),
-    linear-gradient(to left, transparent 0%, black 20%);
+    linear-gradient(to top, transparent 0%, black 28%),
+    linear-gradient(to right, transparent 0%, black 32%),
+    linear-gradient(to left, transparent 0%, black 16%);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 /* ── Contact internals ── */
