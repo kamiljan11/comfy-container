@@ -30,6 +30,8 @@ interface SiteTranslation {
     p2a: string
     p2b: string
     p2c: string
+    p2d: string
+    p2e: string
     meta: string[]
     milestones: Array<{ year: string; desc: string }>
   }
@@ -69,14 +71,16 @@ export const T: Record<Lang, SiteTranslation> = {
     stats: ['Businesses built', 'Active verticals', 'Years building', 'Countries'],
     about: {
       label: 'About',
-      p1a: 'I started at 16 with one decision: ',
-      p1b: 'build yourself before you build anything',
-      p1c: '. A 50-person network at 17, first company at 18, years grinding field sales until I became ',
-      p1d: 'top performer on the floor',
-      p1e: '. Then I moved to Iceland with nothing and started over.',
-      p2a: 'I worked retail shifts, learned the market, and co-launched ',
-      p2b: 'Sleipnir Glacier Tours',
-      p2c: " from scratch — that's when it clicked. Since then I've built MAS Group across five verticals, managed and trained sales teams, hired and directed developers, and designed business systems from the ground up. I don't just ship the code — I run the operation, then train the people so it keeps running without me. That's also why I spent six years writing a practical spirituality guide — taking something genuinely complex and making it simple to follow. Making the complicated usable by other people is the through-line of everything I do.",
+      p1a: 'I started early — a sales network at 17, my first company at 18, then years in field sales until I was the top performer on the team. When I moved to Iceland I arrived with little and no local network, so I took retail work and learned the market from the floor up. That\'s where I co-built ',
+      p1b: 'Sleipnir Glacier Tours',
+      p1c: ' from nothing: the website, the pricing, the marketing and influencer deals, the trade fairs, and the guiding out on the ice. We earned ',
+      p1d: '4.9 stars across 388 reviews',
+      p1e: '. Selling something is one thing; building the machine that sells, delivers, and holds up under real customers is another — and I found I was better at the second.',
+      p2a: 'Now I run MAS Group across multiple verticals — auto parts, print, logistics, rental — where I manage and train the sales team, and hire and direct the developers, including the team at my agency, Reykjawwwik. The part I care about most is automation: ',
+      p2b: 'I ship AI in production',
+      p2c: ' — n8n workflows, voice agents, WhatsApp bots, LLM and MCP integrations — and products like Flyt and QuickFix, plus a multi-market agency SaaS. But shipping the system is only half of it. ',
+      p2d: 'I also train the people who run it, so it keeps working when I step away.',
+      p2e: ' I spent six years writing a practical guide that turns something genuinely hard to grasp into steps anyone can follow — which is the same job, really: take the complicated and make it usable by someone else.',
       meta: ['Years building', 'Active verticals', 'Businesses built'],
       milestones: [
         { year: '2012', desc: 'Started building at 16. First network, first company, field sales — top performer by 18.' },
@@ -177,14 +181,16 @@ export const T: Record<Lang, SiteTranslation> = {
     stats: ['Zbudowanych biznesów', 'Aktywnych pionów', 'Lat budowania', 'Krajów'],
     about: {
       label: 'O mnie',
-      p1a: 'Zacząłem w wieku 16 lat z jedną decyzją: ',
-      p1b: 'zbuduj siebie, zanim zbudujesz cokolwiek innego',
-      p1c: '. Sieć 50 osób w wieku 17 lat, pierwsza firma w 18, lata w sprzedaży terenowej aż do tytułu ',
-      p1d: 'najlepszego sprzedawcy w zespole',
-      p1e: '. Potem przeniosłem się na Islandię bez niczego i zacząłem od nowa.',
-      p2a: 'Pracowałem na zmiany w handlu, poznawałem rynek i współtworzyłem ',
-      p2b: 'Sleipnir Glacier Tours',
-      p2c: ' od podstaw — wtedy wszystko zaskoczyło. Od tamtej pory zbudowałem MAS Group w pięciu pionach, zarządzałem i szkoliłem handlowców, zatrudniałem i kierowałem deweloperami, projektowałem architektury biznesowe od zera. Nie tylko wysyłam kod — prowadzę całą operację, a potem szkolę ludzi, żeby działała beze mnie. Dlatego też przez sześć lat pisałem praktyczny poradnik duchowości — biorąc coś naprawdę skomplikowanego i robiąc z tego coś prostego w praktyce. Sprawianie, że skomplikowane rzeczy stają się zrozumiałe i użyteczne dla innych, to wspólny mianownik wszystkiego, co robię.',
+      p1a: 'Zacząłem wcześnie — sieć sprzedażowa w wieku 17 lat, pierwsza firma w 18, a potem lata w sprzedaży terenowej, aż zostałem najlepszym sprzedawcą w zespole. Po przeprowadzce na Islandię miałem niewiele i żadnych lokalnych znajomości, więc wziąłem pracę w handlu i poznałem rynek od podszewki. Tam od zera współtworzyłem ',
+      p1b: 'Sleipnir Glacier Tours',
+      p1c: ': stronę, cennik, marketing i współprace z influencerami, targi branżowe oraz przewodnictwo na lodowcu. Zebraliśmy ',
+      p1d: '4,9 gwiazdki przy 388 opiniach',
+      p1e: '. Co innego coś sprzedać, a co innego zbudować maszynę, która sprzedaje, dowozi i wytrzymuje pod naporem prawdziwych klientów — i okazało się, że w tym drugim jestem lepszy.',
+      p2a: 'Dziś prowadzę MAS Group w wielu obszarach — części samochodowe, druk, logistyka, wynajem — gdzie zarządzam zespołem sprzedaży i go szkolę oraz zatrudniam i prowadzę programistów, w tym zespół w mojej agencji Reykjawwwik. Najbardziej zależy mi na automatyzacji: ',
+      p2b: 'wdrażam AI na produkcji',
+      p2c: ' — przepływy w n8n, agentów głosowych, boty na WhatsApp, integracje LLM i MCP — oraz produkty takie jak Flyt i QuickFix, plus wielorynkowy agencyjny SaaS. Ale wdrożenie systemu to dopiero połowa roboty. ',
+      p2d: 'Szkolę też ludzi, którzy mają go obsługiwać, żeby działał, gdy odejdę od biurka.',
+      p2e: ' Przez sześć lat pisałem praktyczny przewodnik, który zamienia coś naprawdę trudnego do ogarnięcia w kroki możliwe do przejścia przez każdego — a to w gruncie rzeczy ta sama robota: wziąć skomplikowane i sprawić, by ktoś inny mógł tego użyć.',
       meta: ['Lat budowania', 'Aktywnych pionów', 'Zbudowanych biznesów'],
       milestones: [
         { year: '2012', desc: 'Zacząłem budować w wieku 16 lat. Pierwsza sieć, pierwsza firma, sprzedaż terenowa — najlepszy sprzedawca w wieku 18 lat.' },

@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import Hero3D from '../components/Hero3D'
 import { T, type Lang } from '../i18n'
@@ -146,11 +146,11 @@ function Marquee() {
 
 /* ── Static structural data ── */
 const PROJECT_META = [
-  { num: '01', logo: '/logos/masgroup.webp', name: 'MAS Group', tags: ['Operations', 'B2B'], year: '2021–now', href: null as string | null },
-  { num: '02', logo: '/logos/flyt.webp', name: 'Flyt', tags: ['Marketplace', 'SaaS'], year: '2023', href: null as string | null },
-  { num: '03', logo: '/logos/quickfix.webp', name: 'QuickFix', tags: ['Brand', 'Growth'], year: '2022', href: null as string | null },
-  { num: '04', logo: '/logos/sleipnir.webp', name: 'Sleipnir Glacier Tours', tags: ['Tourism', 'Operations'], year: '2019–2022', href: null as string | null },
-  { num: '05', logo: '/logos/reykjawwwik.svg', name: 'Reykjawwwik', tags: ['Agency', 'Product'], year: '2023', href: null as string | null },
+  { num: '01', logo: '/logos/masgroup.webp', name: 'MAS Group', tags: ['Operations', 'B2B'], year: '2021–now', href: 'https://www.masgroup.is' as string | null },
+  { num: '02', logo: '/logos/flyt.webp', name: 'Flyt', tags: ['Marketplace', 'SaaS'], year: '2023', href: 'https://flyt.is' as string | null },
+  { num: '03', logo: '/logos/quickfix.webp', name: 'QuickFix', tags: ['Brand', 'Growth'], year: '2022', href: 'https://quickfix.is' as string | null },
+  { num: '04', logo: '/logos/sleipnir.webp', name: 'Sleipnir Glacier Tours', tags: ['Tourism', 'Operations'], year: '2019–2022', href: 'https://sleipnirtours.is' as string | null },
+  { num: '05', logo: '/logos/reykjawwwik.svg', name: 'Reykjawwwik', tags: ['Agency', 'Product'], year: '2023', href: 'https://reykjawwwik.is' as string | null },
   { num: '06', logo: '/logos/ekomoc.webp', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
 ]
 
@@ -318,7 +318,7 @@ function HomePage() {
                 {t.about.p1a}<strong>{t.about.p1b}</strong>{t.about.p1c}<strong>{t.about.p1d}</strong>{t.about.p1e}
               </p>
               <p className="about-p">
-                {t.about.p2a}<strong>{t.about.p2b}</strong>{t.about.p2c}
+                {t.about.p2a}<strong>{t.about.p2b}</strong>{t.about.p2c}<strong>{t.about.p2d}</strong>{t.about.p2e}
               </p>
             </div>
             <div className="about-photo-wrap">
@@ -357,9 +357,9 @@ function HomePage() {
               )
               if (p.href) {
                 return (
-                  <Link key={p.num} to={p.href} className="work-row work-row-link">
+                  <a key={p.num} href={p.href} target="_blank" rel="noreferrer" className="work-row work-row-link">
                     {inner}
-                  </Link>
+                  </a>
                 )
               }
               return <div key={p.num} className="work-row">{inner}</div>
