@@ -178,22 +178,47 @@ function HomePage() {
   const t = T[lang]
 
   useEffect(() => {
-    const els = document.querySelectorAll<HTMLElement>('.work-row, .cap-card, .engage-card')
+    const cards = document.querySelectorAll<HTMLElement>('.work-row, .cap-card, .engage-card')
+    const labels = document.querySelectorAll<HTMLElement>('.section-label')
+    const heads = document.querySelectorAll<HTMLElement>('.contact-h2')
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const el = entry.target as HTMLElement
-          const idx = Array.from(el.parentElement?.children ?? []).indexOf(el)
-          el.style.transitionDelay = `${idx * 0.06}s`
-          el.classList.add('visible')
+          if (el.matches('.section-label')) el.classList.add('label-in')
+          else if (el.matches('.contact-h2')) el.classList.add('h2-in')
+          else {
+            const idx = Array.from(el.parentElement?.children ?? []).indexOf(el)
+            el.style.transitionDelay = `${idx * 0.06}s`
+            el.classList.add('visible')
+          }
           observer.unobserve(el)
         }
       })
     }, { threshold: 0, rootMargin: '0px 0px -8% 0px' })
-    els.forEach((el) => observer.observe(el))
-    // safety net — never leave a card stuck invisible if the observer misses
-    const safety = setTimeout(() => els.forEach((el) => el.classList.add('visible')), 1400)
+    ;[...cards, ...labels, ...heads].forEach((el) => observer.observe(el))
+    // safety net — never leave anything stuck hidden if the observer misses
+    const safety = setTimeout(() => {
+      cards.forEach((el) => el.classList.add('visible'))
+      labels.forEach((el) => el.classList.add('label-in'))
+      heads.forEach((el) => el.classList.add('h2-in'))
+    }, 1400)
     return () => { observer.disconnect(); clearTimeout(safety) }
+  }, [])
+
+  // cursor-follow glow on capability/engage cards (desktop only, one passive listener)
+  useEffect(() => {
+    if (!window.matchMedia('(hover: hover)').matches) return
+    const onMove = (e: PointerEvent) => {
+      const card = (e.target as HTMLElement).closest('.cap-card, .engage-card') as HTMLElement | null
+      const glow = card?.querySelector<HTMLElement>('.card-glow')
+      if (!card || !glow) return
+      const r = card.getBoundingClientRect()
+      glow.style.setProperty('--mx', `${e.clientX - r.left}px`)
+      glow.style.setProperty('--my', `${e.clientY - r.top}px`)
+    }
+    document.addEventListener('pointermove', onMove, { passive: true })
+    return () => document.removeEventListener('pointermove', onMove)
   }, [])
 
   return (
@@ -243,8 +268,8 @@ function HomePage() {
         <div className="hero-content">
           <p className="hero-eyebrow">{t.hero.eyebrow}</p>
           <h1 className="hero-h1">
-            {t.hero.h1a}<br />
-            {t.hero.h1b} <em>{t.hero.h1em}</em>
+            <span className="line-mask"><span className="line-in">{t.hero.h1a}</span></span>
+            <span className="line-mask"><span className="line-in">{t.hero.h1b} <em>{t.hero.h1em}</em></span></span>
           </h1>
           <p className="hero-sub">{t.hero.sub}</p>
           <div className="hero-actions">
@@ -332,6 +357,7 @@ function HomePage() {
           <div className="cap-grid">
             {t.caps.map((c, i) => (
               <div key={i} className={`cap-card${openCap === i ? ' expanded' : ''}`}>
+                <div className="card-glow" aria-hidden="true" />
                 <button className="cap-head" onClick={() => setOpenCap(openCap === i ? null : i)} aria-expanded={openCap === i}>
                   <div className="cap-num">{CAP_NUMS[i]}</div>
                   <div className="cap-title">{c.title}</div>
@@ -360,6 +386,7 @@ function HomePage() {
               const e = t.engageModes[i]
               return (
                 <div key={i} className={`engage-card${meta.featured ? ' featured' : ''}${openEngage === i ? ' expanded' : ''}`}>
+                  <div className="card-glow" aria-hidden="true" />
                   <button className="engage-head" onClick={() => setOpenEngage(openEngage === i ? null : i)} aria-expanded={openEngage === i}>
                     <div>
                       <div className="engage-mode">{e?.mode}</div>
@@ -393,7 +420,7 @@ function HomePage() {
         <img src="/kamil.webp" alt="" className="contact-photo" aria-hidden="true" loading="lazy" decoding="async" width="760" height="760" />
         <div className="container">
           <div className="contact-inner">
-            <h2 className="contact-h2">{t.contact.h2}</h2>
+            <h2 className="contact-h2"><span className="line-mask"><span className="line-in">{t.contact.h2}</span></span></h2>
             <p className="contact-sub">{t.contact.sub}</p>
             <a href="mailto:hello@kamiljan.com" className="contact-email">
               hello@kamiljan.com
