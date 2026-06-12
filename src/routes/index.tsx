@@ -436,7 +436,7 @@ function HomePage() {
 
       {/* ── Contact ── */}
       <section className="contact" id="contact">
-        <img src="/kamil.webp" alt="" className="contact-photo" aria-hidden="true" loading="lazy" decoding="async" width="760" height="760" />
+        <img src="/kamil-cutout.webp" alt="" className="contact-photo" aria-hidden="true" loading="lazy" decoding="async" width="853" height="1100" />
         <div className="container">
           <div className="contact-inner">
             <h2 className="contact-h2"><span className="line-mask"><span className="line-in">{t.contact.h2}</span></span></h2>

@@ -702,25 +702,17 @@ section { position: relative; z-index: 1; }
 .contact-photo {
   position: absolute;
   bottom: 0;
-  right: 5%;
-  height: 88%;
+  right: 3%;
+  height: 96%;
   width: auto;
-  object-fit: cover;
-  object-position: top;
-  filter: grayscale(82%) contrast(1.06) brightness(0.66);
-  mask-image:
-    linear-gradient(to top, transparent 0%, black 28%),
-    linear-gradient(to right, transparent 0%, black 32%),
-    linear-gradient(to left, transparent 0%, black 16%);
-  -webkit-mask-image:
-    linear-gradient(to top, transparent 0%, black 28%),
-    linear-gradient(to right, transparent 0%, black 32%),
-    linear-gradient(to left, transparent 0%, black 16%);
-  mask-composite: intersect;
-  -webkit-mask-composite: source-in;
+  object-fit: contain;
+  object-position: bottom;
+  filter: saturate(0.92) contrast(1.02) brightness(0.9);
+  mask-image: linear-gradient(to top, transparent 0%, black 13%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 13%);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.5;
+  opacity: 0.88;
 }
 
 /* ── Contact internals ── */
