@@ -1,19 +1,12 @@
 /**
- * AI assistant backend — server-only. Holds the Anthropic key (never shipped to
- * the browser) and answers visitor questions about Kamil, grounded strictly in
- * the facts below.
- *
- * To enable: set ANTHROPIC_API_KEY as an environment secret in the deploy
- * platform (Lovable → project env / Cloudflare Worker secret). Until then the
- * bot degrades gracefully to a "reach me directly" message with WhatsApp/email.
- *
- * Model: claude-haiku-4-5 — fast + cheap, right tier for a public, grounded
- * Q&A bot. To raise quality, change MODEL below to 'claude-sonnet-4-6' or
- * 'claude-opus-4-8' (higher cost per message).
+ * AI assistant backend — server-only. Uses Lovable AI Gateway (LOVABLE_API_KEY
+ * auto-provisioned, never shipped to browser). Grounded strictly in the facts
+ * below.
  */
-import Anthropic from '@anthropic-ai/sdk'
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
+import { generateText } from 'ai'
 
-const MODEL = 'claude-haiku-4-5'
+const MODEL = 'google/gemini-3-flash-preview'
 
 const SYSTEM = `You are Kamil Jan's AI assistant, embedded on his portfolio site kamiljan.com. You are also a live demo of the kind of AI Kamil builds — so be sharp, helpful, and natural.
 
@@ -55,8 +48,7 @@ export type BotMessage = { role: 'user' | 'assistant'; content: string }
 export type BotResult = { ok: true; text: string } | { ok: false; error: string }
 
 export async function runBot(messages: BotMessage[]): Promise<BotResult> {
-  const apiKey =
-    typeof process !== 'undefined' ? process.env?.ANTHROPIC_API_KEY : undefined
+  const apiKey = process.env.LOVABLE_API_KEY
   if (!apiKey) return { ok: false, error: 'unconfigured' }
 
   const clean = messages
@@ -66,18 +58,21 @@ export async function runBot(messages: BotMessage[]): Promise<BotResult> {
   if (!clean.length) return { ok: false, error: 'empty' }
 
   try {
-    const client = new Anthropic({ apiKey })
-    const res = await client.messages.create({
-      model: MODEL,
-      max_tokens: 512,
+    const gateway = createOpenAICompatible({
+      name: 'lovable',
+      baseURL: 'https://ai.gateway.lovable.dev/v1',
+      headers: {
+        'Lovable-API-Key': apiKey,
+        'X-Lovable-AIG-SDK': 'vercel-ai-sdk',
+      },
+    })
+
+    const res = await generateText({
+      model: gateway(MODEL),
       system: SYSTEM,
       messages: clean,
     })
-    const text = res.content
-      .filter((b): b is Anthropic.TextBlock => b.type === 'text')
-      .map((b) => b.text)
-      .join('\n')
-      .trim()
+    const text = (res.text || '').trim()
     return { ok: true, text: text || 'I am not certain — reach Kamil at hello@kamiljan.com.' }
   } catch {
     return { ok: false, error: 'api-error' }
