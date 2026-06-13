@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import type * as THREE from 'three'
 
 export default function Hero3D() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
