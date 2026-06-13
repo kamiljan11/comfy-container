@@ -1143,11 +1143,40 @@ section { position: relative; z-index: 1; }
 .chatbot-foot a:hover { text-decoration: underline; }
 .chatbot-foot-sep { color: var(--muted); }
 
+/* clickable links inside bot replies */
+.chatbot-msg.assistant a { color: var(--teal-2); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(45,212,191,0.4); }
+.chatbot-msg.assistant a:hover { border-bottom-color: var(--teal-2); }
+
+/* starter question chips */
+.chatbot-starters { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 4px; }
+.chatbot-starter {
+  max-width: 100%; text-align: left; padding: 9px 13px; font-size: 12.5px; line-height: 1.4;
+  color: var(--teal-2); background: rgba(45,212,191,0.07); border: 1px solid rgba(45,212,191,0.28);
+  border-radius: 13px; cursor: none; transition: background 0.18s, border-color 0.18s, transform 0.18s;
+}
+.chatbot-starter:hover { background: rgba(45,212,191,0.14); border-color: var(--teal-2); transform: translateX(2px); }
+
+/* one-time attention nudge next to the FAB */
+.chatbot-nudge {
+  position: fixed; bottom: 40px; right: 92px; z-index: 60; display: flex; align-items: center; gap: 9px;
+  padding: 10px 14px; font-family: var(--font-head); font-size: 13px; font-weight: 600; color: var(--text);
+  background: rgba(9,22,31,0.97); border: 1px solid var(--border); border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45); cursor: none; backdrop-filter: blur(10px);
+  animation: chatbot-nudge-in 0.45s cubic-bezier(0.2,0.8,0.2,1) both;
+}
+.chatbot-nudge:hover { border-color: var(--teal); }
+.chatbot-nudge-x { font-size: 16px; line-height: 1; color: var(--muted); padding: 0 2px; }
+.chatbot-nudge-x:hover { color: var(--text); }
+@keyframes chatbot-nudge-in { from { opacity: 0; transform: translateX(10px) scale(0.96); } to { opacity: 1; transform: none; } }
+
 @media (max-width: 768px) {
   .chatbot-fab { bottom: 20px; right: 20px; }
   .chatbot-panel { bottom: 84px; right: 12px; left: 12px; width: auto; max-width: none; height: 72dvh; }
+  .chatbot-nudge { bottom: 30px; right: 86px; max-width: 56vw; }
 }
 @media (prefers-reduced-motion: reduce) {
   .chatbot-fab-ring, .chatbot-typing span { animation: none !important; }
   .chatbot-typing span { opacity: 0.6 !important; }
+  .chatbot-nudge { animation: none !important; }
+  .chatbot-starter:hover { transform: none; }
 }
