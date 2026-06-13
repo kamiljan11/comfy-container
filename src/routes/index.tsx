@@ -148,7 +148,7 @@ const PROJECT_META = [
   { num: '01', logo: '/logos/masgroup.webp', name: 'MAS Group', tags: ['Operations', 'B2B'], year: '2021–now', href: 'https://www.masgroup.is' as string | null },
   { num: '02', logo: '/logos/flyt.webp', name: 'Flyt', tags: ['Marketplace', 'SaaS'], year: '2023', href: 'https://flyt.is' as string | null },
   { num: '03', logo: '/logos/quickfix.webp', name: 'QuickFix', tags: ['Brand', 'Growth'], year: '2022', href: 'https://quickfix.is' as string | null },
-  { num: '04', logo: '/logos/sleipnir.webp', name: 'Sleipnir Glacier Tours', tags: ['Tourism', 'Operations'], year: '2019–2022', href: 'https://sleipnirtours.is' as string | null },
+  { num: '04', logo: '/logos/sleipnir.webp', name: 'Sleipnir Glacier Tours', tags: ['Tourism', 'Operations'], year: '2022–2024', href: 'https://sleipnirtours.is' as string | null },
   { num: '05', logo: '/logos/reykjawwwik.svg', name: 'Reykjawwwik', tags: ['Agency', 'Product'], year: '2023', href: 'https://reykjawwwik.is' as string | null },
   { num: '06', logo: '/logos/ekomoc.webp', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
 ]
