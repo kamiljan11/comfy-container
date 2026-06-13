@@ -112,6 +112,9 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: "https://kamiljan.com/og-image.png" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&display=swap" },
       { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: siteCss },
       { rel: "canonical", href: "https://kamiljan.com" },
