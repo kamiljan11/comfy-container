@@ -19,10 +19,12 @@ export interface SubscribePayload {
  *   3. Notify Kamil that a new lead came in.
  *   4. Kick off the welcome sequence for the new subscriber.
  */
-export const subscribeToNewsletter = createServerFn({ method: 'POST' }).handler(
-  async ({ data }: { data: SubscribePayload }) => {
+export const subscribeToNewsletter = createServerFn({ method: 'POST' })
+  .inputValidator((data: SubscribePayload) => {
     if (!data?.email?.includes('@')) throw new Error('Valid email is required')
-
+    return data
+  })
+  .handler(async ({ data }) => {
     const subscriber = {
       email: data.email.trim().toLowerCase(),
       name: data.name?.trim() || undefined,
@@ -33,16 +35,13 @@ export const subscribeToNewsletter = createServerFn({ method: 'POST' }).handler(
 
     await saveSubscriber(subscriber)
 
-    // Notify owner so we never miss a lead, even before real email is wired up.
     await sendEmail({
       to: 'hello@kamiljan.com',
       subject: `[kamiljan.com] new subscriber — ${subscriber.email}`,
       text: `Source: ${subscriber.source}\nTag: ${subscriber.tag ?? '—'}\nName: ${subscriber.name ?? '—'}\nEmail: ${subscriber.email}\nAt: ${subscriber.subscribedAt}`,
     })
 
-    // Kick off welcome sequence for the subscriber.
     await startWelcomeSequence({ email: subscriber.email, name: subscriber.name })
 
     return { ok: true, subscribedAt: subscriber.subscribedAt }
-  },
-)
+  })
