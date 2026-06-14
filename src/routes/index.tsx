@@ -267,7 +267,7 @@ function HomePage() {
         </ul>
         <div className="nav-right">
           <button className="lang-toggle" onClick={toggleLang} aria-label="Switch language">
-            {lang === 'en' ? <FlagPL /> : <FlagGB />}
+            {lang === 'en' ? <FlagGB /> : <FlagPL />}
           </button>
           <div className="nav-avail"><span className="avail-dot" />{t.nav.available}</div>
           <a href="#contact" className="nav-cta">{t.nav.cta}</a>
