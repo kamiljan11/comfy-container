@@ -2,29 +2,35 @@ import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { askBot } from '../lib/bot.functions'
 import type { Lang } from '../i18n'
 
+type Chip = { label: string; act: 'send' | 'wizard' | 'pick' | 'free' | 'wlink'; value?: string; href?: string; cta?: boolean }
 type Msg = {
   role: 'user' | 'assistant'
   content: string
   typed?: boolean
   suggestions?: string[]
   failed?: boolean
+  chips?: Chip[]
 }
 
-const COPY: Record<
-  Lang,
-  {
-    greet: string
-    placeholder: string
-    human: string
-    title: string
-    sub: string
-    fallback: string
-    starters: string[]
-    nudge: string
-    thinking: string[]
-    retry: string
-  }
-> = {
+type Copy = {
+  greet: string
+  placeholder: string
+  human: string
+  title: string
+  sub: string
+  fallback: string
+  starters: string[]
+  nudge: string
+  thinking: string[]
+  retry: string
+  wizardCta: string
+  wizardIntro: string
+  askLabel: string
+  moreLabel: string
+  wizard: { label: string; reply: string }[]
+}
+
+const COPY: Record<Lang, Copy> = {
   en: {
     greet: "Hi — I'm Kamil's AI assistant. Ask me about his work, skills, or whether he's a fit for your role.",
     placeholder: 'Ask anything…',
@@ -32,10 +38,22 @@ const COPY: Record<
     title: "Kamil's AI",
     sub: 'trained on his work',
     fallback: "I can't reach my brain right now — but Kamil replies personally. Email hello@kamiljan.com or message him on WhatsApp.",
-    starters: ['Is Kamil a fit for my role?', 'What has he actually built?', 'How do I reach him?'],
+    starters: ['Is Kamil a fit for my role?', 'What has he actually built?'],
     nudge: 'Ask my AI anything 👋',
     thinking: ['Thinking…', "Searching Kamil's work…"],
     retry: 'Try again',
+    wizardCta: '🧭 Help me find the right fit',
+    wizardIntro: "What brings you here? Pick one and I'll point you the right way:",
+    askLabel: 'Ask a question',
+    moreLabel: 'See other options',
+    wizard: [
+      { label: 'Hire Kamil for a role', reply: "Kamil is open to applied / forward-deployed AI engineer, AI implementation and enablement, and Head of AI / Ops / Growth roles — remote-first. He ships AI into production and gets the team to actually run it. The fastest move is a one-line brief of the role — message him below and he replies personally." },
+      { label: 'Get a product or site built', reply: "He handles the full build end to end and hands it over running and documented — full-stack React/TypeScript on Supabase, Vercel and Cloudflare. Tell him what you need and he'll scope it. Reach him below." },
+      { label: 'Add AI / automation to my business', reply: "His core work: ship AI into your production — voice agents, WhatsApp bots, n8n workflows, LLM and RAG — then train your team to run it. Tell him the task that eats the most time and he'll map it. Message him below." },
+      { label: 'Train my team to use AI', reply: "An AI enablement engagement: he ships a real workflow into production while your team learns to run it — train-while-building, documented handoff. Share your team's setup and he'll tell you where he'd start. Reach him below." },
+      { label: 'Growth & marketing', reply: "He builds the whole funnel — site, tracking, copy, Meta and Google Ads, lead-gen systems — and judges on ROAS, not clicks. Tell him the goal and the market. Message him below." },
+      { label: 'Just exploring', reply: "All good — ask me anything about Kamil's work, or browse his projects. When you're ready, he's one message away." },
+    ],
   },
   pl: {
     greet: 'Cześć — jestem AI asystentem Kamila. Pytaj o jego pracę, umiejętności albo czy pasuje do Twojej roli.',
@@ -44,21 +62,31 @@ const COPY: Record<
     title: 'AI Kamila',
     sub: 'wytrenowany na jego pracy',
     fallback: 'Chwilowo nie mam dostępu do mózgu — ale Kamil odpisuje osobiście. Napisz na hello@kamiljan.com albo na WhatsApp.',
-    starters: ['Czy Kamil pasuje do mojej roli?', 'Co realnie zbudował?', 'Jak się z nim skontaktować?'],
+    starters: ['Czy Kamil pasuje do mojej roli?', 'Co realnie zbudował?'],
     nudge: 'Zapytaj moje AI 👋',
     thinking: ['Myślę…', 'Przeszukuję pracę Kamila…'],
     retry: 'Spróbuj ponownie',
+    wizardCta: '🧭 Pomóż mi wybrać',
+    wizardIntro: 'Z czym przychodzisz? Wybierz, a skieruję Cię właściwie:',
+    askLabel: 'Zadaj pytanie',
+    moreLabel: 'Inne opcje',
+    wizard: [
+      { label: 'Zatrudnić Kamila (etat/rola)', reply: 'Kamil jest otwarty na role: applied / forward-deployed AI engineer, wdrażanie i enablement AI oraz Head of AI / Ops / Growth — remote-first. Wdraża AI na produkcję i sprawia, że zespół realnie z niej korzysta. Najszybciej: wyślij jednolinijkowy opis roli poniżej, odpisuje osobiście.' },
+      { label: 'Zbudować produkt lub stronę', reply: 'Przejmuje cały build od A do Z i oddaje działające oraz udokumentowane — full-stack React/TypeScript na Supabase, Vercel i Cloudflare. Napisz czego potrzebujesz, a wyceni zakres. Złap go poniżej.' },
+      { label: 'Wdrożyć AI / automatyzację w firmie', reply: 'Jego rdzeń: wdrożyć AI na Twoją produkcję — agenci głosowi, boty WhatsApp, n8n, LLM i RAG — a potem nauczyć zespół to obsługiwać. Napisz, które zadanie zżera najwięcej czasu, a on to zmapuje. Napisz poniżej.' },
+      { label: 'Przeszkolić zespół z AI', reply: 'Wdrożenie AI z naciskiem na ludzi: wdraża realny workflow na produkcję, a Twój zespół uczy się go obsługiwać — buduje i uczy w trakcie, z dokumentacją. Opisz sytuację zespołu, a powie od czego zacząć. Złap go poniżej.' },
+      { label: 'Wzrost i marketing', reply: 'Buduje cały lejek — strona, tracking, copy, reklamy Meta i Google, systemy lead-gen — i ocenia po ROAS, nie po klikach. Podaj cel i rynek. Napisz poniżej.' },
+      { label: 'Tylko się rozglądam', reply: 'Spoko — pytaj o cokolwiek z pracy Kamila albo przejrzyj projekty. Jak będziesz gotów, jest o jedną wiadomość stąd.' },
+    ],
   },
 }
 
-const STORE_KEY = 'kb_chat_v2'
+const STORE_KEY = 'kb_chat_v3'
 const NUDGE_KEY = 'kb_nudge_seen_v1'
 
-// Turn emails, wa.me and http(s) links inside a bot reply into real anchors.
 const LINK_RE =
   /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|(?:https?:\/\/|wa\.me\/)[^\s)]+)/g
 
-// Links within a plain (non-bold) text run.
 function renderInline(text: string, kp: string) {
   return text.split(LINK_RE).map((part, i) => {
     const key = `${kp}-${i}`
@@ -82,7 +110,6 @@ function renderInline(text: string, kp: string) {
   })
 }
 
-// Render light markdown (**bold** / __bold__) the model may emit, with links inside.
 const BOLD_RE = /\*\*([^*]+)\*\*|__([^_]+)__/g
 function renderText(text: string) {
   const out: ReactNode[] = []
@@ -100,7 +127,6 @@ function renderText(text: string) {
   return out
 }
 
-// Split the model's reply into the visible body and the trailing "SUGGESTED:" chips.
 function parseReply(text: string): { body: string; suggestions: string[] } {
   const m = text.match(/\n?\s*SUGGESTED:\s*([^\n]*)\s*$/i)
   if (!m || m.index === undefined) return { body: text.trim(), suggestions: [] }
@@ -125,7 +151,6 @@ function usePrefersReducedMotion() {
   return reduce
 }
 
-// Word-by-word reveal for a freshly-arrived bot message. Skippable, reduced-motion aware.
 function Typed({ text, onDone, onTick }: { text: string; onDone: () => void; onTick: () => void }) {
   const reduce = usePrefersReducedMotion()
   const tokens = useMemo(() => text.split(/(\s+)/), [text])
@@ -171,7 +196,6 @@ export default function ChatBot({ lang }: { lang: Lang }) {
   const scrollToEnd = () =>
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
 
-  // Restore a prior conversation for this browser session (client-only).
   useEffect(() => {
     try {
       const saved = sessionStorage.getItem(STORE_KEY)
@@ -196,7 +220,6 @@ export default function ChatBot({ lang }: { lang: Lang }) {
     }
   }, [msgs])
 
-  // One-time gentle nudge to draw the eye to the assistant.
   useEffect(() => {
     if (open) return
     let seen = false
@@ -210,12 +233,10 @@ export default function ChatBot({ lang }: { lang: Lang }) {
     return () => window.clearTimeout(id)
   }, [open])
 
-  // Reset greeting if language flips and only the seed message exists.
   useEffect(() => {
     setMsgs((m) => (m.length <= 1 ? [{ role: 'assistant', content: t.greet, typed: true }] : m))
   }, [lang]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Phased thinking label during the (single) request.
   useEffect(() => {
     if (!busy) {
       setPhase(0)
@@ -281,14 +302,64 @@ export default function ChatBot({ lang }: { lang: Lang }) {
     ask(h)
   }
 
+  // ── Mini wizard (deterministic, no LLM call) ──
+  const contactChips: Chip[] = [
+    { label: 'WhatsApp', act: 'wlink', href: 'https://wa.me/3548888901', cta: true },
+    { label: 'Email', act: 'wlink', href: 'mailto:hello@kamiljan.com', cta: true },
+    { label: t.askLabel, act: 'free' },
+    { label: t.moreLabel, act: 'wizard' },
+  ]
+
+  const startWizard = () => {
+    if (busy) return
+    const chips: Chip[] = t.wizard.map((o, i) => ({ label: o.label, act: 'pick', value: String(i) }))
+    setMsgs((m) => [...m, { role: 'assistant', content: t.wizardIntro, typed: true, chips }])
+  }
+
+  const chooseWizard = (idx: string) => {
+    const o = t.wizard[Number(idx)]
+    if (!o) return
+    setMsgs((m) => [...m, { role: 'assistant', content: o.reply, typed: false, chips: contactChips }])
+  }
+
+  const handleChip = (c: Chip) => {
+    if (c.act === 'send') send(c.value)
+    else if (c.act === 'wizard') startWizard()
+    else if (c.act === 'pick' && c.value) chooseWizard(c.value)
+    else if (c.act === 'free') inputRef.current?.focus()
+  }
+
   const markTyped = (i: number) =>
     setMsgs((ms) => ms.map((x, idx) => (idx === i ? { ...x, typed: true } : x)))
 
-  const showStarters = msgs.length === 1 && !busy
+  const renderChips = (chips: Chip[]) => (
+    <div className="chatbot-starters chatbot-chips">
+      {chips.map((c, i) =>
+        c.act === 'wlink' ? (
+          <a
+            key={i}
+            className={`chatbot-starter${c.cta ? ' chatbot-cta' : ''}`}
+            href={c.href}
+            target={c.href?.startsWith('http') ? '_blank' : undefined}
+            rel="noreferrer"
+          >
+            {c.label}
+          </a>
+        ) : (
+          <button key={i} type="button" className="chatbot-starter" onClick={() => handleChip(c)}>
+            {c.label}
+          </button>
+        ),
+      )}
+    </div>
+  )
+
   const last = msgs[msgs.length - 1]
-  const showRetry = !busy && last?.role === 'assistant' && !!last.failed
-  const followups =
-    !busy && last?.role === 'assistant' && last.typed && !last.failed ? last.suggestions ?? [] : []
+  const ready = !busy && last?.role === 'assistant' && last.typed
+  const lastChips = ready && last.chips?.length ? last.chips : null
+  const showRetry = ready && !!last.failed
+  const followups = ready && !last.failed && !last.chips ? last.suggestions ?? [] : []
+  const showStarters = msgs.length === 1 && !busy
 
   return (
     <>
@@ -348,9 +419,20 @@ export default function ChatBot({ lang }: { lang: Lang }) {
                   {q}
                 </button>
               ))}
+              <button type="button" className="chatbot-starter chatbot-wizard-launch" onClick={startWizard}>
+                {t.wizardCta}
+              </button>
             </div>
           )}
-          {followups.length > 0 && (
+          {lastChips ? (
+            renderChips(lastChips)
+          ) : showRetry ? (
+            <div className="chatbot-starters">
+              <button type="button" className="chatbot-starter chatbot-retry" onClick={retry}>
+                ↻ {t.retry}
+              </button>
+            </div>
+          ) : followups.length > 0 ? (
             <div className="chatbot-starters chatbot-followups">
               {followups.map((q) => (
                 <button key={q} type="button" className="chatbot-starter" onClick={() => send(q)}>
@@ -358,14 +440,7 @@ export default function ChatBot({ lang }: { lang: Lang }) {
                 </button>
               ))}
             </div>
-          )}
-          {showRetry && (
-            <div className="chatbot-starters">
-              <button type="button" className="chatbot-starter chatbot-retry" onClick={retry}>
-                ↻ {t.retry}
-              </button>
-            </div>
-          )}
+          ) : null}
         </div>
 
         <form

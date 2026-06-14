@@ -1160,6 +1160,13 @@ section { position: relative; z-index: 1; }
 .chatbot-retry { color: var(--text-2); border-color: var(--border-2); background: var(--surface-2); }
 .chatbot-retry:hover { color: var(--text); border-color: var(--teal); background: var(--surface-2); transform: none; }
 
+/* mini-wizard launcher + contact CTAs */
+.chatbot-wizard-launch { background: rgba(45,212,191,0.10); border-color: rgba(45,212,191,0.45); color: var(--teal-2); font-weight: 600; }
+.chatbot-wizard-launch:hover { background: rgba(45,212,191,0.18); border-color: var(--teal-2); }
+.chatbot-chips { gap: 7px; }
+.chatbot-chips .chatbot-cta { background: var(--teal); border-color: var(--teal); color: #06101a; font-weight: 700; }
+.chatbot-chips .chatbot-cta:hover { background: var(--teal-2); border-color: var(--teal-2); color: #06101a; transform: translateX(2px); }
+
 /* typewriter reveal */
 .chatbot-caret { display: inline-block; width: 6px; height: 13px; margin-left: 2px; vertical-align: -2px; background: var(--teal-2); border-radius: 1px; animation: chatbot-caret 0.9s steps(1) infinite; }
 @keyframes chatbot-caret { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
