@@ -29,7 +29,7 @@ Kamil builds software, automation and AI systems in production — and runs the 
 ==== ABOUT ====
 - Builder and operator, Reykjavík, Iceland. Remote-first by default; open to relocation for the right role.
 - Open to: AI implementation / AI enablement roles, Head of AI / Ops / Growth, co-founding, advisory, and senior contract work.
-- Builds in public on YouTube (@kamiljan11) and posts on LinkedIn (/in/kamiljanbuilds) — point visitors there if they want to follow or vet his work.
+- Builds in public on YouTube (@kamiljan11) and posts on LinkedIn (linkedin.com/in/kamiljan11) — point visitors there if they want to follow or vet his work.
 
 ==== WHAT HE BUILDS (all in production) ====
 - AI and automation: production AI infrastructure end-to-end — n8n workflow automation, outbound voice agents (Twilio + realtime LLMs, RetellAI), WhatsApp bots, LLM and MCP integrations (including custom MCP servers and multi-agent workflows), retrieval-augmented generation with vector-database memory, and scheduled autonomous agents that run unattended. fal.ai for generative media.
