@@ -1,8 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { askBot } from '../lib/bot.functions'
 import type { Lang } from '../i18n'
 
-type Msg = { role: 'user' | 'assistant'; content: string }
+type Msg = {
+  role: 'user' | 'assistant'
+  content: string
+  typed?: boolean
+  suggestions?: string[]
+  failed?: boolean
+}
 
 const COPY: Record<
   Lang,
@@ -15,6 +21,8 @@ const COPY: Record<
     fallback: string
     starters: string[]
     nudge: string
+    thinking: string[]
+    retry: string
   }
 > = {
   en: {
@@ -24,8 +32,10 @@ const COPY: Record<
     title: "Kamil's AI",
     sub: 'trained on his work',
     fallback: "I can't reach my brain right now — but Kamil replies personally. Email hello@kamiljan.com or message him on WhatsApp.",
-    starters: ['Is Kamil a fit for an AI role?', 'What has he actually built?', 'How do I reach him?'],
+    starters: ['Is Kamil a fit for my role?', 'What has he actually built?', 'How do I reach him?'],
     nudge: 'Ask my AI anything 👋',
+    thinking: ['Thinking…', "Searching Kamil's work…"],
+    retry: 'Try again',
   },
   pl: {
     greet: 'Cześć — jestem AI asystentem Kamila. Pytaj o jego pracę, umiejętności albo czy pasuje do Twojej roli.',
@@ -34,12 +44,14 @@ const COPY: Record<
     title: 'AI Kamila',
     sub: 'wytrenowany na jego pracy',
     fallback: 'Chwilowo nie mam dostępu do mózgu — ale Kamil odpisuje osobiście. Napisz na hello@kamiljan.com albo na WhatsApp.',
-    starters: ['Czy Kamil pasuje do roli AI?', 'Co realnie zbudował?', 'Jak się z nim skontaktować?'],
+    starters: ['Czy Kamil pasuje do mojej roli?', 'Co realnie zbudował?', 'Jak się z nim skontaktować?'],
     nudge: 'Zapytaj moje AI 👋',
+    thinking: ['Myślę…', 'Przeszukuję pracę Kamila…'],
+    retry: 'Spróbuj ponownie',
   },
 }
 
-const STORE_KEY = 'kb_chat_v1'
+const STORE_KEY = 'kb_chat_v2'
 const NUDGE_KEY = 'kb_nudge_seen_v1'
 
 // Turn emails, wa.me and http(s) links inside a bot reply into real anchors.
@@ -68,16 +80,76 @@ function renderText(text: string) {
   })
 }
 
+// Split the model's reply into the visible body and the trailing "SUGGESTED:" chips.
+function parseReply(text: string): { body: string; suggestions: string[] } {
+  const m = text.match(/\n?\s*SUGGESTED:\s*([^\n]*)\s*$/i)
+  if (!m || m.index === undefined) return { body: text.trim(), suggestions: [] }
+  const body = text.slice(0, m.index).trim()
+  const suggestions = m[1]
+    .split('|')
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 3)
+  return { body: body || text.trim(), suggestions }
+}
+
+function usePrefersReducedMotion() {
+  const [reduce, setReduce] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduce(mq.matches)
+    const handler = () => setReduce(mq.matches)
+    mq.addEventListener?.('change', handler)
+    return () => mq.removeEventListener?.('change', handler)
+  }, [])
+  return reduce
+}
+
+// Word-by-word reveal for a freshly-arrived bot message. Skippable, reduced-motion aware.
+function Typed({ text, onDone, onTick }: { text: string; onDone: () => void; onTick: () => void }) {
+  const reduce = usePrefersReducedMotion()
+  const tokens = useMemo(() => text.split(/(\s+)/), [text])
+  const [n, setN] = useState(reduce ? tokens.length : 0)
+  const done = useRef(false)
+
+  useEffect(() => {
+    if (reduce || n >= tokens.length) {
+      if (!done.current) {
+        done.current = true
+        onDone()
+      }
+      return
+    }
+    const id = window.setTimeout(() => {
+      setN((x) => x + 1)
+      onTick()
+    }, 18)
+    return () => window.clearTimeout(id)
+  }, [n, tokens.length, reduce]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (reduce || n >= tokens.length) return <>{renderText(text)}</>
+  return (
+    <span className="chatbot-reveal">
+      {tokens.slice(0, n).join('')}
+      <i className="chatbot-caret" />
+    </span>
+  )
+}
+
 export default function ChatBot({ lang }: { lang: Lang }) {
   const t = COPY[lang]
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
+  const [phase, setPhase] = useState(0)
   const [nudge, setNudge] = useState(false)
-  const [msgs, setMsgs] = useState<Msg[]>([{ role: 'assistant', content: t.greet }])
+  const [msgs, setMsgs] = useState<Msg[]>([{ role: 'assistant', content: t.greet, typed: true }])
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const hydrated = useRef(false)
+
+  const scrollToEnd = () =>
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
 
   // Restore a prior conversation for this browser session (client-only).
   useEffect(() => {
@@ -85,7 +157,9 @@ export default function ChatBot({ lang }: { lang: Lang }) {
       const saved = sessionStorage.getItem(STORE_KEY)
       if (saved) {
         const parsed = JSON.parse(saved) as Msg[]
-        if (Array.isArray(parsed) && parsed.length > 1) setMsgs(parsed)
+        if (Array.isArray(parsed) && parsed.length > 1) {
+          setMsgs(parsed.map((m) => ({ ...m, typed: true })))
+        }
       }
     } catch {
       /* ignore */
@@ -93,7 +167,6 @@ export default function ChatBot({ lang }: { lang: Lang }) {
     hydrated.current = true
   }, [])
 
-  // Persist conversation (skip the seed-only state).
   useEffect(() => {
     if (!hydrated.current) return
     try {
@@ -119,12 +192,22 @@ export default function ChatBot({ lang }: { lang: Lang }) {
 
   // Reset greeting if language flips and only the seed message exists.
   useEffect(() => {
-    setMsgs((m) => (m.length <= 1 ? [{ role: 'assistant', content: t.greet }] : m))
+    setMsgs((m) => (m.length <= 1 ? [{ role: 'assistant', content: t.greet, typed: true }] : m))
   }, [lang]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Phased thinking label during the (single) request.
+  useEffect(() => {
+    if (!busy) {
+      setPhase(0)
+      return
+    }
+    const id = window.setTimeout(() => setPhase(1), 900)
+    return () => window.clearTimeout(id)
+  }, [busy])
 
   useEffect(() => {
     if (open) {
-      scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
+      scrollToEnd()
       inputRef.current?.focus()
     }
   }, [open, msgs, busy])
@@ -143,24 +226,49 @@ export default function ChatBot({ lang }: { lang: Lang }) {
     setOpen((o) => !o)
   }
 
-  const send = async (textArg?: string) => {
-    const text = (textArg ?? input).trim()
-    if (!text || busy) return
-    const next: Msg[] = [...msgs, { role: 'user', content: text }]
-    setMsgs(next)
-    setInput('')
+  const ask = async (history: Msg[]) => {
     setBusy(true)
     try {
-      const res = await askBot({ data: { messages: next } })
-      setMsgs([...next, { role: 'assistant', content: res.ok ? res.text : t.fallback }])
+      const res = await askBot({ data: { messages: history.map((m) => ({ role: m.role, content: m.content })) } })
+      const ok = res.ok
+      const parsed = ok ? parseReply(res.text) : { body: t.fallback, suggestions: [] }
+      setMsgs([
+        ...history,
+        { role: 'assistant', content: parsed.body, suggestions: parsed.suggestions, typed: false, failed: !ok },
+      ])
     } catch {
-      setMsgs([...next, { role: 'assistant', content: t.fallback }])
+      setMsgs([...history, { role: 'assistant', content: t.fallback, typed: false, failed: true }])
     } finally {
       setBusy(false)
     }
   }
 
+  const send = (textArg?: string) => {
+    const text = (textArg ?? input).trim()
+    if (!text || busy) return
+    const history: Msg[] = [...msgs, { role: 'user', content: text, typed: true }]
+    setMsgs(history)
+    setInput('')
+    ask(history)
+  }
+
+  const retry = () => {
+    if (busy) return
+    let h = [...msgs]
+    while (h.length && h[h.length - 1].role === 'assistant') h = h.slice(0, -1)
+    if (!h.length) return
+    setMsgs(h)
+    ask(h)
+  }
+
+  const markTyped = (i: number) =>
+    setMsgs((ms) => ms.map((x, idx) => (idx === i ? { ...x, typed: true } : x)))
+
   const showStarters = msgs.length === 1 && !busy
+  const last = msgs[msgs.length - 1]
+  const showRetry = !busy && last?.role === 'assistant' && !!last.failed
+  const followups =
+    !busy && last?.role === 'assistant' && last.typed && !last.failed ? last.suggestions ?? [] : []
 
   return (
     <>
@@ -181,19 +289,38 @@ export default function ChatBot({ lang }: { lang: Lang }) {
           </button>
         </div>
 
-        <div className="chatbot-msgs" ref={scrollRef}>
-          {msgs.map((m, i) => (
-            <div key={i} className={`chatbot-msg ${m.role}`}>
-              {m.role === 'assistant' ? renderText(m.content) : m.content}
-            </div>
-          ))}
+        <div className="chatbot-msgs" ref={scrollRef} role="log" aria-live="polite" aria-relevant="additions">
+          {msgs.map((m, i) => {
+            const animateThis = m.role === 'assistant' && i === msgs.length - 1 && !m.typed
+            return (
+              <div
+                key={i}
+                className={`chatbot-msg ${m.role}`}
+                onClick={animateThis ? () => markTyped(i) : undefined}
+              >
+                {m.role === 'assistant' ? (
+                  animateThis ? (
+                    <Typed text={m.content} onDone={() => markTyped(i)} onTick={scrollToEnd} />
+                  ) : (
+                    renderText(m.content)
+                  )
+                ) : (
+                  m.content
+                )}
+              </div>
+            )
+          })}
           {busy && (
-            <div className="chatbot-msg assistant chatbot-typing">
-              <span />
-              <span />
-              <span />
+            <div className="chatbot-msg assistant chatbot-think">
+              <span className="chatbot-typing">
+                <span />
+                <span />
+                <span />
+              </span>
+              <span className="chatbot-think-label">{t.thinking[phase]}</span>
             </div>
           )}
+
           {showStarters && (
             <div className="chatbot-starters">
               {t.starters.map((q) => (
@@ -201,6 +328,22 @@ export default function ChatBot({ lang }: { lang: Lang }) {
                   {q}
                 </button>
               ))}
+            </div>
+          )}
+          {followups.length > 0 && (
+            <div className="chatbot-starters chatbot-followups">
+              {followups.map((q) => (
+                <button key={q} type="button" className="chatbot-starter" onClick={() => send(q)}>
+                  {q}
+                </button>
+              ))}
+            </div>
+          )}
+          {showRetry && (
+            <div className="chatbot-starters">
+              <button type="button" className="chatbot-starter chatbot-retry" onClick={retry}>
+                ↻ {t.retry}
+              </button>
             </div>
           )}
         </div>
