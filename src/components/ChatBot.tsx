@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { askBot } from '../lib/bot.functions'
 import type { Lang } from '../i18n'
 
@@ -58,12 +58,14 @@ const NUDGE_KEY = 'kb_nudge_seen_v1'
 const LINK_RE =
   /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|(?:https?:\/\/|wa\.me\/)[^\s)]+)/g
 
-function renderText(text: string) {
+// Links within a plain (non-bold) text run.
+function renderInline(text: string, kp: string) {
   return text.split(LINK_RE).map((part, i) => {
+    const key = `${kp}-${i}`
     if (!part) return null
     if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part)) {
       return (
-        <a key={i} href={`mailto:${part}`}>
+        <a key={key} href={`mailto:${part}`}>
           {part}
         </a>
       )
@@ -71,13 +73,31 @@ function renderText(text: string) {
     if (/^(https?:\/\/|wa\.me\/)/.test(part)) {
       const href = part.startsWith('http') ? part : `https://${part}`
       return (
-        <a key={i} href={href} target="_blank" rel="noreferrer">
+        <a key={key} href={href} target="_blank" rel="noreferrer">
           {part}
         </a>
       )
     }
-    return <span key={i}>{part}</span>
+    return <span key={key}>{part}</span>
   })
+}
+
+// Render light markdown (**bold** / __bold__) the model may emit, with links inside.
+const BOLD_RE = /\*\*([^*]+)\*\*|__([^_]+)__/g
+function renderText(text: string) {
+  const out: ReactNode[] = []
+  let last = 0
+  let i = 0
+  let m: RegExpExecArray | null
+  BOLD_RE.lastIndex = 0
+  while ((m = BOLD_RE.exec(text)) !== null) {
+    if (m.index > last) out.push(...renderInline(text.slice(last, m.index), `t${i}`))
+    out.push(<strong key={`b${i}`}>{renderInline(m[1] ?? m[2], `b${i}`)}</strong>)
+    last = m.index + m[0].length
+    i++
+  }
+  if (last < text.length) out.push(...renderInline(text.slice(last), `t${i}`))
+  return out
 }
 
 // Split the model's reply into the visible body and the trailing "SUGGESTED:" chips.
