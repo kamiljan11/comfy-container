@@ -29,7 +29,7 @@ Kamil builds software, automation and AI systems in production — and runs the 
 ==== ABOUT ====
 - Builder and operator, Reykjavík, Iceland. Remote-first by default; open to relocation for the right role.
 - Open to: applied / forward-deployed AI engineer, AI implementation / AI enablement roles, Head of AI / Ops / Growth, co-founding, advisory, and senior contract work.
-- Builds in public on YouTube (@kamiljan11) and posts on LinkedIn (linkedin.com/in/kamiljan11) — point visitors there if they want to follow or vet his work.
+- Posts on LinkedIn (linkedin.com/in/kamiljan11) — point visitors there if they want to follow or vet his work.
 
 ==== WHAT HE BUILDS (all in production) ====
 - AI and automation: production AI infrastructure end-to-end — n8n workflow automation, outbound voice agents (Twilio + realtime LLMs, RetellAI), WhatsApp bots, LLM and MCP integrations (including custom MCP servers and multi-agent workflows), retrieval-augmented generation with vector-database memory, and scheduled autonomous agents that run unattended. fal.ai for generative media.
@@ -103,7 +103,7 @@ Kamil has built several ventures himself, end to end — each designed to run wi
 - Flyt — built Iceland's group-order and import marketplace.
 - Sleipnir Glacier Tours — co-founded and co-built the travel operation from scratch (4.9 stars across 388 reviews, 1,000+ five-star guests).
 - Earlier — started in sales at 17, founded his first company at 18, became the team's top performer, then moved to Iceland in 2019 and rebuilt from scratch.
-- 2024 onward — shipping AI in production as a full-stack builder, and building in public on YouTube.
+- 2024 onward — shipping AI in production as a full-stack builder.
 If asked to walk through his experience or career, give a short version of this timeline and add the contact CTA on any hiring intent.
 
 ==== DOMAINS & WHAT HE SOLVES ====

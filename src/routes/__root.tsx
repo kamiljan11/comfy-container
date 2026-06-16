@@ -13,7 +13,7 @@ const PERSON_SCHEMA = {
   "description": "Iceland-based builder and operator who ships AI in production and trains teams to adopt it. Founder of MAS Group, Flyt, Reykjawwwik, QuickFix, and more.",
   "address": { "@type": "PostalAddress", "addressLocality": "Reykjavík", "addressCountry": "IS" },
   "knowsAbout": ["AI Enablement", "AI Adoption", "AI Coaching", "Team Training", "AI Automation", "Business Operations", "Growth Marketing", "Systems Architecture", "B2B Operations", "MCP Servers", "LLM Workflows", "Voice Agents"],
-  "sameAs": ["https://github.com/mountainallservice", "https://linkedin.com/in/kamiljan11", "https://youtube.com/@kamiljan11"]
+  "sameAs": ["https://linkedin.com/in/kamiljan11"]
 };
 
 const WEBSITE_SCHEMA = {
