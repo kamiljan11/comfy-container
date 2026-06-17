@@ -167,6 +167,8 @@ const ENGAGE_META = [
 function HomePage() {
   const [lang, setLang] = useState<Lang>(() => {
     if (typeof window === 'undefined') return 'en'
+    const url = new URLSearchParams(window.location.search).get('lang') as Lang
+    if (url === 'en' || url === 'pl') return url
     const saved = localStorage.getItem('kj-lang') as Lang
     if (saved === 'en' || saved === 'pl') return saved
     return navigator.language.startsWith('pl') ? 'pl' : 'en'
@@ -183,6 +185,16 @@ function HomePage() {
       return next
     })
   }
+
+  // keep ?lang= in the URL in sync, so a shared link opens in the chosen language
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const u = new URL(window.location.href)
+    if (u.searchParams.get('lang') !== lang) {
+      u.searchParams.set('lang', lang)
+      window.history.replaceState({}, '', u)
+    }
+  }, [lang])
 
   const onBtnMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const b = btnRef.current; if (!b) return
