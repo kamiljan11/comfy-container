@@ -13,7 +13,6 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
 import { generateText } from 'ai'
 
-const TO = 'hello@kamiljan.com'
 const MODEL = 'google/gemini-3-flash-preview'
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
@@ -77,6 +76,7 @@ export async function sendLead(input: LeadInput): Promise<LeadResult> {
   const summary = await buildBrief(transcript, message)
   const tr = transcript.map((m) => `${m.role === 'user' ? 'Visitor' : 'Bot'}: ${m.content}`).join('\n')
   const from = process.env.RESEND_FROM || 'kamiljan.com <onboarding@resend.dev>'
+  const to = process.env.LEAD_TO || 'hello@kamiljan.com'
 
   const html =
     `<h2 style="margin:0 0 12px">New lead from kamiljan.com</h2>` +
@@ -95,7 +95,7 @@ export async function sendLead(input: LeadInput): Promise<LeadResult> {
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from,
-        to: [TO],
+        to: [to],
         reply_to: email,
         subject: `New lead from kamiljan.com — ${name || email}`,
         html,
