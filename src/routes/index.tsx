@@ -124,9 +124,10 @@ function Cursor() {
 
 /* ── Marquee strip ── */
 const STACK = [
-  'React', 'TypeScript', 'Lovable', 'Vercel', 'Supabase',
-  'Cloudflare Workers', 'n8n', 'RetellAI', 'Meta Ads', 'Google Ads',
-  'fal.ai', 'OpenAI', 'Twilio', 'Playwright',
+  'React', 'Next.js', 'TypeScript', 'TanStack', 'Supabase',
+  'Cloudflare Workers', 'Vercel', 'Python', 'n8n', 'MCP',
+  'RAG', 'Pinecone', 'OpenAI', 'RetellAI', 'Twilio',
+  'fal.ai', 'Playwright', 'Meta Ads', 'Google Ads',
 ]
 
 function Marquee() {
