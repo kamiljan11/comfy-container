@@ -1166,6 +1166,24 @@ section { position: relative; z-index: 1; }
 .chatbot-chips { gap: 7px; }
 .chatbot-chips .chatbot-cta { background: var(--teal); border-color: var(--teal); color: #06101a; font-weight: 700; }
 .chatbot-chips .chatbot-cta:hover { background: var(--teal-2); border-color: var(--teal-2); color: #06101a; transform: translateX(2px); }
+.chatbot-starter.chatbot-cta { background: var(--teal); border-color: var(--teal); color: #06101a; font-weight: 700; }
+.chatbot-starter.chatbot-cta:hover { background: var(--teal-2); border-color: var(--teal-2); color: #06101a; }
+
+/* in-bot "message Kamil" lead form */
+.chatbot-lead { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-top: 1px solid var(--border); }
+.chatbot-lead-head { display: flex; align-items: center; justify-content: space-between; font-family: var(--font-head); font-weight: 700; font-size: 13px; color: var(--text); }
+.chatbot-lead-cancel { background: none; border: none; color: var(--text-2); font-size: 12px; cursor: none; padding: 2px 4px; }
+.chatbot-lead-cancel:hover { color: var(--text); }
+.chatbot-lead-in { background: var(--surface); border: 1px solid var(--border-2); border-radius: 10px; padding: 10px 12px; color: var(--text); font-family: var(--font-body); font-size: 16px; outline: none; cursor: none; transition: border-color 0.2s; }
+.chatbot-lead-in:focus { border-color: var(--teal); }
+.chatbot-lead-in::placeholder { color: var(--muted); }
+.chatbot-lead-msg { resize: none; line-height: 1.5; }
+.chatbot-lead-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.chatbot-lead-err { font-size: 12px; color: var(--text-2); line-height: 1.45; }
+.chatbot-lead-err a { color: var(--teal-2); font-weight: 600; }
+.chatbot-lead-send { background: var(--teal); border: none; border-radius: 10px; padding: 11px; color: #06101a; font-weight: 700; font-size: 14px; cursor: none; transition: background 0.2s, opacity 0.2s; }
+.chatbot-lead-send:hover:not(:disabled) { background: var(--teal-2); }
+.chatbot-lead-send:disabled { opacity: 0.5; }
 
 /* typewriter reveal */
 .chatbot-caret { display: inline-block; width: 6px; height: 13px; margin-left: 2px; vertical-align: -2px; background: var(--teal-2); border-radius: 1px; animation: chatbot-caret 0.9s steps(1) infinite; }

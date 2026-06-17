@@ -1,8 +1,9 @@
 import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { askBot } from '../lib/bot.functions'
+import { submitLead } from '../lib/lead.functions'
 import type { Lang } from '../i18n'
 
-type Chip = { label: string; act: 'send' | 'wizard' | 'pick' | 'free' | 'wlink'; value?: string; href?: string; cta?: boolean }
+type Chip = { label: string; act: 'send' | 'wizard' | 'pick' | 'free' | 'wlink' | 'lead'; value?: string; href?: string; cta?: boolean }
 type Msg = {
   role: 'user' | 'assistant'
   content: string
@@ -28,6 +29,16 @@ type Copy = {
   askLabel: string
   moreLabel: string
   wizard: { label: string; reply: string }[]
+  leadCta: string
+  leadTitle: string
+  leadNamePh: string
+  leadEmailPh: string
+  leadMsgPh: string
+  leadSend: string
+  leadSending: string
+  leadCancel: string
+  leadSent: string
+  leadErr: string
 }
 
 const COPY: Record<Lang, Copy> = {
@@ -47,13 +58,23 @@ const COPY: Record<Lang, Copy> = {
     askLabel: 'Ask a question',
     moreLabel: 'See other options',
     wizard: [
-      { label: 'Hire Kamil for a role', reply: "Kamil is open to applied / forward-deployed AI engineer, AI implementation and enablement, and Head of AI / Ops / Growth roles — remote-first. He ships AI into production and gets the team to actually run it. The fastest move is a one-line brief of the role — message him below and he replies personally." },
-      { label: 'Get a product or site built', reply: "He handles the full build end to end and hands it over running and documented — full-stack React/TypeScript on Supabase, Vercel and Cloudflare. Tell him what you need and he'll scope it. Reach him below." },
-      { label: 'Add AI / automation to my business', reply: "His core work: ship AI into your production — voice agents, WhatsApp bots, n8n workflows, LLM and RAG — then train your team to run it. Tell him the task that eats the most time and he'll map it. Message him below." },
-      { label: 'Train my team to use AI', reply: "An AI enablement engagement: he ships a real workflow into production while your team learns to run it — train-while-building, documented handoff. Share your team's setup and he'll tell you where he'd start. Reach him below." },
-      { label: 'Growth & marketing', reply: "He builds the whole funnel — site, tracking, copy, Meta and Google Ads, lead-gen systems — and judges on ROAS, not clicks. Tell him the goal and the market. Message him below." },
+      { label: 'Hire Kamil for a role', reply: "Kamil is open to applied / forward-deployed AI engineer, AI implementation and enablement, and Head of AI / Ops / Growth roles — remote-first. He ships AI into production and gets the team to actually run it. The fastest move is a one-line brief of the role — send it below and he replies personally." },
+      { label: 'Get a product or site built', reply: "He handles the full build end to end and hands it over running and documented — full-stack React/TypeScript on Supabase, Vercel and Cloudflare. Tell him what you need and he'll scope it. Send it below." },
+      { label: 'Add AI / automation to my business', reply: "His core work: ship AI into your production — voice agents, WhatsApp bots, n8n workflows, LLM and RAG — then train your team to run it. Tell him the task that eats the most time and he'll map it. Send it below." },
+      { label: 'Train my team to use AI', reply: "An AI enablement engagement: he ships a real workflow into production while your team learns to run it — train-while-building, documented handoff. Share your team's setup and he'll tell you where he'd start. Send it below." },
+      { label: 'Growth & marketing', reply: "He builds the whole funnel — site, tracking, copy, Meta and Google Ads, lead-gen systems — and judges on ROAS, not clicks. Tell him the goal and the market. Send it below." },
       { label: 'Just exploring', reply: "All good — ask me anything about Kamil's work, or browse his projects. When you're ready, he's one message away." },
     ],
+    leadCta: '✉️ Send Kamil a message',
+    leadTitle: 'Message Kamil',
+    leadNamePh: 'Your name (optional)',
+    leadEmailPh: 'Your email',
+    leadMsgPh: 'What can he help with?',
+    leadSend: 'Send to Kamil',
+    leadSending: 'Sending…',
+    leadCancel: 'Cancel',
+    leadSent: 'Sent — Kamil will reply personally to {email}.',
+    leadErr: "Couldn't send right now — reach him directly:",
   },
   pl: {
     greet: 'Cześć — jestem AI asystentem Kamila. Pytaj o jego pracę, umiejętności albo czy pasuje do Twojej roli.',
@@ -72,12 +93,22 @@ const COPY: Record<Lang, Copy> = {
     moreLabel: 'Inne opcje',
     wizard: [
       { label: 'Zatrudnić Kamila (etat/rola)', reply: 'Kamil jest otwarty na role: applied / forward-deployed AI engineer, wdrażanie i enablement AI oraz Head of AI / Ops / Growth — remote-first. Wdraża AI na produkcję i sprawia, że zespół realnie z niej korzysta. Najszybciej: wyślij jednolinijkowy opis roli poniżej, odpisuje osobiście.' },
-      { label: 'Zbudować produkt lub stronę', reply: 'Przejmuje cały build od A do Z i oddaje działające oraz udokumentowane — full-stack React/TypeScript na Supabase, Vercel i Cloudflare. Napisz czego potrzebujesz, a wyceni zakres. Złap go poniżej.' },
-      { label: 'Wdrożyć AI / automatyzację w firmie', reply: 'Jego rdzeń: wdrożyć AI na Twoją produkcję — agenci głosowi, boty WhatsApp, n8n, LLM i RAG — a potem nauczyć zespół to obsługiwać. Napisz, które zadanie zżera najwięcej czasu, a on to zmapuje. Napisz poniżej.' },
-      { label: 'Przeszkolić zespół z AI', reply: 'Wdrożenie AI z naciskiem na ludzi: wdraża realny workflow na produkcję, a Twój zespół uczy się go obsługiwać — buduje i uczy w trakcie, z dokumentacją. Opisz sytuację zespołu, a powie od czego zacząć. Złap go poniżej.' },
-      { label: 'Wzrost i marketing', reply: 'Buduje cały lejek — strona, tracking, copy, reklamy Meta i Google, systemy lead-gen — i ocenia po ROAS, nie po klikach. Podaj cel i rynek. Napisz poniżej.' },
+      { label: 'Zbudować produkt lub stronę', reply: 'Przejmuje cały build od A do Z i oddaje działające oraz udokumentowane — full-stack React/TypeScript na Supabase, Vercel i Cloudflare. Napisz czego potrzebujesz, a wyceni zakres. Wyślij poniżej.' },
+      { label: 'Wdrożyć AI / automatyzację w firmie', reply: 'Jego rdzeń: wdrożyć AI na Twoją produkcję — agenci głosowi, boty WhatsApp, n8n, LLM i RAG — a potem nauczyć zespół to obsługiwać. Napisz, które zadanie zżera najwięcej czasu, a on to zmapuje. Wyślij poniżej.' },
+      { label: 'Przeszkolić zespół z AI', reply: 'Wdrożenie AI z naciskiem na ludzi: wdraża realny workflow na produkcję, a Twój zespół uczy się go obsługiwać — buduje i uczy w trakcie, z dokumentacją. Opisz sytuację zespołu, a powie od czego zacząć. Wyślij poniżej.' },
+      { label: 'Wzrost i marketing', reply: 'Buduje cały lejek — strona, tracking, copy, reklamy Meta i Google, systemy lead-gen — i ocenia po ROAS, nie po klikach. Podaj cel i rynek. Wyślij poniżej.' },
       { label: 'Tylko się rozglądam', reply: 'Spoko — pytaj o cokolwiek z pracy Kamila albo przejrzyj projekty. Jak będziesz gotów, jest o jedną wiadomość stąd.' },
     ],
+    leadCta: '✉️ Wyślij wiadomość do Kamila',
+    leadTitle: 'Wiadomość do Kamila',
+    leadNamePh: 'Twoje imię (opcjonalnie)',
+    leadEmailPh: 'Twój email',
+    leadMsgPh: 'W czym może pomóc?',
+    leadSend: 'Wyślij do Kamila',
+    leadSending: 'Wysyłam…',
+    leadCancel: 'Anuluj',
+    leadSent: 'Wysłane — Kamil odpisze osobiście na {email}.',
+    leadErr: 'Nie udało się wysłać — złap go bezpośrednio:',
   },
 }
 
@@ -189,6 +220,14 @@ export default function ChatBot({ lang }: { lang: Lang }) {
   const [phase, setPhase] = useState(0)
   const [nudge, setNudge] = useState(false)
   const [msgs, setMsgs] = useState<Msg[]>([{ role: 'assistant', content: t.greet, typed: true }])
+  // lead form
+  const [leadOpen, setLeadOpen] = useState(false)
+  const [leadStatus, setLeadStatus] = useState<'idle' | 'sending' | 'error'>('idle')
+  const [leadName, setLeadName] = useState('')
+  const [leadEmail, setLeadEmail] = useState('')
+  const [leadMsg, setLeadMsg] = useState('')
+  const [leadHp, setLeadHp] = useState('')
+
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const hydrated = useRef(false)
@@ -249,9 +288,9 @@ export default function ChatBot({ lang }: { lang: Lang }) {
   useEffect(() => {
     if (open) {
       scrollToEnd()
-      inputRef.current?.focus()
+      if (!leadOpen) inputRef.current?.focus()
     }
-  }, [open, msgs, busy])
+  }, [open, msgs, busy, leadOpen])
 
   const dismissNudge = () => {
     setNudge(false)
@@ -304,9 +343,9 @@ export default function ChatBot({ lang }: { lang: Lang }) {
 
   // ── Mini wizard (deterministic, no LLM call) ──
   const contactChips: Chip[] = [
-    { label: 'WhatsApp', act: 'wlink', href: 'https://wa.me/3548888901', cta: true },
-    { label: 'Email', act: 'wlink', href: 'mailto:hello@kamiljan.com', cta: true },
-    { label: t.askLabel, act: 'free' },
+    { label: t.leadCta, act: 'lead', cta: true },
+    { label: 'WhatsApp', act: 'wlink', href: 'https://wa.me/3548888901' },
+    { label: 'Email', act: 'wlink', href: 'mailto:hello@kamiljan.com' },
     { label: t.moreLabel, act: 'wizard' },
   ]
 
@@ -322,11 +361,45 @@ export default function ChatBot({ lang }: { lang: Lang }) {
     setMsgs((m) => [...m, { role: 'assistant', content: o.reply, typed: false, chips: contactChips }])
   }
 
+  const openLead = () => {
+    setLeadStatus('idle')
+    setLeadOpen(true)
+  }
+
+  const submitLeadForm = async () => {
+    if (leadStatus === 'sending' || !leadEmail.trim() || !leadMsg.trim()) return
+    setLeadStatus('sending')
+    try {
+      const res = await submitLead({
+        data: {
+          name: leadName,
+          email: leadEmail,
+          message: leadMsg,
+          hp: leadHp,
+          transcript: msgs.map((m) => ({ role: m.role, content: m.content })),
+        },
+      })
+      if (res.ok) {
+        setLeadOpen(false)
+        setLeadStatus('idle')
+        setMsgs((m) => [...m, { role: 'assistant', content: t.leadSent.replace('{email}', leadEmail), typed: false }])
+        setLeadName('')
+        setLeadMsg('')
+        setLeadHp('')
+      } else {
+        setLeadStatus('error')
+      }
+    } catch {
+      setLeadStatus('error')
+    }
+  }
+
   const handleChip = (c: Chip) => {
     if (c.act === 'send') send(c.value)
     else if (c.act === 'wizard') startWizard()
     else if (c.act === 'pick' && c.value) chooseWizard(c.value)
     else if (c.act === 'free') inputRef.current?.focus()
+    else if (c.act === 'lead') openLead()
   }
 
   const markTyped = (i: number) =>
@@ -346,7 +419,7 @@ export default function ChatBot({ lang }: { lang: Lang }) {
             {c.label}
           </a>
         ) : (
-          <button key={i} type="button" className="chatbot-starter" onClick={() => handleChip(c)}>
+          <button key={i} type="button" className={`chatbot-starter${c.cta ? ' chatbot-cta' : ''}`} onClick={() => handleChip(c)}>
             {c.label}
           </button>
         ),
@@ -422,6 +495,9 @@ export default function ChatBot({ lang }: { lang: Lang }) {
               <button type="button" className="chatbot-starter chatbot-wizard-launch" onClick={startWizard}>
                 {t.wizardCta}
               </button>
+              <button type="button" className="chatbot-starter chatbot-cta" onClick={openLead}>
+                {t.leadCta}
+              </button>
             </div>
           )}
           {lastChips ? (
@@ -443,26 +519,94 @@ export default function ChatBot({ lang }: { lang: Lang }) {
           ) : null}
         </div>
 
-        <form
-          className="chatbot-input"
-          onSubmit={(e) => {
-            e.preventDefault()
-            send()
-          }}
-        >
-          <input
-            ref={inputRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={t.placeholder}
-            aria-label={t.placeholder}
-          />
-          <button type="submit" disabled={busy || !input.trim()} aria-label="Send">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M2 8h10M8 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </form>
+        {leadOpen ? (
+          <form
+            className="chatbot-lead"
+            onSubmit={(e) => {
+              e.preventDefault()
+              submitLeadForm()
+            }}
+          >
+            <div className="chatbot-lead-head">
+              <span>{t.leadTitle}</span>
+              <button type="button" className="chatbot-lead-cancel" onClick={() => setLeadOpen(false)}>
+                {t.leadCancel}
+              </button>
+            </div>
+            <input
+              className="chatbot-lead-in"
+              value={leadName}
+              onChange={(e) => setLeadName(e.target.value)}
+              placeholder={t.leadNamePh}
+              aria-label={t.leadNamePh}
+            />
+            <input
+              className="chatbot-lead-in"
+              type="email"
+              required
+              value={leadEmail}
+              onChange={(e) => setLeadEmail(e.target.value)}
+              placeholder={t.leadEmailPh}
+              aria-label={t.leadEmailPh}
+            />
+            <textarea
+              className="chatbot-lead-in chatbot-lead-msg"
+              required
+              rows={3}
+              value={leadMsg}
+              onChange={(e) => setLeadMsg(e.target.value)}
+              placeholder={t.leadMsgPh}
+              aria-label={t.leadMsgPh}
+            />
+            {/* honeypot — hidden from humans */}
+            <input
+              className="chatbot-lead-hp"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={leadHp}
+              onChange={(e) => setLeadHp(e.target.value)}
+            />
+            {leadStatus === 'error' && (
+              <div className="chatbot-lead-err">
+                {t.leadErr}{' '}
+                <a href="https://wa.me/3548888901" target="_blank" rel="noreferrer">
+                  WhatsApp
+                </a>{' '}
+                ·{' '}
+                <a href="mailto:hello@kamiljan.com">Email</a>
+              </div>
+            )}
+            <button
+              type="submit"
+              className="chatbot-lead-send"
+              disabled={leadStatus === 'sending' || !leadEmail.trim() || !leadMsg.trim()}
+            >
+              {leadStatus === 'sending' ? t.leadSending : t.leadSend}
+            </button>
+          </form>
+        ) : (
+          <form
+            className="chatbot-input"
+            onSubmit={(e) => {
+              e.preventDefault()
+              send()
+            }}
+          >
+            <input
+              ref={inputRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={t.placeholder}
+              aria-label={t.placeholder}
+            />
+            <button type="submit" disabled={busy || !input.trim()} aria-label="Send">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 8h10M8 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </form>
+        )}
 
         <div className="chatbot-foot">
           <span>{t.human}</span>
