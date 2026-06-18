@@ -108,8 +108,8 @@ export const T: Record<Lang, SiteTranslation> = {
     caps: [
       {
         title: 'Websites & Products',
-        desc: 'From idea to live product — I build it myself. Full-stack: Lovable, React, TypeScript, Vercel, Supabase, Cloudflare Workers. You get a shipped product running in production, not a prototype handed to a dev.',
-        tags: ['Lovable', 'React / TypeScript', 'Vercel + Supabase', 'Cloudflare Workers'],
+        desc: 'From idea to live product — I build it myself. Full-stack: React, Next.js, TypeScript, Supabase, Vercel, Cloudflare Workers. You get a shipped product running in production, not a prototype handed to a dev.',
+        tags: ['React / Next.js', 'TypeScript', 'Vercel + Supabase', 'Cloudflare Workers'],
       },
       {
         title: 'Growth & Marketing Systems',
@@ -218,8 +218,8 @@ export const T: Record<Lang, SiteTranslation> = {
     caps: [
       {
         title: 'Strony i Produkty',
-        desc: 'Od pomysłu do działającego produktu — buduję to osobiście. Full-stack: Lovable, React, TypeScript, Vercel, Supabase, Cloudflare Workers. Dostajesz produkt działający na produkcji, nie prototyp przekazany deweloperowi.',
-        tags: ['Lovable', 'React / TypeScript', 'Vercel + Supabase', 'Cloudflare Workers'],
+        desc: 'Od pomysłu do działającego produktu — buduję to osobiście. Full-stack: React, Next.js, TypeScript, Supabase, Vercel, Cloudflare Workers. Dostajesz produkt działający na produkcji, nie prototyp przekazany deweloperowi.',
+        tags: ['React / Next.js', 'TypeScript', 'Vercel + Supabase', 'Cloudflare Workers'],
       },
       {
         title: 'Wzrost i Marketing',
