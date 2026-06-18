@@ -262,6 +262,7 @@ function HomePage() {
         <a href="#about">{t.nav.about}</a>
         <a href="#capabilities">{t.nav.capabilities}</a>
         <a href="#engage">{t.nav.engage}</a>
+        <a href="/cv">CV</a>
         <div className="mobile-menu-divider" />
         <a href="#contact" className="mobile-menu-cta">{t.nav.cta}</a>
       </div>
@@ -277,6 +278,7 @@ function HomePage() {
           <li><a href="#capabilities">{t.nav.capabilities}</a></li>
           <li><a href="#engage">{t.nav.engage}</a></li>
           <li><a href="#contact">{t.nav.contact}</a></li>
+          <li><a href="/cv">CV</a></li>
         </ul>
         <div className="nav-right">
           <button className="lang-toggle" onClick={toggleLang} aria-label="Switch language">
@@ -463,6 +465,8 @@ function HomePage() {
             <div className="contact-alts">
               {t.contact.findMe}
               <a href="https://linkedin.com/in/kamiljan11" target="_blank" rel="noreferrer">LinkedIn</a>
+              &middot;
+              <a href="/cv">CV</a>
             </div>
             <div className="contact-sig">
               <img src="/signature.webp" alt="Kamil Jan signature" loading="lazy" decoding="async" />
