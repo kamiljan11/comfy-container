@@ -75,7 +75,7 @@ export async function sendLead(input: LeadInput): Promise<LeadResult> {
 
   const summary = await buildBrief(transcript, message)
   const tr = transcript.map((m) => `${m.role === 'user' ? 'Visitor' : 'Bot'}: ${m.content}`).join('\n')
-  const from = process.env.RESEND_FROM || 'kamiljan.com <onboarding@resend.dev>'
+  const from = process.env.RESEND_FROM || 'kamiljan.com (bot) <leads@mountaincar.is>'
   const to = process.env.LEAD_TO || 'hello@kamiljan.com'
 
   const html =
