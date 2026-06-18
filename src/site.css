@@ -1059,7 +1059,8 @@ section { position: relative; z-index: 1; }
   .contact::before, .contact::after { display: none; }
   .contact-photo {
     display: block; right: auto; left: 50%; transform: translateX(-50%);
-    bottom: 0; height: auto; width: min(70vw, 260px); opacity: 0.6;
+    bottom: 0; height: auto; width: min(74vw, 280px); opacity: 0.92;
+    filter: grayscale(22%) contrast(1.04) brightness(0.98);
   }
 
   /* ── Footer ── */
