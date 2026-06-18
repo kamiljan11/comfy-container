@@ -145,11 +145,11 @@ function CVPage() {
         <section className="cv-sec">
           <h2>Summary</h2>
           <p>
-            Applied / forward-deployed AI engineer and builder-operator. Ships AI into production for SMEs and trains
-            the teams to run it after he steps away — “most coaches can’t build; most builders can’t teach, I do both.”
-            Came up through sales and marketing in Poland (top performer; ran his own agency), rebuilt from the floor up
-            after moving to Iceland, moved into product and operations, and now builds and runs multiple ventures end to
-            end.
+            Applied / forward-deployed AI engineer and builder-operator. Ships AI into production for SMEs — then trains
+            the team to run it after he steps away. “Most coaches can’t build; most builders can’t teach — I do both.”
+            Largely self-taught: learned engineering and applied AI by shipping real products, not in lecture halls. Came
+            up through sales and marketing in Poland (top performer; ran his own agency), rebuilt from the floor up after
+            moving to Iceland, and now builds and operates multiple ventures end to end.
           </p>
         </section>
 
@@ -193,11 +193,15 @@ function CVPage() {
         </section>
 
         <section className="cv-sec">
-          <h2>Education &amp; training</h2>
+          <h2>Education &amp; self-directed learning</h2>
           <ul className="cv-list">
-            <li><b>High school</b> — general education (science, economics, accounting). Rzeszów, Poland · 2013–2016.</li>
-            <li><b>Self-taught</b> full-stack engineering and applied AI (since).</li>
-            <li><b>Courses:</b> trading (2019), 200-hour Yoga Teacher, Icelandic (levels 1–2).</li>
+            <li>
+              <b>Learned by building, not by studying.</b> Every technical skill here — full-stack engineering and
+              applied AI — is self-taught, earned by shipping real products for real businesses. Treats production as the
+              classroom: take on a problem worth solving, build the system, learn whatever the build demands.
+            </li>
+            <li><b>General secondary education</b> — science, economics &amp; accounting. Rzeszów, Poland · 2013–2016.</li>
+            <li><b>Continuous learning:</b> ongoing AI &amp; engineering courses and docs; trading (2019); 200-hour Yoga Teacher certification; Icelandic (levels 1–2).</li>
           </ul>
         </section>
 
@@ -205,6 +209,8 @@ function CVPage() {
           <h2>Languages &amp; other</h2>
           <ul className="cv-list">
             <li><b>Languages:</b> Polish (native); English (reading &amp; listening C1, spoken B2).</li>
+            <li><b>Work eligibility:</b> EU / EEA (Polish citizen, based in Iceland).</li>
+            <li><b>Timezone:</b> GMT / UTC — overlaps both European and US-East working hours.</li>
             <li><b>Driving licence:</b> B.</li>
           </ul>
         </section>
