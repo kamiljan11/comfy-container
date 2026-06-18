@@ -146,10 +146,10 @@ function CVPage() {
           <h2>Summary</h2>
           <p>
             Applied / forward-deployed AI engineer and builder-operator. Ships AI into production for SMEs — then trains
-            the team to run it after he steps away. “Most coaches can’t build; most builders can’t teach — I do both.”
+            the team to run it after stepping away. “Most coaches can’t build; most builders can’t teach — I do both.”
             Largely self-taught: learned engineering and applied AI by shipping real products, not in lecture halls. Came
-            up through sales and marketing in Poland (top performer; ran his own agency), rebuilt from the floor up after
-            moving to Iceland, and now builds and operates multiple ventures end to end.
+            up through sales and marketing in Poland (top performer; founded and ran a marketing agency), rebuilt from the
+            floor up after moving to Iceland, and now builds and operates multiple ventures end to end.
           </p>
         </section>
 
