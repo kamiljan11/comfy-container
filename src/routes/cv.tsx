@@ -128,12 +128,13 @@ function CVPage() {
         </button>
       </div>
 
-      <article className="cv">
+      <article className="cv-paper">
         <header className="cv-head">
           <h1>Kamil Jan Włodarczyk</h1>
           <p className="cv-role">Applied / Forward-Deployed AI Engineer · Builder &amp; Operator</p>
-          <p className="cv-loc">Reykjavík, Iceland · Remote-first · open to relocation</p>
           <p className="cv-contact">
+            Reykjavík, Iceland · Remote-first · open to relocation
+            <br />
             <a href="mailto:hello@kamiljan.com">hello@kamiljan.com</a> ·{' '}
             <a href="https://wa.me/3548888901" target="_blank" rel="noreferrer">WhatsApp +354 8888901</a> ·{' '}
             <a href="https://linkedin.com/in/kamiljan11" target="_blank" rel="noreferrer">linkedin.com/in/kamiljan11</a> ·{' '}
@@ -174,14 +175,14 @@ function CVPage() {
         <section className="cv-sec">
           <h2>Experience</h2>
           {EXPERIENCE.map((e) => (
-            <div key={e.role + e.org} className="cv-item">
-              <h3>
-                {e.role} <span>· {e.org}</span>
-              </h3>
-              <p className="cv-meta">
-                {e.dates}
-                {e.loc ? ` · ${e.loc}` : ''}
-              </p>
+            <div key={e.role + e.org} className="cv-job">
+              <div className="cv-job-head">
+                <h3>
+                  {e.role} <span>· {e.org}</span>
+                </h3>
+                <span className="cv-job-dates">{e.dates}</span>
+              </div>
+              {e.loc && <p className="cv-job-loc">{e.loc}</p>}
               <ul className="cv-bullets">
                 {e.bullets.map((b, i) => (
                   <li key={i}>{b}</li>
@@ -193,7 +194,7 @@ function CVPage() {
 
         <section className="cv-sec">
           <h2>Education &amp; training</h2>
-          <ul className="cv-exp">
+          <ul className="cv-list">
             <li><b>High school</b> — general education (science, economics, accounting). Rzeszów, Poland · 2013–2016.</li>
             <li><b>Self-taught</b> full-stack engineering and applied AI (since).</li>
             <li><b>Courses:</b> trading (2019), 200-hour Yoga Teacher, Icelandic (levels 1–2).</li>
@@ -202,7 +203,7 @@ function CVPage() {
 
         <section className="cv-sec">
           <h2>Languages &amp; other</h2>
-          <ul className="cv-exp">
+          <ul className="cv-list">
             <li><b>Languages:</b> Polish (native); English (reading &amp; listening C1, spoken B2).</li>
             <li><b>Driving licence:</b> B.</li>
           </ul>
