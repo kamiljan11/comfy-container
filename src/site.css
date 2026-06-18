@@ -1051,13 +1051,16 @@ section { position: relative; z-index: 1; }
   .engage::after { display: none; }
 
   /* ── Contact ── */
-  .contact { padding: 56px 0 100px; }
+  .contact { padding: 56px 0 280px; }
   .contact-h2 { font-size: clamp(1.7rem, 8vw, 2.5rem); margin-bottom: 14px; }
   .contact-sub { font-size: 15px; margin-bottom: 32px; }
   .contact-email { font-size: 15px; flex-wrap: wrap; justify-content: center; }
   .contact-sig img { height: 60px; }
   .contact::before, .contact::after { display: none; }
-  .contact-photo { display: none; }
+  .contact-photo {
+    display: block; right: auto; left: 50%; transform: translateX(-50%);
+    bottom: 0; height: auto; width: min(70vw, 260px); opacity: 0.6;
+  }
 
   /* ── Footer ── */
   .footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 16px; }
