@@ -60,7 +60,7 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: "Let's talk",
     },
     hero: {
-      eyebrow: 'Builder · AI Enablement · Team Coach',
+      eyebrow: 'Forward-Deployed AI Engineer · Builder & Operator',
       h1a: 'I build things',
       h1b: 'that run',
       h1em: 'themselves.',
@@ -170,7 +170,7 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: 'Porozmawiajmy',
     },
     hero: {
-      eyebrow: 'Budowniczy · Wdrażanie AI · Coach zespołu',
+      eyebrow: 'Inżynier AI (Forward-Deployed) · Builder & Operator',
       h1a: 'Buduję rzeczy,',
       h1b: 'które działają',
       h1em: 'same.',
