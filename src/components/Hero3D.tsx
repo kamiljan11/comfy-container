@@ -7,7 +7,10 @@ export default function Hero3D() {
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (!canvasRef.current) return
-    if (window.matchMedia('(max-width: 820px)').matches) return
+    // Respect reduced-motion, but otherwise run everywhere — including mobile.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const isMobile = window.matchMedia('(max-width: 820px)').matches
 
     const canvas = canvasRef.current
     let animId = 0
@@ -15,14 +18,17 @@ export default function Hero3D() {
     let renderer: any = null
     let mouseX = 0
     let mouseY = 0
+    let inView = true
     let resizeCleanup: (() => void) | null = null
+    let io: IntersectionObserver | null = null
     let mounted = true
 
     const onMouseMove = (e: MouseEvent) => {
       mouseX = (e.clientX / window.innerWidth - 0.5) * 2
       mouseY = (e.clientY / window.innerHeight - 0.5) * 2
     }
-    window.addEventListener('mousemove', onMouseMove)
+    // Mouse parallax is desktop-only; phones get an automatic gentle sway instead.
+    if (!isMobile) window.addEventListener('mousemove', onMouseMove)
 
     import('three').then((THREE) => {
       if (!mounted || !canvasRef.current) return
@@ -36,11 +42,13 @@ export default function Hero3D() {
 
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
       renderer.setSize(w, h)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      // Lower the pixel ratio on phones — the network is a faint background, so the
+      // quality cost is invisible but the fill-rate saving is large.
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2))
       renderer.setClearColor(0x000000, 0)
 
-      // ── Nodes ──
-      const NODE_COUNT = 68
+      // ── Nodes (lighter graph on mobile) ──
+      const NODE_COUNT = isMobile ? 44 : 68
       const HUB_INDICES = new Set([3, 8, 14, 21, 29, 38, 47, 55])
       const CONNECT_DIST = 9
       const MAX_LINES = 500
@@ -99,7 +107,15 @@ export default function Hero3D() {
       const tick = () => {
         if (!mounted) return
         animId = requestAnimationFrame(tick)
+        // Skip all heavy work + render while the hero is scrolled off-screen (saves battery, esp. mobile).
+        if (!inView) return
         t += 0.013
+
+        // On mobile there is no cursor — drive the camera with a slow automatic sway so it still feels alive.
+        if (isMobile) {
+          mouseX = Math.sin(t * 0.6) * 0.5
+          mouseY = Math.sin(t * 0.45) * 0.35
+        }
 
         // Update positions
         for (let i = 0; i < NODE_COUNT; i++) {
@@ -142,6 +158,15 @@ export default function Hero3D() {
 
       tick()
 
+      // Pause the render loop when the hero is not on screen.
+      io = new IntersectionObserver(
+        (entries) => {
+          inView = entries[0]?.isIntersecting ?? true
+        },
+        { threshold: 0 }
+      )
+      io.observe(canvas)
+
       const onResize = () => {
         if (!canvasRef.current) return
         const cw = canvas.parentElement?.clientWidth || window.innerWidth
@@ -158,6 +183,7 @@ export default function Hero3D() {
       mounted = false
       cancelAnimationFrame(animId)
       window.removeEventListener('mousemove', onMouseMove)
+      io?.disconnect()
       resizeCleanup?.()
       if (renderer) {
         renderer.dispose()
