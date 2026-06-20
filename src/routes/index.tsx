@@ -288,7 +288,7 @@ function HomePage() {
           </button>
           <div className="nav-avail"><span className="avail-dot" />{t.nav.available}</div>
           <a href="#contact" className="nav-cta">{t.nav.cta}</a>
-          <button className={`hamburger${menuOpen ? ' open' : ''}`} onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
+          <button className={`hamburger${menuOpen ? ' open' : ''}`} onClick={() => setMenuOpen(o => !o)} aria-label="Menu" aria-expanded={menuOpen}>
             <span /><span /><span />
           </button>
         </div>
