@@ -262,6 +262,7 @@ function HomePage() {
         <a href="#about">{t.nav.about}</a>
         <a href="#capabilities">{t.nav.capabilities}</a>
         <a href="#engage">{t.nav.engage}</a>
+        <a href="/case-studies">Case studies</a>
         <a href="/cv">CV</a>
         <div className="mobile-menu-divider" />
         <a href="#contact" className="mobile-menu-cta">{t.nav.cta}</a>
@@ -278,6 +279,7 @@ function HomePage() {
           <li><a href="#capabilities">{t.nav.capabilities}</a></li>
           <li><a href="#engage">{t.nav.engage}</a></li>
           <li><a href="#contact">{t.nav.contact}</a></li>
+          <li><a href="/case-studies">Case studies</a></li>
           <li><a href="/cv">CV</a></li>
         </ul>
         <div className="nav-right">
@@ -381,6 +383,11 @@ function HomePage() {
             })}
           </div>
           <div className="work-swipe-hint">{lang === 'pl' ? 'Przesuń' : 'Swipe'} →</div>
+          <div style={{ marginTop: 22, textAlign: 'center' }}>
+            <a href="/case-studies" className="btn-ghost">
+              {lang === 'pl' ? 'Czytaj pełne case studies' : 'Read the full case studies'} →
+            </a>
+          </div>
         </div>
       </section>
 

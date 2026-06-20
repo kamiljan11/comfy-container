@@ -1282,3 +1282,43 @@ section { position: relative; z-index: 1; }
   a { text-decoration: none; color: #0a7d8c; }
   @page { margin: 1.4cm; }
 }
+
+/* ── Case studies ── */
+.cs-head { max-width: 860px; margin: 0 auto 30px; padding: 0 16px; }
+.cs-head h1 { font-family: var(--font-head); font-size: clamp(2rem, 6vw, 3rem); font-weight: 800; color: var(--text-1); letter-spacing: -0.02em; line-height: 1.05; }
+.cs-intro { color: var(--text-2); font-size: 16px; line-height: 1.6; margin-top: 14px; max-width: 68ch; }
+.cs-toc { display: flex; flex-direction: column; gap: 9px; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-2); }
+.cs-toc a { color: var(--teal-2); font-size: 14px; font-weight: 500; line-height: 1.4; }
+.cs-toc a:hover { color: var(--teal); text-decoration: underline; }
+
+.cs-paper {
+  max-width: 860px; margin: 0 auto 26px; background: #fdfdfb; color: #1f2328;
+  padding: 44px 48px; border-radius: 8px; box-shadow: 0 18px 50px rgba(0,0,0,0.4);
+  font-family: var(--font-body); line-height: 1.62; border-top: 4px solid var(--teal); scroll-margin-top: 24px;
+}
+.cs-paper h2 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; color: #111; line-height: 1.22; letter-spacing: -0.01em; }
+.cs-oneliner { color: #3c4044; font-size: 15px; margin-top: 10px; font-style: italic; }
+.cs-stack { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0 4px; }
+.cs-tag { font-size: 12px; font-weight: 600; color: #0a7d8c; background: rgba(10,125,140,0.08); border: 1px solid rgba(10,125,140,0.2); border-radius: 999px; padding: 3px 10px; }
+.cs-role { font-size: 14px; color: #333; margin-top: 14px; padding: 12px 14px; background: #f4f4f1; border-radius: 6px; line-height: 1.55; }
+.cs-role b { color: #111; }
+.cs-sec { margin-top: 22px; }
+.cs-sec h3 { font-family: var(--font-head); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0a7d8c; padding-bottom: 6px; border-bottom: 1px solid #e3e3df; margin-bottom: 10px; }
+.cs-sec p { font-size: 15px; color: #2a2e33; }
+.cs-hard { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.cs-hard li { font-size: 14.5px; color: #2a2e33; padding-left: 18px; position: relative; line-height: 1.6; }
+.cs-hard li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+.cs-back-top { display: inline-block; margin-top: 24px; font-size: 13px; color: #0a7d8c; font-weight: 600; }
+.cs-foot { max-width: 860px; margin: 12px auto 0; padding: 0 16px 8px; text-align: center; color: var(--text-2); font-size: 14px; }
+.cs-foot p { margin-bottom: 10px; }
+.cs-foot a { color: var(--teal-2); }
+
+@media (max-width: 768px) {
+  .cs-paper { padding: 30px 22px; border-radius: 6px; }
+  .cs-paper h2 { font-size: 1.3rem; }
+  .cs-head h1 { font-size: 2rem; }
+}
+@media print {
+  .cs-toc, .cs-back-top, .cs-foot { display: none !important; }
+  .cs-paper { box-shadow: none; border-radius: 0; max-width: 100%; padding: 0 0 24px; background: #fff; page-break-inside: avoid; }
+}
