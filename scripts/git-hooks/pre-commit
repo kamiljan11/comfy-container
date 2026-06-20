@@ -1,0 +1,9 @@
+#!/bin/sh
+# Tracked pre-commit guard (active via core.hooksPath=scripts/git-hooks).
+# Blocks commits whose staged code won't parse — chiefly smart quotes (“ ”)
+# that replaced ASCII " and crash the Lovable build. See scripts/check-encoding.mjs
+node scripts/check-encoding.mjs || {
+  echo ""
+  echo "Commit blocked. Fix the file(s) above, then commit again."
+  exit 1
+}
