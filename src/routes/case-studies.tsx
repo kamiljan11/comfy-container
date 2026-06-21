@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { useEffect } from 'react'
 import { FEATURED, SECONDARY } from '../data/caseStudies'
 
 export const Route = createFileRoute('/case-studies')({
@@ -29,6 +30,22 @@ function Paras({ text }: { text: string }) {
 }
 
 function CaseStudiesPage() {
+  // Open a collapsed study when it's linked from the TOC or a shared #hash.
+  useEffect(() => {
+    const openFromHash = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1))
+      if (!id) return
+      const el = document.getElementById(id)
+      if (el && el.tagName === 'DETAILS') {
+        ;(el as HTMLDetailsElement).open = true
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+    openFromHash()
+    window.addEventListener('hashchange', openFromHash)
+    return () => window.removeEventListener('hashchange', openFromHash)
+  }, [])
+
   return (
     <div className="cv-page">
       <div className="cv-bar">
@@ -40,7 +57,7 @@ function CaseStudiesPage() {
         <h1>Case studies</h1>
         <p className="cs-intro">
           How a few of these systems were actually built — the problem, the decisions I made and the alternatives I
-          rejected, how I knew it worked, and what I'd do differently. No invented metrics; private numbers stay private.
+          rejected, how I knew it worked, and what I'd do differently. Tap any one to read it in full.
         </p>
         <nav className="cs-toc" aria-label="Case studies">
           {FEATURED.map((cs) => (
@@ -51,76 +68,83 @@ function CaseStudiesPage() {
         </nav>
       </header>
 
-      {FEATURED.map((cs) => (
-        <article key={cs.slug} id={cs.slug} className="cs-paper">
-          <h2>{cs.title}</h2>
-          <p className="cs-preview">{cs.resultsPreview}</p>
+      {FEATURED.map((cs, idx) => (
+        <details key={cs.slug} id={cs.slug} className="cs-fold" open={idx === 0}>
+          <summary className="cs-fold-sum">
+            <div className="cs-fold-main">
+              <h2>{cs.title}</h2>
+              <p className="cs-fold-preview">{cs.resultsPreview}</p>
+              <div className="cs-stack">
+                {cs.stack.slice(0, 6).map((s) => (
+                  <span key={s} className="cs-tag">{s}</span>
+                ))}
+                {cs.stack.length > 6 && <span className="cs-tag cs-tag-more">+{cs.stack.length - 6}</span>}
+              </div>
+            </div>
+            <span className="cs-chev" aria-hidden="true">▾</span>
+          </summary>
 
-          <div className="cs-stack">
-            {cs.stack.map((s) => (
-              <span key={s} className="cs-tag">{s}</span>
-            ))}
+          <div className="cs-fold-body">
+            <section className="cs-sec">
+              <h3>The problem</h3>
+              <Paras text={cs.problem} />
+            </section>
+
+            <section className="cs-sec">
+              <h3>Context &amp; constraints</h3>
+              <Paras text={cs.context} />
+              <p className="cs-role"><b>My role.</b> {cs.myRole}</p>
+            </section>
+
+            <section className="cs-sec">
+              <h3>The decisions that mattered</h3>
+              <ol className="cs-decisions">
+                {cs.decisions.map((d, i) => (
+                  <li key={i} className="cs-decision">
+                    <p className="cs-d-head">{d.decision}</p>
+                    <p className="cs-d-line"><span className="cs-d-label">Why</span> {d.why}</p>
+                    <p className="cs-d-line"><span className="cs-d-label cs-d-rej">Rejected</span> {d.rejected}</p>
+                    <p className="cs-d-line"><span className="cs-d-label cs-d-trade">Trade-off</span> {d.tradeoff}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
+
+            <section className="cs-sec">
+              <h3>Building &amp; deploying it</h3>
+              <Paras text={cs.build} />
+            </section>
+
+            <section className="cs-sec">
+              <h3>How I knew it worked</h3>
+              <Paras text={cs.evals} />
+            </section>
+
+            <section className="cs-sec">
+              <h3>What didn't work</h3>
+              <Paras text={cs.limitations} />
+            </section>
+
+            <section className="cs-sec">
+              <h3>Results &amp; impact</h3>
+              <Paras text={cs.results} />
+            </section>
+
+            <section className="cs-sec">
+              <h3>What I'd carry forward</h3>
+              <Paras text={cs.principle} />
+            </section>
+
+            <a href="#top" className="cs-back-top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+              ↑ Back to top
+            </a>
           </div>
-
-          <section className="cs-sec">
-            <h3>The problem</h3>
-            <Paras text={cs.problem} />
-          </section>
-
-          <section className="cs-sec">
-            <h3>Context &amp; constraints</h3>
-            <Paras text={cs.context} />
-            <p className="cs-role"><b>My role.</b> {cs.myRole}</p>
-          </section>
-
-          <section className="cs-sec">
-            <h3>The decisions that mattered</h3>
-            <ol className="cs-decisions">
-              {cs.decisions.map((d, i) => (
-                <li key={i} className="cs-decision">
-                  <p className="cs-d-head">{d.decision}</p>
-                  <p className="cs-d-line"><span className="cs-d-label">Why</span> {d.why}</p>
-                  <p className="cs-d-line"><span className="cs-d-label cs-d-rej">Rejected</span> {d.rejected}</p>
-                  <p className="cs-d-line"><span className="cs-d-label cs-d-trade">Trade-off</span> {d.tradeoff}</p>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <section className="cs-sec">
-            <h3>Building &amp; deploying it</h3>
-            <Paras text={cs.build} />
-          </section>
-
-          <section className="cs-sec">
-            <h3>How I knew it worked</h3>
-            <Paras text={cs.evals} />
-          </section>
-
-          <section className="cs-sec">
-            <h3>What didn't work</h3>
-            <Paras text={cs.limitations} />
-          </section>
-
-          <section className="cs-sec">
-            <h3>Results &amp; impact</h3>
-            <Paras text={cs.results} />
-          </section>
-
-          <section className="cs-sec">
-            <h3>What I'd carry forward</h3>
-            <Paras text={cs.principle} />
-          </section>
-
-          <a href="#top" className="cs-back-top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-            ↑ Back to top
-          </a>
-        </article>
+        </details>
       ))}
 
       <section className="cs-more">
         <h2 className="cs-more-h">More work</h2>
-        <p className="cs-more-sub">Shorter writes-ups — same honesty, less depth.</p>
+        <p className="cs-more-sub">Shorter write-ups — same honesty, less depth.</p>
         <div className="cs-more-grid">
           {SECONDARY.map((s) => (
             <div key={s.slug} className="cs-card">
