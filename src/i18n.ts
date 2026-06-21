@@ -60,7 +60,7 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: "Let's talk",
     },
     hero: {
-      eyebrow: 'Forward-Deployed AI Engineer · Builder & Operator',
+      eyebrow: 'AI Automation & Implementation Engineer · Builder & Operator',
       h1a: 'I build things',
       h1b: 'that run',
       h1em: 'themselves.',
@@ -153,7 +153,7 @@ export const T: Record<Lang, SiteTranslation> = {
         mode: 'Hire Me',
         title: 'Full-time or long-term',
         desc: "Open to both employment and long-term project engagements. Remote-first. Most effective where someone needs to build the AI infrastructure from scratch and get a team to actually use it — I've done both in my own companies. Equally strong owning the product, growth, or operations layer.",
-        detail: 'Full-time or contract · Remote-first · AI Coach / Enablement Lead · Head of AI / Ops',
+        detail: 'Full-time or contract · Remote-first · AI Automation / Implementation Engineer · AI Solutions Engineer',
         cta: 'Get in touch',
       },
     ],
@@ -170,7 +170,7 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: 'Porozmawiajmy',
     },
     hero: {
-      eyebrow: 'Inżynier AI (Forward-Deployed) · Builder & Operator',
+      eyebrow: 'Inżynier Automatyzacji i Wdrożeń AI · Builder & Operator',
       h1a: 'Buduję rzeczy,',
       h1b: 'które działają',
       h1em: 'same.',
