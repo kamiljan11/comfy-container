@@ -8,7 +8,7 @@ export const Route = createFileRoute('/case-studies')({
       {
         name: 'description',
         content:
-          'Engineering case studies by Kamil Jan Włodarczyk — applied / forward-deployed AI engineer. How real production systems were built: the problem, the decisions and rejected alternatives, how I knew it worked, and the honest trade-offs.',
+          'Engineering case studies by Kamil Jan Włodarczyk — AI automation & implementation engineer. How real production systems were built: the problem, the decisions and rejected alternatives, how I knew it worked, and the honest trade-offs.',
       },
     ],
     links: [{ rel: 'canonical', href: 'https://kamiljan.com/case-studies' }],
