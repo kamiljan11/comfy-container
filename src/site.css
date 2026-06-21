@@ -1051,7 +1051,7 @@ section { position: relative; z-index: 1; }
   .engage::after { display: none; }
 
   /* ── Contact ── */
-  .contact { padding: 56px 0 280px; }
+  .contact { padding: 56px 0 384px; }
   .contact-h2 { font-size: clamp(1.7rem, 8vw, 2.5rem); margin-bottom: 14px; }
   .contact-sub { font-size: 15px; margin-bottom: 32px; }
   .contact-email { font-size: 15px; flex-wrap: wrap; justify-content: center; }
