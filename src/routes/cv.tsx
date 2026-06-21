@@ -74,14 +74,14 @@ const CONTENT: Record<Lang, CV> = {
     },
     summary:
       'AI automation & implementation engineer and builder-operator. Ships AI into production for SMEs, then trains ' +
-      'the team to keep it running. "Most coaches can't build; most builders can't teach — I do both." Mostly ' +
+      'the team to keep it running. "Most coaches can\'t build; most builders can\'t teach — I do both." Mostly ' +
       'self-taught: learned engineering and AI by building real products rather than in classrooms. Came up through ' +
       'sales and marketing in Poland; top performer, founded and ran a marketing agency. Rebuilt from the floor up ' +
       'after moving to Iceland in 2019, and now runs several ventures hands-on.',
     skills: [
       {
         label: 'AI & automation:',
-        body: 'LLM orchestration, custom MCP servers, multi-agent workflows, RAG with vector databases, realtime voice agents (Twilio + OpenAI Realtime over WebSockets), WhatsApp bots, n8n, scheduled autonomous agents, fal.ai.',
+        body: 'LLM orchestration, MCP integrations, multi-agent workflows, n8n, scheduled autonomous agents, fal.ai; works hands-on with RAG and agent patterns at an integrator level; experimented with voice agents (Twilio + OpenAI Realtime) and WhatsApp automation in own projects.',
       },
       {
         label: 'Product / full-stack:',
@@ -233,13 +233,13 @@ const CONTENT: Record<Lang, CV> = {
     summary:
       'Inżynier automatyzacji i wdrożeń AI i builder-operator. Wdraża AI na produkcję w MŚP, a potem szkoli ' +
       'zespół, żeby sam to utrzymał. „Większość coachów nie umie budować, większość builderów nie umie uczyć — ja ' +
-      'robię jedno i drugie." W dużej mierze samouk: inżynierii i AI nauczył się, budując realne produkty, a nie na ' +
+      'robię jedno i drugie.\" W dużej mierze samouk: inżynierii i AI nauczył się, budując realne produkty, a nie na ' +
       'wykładach. Zaczynał od sprzedaży i marketingu w Polsce; najlepszy sprzedawca, założył i prowadził własną ' +
       'agencję. Po przeprowadzce na Islandię w 2019 odbudował się od zera i dziś sam prowadzi kilka biznesów.',
     skills: [
       {
         label: 'AI i automatyzacja:',
-        body: 'orkiestracja LLM, własne serwery MCP, multi-agentowe workflowy, RAG z bazami wektorowymi, agenty głosowe real-time (Twilio + OpenAI Realtime po WebSockets), boty WhatsApp, n8n, autonomiczne agenty na harmonogramie, fal.ai.',
+        body: 'orkiestracja LLM, integracje MCP, multi-agentowe workflowy, n8n, autonomiczne agenty na harmonogramie, fal.ai; pracuje z RAG i wzorcami agentów na poziomie integratora; eksperymentował z agentami głosowymi (Twilio + OpenAI Realtime) i automatyzacją WhatsApp we własnych projektach.',
       },
       {
         label: 'Produkt / full-stack:',
@@ -287,7 +287,7 @@ const CONTENT: Record<Lang, CV> = {
         loc: 'Reykjavík',
         dates: '2022–present',
         bullets: [
-          'Dostarczył wielojęzyczną (EN / PL / IS) stronę marketingową i lejek leadów dla marki „złotej rączki". Pełna marka i flow sprzedaży na żywo w 72 godziny.',
+          'Dostarczył wielojęzyczną (EN / PL / IS) stronę marketingową i lejek leadów dla marki „złotej rączki\". Pełna marka i flow sprzedaży na żywo w 72 godziny.',
         ],
       },
       {
@@ -346,7 +346,7 @@ const CONTENT: Record<Lang, CV> = {
         org: 'Polska & Islandia',
         dates: '2013–2017',
         bullets: [
-          'Lider zespołu (MLM / FM, ~50 osób), przedstawiciel handlowy i „najlepszy sprzedawca na sali" (call center, kredyty i ubezpieczenia), kierownik działu marketingu (Well Moda), plus role w contencie, dystrybucji, handlu i hotelarstwie. Od podstaw po przeprowadzce.',
+          'Lider zespołu (MLM / FM, ~50 osób), przedstawiciel handlowy i „najlepszy sprzedawca na sali\" (call center, kredyty i ubezpieczenia), kierownik działu marketingu (Well Moda), plus role w contencie, dystrybucji, handlu i hotelarstwie. Od podstaw po przeprowadzce.',
         ],
       },
     ],
