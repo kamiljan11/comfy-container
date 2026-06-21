@@ -9,10 +9,10 @@ const PERSON_SCHEMA = {
   "url": "https://kamiljan.com",
   "image": "https://kamiljan.com/kamil.png",
   "email": "hello@kamiljan.com",
-  "jobTitle": "Applied / Forward-Deployed AI Engineer",
-  "description": "Reykjavík-based applied / forward-deployed AI engineer and builder-operator. Ships AI into production for SMEs, then trains the team to run it. Founder and operator of MAS Group, Reykjawwwik, Flyt, QuickFix, and Mountain Car.",
+  "jobTitle": "AI Automation & Implementation Engineer",
+  "description": "Iceland-based builder and operator who ships AI in production and trains teams to adopt it. Founder of MAS Group, Flyt, Reykjawwwik, QuickFix, and more.",
   "address": { "@type": "PostalAddress", "addressLocality": "Reykjavík", "addressCountry": "IS" },
-  "knowsAbout": ["Applied AI Engineering", "Forward-Deployed AI Engineering", "LLM Orchestration", "Retrieval-Augmented Generation", "Vector Databases", "Model Context Protocol", "Multi-Agent Workflows", "Realtime Voice Agents", "AI Automation", "AI Enablement", "Full-Stack Development", "Next.js", "React", "TypeScript", "Supabase", "Cloudflare Workers", "Python", "Twilio", "Growth Marketing", "B2B Operations"],
+  "knowsAbout": ["AI Enablement", "AI Adoption", "AI Coaching", "Team Training", "AI Automation", "Business Operations", "Growth Marketing", "Systems Architecture", "B2B Operations", "MCP Servers", "LLM Workflows", "Voice Agents"],
   "sameAs": ["https://linkedin.com/in/kamiljan11"]
 };
 
@@ -21,7 +21,7 @@ const WEBSITE_SCHEMA = {
   "@type": "WebSite",
   "url": "https://kamiljan.com",
   "name": "Kamil Jan",
-  "description": "Portfolio of Kamil Jan — applied / forward-deployed AI engineer and builder-operator based in Reykjavík, Iceland. Production AI systems, engineering case studies, and CV."
+  "description": "Portfolio of Kamil Jan — entrepreneur, operator, and AI automation architect based in Reykjavík, Iceland."
 };
 
 const FAQ_SCHEMA = {
@@ -33,7 +33,7 @@ const FAQ_SCHEMA = {
       "name": "Who is Kamil Jan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Kamil Jan (Kamil Jan Włodarczyk) is an applied / forward-deployed AI engineer and builder-operator based in Reykjavík, Iceland. He founded and runs MAS Group, Reykjawwwik, Flyt, QuickFix, and Mountain Car — building AI and software into production and training the teams to run it."
+        "text": "Kamil Jan is an entrepreneur, operator, and AI automation architect based in Reykjavík, Iceland. He is the founder of MAS Group, Flyt, Reykjawwwik, and QuickFix — with 5+ years building B2B operations across Iceland."
       }
     },
     {
@@ -41,7 +41,7 @@ const FAQ_SCHEMA = {
       "name": "What does Kamil Jan do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "He ships AI into production for SMEs — realtime voice agents, retrieval-augmented generation over vector databases, custom MCP servers, and multi-agent workflows on a type-safe React/TypeScript and Supabase stack — then trains the team to run it after he steps away. Real engineering case studies are at kamiljan.com/case-studies."
+        "text": "Kamil Jan builds businesses and the systems that run them. He specializes in systems architecture, AI automation (LLM workflows, voice agents, MCP servers), and growth marketing. He is available as a co-founder, advisor, or senior hire."
       }
     },
     {
@@ -49,7 +49,7 @@ const FAQ_SCHEMA = {
       "name": "Is Kamil Jan available for hire or co-founding?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. He is open to applied / forward-deployed AI engineer roles, AI implementation and enablement, Head of AI / Ops / Growth, co-founding, advisory, and senior contract work — remote-first and open to relocation. Contact him at hello@kamiljan.com."
+        "text": "Yes. Kamil Jan is available as an equity co-founder at pre-revenue or early traction stage, for 30–90 day advisory and project engagements, or as a full-time Head of Operations, Growth, or AI. Contact him at hello@kamiljan.com."
       }
     },
     {
@@ -65,7 +65,7 @@ const FAQ_SCHEMA = {
       "name": "What AI tools and technologies does Kamil Jan work with?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Kamil Jan works with LLM orchestration, custom MCP servers, retrieval-augmented generation over vector databases, realtime voice agents (Twilio + OpenAI Realtime over WebSockets), RetellAI, n8n, React, Next.js, TypeScript, Supabase, Vercel, Cloudflare Workers, Python, fal.ai, and Playwright. He builds and deploys AI in production, not demos."
+        "text": "Kamil Jan works with LLM workflows, RetellAI voice agents, MCP servers, Cloudflare Workers, TanStack Router, Three.js, n8n, fal.ai, Twilio, Supabase, Meta Ads, and Playwright — among others. He builds and deploys AI tooling in production, not just demos."
       }
     }
   ]
