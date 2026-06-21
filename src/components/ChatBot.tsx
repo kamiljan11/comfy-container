@@ -58,7 +58,7 @@ const COPY: Record<Lang, Copy> = {
     askLabel: 'Ask a question',
     moreLabel: 'See other options',
     wizard: [
-      { label: 'Hire Kamil for a role', reply: "Kamil is open to applied / forward-deployed AI engineer, AI implementation and enablement, and Head of AI / Ops / Growth roles — remote-first. He ships AI into production and gets the team to actually run it. The fastest move is a one-line brief of the role — send it below and he replies personally." },
+      { label: 'Hire Kamil for a role', reply: "Kamil is open to AI Automation & Implementation Engineer, AI solutions engineer, AI implementation and enablement, and Head of AI / Ops / Growth roles — remote-first. He ships AI into production and gets the team to actually run it. The fastest move is a one-line brief of the role — send it below and he replies personally." },
       { label: 'Get a product or site built', reply: "He handles the full build end to end and hands it over running and documented — full-stack React/TypeScript on Supabase, Vercel and Cloudflare. Tell him what you need and he'll scope it. Send it below." },
       { label: 'Add AI / automation to my business', reply: "His core work: ship AI into your production — voice agents, WhatsApp bots, n8n workflows, LLM and RAG — then train your team to run it. Tell him the task that eats the most time and he'll map it. Send it below." },
       { label: 'Train my team to use AI', reply: "An AI enablement engagement: he ships a real workflow into production while your team learns to run it — train-while-building, documented handoff. Share your team's setup and he'll tell you where he'd start. Send it below." },
@@ -92,7 +92,7 @@ const COPY: Record<Lang, Copy> = {
     askLabel: 'Zadaj pytanie',
     moreLabel: 'Inne opcje',
     wizard: [
-      { label: 'Zatrudnić Kamila (etat/rola)', reply: 'Kamil jest otwarty na role: applied / forward-deployed AI engineer, wdrażanie i enablement AI oraz Head of AI / Ops / Growth — remote-first. Wdraża AI na produkcję i sprawia, że zespół realnie z niej korzysta. Najszybciej: wyślij jednolinijkowy opis roli poniżej, odpisuje osobiście.' },
+      { label: 'Zatrudnić Kamila (etat/rola)', reply: 'Kamil jest otwarty na role: Inżynier Automatyzacji i Wdrożeń AI, AI solutions engineer, wdrażanie i enablement AI oraz Head of AI / Ops / Growth — remote-first. Wdraża AI na produkcję i sprawia, że zespół realnie z niej korzysta. Najszybciej: wyślij jednolinijkowy opis roli poniżej, odpisuje osobiście.' },
       { label: 'Zbudować produkt lub stronę', reply: 'Przejmuje cały build od A do Z i oddaje działające oraz udokumentowane — full-stack React/TypeScript na Supabase, Vercel i Cloudflare. Napisz czego potrzebujesz, a wyceni zakres. Wyślij poniżej.' },
       { label: 'Wdrożyć AI / automatyzację w firmie', reply: 'Jego rdzeń: wdrożyć AI na Twoją produkcję — agenci głosowi, boty WhatsApp, n8n, LLM i RAG — a potem nauczyć zespół to obsługiwać. Napisz, które zadanie zżera najwięcej czasu, a on to zmapuje. Wyślij poniżej.' },
       { label: 'Przeszkolić zespół z AI', reply: 'Wdrożenie AI z naciskiem na ludzi: wdraża realny workflow na produkcję, a Twój zespół uczy się go obsługiwać — buduje i uczy w trakcie, z dokumentacją. Opisz sytuację zespołu, a powie od czego zacząć. Wyślij poniżej.' },
