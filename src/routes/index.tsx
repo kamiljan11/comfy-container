@@ -153,6 +153,7 @@ const PROJECT_META = [
   { num: '04', logo: '/logos/sleipnir.webp', name: 'Sleipnir Glacier Tours', tags: ['Tourism', 'Operations'], year: '2022–2024', href: 'https://sleipnirtours.is' as string | null },
   { num: '05', logo: '/logos/reykjawwwik.svg', name: 'Reykjawwwik', tags: ['Agency', 'Product'], year: '2023', href: 'https://reykjawwwik.is' as string | null },
   { num: '06', logo: '/logos/ekomoc.webp', name: 'Ekomoc CRM', tags: ['SaaS', 'CRM'], year: '2024', href: null as string | null },
+  { num: '07', logo: '/logos/masgroup.webp', name: 'MAS Warsztat', tags: ['SaaS', 'AI'], year: '2026', href: 'https://app.garage.mountaincar.is' as string | null },
 ]
 
 const CAP_NUMS = ['01', '02', '03', '04']

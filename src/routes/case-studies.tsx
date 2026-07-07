@@ -1,6 +1,28 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect } from 'react'
-import { FEATURED, SECONDARY } from '../data/caseStudies'
+import { FEATURED, SECONDARY, type CaseStudy } from '../data/caseStudies'
+
+/** Approximate reading time from all prose fields (~200 wpm). */
+function readMins(cs: CaseStudy): number {
+  const words = [
+    cs.problem, cs.context, cs.myRole, cs.build, cs.evals, cs.limitations, cs.results, cs.principle,
+    ...cs.decisions.flatMap((d) => [d.decision, d.why, d.rejected, d.tradeoff]),
+  ].join(' ').split(/\s+/).length
+  return Math.max(3, Math.round(words / 200))
+}
+
+const CS_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Kamil Jan Włodarczyk — Engineering Case Studies',
+  url: 'https://kamiljan.com/case-studies',
+  hasPart: FEATURED.map((cs) => ({
+    '@type': 'Article',
+    headline: cs.title,
+    url: `https://kamiljan.com/case-studies#${cs.slug}`,
+    author: { '@type': 'Person', name: 'Kamil Jan Włodarczyk' },
+  })),
+}
 
 export const Route = createFileRoute('/case-studies')({
   head: () => ({
@@ -48,6 +70,7 @@ function CaseStudiesPage() {
 
   return (
     <div className="cv-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(CS_SCHEMA) }} />
       <div className="cv-bar">
         <Link to="/" className="cv-back">← kamiljan.com</Link>
         <a href="/cv" className="cv-download">View CV →</a>
@@ -59,10 +82,20 @@ function CaseStudiesPage() {
           How a few of these systems were actually built — the problem, the decisions I made and the alternatives I
           rejected, how I knew it worked, and what I'd do differently. Tap any one to read it in full.
         </p>
-        <nav className="cs-toc" aria-label="Case studies">
-          {FEATURED.map((cs) => (
-            <a key={cs.slug} href={`#${cs.slug}`}>
-              {cs.title}
+        <nav className="cs-toc-grid" aria-label="Case studies">
+          {FEATURED.map((cs, i) => (
+            <a key={cs.slug} href={`#${cs.slug}`} className="cs-toc-card">
+              <span className="cs-toc-num">{String(i + 1).padStart(2, '0')}</span>
+              <span className="cs-toc-body">
+                <span className="cs-toc-title">{cs.title}</span>
+                <span className="cs-toc-preview">{cs.resultsPreview}</span>
+                <span className="cs-toc-meta">
+                  {cs.stack.slice(0, 3).map((s) => (
+                    <span key={s} className="cs-tag">{s}</span>
+                  ))}
+                  <span className="cs-toc-time">{readMins(cs)} min</span>
+                </span>
+              </span>
             </a>
           ))}
         </nav>
@@ -80,6 +113,7 @@ function CaseStudiesPage() {
                 ))}
                 {cs.stack.length > 6 && <span className="cs-tag cs-tag-more">+{cs.stack.length - 6}</span>}
               </div>
+              <span className="cs-fold-time">{readMins(cs)} min read</span>
             </div>
             <span className="cs-chev" aria-hidden="true">▾</span>
           </summary>

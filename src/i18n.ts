@@ -104,6 +104,7 @@ export const T: Record<Lang, SiteTranslation> = {
       { outcome: 'Built the full operation from scratch — website, pricing structure, influencer marketing, trade fair presence, and on-glacier guiding. Ran the project end-to-end including custom tour design. Grew it into a top-rated glacier tour with 1,000+ five-star guests.' },
       { outcome: 'Built a full SaaS platform for a web agency — multi-market pricing engine across 10 countries with geo-detection, lead-to-contract pipeline, admin CRM, PDF contract generation with per-country VAT logic, and push notifications. React + Supabase.' },
       { outcome: 'Built a field-sales CRM for energy audit teams — 9-stage order pipeline, role-based access (salesperson / auditor / admin), automated DOCX/PDF generation for government funding contracts, map view, push notifications, and performance leaderboard.' },
+      { outcome: 'Built an AI-native workshop management system — quoting computed from the shop\'s own labor-time history, calendar, customer SMS and approval flow, plus an assistant grounded in the shop\'s real data with a zero-token fast path for diagnostic codes. Live in production at a Keflavík garage.' },
     ],
     caps: [
       {
@@ -214,6 +215,7 @@ export const T: Record<Lang, SiteTranslation> = {
       { outcome: 'Zbudowałem cały biznes od zera — stronę, strukturę cenową, influencer marketing, obecność na targach i prowadzenie wycieczek na lodowcu. Projekt od A do Z, łącznie z designem wycieczek na zamówienie. Wyrósł na jeden z najwyżej ocenianych tourów lodowcowych, 1000+ gości z 5 gwiazdkami.' },
       { outcome: 'Zbudowałem pełną platformę SaaS dla agencji webowej — silnik cenowy na 10 rynkach z geolokalizacją, pipeline od leada do umowy, CRM dla admina, generowanie PDF umów z logiką VAT per kraj i push notyfikacje. React + Supabase.' },
       { outcome: 'Zbudowałem CRM dla zespołów sprzedaży audytów energetycznych — 9-etapowy pipeline zamówień, dostęp oparty na rolach (handlowiec / audytor / admin), automatyczne generowanie DOCX/PDF dla wniosków Czyste Powietrze, widok mapy, push notyfikacje i tabela wyników.' },
+      { outcome: 'Zbudowałem AI-natywny system zarządzania warsztatem — wyceny liczone z historii rzeczywistych czasów pracy warsztatu, kalendarz, SMS-y do klientów i flow akceptacji, plus asystent osadzony w danych warsztatu z zero-tokenową szybką ścieżką dla kodów diagnostycznych. Działa produkcyjnie w warsztacie w Keflavíku.' },
     ],
     caps: [
       {

@@ -351,6 +351,114 @@ export const FEATURED: CaseStudy[] = [
       "Supabase (Postgres)",
       "Vercel"
     ]
+  },
+  {
+    "slug": "ai-native-workshop-management",
+    "title": "A workshop management system where the database learns the shop's real labor times — and the AI is banned from guessing prices",
+    "resultsPreview": "Live at a real repair shop: quoting, calendar, SMS and client approvals in production, with labor-time estimates computed from the shop's own closed jobs instead of a model's imagination. Measured wins: ~92% of input tokens served from cache (about 70% cheaper multi-step replies), a 12,857-code diagnostic lookup that answers in zero tokens, and an adversarial multi-agent audit that logged 124 findings and shipped 63 fixes within the week.",
+    "problem": "Ask a small workshop how long a timing-belt job takes on a ten-year-old Yaris and you get an estimate from memory — a different one depending on the day and on who answers. Quotes lived in heads and chat threads, bookings lived on paper, and nothing the shop learned on one job made the next quote any smarter.\n\nThe interesting version of the problem was not 'build a booking app'. It was that a working shop generates precise operational data every single day — real labor times, real parts, real outcomes — and all of it was evaporating. Meanwhile every 'AI for workshops' pitch I saw wanted to point a chatbot at the problem and let it guess. A guessed price on a real invoice is not a feature. It is a liability with a chat interface.",
+    "context": "The shop is a real one-lift garage in Keflavík that my company shares infrastructure with — non-technical owner, phones-first, customers who speak Polish, Icelandic and English. The constraints were unforgiving in a small-business way: the system had to be trustworthy enough to send real SMS to real customers and put real prices in front of them; it had to run on managed infrastructure because nobody is going to babysit servers between oil changes; and the assistant had to be useful to a mechanic mid-job — which means fast, grounded answers, not essays.\n\nI set one design law before writing a line of code, and it shaped everything after: hard facts live in SQL, context lives in vectors, and the model never gets to invent either.",
+    "myRole": "I designed and built the whole system solo — the schema, the row-level security policies, the edge functions, the assistant pipeline and the cost model — and I run it in production. I also trained the shop on it, so every rough edge lands directly back on me as a phone call.",
+    "decisions": [
+      {
+        "decision": "Compute labor-time estimates from the shop's own closed jobs — a live SQL view with a three-level fallback (make+model, then make, then global) — instead of asking the LLM.",
+        "why": "Every closed job instantly makes the next quote smarter, with zero tokens and zero hallucination surface. The database learns, so the model does not have to pretend to know.",
+        "rejected": "LLM-generated estimates with a disclaimer, and static industry labor-time tables. The first one guesses; the second does not know this shop, this equipment, this mechanic.",
+        "tradeoff": "A cold-start problem by design — with few closed jobs the medians are thin, which is exactly what the fallback chain is for. Early estimates lean on broader buckets and say so, instead of projecting false confidence."
+      },
+      {
+        "decision": "Split the assistant into a fast path and a model path: bare diagnostic codes and plates skip the LLM entirely and hit a database function over a 12,857-code table.",
+        "why": "A mechanic typing P0301 does not want prose — they want the answer in under a second. Deterministic lookups should not cost tokens or latency.",
+        "rejected": "Routing everything through the model for a 'consistent experience'. Consistent, slower, and more expensive at the exact moment speed matters most.",
+        "tradeoff": "Two code paths to maintain, and a router that has to recognize a lookup versus a question. The zero-tokens badge in the UI keeps me honest about which path actually fired."
+      },
+      {
+        "decision": "Ground the assistant's retrieval in this shop's own history on Postgres pgvector, isolated from every other system I run, with a hard minimum-similarity threshold.",
+        "why": "Client-data separation is non-negotiable — and an audit showed that adding more knowledge-base documents without a similarity floor made answers worse and costs higher. That is retrieval noise, not knowledge.",
+        "rejected": "One shared vector index across my projects (cheaper, simpler), and thresholdless top-k retrieval — the default everyone ships.",
+        "tradeoff": "Sometimes the assistant says it does not have enough context where a looser retriever would have mumbled something plausible. I will take the honest gap over the confident mumble."
+      },
+      {
+        "decision": "Make row-level security the only barrier, and keep prices physically outside the mechanic-facing query paths via narrow security-definer functions.",
+        "why": "If a role should never see pricing, the safest version is a query path that cannot return it — not a UI that politely hides it.",
+        "rejected": "App-layer filtering. It is one forgotten WHERE clause away from a leak, forever.",
+        "tradeoff": "RLS policies interact in non-obvious ways and are genuinely harder to reason about — I paid for that in audit findings. Still the right wall to load-bear."
+      },
+      {
+        "decision": "Cache the whole conversation rather than just the system prompt, and route between a light and a heavy model by task weight.",
+        "why": "Multi-step repair conversations reuse almost all of their context. Moving the cache breakpoint meant about 92% of input tokens came from cache — measured in production, not estimated — cutting the cost of multi-step replies by roughly 70%.",
+        "rejected": "Default prompt caching and a single 'best' model for everything.",
+        "tradeoff": "Cache-aware prompt structure constrains how freely I can reorder context, and a model router is one more component to test. Worth it at these margins."
+      }
+    ],
+    "build": "React 19 and TypeScript with TanStack Router on the front, Supabase underneath — Postgres with pgvector for retrieval, auth, storage, and Deno edge functions for the assistant pipeline, SMS and web push. Claude does the reasoning with a light/heavy model split, Voyage does the embeddings, Twilio does the SMS, Sentry watches production. At the time of writing: 28 tables, 7 edge functions, 3 roles, 18 migrations — and the critical-path bundle went from 780KB to about 140KB gzipped along the way, because a workshop phone on a workshop connection is the real target device.\n\nThe part I would point at is the assistant's reliability layer. The model's inline links and diagrams are verified after generation with real HTTP checks before they reach the mechanic — it turns out models fabricate video links with total confidence — and when the hosted web-search tool throws an upstream error, the assistant degrades to local tools instead of returning a 500 to someone standing under a car.",
+    "evals": "Three ways, in increasing order of honesty. First, end-to-end security tests as a user rather than as a query: log in as a mechanic, try to read prices and other people's jobs directly — zero rows back, proven rather than assumed. Second, an adversarial multi-agent audit: eight analyzer agents over the codebase, then parallel fixer agents. It logged 124 findings, 20 of them serious, and 63 fixes shipped within the week — including a real filter-injection bug in customer search that no amount of manual clicking would have surfaced. Third, the strictest harness I know: the shop uses it every day, and a wrong labor estimate or a failed SMS becomes a phone call from the owner within hours.",
+    "limitations": "The audit backlog is honest: a set of lower-severity findings was triaged and deferred rather than fixed in the same week, and it is tracked openly instead of pretended away. The learning loop has a built-in cold start — a shop that has closed forty jobs teaches the system far more than one that has closed four, and early estimates reflect that. And one meta-lesson cost real money: an agent in the audit fleet defaulted to a heavier model than intended and burned budget on verification passes, which is why every agent call in my tooling now pins its model explicitly.",
+    "results": "The shop runs on it daily — quoting, calendar, customer SMS, approval flow — and every closed job feeds the labor-time view that prices the next one, so the system is measurably smarter this month than last month at zero marginal cost. The engineering wins are measured, not vibes: about 92% of input tokens from cache on multi-step conversations, roughly 70% cost reduction on those replies, instant zero-token answers for the most common mechanic queries, and a security model that survived an adversarial audit with the serious findings fixed in days. It is also where my 'hard facts in SQL, context in vectors' rule earned its keep — I have reused it in every AI build since.",
+    "principle": "Do not ask a model to know what your database can measure. The most trustworthy AI feature in this system is a SQL view over closed jobs — the model's job is conversation and context, and the moment it becomes the source of truth, you have built a liability with a chat interface.",
+    "stack": [
+      "React 19",
+      "TypeScript",
+      "TanStack Router",
+      "Supabase",
+      "pgvector",
+      "Postgres RLS",
+      "Deno Edge Functions",
+      "Claude (light/heavy routing)",
+      "Voyage embeddings",
+      "Twilio SMS",
+      "Web Push",
+      "Sentry"
+    ]
+  },
+  {
+    "slug": "autonomous-outreach-agent",
+    "title": "An autonomous agent that ran a real cold-email campaign for two months — engineered so it could never send twice",
+    "resultsPreview": "A scheduled agent researched companies, wrote and sent the emails, detected replies and bounces, and improved its own writing rules — Monday to Friday, unattended, for a real product line. The engineering that mattered was defensive: three independent layers of double-send protection, retrospective bounce and out-of-office sweeps, and a self-review step that turned every batch's mistakes into permanent rules. It opened real conversations with real Icelandic companies, with zero duplicate sends across the entire run.",
+    "problem": "Cold outreach is a solved problem if you do not care about your name. I did: the sender was my own company's domain, the market is Iceland — small enough that every recipient plausibly knows every other recipient — and the agent would run with nobody watching.\n\nThe naive version of this automation is easy and catastrophic: an LLM that writes flattering emails and a cron job that sends them. The actual problem is state. How does an unattended system stay certain about who was contacted, who bounced, who replied, and who must never be emailed again — when any of its own writes can silently fail mid-run? Get that wrong once and the same busy person gets the same pitch twice, and in a market this size, word travels.",
+    "context": "The campaign sold eco paper cups for MAS Prints to Icelandic cafés, hotels, canteens and attractions — a queue of several hundred companies, tiered by value. The operating rules were strict: five new companies a day, business hours only, Icelandic public holidays respected, hard caps per domain, and one inviolable line — the moment a real human replies, automation stops and I take over. Everything ran on infrastructure I already had: a scheduled agent, Gmail through a tool integration, the contact queue and daily drafts as plain Markdown files on disk, and push alerts to my phone.",
+    "myRole": "I designed the system and its guardrails, wrote the operating prompt it runs on, and audited its logs. The agent did the daily work; I did the engineering that made its work safe to leave alone.",
+    "decisions": [
+      {
+        "decision": "Treat double-send protection as three independent layers that must all clear: a permanent block list with per-domain caps, the queue status, and draft files written to disk before sending as the ground truth.",
+        "why": "Any single record can be wrong — a status write can fail silently, and the next run would happily re-send. Independent layers fail independently, and the expensive mistake requires all three to fail at once.",
+        "rejected": "Trusting the mailbox's sent folder. The discovery that killed that idea: the Gmail integration over IMAP never searches Sent — the query returns zero even for mail that definitely went out. If I had not tested that assumption, the 'safety check' would have approved every duplicate.",
+        "tradeoff": "More bookkeeping per email and the occasional false skip. In outreach, a skipped email costs a day; a duplicate costs the domain's credibility."
+      },
+      {
+        "decision": "Start every run with a retrospective sweep: search the previous seven days for bounces and out-of-office replies before doing anything new.",
+        "why": "The agent does not run on weekends, but bounces do. Guessed addresses at small Icelandic firms bounce constantly, and each bounce triggers a hunt for the company's real general inbox before any resend is allowed.",
+        "rejected": "Handling bounces only immediately after sending. Fast SMTP rejections get caught that way — the slow half arrives hours later, when the run is already over.",
+        "tradeoff": "Every session pays a fixed cost reading old mail before doing new work. Worth it: the bounce-to-alternative-address cycle recovered contacts that would otherwise have been dead ends."
+      },
+      {
+        "decision": "Give hook research a quality gate: a nine-step search pipeline to find something real about the company, then a hard green/red classification — where 'no hook' is a legal outcome.",
+        "why": "The worst cold email is one with a forced compliment. A hook is only usable if the bridge to the product is one natural, observational sentence — state the fact, ask the question, and never draw the conclusion for the reader.",
+        "rejected": "Letting the model find something nice to say every time. That is how you get 'congratulations on the new hire... anyway, about your cups'.",
+        "tradeoff": "Plenty of emails shipped hookless. A plain, honest opener beats a fabricated one — and the reply log agreed."
+      },
+      {
+        "decision": "Make the agent review its own output after every batch and write generalized rules back into its own operating prompt.",
+        "why": "The same mistakes kept appearing as categories, not instances — presumptuous hooks, sales-deck phrasing, idioms a non-native English reader would stumble on. A post-batch self-review that must produce a rule, not just a one-off fix, compounds over time.",
+        "rejected": "Me editing every draft, which does not scale and defeats the point — and a static style guide, which goes stale the day it is written.",
+        "tradeoff": "The operating prompt grows and needs occasional pruning, and self-review costs tokens every batch. It is the difference between an agent that runs and an agent that improves."
+      }
+    ],
+    "build": "The whole system is a scheduled agent with a long operating prompt — no custom backend at all, which was itself a decision. The queue, campaign notes, templates and daily drafts live as Markdown in my knowledge vault, written through a file-access layer. Gmail runs through a tool integration; company research uses web search with site-restricted queries against Icelandic media; alerts go to my phone.\n\nThe weekday pipeline: retrospective bounce and out-of-office sweep, then the holiday and business-hours check, then any pending drafts from previous runs, then reply detection — thread-based and domain-based, filtered through a multilingual auto-reply list — then five new companies picked by tier under domain caps, missing general inboxes hunted down, hooks researched and gated, emails written under hard word limits (120 cold, 80 general inbox, 60 follow-up), drafts saved to disk, sends executed, a post-send bounce check, the self-review, and a learnings log appended.",
+    "evals": "The logs were the eval. Every run recorded what it sent, what it skipped and which protection layer blocked it, and what the self-review corrected. That is how the real bugs surfaced: duplicate sends slipping through on a company's second top-level domain, and a genuine human reply nearly missed because it came from a different person than the one contacted — each became a named rule in the prompt the same day.\n\nAnd the metric that actually matters end-to-end: real humans replying. The campaign opened conversations with exactly the tier of companies it targeted — including a national attraction and the operations manager of a nationwide franchise — each flagged to my phone within minutes as a hot lead.",
+    "limitations": "Reply detection is only as good as the mailbox's search semantics, and the IMAP quirks forced real workarounds — plain keyword queries only, since quoted phrases and OR operators silently break the search. Hook research burned real time for modest hit rates, because most small companies in a small market generate no news. And the system deliberately never crossed the line into replying on a human's behalf — the moment someone answers, automation ends — which means throughput is ultimately capped by me.",
+    "results": "Two months of unattended Monday-to-Friday operation against a queue of several hundred companies: zero duplicate sends, bounces recycled into corrected contacts automatically, out-of-office replies rescheduled around real return dates, and warm conversations opened with the exact companies the campaign was built to reach. When the campaign wound down, the system did not die with it — I distilled the machinery into a reusable playbook (loop protection, reply detection, the hook gate, follow-up formats), so the next campaign starts from day one with two months of hard-won rules already in place.",
+    "principle": "In autonomous systems, the writing is the easy 20%. The rest is state discipline: assume every external check can lie, assume every write can fail, and design so the expensive mistake — here, emailing a human twice — is structurally impossible rather than merely unlikely.",
+    "stack": [
+      "Claude (scheduled agent)",
+      "Gmail integration",
+      "Markdown-as-database",
+      "Web research pipeline",
+      "Multilingual reply detection",
+      "Push alerts (ntfy)",
+      "Holiday-aware scheduling",
+      "Self-amending prompt rules"
+    ]
   }
 ]
 
@@ -403,6 +511,45 @@ export const SECONDARY: SecondaryStudy[] = [
       "Email / sales newsletter",
       "Trade-fair partner sales",
       "Tour productization and pricing"
+    ]
+  },
+  {
+    "slug": "field-pricing-pwa-maskalkulator",
+    "title": "A pricing calculator sales reps actually open at the counter — supplier costs wired 1:1, margins auditable",
+    "summary": "Custom-print pricing used to mean a spreadsheet and a promise to email later. Now it is a PWA on the reps' phones: the supplier's price list wired in line-by-line and verified against the source, live currency from the national bank's API, and a margin formula transparent enough to defend in front of the client — tax in, margin, tax out, nothing hidden. Behind the calculator sits a 10-step quote-to-delivery pipeline with role-scoped visibility, automatic commissions, and a status-change guard that logs every transition.",
+    "stack": [
+      "TanStack Start",
+      "React 19",
+      "Supabase",
+      "Postgres RLS",
+      "PWA",
+      "Cloudflare Workers"
+    ]
+  },
+  {
+    "slug": "fleet-manager-saas-replacement",
+    "title": "Replacing a rental SaaS with an in-house fleet manager — including the 32 bookings the old system dropped",
+    "summary": "The rental side of the business ran on a paid SaaS that we outgrew. I built the replacement: a resource-timeline calendar for the whole fleet with reservations, blocks and service on one axis, insurance and inspection alerts before deadlines bite, clients, and generated rental contracts with handover protocols. The unglamorous part was the point: reconciling the migration and restoring 32 bookings the export had silently dropped, then locking data access server-side with row-level security before anyone trusted it with a season.",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Postgres RLS",
+      "Vercel",
+      "PWA"
+    ]
+  },
+  {
+    "slug": "photo-to-3d-site-pipeline",
+    "title": "A scroll-driven 3D product site template — with an AI photo-to-3D asset pipeline feeding it",
+    "summary": "A reusable premium-product site: a glass 3D hero that turns and reveals on scroll, studio lighting and post-processing, running fully offline with no runtime asset fetches. The interesting half is the pipeline behind it — a photograph goes through an image-to-3D model, comes out as a GLB, and gets optimized for the web automatically — plus a written build spec with pinned, verified library versions and a definition of done, so the next build is a repeat, not an adventure.",
+    "stack": [
+      "React Three Fiber",
+      "three.js",
+      "GSAP",
+      "Vite",
+      "AI image-to-3D (tripo3d)",
+      "gltf-transform"
     ]
   }
 ]
