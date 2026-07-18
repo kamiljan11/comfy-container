@@ -80,11 +80,11 @@ const CONTENT: Record<Lang, CV> = {
     skills: [
       {
         label: 'AI & automation:',
-        body: 'LLM orchestration, MCP integrations, multi-agent workflows, n8n, scheduled autonomous agents, fal.ai; works hands-on with RAG and agent patterns at an integrator level; experimented with voice agents (Twilio + OpenAI Realtime) and WhatsApp automation in own projects.',
+        body: 'LLM APIs (OpenAI, Claude) with prompt engineering and structured JSON outputs; n8n workflows with error handling and retries; REST APIs, webhooks, OAuth2, rate limits, pagination; MCP integrations; multi-agent workflows; scheduled autonomous agents; fal.ai; works hands-on with RAG and vector databases at an integrator level; experimented with voice agents (Twilio + OpenAI Realtime) and WhatsApp automation in own projects.',
       },
       {
         label: 'Product / full-stack:',
-        body: 'React, Next.js, TypeScript, TanStack, Supabase (Postgres + RLS), Vercel, Cloudflare Workers, Python, Zod, Sentry, Playwright / Vitest.',
+        body: 'React, Next.js, JavaScript / TypeScript, TanStack, Supabase (SQL / Postgres + RLS), Vercel, Cloudflare Workers, Python, Zod, Sentry (observability), Playwright / Vitest.',
       },
       {
         label: 'Growth:',
@@ -237,11 +237,11 @@ const CONTENT: Record<Lang, CV> = {
     skills: [
       {
         label: 'AI i automatyzacja:',
-        body: 'orkiestracja LLM, integracje MCP, multi-agentowe workflowy, n8n, autonomiczne agenty na harmonogramie, fal.ai; pracuje z RAG i wzorcami agentów na poziomie integratora; eksperymentował z agentami głosowymi (Twilio + OpenAI Realtime) i automatyzacją WhatsApp we własnych projektach.',
+        body: 'LLM API (OpenAI, Claude) z prompt engineeringiem i structured JSON outputs; workflowy n8n z error handlingiem i retry; REST API, webhooki, OAuth2, rate limity, paginacja; integracje MCP; multi-agentowe workflowy; autonomiczne agenty na harmonogramie; fal.ai; pracuje z RAG i bazami wektorowymi na poziomie integratora; eksperymentował z agentami głosowymi (Twilio + OpenAI Realtime) i automatyzacją WhatsApp we własnych projektach.',
       },
       {
         label: 'Produkt / full-stack:',
-        body: 'React, Next.js, TypeScript, TanStack, Supabase (Postgres + RLS), Vercel, Cloudflare Workers, Python, Zod, Sentry, Playwright / Vitest.',
+        body: 'React, Next.js, JavaScript / TypeScript, TanStack, Supabase (SQL / Postgres + RLS), Vercel, Cloudflare Workers, Python, Zod, Sentry (observability), Playwright / Vitest.',
       },
       {
         label: 'Wzrost:',

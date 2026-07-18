@@ -120,7 +120,7 @@ export const T: Record<Lang, SiteTranslation> = {
       {
         title: 'AI & Automation',
         desc: "n8n workflows, voice agents, WhatsApp bots, LLM integrations — running in production. But building is only half of it: I coach teams to actually adopt AI, turn complex tools into simple daily habits, and leave behind documentation and AI champions who keep it running without me.",
-        tags: ['n8n Workflows', 'Voice Agents', 'LLM Integrations', 'AI Enablement'],
+        tags: ['n8n Workflows', 'Structured JSON Outputs', 'Error Handling & Retries', 'Webhooks & REST APIs', 'Voice Agents', 'LLM Integrations', 'AI Enablement'],
       },
       {
         title: 'Strategy, Leadership & Consulting',
