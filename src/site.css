@@ -1424,6 +1424,41 @@ section { position: relative; z-index: 1; }
 .cs-toc-card:hover { box-shadow: 0 10px 28px rgba(45, 212, 191, 0.1); }
 .cs-toc-card:hover .cs-toc-num { color: var(--teal); }
 
+/* ── Site-wide polish (homepage + CV) ── */
+
+/* Brand text selection — dark shell vs light paper. */
+::selection { background: rgba(34, 211, 238, 0.28); color: var(--text); }
+.cs-fold ::selection, .cs-paper ::selection, .cv-paper ::selection { background: rgba(10, 125, 140, 0.22); color: #111; }
+
+/* Visible keyboard focus (mouse clicks unaffected). */
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--teal-2); outline-offset: 3px; border-radius: 4px;
+}
+
+/* Typography: no orphan words in titles, better rag in body text. */
+.cap-title, .engage-title, .contact-h2, .work-name { text-wrap: balance; }
+.about-p, .hero-sub, .cap-desc { text-wrap: pretty; }
+.cv-paper h1 { text-wrap: balance; }
+.cv-paper p, .cv-paper li { text-wrap: pretty; }
+
+/* Count-up stats: fixed-width digits so the number doesn't jitter while counting. */
+.hero-stat-val { font-variant-numeric: tabular-nums; }
+
+/* Sheen sweep across the primary CTA on hover (desktop pointers only). */
+@media (hover: hover) {
+  .btn-primary { position: relative; overflow: hidden; }
+  .btn-primary::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.35) 50%, transparent 68%);
+    transform: translateX(-130%);
+  }
+  .btn-primary:hover::after { transform: translateX(130%); transition: transform 0.65s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary::after { display: none; }
+  .read-progress { display: none; }
+}
+
 @media (max-width: 768px) {
   .cs-paper { padding: 30px 22px; border-radius: 6px; }
   .cs-paper h2 { font-size: 1.3rem; }
