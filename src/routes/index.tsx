@@ -47,13 +47,16 @@ function RotatingWord({ lang }: { lang: Lang }) {
 
 /* ── Count-up stat ── */
 function StatCounter({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const [count, setCount] = useState(0)
+  // start at the REAL value so SSR/SEO/no-JS never shows "0+" (signal, not noise);
+  // the client resets to 0 on mount and animates up
+  const [count, setCount] = useState(value)
   useEffect(() => {
     // start straight from page load — hero stats are above the fold, no scroll gating
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setCount(value)
       return
     }
+    setCount(0)
     const dur = 1600; let t0: number | null = null; let raf = 0
     const step = (ts: number) => {
       if (!t0) t0 = ts
@@ -473,6 +476,8 @@ function HomePage() {
             <div className="contact-alts">
               {t.contact.findMe}
               <a href="https://linkedin.com/in/kamiljan11" target="_blank" rel="noreferrer">LinkedIn</a>
+              &middot;
+              <a href="https://github.com/mountainallservice" target="_blank" rel="noreferrer">GitHub</a>
               &middot;
               <a href="/cv">CV</a>
             </div>
