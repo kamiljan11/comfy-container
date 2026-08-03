@@ -48,6 +48,7 @@ type Labeled = { label: string; body: string };
 
 type CV = {
   back: string;
+  cases: string;
   download: string;
   role: string;
   contact: string;
@@ -70,6 +71,7 @@ type CV = {
 const CONTENT: Record<Lang, CV> = {
   en: {
     back: "← kamiljan.com",
+    cases: "Case studies →",
     download: "Download PDF",
     role: "AI Automation & Implementation Engineer · Builder & Operator",
     contact: "Reykjavík, Iceland · Remote-first · open to relocation",
@@ -89,7 +91,7 @@ const CONTENT: Record<Lang, CV> = {
     skills: [
       {
         label: "AI & automation:",
-        body: "LLM APIs (OpenAI, Claude) with prompt engineering and structured JSON outputs; n8n workflows with error handling and retries; REST APIs, webhooks, OAuth2, rate limits, pagination; MCP integrations; multi-agent workflows; scheduled autonomous agents; fal.ai; works hands-on with RAG and vector databases at an integrator level; experimented with voice agents (Twilio + OpenAI Realtime) and WhatsApp automation in own projects.",
+        body: "LLM APIs (OpenAI, Claude) with prompt engineering and structured JSON outputs; n8n workflows with error handling and retries; REST APIs, webhooks, OAuth2, rate limits, pagination; MCP integrations; multi-agent workflows; scheduled autonomous agents; fal.ai; works hands-on with RAG and vector databases at an integrator level; experimented with voice agents (Twilio + OpenAI Realtime) and WhatsApp automation in own projects. Runs a personal agent runtime at real scale: 33 scheduled agents (~18 active daily), ~140 skill definitions across two runtimes.",
       },
       {
         label: "Product / full-stack:",
@@ -146,7 +148,7 @@ const CONTENT: Record<Lang, CV> = {
         loc: "Keflavík",
         dates: "2025–present",
         bullets: [
-          "Car rental and garage near Keflavík airport: fleet, booking and quote flow (Next.js + Supabase).",
+          "Car rental and garage near Keflavík airport: fleet, booking and quote flow (Next.js + Supabase). Built a 9-business reciprocal-discount partner network around the garage, live on garage.mountaincar.is.",
         ],
       },
       {
@@ -217,6 +219,10 @@ const CONTENT: Record<Lang, CV> = {
         label: "Continuous learning:",
         body: "ongoing AI and engineering courses; trading (2019); 200-hour Yoga Teacher certification; Icelandic (levels 1–2).",
       },
+      {
+        label: "Engineered learning system:",
+        body: "built my own training platform — every code exercise executed and verified before it can teach, spaced repetition, and a curriculum that updates from real job listings (public: github.com/mountainallservice/code-reading-quest; write-up at kamiljan.com/case-studies).",
+      },
     ],
     languages: [
       {
@@ -234,6 +240,7 @@ const CONTENT: Record<Lang, CV> = {
 
   pl: {
     back: "← kamiljan.com",
+    cases: "Studia przypadków →",
     download: "Pobierz PDF",
     role: "Inżynier Automatyzacji i Wdrożeń AI · Builder & Operator",
     contact: "Reykjavík, Islandia · Praca zdalna · otwarty na relokację",
@@ -253,7 +260,7 @@ const CONTENT: Record<Lang, CV> = {
     skills: [
       {
         label: "AI i automatyzacja:",
-        body: "LLM API (OpenAI, Claude) z prompt engineeringiem i structured JSON outputs; workflowy n8n z error handlingiem i retry; REST API, webhooki, OAuth2, rate limity, paginacja; integracje MCP; multi-agentowe workflowy; autonomiczne agenty na harmonogramie; fal.ai; pracuje z RAG i bazami wektorowymi na poziomie integratora; eksperymentował z agentami głosowymi (Twilio + OpenAI Realtime) i automatyzacją WhatsApp we własnych projektach.",
+        body: "LLM API (OpenAI, Claude) z prompt engineeringiem i structured JSON outputs; workflowy n8n z error handlingiem i retry; REST API, webhooki, OAuth2, rate limity, paginacja; integracje MCP; multi-agentowe workflowy; autonomiczne agenty na harmonogramie; fal.ai; pracuje z RAG i bazami wektorowymi na poziomie integratora; eksperymentował z agentami głosowymi (Twilio + OpenAI Realtime) i automatyzacją WhatsApp we własnych projektach. Prowadzi własny runtime agentowy w realnej skali: 33 zaplanowane agenty (~18 aktywnych dziennie), ~140 definicji skilli w dwóch środowiskach.",
       },
       {
         label: "Produkt / full-stack:",
@@ -310,7 +317,7 @@ const CONTENT: Record<Lang, CV> = {
         loc: "Keflavík",
         dates: "2025–present",
         bullets: [
-          "Wynajem aut i warsztat przy lotnisku Keflavík: flota, rezerwacje i flow wyceny (Next.js + Supabase).",
+          "Wynajem aut i warsztat przy lotnisku Keflavík: flota, rezerwacje i flow wyceny (Next.js + Supabase). Zbudował sieć 9 partnerskich firm z wzajemnymi zniżkami wokół warsztatu, live na garage.mountaincar.is.",
         ],
       },
       {
@@ -381,6 +388,10 @@ const CONTENT: Record<Lang, CV> = {
         label: "Ciągła nauka:",
         body: "bieżące kursy AI i inżynierii; trading (2019); certyfikat nauczyciela jogi (200h); islandzki (poziomy 1–2).",
       },
+      {
+        label: "Zaprojektowany system nauki:",
+        body: "zbudował własną platformę treningową — każde ćwiczenie kodu wykonane i zweryfikowane zanim może uczyć, spaced repetition, curriculum aktualizowane z realnych ofert pracy (publiczne: github.com/mountainallservice/code-reading-quest; opis na kamiljan.com/case-studies).",
+      },
     ],
     languages: [
       {
@@ -438,6 +449,9 @@ function CVPage() {
           {cv.back}
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <Link to="/case-studies" className="cv-back">
+            {cv.cases}
+          </Link>
           <button
             type="button"
             className="lang-toggle"

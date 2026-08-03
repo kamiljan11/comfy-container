@@ -48,19 +48,53 @@ export const Route = createFileRoute("/case-studies")({
   component: CaseStudiesPage,
 });
 
+/** Whitelisted proof domains mentioned in study prose, mapped to a URL that actually resolves. */
+const PROOF_LINKS: Record<string, string> = {
+  "journeyiceland.is": "https://www.journeyiceland.is",
+  "masgroup.is": "https://www.masgroup.is",
+  "flyt.is": "https://flyt.is",
+  "quickfix.is": "https://quickfix.is",
+  "reykjawwwik.is": "https://reykjawwwik.is",
+  "garage.mountaincar.is": "https://garage.mountaincar.is",
+  "mountaincar.is": "https://mountaincar.is",
+  "kamiljan.com/case-studies": "https://kamiljan.com/case-studies",
+  "github.com/mountainallservice/code-reading-quest":
+    "https://github.com/mountainallservice/code-reading-quest",
+};
+const PROOF_RE = new RegExp(
+  `(${Object.keys(PROOF_LINKS)
+    .sort((a, b) => b.length - a.length)
+    .map((d) => d.replace(/[.\\/]/g, "\\$&"))
+    .join("|")})`,
+  "g",
+);
+
+/** Render a prose chunk with whitelisted domains turned into live proof links. */
+function linkify(p: string, key: number) {
+  const segs = p.split(PROOF_RE);
+  if (segs.length === 1) return <p key={key}>{p}</p>;
+  return (
+    <p key={key}>
+      {segs.map((seg, i) =>
+        PROOF_LINKS[seg] ? (
+          <a key={i} href={PROOF_LINKS[seg]} target="_blank" rel="noopener noreferrer">
+            {seg}
+          </a>
+        ) : (
+          seg
+        ),
+      )}
+    </p>
+  );
+}
+
 /** Render a long field that may contain blank-line-separated paragraphs. */
 function Paras({ text }: { text: string }) {
   const parts = text
     .split(/\n{2,}/)
     .map((p) => p.trim())
     .filter(Boolean);
-  return (
-    <>
-      {parts.map((p, i) => (
-        <p key={i}>{p}</p>
-      ))}
-    </>
-  );
+  return <>{parts.map((p, i) => linkify(p, i))}</>;
 }
 
 function CaseStudiesPage() {

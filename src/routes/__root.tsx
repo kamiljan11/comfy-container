@@ -6,6 +6,7 @@ const PERSON_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Kamil Jan",
+  alternateName: "Kamil Jan Włodarczyk",
   url: "https://kamiljan.com",
   image: "https://kamiljan.com/kamil.png",
   email: "hello@kamiljan.com",
@@ -27,7 +28,21 @@ const PERSON_SCHEMA = {
     "LLM Workflows",
     "Voice Agents",
   ],
-  sameAs: ["https://linkedin.com/in/kamiljan11"],
+  sameAs: ["https://linkedin.com/in/kamiljan11", "https://github.com/mountainallservice"],
+  author: [
+    {
+      "@type": "Book",
+      name: "Simplified Practical Spirituality — The Complete Guidebook",
+      url: "https://kamiljan.com/books/Simplified-Practical-Spirituality.pdf",
+      isAccessibleForFree: true,
+    },
+    {
+      "@type": "Book",
+      name: "Simplified Practical Spirituality² — The Short Version",
+      url: "https://kamiljan.com/books/Simplified-Practical-Spirituality-Short.pdf",
+      isAccessibleForFree: true,
+    },
+  ],
 };
 
 const WEBSITE_SCHEMA = {
@@ -36,7 +51,7 @@ const WEBSITE_SCHEMA = {
   url: "https://kamiljan.com",
   name: "Kamil Jan",
   description:
-    "Portfolio of Kamil Jan — entrepreneur, operator, and AI automation architect based in Reykjavík, Iceland.",
+    "Portfolio of Kamil Jan — entrepreneur, operator, and AI automation & implementation engineer based in Reykjavík, Iceland.",
 };
 
 const FAQ_SCHEMA = {
@@ -48,7 +63,7 @@ const FAQ_SCHEMA = {
       name: "Who is Kamil Jan?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Kamil Jan is an entrepreneur, operator, and AI automation architect based in Reykjavík, Iceland. He is the founder of MAS Group, Flyt, Reykjawwwik, and QuickFix — with 5+ years building B2B operations across Iceland.",
+        text: "Kamil Jan is an entrepreneur, operator, and AI automation & implementation engineer based in Reykjavík, Iceland. He is the founder of MAS Group, Flyt, Reykjawwwik, and QuickFix — 14 years of building, six businesses of his own, shipping AI systems into production since 2024.",
       },
     },
     {
@@ -64,7 +79,7 @@ const FAQ_SCHEMA = {
       name: "Is Kamil Jan available for hire or co-founding?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. Kamil Jan is available as an equity co-founder at pre-revenue or early traction stage, for 30–90 day advisory and project engagements, or as a full-time Head of Operations, Growth, or AI. Contact him at hello@kamiljan.com.",
+        text: "Yes. Kamil Jan is open to AI implementation and enablement roles, co-founding, advisory and project engagements, or a full-time senior role. Contact him at hello@kamiljan.com.",
       },
     },
     {
@@ -73,6 +88,14 @@ const FAQ_SCHEMA = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "You can reach Kamil Jan by email at hello@kamiljan.com, or find him on LinkedIn at linkedin.com/in/kamiljan11.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Where can I see Kamil Jan's actual work?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "kamiljan.com/case-studies hosts 19 in-depth engineering case studies — each with the problem, the decisions and rejected alternatives, how success was measured, and honest limitations. Live systems include masgroup.is, flyt.is, journeyiceland.is (client delivery), garage.mountaincar.is, and quickfix.is.",
       },
     },
     {

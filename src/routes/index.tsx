@@ -249,7 +249,7 @@ const PROJECT_META = [
     name: "MAS Warsztat",
     tags: ["SaaS", "AI"],
     year: "2026",
-    href: "https://app.garage.mountaincar.is" as string | null,
+    href: "https://garage.mountaincar.is" as string | null,
   },
 ];
 

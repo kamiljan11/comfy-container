@@ -3260,6 +3260,16 @@ section {
   color: #2a2e33;
   max-width: 72ch;
 }
+.cs-sec p a {
+  color: #0a7d8c;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(10, 125, 140, 0.35);
+  text-underline-offset: 2px;
+}
+.cs-sec p a:hover {
+  text-decoration-color: #0a7d8c;
+}
 .cs-sec p + p {
   margin-top: 14px;
 }
