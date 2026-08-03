@@ -108,7 +108,7 @@ export const T: Record<Lang, SiteTranslation> = {
     beyond: {
       label: "Beyond Work",
       title: "Twelve years of practice, one guidebook",
-      body: 'Before I built AI systems, my long project was inner: twelve years of spiritual practice and study, six of them spent writing it down. The result is "Simplified Practical Spirituality" — a practical, tradition-agnostic guidebook. Both editions are free. Start with the short one.',
+      body: 'Before I built AI systems, my long project was inner: twelve years of spiritual practice and study, six of them spent writing it down. It took two earlier books to learn how to write this one. The result is "Simplified Practical Spirituality" — a practical, tradition-agnostic guidebook. Both editions are free. Start with the short one.',
       short: "Short version — 87 pages, ~1 hour",
       full: "Complete guidebook — 183 pages",
       hint: "PDFs with clickable contents and chapter navigation.",
@@ -269,7 +269,7 @@ export const T: Record<Lang, SiteTranslation> = {
     beyond: {
       label: "Poza pracą",
       title: "Dwanaście lat praktyki, jeden przewodnik",
-      body: 'Zanim zacząłem budować systemy AI, moim długim projektem była praca wewnętrzna: dwanaście lat praktyki i poszukiwań, z czego sześć spędziłem na spisywaniu. Tak powstało „Simplified Practical Spirituality" — praktyczny przewodnik ponad tradycjami (po angielsku). Obie wersje są darmowe. Zacznij od krótkiej.',
+      body: 'Zanim zacząłem budować systemy AI, moim długim projektem była praca wewnętrzna: dwanaście lat praktyki i poszukiwań, z czego sześć spędziłem na spisywaniu. Zanim powstała wersja ostateczna, napisałem dwie wcześniejsze książki. Tak powstało „Simplified Practical Spirituality" — praktyczny przewodnik ponad tradycjami (po angielsku). Obie wersje są darmowe. Zacznij od krótkiej.',
       short: "Wersja skrócona — 87 stron, ~1 godzina",
       full: "Pełny przewodnik — 183 strony",
       hint: "PDF-y z klikalnym spisem treści i nawigacją po rozdziałach.",
