@@ -246,7 +246,7 @@ const PROJECT_META = [
   {
     num: "07",
     logo: "/logos/masgroup.webp",
-    name: "MAS Warsztat",
+    name: "Workshop 3.0",
     tags: ["SaaS", "AI"],
     year: "2026",
     href: "https://garage.mountaincar.is" as string | null,
@@ -716,29 +716,40 @@ function HomePage() {
 
       {/* ── Beyond work ── */}
       <section className="beyond" id="beyond">
+        <div className="beyond-flow" aria-hidden="true" />
         <div className="container">
-          <div className="beyond-inner">
-            <div className="section-label">{t.beyond.label}</div>
-            <h2 className="beyond-title">{t.beyond.title}</h2>
-            <p className="beyond-body">{t.beyond.body}</p>
-            <div className="beyond-actions">
-              <a
-                className="btn-ghost beyond-btn"
-                href="/books/Simplified-Practical-Spirituality-Short.pdf"
-                download
-              >
-                {t.beyond.short}
-              </a>
-              <a
-                className="btn-ghost beyond-btn"
-                href="/books/Simplified-Practical-Spirituality.pdf"
-                download
-              >
-                {t.beyond.full}
-              </a>
+          <details className="beyond-fold">
+            <summary className="beyond-sum">
+              <span className="section-label">{t.beyond.label}</span>
+              <span className="beyond-title">{t.beyond.title}</span>
+              <span className="beyond-open">
+                {t.beyond.open}
+                <span className="beyond-chev" aria-hidden="true">
+                  ▾
+                </span>
+              </span>
+            </summary>
+            <div className="beyond-inner">
+              <p className="beyond-body">{t.beyond.body}</p>
+              <div className="beyond-actions">
+                <a
+                  className="btn-ghost beyond-btn"
+                  href="/books/Simplified-Practical-Spirituality-Short.pdf"
+                  download
+                >
+                  {t.beyond.short}
+                </a>
+                <a
+                  className="btn-ghost beyond-btn"
+                  href="/books/Simplified-Practical-Spirituality.pdf"
+                  download
+                >
+                  {t.beyond.full}
+                </a>
+              </div>
+              <p className="beyond-hint">{t.beyond.hint}</p>
             </div>
-            <p className="beyond-hint">{t.beyond.hint}</p>
-          </div>
+          </details>
         </div>
       </section>
 

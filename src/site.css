@@ -3555,18 +3555,144 @@ section {
 
 /* ── Beyond work (books) ── */
 .beyond {
-  padding: 88px 0;
+  position: relative;
+  padding: 64px 0;
   border-top: 1px solid var(--border-2);
+  overflow: hidden;
 }
-.beyond-inner {
+
+/* flowing backdrop — slow drifting teal blooms, purely decorative */
+.beyond-flow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+}
+.beyond-flow::before,
+.beyond-flow::after {
+  content: "";
+  position: absolute;
+  width: 46vw;
+  height: 46vw;
+  min-width: 320px;
+  min-height: 320px;
+  border-radius: 50%;
+  filter: blur(90px);
+}
+.beyond-flow::before {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.22), transparent 62%);
+  top: -40%;
+  left: -6%;
+  animation: beyond-drift-a 22s ease-in-out infinite;
+}
+.beyond-flow::after {
+  background: radial-gradient(circle, rgba(8, 145, 178, 0.2), transparent 62%);
+  bottom: -45%;
+  right: -4%;
+  animation: beyond-drift-b 27s ease-in-out infinite;
+}
+@keyframes beyond-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(14%, 12%) scale(1.18);
+  }
+}
+@keyframes beyond-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate(-12%, -10%) scale(0.92);
+  }
+}
+.beyond .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* collapsible so it never competes with the contact CTA */
+.beyond-fold {
   max-width: 640px;
   margin: 0 auto;
   text-align: center;
 }
-.beyond-inner .section-label {
+.beyond-sum {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.beyond-sum::-webkit-details-marker {
+  display: none;
+}
+.beyond-sum .beyond-title {
+  margin-top: 0;
+}
+.beyond-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teal-2);
+  transition: color 0.2s;
+}
+.beyond-sum:hover .beyond-open {
+  color: var(--teal);
+}
+.beyond-chev {
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 0.25s var(--ease-expo);
+}
+.beyond-fold[open] .beyond-chev {
+  transform: rotate(180deg);
+}
+.beyond-fold[open] .beyond-inner {
+  animation: beyond-reveal 0.4s var(--ease-expo);
+}
+@keyframes beyond-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .beyond-flow::before,
+  .beyond-flow::after {
+    animation: none;
+  }
+  .beyond-fold[open] .beyond-inner {
+    animation: none;
+  }
+  .beyond-chev {
+    transition: none;
+  }
+}
+
+.beyond-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 18px;
+}
+.beyond-sum .section-label {
   justify-content: center;
 }
-.beyond-inner .section-label::after {
+.beyond-sum .section-label::after {
   content: "";
   display: block;
   width: 28px;
