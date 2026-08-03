@@ -1419,6 +1419,15 @@ section { position: relative; z-index: 1; }
 @keyframes cs-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes cs-fade { from { opacity: 0; } to { opacity: 1; } }
 
+/* ── Beyond work (books) ── */
+.beyond { padding: 88px 0; border-top: 1px solid var(--border-2); }
+.beyond-inner { max-width: 640px; }
+.beyond-title { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.4rem, 3.5vw, 1.9rem); letter-spacing: -0.02em; color: var(--text); margin-top: 18px; text-wrap: balance; }
+.beyond-body { color: var(--text-2); font-size: 16px; line-height: 1.75; margin: 16px 0 26px; text-wrap: pretty; }
+.beyond-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.beyond-btn { font-size: 14px; }
+.beyond-hint { font-size: 12px; color: var(--text-2); opacity: 0.75; margin-top: 12px; }
+
 /* TOC hover polish. */
 .cs-toc-num { transition: color 0.2s; }
 .cs-toc-card:hover { box-shadow: 0 10px 28px rgba(45, 212, 191, 0.1); }

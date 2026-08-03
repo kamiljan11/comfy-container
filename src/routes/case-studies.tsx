@@ -220,25 +220,27 @@ function CaseStudiesPage() {
         </details>
       ))}
 
-      <section className="cs-more">
-        <h2 className="cs-more-h">More work</h2>
-        <p className="cs-more-sub">Shorter write-ups — same honesty, less depth.</p>
-        <div className="cs-more-grid">
-          {SECONDARY.map((s) => (
-            <div key={s.slug} className="cs-card">
-              <h3>{s.title}</h3>
-              <p>{s.summary}</p>
-              <div className="cs-stack">
-                {s.stack.map((t) => (
-                  <span key={t} className="cs-tag">
-                    {t}
-                  </span>
-                ))}
+      {SECONDARY.length > 0 && (
+        <section className="cs-more">
+          <h2 className="cs-more-h">More work</h2>
+          <p className="cs-more-sub">Shorter write-ups — same honesty, less depth.</p>
+          <div className="cs-more-grid">
+            {SECONDARY.map((s) => (
+              <div key={s.slug} className="cs-card">
+                <h3>{s.title}</h3>
+                <p>{s.summary}</p>
+                <div className="cs-stack">
+                  {s.stack.map((t) => (
+                    <span key={t} className="cs-tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="cs-foot">
         <p>
