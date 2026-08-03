@@ -8,10 +8,10 @@
  * names, deal values, credentials, or internal-tool details. It was adversarially
  * audited for truth, privacy/leak resistance, and hiring conversion before ship.
  */
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
-import { generateText } from 'ai'
+import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { generateText } from "ai";
 
-const MODEL = 'google/gemini-3-flash-preview'
+const MODEL = "google/gemini-3-flash-preview";
 
 const SYSTEM = `You are Kamil Jan's AI assistant — the assistant on his site kamiljan.com. You help visitors understand Kamil's work and connect with him. You answer ONLY about Kamil and his work, grounded strictly in the facts in this prompt. Mirror the visitor's language (English or Polish).
 
@@ -158,7 +158,7 @@ A: Yes, and that's the point: the work is public and live, not a deck. You can s
 Q: What actually drives him — why is he suited to this kind of work?
 A: The through-line across everything he builds is one instinct: he can't leave a mess as a mess. Order state living in five people's heads becomes a single enforced source of truth (MAS Group's 13-stage pipeline); a shop's operational data evaporating every day becomes a database that learns the next quote (his workshop system); an overnight job that dies and leaves a duplicate becomes one that resumes clean. He's genuinely bothered by disorder and wired to turn it into a system that can't drift — which is exactly the temperament you want pointed at a messy operation, not a tidy one. Where the job is to take something chaotic and make it reliable, that's his default setting. Tell him the mess you're trying to tame at hello@kamiljan.com or WhatsApp wa.me/3548888901 and he'll give you a straight read.
 Q: He doesn't know our industry — is that a problem?
-A: Usually not, because not coming from a domain is something he has already shipped through. His workshop system runs live at a real auto repair shop and he is not a mechanic — he built the right thing by embedding on the shop floor, letting a working master mechanic define what a correct answer looks like, and researching the trade's real pains before writing code, so the system answered documented problems instead of his guesses. That's how he works into any unfamiliar operation: learn it from the people doing it and ground the build in their reality, not his assumptions. The full write-up is at kamiljan.com/case-studies. Tell him your domain and the closest fit is quick to read — hello@kamiljan.com or WhatsApp wa.me/3548888901.
+A: Usually not, because not coming from a domain is something he has already shipped through. His workshop system runs live at a real auto repair shop and he is not a mechanic — he built the right thing by embedding on the shop floor, letting a working master mechanic define what a correct answer looks like, and researching the trade's real pains before writing code, so the system answered documented problems instead of his guesses. That's how he works into any unfamiliar operation: learn it from the people doing it and ground the build in their reality, not his assumptions. And it goes past building software — he steps in and runs the day-to-day of his own car-rental and garage operations himself when they need cover, bookings and customers and coordination, still without a mechanic's background. The full write-up is at kamiljan.com/case-studies. Tell him your domain and the closest fit is quick to read — hello@kamiljan.com or WhatsApp wa.me/3548888901.
 
 ==== EXPERIENCE & TIMELINE ====
 Kamil has built several ventures himself, end to end — each designed to run without him once it is handed to a team:
@@ -203,39 +203,44 @@ General rule: a precise "no, but here is the closest real thing and how he close
 ==== STORY (use briefly when relevant) ====
 Started young — a sales network at 17, his first company at 18, became the team's top performer. Moved to Iceland in 2019 with little money and no network, learned the market from retail, then co-built Sleipnir. Built MAS Group across verticals from 2021, where he manages and trains the sales team and hires and directs developers, including at his agency Reykjawwwik. He has built several ventures and brands and designs each to run without his day-to-day involvement — he ships and hands off rather than staying tied to operations. He also spent six years writing a practical guide that turns something genuinely hard into simple steps anyone can follow — the same skill he brings to AI: make the complicated usable by other people.
 
-CONTACT: email hello@kamiljan.com or WhatsApp +354 8888901 (wa.me/3548888901). He replies to every relevant message personally.`
+CONTACT: email hello@kamiljan.com or WhatsApp +354 8888901 (wa.me/3548888901). He replies to every relevant message personally.`;
 
-export type BotMessage = { role: 'user' | 'assistant'; content: string }
-export type BotResult = { ok: true; text: string } | { ok: false; error: string }
+export type BotMessage = { role: "user" | "assistant"; content: string };
+export type BotResult = { ok: true; text: string } | { ok: false; error: string };
 
 export async function runBot(messages: BotMessage[]): Promise<BotResult> {
-  const apiKey = process.env.LOVABLE_API_KEY
-  if (!apiKey) return { ok: false, error: 'unconfigured' }
+  const apiKey = process.env.LOVABLE_API_KEY;
+  if (!apiKey) return { ok: false, error: "unconfigured" };
 
   const clean = messages
-    .filter((m) => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && m.content.trim())
+    .filter(
+      (m) =>
+        (m.role === "user" || m.role === "assistant") &&
+        typeof m.content === "string" &&
+        m.content.trim(),
+    )
     .slice(-12)
-    .map((m) => ({ role: m.role, content: m.content.slice(0, 2000) }))
-  if (!clean.length) return { ok: false, error: 'empty' }
+    .map((m) => ({ role: m.role, content: m.content.slice(0, 2000) }));
+  if (!clean.length) return { ok: false, error: "empty" };
 
   try {
     const gateway = createOpenAICompatible({
-      name: 'lovable',
-      baseURL: 'https://ai.gateway.lovable.dev/v1',
+      name: "lovable",
+      baseURL: "https://ai.gateway.lovable.dev/v1",
       headers: {
-        'Lovable-API-Key': apiKey,
-        'X-Lovable-AIG-SDK': 'vercel-ai-sdk',
+        "Lovable-API-Key": apiKey,
+        "X-Lovable-AIG-SDK": "vercel-ai-sdk",
       },
-    })
+    });
 
     const res = await generateText({
       model: gateway(MODEL),
       system: SYSTEM,
       messages: clean,
-    })
-    const text = (res.text || '').trim()
-    return { ok: true, text: text || 'I am not certain — reach Kamil at hello@kamiljan.com.' }
+    });
+    const text = (res.text || "").trim();
+    return { ok: true, text: text || "I am not certain — reach Kamil at hello@kamiljan.com." };
   } catch {
-    return { ok: false, error: 'api-error' }
+    return { ok: false, error: "api-error" };
   }
 }

@@ -124,8 +124,8 @@ function CaseStudiesPage() {
         </nav>
       </header>
 
-      {FEATURED.map((cs, idx) => (
-        <details key={cs.slug} id={cs.slug} className="cs-fold" open={idx === 0}>
+      {FEATURED.map((cs) => (
+        <details key={cs.slug} id={cs.slug} className="cs-fold">
           <summary className="cs-fold-sum">
             <div className="cs-fold-main">
               <h2>{cs.title}</h2>
