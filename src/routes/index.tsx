@@ -245,7 +245,7 @@ const PROJECT_META = [
   },
   {
     num: "07",
-    logo: "/logos/masgroup.webp",
+    logo: "/logos/mountaincar-garage.webp",
     name: "Workshop 3.0",
     tags: ["SaaS", "AI"],
     year: "2026",
