@@ -716,7 +716,11 @@ function HomePage() {
 
       {/* ── Beyond work ── */}
       <section className="beyond" id="beyond">
-        <div className="beyond-flow" aria-hidden="true" />
+        <div className="beyond-flow" aria-hidden="true">
+          <div className="beyond-wave beyond-wave-1" />
+          <div className="beyond-wave beyond-wave-2" />
+          <div className="beyond-wave beyond-wave-3" />
+        </div>
         <div className="container">
           <details className="beyond-fold">
             <summary className="beyond-sum">
