@@ -10,7 +10,9 @@ try {
   execSync("git rev-parse --is-inside-work-tree", { stdio: "ignore" });
   execSync("git config core.hooksPath scripts/git-hooks", { stdio: "ignore" });
   if (existsSync("scripts/git-hooks/pre-commit")) {
-    try { chmodSync("scripts/git-hooks/pre-commit", 0o755); } catch {}
+    try {
+      chmodSync("scripts/git-hooks/pre-commit", 0o755);
+    } catch {}
   }
   console.log("[hooks] pre-commit build guard active (core.hooksPath=scripts/git-hooks)");
 } catch {

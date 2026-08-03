@@ -1,6 +1,11 @@
 // Road extending to horizon — full-hero landscape. Vanishing point in upper third, road fills lower portion.
 export const JourneyPath = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden>
+  <svg
+    viewBox="0 0 1600 900"
+    preserveAspectRatio="xMidYMid slice"
+    className={className}
+    aria-hidden
+  >
     <defs>
       <linearGradient id="asphalt" x1="50%" y1="0%" x2="50%" y2="100%">
         <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
@@ -25,18 +30,49 @@ export const JourneyPath = ({ className = "" }: { className?: string }) => (
     <ellipse cx="800" cy="380" rx="450" ry="60" fill="url(#vanishGlow)" />
 
     {/* far mountain ridges — multiple layers for depth */}
-    <path d="M0 360 Q 200 340 400 350 Q 600 326 800 340 Q 1000 326 1200 348 Q 1400 336 1600 354 L1600 390 L0 390 Z" fill="url(#ridgeFade)" />
-    <path d="M0 380 Q 250 366 460 372 Q 700 360 940 370 Q 1180 362 1400 372 L1600 376 L1600 400 L0 400 Z" fill="currentColor" opacity="0.08" />
+    <path
+      d="M0 360 Q 200 340 400 350 Q 600 326 800 340 Q 1000 326 1200 348 Q 1400 336 1600 354 L1600 390 L0 390 Z"
+      fill="url(#ridgeFade)"
+    />
+    <path
+      d="M0 380 Q 250 366 460 372 Q 700 360 940 370 Q 1180 362 1400 372 L1600 376 L1600 400 L0 400 Z"
+      fill="currentColor"
+      opacity="0.08"
+    />
 
     {/* horizon line where ground meets sky */}
-    <line x1="0" y1="380" x2="1600" y2="380" stroke="currentColor" strokeWidth="0.5" opacity="0.18" />
+    <line
+      x1="0"
+      y1="380"
+      x2="1600"
+      y2="380"
+      stroke="currentColor"
+      strokeWidth="0.5"
+      opacity="0.18"
+    />
 
     {/* ROAD — vanishing point at (800, 380), bottom corners at (220, 900) and (1380, 900) */}
     <path d="M 800 380 L 220 900 L 1380 900 Z" fill="url(#asphalt)" />
 
     {/* outer shoulder lines */}
-    <line x1="800" y1="380" x2="220" y2="900" stroke="url(#lineFade)" strokeWidth="2" strokeLinecap="round" />
-    <line x1="800" y1="380" x2="1380" y2="900" stroke="url(#lineFade)" strokeWidth="2" strokeLinecap="round" />
+    <line
+      x1="800"
+      y1="380"
+      x2="220"
+      y2="900"
+      stroke="url(#lineFade)"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <line
+      x1="800"
+      y1="380"
+      x2="1380"
+      y2="900"
+      stroke="url(#lineFade)"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
 
     {/* center dashed lane — scales with perspective */}
     <g stroke="url(#lineFade)" fill="none" strokeLinecap="round">
@@ -90,7 +126,13 @@ export const HorizonTrees = () => null;
 // Open hands — minimal, sumi-e brushstroke style. Two hands, palms up, slightly inclined toward each other.
 export const OpenHands = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 240 120" className={className} aria-hidden>
-    <g stroke="currentColor" fill="none" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <g
+      stroke="currentColor"
+      fill="none"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       {/* left hand — palm up, fingers curving inward toward center */}
       <g transform="translate(20, 30) rotate(-12)">
         {/* palm cup */}
@@ -122,7 +164,15 @@ export const OpenHands = ({ className = "" }: { className?: string }) => (
 
       {/* small connecting dot/center mark — what's offered between the hands */}
       <circle cx="120" cy="60" r="2" fill="currentColor" opacity="0.6" />
-      <circle cx="120" cy="60" r="6" stroke="currentColor" fill="none" strokeWidth="0.6" opacity="0.3" />
+      <circle
+        cx="120"
+        cy="60"
+        r="6"
+        stroke="currentColor"
+        fill="none"
+        strokeWidth="0.6"
+        opacity="0.3"
+      />
     </g>
   </svg>
 );
@@ -164,33 +214,92 @@ export const InkPine = ({ className = "" }: { className?: string }) => (
     />
 
     {/* knot/character mark on trunk */}
-    <ellipse cx="320" cy="320" rx="6" ry="3" fill="currentColor" opacity="0.4" transform="rotate(-30 320 320)" />
-    <ellipse cx="262" cy="288" rx="5" ry="2.5" fill="currentColor" opacity="0.35" transform="rotate(15 262 288)" />
+    <ellipse
+      cx="320"
+      cy="320"
+      rx="6"
+      ry="3"
+      fill="currentColor"
+      opacity="0.4"
+      transform="rotate(-30 320 320)"
+    />
+    <ellipse
+      cx="262"
+      cy="288"
+      rx="5"
+      ry="2.5"
+      fill="currentColor"
+      opacity="0.35"
+      transform="rotate(15 262 288)"
+    />
 
     {/* secondary branches reaching out */}
     {/* upper-left branch */}
-    <path d="M 218 264 C 198 252 178 244 156 240 C 138 236 122 234 108 230"
-      stroke="currentColor" strokeWidth="3.5" fill="none" strokeLinecap="round" opacity="0.8" />
-    <path d="M 156 240 C 144 232 132 222 124 210"
-      stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.6" />
+    <path
+      d="M 218 264 C 198 252 178 244 156 240 C 138 236 122 234 108 230"
+      stroke="currentColor"
+      strokeWidth="3.5"
+      fill="none"
+      strokeLinecap="round"
+      opacity="0.8"
+    />
+    <path
+      d="M 156 240 C 144 232 132 222 124 210"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="none"
+      strokeLinecap="round"
+      opacity="0.6"
+    />
 
     {/* mid branch jutting up-left */}
-    <path d="M 200 152 C 184 136 166 124 146 116 C 130 110 116 108 102 106"
-      stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.75" />
-    <path d="M 146 116 C 132 102 122 86 114 70"
-      stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round" opacity="0.55" />
+    <path
+      d="M 200 152 C 184 136 166 124 146 116 C 130 110 116 108 102 106"
+      stroke="currentColor"
+      strokeWidth="3"
+      fill="none"
+      strokeLinecap="round"
+      opacity="0.75"
+    />
+    <path
+      d="M 146 116 C 132 102 122 86 114 70"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      fill="none"
+      strokeLinecap="round"
+      opacity="0.55"
+    />
 
     {/* top branch reaching highest */}
-    <path d="M 240 122 C 232 108 222 96 210 84 C 198 72 184 64 168 58"
-      stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.7" />
+    <path
+      d="M 240 122 C 232 108 222 96 210 84 C 198 72 184 64 168 58"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      fill="none"
+      strokeLinecap="round"
+      opacity="0.7"
+    />
 
     {/* small twigs */}
-    <path d="M 108 230 L 96 224 M 108 230 L 100 240 M 102 106 L 88 100 M 102 106 L 92 116 M 168 58 L 156 50 M 168 58 L 158 66"
-      stroke="currentColor" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.6" />
+    <path
+      d="M 108 230 L 96 224 M 108 230 L 100 240 M 102 106 L 88 100 M 102 106 L 92 116 M 168 58 L 156 50 M 168 58 L 158 66"
+      stroke="currentColor"
+      strokeWidth="1.2"
+      fill="none"
+      strokeLinecap="round"
+      opacity="0.6"
+    />
 
     {/* needle cloud-pads (matsu style — soft elliptical clusters) */}
     {/* lower-right cluster (largest, anchoring) */}
-    <ellipse cx="340" cy="335" rx="48" ry="22" fill="url(#needleCloud)" transform="rotate(-15 340 335)" />
+    <ellipse
+      cx="340"
+      cy="335"
+      rx="48"
+      ry="22"
+      fill="url(#needleCloud)"
+      transform="rotate(-15 340 335)"
+    />
     <g stroke="currentColor" strokeWidth="0.8" opacity="0.55" fill="none" strokeLinecap="round">
       <path d="M310 322 q 6 -8 14 -10" />
       <path d="M324 318 q 8 -6 18 -6" />
@@ -202,7 +311,14 @@ export const InkPine = ({ className = "" }: { className?: string }) => (
     </g>
 
     {/* mid cluster */}
-    <ellipse cx="120" cy="225" rx="42" ry="20" fill="url(#needleCloud)" transform="rotate(-8 120 225)" />
+    <ellipse
+      cx="120"
+      cy="225"
+      rx="42"
+      ry="20"
+      fill="url(#needleCloud)"
+      transform="rotate(-8 120 225)"
+    />
     <g stroke="currentColor" strokeWidth="0.8" opacity="0.5" fill="none" strokeLinecap="round">
       <path d="M90 220 q 6 -7 14 -8" />
       <path d="M106 215 q 10 -4 18 -3" />
@@ -213,7 +329,14 @@ export const InkPine = ({ className = "" }: { className?: string }) => (
     </g>
 
     {/* upper-left cluster */}
-    <ellipse cx="100" cy="92" rx="38" ry="18" fill="url(#needleCloud)" transform="rotate(-5 100 92)" />
+    <ellipse
+      cx="100"
+      cy="92"
+      rx="38"
+      ry="18"
+      fill="url(#needleCloud)"
+      transform="rotate(-5 100 92)"
+    />
     <g stroke="currentColor" strokeWidth="0.8" opacity="0.5" fill="none" strokeLinecap="round">
       <path d="M72 86 q 8 -6 16 -6" />
       <path d="M90 82 q 10 -2 18 0" />
@@ -223,7 +346,14 @@ export const InkPine = ({ className = "" }: { className?: string }) => (
     </g>
 
     {/* topmost cluster */}
-    <ellipse cx="160" cy="50" rx="28" ry="14" fill="url(#needleCloud)" transform="rotate(-12 160 50)" />
+    <ellipse
+      cx="160"
+      cy="50"
+      rx="28"
+      ry="14"
+      fill="url(#needleCloud)"
+      transform="rotate(-12 160 50)"
+    />
     <g stroke="currentColor" strokeWidth="0.7" opacity="0.45" fill="none" strokeLinecap="round">
       <path d="M138 46 q 8 -4 14 -4" />
       <path d="M154 42 q 8 -2 14 0" />
@@ -232,7 +362,14 @@ export const InkPine = ({ className = "" }: { className?: string }) => (
     </g>
 
     {/* small accent cluster on lower-mid */}
-    <ellipse cx="220" cy="278" rx="22" ry="11" fill="url(#needleCloud)" transform="rotate(-20 220 278)" />
+    <ellipse
+      cx="220"
+      cy="278"
+      rx="22"
+      ry="11"
+      fill="url(#needleCloud)"
+      transform="rotate(-20 220 278)"
+    />
 
     {/* falling needles / scattered marks for atmosphere */}
     <g stroke="currentColor" strokeWidth="0.6" opacity="0.4" strokeLinecap="round">
@@ -245,7 +382,16 @@ export const InkPine = ({ className = "" }: { className?: string }) => (
     </g>
 
     {/* signature dot/seal mark — small red square in classic kakemono style */}
-    <rect x="356" y="356" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.35" />
+    <rect
+      x="356"
+      y="356"
+      width="12"
+      height="12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+      opacity="0.35"
+    />
   </svg>
 );
 
@@ -263,12 +409,60 @@ export const Sprig = ({ className = "" }: { className?: string }) => (
       <path d="M38 13 Q 38 7 34 3" />
       <path d="M46 12 Q 46 6 42 2" />
       <path d="M54 12 Q 54 6 50 2" />
-      <ellipse cx="10" cy="5" rx="3" ry="1.4" transform="rotate(-50 10 5)" fill="currentColor" opacity="0.55" />
-      <ellipse cx="18" cy="4" rx="3" ry="1.4" transform="rotate(-50 18 4)" fill="currentColor" opacity="0.55" />
-      <ellipse cx="26" cy="3" rx="3" ry="1.4" transform="rotate(-50 26 3)" fill="currentColor" opacity="0.55" />
-      <ellipse cx="34" cy="3" rx="3" ry="1.4" transform="rotate(-50 34 3)" fill="currentColor" opacity="0.55" />
-      <ellipse cx="42" cy="2" rx="3" ry="1.4" transform="rotate(-50 42 2)" fill="currentColor" opacity="0.55" />
-      <ellipse cx="50" cy="2" rx="3" ry="1.4" transform="rotate(-50 50 2)" fill="currentColor" opacity="0.55" />
+      <ellipse
+        cx="10"
+        cy="5"
+        rx="3"
+        ry="1.4"
+        transform="rotate(-50 10 5)"
+        fill="currentColor"
+        opacity="0.55"
+      />
+      <ellipse
+        cx="18"
+        cy="4"
+        rx="3"
+        ry="1.4"
+        transform="rotate(-50 18 4)"
+        fill="currentColor"
+        opacity="0.55"
+      />
+      <ellipse
+        cx="26"
+        cy="3"
+        rx="3"
+        ry="1.4"
+        transform="rotate(-50 26 3)"
+        fill="currentColor"
+        opacity="0.55"
+      />
+      <ellipse
+        cx="34"
+        cy="3"
+        rx="3"
+        ry="1.4"
+        transform="rotate(-50 34 3)"
+        fill="currentColor"
+        opacity="0.55"
+      />
+      <ellipse
+        cx="42"
+        cy="2"
+        rx="3"
+        ry="1.4"
+        transform="rotate(-50 42 2)"
+        fill="currentColor"
+        opacity="0.55"
+      />
+      <ellipse
+        cx="50"
+        cy="2"
+        rx="3"
+        ry="1.4"
+        transform="rotate(-50 50 2)"
+        fill="currentColor"
+        opacity="0.55"
+      />
     </g>
   </svg>
 );

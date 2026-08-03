@@ -9,16 +9,16 @@ Extracted from `/api/dashboard/customer/funnels/list`. **Two additional public U
 - `/kursmarketing` (PL marketing course landing — different from `/spiritual-marketing-blog`)
 - `/mainpage_newsletter` (newsletter widget endpoint)
 
-| Funnel ID | Name | View URL | Status |
-|---|---|---|---|
-| 6590855 | Szkolenie z Marketingu | https://www.myspiritway.org/kursmarketing | active |
-| 6518704 | newsletter widgets | https://www.myspiritway.org/mainpage_newsletter | active |
-| 6293298 | BOFU - 3 products spiritual marketing | https://www.myspiritway.org/spiritual-marketing | active |
-| 6280859 | 1:1 Consultation - MOFU - Clarity Call | https://www.myspiritway.org/clarity | active |
-| 5647601 | Simplified Practical Spirituality - Short Summary | https://www.myspiritway.org/sps2 | active |
-| 5184589 | Simplified Practical Spirituality | https://www.myspiritway.org/sps | active |
-| 4934974 | The Awakening Circle | (URL — to verify) | inactive |
-| (3 more) | DMT / MAINPAGE / IYSS | already mapped in `01-funnels-inventory.md` | active |
+| Funnel ID | Name                                              | View URL                                        | Status   |
+| --------- | ------------------------------------------------- | ----------------------------------------------- | -------- |
+| 6590855   | Szkolenie z Marketingu                            | https://www.myspiritway.org/kursmarketing       | active   |
+| 6518704   | newsletter widgets                                | https://www.myspiritway.org/mainpage_newsletter | active   |
+| 6293298   | BOFU - 3 products spiritual marketing             | https://www.myspiritway.org/spiritual-marketing | active   |
+| 6280859   | 1:1 Consultation - MOFU - Clarity Call            | https://www.myspiritway.org/clarity             | active   |
+| 5647601   | Simplified Practical Spirituality - Short Summary | https://www.myspiritway.org/sps2                | active   |
+| 5184589   | Simplified Practical Spirituality                 | https://www.myspiritway.org/sps                 | active   |
+| 4934974   | The Awakening Circle                              | (URL — to verify)                               | inactive |
+| (3 more)  | DMT / MAINPAGE / IYSS                             | already mapped in `01-funnels-inventory.md`     | active   |
 
 **Action**: add `/kursmarketing` route to kamiljan.com if it's still relevant content. The `/mainpage_newsletter` URL is just the embed endpoint — no public page to migrate.
 
@@ -27,6 +27,7 @@ Extracted from `/api/dashboard/customer/funnels/list`. **Two additional public U
 **Finding**: Systeme.io account does **not use** the dedicated Automation Rules engine. The `/api/dashboard/customer/automation-rules/list` endpoint returned 404 — no rules configured.
 
 Instead, automation logic is implicit in the funnel structure:
+
 1. Visitor lands on funnel step (e.g., `/sps`)
 2. Submits opt-in form
 3. Form is configured to tag the contact + start a campaign (configured per-form in funnel editor, not as a top-level rule)
@@ -42,15 +43,15 @@ API endpoints `/api/dashboard/customer/tags` and `/tags/list` return 404 — lik
 
 **Workaround for migration**: tag values can be observed in the Live Updates feed on the Systeme.io dashboard (e.g., "subscribed to main page", "subscribed to Simplified Practical Spirituality"). These match the funnel name. Inferred tag schema based on observed subscriptions:
 
-| Tag | Set by | Triggers |
-|---|---|---|
-| `main page` / `main-page` | MAINPAGE funnel form | (none) |
-| `Simplified Practical Spirituality` | SPS funnel form | Practical Spirituality for Modern People campaign |
-| `Simplified (square) Practical Spirituality` | SPS² funnel form | Practical Spirituality for Modern People campaign |
-| `dmt-subscriber` (assumed) | DMT funnel form | DMT EMAILS campaign |
-| `iyss-subscriber` (assumed) | IYSS funnel form | Integrate Your Shattered Self campaign |
-| `clarity-call` (assumed) | Clarity funnel form | (booking confirmation, not a sequence) |
-| `spiritual-marketing` (assumed) | BOFU funnel form | Practical Marketing campaign |
+| Tag                                          | Set by               | Triggers                                          |
+| -------------------------------------------- | -------------------- | ------------------------------------------------- |
+| `main page` / `main-page`                    | MAINPAGE funnel form | (none)                                            |
+| `Simplified Practical Spirituality`          | SPS funnel form      | Practical Spirituality for Modern People campaign |
+| `Simplified (square) Practical Spirituality` | SPS² funnel form     | Practical Spirituality for Modern People campaign |
+| `dmt-subscriber` (assumed)                   | DMT funnel form      | DMT EMAILS campaign                               |
+| `iyss-subscriber` (assumed)                  | IYSS funnel form     | Integrate Your Shattered Self campaign            |
+| `clarity-call` (assumed)                     | Clarity funnel form  | (booking confirmation, not a sequence)            |
+| `spiritual-marketing` (assumed)              | BOFU funnel form     | Practical Marketing campaign                      |
 
 These map 1:1 to the `tag` field on `<NewsletterSignup />` in kamiljan.com. The tags are normalized to kebab-case on submission via `src/server/newsletter.ts`.
 

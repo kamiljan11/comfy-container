@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import { subscribeToNewsletter } from '../lib/newsletter.functions'
+import { useState } from "react";
+import { subscribeToNewsletter } from "../lib/newsletter.functions";
 
 interface Props {
-  source?: string
-  tag?: string
-  heading?: string
-  subheading?: string
-  buttonLabel?: string
+  source?: string;
+  tag?: string;
+  heading?: string;
+  subheading?: string;
+  buttonLabel?: string;
 }
 
 /**
@@ -18,35 +18,35 @@ interface Props {
  * the server console so we can verify the data path end-to-end.
  */
 export default function NewsletterSignup({
-  source = 'inline',
+  source = "inline",
   tag,
-  heading = 'Join the Community',
-  subheading = 'Updates about newest projects + practical insights. Unsubscribe anytime.',
-  buttonLabel = 'Subscribe',
+  heading = "Join the Community",
+  subheading = "Updates about newest projects + practical insights. Unsubscribe anytime.",
+  buttonLabel = "Subscribe",
 }: Props) {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-  const [errorMsg, setErrorMsg] = useState('')
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setStatus('sending')
-    setErrorMsg('')
-    const form = e.currentTarget
-    const data = new FormData(form)
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMsg("");
+    const form = e.currentTarget;
+    const data = new FormData(form);
     try {
       await subscribeToNewsletter({
         data: {
-          email: String(data.get('email') || ''),
-          name: String(data.get('name') || ''),
+          email: String(data.get("email") || ""),
+          name: String(data.get("name") || ""),
           source,
           tag,
         },
-      })
-      setStatus('sent')
-      form.reset()
+      });
+      setStatus("sent");
+      form.reset();
     } catch (err) {
-      setStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Something went wrong')
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
     }
   }
 
@@ -60,7 +60,7 @@ export default function NewsletterSignup({
             name="name"
             type="text"
             placeholder="Your name (optional)"
-            disabled={status === 'sending'}
+            disabled={status === "sending"}
             className="w-full rounded-md border border-white/15 bg-black/40 px-3 py-2 text-white placeholder:text-white/40 focus:border-cyan-400/50 focus:outline-none"
           />
           <input
@@ -68,23 +68,27 @@ export default function NewsletterSignup({
             type="email"
             placeholder="you@email.com"
             required
-            disabled={status === 'sending'}
+            disabled={status === "sending"}
             className="w-full rounded-md border border-white/15 bg-black/40 px-3 py-2 text-white placeholder:text-white/40 focus:border-cyan-400/50 focus:outline-none"
           />
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <button
             type="submit"
-            disabled={status === 'sending'}
+            disabled={status === "sending"}
             className="rounded-md border border-cyan-400/30 bg-cyan-400/10 px-5 py-2 text-sm text-cyan-100 hover:bg-cyan-400/20 transition-all disabled:opacity-50"
           >
-            {status === 'sending' ? 'Subscribing…' : buttonLabel}
+            {status === "sending" ? "Subscribing…" : buttonLabel}
           </button>
-          {status === 'sent' && <span className="text-sm text-green-400">✓ You're in. Check your inbox.</span>}
-          {status === 'error' && <span className="text-sm text-red-400">{errorMsg}</span>}
+          {status === "sent" && (
+            <span className="text-sm text-green-400">✓ You're in. Check your inbox.</span>
+          )}
+          {status === "error" && <span className="text-sm text-red-400">{errorMsg}</span>}
         </div>
       </form>
-      <p className="mt-3 text-[10px] text-white/30">By subscribing you accept to receive emails. Unsubscribe anytime via link in any email.</p>
+      <p className="mt-3 text-[10px] text-white/30">
+        By subscribing you accept to receive emails. Unsubscribe anytime via link in any email.
+      </p>
     </div>
-  )
+  );
 }

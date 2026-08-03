@@ -38,7 +38,11 @@ for (const file of listFiles()) {
   const loader = LOADER[ext];
   if (!loader) continue; // only parse JS/TS — JSON/CSS not the failure mode here
   let code;
-  try { code = readFileSync(file, "utf8"); } catch { continue; }
+  try {
+    code = readFileSync(file, "utf8");
+  } catch {
+    continue;
+  }
 
   try {
     await transform(code, { loader, sourcefile: file });
@@ -59,7 +63,7 @@ for (const file of listFiles()) {
 
 if (failed) {
   console.error(`\n${failed} file(s) will fail the Lovable build. Commit blocked.`);
-  console.error("Common cause: smart quotes (“ ”) replaced ASCII \" in code.");
+  console.error('Common cause: smart quotes (“ ”) replaced ASCII " in code.');
   console.error("Fix the delimiter(s) above to straight quotes, then commit again.");
   process.exit(1);
 }

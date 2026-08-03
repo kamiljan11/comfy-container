@@ -17,85 +17,85 @@
  */
 
 export interface EmailMessage {
-  to: string
-  subject: string
-  text: string
-  html?: string
-  replyTo?: string
-  from?: string
+  to: string;
+  subject: string;
+  text: string;
+  html?: string;
+  replyTo?: string;
+  from?: string;
 }
 
 export interface EmailTransport {
-  name: string
-  send(msg: EmailMessage): Promise<{ ok: true; id: string } | { ok: false; error: string }>
+  name: string;
+  send(msg: EmailMessage): Promise<{ ok: true; id: string } | { ok: false; error: string }>;
 }
 
 // ── Stub transport (default) ─────────────────────────────────────────────────
 const stubTransport: EmailTransport = {
-  name: 'stub',
+  name: "stub",
   async send(msg) {
     // eslint-disable-next-line no-console
-    console.log('[email:stub] would send', {
+    console.log("[email:stub] would send", {
       to: msg.to,
       subject: msg.subject,
-      from: msg.from ?? 'hello@kamiljan.com',
+      from: msg.from ?? "hello@kamiljan.com",
       replyTo: msg.replyTo,
       textPreview: msg.text.slice(0, 200),
-    })
-    return { ok: true, id: `stub-${Date.now()}` }
+    });
+    return { ok: true, id: `stub-${Date.now()}` };
   },
-}
+};
 
 // ── Resend transport (ready to wire) ─────────────────────────────────────────
 // Uncomment + set RESEND_API_KEY once you have the account.
 const resendTransport: EmailTransport = {
-  name: 'resend',
+  name: "resend",
   async send(msg) {
-    const apiKey = process.env.RESEND_API_KEY
+    const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      console.warn('[email:resend] RESEND_API_KEY not set, falling back to stub')
-      return stubTransport.send(msg)
+      console.warn("[email:resend] RESEND_API_KEY not set, falling back to stub");
+      return stubTransport.send(msg);
     }
     try {
-      const res = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          from: msg.from ?? 'Kamil Jan <hello@kamiljan.com>',
+          from: msg.from ?? "Kamil Jan <hello@kamiljan.com>",
           to: msg.to,
           subject: msg.subject,
           text: msg.text,
           html: msg.html,
           reply_to: msg.replyTo,
         }),
-      })
+      });
       if (!res.ok) {
-        const errText = await res.text()
-        return { ok: false, error: `Resend ${res.status}: ${errText.slice(0, 200)}` }
+        const errText = await res.text();
+        return { ok: false, error: `Resend ${res.status}: ${errText.slice(0, 200)}` };
       }
-      const body = (await res.json()) as { id?: string }
-      return { ok: true, id: body.id ?? 'unknown' }
+      const body = (await res.json()) as { id?: string };
+      return { ok: true, id: body.id ?? "unknown" };
     } catch (err) {
-      return { ok: false, error: err instanceof Error ? err.message : 'unknown' }
+      return { ok: false, error: err instanceof Error ? err.message : "unknown" };
     }
   },
-}
+};
 
 // ── Active transport selection ───────────────────────────────────────────────
 function pickTransport(): EmailTransport {
-  const provider = process.env.EMAIL_PROVIDER ?? 'stub'
-  if (provider === 'resend') return resendTransport
-  return stubTransport
+  const provider = process.env.EMAIL_PROVIDER ?? "stub";
+  if (provider === "resend") return resendTransport;
+  return stubTransport;
 }
 
 export async function sendEmail(msg: EmailMessage): Promise<void> {
-  const transport = pickTransport()
-  const result = await transport.send(msg)
+  const transport = pickTransport();
+  const result = await transport.send(msg);
   if (!result.ok) {
-    console.error(`[email:${transport.name}] send failed:`, result.error)
+    console.error(`[email:${transport.name}] send failed:`, result.error);
     // Don't throw — we never want a failing provider to lose the user's submission.
     // The form caller logs the data, and the user always gets the success state.
   }
@@ -109,28 +109,31 @@ export async function sendEmail(msg: EmailMessage): Promise<void> {
  * Cron) that dispatches them on the right cadence.
  */
 export interface SequenceEmail {
-  delayHours: number
-  subject: string
-  body: string
+  delayHours: number;
+  subject: string;
+  body: string;
 }
 
 export const welcomeSequence: SequenceEmail[] = [
   {
     delayHours: 0,
-    subject: 'Welcome to MySpiritWay (now at kamiljan.com)',
-    body: 'Hi {{name}},\n\nThanks for connecting. You\'ll find the full Simplified Practical Spirituality at https://kamiljan.com/spirituality.\n\n— Kamil',
+    subject: "Welcome to MySpiritWay (now at kamiljan.com)",
+    body: "Hi {{name}},\n\nThanks for connecting. You'll find the full Simplified Practical Spirituality at https://kamiljan.com/spirituality.\n\n— Kamil",
   },
   // TODO: paste extracted email-campaign content here once exported from Systeme.io.
-]
+];
 
-export async function startWelcomeSequence(_subscriber: { email: string; name?: string }): Promise<void> {
+export async function startWelcomeSequence(_subscriber: {
+  email: string;
+  name?: string;
+}): Promise<void> {
   // First email goes out immediately. Future emails are queued via the cron
   // worker once we add it (see iteration 5 of the migration plan).
-  const first = welcomeSequence[0]
-  if (!first) return
+  const first = welcomeSequence[0];
+  if (!first) return;
   await sendEmail({
     to: _subscriber.email,
     subject: first.subject,
-    text: first.body.replace('{{name}}', _subscriber.name ?? 'friend'),
-  })
+    text: first.body.replace("{{name}}", _subscriber.name ?? "friend"),
+  });
 }

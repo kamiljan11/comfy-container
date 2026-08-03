@@ -5,35 +5,35 @@ Repo: `mountainallservice/comfy-container` · branch `main` (Lovable auto-deploy
 
 ## Verification — every public page on myspiritway.org is migrated
 
-| myspiritway.org URL | kamiljan.com new route | Source funnel | Content status |
-|---|---|---|---|
-| `/` | `/spirituality` | MAINPAGE | ✅ Full hub with 12 cards + newsletter signup |
-| `/sps` | `/spirituality/sps` | SPS funnel | ✅ Complete book (~240KB, 6 markdown parts joined) |
-| `/sps2` | `/spirituality/sps2` | SPS Short Summary | ✅ Full short version (~70KB) |
-| `/dmt` | `/spirituality/dmt` | DMT | ✅ Intro + 8 benefits + FAQ + link to live practice |
-| `/dmtpractice` | `/spirituality/dmtpractice` | DMT | ✅ Pre-practice safety + link to original session + signup |
-| `/iyss` | `/spirituality/iyss` | IYSS | ✅ Description + 21-day workbook stub |
-| `/aboutkamiljan` | `/spirituality/about` | MAINPAGE | ✅ Full bio |
-| `/support_myspiritway` | `/spirituality/support` | MAINPAGE | ✅ Fair Exchange + all payment options (cards / monthly / crypto / SWIFT) |
-| `/contact-myspiritway` | `/spirituality/contact` | MAINPAGE | ✅ Live contact form |
-| `/clarity` | `/spirituality/clarity` | Clarity Call | ✅ Google Calendar booking link + signup |
-| `/spiritual-marketing` | `/spirituality/spiritual-marketing` | BOFU | ✅ Positioning + 3 capability cards + signup |
-| `/spiritual-marketing-blog` | `/spirituality/marketing-training` | Szkolenie z Marketingu | ✅ PL training landing + signup |
-| `/blog/posts` | `/spirituality/blog` | MAINPAGE | ✅ Index listing (1 post inventoried, more to add) |
+| myspiritway.org URL         | kamiljan.com new route              | Source funnel          | Content status                                                            |
+| --------------------------- | ----------------------------------- | ---------------------- | ------------------------------------------------------------------------- |
+| `/`                         | `/spirituality`                     | MAINPAGE               | ✅ Full hub with 12 cards + newsletter signup                             |
+| `/sps`                      | `/spirituality/sps`                 | SPS funnel             | ✅ Complete book (~240KB, 6 markdown parts joined)                        |
+| `/sps2`                     | `/spirituality/sps2`                | SPS Short Summary      | ✅ Full short version (~70KB)                                             |
+| `/dmt`                      | `/spirituality/dmt`                 | DMT                    | ✅ Intro + 8 benefits + FAQ + link to live practice                       |
+| `/dmtpractice`              | `/spirituality/dmtpractice`         | DMT                    | ✅ Pre-practice safety + link to original session + signup                |
+| `/iyss`                     | `/spirituality/iyss`                | IYSS                   | ✅ Description + 21-day workbook stub                                     |
+| `/aboutkamiljan`            | `/spirituality/about`               | MAINPAGE               | ✅ Full bio                                                               |
+| `/support_myspiritway`      | `/spirituality/support`             | MAINPAGE               | ✅ Fair Exchange + all payment options (cards / monthly / crypto / SWIFT) |
+| `/contact-myspiritway`      | `/spirituality/contact`             | MAINPAGE               | ✅ Live contact form                                                      |
+| `/clarity`                  | `/spirituality/clarity`             | Clarity Call           | ✅ Google Calendar booking link + signup                                  |
+| `/spiritual-marketing`      | `/spirituality/spiritual-marketing` | BOFU                   | ✅ Positioning + 3 capability cards + signup                              |
+| `/spiritual-marketing-blog` | `/spirituality/marketing-training`  | Szkolenie z Marketingu | ✅ PL training landing + signup                                           |
+| `/blog/posts`               | `/spirituality/blog`                | MAINPAGE               | ✅ Index listing (1 post inventoried, more to add)                        |
 
 **Coverage: 13 / 13 public pages = 100%** ✅
 
 ## Infrastructure / Logic — pluggable backend
 
-| Capability | Status | Activate by |
-|---|---|---|
-| Contact form submission | ✅ Live, stubbed | Routes through `src/server/contact.ts` → `sendEmail()` |
-| Newsletter signup (reusable) | ✅ Live, stubbed | Drop `<NewsletterSignup />` anywhere; routes through `src/server/newsletter.ts` |
-| Subscriber storage | ✅ Stub (in-memory + console) | Bind Cloudflare KV namespace `SUBSCRIBERS_KV` in `wrangler.jsonc`, uncomment `kvStore` in `src/server/subscribers.ts` |
-| Email sending | ✅ Stub (console.log) | Set env `EMAIL_PROVIDER=resend` + `RESEND_API_KEY` (free 3K emails/month) |
-| Welcome sequence trigger | ✅ Stub (first email only) | Paste extracted campaign content into `welcomeSequence` array in `src/server/email.ts` |
-| Google Calendar booking | ✅ Live link in /clarity | Update `GOOGLE_CALENDAR_BOOKING_URL` const if URL changes |
-| Payments | ✅ Live (direct provider links) | Already independent of Systeme.io (Revolut, PayPal, Wise, Stripe, BMC, Ko-Fi, BTC, ETH, SWIFT) |
+| Capability                   | Status                          | Activate by                                                                                                           |
+| ---------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Contact form submission      | ✅ Live, stubbed                | Routes through `src/server/contact.ts` → `sendEmail()`                                                                |
+| Newsletter signup (reusable) | ✅ Live, stubbed                | Drop `<NewsletterSignup />` anywhere; routes through `src/server/newsletter.ts`                                       |
+| Subscriber storage           | ✅ Stub (in-memory + console)   | Bind Cloudflare KV namespace `SUBSCRIBERS_KV` in `wrangler.jsonc`, uncomment `kvStore` in `src/server/subscribers.ts` |
+| Email sending                | ✅ Stub (console.log)           | Set env `EMAIL_PROVIDER=resend` + `RESEND_API_KEY` (free 3K emails/month)                                             |
+| Welcome sequence trigger     | ✅ Stub (first email only)      | Paste extracted campaign content into `welcomeSequence` array in `src/server/email.ts`                                |
+| Google Calendar booking      | ✅ Live link in /clarity        | Update `GOOGLE_CALENDAR_BOOKING_URL` const if URL changes                                                             |
+| Payments                     | ✅ Live (direct provider links) | Already independent of Systeme.io (Revolut, PayPal, Wise, Stripe, BMC, Ko-Fi, BTC, ETH, SWIFT)                        |
 
 ## File structure summary
 
@@ -77,15 +77,15 @@ src/
 
 ## Iteration log
 
-| # | Name | Status | Notes |
-|---|---|---|---|
-| 1 | Push SPS/SPS2 content + core routes | ✅ Done | All 6 SPS parts + SPS² + 8 spirituality routes |
-| 2 | Map all 9 Systeme.io funnels 1:1 | ✅ Done | See `migration/01-funnels-inventory.md` |
-| 3 | Extract email campaign content (31 emails) | ⏳ Pending | Requires per-email click in Systeme.io dashboard. Plug into `welcomeSequence` in `src/server/email.ts` |
-| 4 | Map Automation Rules + Tags + Contacts schema | ⏳ Pending | Tag schema partially inferred in inventory doc; needs detailed extraction |
-| 5 | Build pluggable email/form stubs + Cloudflare Workers | ✅ Done | All in `src/server/*` — stub mode active, real transport one env-var away |
-| 6 | Map remaining pages (Clarity, Spiritual Marketing, Blog) | ✅ Done | All routes built with content + signup forms |
-| 7 | Final QA pass | ✅ Done (this doc) | 13/13 public pages mapped; no orphan URLs found |
+| #   | Name                                                     | Status             | Notes                                                                                                  |
+| --- | -------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------ |
+| 1   | Push SPS/SPS2 content + core routes                      | ✅ Done            | All 6 SPS parts + SPS² + 8 spirituality routes                                                         |
+| 2   | Map all 9 Systeme.io funnels 1:1                         | ✅ Done            | See `migration/01-funnels-inventory.md`                                                                |
+| 3   | Extract email campaign content (31 emails)               | ⏳ Pending         | Requires per-email click in Systeme.io dashboard. Plug into `welcomeSequence` in `src/server/email.ts` |
+| 4   | Map Automation Rules + Tags + Contacts schema            | ⏳ Pending         | Tag schema partially inferred in inventory doc; needs detailed extraction                              |
+| 5   | Build pluggable email/form stubs + Cloudflare Workers    | ✅ Done            | All in `src/server/*` — stub mode active, real transport one env-var away                              |
+| 6   | Map remaining pages (Clarity, Spiritual Marketing, Blog) | ✅ Done            | All routes built with content + signup forms                                                           |
+| 7   | Final QA pass                                            | ✅ Done (this doc) | 13/13 public pages mapped; no orphan URLs found                                                        |
 
 ## Pre-cutover checklist (before Systeme.io subscription expires)
 

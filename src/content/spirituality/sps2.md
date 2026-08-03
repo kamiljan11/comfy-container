@@ -38,7 +38,6 @@ this playlist.
 
 Please accept cookies to access this content
 
-
 ## Table of Contents:
 
 (Click to navigate)
@@ -67,44 +66,25 @@ PART 2 – Take Actionable Steps
 
 Practical Spiritual Path
 
-
 ## Activation Sessions
-
-
 
 ## The Evolutionary Mindset
 
-
-
 ## Always Try Your Very Best
-
-
 
 ## Develop Formal Spiritual Practice
 
-
-
 ## Practice Micro-Awareness
-
-
 
 ## Engage in Deep Reflection
 
-
-
 ## Develop Conscious Healthy Lifestyle
-
-
 
 ## Cultivate Spiritual Sensitivity
 
-
-
 ## Fair Exchange Model
 
-
 Guidebook FAQ
-
 
 ## Part 1 - Develop Deeper Understanding
 
@@ -126,13 +106,13 @@ What kind of pain or struggle shows up most often in my life — physical, emoti
 🤔
 When I feel pain, what is my usual reaction — do I try to avoid it, fight it, ignore it?
 🤔
- Do I ever notice that my thoughts or beliefs about a situation make it feel worse?
+Do I ever notice that my thoughts or beliefs about a situation make it feel worse?
 🤔
- Is it possible that the way I
+Is it possible that the way I
 see
- or
+or
 think about
- things is part of what creates my suffering?
+things is part of what creates my suffering?
 🤔
 Have there been hard moments in my life that also helped me grow, learn, or understand something important?
 🤔
@@ -168,7 +148,7 @@ How We Can Meet it Differently:
 We don't need to wait for a perfect moment. We need to realise that the path is already unfolding, and what shifts is our ability to notice it.
 Spiritual practices like meditation, reflection, and conscious living help us move from
 thinking about truth
- to
+to
 living it directly
 .
 Reflection:
@@ -210,21 +190,21 @@ Over time, the process becomes less about striving and more about recognizing.
 We are not chasing awareness, but returning to what has always been here.
 Reflection:
 🤔
- What is it that notices my thoughts — but is not the thoughts themselves?
+What is it that notices my thoughts — but is not the thoughts themselves?
 🤔
- Can I feel the presence behind my emotions, even as they rise and fall?
+Can I feel the presence behind my emotions, even as they rise and fall?
 🤔
 What remains when I'm not caught in labels, stories, or roles?
 🤔
- Is there something in me that has always been here — through every age, every change?
+Is there something in me that has always been here — through every age, every change?
 🤔
- Do I need to do anything to be aware, or is awareness already present?
+Do I need to do anything to be aware, or is awareness already present?
 These questions aren't puzzles to solve. They are reflections that help you recognize your true nature.
 Micro-definitions of Consciousness:
 🔹 Consciousness is the awareness, the canvas in which all thoughts, feelings, and sensations appear.
 🔹 Consciousness is not something we "have" — it's what we
 are
- at the most essential level.
+at the most essential level.
 🔹 Consciousness is the witnessing presence behind the stream of experience.
 🔹 Consciousness is personal and intimate — yet opens into something universal.
 🔹 Consciousness is the unchanging background behind all change.
@@ -248,15 +228,15 @@ Growth happens when you allow yourself to release what no longer serves you, mak
 Meeting your own unfolding with presence and trust allows you to experience your evolution in a deeper, more meaningful way.
 Reflection:
 🤔
- In what ways has my understanding of life changed over the years — and what sparked those shifts?
+In what ways has my understanding of life changed over the years — and what sparked those shifts?
 🤔
- When have I felt more connected to something greater than myself?
+When have I felt more connected to something greater than myself?
 🤔
- What beliefs or identities have I outgrown — and what have they made space for?
+What beliefs or identities have I outgrown — and what have they made space for?
 🤔
- Can I sense a part of me that is growing, deepening, or waking up?
+Can I sense a part of me that is growing, deepening, or waking up?
 🤔
- What would it mean to trust the unfolding of my own consciousness?
+What would it mean to trust the unfolding of my own consciousness?
 Micro-definitions of the Evolution of Consciousness:
 🔹 The evolution of consciousness is the shift from ego-based perception to deeper, more connected awareness.
 🔹 It is a movement from separation to unity — both within and beyond the self.
@@ -283,15 +263,15 @@ Practices such as mindful reflection, inner inquiry, and body awareness offer ge
 This journey grows brighter as you focus on the step you're living right now. Presence and acceptance create the foundation for authentic growth.
 Reflection:
 🤔
- Where do I find myself in this journey of inner evolution — and what patterns or questions are most present right now?
+Where do I find myself in this journey of inner evolution — and what patterns or questions are most present right now?
 🤔
- What habits or beliefs keep me in older patterns — and what would help me grow beyond them?
+What habits or beliefs keep me in older patterns — and what would help me grow beyond them?
 🤔
- Have I ever touched a deeper state — even briefly — that felt more real, more free?
+Have I ever touched a deeper state — even briefly — that felt more real, more free?
 🤔
- What kind of world might I help shape by growing into higher awareness?
+What kind of world might I help shape by growing into higher awareness?
 🤔
- Am I willing to meet myself with honesty and compassion, wherever I am or hold to what's old and bringing suffering?
+Am I willing to meet myself with honesty and compassion, wherever I am or hold to what's old and bringing suffering?
 Micro-definitions of Consciousness Levels:
 🔹 Consciousness grows through stages — from ego to unity.
 🔹 Lower levels are marked by fear, survival, and control.
@@ -315,9 +295,9 @@ These experiences often arrive unexpectedly — but we can cultivate the conditi
 Just as important as the experience itself is what happens after: integration. This means reflecting, grounding, and letting the experience reshape how we live. So we can allow a brief moment to become a lifelong shift.
 Reflection:
 🤔
- Have I ever had a moment that felt deeply /profoundly alive, peaceful, or connected — even briefly?
+Have I ever had a moment that felt deeply /profoundly alive, peaceful, or connected — even briefly?
 🤔
- What message or insight did it offer me — and have I honored it in my life?
+What message or insight did it offer me — and have I honored it in my life?
 🤔
 How might I prepare myself — not to force such moments, but to welcome them?
 🤔
@@ -349,11 +329,11 @@ Reflection:
 🤔
 Where have I placed my sense of meaning — and is it built on something that will last?
 🤔
- What would it mean to live from awareness, not just reaction?
+What would it mean to live from awareness, not just reaction?
 🤔
- How might my relationships or work change if guided by deeper understanding?
+How might my relationships or work change if guided by deeper understanding?
 🤔
- What if evolving my consciousness is not an escape — but the most grounded path I could walk?
+What if evolving my consciousness is not an escape — but the most grounded path I could walk?
 Micro-definitions of the Evolution-Centered Life:
 🔹 A life guided by awareness, not ego or fear
 🔹 A shift from external striving to inner alignment
@@ -464,13 +444,13 @@ Practice Micro-Awareness:
 Bring presence into every moment. Notice subtle patterns and reactions in daily life.
 7️⃣
 Engage in Deep Reflection:
- Turn inward regularly. Reflection clarifies patterns, deepens insight, and prevents unconscious repetition of limiting behaviours.
+Turn inward regularly. Reflection clarifies patterns, deepens insight, and prevents unconscious repetition of limiting behaviours.
 8️⃣
 
 ## Develop Conscious Healthy Lifestyle
 
 :
- Support your spiritual path through healthy way of living, and elimination of negative habits.
+Support your spiritual path through healthy way of living, and elimination of negative habits.
 9️⃣
 Tune Into the Subtle:
 Actively engage in myriad of different approaches, and that can help you to tune more easily into spiritual in daily life.
@@ -487,7 +467,7 @@ Below you can find complete list of Activation Sessions. Each one supports key a
 Activation Sessions:
 🙏
 Dynamic Meditation Practice DMT (Practice once a week)
- →
+→
 
 https://www.myspiritway.org/dmt
 Powerful practice inspired by the complete 8 Limbs of Yoga. It accelerates inner evolution, fosters spontaneous insight, and helps you experience a deeper reference point.
@@ -508,18 +488,18 @@ Develop your own evening session.
 For example: invite a sense of gratitude for the day. Reflect on the quality of your experiences and journal your insights. Then practice body scanning while lying on your back. Let yourself naturally shift into sleep from this calm, inward state.
 🙏
 Full-Body Workout (Practice at least twice a week)
- →
+→
 
 https://www.myspiritway.org/sps#text-bd10c589
 Develop no excuses workout. For example like no-equipment home workout, calisthenics, dance or any other type of active movement. Think holistically to develop strength, bone density and cardiovascular health.
 🙏
 Integrate Your Shattered Self (Practice for 21 days, and then once a week)
- →
+→
 https://www.myspiritway.org/iyss
 Integration of fragmented parts of the self. Ideal for shadow work, trauma processing, and creating a vision of inner wholeness and a beautiful future.
 🙏
 Oneness Energy Work (Practice once a week, learn to body scan every evening)
- →
+→
 https://www.youtube.com/watch?v=hNC0Y9-YDG4&t
 Learn to feel, transform, and flow with subtle energy. Develop sensitivity to energy fields to invite balance and help you to deepen sacred sense of oneness with life.
 
@@ -531,37 +511,37 @@ How to Practice It:
 Cultivating the Evolutionary Mindset is about active engagement in overriding current mindset automatic responses. Remember the characteristics and ways to practice and apply them actively.
 👉
 Question your assumptions.
- Ask: "What if I'm seeing this through a limited lens?"
+Ask: "What if I'm seeing this through a limited lens?"
 👉
 Stay curious.
- Let sincere interest guide your learning — not the need for certainty.
+Let sincere interest guide your learning — not the need for certainty.
 👉
 Pause and reflect.
- Before reacting, take a deep breath, notice your thoughts, emotions, and deeper motives.
+Before reacting, take a deep breath, notice your thoughts, emotions, and deeper motives.
 👉
 Engage with diverse perspectives.
- Learn from philosophy, science, cultures, art, and other worldviews.
+Learn from philosophy, science, cultures, art, and other worldviews.
 👉
 Apply new insights in action.
- Let understanding shape how you speak, choose, and show up.
+Let understanding shape how you speak, choose, and show up.
 👉
 Welcome the unknown.
- Step into discomfort as a space for transformation, not threat.
+Step into discomfort as a space for transformation, not threat.
 👉
 Develop your self-awareness.
- Use practices like journaling, meditation, and inner inquiry.
+Use practices like journaling, meditation, and inner inquiry.
 👉
 Practice gratitude.
- It widens your focus and shifts your mindset toward openness and trust.
+It widens your focus and shifts your mindset toward openness and trust.
 👉
 Learn from failure.
- Let mistakes refine you, not define you.
+Let mistakes refine you, not define you.
 👉
 Express creatively.
- Explore arts, music, or writing to stretch imagination and reveal new perspectives.
+Explore arts, music, or writing to stretch imagination and reveal new perspectives.
 👉
 Study how ideas evolve.
- Trace the history of concepts and breakthroughs to appreciate knowledge as fluid and ever-expanding.
+Trace the history of concepts and breakthroughs to appreciate knowledge as fluid and ever-expanding.
 Core Qualities of the Evolutionary Mindset:
 🔹 Curiosity over Certainty
 🔹 Openness over Defensiveness
@@ -593,16 +573,16 @@ Your best won't look the same every day — and that's okay. What matters is tha
 How to Practice:
 👉
 Set daily an intentions.
- Each morning promise to yourself: "Today I'll give my full presence and will try my very best"
+Each morning promise to yourself: "Today I'll give my full presence and will try my very best"
 👉
 Use gentle reminders.
- Be creative and find the ways that can help you pause, connect and remind about your morning intention.
+Be creative and find the ways that can help you pause, connect and remind about your morning intention.
 👉
 Take a breath before reacting.
- A short pause can open up more conscious choices. It's practical to connect it with deep breath, as it impacts your biology.
+A short pause can open up more conscious choices. It's practical to connect it with deep breath, as it impacts your biology.
 👉
 Reflect in the evening.
- Ask yourself and journal: Where did I genuinely give my best effort today? What could I have done differently to improve the outcome? How will I remind myself to give my very best, especially in moments when I tend to forget?
+Ask yourself and journal: Where did I genuinely give my best effort today? What could I have done differently to improve the outcome? How will I remind myself to give my very best, especially in moments when I tend to forget?
 👉
 Connect with
 
@@ -658,83 +638,84 @@ Key Elements of Formal Practice:
 A well-rounded spiritual practice may combine any of the elements:
 🔹
 Meditation
- –
+–
 silent sitting, mantra repetition, mindfulness, concentration techniques, guided visualisations
 🔹
 Reflection
- – journaling, inner inquiry, reflecting on sacred texts
+– journaling, inner inquiry, reflecting on sacred texts
 🔹Gratitude
+
 - listing things you are thankful for each day
-🔹
-Prayer or Devotion
- – spoken, silent, or felt
-🔹
-Movement
- – Yoga Asana, conscious walking, mindful stretching
-🔹
-Breathwork
- – conscious breathing, pranayama
-🔹
-Energy Practices
- – scanning, grounding, or subtle body work
-🔹
-Ritual
- –
-full-moon rituals, smudging with sage, lighting candles for intention, creating altars
-Morning and Evening:
-🔹
-Morning
- is the ideal time to set the energies for the day ahead. Begin with a formal practice while the schedule is still uncluttered, making it less likely to be skipped. You'll start the day more present, aware, and centered.
-🔹
-Evening
- invites you to gather and harmonize the day's energies before sleep. Turn inward to reflect, release, and restore, preparing body and mind for deeper rest and integration.
-Aim for at least 5-15 minutes of practice daily.
-My Personal Practice Morning:
-My morning practice is inspired by the Eight Limbs of Yoga, a complete spiritual system that supports progress on the evolutionary path.
-1️⃣
-Dedication to Divinity
- – Begin by offering the session to a higher power or truth. Silently affirm, "I dedicate this time to the Divine; guide me."
-2️⃣
-Intention for the Practice
- – State a clear intention for how you want to live and meet the day.
-3️⃣
-Asana (Yoga Flow)
- – Move mindfully for 20-30 minutes, synchronizing breath (ideally Ujjayi) with a full-body routine to clear energy and prepare for sitting.
-Here is Modular Yoga Asana
- that I follow.
-4️⃣
-Pranayama (Breathwork)
- – Settle into stillness and practice controlled breathing to quiet the mental noise—for example, by doing
-two rounds of DMT breathing
-, or simply observing your breath mindfully.
-5️⃣
-Pratyahara (Sensory Withdrawal)
- – Gently withdraw attention from external stimuli; scan the body without judgment to turn awareness inward.
-6️⃣
-Dharana (Concentration)
- – Anchor focus on one object: a mantra, bodily point, sacred image, or pure observation, returning attention whenever it drifts.
-7️⃣
-Dhyana (Meditative Absorption)
- – Let effort dissolve as concentration becomes effortless; the mind settles into uninterrupted presence.
-8️⃣
-Samadhi (Unity)
- – Possibly experience a sense of oneness where the "I" merges with universal consciousness, leaving a lasting imprint of clarity and peace.
-My Personal Practice Evening:
-My evening practice is an energy work session. The goal is to maintain energetic balance.
-1️⃣
-Settle & Breathe
- – Lie on your back. Feel the weight of your body on the bed, then follow the natural rhythm of your breath until it slows.
-2️⃣
-Slow Body Scan with Energy Awareness
- – Starting at your toes, move attention upward, inviting any sensations—warmth, tingling, heaviness—to surface. Spend extra time on spots that feel dull or hard to notice.
-3️⃣
-Gentle Integration
- – If a memory or emotion appears, observe it without judgment. Allowing it to be expressed often "unblocks" the energy tied to that experience.
-4️⃣
-Second Pass & Surrender
- – After reaching the crown of your head, release control and let awareness drift wherever it's needed. Many nights this easeful state flows straight into deep sleep.
-Reflection:
-🤔
+  🔹
+  Prayer or Devotion
+  – spoken, silent, or felt
+  🔹
+  Movement
+  – Yoga Asana, conscious walking, mindful stretching
+  🔹
+  Breathwork
+  – conscious breathing, pranayama
+  🔹
+  Energy Practices
+  – scanning, grounding, or subtle body work
+  🔹
+  Ritual
+  –
+  full-moon rituals, smudging with sage, lighting candles for intention, creating altars
+  Morning and Evening:
+  🔹
+  Morning
+  is the ideal time to set the energies for the day ahead. Begin with a formal practice while the schedule is still uncluttered, making it less likely to be skipped. You'll start the day more present, aware, and centered.
+  🔹
+  Evening
+  invites you to gather and harmonize the day's energies before sleep. Turn inward to reflect, release, and restore, preparing body and mind for deeper rest and integration.
+  Aim for at least 5-15 minutes of practice daily.
+  My Personal Practice Morning:
+  My morning practice is inspired by the Eight Limbs of Yoga, a complete spiritual system that supports progress on the evolutionary path.
+  1️⃣
+  Dedication to Divinity
+  – Begin by offering the session to a higher power or truth. Silently affirm, "I dedicate this time to the Divine; guide me."
+  2️⃣
+  Intention for the Practice
+  – State a clear intention for how you want to live and meet the day.
+  3️⃣
+  Asana (Yoga Flow)
+  – Move mindfully for 20-30 minutes, synchronizing breath (ideally Ujjayi) with a full-body routine to clear energy and prepare for sitting.
+  Here is Modular Yoga Asana
+  that I follow.
+  4️⃣
+  Pranayama (Breathwork)
+  – Settle into stillness and practice controlled breathing to quiet the mental noise—for example, by doing
+  two rounds of DMT breathing
+  , or simply observing your breath mindfully.
+  5️⃣
+  Pratyahara (Sensory Withdrawal)
+  – Gently withdraw attention from external stimuli; scan the body without judgment to turn awareness inward.
+  6️⃣
+  Dharana (Concentration)
+  – Anchor focus on one object: a mantra, bodily point, sacred image, or pure observation, returning attention whenever it drifts.
+  7️⃣
+  Dhyana (Meditative Absorption)
+  – Let effort dissolve as concentration becomes effortless; the mind settles into uninterrupted presence.
+  8️⃣
+  Samadhi (Unity)
+  – Possibly experience a sense of oneness where the "I" merges with universal consciousness, leaving a lasting imprint of clarity and peace.
+  My Personal Practice Evening:
+  My evening practice is an energy work session. The goal is to maintain energetic balance.
+  1️⃣
+  Settle & Breathe
+  – Lie on your back. Feel the weight of your body on the bed, then follow the natural rhythm of your breath until it slows.
+  2️⃣
+  Slow Body Scan with Energy Awareness
+  – Starting at your toes, move attention upward, inviting any sensations—warmth, tingling, heaviness—to surface. Spend extra time on spots that feel dull or hard to notice.
+  3️⃣
+  Gentle Integration
+  – If a memory or emotion appears, observe it without judgment. Allowing it to be expressed often "unblocks" the energy tied to that experience.
+  4️⃣
+  Second Pass & Surrender
+  – After reaching the crown of your head, release control and let awareness drift wherever it's needed. Many nights this easeful state flows straight into deep sleep.
+  Reflection:
+  🤔
 
 What helps me feel connected to something deeper?
 🤔
@@ -753,22 +734,22 @@ How It Works:
 Micro-awareness weaves together three core capacities:
 🔹
 Mindfulness:
- Noticing what is happening in the moment.
+Noticing what is happening in the moment.
 🔹
 Self-Awareness:
- Understanding why it is happening.
+Understanding why it is happening.
 🔹
 Reflection:
- Evaluating whether it aligns with who you want to be and making small, conscious adjustments.
+Evaluating whether it aligns with who you want to be and making small, conscious adjustments.
 The "Holy 5" — Core Areas of Focus:
 Pick one area at a time for at least a week and run it through the three questions. Here's how that sounds in practice:
 👉
- Thoughts
+Thoughts
 Mindfulness: "What thoughts are present right now?"
 Self-Awareness: "What might have sparked this way of thinking?"
 Reflection: "Does it support or drain me? How can I reframe it to support my goals?"
 👉
- Feelings
+Feelings
 Mindfulness: "Which emotion is here right now?"
 Self-Awareness: "What triggered or is fuelling this feeling?"
 Reflection: "Is it expanding or constricting me? What response would honour both the feeling and my values?"
@@ -783,7 +764,7 @@ Mindfulness: "How and what am I speaking?"
 Self-Awareness: "What emotion, intention, or need is driving these words?"
 Reflection: "Does my speech uplift, defend, or disconnect? What subtle shift could realign it with who I aspire to be?"
 👉
- Behaviour
+Behaviour
 Mindfulness: "What action or impulse am I noticing right now?"
 Self-Awareness: "Is it driven by habit, emotion, or conscious choice?"
 Reflection: "Does it reflect my values? What tiny adjustment would move it closer?"
@@ -793,38 +774,38 @@ A Weekly Practice Flow:
 Choose one element per week
 🔹
 Mindfulness (Noticing)
- — Pause during the day. Observe what's happening in your chosen area.
+— Pause during the day. Observe what's happening in your chosen area.
 🔹
 Self-Awareness (Understanding)
- — Reflect: What's behind it? What does it try to tell me? What pattern does it reveal?
+— Reflect: What's behind it? What does it try to tell me? What pattern does it reveal?
 🔹
 Reflection (Redirecting)
- — Think deeply: "Is this aligned with my values?" Make a small adjustment if needed.
+— Think deeply: "Is this aligned with my values?" Make a small adjustment if needed.
 🔹
 Journal briefly each day
- — What did you discover? What could shift?
+— What did you discover? What could shift?
 🔹
 Rotate weekly
- — One by one, build awareness across all five elements.
+— One by one, build awareness across all five elements.
 Tips for Success:
 🔹
 Keep it simple
- — A few check-ins a day is enough. You can also simplify the process, by simply practicing mindfulness and whenever space allows deepen the process into self-awareness and reflection.
+— A few check-ins a day is enough. You can also simplify the process, by simply practicing mindfulness and whenever space allows deepen the process into self-awareness and reflection.
 🔹
 Use reminders
- — Notes, alarms, or visuals help you remember to pause.
+— Notes, alarms, or visuals help you remember to pause.
 🔹
 Be curious, not critical
- — You're not judging yourself. You're getting to know yourself better.
+— You're not judging yourself. You're getting to know yourself better.
 🔹
 Stay flexible
- — Some days are more spacious than others. Do what you can.
+— Some days are more spacious than others. Do what you can.
 🔹
 Celebrate progress
- — Each moment of awareness is a step forward. Invite joy which comes from being present.
+— Each moment of awareness is a step forward. Invite joy which comes from being present.
 🔹
 Play the long game
- — Small shifts lead to deep change over time.
+— Small shifts lead to deep change over time.
 Micro-awareness turns the ordinary into the sacred. It's how you catch yourself in the middle of life and gently choose something of higher quality.
 👉 Read the full chapter → (Learn about everything in greater detail)
 
@@ -835,16 +816,16 @@ As you reflect, you see your patterns more clearly and gain the freedom to chang
 Key Elements of Deep Reflection:
 🔹
 Start with doubt.
- The willingness to admit "I don't know" is often the doorway to real insight.
+The willingness to admit "I don't know" is often the doorway to real insight.
 🔹
 Ask meaningful questions.
- "Why do I believe this?" "What am I truly feeling?" "Is this action aligned with who I want to be?"
+"Why do I believe this?" "What am I truly feeling?" "Is this action aligned with who I want to be?"
 🔹
 Look inward with honesty.
- Notice recurring thoughts, emotional reactions, and habits—especially the uncomfortable ones—for they reveal the patterns you are ready to understand and transform.
+Notice recurring thoughts, emotional reactions, and habits—especially the uncomfortable ones—for they reveal the patterns you are ready to understand and transform.
 🔹
 Let insight emerge.
- Clarity often comes not from forcing answers but from sitting quietly and allowing the truth to rise on its own.
+Clarity often comes not from forcing answers but from sitting quietly and allowing the truth to rise on its own.
 How to Practice It:
 👉
 Journaling.
@@ -894,20 +875,20 @@ You don't have to reflect on all of these. Start with what naturally pulls your 
 Tips for Making It a Habit:
 🔹
 Keep it simple.
- Even 10 minutes a day can be life changing.
+Even 10 minutes a day can be life changing.
 🔹
 Choose your time.
- Early morning or before bed are especially powerful.
+Early morning or before bed are especially powerful.
 🔹
 Be honest, not perfect.
- The goal is to see clearly — not to look good.
+The goal is to see clearly — not to look good.
 🔹
 Stay curious.
- Judgment blocks insight. Openness invites it.
+Judgment blocks insight. Openness invites it.
 "The unexamined life is not worth living." — Socrates
 Through deep reflection, you don't just live. You learn to live
 well
- — with clarity, depth, and truth.
+— with clarity, depth, and truth.
 👉 Read the full chapter → (Dive into more details)
 
 ## Develop Conscious Healthy Lifestyle
@@ -916,41 +897,41 @@ Conscious Healthy Lifestyle means doing your best each day to live in a healthy,
 Key Principles:
 🔹
 Balance over extremes.
- Choose steady, sustainable habits—like regular exercise and a varied whole-food diet—instead of short-lived trends, strict "lose-weight-fast" diets, or suddenly over-exercising after long inactivity.
+Choose steady, sustainable habits—like regular exercise and a varied whole-food diet—instead of short-lived trends, strict "lose-weight-fast" diets, or suddenly over-exercising after long inactivity.
 🔹
 Listen to your body.
- Pay attention to signals—energy, tension, appetite, mood—and adjust your actions accordingly.
+Pay attention to signals—energy, tension, appetite, mood—and adjust your actions accordingly.
 🔹
 Start small, stay consistent.
- Lasting change grows from modest, repeatable steps that compound over time, not from occasional big efforts.
+Lasting change grows from modest, repeatable steps that compound over time, not from occasional big efforts.
 🔹
 Apply the 80/20 rule.
- Start with the few habits that deliver most of the benefits—solid sleep, whole-food meals, daily movement, stress resets, and supportive relationships. Master these first to gain 80 % of the results with 20 % of the effort.
+Start with the few habits that deliver most of the benefits—solid sleep, whole-food meals, daily movement, stress resets, and supportive relationships. Master these first to gain 80 % of the results with 20 % of the effort.
 🔹
 Treat it as spiritual practice.
- Caring for your body is part of spiritual path; honour it as a living temple through which consciousness evolves.
+Caring for your body is part of spiritual path; honour it as a living temple through which consciousness evolves.
 How to Practice It:
 👉
 Regenerative High Quality Sleep.
- Keep a steady 7–9-hour sleep schedule, wind down without screens, and sleep in a dark, cool room to let your body repair and recharge.
+Keep a steady 7–9-hour sleep schedule, wind down without screens, and sleep in a dark, cool room to let your body repair and recharge.
 👉
 Healthy Nutritional Balanced Diet.
- Fill your plate with whole foods—plenty of vegetables, quality protein, and healthy fats—while cutting back on ultra-processed items, eat slowly and with full attention.
+Fill your plate with whole foods—plenty of vegetables, quality protein, and healthy fats—while cutting back on ultra-processed items, eat slowly and with full attention.
 👉
 Regular Daily Movement.
- Walk at least 30 minutes each day, add simple strength work twice a week, and stand or stretch briefly every hour to keep blood and energy flowing.
+Walk at least 30 minutes each day, add simple strength work twice a week, and stand or stretch briefly every hour to keep blood and energy flowing.
 👉
 Supportive Nurturing Social Connections.
- Spend real, undistracted time with people who uplift you, practice active listening, and limit interactions that leave you depleted.
+Spend real, undistracted time with people who uplift you, practice active listening, and limit interactions that leave you depleted.
 👉
 Mental Well-Being/Stress Management.
- Use short deep-breathing breaks, brief moments in nature, and a nightly gratitude note to calm the mind and build resilience.
+Use short deep-breathing breaks, brief moments in nature, and a nightly gratitude note to calm the mind and build resilience.
 👉
 Reduce Harmful Habits.
- Identify what drains you and makes you addicted with low self control then cut back step by step and swap each one for a healthier option.
+Identify what drains you and makes you addicted with low self control then cut back step by step and swap each one for a healthier option.
 👉
 Design Your Days with Care.
- Create a rhythm that fits you: fixed mornings and evenings, keep the middle flexible, and make sure every day includes quality sleep, good food, daily movement, meaningful connection, and time to deeply relax.
+Create a rhythm that fits you: fixed mornings and evenings, keep the middle flexible, and make sure every day includes quality sleep, good food, daily movement, meaningful connection, and time to deeply relax.
 Reflection:
 🤔What is the current quality of each of the health pillars?
 🤔How can I increase quality of each of the pillars?
@@ -959,13 +940,13 @@ Reflection:
 Tips for Making It a Habit:
 🔹
 Start with what feels obvious.
- Often the next right step is the one you've already been thinking about.
+Often the next right step is the one you've already been thinking about.
 🔹
 Don't wait to be perfect.
- Begin where you are. Build slowly.
+Begin where you are. Build slowly.
 🔹
 Track how you feel.
- Let results guide your motivation.
+Let results guide your motivation.
 🔹
 Let it be enjoyable
 . Don't push yourself like maniac. You're learning to love your life more deeply.
@@ -982,31 +963,31 @@ How to Practice It:
 There's no single path. There are many doorways. Here are just a few ways to turn toward the subtle:
 👉
 Practice Conscious Presence
- – Slow down and become aware of your body, breath, and surroundings. Eat, walk, or listen without distraction.
+– Slow down and become aware of your body, breath, and surroundings. Eat, walk, or listen without distraction.
 👉
 Develop Your Intuition
- – Learn the signals of your inner voice. Pause before decisions, notice body sensations, and reflect on gut feelings.
+– Learn the signals of your inner voice. Pause before decisions, notice body sensations, and reflect on gut feelings.
 👉
 Connect with Nature
- – Spend time outside, walk barefoot, observe the seasons, feel the wind or sun on your skin. Nature helps attune your senses.
+– Spend time outside, walk barefoot, observe the seasons, feel the wind or sun on your skin. Nature helps attune your senses.
 👉
 Meditation and Breath Awareness
- – Practice sitting still or breathing consciously to quiet the mind and become more sensitive to subtle impressions.
+– Practice sitting still or breathing consciously to quiet the mind and become more sensitive to subtle impressions.
 👉
 Pay Attention to Dreams
- – Keep a dream journal and reflect on recurring symbols or feelings. Dreams often carry inner wisdom.
+– Keep a dream journal and reflect on recurring symbols or feelings. Dreams often carry inner wisdom.
 👉
 Notice Synchronicities
- – Be open to meaningful coincidences. Reflect on repeated symbols, numbers, or events that catch your attention.
+– Be open to meaningful coincidences. Reflect on repeated symbols, numbers, or events that catch your attention.
 👉
 Explore Sound and Vibration
- – Listen deeply to music, chanting, or singing bowls. Feel how sound moves through your body and shifts your energy.
+– Listen deeply to music, chanting, or singing bowls. Feel how sound moves through your body and shifts your energy.
 👉
 Spontaneous Sacred Text Reading
- – Set an intention and open a book of wisdom randomly. Let the passage offer intuitive guidance.
+– Set an intention and open a book of wisdom randomly. Let the passage offer intuitive guidance.
 👉
 Invite Sacredness into Daily Life
- – Treat ordinary moments as sacred: lighting a candle, speaking kindly, or offering gratitude.
+– Treat ordinary moments as sacred: lighting a candle, speaking kindly, or offering gratitude.
 👉
 Use Intuitive Tools
 – Try using a pendulum, oracle cards, or intuitive writing — not as fortune-telling, but as ways to connect with inner guidance.
@@ -1033,75 +1014,77 @@ I envision a community founded on honesty and openness, which is why I leave the
 Below are some ways you can contribute:
 👉
 If you're interested in an offering but can't afford it
- - email me at
-kamiljan@myspiritway.org
-. Tell me your story, how much you can contribute, and why this offering is important to you — I'll send you a special discount code.
-👉
-Make a financial contribution
- – see options below.
-👉
-Share this guidebook's main page
- with others:
-https://www.myspiritway.org/sps2
-👉
-Send a testimonial or feedback
- to me at
-kamiljan@myspiritway.org
-.
-👉
-Share your perspective -
-email me at
-kamiljan@myspiritway.org
- your perspective over practical spirituality, maybe there is something that is missing or could be described better in the introduced approach?
-👉
-Help grow the MySpiritWay community
- – email me at
-kamiljan@myspiritway.org
-, and share your idea on how you can help
-👉
-Contribute creatively in a way that resonates with you. -
-be proactive
-Your support allows me to dedicate my time and energy to developing this project and helping others without needing to seek outside employment. The more this project grows, the more resources—financial and otherwise—will be available not just for its continued development but also for supporting other meaningful initiatives that can benefit the world.
-By supporting this journey, you're helping to expand its reach and impact.
-Thank you for your kindness and generosity—it truly makes a difference to the whole world.
-And let's not forget the more we can give the more we can receive.
-Single Support Options
+
+- email me at
+  kamiljan@myspiritway.org
+  . Tell me your story, how much you can contribute, and why this offering is important to you — I'll send you a special discount code.
+  👉
+  Make a financial contribution
+  – see options below.
+  👉
+  Share this guidebook's main page
+  with others:
+  https://www.myspiritway.org/sps2
+  👉
+  Send a testimonial or feedback
+  to me at
+  kamiljan@myspiritway.org
+  .
+  👉
+  Share your perspective -
+  email me at
+  kamiljan@myspiritway.org
+  your perspective over practical spirituality, maybe there is something that is missing or could be described better in the introduced approach?
+  👉
+  Help grow the MySpiritWay community
+  – email me at
+  kamiljan@myspiritway.org
+  , and share your idea on how you can help
+  👉
+  Contribute creatively in a way that resonates with you. -
+  be proactive
+  Your support allows me to dedicate my time and energy to developing this project and helping others without needing to seek outside employment. The more this project grows, the more resources—financial and otherwise—will be available not just for its continued development but also for supporting other meaningful initiatives that can benefit the world.
+  By supporting this journey, you're helping to expand its reach and impact.
+  Thank you for your kindness and generosity—it truly makes a difference to the whole world.
+  And let's not forget the more we can give the more we can receive.
+  Single Support Options
 - allow progression
-for the mission.
-BTC (BITCOIN)
-bc1qmz0ydhuvlax9s8n6zgvxw5cvs5fucl0tt0jc23
-ETH (Etherium) min. 0.1 ETH
-0x1dA94A7bDd2aE4181Fb42c74C1E79d54CcEc8aD2
-Debit/Credit Card
-(Multi Currency)
-PayPal
+  for the mission.
+  BTC (BITCOIN)
+  bc1qmz0ydhuvlax9s8n6zgvxw5cvs5fucl0tt0jc23
+  ETH (Etherium) min. 0.1 ETH
+  0x1dA94A7bDd2aE4181Fb42c74C1E79d54CcEc8aD2
+  Debit/Credit Card
+  (Multi Currency)
+  PayPal
 
 WIRE Transfer (SWIFT)
 
- GPB, EUR, USD, CHF and more...
+GPB, EUR, USD, CHF and more...
 
 Kamil Włodarczyk
 
- IBAN: LT79 3250 0272 4579 4080
+IBAN: LT79 3250 0272 4579 4080
 
- BIC/SWIFT: REVOLT21
+BIC/SWIFT: REVOLT21
 
 Bank name and address:
 
- Revolut Bank UAB
+Revolut Bank UAB
 
- Konstitucijos ave. 21B, 08130, Vilnius, Lithuania
+Konstitucijos ave. 21B, 08130, Vilnius, Lithuania
 
 Correspondent bank BIC:
- CHASGB2L
+CHASGB2L
 
 Wise
 Stripe
 Monthly Support Options
+
 - crucial as they offer stability
-for the mission.
-Buy Me a Coffee
-Ko-Fi
+  for the mission.
+  Buy Me a Coffee
+  Ko-Fi
 
 ## The GuideBook's FAQ
 
@@ -1125,4 +1108,4 @@ DISCLAIMER. The content provided on this website, including all information, ser
 
 ---
 
-*Source: https://www.myspiritway.org/sps2*
+_Source: https://www.myspiritway.org/sps2_

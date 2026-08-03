@@ -8,32 +8,32 @@
  */
 
 export interface Subscriber {
-  email: string
-  name?: string
-  source?: string
-  tag?: string
-  subscribedAt: string
+  email: string;
+  name?: string;
+  source?: string;
+  tag?: string;
+  subscribedAt: string;
 }
 
 export interface SubscriberStore {
-  name: string
-  save(s: Subscriber): Promise<void>
-  list(): Promise<Subscriber[]>
+  name: string;
+  save(s: Subscriber): Promise<void>;
+  list(): Promise<Subscriber[]>;
 }
 
 // ── In-memory + console (default) ──────────────────────────────────────────
-const memory: Subscriber[] = []
+const memory: Subscriber[] = [];
 const memoryStore: SubscriberStore = {
-  name: 'memory',
+  name: "memory",
   async save(s) {
-    memory.push(s)
+    memory.push(s);
     // eslint-disable-next-line no-console
-    console.log('[subscribers:memory] saved', { email: s.email, tag: s.tag, source: s.source })
+    console.log("[subscribers:memory] saved", { email: s.email, tag: s.tag, source: s.source });
   },
   async list() {
-    return [...memory]
+    return [...memory];
   },
-}
+};
 
 // ── Cloudflare KV (ready to wire) ────────────────────────────────────────────
 // Bind a KV namespace in wrangler.jsonc as SUBSCRIBERS_KV and uncomment:
@@ -55,13 +55,13 @@ const memoryStore: SubscriberStore = {
 
 function pickStore(): SubscriberStore {
   // When KV is bound, switch this to `process.env.SUBSCRIBERS_KV_ENABLED ? kvStore : memoryStore`.
-  return memoryStore
+  return memoryStore;
 }
 
 export async function saveSubscriber(s: Subscriber): Promise<void> {
-  await pickStore().save(s)
+  await pickStore().save(s);
 }
 
 export async function listSubscribers(): Promise<Subscriber[]> {
-  return pickStore().list()
+  return pickStore().list();
 }

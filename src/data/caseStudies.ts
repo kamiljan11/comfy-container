@@ -1246,6 +1246,84 @@ export const FEATURED: CaseStudy[] = [
       "systeme.io funnel",
     ],
   },
+  {
+    slug: "engineered-learning-system",
+    title: "I built my own training system, then made it grade me",
+    resultsPreview:
+      "Learning by watching tutorials didn't stick, so I built the loop instead: a daily agent that prepares one lesson, an app that makes me predict the answer before it shows me anything and grades what I typed, a bank of verified exercises that keeps every lesson replayable, and a job-market scanner that edits my own curriculum when real listings drift. Every code output is executed before it can become an answer key. The system also improves itself weekly.",
+    problem:
+      "I'd done the tutorial thing. Watch a video, nod along, feel productive, retain almost nothing. The failure was obvious once I named it: I was consuming explanations instead of making predictions, so I never found out what I actually didn't know.\n\nThe second failure was worse. My learning plan was a guess about what the market wants. I was picking topics from intuition while real job listings sat right there, unread, telling me exactly which skills kept showing up.\n\nAnd the third: whatever I did learn evaporated. A lesson happened once, lived in a note, and was never seen again. Forgetting is the default state, and I had nothing engineered against it.",
+    context:
+      "This is my own learning infrastructure, built for a specific target: moving from AI automation and implementation work toward solutions engineering and eventually a forward-deployed role. It runs on the same agent runtime as the rest of my automations.\n\nThe constraints are personal and unforgiving. I run several businesses, so study time is whatever survives the day, and any system that needs an hour of setup gets abandoned in week two. I'm honest that I retain by doing, not by reading. And motivation is unreliable by design, so the system had to keep producing value on the days I don't show up.\n\nOne deliberate scope decision shaped everything: at this stage the goal is reading and understanding code, not writing it from scratch. Prediction is cheap to test and it exposes false confidence immediately.",
+    myRole:
+      "I designed and built all of it: the daily agent, the training app, the exercise bank format, the grading and scheduling rules, and the market-signal bridge. I also wrote the guardrails that stop the system from wandering off, which turned out to matter more than the features.\n\nI'm the only user, so I'm also the one who finds every flaw the hard way.",
+    decisions: [
+      {
+        decision:
+          "Split the system in two: a scheduled agent that only prepares and feeds material, and an app that owns all scoring. The agent is explicitly forbidden from awarding progress.",
+        why: "If the thing that writes the lesson also grants the points, it can quietly reward me for showing up instead of for knowing something. Separating them means progress can only be earned live, by typing an answer that gets judged. The agent can run every day whether I show up or not; my score only moves when I actually do the work.",
+        rejected:
+          "One agent doing everything, which is simpler and what I built first. It made streaks and points meaningless because they accrued from automation, not from recall.",
+        tradeoff:
+          "Two components that must agree on an exact file format, and a parser that breaks if either side drifts. I keep the format frozen and version it rather than letting each side improvise.",
+      },
+      {
+        decision:
+          "Never show the answer before the prediction. The app forces a written guess, then grades it with a model against a verified key.",
+        why: "Recognition feels like knowledge and isn't. Forcing a commitment first turns every exercise into a real test of understanding, and the gap between what I predicted and what actually ran is the only useful signal in the whole system.",
+        rejected:
+          "Reading annotated code with the output alongside it, the way most tutorials work. It's more comfortable and it produces the illusion of competence I was trying to escape.",
+        tradeoff:
+          "It's slower and it stings. Sessions where I'm wrong three times in a row are the ones that teach most and feel worst, and there's no way to have the first without the second.",
+      },
+      {
+        decision:
+          "Execute every code snippet before its output can become an answer key, and re-verify the oldest exercises on a weekly cycle.",
+        why: "A training system that teaches wrong answers is worse than none. So the expected output isn't reasoned about, it's produced: the code runs, and the real output is what gets stored. The weekly pass re-runs the oldest exercises and corrects the bank if reality has drifted, logging every correction.",
+        rejected:
+          "Trusting the model's predicted output. Models are confidently wrong about execution order and edge cases exactly where the interesting exercises live.",
+        tradeoff:
+          "Every exercise costs an execution step to create and another to maintain, which caps how fast the bank can grow. I'd rather have a smaller bank I can trust than a large one I can't.",
+      },
+      {
+        decision:
+          "Bank every lesson as a structured object instead of leaving it in a progress note, and top up the weakest topic by one extra exercise a day.",
+        why: "A lesson that only exists in a running log is gone the moment the log rotates. Banked as data, it can be served again in a practice round, upgraded later, or turned into a harder variant. The daily top-up targets whichever topic has the fewest exercises, so coverage evens out instead of pooling around whatever I found interesting that week.",
+        rejected:
+          "Keeping lessons in the narrative progress file only, which is what I did at first and why early material became unusable.",
+        tradeoff:
+          "A schema to maintain and a real risk of corrupting a growing JSON file. I write to it only through a script that parses, appends to the right array, re-reads and reports counts, after an incident where lessons landed in the wrong bucket.",
+      },
+      {
+        decision:
+          "Let real job listings edit the curriculum, but only through hard guardrails: never a topic from my explicit skip list, at most one new topic a week, mastery gates untouchable, append-only.",
+        why: "My plan is a hypothesis about the market; listings are evidence. A separate scanner reads real postings and, when the same requirement keeps appearing, adds it to the curriculum and records why. The guardrails exist because an unconstrained feedback loop would chase every trend and rewrite the plan weekly, which is just a slower way of learning nothing.",
+        rejected:
+          "Reviewing the market myself every few months. I don't, reliably, and by the time I notice a shift I've spent a quarter on the wrong thing.",
+        tradeoff:
+          "The curriculum grows from two directions, mine and the market's, so it needs a referee. The rules are that referee: weakest-topic-first ordering and the mastery gates always win over a fresh market signal.",
+      },
+    ],
+    build:
+      "The daily agent reads the current state, picks the next concept with the weakest topic first, builds one exercise with a themed scenario, two code snippets, a diagram, a prediction question and a three-question quiz, runs the code to capture the real output, and writes it into the progress file in a fixed format. Then it banks the same exercise as a structured object and tops up whichever topic is thinnest.\n\nThe app is where the actual session happens. It reads the prepared lesson, refuses to reveal anything before I commit to a prediction, grades what I typed, and writes back the result itself: points, level, streak, and new cards scheduled by spaced repetition. Six tabs, progress rings, ranks and boss fights, because the boring version is the one I stop opening.\n\nMastery gates sit between phases: every fifth completed session is a mixed checkpoint, and a new phase only opens after it's passed. Advancing a rung on the role ladder requires a real artifact — a link, a repo, something that exists — not a claim that I've learned it.\n\nThe weekly improvement cycle is the part I'd defend hardest. It re-verifies the three oldest exercises, rewrites the weak ones, and promotes anything I've passed twice into a harder variant while keeping the original. Nothing is ever deleted, only versioned.",
+    evals:
+      "The honest measure is whether the material survives contact with me, and there the system is doing its job: exercises are banked with executed outputs, the weakest topics get filled first, and the coverage numbers are visible rather than assumed — the bank sat at 32 exercises across seven topics after one consolidation batch, with an explicit target of at least six per topic before difficulty rises.\n\nThe sharper eval is the one I didn't design for: the failures it caught. A run once wrote to a progress file in overwrite mode and destroyed hundreds of lines of archive; the game state was rebuildable from context, the archived detail was not. Another run appended new lessons into the wrong array of the bank, so they surfaced as boss fights instead of practice. Both produced permanent rules — append-only writes on state files, and a script-mediated write that re-reads and reports counts.\n\nWhat I can't claim is an outcome metric. There's no score that proves this made me employable; it's a system for retention and honest self-assessment, and the only real verdict will be whether the work I ship keeps getting harder.",
+    limitations:
+      "The obvious one: this is self-directed practice, not a credential, and nobody outside my own setup has audited what I've actually learned. Grading by model is good enough to catch a wrong prediction; it is not an examiner.\n\nThe scope is narrow on purpose. At this stage it trains reading and predicting code, not writing production code from a blank file, and those are different skills. I chose the one that exposes false confidence fastest, but I'm not going to pretend it covers both.\n\nAnd automation can't make me sit down. The agent prepares a lesson whether I show up or not, which keeps the material flowing but also means a long quiet stretch is entirely possible; the bank exists precisely so those weeks don't waste the material. Two incidents also proved that a system writing to its own state files is one careless mode flag away from destroying its own history — that risk is managed now, not eliminated.",
+    results:
+      "I have a learning loop that runs without me maintaining it, and that fails loudly instead of quietly. Every lesson is executed before it's taught, banked so it can be replayed, and scheduled to come back before I forget it. The curriculum answers to real job listings rather than my guesses, inside rules that stop it from chasing noise.\n\nThe part I actually care about: it removed the comfortable illusion. I can't nod along to my own system, because it makes me commit to an answer before it shows me anything, and it keeps a list of the things I keep getting wrong.\n\nIt's also the clearest evidence of how I work. I applied the same discipline to my own learning that I apply to production systems — verified outputs, versioned material, guardrails written from real incidents, append-only writes on anything that holds state.",
+    principle:
+      "If something matters and depends on willpower, it will fail — so engineer it. Separate the thing that produces work from the thing that scores it, or you'll reward attendance instead of understanding. Verify before you teach, because a confident wrong answer is worse than no answer. And write your guardrails from the incidents you actually had, not the ones you imagined.",
+    stack: [
+      "Scheduled agent (daily lesson feeder)",
+      "Self-built training app (in-app grading)",
+      "Spaced repetition (SM-2)",
+      "Structured exercise bank (JSON, versioned)",
+      "Node / Python execution for verified outputs",
+      "Job-market scanner feeding the curriculum",
+      "Append-only state files with recovery rules",
+    ],
+  },
 ];
 
 export const SECONDARY: SecondaryStudy[] = [];

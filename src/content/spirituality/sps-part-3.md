@@ -16,7 +16,7 @@ Considering the inherent impermanence of external things, where do you feel your
 
 Having explored the essence of suffering, the nature of spirituality, the process of consciousness evolution, and the inspiring glimpses of peak experiences, it's natural to ask: what is the ultimate grounded outcome we are striving for? This leads us perfectly into a discussion of Complete Lasting Life Happiness, which we will expand on in the next chapter.
 
-*"The Universe" by Lindsay Manolakos*
+_"The Universe" by Lindsay Manolakos_
 
 ## What is the Complete Lasting Life Happiness?
 
@@ -52,7 +52,7 @@ Consider the various areas of your life—personal growth, romantic relationship
 
 Now, with all the insights presented and various techniques introduced to support your growth, we'll dive deeper into practical, actionable steps to help you apply these ideas in your everyday life.
 
-*Emblem 21 (Michael Maier, Atalanta Fugiens, 1617)*
+_Emblem 21 (Michael Maier, Atalanta Fugiens, 1617)_
 
 ## What is the Practical/Pragmatic Spirituality?
 
@@ -90,13 +90,14 @@ Reflecting on core principles of practical spirituality is encouraged for practi
 
 ## Part 2 - Take Actionable Steps
 
-*"Spiritual Pilgrim", wood engraving. Artist unknown. "L'atomosphere: meteorologie populaire" written by Camille Flammarion, p. 163, published in 1888. Color version – Gunther Scholl.*
+_"Spiritual Pilgrim", wood engraving. Artist unknown. "L'atomosphere: meteorologie populaire" written by Camille Flammarion, p. 163, published in 1888. Color version – Gunther Scholl._
 
 ## The Practical Spiritual Path
 
 The following section, "How-to of Practical Spirituality," provides specific tools and practices that form the foundation of the Practical Spiritual Path. These are actionable steps you can take to actively cultivate a more conscious, fulfilling life with less unnecessary suffering.
 
 Let's now explore practical methods that support our primary directions:
+
 1. Accelerating the natural evolution of consciousness
 2. Reducing suffering
 3. Achieving complete life satisfaction
@@ -129,7 +130,7 @@ Ultimately, it's all in your hands - how much and if you will progress on that p
 
 Lastly, remember, don't get attached to specific results, as that, as we discussed previously, can bring unnecessary friction and thus suffering. Simply enjoy your journey as it unfolds.
 
-*Festival Wibracje (Poland) - Kamil Jan Running DMT Session*
+_Festival Wibracje (Poland) - Kamil Jan Running DMT Session_
 
 ## Activation Sessions
 
@@ -159,7 +160,7 @@ Integration of fragmented parts of the self. Ideal for shadow work, trauma proce
 
 Learn to feel, transform, and flow with subtle energy. Develop sensitivity to energy fields to invite balance and help you to deepen sacred sense of oneness with life.
 
-*Michelangelo - Creation of Adam*
+_Michelangelo - Creation of Adam_
 
 ## The Evolutionary Mindset 🧠
 
@@ -226,7 +227,7 @@ Read this chapter again and reflect deeply on the characteristics of the evoluti
 
 Consider the benefits of embodying these qualities in your own way of being. How might they influence your life across different areas? Think deeply about why they matter to you, and how they can shape the way you move through the world. Actively search for ways to evolve your mindset and apply them in practice.
 
-*The Light in The Soul' by Chirila Corina*
+_The Light in The Soul' by Chirila Corina_
 
 ## Always Try Your Very Best 💖
 
@@ -270,4 +271,4 @@ Take some honest time for yourself and examine these values deeply. Try to under
 
 As you progress on the path of evolving consciousness, these spiritual virtues naturally begin to reflect in your daily life, guiding your actions and interactions with the world.
 
-*Wijck (follower) Alchemist Seated at a Table*
+_Wijck (follower) Alchemist Seated at a Table_

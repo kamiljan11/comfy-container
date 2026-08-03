@@ -1,12 +1,12 @@
-import { createServerFn } from '@tanstack/react-start'
-import { sendEmail, startWelcomeSequence } from '../server/email.server'
-import { saveSubscriber } from '../server/subscribers.server'
+import { createServerFn } from "@tanstack/react-start";
+import { sendEmail, startWelcomeSequence } from "../server/email.server";
+import { saveSubscriber } from "../server/subscribers.server";
 
 export interface SubscribePayload {
-  email: string
-  name?: string
-  source?: string
-  tag?: string
+  email: string;
+  name?: string;
+  source?: string;
+  tag?: string;
 }
 
 /**
@@ -19,29 +19,29 @@ export interface SubscribePayload {
  *   3. Notify Kamil that a new lead came in.
  *   4. Kick off the welcome sequence for the new subscriber.
  */
-export const subscribeToNewsletter = createServerFn({ method: 'POST' })
+export const subscribeToNewsletter = createServerFn({ method: "POST" })
   .inputValidator((data: SubscribePayload) => {
-    if (!data?.email?.includes('@')) throw new Error('Valid email is required')
-    return data
+    if (!data?.email?.includes("@")) throw new Error("Valid email is required");
+    return data;
   })
   .handler(async ({ data }) => {
     const subscriber = {
       email: data.email.trim().toLowerCase(),
       name: data.name?.trim() || undefined,
-      source: data.source || 'inline',
+      source: data.source || "inline",
       tag: data.tag || undefined,
       subscribedAt: new Date().toISOString(),
-    }
+    };
 
-    await saveSubscriber(subscriber)
+    await saveSubscriber(subscriber);
 
     await sendEmail({
-      to: 'hello@kamiljan.com',
+      to: "hello@kamiljan.com",
       subject: `[kamiljan.com] new subscriber — ${subscriber.email}`,
-      text: `Source: ${subscriber.source}\nTag: ${subscriber.tag ?? '—'}\nName: ${subscriber.name ?? '—'}\nEmail: ${subscriber.email}\nAt: ${subscriber.subscribedAt}`,
-    })
+      text: `Source: ${subscriber.source}\nTag: ${subscriber.tag ?? "—"}\nName: ${subscriber.name ?? "—"}\nEmail: ${subscriber.email}\nAt: ${subscriber.subscribedAt}`,
+    });
 
-    await startWelcomeSequence({ email: subscriber.email, name: subscriber.name })
+    await startWelcomeSequence({ email: subscriber.email, name: subscriber.name });
 
-    return { ok: true, subscribedAt: subscriber.subscribedAt }
-  })
+    return { ok: true, subscribedAt: subscriber.subscribedAt };
+  });

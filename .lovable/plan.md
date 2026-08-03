@@ -1,9 +1,11 @@
 # Odejście od Lovable: Supabase + Vercel
 
 ## Cel
+
 Przenieść całą aplikację `kamiljan.com` z Lovable (hosting + Lovable Cloud) na własne konto **Supabase** (baza + auth) oraz **Vercel** (hosting + CI/CD), tak żeby deploy odbywał się przez `git push` bez ręcznego klikania "Publish".
 
 ## Stan obecny
+
 - Frontend: **TanStack Start** (React 19 + Vite + Tailwind v4).
 - Runtime: **Cloudflare Workers** — ustawione przez `wrangler.jsonc` i `@lovable.dev/vite-tanstack-config`.
 - Backend: **Lovable Cloud** (Supabase pod spodem), ale w kodzie nie ma jeszcze wygenerowanych `@/integrations/supabase/*`.
@@ -108,14 +110,14 @@ Przenieść całą aplikację `kamiljan.com` z Lovable (hosting + Lovable Cloud)
 
 ## Ryzyka i jak je ograniczyć
 
-| Ryzyko | Ograniczenie |
-|--------|--------------|
-| Stracenie danych z obecnego Lovable Cloud | Przed migracją wyeksportować wszystko z Lovable Cloud (jeśli cokolwiek tam jest) lub zaakceptować start od zera. |
-| Bot przestanie działać bez `LOVABLE_API_KEY` | Przenieść bota na własny klucz AI lub wyłączyć tymczasowo. |
-| Formularze wysyłają maile w trybie stub | Ustawić `EMAIL_PROVIDER=resend` i dodać `RESEND_API_KEY` w Vercel. |
-| Długa propagacja DNS | Obniżyć TTL przed zmianą, mieć preview URL z Vercel. |
-| Lovable Cloud może być włączony i generować koszty | Po migracji wyłączyć Lovable Cloud / usunąć projekt z Lovable. |
-| TanStack Start na Vercel to mniej testowany setup niż Next.js | Zrobić pełen build lokalnie i E2E przed go-live. |
+| Ryzyko                                                        | Ograniczenie                                                                                                     |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Stracenie danych z obecnego Lovable Cloud                     | Przed migracją wyeksportować wszystko z Lovable Cloud (jeśli cokolwiek tam jest) lub zaakceptować start od zera. |
+| Bot przestanie działać bez `LOVABLE_API_KEY`                  | Przenieść bota na własny klucz AI lub wyłączyć tymczasowo.                                                       |
+| Formularze wysyłają maile w trybie stub                       | Ustawić `EMAIL_PROVIDER=resend` i dodać `RESEND_API_KEY` w Vercel.                                               |
+| Długa propagacja DNS                                          | Obniżyć TTL przed zmianą, mieć preview URL z Vercel.                                                             |
+| Lovable Cloud może być włączony i generować koszty            | Po migracji wyłączyć Lovable Cloud / usunąć projekt z Lovable.                                                   |
+| TanStack Start na Vercel to mniej testowany setup niż Next.js | Zrobić pełen build lokalnie i E2E przed go-live.                                                                 |
 
 ## Szacunek pracy
 
