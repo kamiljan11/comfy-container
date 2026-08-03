@@ -118,8 +118,8 @@ export const T: Record<Lang, SiteTranslation> = {
       title: "Twelve years of practice, one guidebook",
       open: "Two free books",
       body: "Before I built AI systems, my long project was inner: twelve years of spiritual practice and study, six of them spent writing it down. It took two earlier books to learn how to write this one. The result is \"Simplified Practical Spirituality\" — a practical, tradition-agnostic guidebook. Both editions are free and always will be. This is the one thing I make that isn't for sale: no funnel, no upsell, nothing to buy. It's what I have to give back, and it stays that way. Start with the short one.",
-      short: "Short version — 87 pages, ~1 hour",
-      full: "Complete guidebook — 183 pages",
+      short: "Short version — 90 pages, ~1 hour",
+      full: "Complete guidebook — 202 pages",
       hint: "PDFs with clickable contents and chapter navigation.",
     },
     contact: {
@@ -280,8 +280,8 @@ export const T: Record<Lang, SiteTranslation> = {
       title: "Dwanaście lat praktyki, jeden przewodnik",
       open: "Dwie darmowe książki",
       body: 'Zanim zacząłem budować systemy AI, moim długim projektem była praca wewnętrzna: dwanaście lat praktyki i poszukiwań, z czego sześć spędziłem na spisywaniu. Zanim powstała wersja ostateczna, napisałem dwie wcześniejsze książki. Tak powstało „Simplified Practical Spirituality" — praktyczny przewodnik ponad tradycjami (po angielsku). Obie wersje są darmowe i takie zostaną. To jedyna rzecz, którą robię, a która nie jest na sprzedaż: żadnego lejka, żadnego upsellu, nie ma czego kupować. To mój wkład od siebie i tak ma zostać. Zacznij od krótkiej.',
-      short: "Wersja skrócona — 87 stron, ~1 godzina",
-      full: "Pełny przewodnik — 183 strony",
+      short: "Wersja skrócona — 90 stron, ~1 godzina",
+      full: "Pełny przewodnik — 202 strony",
       hint: "PDF-y z klikalnym spisem treści i nawigacją po rozdziałach.",
     },
     contact: {
