@@ -227,7 +227,7 @@ const CONTENT: Record<Lang, CV> = {
     languages: [
       {
         label: "Languages:",
-        body: "Polish (native); English (reading & listening C1, spoken B2).",
+        body: "Polish (native); English (C1).",
       },
       { label: "Work eligibility:", body: "EU / EEA (Polish citizen, based in Iceland)." },
       { label: "Timezone:", body: "GMT / UTC. Overlaps both European and US-East working hours." },
@@ -396,7 +396,7 @@ const CONTENT: Record<Lang, CV> = {
     languages: [
       {
         label: "Języki:",
-        body: "polski (ojczysty); angielski (czytanie i słuchanie C1, mówienie B2).",
+        body: "polski (ojczysty); angielski (C1).",
       },
       { label: "Prawo do pracy:", body: "UE / EOG (obywatel Polski, mieszka na Islandii)." },
       {
