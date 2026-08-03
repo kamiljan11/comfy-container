@@ -855,6 +855,11 @@ section {
   position: relative;
   overflow: hidden;
 }
+/* the tail padding is sized for ending the page; when the Beyond Work aside
+   follows, that plus its own top padding leaves a dead gap */
+.contact:has(+ .beyond) {
+  padding-bottom: 104px;
+}
 .contact::before {
   content: "";
   position: absolute;
