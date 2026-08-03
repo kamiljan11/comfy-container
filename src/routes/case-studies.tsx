@@ -158,30 +158,29 @@ function CaseStudiesPage() {
         </nav>
       </header>
 
-      {FEATURED.map((cs) => (
+      {FEATURED.map((cs, i) => (
         <details key={cs.slug} id={cs.slug} className="cs-fold">
+          {/* collapsed, this is one clickable line: nineteen of these scan in a
+              screen or two. Everything else waits until it is opened. */}
           <summary className="cs-fold-sum">
-            <div className="cs-fold-main">
-              <h2>{cs.title}</h2>
-              <p className="cs-fold-preview">{cs.resultsPreview}</p>
-              <div className="cs-stack">
-                {cs.stack.slice(0, 6).map((s) => (
-                  <span key={s} className="cs-tag">
-                    {s}
-                  </span>
-                ))}
-                {cs.stack.length > 6 && (
-                  <span className="cs-tag cs-tag-more">+{cs.stack.length - 6}</span>
-                )}
-              </div>
-              <span className="cs-fold-time">{readMins(cs)} min read</span>
-            </div>
+            <span className="cs-fold-num">{String(i + 1).padStart(2, "0")}</span>
+            <h2>{cs.title}</h2>
+            <span className="cs-fold-time">{readMins(cs)} min</span>
             <span className="cs-chev" aria-hidden="true">
               ▾
             </span>
           </summary>
 
           <div className="cs-fold-body">
+            <p className="cs-fold-preview">{cs.resultsPreview}</p>
+            <div className="cs-stack cs-fold-stack">
+              {cs.stack.map((s) => (
+                <span key={s} className="cs-tag">
+                  {s}
+                </span>
+              ))}
+            </div>
+
             <section className="cs-sec">
               <h3>The problem</h3>
               <Paras text={cs.problem} />
