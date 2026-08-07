@@ -6,7 +6,7 @@
 
 - Produkcja: [URL]
 - Hosting: [gdzie stoi + link do panelu]
-- Repo: github.com/mountainallservice/[repo]
+- Repo: github.com/kamiljan11/[repo]
 - Sekrety: Infisical "MAS Group" (localhost:8222) — NIE w repo
 
 ## Deploy

@@ -28,7 +28,7 @@ const PERSON_SCHEMA = {
     "LLM Workflows",
     "Voice Agents",
   ],
-  sameAs: ["https://linkedin.com/in/kamiljan11", "https://github.com/mountainallservice"],
+  sameAs: ["https://linkedin.com/in/kamiljan11", "https://github.com/kamiljan11"],
   author: [
     {
       "@type": "Book",
