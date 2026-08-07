@@ -752,7 +752,7 @@ function HomePage() {
                 LinkedIn
               </a>
               &middot;
-              <a href="https://github.com/mountainallservice" target="_blank" rel="noreferrer">
+              <a href="https://github.com/kamiljan11" target="_blank" rel="noreferrer">
                 GitHub
               </a>
               &middot;
