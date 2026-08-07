@@ -58,8 +58,8 @@ const PROOF_LINKS: Record<string, string> = {
   "garage.mountaincar.is": "https://garage.mountaincar.is",
   "mountaincar.is": "https://mountaincar.is",
   "kamiljan.com/case-studies": "https://kamiljan.com/case-studies",
-  "github.com/mountainallservice/code-reading-quest":
-    "https://github.com/mountainallservice/code-reading-quest",
+  "github.com/kamiljan11/code-reading-quest":
+    "https://github.com/kamiljan11/code-reading-quest",
 };
 const PROOF_RE = new RegExp(
   `(${Object.keys(PROOF_LINKS)

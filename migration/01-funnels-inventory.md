@@ -2,7 +2,7 @@
 
 Captured: 2026-05-21
 Source: Systeme.io dashboard (kamiljan@myspiritway.org account)
-Target: kamiljan.com via `mountainallservice/comfy-container`
+Target: kamiljan.com via `kamiljan11/comfy-container`
 
 ## 1:1 Funnel Mapping
 
