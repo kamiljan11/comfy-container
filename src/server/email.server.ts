@@ -95,7 +95,7 @@ export async function sendEmail(msg: EmailMessage): Promise<void> {
   const transport = pickTransport();
   const result = await transport.send(msg);
   if (!result.ok) {
-    console.error(`[email:${transport.name}] send failed:`, result.error);
+    console.error("[email] send failed:", transport.name, result.error);
     // Don't throw — we never want a failing provider to lose the user's submission.
     // The form caller logs the data, and the user always gets the success state.
   }
