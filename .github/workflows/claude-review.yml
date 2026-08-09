@@ -1,7 +1,7 @@
 name: Claude Code Review
 # "Druga para oczu" seniora — swieza instancja Claude (zero kontekstu sesji,
 # zero przywiazania do wlasnego kodu) robi review KAZDEGO PR automatycznie.
-# Bez sekretu (CLAUDE_CODE_OAUTH_TOKEN lub ANTHROPIC_API_KEY) job grzecznie sie pomija.
+# Bez sekretu CLAUDE_CODE_OAUTH_TOKEN (TYLKO OAuth/subskrypcja, zero platnych tokenow API) job grzecznie sie pomija.
 
 on:
   pull_request:
@@ -20,19 +20,17 @@ jobs:
         name: Check secret present
         env:
           HAS_OAUTH: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
-          HAS_API: ${{ secrets.ANTHROPIC_API_KEY != '' }}
-        run: echo "ok=$([ "$HAS_OAUTH" = "true" ] || [ "$HAS_API" = "true" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+        run: echo "ok=$([ "$HAS_OAUTH" = "true" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         if: steps.token.outputs.ok == 'true'
         with:
           fetch-depth: 0
 
-      - uses: anthropics/claude-code-action@v1
+      - uses: anthropics/claude-code-action@6b082c41935b4c8a3b8b0ef85ba4ba4d9eeb8975 # v1
         if: steps.token.outputs.ok == 'true'
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
             Zrob code review tego PR jak senior 20+ (poziom Google/bank). Po polsku.
             KROK 0 — PAMIEC: najpierw przeczytaj CLAUDE.md i docs/REVIEW-LEARNINGS.md (jesli istnieja)

@@ -273,7 +273,7 @@ Polish-language digital marketing course landing page operated by Mountain All S
 
 When Kamil's Systeme.io subscription expires and the CloudFront URLs start returning 404, run the following one-shot rescue pass (deferred from this task — binary upload via the GitHub API is fiddly and deserves its own dedicated agent run):
 
-1. **Spin up a local clone** of `mountainallservice/comfy-container`, create branch `chore/mirror-cdn-images`.
+1. **Spin up a local clone** of `kamiljan11/comfy-container`, create branch `chore/mirror-cdn-images`.
 2. **Download each unique URL** in this manifest into `public/images/<recommended-filename>` using `curl`/`wget`. For example:
    ```bash
    mkdir -p public/images

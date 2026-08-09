@@ -1,7 +1,7 @@
 # MySpiritWay → kamiljan.com — Migration Status
 
 Last updated: 2026-05-21
-Repo: `mountainallservice/comfy-container` · branch `main` (Lovable auto-deploys to kamiljan.com)
+Repo: `kamiljan11/comfy-container` · branch `main` (Lovable auto-deploys to kamiljan.com)
 
 ## Verification — every public page on myspiritway.org is migrated
 

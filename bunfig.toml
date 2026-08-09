@@ -1,2 +1,4 @@
 [install]
 saveTextLockfile = false
+# 7 dni kwarantanny na swiezo publikowane pakiety (supply-chain)
+minimumReleaseAge = 604800

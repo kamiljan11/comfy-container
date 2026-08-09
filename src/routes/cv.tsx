@@ -221,7 +221,7 @@ const CONTENT: Record<Lang, CV> = {
       },
       {
         label: "Engineered learning system:",
-        body: "built my own training platform — every code exercise executed and verified before it can teach, spaced repetition, and a curriculum that updates from real job listings (public: github.com/mountainallservice/code-reading-quest; write-up at kamiljan.com/case-studies).",
+        body: "built my own training platform — every code exercise executed and verified before it can teach, spaced repetition, and a curriculum that updates from real job listings (public: github.com/kamiljan11/code-reading-quest; write-up at kamiljan.com/case-studies).",
       },
     ],
     languages: [
@@ -390,7 +390,7 @@ const CONTENT: Record<Lang, CV> = {
       },
       {
         label: "Zaprojektowany system nauki:",
-        body: "zbudował własną platformę treningową — każde ćwiczenie kodu wykonane i zweryfikowane zanim może uczyć, spaced repetition, curriculum aktualizowane z realnych ofert pracy (publiczne: github.com/mountainallservice/code-reading-quest; opis na kamiljan.com/case-studies).",
+        body: "zbudował własną platformę treningową — każde ćwiczenie kodu wykonane i zweryfikowane zanim może uczyć, spaced repetition, curriculum aktualizowane z realnych ofert pracy (publiczne: github.com/kamiljan11/code-reading-quest; opis na kamiljan.com/case-studies).",
       },
     ],
     languages: [
