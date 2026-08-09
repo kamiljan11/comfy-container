@@ -249,7 +249,7 @@ const PROJECT_META = [
     name: "Workshop 3.0",
     tags: ["SaaS", "AI"],
     year: "2026",
-    href: "https://garage.mountaincar.is" as string | null,
+    href: "https://app.garage.mountaincar.is" as string | null,
   },
 ];
 
@@ -556,21 +556,23 @@ function HomePage() {
                     ))}
                   </div>
                   <div className="work-year">{p.year}</div>
-                  <svg
-                    className="work-arrow"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                  >
-                    <path
-                      d="M2 7h10M8 3l4 4-4 4"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  {p.href ? (
+                    <svg
+                      className="work-arrow"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <path
+                        d="M2 7h10M8 3l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  ) : null}
                 </>
               );
               if (p.href) {
