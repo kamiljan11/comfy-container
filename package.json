@@ -14,7 +14,7 @@
     "prepare": "node scripts/setup-hooks.mjs"
   },
   "dependencies": {
-    "@ai-sdk/google": "^3.0.104",
+    "@ai-sdk/anthropic": "^3.0.107",
     "@cloudflare/vite-plugin": "^1.25.5",
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",

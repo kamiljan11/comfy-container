@@ -4,16 +4,16 @@
  * hardcoded to Kamil, so this is NOT an open relay — the worst an abuser can do
  * is mail Kamil's own inbox.
  *
- * Enable: set RESEND_API_KEY and GEMINI_API_KEY as env vars on the host (Vercel).
+ * Enable: set RESEND_API_KEY and ANTHROPIC_API_KEY as env vars on the host (Vercel).
  * For best deliverability also verify a domain in Resend and set RESEND_FROM to a
  * sender on that domain (e.g. "kamiljan.com <bot@kamiljan.com>"). Until then it
  * falls back to Resend's onboarding sender, which can only deliver to Kamil's own
  * Resend account email. Without the key the bot degrades to direct WhatsApp/email.
  */
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { generateText } from "ai";
 
-const MODEL = "gemini-3-flash";
+const MODEL = "claude-haiku-4-5-20251001";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export type LeadMessage = { role: "user" | "assistant"; content: string };
@@ -34,10 +34,10 @@ function br(s: string) {
 }
 
 async function buildBrief(transcript: LeadMessage[], message: string): Promise<string> {
-  const key = process.env.GEMINI_API_KEY;
+  const key = process.env.ANTHROPIC_API_KEY;
   if (!key) return "";
   try {
-    const gateway = createGoogleGenerativeAI({ apiKey: key });
+    const gateway = createAnthropic({ apiKey: key });
     const convo = transcript
       .slice(-20)
       .map((m) => `${m.role}: ${m.content}`)

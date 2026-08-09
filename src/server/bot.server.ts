@@ -1,5 +1,5 @@
 /**
- * AI assistant backend — server-only. Uses Google Gemini directly (GEMINI_API_KEY,
+ * AI assistant backend — server-only. Uses Anthropic Claude directly (ANTHROPIC_API_KEY,
  * never shipped to browser).
  *
  * The SYSTEM prompt is the bot's entire knowledge base — grounded only in
@@ -8,10 +8,10 @@
  * names, deal values, credentials, or internal-tool details. It was adversarially
  * audited for truth, privacy/leak resistance, and hiring conversion before ship.
  */
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { createAnthropic } from "@ai-sdk/anthropic";
 import { generateText } from "ai";
 
-const MODEL = "gemini-3-flash";
+const MODEL = "claude-haiku-4-5-20251001";
 
 const SYSTEM = `You are Kamil Jan's AI assistant — the assistant on his site kamiljan.com. You help visitors understand Kamil's work and connect with him. You answer ONLY about Kamil and his work, grounded strictly in the facts in this prompt. Mirror the visitor's language (English or Polish).
 
@@ -214,9 +214,9 @@ export type BotMessage = { role: "user" | "assistant"; content: string };
 export type BotResult = { ok: true; text: string } | { ok: false; error: string };
 
 export async function runBot(messages: BotMessage[]): Promise<BotResult> {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    console.warn("[bot] GEMINI_API_KEY not set — assistant disabled");
+    console.warn("[bot] ANTHROPIC_API_KEY not set — assistant disabled");
     return { ok: false, error: "unconfigured" };
   }
 
@@ -232,10 +232,10 @@ export async function runBot(messages: BotMessage[]): Promise<BotResult> {
   if (!clean.length) return { ok: false, error: "empty" };
 
   try {
-    const google = createGoogleGenerativeAI({ apiKey });
+    const anthropic = createAnthropic({ apiKey });
 
     const res = await generateText({
-      model: google(MODEL),
+      model: anthropic(MODEL),
       system: SYSTEM,
       messages: clean,
     });
