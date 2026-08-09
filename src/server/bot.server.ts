@@ -1,6 +1,6 @@
 /**
- * AI assistant backend — server-only. Uses Lovable AI Gateway (LOVABLE_API_KEY
- * auto-provisioned, never shipped to browser).
+ * AI assistant backend — server-only. Uses Google Gemini directly (GEMINI_API_KEY,
+ * never shipped to browser).
  *
  * The SYSTEM prompt is the bot's entire knowledge base — grounded only in
  * public-safe facts (kamiljan.com vetted copy + Kamil's public GitHub profile/
@@ -8,10 +8,10 @@
  * names, deal values, credentials, or internal-tool details. It was adversarially
  * audited for truth, privacy/leak resistance, and hiring conversion before ship.
  */
-import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { generateText } from "ai";
 
-const MODEL = "google/gemini-3-flash-preview";
+const MODEL = "gemini-3-flash";
 
 const SYSTEM = `You are Kamil Jan's AI assistant — the assistant on his site kamiljan.com. You help visitors understand Kamil's work and connect with him. You answer ONLY about Kamil and his work, grounded strictly in the facts in this prompt. Mirror the visitor's language (English or Polish).
 
@@ -214,8 +214,11 @@ export type BotMessage = { role: "user" | "assistant"; content: string };
 export type BotResult = { ok: true; text: string } | { ok: false; error: string };
 
 export async function runBot(messages: BotMessage[]): Promise<BotResult> {
-  const apiKey = process.env.LOVABLE_API_KEY;
-  if (!apiKey) return { ok: false, error: "unconfigured" };
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    console.warn("[bot] GEMINI_API_KEY not set — assistant disabled");
+    return { ok: false, error: "unconfigured" };
+  }
 
   const clean = messages
     .filter(
@@ -229,17 +232,10 @@ export async function runBot(messages: BotMessage[]): Promise<BotResult> {
   if (!clean.length) return { ok: false, error: "empty" };
 
   try {
-    const gateway = createOpenAICompatible({
-      name: "lovable",
-      baseURL: "https://ai.gateway.lovable.dev/v1",
-      headers: {
-        "Lovable-API-Key": apiKey,
-        "X-Lovable-AIG-SDK": "vercel-ai-sdk",
-      },
-    });
+    const google = createGoogleGenerativeAI({ apiKey });
 
     const res = await generateText({
-      model: gateway(MODEL),
+      model: google(MODEL),
       system: SYSTEM,
       messages: clean,
     });
