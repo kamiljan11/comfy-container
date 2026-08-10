@@ -1,57 +1,43 @@
-# [NAZWA PROJEKTU]
+# kamiljan.com — Personal Site
 
-<!-- Jednozdaniowy opis: co to robi i dla kogo. UZUPELNIJ przy starcie projektu. -->
+**Live:** [kamiljan.com](https://kamiljan.com) · **Status:** production · **Built by** [Kamil Jan](https://kamiljan.com)
+
+Personal site and CV: what I build, what it is running in production, and how to get hold of
+me. The public front for the work in the rest of this account.
+
+## What it does
+
+- **Home** — what I do, in one screen
+- **Case studies** — the systems behind the products, written for someone deciding whether to
+  work with me
+- **CV** — background and contact
 
 ## Stack
 
-- Frontend: React 18 + TypeScript + Vite + Tailwind
-- Backend/API:
-- Baza:
-- Hosting/deploy:
+React + TypeScript · Vite · TanStack Router · Tailwind CSS · hosted on Vercel.
 
-## Wymagania
+No backend and no database. A personal site that needs a server is a personal site that will
+be broken in two years.
 
-- Node 20+
-- npm
-
-## Setup
+## Running locally
 
 ```bash
 npm install
-cp .env.example .env   # uzupelnij wartosci (sekrety: Infisical "MAS Group")
+npm run dev
 ```
 
-## Komendy
-
-| Komenda                 | Co robi               |
-| ----------------------- | --------------------- |
-| `npm run dev`           | serwer deweloperski   |
-| `npm run build`         | build produkcyjny     |
-| `npm run lint`          | ESLint                |
-| `npm run typecheck`     | tsc --noEmit          |
-| `npm test`              | testy jednostkowe     |
-| `npm run test:coverage` | testy + prog pokrycia |
-| `npx playwright test`   | E2E smoke             |
-
-## Zmienne srodowiskowe
-
-<!-- Tabela: NAZWA | wymagana? | opis. Zadnych wartosci sekretow w repo. -->
-
-## Struktura
-
-```
-src/            # kod aplikacji
-e2e/            # testy Playwright
-docs/adr/       # decyzje architektoniczne
-docs/RUNBOOK.md # operacje: deploy, rollback, awarie
+```bash
+npm run lint
+npm run build
+npx tsc -b        # note: -b, not --noEmit (project references)
 ```
 
-## Deploy i wersjonowanie
+## How security is handled
 
-- Flow: feature branch -> PR -> zielone CI + review -> merge do main -> deploy
-- Wersje: SemVer, tag `vX.Y.Z` tworzy GitHub Release (auto-notes)
-- Zmiany: `CHANGELOG.md` (Keep a Changelog) — aktualizuj sekcje [Unreleased] w kazdym PR
+No backend, no credentials, nothing to leak. The same gates run anyway: every push triggers
+build, lint, typecheck, Semgrep static analysis and a Gitleaks secret scan, with a pre-commit
+hook blocking credential-shaped strings.
 
-## Wlasciciel
+## Licence
 
-MAS Group / Kamil Jan — mountainallservice@gmail.com
+Proprietary. All rights reserved.
