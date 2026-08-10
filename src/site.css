@@ -2939,6 +2939,56 @@ section {
     font-size: 1.6rem;
   }
 }
+
+/* ── /claude — the AI-system page (shares the cv-paper shell) ── */
+.ai-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.ai-stat {
+  border: 1px solid #e3e3df;
+  border-radius: 8px;
+  padding: 12px 8px 10px;
+  text-align: center;
+  background: #fafaf8;
+}
+.ai-stat-n {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0a7d8c;
+  line-height: 1.1;
+}
+.ai-stat-l {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6a6f76;
+}
+.ai-lead {
+  font-size: 13.5px;
+  color: #6a6f76;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+.ai-colophon {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid #e3e3df;
+  font-size: 12.5px;
+  color: #6a6f76;
+  font-style: italic;
+}
+@media (max-width: 560px) {
+  .ai-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media print {
   body {
     background: #fff !important;

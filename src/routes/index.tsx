@@ -373,6 +373,7 @@ function HomePage() {
         <a href="#engage">{t.nav.engage}</a>
         <a href="/case-studies">Case studies</a>
         <a href="/cv">CV</a>
+        <a href="/claude">{lang === "pl" ? "System AI" : "AI system"}</a>
         <div className="mobile-menu-divider" />
         <a href="#contact" className="mobile-menu-cta">
           {t.nav.cta}
@@ -405,6 +406,9 @@ function HomePage() {
           </li>
           <li>
             <a href="/cv">CV</a>
+          </li>
+          <li>
+            <a href="/claude">{lang === "pl" ? "System AI" : "AI system"}</a>
           </li>
         </ul>
         <div className="nav-right">

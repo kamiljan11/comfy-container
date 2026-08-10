@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
+import { Route as ClaudeRouteImport } from './routes/claude'
 import { Route as CvRouteImport } from './routes/cv'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const CaseStudiesRoute = CaseStudiesRouteImport.update({
   path: '/case-studies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClaudeRoute = ClaudeRouteImport.update({
+  id: '/claude',
+  path: '/claude',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CvRoute = CvRouteImport.update({
   id: '/cv',
   path: '/cv',
@@ -32,30 +38,34 @@ const CvRoute = CvRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/case-studies': typeof CaseStudiesRoute
+  '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/case-studies': typeof CaseStudiesRoute
+  '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/case-studies': typeof CaseStudiesRoute
+  '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/case-studies' | '/cv'
+  fullPaths: '/' | '/case-studies' | '/claude' | '/cv'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/case-studies' | '/cv'
-  id: '__root__' | '/' | '/case-studies' | '/cv'
+  to: '/' | '/case-studies' | '/claude' | '/cv'
+  id: '__root__' | '/' | '/case-studies' | '/claude' | '/cv'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CaseStudiesRoute: typeof CaseStudiesRoute
+  ClaudeRoute: typeof ClaudeRoute
   CvRoute: typeof CvRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/claude': {
+      id: '/claude'
+      path: '/claude'
+      fullPath: '/claude'
+      preLoaderRoute: typeof ClaudeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cv': {
       id: '/cv'
       path: '/cv'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CaseStudiesRoute: CaseStudiesRoute,
+  ClaudeRoute: ClaudeRoute,
   CvRoute: CvRoute,
 }
 export const routeTree = rootRouteImport
