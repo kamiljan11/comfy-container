@@ -79,7 +79,7 @@ const COPY: Record<Lang, Copy> = {
       {
         label: "Get a product or site built",
         reply:
-          "He handles the full build end to end and hands it over running and documented — full-stack React/TypeScript on Supabase, Vercel and Cloudflare. Tell him what you need and he'll scope it. Send it below.",
+          "He handles the full build end to end and hands it over running and documented — React/TypeScript on Supabase, Vercel and Cloudflare, built by directing AI coding agents while he owns the spec, the review and the deploy. Tell him what you need and he'll scope it. Send it below.",
       },
       {
         label: "Add AI / automation to my business",
@@ -144,7 +144,7 @@ const COPY: Record<Lang, Copy> = {
       {
         label: "Zbudować produkt lub stronę",
         reply:
-          "Przejmuje cały build od A do Z i oddaje działające oraz udokumentowane — full-stack React/TypeScript na Supabase, Vercel i Cloudflare. Napisz czego potrzebujesz, a wyceni zakres. Wyślij poniżej.",
+          "Przejmuje cały build od A do Z i oddaje działające oraz udokumentowane — React/TypeScript na Supabase, Vercel i Cloudflare, budowane przez kierowanie agentami AI, przy czym specyfikacja, review i wdrożenie są po jego stronie. Napisz czego potrzebujesz, a wyceni zakres. Wyślij poniżej.",
       },
       {
         label: "Wdrożyć AI / automatyzację w firmie",
