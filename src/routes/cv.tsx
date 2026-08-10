@@ -85,16 +85,22 @@ const CONTENT: Record<Lang, CV> = {
     },
     summary:
       "AI automation & implementation engineer and builder-operator. Ships AI into production for SMEs, then trains " +
-      "the team to keep it running. Mostly self-taught: learned engineering and AI by building real products rather " +
-      "than in classrooms. Came up through sales and marketing in Poland; top performer, founded and ran a marketing " +
-      "agency. Rebuilt from the floor up after moving to Iceland in 2019, and now runs several ventures hands-on.",
+      "the team to keep it running. Works the way 2026 actually works: AI coding agents write the code, and I own " +
+      "everything around them — the spec, the architecture call, the review, the deploy, and the customer on the " +
+      "other end when something breaks at 4pm on a Tuesday. Came up through sales and marketing in Poland; top " +
+      "performer, founded and ran a marketing agency. Rebuilt from the floor up after moving to Iceland in 2019, " +
+      "and now runs several ventures hands-on.",
     skills: [
       {
         label: "AI & automation:",
         body: "LLM APIs (OpenAI, Claude) with prompt engineering and structured JSON outputs; n8n workflows with error handling and retries; REST APIs, webhooks, OAuth2, rate limits, pagination; MCP integrations; multi-agent workflows; scheduled autonomous agents; fal.ai; works hands-on with RAG and vector databases at an integrator level; experimented with voice agents (Twilio + OpenAI Realtime) and WhatsApp automation in own projects. Runs a personal agent runtime at real scale: 33 scheduled agents (~18 active daily), ~140 skill definitions across two runtimes.",
       },
       {
-        label: "Product / full-stack:",
+        label: "How I build:",
+        body: "I direct AI coding agents rather than typing the code myself. What I own is the part that decides whether a system survives contact with customers: scoping it, choosing the architecture, reviewing what comes back, shipping it, and operating it afterwards. Every system on this page was built that way and is running in production. I am closing the gap deliberately, not pretending it isn't there — daily predict-then-verify code-reading practice with a public log, plus Boot.dev Python and SQL.",
+      },
+      {
+        label: "Shipped on:",
         body: "React, Next.js, JavaScript / TypeScript, TanStack, Supabase (SQL / Postgres + RLS), Vercel, Cloudflare Workers, Python, Zod, Sentry (observability), Playwright / Vitest.",
       },
       {
@@ -208,8 +214,8 @@ const CONTENT: Record<Lang, CV> = {
     ],
     education: [
       {
-        label: "Self-taught engineer.",
-        body: "Full-stack development and applied AI, learned on the job by building and shipping products that businesses use every day.",
+        label: "Self-taught, in production.",
+        body: "Applied AI and product engineering, learned by shipping systems that businesses use every day rather than in a classroom. Currently working through Boot.dev (Python, SQL, Git) and a daily code-reading practice, because reviewing what an AI writes for you is only worth something if you can actually read it.",
       },
       {
         label: "General secondary education",
@@ -254,16 +260,22 @@ const CONTENT: Record<Lang, CV> = {
     },
     summary:
       "Inżynier automatyzacji i wdrożeń AI i builder-operator. Wdraża AI na produkcję w MŚP, a potem szkoli " +
-      "zespół, żeby sam to utrzymał. W dużej mierze samouk: inżynierii i AI nauczył się, budując realne produkty, a nie na " +
-      "wykładach. Zaczynał od sprzedaży i marketingu w Polsce; najlepszy sprzedawca, założył i prowadził własną " +
-      "agencję. Po przeprowadzce na Islandię w 2019 odbudował się od zera i dziś sam prowadzi kilka biznesów.",
+      "zespół, żeby sam to utrzymał. Pracuje tak, jak realnie wygląda 2026: kod piszą agenty AI, a ja odpowiadam za " +
+      "wszystko dookoła — specyfikację, decyzję architektoniczną, review, wdrożenie i za klienta po drugiej stronie, " +
+      "kiedy coś się sypie we wtorek po południu. Zaczynał od sprzedaży i marketingu w Polsce; najlepszy sprzedawca, " +
+      "założył i prowadził własną agencję. Po przeprowadzce na Islandię w 2019 odbudował się od zera i dziś sam " +
+      "prowadzi kilka biznesów.",
     skills: [
       {
         label: "AI i automatyzacja:",
         body: "LLM API (OpenAI, Claude) z prompt engineeringiem i structured JSON outputs; workflowy n8n z error handlingiem i retry; REST API, webhooki, OAuth2, rate limity, paginacja; integracje MCP; multi-agentowe workflowy; autonomiczne agenty na harmonogramie; fal.ai; pracuje z RAG i bazami wektorowymi na poziomie integratora; eksperymentował z agentami głosowymi (Twilio + OpenAI Realtime) i automatyzacją WhatsApp we własnych projektach. Prowadzi własny runtime agentowy w realnej skali: 33 zaplanowane agenty (~18 aktywnych dziennie), ~140 definicji skilli w dwóch środowiskach.",
       },
       {
-        label: "Produkt / full-stack:",
+        label: "Jak buduję:",
+        body: "Kod piszą agenty AI, nie ja ręcznie. Moja część to ta, która decyduje, czy system przeżyje kontakt z klientami: zakres, wybór architektury, review tego, co wraca, wdrożenie i utrzymanie później. Każdy system na tej stronie powstał w ten sposób i działa na produkcji. Lukę domykam świadomie, a nie udaję, że jej nie ma — codzienna praktyka czytania kodu w trybie przewidz-i-sprawdz z publicznym logiem, plus Boot.dev Python i SQL.",
+      },
+      {
+        label: "Stack, na którym wdrażam:",
         body: "React, Next.js, JavaScript / TypeScript, TanStack, Supabase (SQL / Postgres + RLS), Vercel, Cloudflare Workers, Python, Zod, Sentry (observability), Playwright / Vitest.",
       },
       {
@@ -377,8 +389,8 @@ const CONTENT: Record<Lang, CV> = {
     ],
     education: [
       {
-        label: "Samouk.",
-        body: "Full-stack i applied AI wyuczone w praktyce, przez budowanie i wdrażanie produktów, których firmy używają na co dzień.",
+        label: "Samouk, na produkcji.",
+        body: "Applied AI i inżynieria produktu wyuczone przez wdrażanie systemów, których firmy używają na co dzień, a nie na wykładach. Obecnie Boot.dev (Python, SQL, Git) i codzienna praktyka czytania kodu — bo review tego, co napisała za ciebie AI, jest coś warte tylko wtedy, gdy potrafisz to przeczytać.",
       },
       {
         label: "Wykształcenie średnie ogólne",
