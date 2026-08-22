@@ -1522,18 +1522,25 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 2px;
+  /* 7 links + CTA have to fit a 667px phone without the top item being clipped;
+     scroll is the safety net for short viewports (landscape, small Androids) */
+  padding: 76px 20px 28px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .mobile-menu.open {
   display: flex;
 }
 .mobile-menu a {
   font-family: var(--font-head);
-  font-size: 2.2rem;
+  /* scales with the viewport so long labels ("Case studies") never touch the edge;
+     11px padding keeps the tap target at ~46px, above the 44px minimum */
+  font-size: clamp(1.3rem, 5.4vw, 1.8rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--text-2);
-  padding: 12px 0;
+  padding: 11px 0;
   transition: color 0.2s;
 }
 .mobile-menu a:hover {
@@ -1543,11 +1550,11 @@ section {
   width: 40px;
   height: 1px;
   background: var(--border-2);
-  margin: 16px 0;
+  margin: 12px 0;
 }
 .mobile-menu-cta {
-  margin-top: 24px;
-  padding: 16px 48px !important;
+  margin-top: 16px;
+  padding: 15px 44px !important;
   background: var(--teal) !important;
   color: #fff !important;
   border-radius: 12px !important;
@@ -1671,9 +1678,6 @@ section {
 
 /* ── Responsive ── */
 @media (max-width: 380px) {
-  .hero-h1 {
-    font-size: 1.95rem;
-  }
   .hero-sub {
     font-size: 14px;
   }
@@ -1687,6 +1691,20 @@ section {
   .mobile-float-cta {
     padding: 12px 28px;
     font-size: 13px;
+  }
+}
+
+/* Hero headline on phones — the rotating last line is the constraint. The
+   longest phrase is "while you sleep." at 11.76em against a column of
+   100vw - 32px, so the headline has to stay under ~8.5vw. The base clamp()
+   floors at 2.2rem, which overshoots that on every viewport below 446px and
+   the line mask clips the phrase. Dropping the floor lets the same 7vw the
+   clamp already uses keep scaling down. 502px is where 7vw crosses 2.2rem, so
+   above it the base clamp already resolves to 7vw and the two are continuous —
+   no size jump at the breakpoint, and tablet/desktop are untouched. */
+@media (max-width: 502px) {
+  .hero-h1 {
+    font-size: 7vw;
   }
 }
 
