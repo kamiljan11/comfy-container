@@ -102,7 +102,12 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
   );
 }
 
-export const Route = createFileRoute("/")({ component: HomePage });
+export const Route = createFileRoute("/")({
+  // The canonical used to live in __root, which meant every other route
+  // emitted a second one pointing here. It belongs to the page it names.
+  head: () => ({ links: [{ rel: "canonical", href: "https://kamiljan.com/" }] }),
+  component: HomePage,
+});
 
 /* ── Scroll progress ── */
 function ScrollProg() {
@@ -118,40 +123,6 @@ function ScrollProg() {
     return () => window.removeEventListener("scroll", update);
   }, []);
   return <div ref={barRef} className="scroll-prog" />;
-}
-
-/* ── Custom cursor — SVG arrow pointer ── */
-function Cursor() {
-  const ptrRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      if (ptrRef.current) {
-        ptrRef.current.style.left = `${e.clientX}px`;
-        ptrRef.current.style.top = `${e.clientY}px`;
-      }
-    };
-    const hover = () => ptrRef.current?.classList.add("hovering");
-    const unhover = () => ptrRef.current?.classList.remove("hovering");
-    document.addEventListener("mousemove", onMove);
-    document.querySelectorAll("a, button").forEach((el) => {
-      el.addEventListener("mouseenter", hover);
-      el.addEventListener("mouseleave", unhover);
-    });
-    return () => document.removeEventListener("mousemove", onMove);
-  }, []);
-  return (
-    <div ref={ptrRef} className="cursor-ptr">
-      <svg
-        width="22"
-        height="26"
-        viewBox="0 0 22 26"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M1.5 1.5L1.5 19L6 14.5L9 22L11.5 21L8.5 13.5H15L1.5 1.5Z" fill="#22d3ee" />
-      </svg>
-    </div>
-  );
 }
 
 /* ── Marquee strip ── */
@@ -363,7 +334,6 @@ function HomePage() {
   return (
     <div>
       <ScrollProg />
-      <Cursor />
 
       {/* ── Mobile menu overlay ── */}
       <div className={`mobile-menu${menuOpen ? " open" : ""}`} onClick={() => setMenuOpen(false)}>

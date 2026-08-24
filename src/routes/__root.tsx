@@ -1,4 +1,5 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Cursor } from "../components/Cursor";
 import appCss from "../styles.css?url";
 import siteCss from "../site.css?url";
 
@@ -187,7 +188,12 @@ export const Route = createRootRoute({
       },
       { rel: "stylesheet", href: appCss },
       { rel: "stylesheet", href: siteCss },
-      { rel: "canonical", href: "https://kamiljan.com" },
+      // No canonical here on purpose. A root-level one is emitted on every
+      // page, so /cv, /claude, /case-studies and /uslugi/* each shipped two
+      // canonical tags — their own and this one pointing at the homepage.
+      // Google discards all of them when a page declares more than one, so
+      // every route was effectively running without a canonical. Each route
+      // that has a real URL declares its own; the homepage route declares this.
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
@@ -217,6 +223,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         />
       </head>
       <body>
+        <Cursor />
         {children}
         <Scripts />
       </body>

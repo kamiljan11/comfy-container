@@ -34,7 +34,6 @@ export interface EmailTransport {
 const stubTransport: EmailTransport = {
   name: "stub",
   async send(msg) {
-    // eslint-disable-next-line no-console
     console.log("[email:stub] would send", {
       to: msg.to,
       subject: msg.subject,

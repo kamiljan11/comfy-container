@@ -27,7 +27,7 @@ const memoryStore: SubscriberStore = {
   name: "memory",
   async save(s) {
     memory.push(s);
-    // eslint-disable-next-line no-console
+
     console.log("[subscribers:memory] saved", { email: s.email, tag: s.tag, source: s.source });
   },
   async list() {
