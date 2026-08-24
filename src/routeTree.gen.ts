@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as ClaudeRouteImport } from './routes/claude'
 import { Route as CvRouteImport } from './routes/cv'
+import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
+import { Route as UslugiSlugRouteImport } from './routes/uslugi.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +36,32 @@ const CvRoute = CvRouteImport.update({
   path: '/cv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UslugiIndexRoute = UslugiIndexRouteImport.update({
+  id: '/uslugi/',
+  path: '/uslugi/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UslugiSlugRoute = UslugiSlugRouteImport.update({
+  id: '/uslugi/$slug',
+  path: '/uslugi/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
+  '/uslugi/$slug': typeof UslugiSlugRoute
+  '/uslugi/': typeof UslugiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
+  '/uslugi/$slug': typeof UslugiSlugRoute
+  '/uslugi': typeof UslugiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +69,28 @@ export interface FileRoutesById {
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
+  '/uslugi/$slug': typeof UslugiSlugRoute
+  '/uslugi/': typeof UslugiIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/case-studies' | '/claude' | '/cv'
+  fullPaths:
+    | '/'
+    | '/case-studies'
+    | '/claude'
+    | '/cv'
+    | '/uslugi/$slug'
+    | '/uslugi/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/case-studies' | '/claude' | '/cv'
-  id: '__root__' | '/' | '/case-studies' | '/claude' | '/cv'
+  to: '/' | '/case-studies' | '/claude' | '/cv' | '/uslugi/$slug' | '/uslugi'
+  id:
+    | '__root__'
+    | '/'
+    | '/case-studies'
+    | '/claude'
+    | '/cv'
+    | '/uslugi/$slug'
+    | '/uslugi/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +98,8 @@ export interface RootRouteChildren {
   CaseStudiesRoute: typeof CaseStudiesRoute
   ClaudeRoute: typeof ClaudeRoute
   CvRoute: typeof CvRoute
+  UslugiSlugRoute: typeof UslugiSlugRoute
+  UslugiIndexRoute: typeof UslugiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +132,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/uslugi/': {
+      id: '/uslugi/'
+      path: '/uslugi'
+      fullPath: '/uslugi/'
+      preLoaderRoute: typeof UslugiIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/uslugi/$slug': {
+      id: '/uslugi/$slug'
+      path: '/uslugi/$slug'
+      fullPath: '/uslugi/$slug'
+      preLoaderRoute: typeof UslugiSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +154,8 @@ const rootRouteChildren: RootRouteChildren = {
   CaseStudiesRoute: CaseStudiesRoute,
   ClaudeRoute: ClaudeRoute,
   CvRoute: CvRoute,
+  UslugiSlugRoute: UslugiSlugRoute,
+  UslugiIndexRoute: UslugiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
