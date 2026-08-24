@@ -35,8 +35,7 @@ Pay Attention to Dream Messages.
 Keep a notebook by your bed to record your dreams immediately upon waking and look for recurring patterns over time, feeling into what messages these patterns might offer (the work of Jung can be helpful here), with the potential to eventually experience lucid dreams where you are conscious of dreaming.
 ⭐
 Explore Out-of-Body Experiences (OOBE).
-Once you have developed a strong foundation in introduced practical spiritual practices, you might feel drawn to explore the phenomenon of Out-of-Body Experiences. This involves a perceived separation of your consciousness or awareness from your physical body, allowing you to experience the world from a different perspective or even explore non-physical realms. It's often considered an advanced spiritual or consciousness exploration, and individuals who pursue OOBE may do so for various reasons, including personal growth, spiritual understanding, or exploring the nature of consciousness itself. Best Trilogy about OOBE
-here
+Once you have developed a strong foundation in introduced practical spiritual practices, you might feel drawn to explore the phenomenon of Out-of-Body Experiences. This involves a perceived separation of your consciousness or awareness from your physical body, allowing you to experience the world from a different perspective or even explore non-physical realms. It's often considered an advanced spiritual or consciousness exploration, and individuals who pursue OOBE may do so for various reasons, including personal growth, spiritual understanding, or exploring the nature of consciousness itself. Best Trilogy about OOBE here
 🔎
 ⭐
 Surrender to Higher Guidance.
@@ -57,8 +56,7 @@ Spend time gazing at the stars and allow yourself to feel the beauty of the nigh
 ⭐ Practice Cloud Reading.
 Watch the formations of clouds with the intention of receiving messages or insights, or simply allow yourself to experience a sense of peace and tranquillity through the act of gazing at the sky.
 ⭐ Engage in Selfless Service.
-Dedicate yourself to performing one anonymous act of kindness each day, or actively support a cause you deeply care about, and pay attention to the feeling of fulfilment and connection that arises from helping others. Cool List of Random Acts of Kindness
-click here
+Dedicate yourself to performing one anonymous act of kindness each day, or actively support a cause you deeply care about, and pay attention to the feeling of fulfilment and connection that arises from helping others. Cool List of Random Acts of Kindness click here
 🔎
 ⭐ Choose Nourishing Content.
 Be mindful of the information, art, and media you consume, consciously selecting content like inspiring poems, nature documentaries, uplifting music, or insightful talks that elevate your consciousness and broaden your understanding of the world. Remember everything that you consume it's storage in your brain even though you cannot recall details.
@@ -67,8 +65,7 @@ Create spaces of stillness even within the busiest environments to find your can
 ⭐ Search for Spirituality in your Place.
 Explore your local area for spiritual events that could enrich your journey by using platforms like Facebook Events, Eventbrite, or Google Maps to find gatherings and workshops happening near you.
 ⭐ Attend a Festival.
-Consider attending a Consciousness Festival, Psytrance Festival, Spiritual Festival, Permaculture Festival (search online for options) as a wonderful way to experience diverse workshops and build meaningful connections with like-minded individuals. For extensive list of Festivals in Europe
-click here
+Consider attending a Consciousness Festival, Psytrance Festival, Spiritual Festival, Permaculture Festival (search online for options) as a wonderful way to experience diverse workshops and build meaningful connections with like-minded individuals. For extensive list of Festivals in Europe click here
 🔎
 ⭐ Volunteer in Eco Village.
 There are beautiful alternative communities, which can inspire you to embrace meaningful human connection while being closer to nature. Those places often have volunteer programs. For extensive list of Eco Villages
@@ -175,27 +172,18 @@ If you’re interested in an offering but can’t afford it
   Make a financial contribution
   – see options below.
   👉
-  Share this guidebook's main page
-  with others:
+  Share this guidebook's main page with others:
   https://www.myspiritway.org/sps2
   👉
-  Send a testimonial or feedback
-  to me at
-  kamiljan@myspiritway.org
-  .
+  Send a testimonial or feedback to me at kamiljan@myspiritway.org.
   👉
-  Share your perspective -
-  email me at
-  kamiljan@myspiritway.org
-  your perspective over practical spirituality, maybe there is something that is missing or could be described better in the introduced approach?
+  Share your perspective - email me at kamiljan@myspiritway.org your perspective over practical spirituality, maybe there is something that is missing or could be described better in the introduced approach?
   👉
   Help grow the MySpiritWay community
-  – email me at
-  kamiljan@myspiritway.org
+  – email me at kamiljan@myspiritway.org
   , and share your idea on how you can help
   👉
-  Contribute creatively in a way that resonates with you. -
-  be proactive
+  Contribute creatively in a way that resonates with you. - be proactive
   Your support allows me to dedicate my time and energy to developing this project and helping others without needing to seek outside employment. The more this project grows, the more resources—financial and otherwise—will be available not just for its continued development but also for supporting other meaningful initiatives that can benefit the world.
   By supporting this journey, you’re helping to expand its reach and impact.
   Thank you for your kindness and generosity—it truly makes a difference to the whole world.
@@ -203,8 +191,7 @@ If you’re interested in an offering but can’t afford it
   Single Support Options
 - allow progression
   for the mission.
-  BTC (BITCOIN)
-  bc1qmz0ydhuvlax9s8n6zgvxw5cvs5fucl0tt0jc23
+  BTC (BITCOIN) bc1qmz0ydhuvlax9s8n6zgvxw5cvs5fucl0tt0jc23
   ETH (Etherium) min. 0.1 ETH
   0x1dA94A7bDd2aE4181Fb42c74C1E79d54CcEc8aD2
   Debit/Credit Card
@@ -252,12 +239,9 @@ This guidebook is designed to be accessible to everyone, regardless of their bac
 Does it offer a one-size-fits-all solution?
 This guidebook does not claim to have all the answers or to be the ultimate solution for everyone. It serves as a resource and a guide, encouraging readers to explore their own paths and discover what works best for them on their journey of self-discovery and growth.
 Do I need to pay for anything offered?
-All the offerings are NOT FREE but are based on community support and the Fair Exchange Model (click
-here
-to learn more). Which allows you to contribute in the meaningful way to you.
+All the offerings are NOT FREE but are based on community support and the Fair Exchange Model (click here to learn more). Which allows you to contribute in the meaningful way to you.
 Elevate Your Consciousness
-Sign up now
-to begin your journey.
+Sign up now to begin your journey.
 DISCLAIMER. The content provided on this website, including all information, services, resources, live stream videos, images, and materials provided in newsletters, is offered solely for educational and informational purposes. It is not intended as, and should not be considered, medical, psychological, legal, or professional advice. The practices and techniques discussed herein are based on personal experiences and individual interpretations and are not a substitute for professional consultation. You acknowledge and agree that you are solely responsible for your own health, safety, and well-being when applying any information or techniques from this website. The authors, contributors, and affiliated parties shall not be liable for any outcomes, damages, or losses arising from your use of this information. This website may contain links to external websites that provide additional resources or information. We do not endorse, control, or assume responsibility for the content or practices of any third-party websites. Always consult with a qualified healthcare provider or other appropriate professional before starting any new health regimen or if you have any concerns regarding your physical or mental health. While we strive to ensure that the information provided is accurate and valuable, we make no representations or warranties regarding the effectiveness, suitability, or completeness of any practices or information provided. Individual experiences and results may vary. By using this website and subscribing to our newsletters, you acknowledge and agree to the terms of this disclaimer. If you do not agree with these terms, please refrain from using this website and our services.
 
 ---

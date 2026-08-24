@@ -23,8 +23,7 @@ All the elements below are intertwined like when one of those elements it's not 
 The 5 Pillars of Longevity focus on key areas including:
 
 1. Regenerative High Quality Sleep.
-   Sleep is
-   essential
+   Sleep is essential
    , not optional. It's the foundation for health, happiness, and peak performance.
    🤔Reflection
    Remind yourself of a time when you didn’t sleep well. How was your overall well-being?
@@ -70,9 +69,7 @@ The 5 Pillars of Longevity focus on key areas including:
    Reflection
    Think which improvement you can implement immediately. Experiment, and keep track on the difference.
 2. Healthy Nutritional Balanced Diet.
-   Nutrition is KEY. Food
-   becomes
-   your cells. Food impacts your energy levels, mood, immunity and long term-health.
+   Nutrition is KEY. Food becomes your cells. Food impacts your energy levels, mood, immunity and long term-health.
    🤔Reflection
    Remind yourself of a time when you over eaten, or ate something really unhealthy. How did you feel?
    Things that you can do:
@@ -84,8 +81,7 @@ The 5 Pillars of Longevity focus on key areas including:
    . You can either put effort into cooking a variety of tasty, healthy meals or follow a simple diet that meets all your nutritional needs, treating food as nourishment for your body.
    👉
    Eat Veggies Daily.
-   Maximize Micronutrients. Eat huge quantities and an extreme variety of vegetables daily, especially leafy greens, cruciferous veggies, and non-starchy options, to flood your body with diverse vitamins, minerals, fiber, and phytonutrients. Veggies are the absolute base of a nutrient-dense diet. To support that goal find out about what are Microgreens
-   here▶️
+   Maximize Micronutrients. Eat huge quantities and an extreme variety of vegetables daily, especially leafy greens, cruciferous veggies, and non-starchy options, to flood your body with diverse vitamins, minerals, fiber, and phytonutrients. Veggies are the absolute base of a nutrient-dense diet. To support that goal find out about what are Microgreens here▶️
    👉
    Eat Whole Foods for Fiber.
    Gut Health, Blood Sugar, & Foundational Nutrition. Build your diet on whole, minimally processed foods: whole grains (in moderation for some), fruits (lower sugar berries especially), vegetables, legumes, nuts, and seeds. These are your primary sources of fiber, complex carbs, vitamins, and minerals.
@@ -150,8 +146,7 @@ The 5 Pillars of Longevity focus on key areas including:
   🔹Supplements (irregularly):
   high-quality multivitamin/minerals, multiple strains strong probiotics, Omega 3-6-9, creatine, turmeric, collagen, bee products, coconut charcoal.
   🔹Other:
-  Micro dosing psilocybin, mix of cognitive mushrooms (Stamets Protocol – every 3rd day learn more
-  here
+  Micro dosing psilocybin, mix of cognitive mushrooms (Stamets Protocol – every 3rd day learn more here
   ▶️
   ), monthly 72-hour water fast.
   🔹Alternatively:

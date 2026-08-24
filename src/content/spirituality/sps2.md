@@ -8,12 +8,9 @@ captured: 2026-05-21
 # The Simplified Practical Spirituality²
 
 I'm Kamil Jan, a teacher of practical spirituality, sharing universal insights from 12 years of exploring spiritual, religious, and philosophical traditions.
-"The Simplified Practical Spirituality" offers a clear and accessible guide to accelerating
-the evolution of consciousness, reducing unnecessary suffering, and creating space for complete lasting lasting life happiness.
+"The Simplified Practical Spirituality" offers a clear and accessible guide to accelerating the evolution of consciousness, reducing unnecessary suffering, and creating space for complete lasting lasting life happiness.
 Together, we focus on utilising practical methods to integrate these transformations into everyday modern life.
-Below, you'll find a summary of
-The Simplified Practical Spirituality
-.
+Below, you'll find a summary of The Simplified Practical Spirituality.
 Whenever you feel inspired, you can click the button at the end of each section to access its full corresponding chapter.
 Summary ~66-minute read.
 Read Complete Book Here
@@ -33,8 +30,7 @@ Discover what truly matters to you. As you bring awareness to neglected areas of
 
 (Meta Spirituality/Core Spirituality)
 Ultra Short Videos Inspired by the Guidebook
-Videos will be successfully added to
-this playlist.
+Videos will be successfully added to this playlist.
 
 Please accept cookies to access this content
 
@@ -108,11 +104,7 @@ When I feel pain, what is my usual reaction — do I try to avoid it, fight it, 
 🤔
 Do I ever notice that my thoughts or beliefs about a situation make it feel worse?
 🤔
-Is it possible that the way I
-see
-or
-think about
-things is part of what creates my suffering?
+Is it possible that the way I see or think about things is part of what creates my suffering?
 🤔
 Have there been hard moments in my life that also helped me grow, learn, or understand something important?
 🤔
@@ -146,11 +138,7 @@ Key Idea:
 Spirituality is the journey of awakening — or gently reminding ourselves — of a deeper dimension of life, one that reveals connection, meaning, and the hidden truth of both ourselves and reality.
 How We Can Meet it Differently:
 We don't need to wait for a perfect moment. We need to realise that the path is already unfolding, and what shifts is our ability to notice it.
-Spiritual practices like meditation, reflection, and conscious living help us move from
-thinking about truth
-to
-living it directly
-.
+Spiritual practices like meditation, reflection, and conscious living help us move from thinking about truth to living it directly.
 Reflection:
 🤔
 When have I felt a quiet sense that life might be more than what I can see or explain?
@@ -159,9 +147,7 @@ What gives my life meaning — and am I connected to it in daily experience?
 🤔
 Do I ever feel pulled toward something deeper, even if I can't name it?
 🤔
-In what moments do I feel most awake, most connected, most
-myself
-?
+In what moments do I feel most awake, most connected, most myself?
 🤔
 What might change if I gave more space to presence, stillness, or reflection in my life?
 These questions aren't meant to be answered perfectly. They're invitations into something deeper.
@@ -203,8 +189,7 @@ These questions aren't puzzles to solve. They are reflections that help you reco
 Micro-definitions of Consciousness:
 🔹 Consciousness is the awareness, the canvas in which all thoughts, feelings, and sensations appear.
 🔹 Consciousness is not something we "have" — it's what we
-are
-at the most essential level.
+are at the most essential level.
 🔹 Consciousness is the witnessing presence behind the stream of experience.
 🔹 Consciousness is personal and intimate — yet opens into something universal.
 🔹 Consciousness is the unchanging background behind all change.
@@ -280,8 +265,7 @@ Micro-definitions of Consciousness Levels:
 🔹 The journey is both inward and upward — toward wholeness and return.
 In the end this model is a simplified introduction. The full richness of this path can be found in deeper explorations from spiritual traditions, psychological frameworks, and wisdom lineages across cultures. Many share a common theme: the movement from fragmentation to wholeness, from ego to essence.
 👉
-Read the full chapter → (
-Learn about the levels of consciousness described in more detail)
+Read the full chapter → (Learn about the levels of consciousness described in more detail)
 
 ## What Are The Peak Experiences?
 
@@ -396,8 +380,7 @@ Core Principles of Practical Spirituality:
 🔹Lay a strong foundation before chasing complex teachings.
 🔹Question all things to find truth through your own direct insight.
 🔹Stay true to your own way, and let the journeys of others inspire you.
-The active embodiment of these principles is known as the
-Practical Spiritual Path.
+The active embodiment of these principles is known as the Practical Spiritual Path.
 Key Idea:
 Spirituality is not something separate from life — it's how we live each moment.
 Practical spirituality means applying insight with clarity, presence, and integrity in everyday situations.
@@ -417,9 +400,7 @@ Join the Community
 Update about newest projects, List of useful links in one place
 JOIN
 By Submitting you accept to receive emails from us.
-This work is based o
-n
-the Fair Exchange Model.
+This work is based o n the Fair Exchange Model.
 
 ## Part 2 - Take Actionable Steps
 
@@ -429,8 +410,7 @@ Below you can find the actionable part of the guidebook.
 
 Here are key practices to help you to Accelerate the Evolution of Consciousness, Reduce Unnecessary Suffering and Achieve Complete Lasting Life Happiness.
 1️⃣ Join the Community:
-Connect with others on the path. Receive additional insights, support, and learn about project updates through our newsletter and WhatsApp group. To join - use the form
-here.
+Connect with others on the path. Receive additional insights, support, and learn about project updates through our newsletter and WhatsApp group. To join - use the form here.
 2️⃣ Activation Sessions:
 Engage regularly with structured sessions. Sessions are meant to complete the system of Practical Spirituality.
 3️⃣ Cultivate an Evolutionary Mindset:
@@ -481,8 +461,7 @@ https://www.myspiritway.org/sps#headline-6bda02ea
 Develop your own morning session.
 For example: begin by inviting sacredness through dedicating the space and time to the Divine. Practice Modular Yoga
 (learn more here)
-, followed by Pranayama (for example, check out
-this YouTube channel
+, followed by Pranayama (for example, check out this YouTube channel
 ). Continue with a Pratyahara practice (turning inward, such as through body scanning), then move into Dharana (deep concentration, for example, on the space between your eyebrows). From there, enter Dhyana (meditation), allowing your extended Dharana to naturally deepen into meditative absorption. You might want to set a timer on your phone for the desired length of your practice.
 Develop your own evening session.
 For example: invite a sense of gratitude for the day. Reflect on the quality of your experiences and journal your insights. Then practice body scanning while lying on your back. Let yourself naturally shift into sleep from this calm, inward state.
@@ -494,13 +473,11 @@ https://www.myspiritway.org/sps#text-bd10c589
 Develop no excuses workout. For example like no-equipment home workout, calisthenics, dance or any other type of active movement. Think holistically to develop strength, bone density and cardiovascular health.
 🙏
 Integrate Your Shattered Self (Practice for 21 days, and then once a week)
-→
-https://www.myspiritway.org/iyss
+→ https://www.myspiritway.org/iyss
 Integration of fragmented parts of the self. Ideal for shadow work, trauma processing, and creating a vision of inner wholeness and a beautiful future.
 🙏
 Oneness Energy Work (Practice once a week, learn to body scan every evening)
-→
-https://www.youtube.com/watch?v=hNC0Y9-YDG4&t
+→ https://www.youtube.com/watch?v=hNC0Y9-YDG4&t
 Learn to feel, transform, and flow with subtle energy. Develop sensitivity to energy fields to invite balance and help you to deepen sacred sense of oneness with life.
 
 ## The Evolutionary Mindset
@@ -638,8 +615,7 @@ Key Elements of Formal Practice:
 A well-rounded spiritual practice may combine any of the elements:
 🔹
 Meditation
-–
-silent sitting, mantra repetition, mindfulness, concentration techniques, guided visualisations
+– silent sitting, mantra repetition, mindfulness, concentration techniques, guided visualisations
 🔹
 Reflection
 – journaling, inner inquiry, reflecting on sacred texts
@@ -660,15 +636,12 @@ Reflection
   – scanning, grounding, or subtle body work
   🔹
   Ritual
-  –
-  full-moon rituals, smudging with sage, lighting candles for intention, creating altars
+  – full-moon rituals, smudging with sage, lighting candles for intention, creating altars
   Morning and Evening:
   🔹
-  Morning
-  is the ideal time to set the energies for the day ahead. Begin with a formal practice while the schedule is still uncluttered, making it less likely to be skipped. You'll start the day more present, aware, and centered.
+  Morning is the ideal time to set the energies for the day ahead. Begin with a formal practice while the schedule is still uncluttered, making it less likely to be skipped. You'll start the day more present, aware, and centered.
   🔹
-  Evening
-  invites you to gather and harmonize the day's energies before sleep. Turn inward to reflect, release, and restore, preparing body and mind for deeper rest and integration.
+  Evening invites you to gather and harmonize the day's energies before sleep. Turn inward to reflect, release, and restore, preparing body and mind for deeper rest and integration.
   Aim for at least 5-15 minutes of practice daily.
   My Personal Practice Morning:
   My morning practice is inspired by the Eight Limbs of Yoga, a complete spiritual system that supports progress on the evolutionary path.
@@ -681,12 +654,10 @@ Reflection
   3️⃣
   Asana (Yoga Flow)
   – Move mindfully for 20-30 minutes, synchronizing breath (ideally Ujjayi) with a full-body routine to clear energy and prepare for sitting.
-  Here is Modular Yoga Asana
-  that I follow.
+  Here is Modular Yoga Asana that I follow.
   4️⃣
   Pranayama (Breathwork)
-  – Settle into stillness and practice controlled breathing to quiet the mental noise—for example, by doing
-  two rounds of DMT breathing
+  – Settle into stillness and practice controlled breathing to quiet the mental noise—for example, by doing two rounds of DMT breathing
   , or simply observing your breath mindfully.
   5️⃣
   Pratyahara (Sensory Withdrawal)
@@ -886,8 +857,7 @@ The goal is to see clearly — not to look good.
 Stay curious.
 Judgment blocks insight. Openness invites it.
 "The unexamined life is not worth living." — Socrates
-Through deep reflection, you don't just live. You learn to live
-well
+Through deep reflection, you don't just live. You learn to live well
 — with clarity, depth, and truth.
 👉 Read the full chapter → (Dive into more details)
 
@@ -1022,27 +992,18 @@ If you're interested in an offering but can't afford it
   Make a financial contribution
   – see options below.
   👉
-  Share this guidebook's main page
-  with others:
+  Share this guidebook's main page with others:
   https://www.myspiritway.org/sps2
   👉
-  Send a testimonial or feedback
-  to me at
-  kamiljan@myspiritway.org
-  .
+  Send a testimonial or feedback to me at kamiljan@myspiritway.org.
   👉
-  Share your perspective -
-  email me at
-  kamiljan@myspiritway.org
-  your perspective over practical spirituality, maybe there is something that is missing or could be described better in the introduced approach?
+  Share your perspective - email me at kamiljan@myspiritway.org your perspective over practical spirituality, maybe there is something that is missing or could be described better in the introduced approach?
   👉
   Help grow the MySpiritWay community
-  – email me at
-  kamiljan@myspiritway.org
+  – email me at kamiljan@myspiritway.org
   , and share your idea on how you can help
   👉
-  Contribute creatively in a way that resonates with you. -
-  be proactive
+  Contribute creatively in a way that resonates with you. - be proactive
   Your support allows me to dedicate my time and energy to developing this project and helping others without needing to seek outside employment. The more this project grows, the more resources—financial and otherwise—will be available not just for its continued development but also for supporting other meaningful initiatives that can benefit the world.
   By supporting this journey, you're helping to expand its reach and impact.
   Thank you for your kindness and generosity—it truly makes a difference to the whole world.
@@ -1050,8 +1011,7 @@ If you're interested in an offering but can't afford it
   Single Support Options
 - allow progression
   for the mission.
-  BTC (BITCOIN)
-  bc1qmz0ydhuvlax9s8n6zgvxw5cvs5fucl0tt0jc23
+  BTC (BITCOIN) bc1qmz0ydhuvlax9s8n6zgvxw5cvs5fucl0tt0jc23
   ETH (Etherium) min. 0.1 ETH
   0x1dA94A7bDd2aE4181Fb42c74C1E79d54CcEc8aD2
   Debit/Credit Card
@@ -1099,9 +1059,7 @@ This guidebook is designed to be accessible to everyone, regardless of their bac
 Does it offer a one-size-fits-all solution?
 This guidebook does not claim to have all the answers or to be the ultimate solution for everyone. It serves as a resource and a guide, encouraging readers to explore their own paths and discover what works best for them on their journey of self-discovery and growth.
 Do I need to pay for anything offered?
-All the offerings are NOT FREE but are based on community support and the Fair Exchange Model (click
-here
-to learn more). Which allows you to contribute in the meaningful way to you.
+All the offerings are NOT FREE but are based on community support and the Fair Exchange Model (click here to learn more). Which allows you to contribute in the meaningful way to you.
 Read the Complete Book
 Here
 DISCLAIMER. The content provided on this website, including all information, services, resources, live stream videos, images, and materials provided in newsletters, is offered solely for educational and informational purposes. It is not intended as, and should not be considered, medical, psychological, legal, or professional advice. The practices and techniques discussed herein are based on personal experiences and individual interpretations and are not a substitute for professional consultation. You acknowledge and agree that you are solely responsible for your own health, safety, and well-being when applying any information or techniques from this website. The authors, contributors, and affiliated parties shall not be liable for any outcomes, damages, or losses arising from your use of this information. This website may contain links to external websites that provide additional resources or information. We do not endorse, control, or assume responsibility for the content or practices of any third-party websites. Always consult with a qualified healthcare provider or other appropriate professional before starting any new health regimen or if you have any concerns regarding your physical or mental health. While we strive to ensure that the information provided is accurate and valuable, we make no representations or warranties regarding the effectiveness, suitability, or completeness of any practices or information provided. Individual experiences and results may vary. By using this website and subscribing to our newsletters, you acknowledge and agree to the terms of this disclaimer. If you do not agree with these terms, please refrain from using this website and our services.

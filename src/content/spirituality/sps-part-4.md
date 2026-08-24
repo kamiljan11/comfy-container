@@ -50,16 +50,14 @@ Here is my personal interpretation of the Eight Limbs of Yoga, expressed as a co
 3. Yoga Poses Flow (Asana)
 
 - Prepare body for prolonged sit in comfortable, stillness. Support the process of cleaning the impurities which hinder the flow of energy. Perform a 20-30-minute sequence of Full Body Yoga Poses (
-  Charlie Follows
-  has really good flows, I currently practice
+  Charlie Follows has really good flows, I currently practice
   Modula Yoga
   ) You might want to specifically design it to target those areas that need most of your attention. It's important to sync the movement with the breathing - ideally combined with slight restriction (Ujjayi breath).
 
 4. Breathwork (Pranayama)
 
 - Settle into stillness (floor or chair) and practice breathwork/breath control. It will help to prepare your mind to blow away much of the internal noise. It's best to experiment with different techniques to find one that aligns best with your own unique needs. I follow
-  DMT (Dynamic Mediation Technique)
-  session for 2 rounds, which include intensive inhalations and exhalations through the mouth with breath retention on full and empty lungs between rounds. Interestingly breathing can help you to control the way how you feel, and even how resistant you are to extreme temperatures.
+  DMT (Dynamic Mediation Technique) session for 2 rounds, which include intensive inhalations and exhalations through the mouth with breath retention on full and empty lungs between rounds. Interestingly breathing can help you to control the way how you feel, and even how resistant you are to extreme temperatures.
 
 5. Sensory Withdrawal (Pratyahara)
 
@@ -91,13 +89,8 @@ Here is my personal interpretation of the Eight Limbs of Yoga, expressed as a co
 Micro-awareness is the profound yet simple art of shining a gentle, focused spotlight on the unnoticed moments that constantly unfold within and around us.
 So much of our day can slip by in a haze of automatic routines and reactions, leaving us feeling disconnected or merely passengers in our own lives. Instead of letting life pass by on this autopilot setting (operating from ingrained habits rather than present awareness) micro-awareness invites us to consciously tune in. We train ourselves to become sensitive detectors, catching even the smallest, most fleeting cues: thought crossing the mind, a subtle tension building in the shoulders, a quiet shift in our emotional undertone, the specific words chosen in a casual remark, or a habitual way of reacting to a minor frustration.
 This practice encourages us to become active, curious observers of our own inner landscape. By noticing details, we begin to engage directly with our inner experiences, actively acknowledging their presence and discerning their nature. It's like zooming in momentarily to see the texture and quality of the present moment.
-Functionally, micro-awareness is a practical tool that beautifully integrates several powerful capacities. It draws heavily on mindfulness (the core ability to be present and aware, paying attention to unfolding experiences without immediate judgment). But it goes a step further by incorporating active self-awareness (understanding
-what
-we are experiencing and
-why
-) and reflection (considering the implications and quality of that experience). This blend creates the necessary mental and emotional space to truly
-realize
-the quality of our inner states – are they helpful, hindering, aligned, misaligned? – and, crucially, to take conscious steps to elevate that quality. Through the consistent practice of micro-awareness, we engage in this process daily, catching and mindfully examining our thoughts, emotions, bodily sensations, speech, and behaviours as they arise, transforming the mundane into opportunities for growth and self-understanding.
+Functionally, micro-awareness is a practical tool that beautifully integrates several powerful capacities. It draws heavily on mindfulness (the core ability to be present and aware, paying attention to unfolding experiences without immediate judgment). But it goes a step further by incorporating active self-awareness (understanding what we are experiencing and why
+) and reflection (considering the implications and quality of that experience). This blend creates the necessary mental and emotional space to truly realize the quality of our inner states – are they helpful, hindering, aligned, misaligned? – and, crucially, to take conscious steps to elevate that quality. Through the consistent practice of micro-awareness, we engage in this process daily, catching and mindfully examining our thoughts, emotions, bodily sensations, speech, and behaviours as they arise, transforming the mundane into opportunities for growth and self-understanding.
 Let's illustrate this flow with an example:
 You receive an email from your boss asking you to redo a significant portion of a report you spent a lot of time on.
 Here's how micro-awareness unfolds through the stages of Mindfulness, Self-Awareness, and Reflection in this moment:
@@ -125,11 +118,7 @@ This example demonstrates how micro-awareness utilizes mindfulness to notice the
 Key Practical Benefits of Micro-Awareness:
 🔹
 Elevating the Quality of Inner and Outer Experience
-Through consistent observation, we begin to notice not just
-what
-is happening inside us, but
-how
-it is happening. We start to recognize when our thoughts are clear or when they are cluttered, when our speech uplifts or when it wounds, when our emotions nourish us or drain us and and how sensitive or disconnected we are from the signals in our bodies. With this awareness, we create the space to consciously improve the quality of everything we experience and express.
+Through consistent observation, we begin to notice not just what is happening inside us, but how it is happening. We start to recognize when our thoughts are clear or when they are cluttered, when our speech uplifts or when it wounds, when our emotions nourish us or drain us and and how sensitive or disconnected we are from the signals in our bodies. With this awareness, we create the space to consciously improve the quality of everything we experience and express.
 Rather than letting patterns of negativity, anxiety, or unconscious behaviour dominate, we can choose to shift toward higher, more refined states of being. Even small changes, like replacing a harsh inner thought with a compassionate one or choosing words that heal instead of hurt, can gradually reshape the entire tone of our lives.
 In this way, micro-awareness becomes a daily act of quiet refinement, polishing the way we think, feel, speak, and act into greater alignment with our values and aspirations.
 🔹
@@ -240,9 +229,7 @@ Here’s how to implement it step-by-step:
    Tips for Success:
    🔹
    Keep It Simple
-   Start small. Begin with brief check-ins—just a few seconds of awareness. You can also add short, honest journal entries, that can help you to track patterns. The goal is to build the
-   habit
-   of returning to observation, not to overwhelm yourself with complicated processes. Consistency matters far more than how "deep" or "perfect" any single moment feels.
+   Start small. Begin with brief check-ins—just a few seconds of awareness. You can also add short, honest journal entries, that can help you to track patterns. The goal is to build the habit of returning to observation, not to overwhelm yourself with complicated processes. Consistency matters far more than how "deep" or "perfect" any single moment feels.
    🔹
    Set Up Reminders
    Key to success is to remember about engagement in the challenge. Be creative and find out way how you can remind yourself to practice micro-awareness throughout different moments during the day.
