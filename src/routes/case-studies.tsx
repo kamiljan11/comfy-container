@@ -159,7 +159,7 @@ function CaseStudiesPage() {
 
       {FEATURED.map((cs, i) => (
         <details key={cs.slug} id={cs.slug} className="cs-fold">
-          {/* collapsed, this is one clickable line: nineteen of these scan in a
+          {/* collapsed, this is one clickable line: twenty of these scan in a
               screen or two. Everything else waits until it is opened. */}
           <summary className="cs-fold-sum">
             <span className="cs-fold-num">{String(i + 1).padStart(2, "0")}</span>

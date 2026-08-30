@@ -1403,6 +1403,70 @@ export const FEATURED: CaseStudy[] = [
       "One-command repo bootstrap (fleet templates)",
     ],
   },
+  {
+    slug: "supplier-feed-to-storefront",
+    title:
+      "A supplier feed became a storefront \u2014 and 1,885 items are deliberately still hidden",
+    resultsPreview:
+      "NextCar Keflav\u00edk runs on Next.js and Payload with 1,932 products imported from a supplier CSV and sorted into a 229-node taxonomy. 47 are published; the other 1,885 sit in draft on purpose, because the feed ships no purchase price and selling on a guessed margin loses money on every order. The interesting part is what the import could not answer, and what I did instead of guessing.",
+    problem:
+      "A workshop in Keflav\u00edk wanted to sell the equipment it already imports. The supplier hands over a CSV: about two thousand rows, product names, photos, specifications, retail prices in one market.\n\nEverything about that sounds like a straightforward import. It is not. The feed carries a price the supplier charges someone, somewhere, in a currency it never states \u2014 and no purchase price at all. Wholesale price is empty in 1,932 rows out of 1,932. So the one number the shop actually needs, the number every margin is calculated from, is the one number that is missing.\n\nYou can build the whole storefront without noticing this. Products render, categories work, the cart adds items. It only surfaces when someone asks what a thing costs.",
+    context:
+      "NextCar is a car workshop in Keflav\u00edk \u2014 engine service, diagnostics, alignment \u2014 that also brings in workshop equipment. The site has to do two jobs at once: sell services to local drivers, and present an equipment catalogue to trade buyers, in Icelandic, English and Polish.\n\nThe constraints were mostly about who maintains it afterwards. The workshop is not going to edit code to change opening hours or add a service. The catalogue has to absorb a new supplier file without a developer. And the whole thing is a live commercial site on its own domain, so a broken deploy is a closed shop, not a broken demo.",
+    myRole:
+      "I built and shipped it: the data model, the import path from the supplier CSV, the storefront, the admin, the three languages and the deployment. The decision to hold 1,885 products in draft rather than publish them with invented prices is mine, and it is the decision I would defend hardest.",
+    decisions: [
+      {
+        decision:
+          "Take Payload CMS as the admin and the data layer instead of building an admin panel.",
+        why: "The workshop needs to edit pages, services and products without me. That means an admin with authentication, roles, media handling, drafts and versioning. Payload gives all of it against the same Postgres the app already uses, and generates types the app compiles against, so a schema change becomes a type error rather than a runtime surprise.",
+        rejected:
+          "A hand-built admin on top of the same database. It is the obvious path when you already have the schema, and it is how the first version of most of my systems started.",
+        tradeoff:
+          "The admin is theirs, not mine: its behaviour, its upgrade cycle and its opinions about content modelling. When Payload wants a collection shaped a certain way, arguing costs more than complying. I traded control over a large surface for not maintaining authentication, media and drafts myself \u2014 for a two-person workshop, that is the right side of the trade.",
+      },
+      {
+        decision:
+          "Import all 1,932 products, but publish only what has a defensible price. The rest stay in draft.",
+        why: "Draft status turns the missing purchase price from a silent problem into a visible gate. The catalogue exists, the taxonomy is built, the photos are attached \u2014 and nothing reaches a customer until a number behind it can be justified. When the supplier supplies the missing column, publishing is a status change, not another import.",
+        rejected:
+          "Publishing everything with the feed price marked up by a guess. It would have made the shop look finished, which is exactly why it was tempting.",
+        tradeoff:
+          "The shop looks emptier than the work behind it. A visitor sees 47 products and no prices, and has no way of knowing that 1,885 more are sorted, photographed and one column away from going live. I would rather explain that than refund an order sold below cost.",
+      },
+      {
+        decision:
+          "Carry the language in a cookie and render on the server, rather than putting the locale in the URL.",
+        why: "The workshop serves Icelandic locals, English-speaking trade buyers and Polish residents from a single set of pages. One URL per product keeps a shared link working regardless of which language the reader uses, and keeps the catalogue from tripling in the sitemap.",
+        rejected:
+          "The conventional /is/, /en/, /pl/ URL prefixes with a locale segment in the router.",
+        tradeoff:
+          "Content in three languages under one address cannot be prerendered once, so those pages render per request \u2014 a cost I took knowingly. It also cost me a production bug: the 404 page read the language cookie, which is request-time data, while Next prerenders the global not-found at build time. Every unknown address returned a server error instead of a not-found until I traced it.",
+      },
+    ],
+    build:
+      "Next.js 16 and React 19 on Vercel, Payload 3 for the admin and content, Postgres through Drizzle, Stripe wired for checkout. Around 34,700 lines of TypeScript across 357 files.\n\nThe supplier CSV is parsed into products, categories and media in one pass: 1,932 products into a 229-node taxonomy, with roughly 1,460 photographs fetched and attached, named by the supplier product code so a re-import matches them again instead of duplicating. Database migrations run as part of the build, so a deploy cannot reach production ahead of the schema it needs.",
+    evals:
+      "274 unit and integration tests run on every change, alongside typechecking and linting. They cover the parts where being wrong is expensive: pricing and cart arithmetic, the import mapping, and access rules.\n\nThe check that mattered most was one I ran against the live site rather than the test suite. That is how I found every unknown URL returning a server error rather than a not-found \u2014 the sitemap and the product pages were fine, so nothing in the suite was ever going to notice. The cause was a route that declared static generation while reading request-time data; Next resolves that conflict by failing the render. Removing the static declaration fixed it, and the shape of the bug is now written into the file so it does not come back.",
+    limitations:
+      "The shop does not sell yet. Every published product reads Price on request, because the supplier feed has no purchase price and I will not invent a margin. Checkout is wired but the payment provider is still on test credentials.\n\nThe weights on 37 machines in the feed are not believable \u2014 the same figure repeats across visibly different equipment \u2014 so shipping cost cannot be calculated for those until the supplier confirms them.\n\nThere is no error monitoring wired in. Failures log to the console, which means I find out when I look, not when they happen. For a catalogue that is survivable; the day it takes payments it stops being survivable, and that is the next thing to fix.",
+    results:
+      "The site is live on its own domain with 78 indexed pages: services, the equipment catalogue, and the workshop pages, in three languages, maintained by the workshop rather than by me.\n\n1,932 products are imported and sorted; 47 are published and 1,885 are one supplier column away from joining them. The import is repeatable, so the next feed is a re-run rather than a rebuild.",
+    principle:
+      "An empty-looking catalogue is a smaller problem than a confident wrong price. The hard part of an import is never the parsing \u2014 it is being honest about the fields the source does not contain, and building the gate that keeps them from becoming invented data downstream.",
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "Payload CMS 3",
+      "Postgres",
+      "Drizzle",
+      "Stripe",
+      "TypeScript",
+      "Vercel",
+      "Playwright",
+      "Vitest",
+    ],
+  },
 ];
 
 export const SECONDARY: SecondaryStudy[] = [];

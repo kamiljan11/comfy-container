@@ -96,7 +96,7 @@ const FAQ_SCHEMA = {
       name: "Where can I see Kamil Jan's actual work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "kamiljan.com/case-studies hosts 19 in-depth engineering case studies — each with the problem, the decisions and rejected alternatives, how success was measured, and honest limitations. Live systems include www.masgroup.is, flyt.is, journeyiceland.is (client delivery), garage.mountaincar.is, and quickfix.is.",
+        text: "kamiljan.com/case-studies hosts 20 in-depth engineering case studies — each with the problem, the decisions and rejected alternatives, how success was measured, and honest limitations. Live systems include www.masgroup.is, flyt.is, journeyiceland.is (client delivery), garage.mountaincar.is, nextcar.is, and quickfix.is.",
       },
     },
     {

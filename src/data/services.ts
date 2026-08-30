@@ -128,6 +128,11 @@ const PL: Service[] = [
         title: "Pipeline dziewięciu etapów generujący umowy dotacyjne",
         metric: "Dokumenty DOCX i PDF gotowe do podpisu",
       },
+      {
+        sector: "Motoryzacja / handel",
+        title: "Katalog z pliku dostawcy, który warsztat prowadzi sam",
+        metric: "1932 pozycje w 229 kategoriach, panel po stronie klienta",
+      },
     ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
@@ -792,6 +797,11 @@ const EN: Service[] = [
         sector: "Consulting",
         title: "A nine-stage pipeline generating funding contracts",
         metric: "DOCX and PDF ready for signature",
+      },
+      {
+        sector: "Automotive / trade",
+        title: "A supplier file turned into a catalogue the workshop runs itself",
+        metric: "1,932 items across 229 categories, admin on the client side",
       },
     ],
     faqTitle: "Questions I get asked",
