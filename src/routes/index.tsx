@@ -458,7 +458,7 @@ function HomePage() {
           </div>
           <div className="hero-stats">
             <StatCounter value={6} suffix="+" label={t.stats[0]} />
-            <StatCounter value={12} suffix="yr" label={t.about.meta[0]} />
+            <StatCounter value={12} suffix="+" label={t.about.meta[0]} />
           </div>
         </div>
       </section>

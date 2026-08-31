@@ -64,7 +64,7 @@ const FAQ_SCHEMA = {
       name: "Who is Kamil Jan?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Kamil Jan is an entrepreneur, operator, and AI automation & implementation engineer based in Reykjavík, Iceland. He is the founder of MAS Group, Flyt, Reykjawwwik, and QuickFix — 12 years of building, six businesses of his own, shipping AI systems into production since 2024.",
+        text: "Kamil Jan is an entrepreneur, operator, and AI automation & implementation engineer based in Reykjavík, Iceland. He is the founder of MAS Group, Flyt, Reykjawwwik, and QuickFix — 12+ years of building, six businesses of his own, shipping AI systems into production since 2024.",
       },
     },
     {
