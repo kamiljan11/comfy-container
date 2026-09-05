@@ -14,8 +14,7 @@ export default function Hero3D() {
 
     const canvas = canvasRef.current;
     let animId = 0;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let renderer: any = null;
+    let renderer: THREE.WebGLRenderer | null = null;
     let mouseX = 0;
     let mouseY = 0;
     let inView = true;
@@ -105,7 +104,7 @@ export default function Hero3D() {
       let t = 0;
 
       const tick = () => {
-        if (!mounted) return;
+        if (!mounted || !renderer) return;
         animId = requestAnimationFrame(tick);
         // Skip all heavy work + render while the hero is scrolled off-screen (saves battery, esp. mobile).
         if (!inView) return;
@@ -168,7 +167,7 @@ export default function Hero3D() {
       io.observe(canvas);
 
       const onResize = () => {
-        if (!canvasRef.current) return;
+        if (!canvasRef.current || !renderer) return;
         const cw = canvas.parentElement?.clientWidth || window.innerWidth;
         const ch = canvas.parentElement?.clientHeight || window.innerHeight;
         camera.aspect = cw / ch;
