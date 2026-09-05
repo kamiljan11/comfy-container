@@ -8,10 +8,15 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 ### Added
 
 - Pipeline jakosci: CI (build/lint/typecheck/test/semgrep/audit/licencje), Claude review na PR, szablony dokumentacji
+- `docs/ARCHITECTURE.md`, `docs/GLOSSARY.md`, `docs/adr/0001-*` and `0002-*`, filled-in `docs/RUNBOOK.md`, `docs/quality/BACKLOG.md`
+- `LICENSE`, `.env.example`
+- Vitest (`npm test`) + unit tests for the pure helpers in `src/server/lead.server.ts` (`esc`, `br`, `isValidEmail`)
 
 ### Changed
 
--
+- README: corrected the "no backend" claim (the AI chat bot and lead capture run as real server functions calling Anthropic + Resend), documented env vars and testing
+- `src/server/lead.server.ts`: magic numbers (transcript/message/name/email length caps) named as constants; `isValidEmail` extracted from an inline regex check
+- `src/components/Hero3D.tsx`: `renderer` typed as `THREE.WebGLRenderer | null` instead of `any` (the only hand-written `any` in the repo; `src/routeTree.gen.ts`'s are router-plugin-generated and out of scope), with the two resulting "possibly null" call sites (`tick`'s render loop, `onResize`) guarded instead of suppressed
 
 ### Fixed
 
