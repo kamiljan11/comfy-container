@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "check:encoding": "node scripts/check-encoding.mjs --all",
+    "test": "vitest run",
     "prepare": "node scripts/setup-hooks.mjs"
   },
   "dependencies": {
@@ -90,7 +91,8 @@
     "prettier": "^3.7.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vitest": "^3.2.4"
   },
   "overrides": {
     "@ai-sdk/provider-utils": {
