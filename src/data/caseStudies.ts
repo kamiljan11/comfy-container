@@ -90,6 +90,73 @@ export const FEATURED: CaseStudy[] = [
     ],
   },
   {
+    slug: "consignment-shop-fiscal-ledger",
+    title: "A shop that sells someone else's stock, with the rules in the database",
+    resultsPreview:
+      "A parts counter inside a working auto workshop, where the goods on the shelf belong to the supplier until they sell and we keep a commission on each one. The foundation is built and tested: 16 tables, an append-only stock ledger, and Icelandic invoicing rules enforced by the database rather than by the app. 30 database tests pass, including the ones that prove a delivery can never be settled as a sale. The counter has not opened yet, and the screens are not built \u2014 this is the layer everything else will sit on.",
+    problem:
+      "A supplier puts their stock on your shelf. You sell it, keep a cut, and settle the rest with them every month. Simple to say, and every part of it is a way to lose money quietly.\n\nCount the stock wrong and you pay for goods that walked out. Let two tablets sell the same last item and you owe a customer something you do not have. Get the tax split wrong on a receipt and it is the tax office's problem to explain, not yours. And the settlement itself is the trap: if the report you send the supplier is built from a different number than the one the till used, nobody can tell whose arithmetic is wrong, only that the two disagree.\n\nThe usual answer is to be careful in the app. That works until the evening a tired person clicks twice.",
+    context:
+      "MAS Varahlutir is a parts counter opening inside our own workshop in Nj\u00e1r\u00f0v\u00edk, Iceland. The stock comes from an Icelandic wholesaler on consignment: it stays theirs until it sells, and we earn a commission on each sold item.\n\nThat setting decides the engineering. The person behind the counter is also the person running the workshop, so there is no second pair of eyes to catch a mistake by process. The same shelf feeds two different flows, because a mechanic will grab a part for the car on the lift, and that has to land in the supplier settlement exactly like a sale. Icelandic law is specific about sales documents: numbering must be unbroken, an issued document may not be edited or deleted, and records are kept for seven years.\n\nSo the correctness cannot live in screens. Screens are where mistakes happen.",
+    myRole:
+      "I designed and built it. The shape of the problem came first \u2014 five rounds of adversarial review against my own design, each one run with a fresh reviewer told to assume the document was wrong \u2014 then the schema, the rules, and the tests.\n\nThat review is where most of the value came from. It caught me pricing everything net when the shelf label and the supplier both work in gross, and it caught a settlement rule that would have invoiced the supplier for the privilege of delivering their own goods to us.",
+    decisions: [
+      {
+        decision:
+          "Make the shelf count a sum of signed movements in an append-only ledger, with the running balance kept by a trigger and a constraint that refuses to go below zero.",
+        why: "Settlement, stocktaking and the loss report all have to agree. If each reads its own column, they drift, and the first time you notice is when the supplier's invoice does not match your report. One ledger means one version of what happened, and the constraint is the last line of defence: even if application code is wrong, the database will not let a shelf go negative.",
+        rejected:
+          "A quantity column updated on each sale. It is the obvious approach and every tutorial does it.",
+        tradeoff:
+          "More rows and a trigger to maintain, and every correction is a new entry rather than an edit. In exchange nothing can be quietly overwritten, and the monthly settlement is derived from the same rows as the stock count instead of a parallel tally.",
+      },
+      {
+        decision:
+          "Treat gross amounts in whole kr\u00f3nur as the source of truth, and compute VAT at the document level with a single shared formula.",
+        why: "The price on the shelf label is gross, and so is the supplier's catalogue. Dividing to net gives a number that is not a whole kr\u00f3na, so storing net and reconstructing gross puts the receipt a kr\u00f3na away from the label the customer just read. Going the other way keeps the number the customer sees exact.",
+        rejected:
+          "Storing net per line, which is what the workshop's existing invoice already does.",
+        tradeoff:
+          "The two halves of the same system now use opposite conventions, which is a real cost \u2014 so the boundary between them converts explicitly, and a test pins the arithmetic. Without that, a part taken from the shelf onto a repair order would have had VAT applied twice.",
+      },
+      {
+        decision:
+          "Take write access to the money tables away from logged-in users entirely. Sales, payments, stock and settlement can only be changed through database functions.",
+        why: "A rule that only exists in the app is one forgotten call away from being skipped, and the interface is not the only way into the data. Putting the write path behind functions means the sequence \u2014 lock the item, check the shelf, number the document, freeze its contents \u2014 either happens completely or not at all.",
+        rejected: "Ordinary table permissions plus care in the client code.",
+        tradeoff:
+          "Every new operation needs a function written and tested; there is no quick fix straight against a table. That friction is the point, and it also gave the mechanic role something it did not have before: the shelf and the catalogue are visible, the takings are not.",
+      },
+      {
+        decision:
+          "Write down, as an explicit map, which kinds of stock movement create a settlement line and which do not.",
+        why: "The first version simply settled every movement of the supplier's goods. That reads as reasonable until you notice it means receiving a delivery counts as a sale, so we would invoice the supplier for accepting their own stock. Sales and internal use settle; deliveries and returns to the supplier do not; a stock loss only settles if that supplier has actually agreed to charge us for it.",
+        rejected: "Deriving settlement from the sales documents instead of from stock movements.",
+        tradeoff:
+          "Settlement now depends on movements being recorded honestly rather than on documents, so a part taken off the shelf without scanning is invisible until someone counts. I chose it because it is the only version that catches the mechanic's use of the shelf, which documents never see.",
+      },
+    ],
+    build:
+      "Sixteen tables in the workshop's existing Postgres: supplier and their terms (with a validity date, so changing the commission next month cannot rewrite last month), catalogue with numbers normalised for the barcode scanner, the movement ledger and its balance, sales documents with their own numbering series and a frozen copy of what was printed, the till day, deliveries, and settlement periods.\n\nThe rules sit in triggers: the balance, the settlement map, and the immutability of an issued document \u2014 including its lines and payments, so the content cannot be changed from the side. Trigger names carry numbers because Postgres fires them alphabetically, and the balance has to be checked before a settlement line is written.\n\nBefore any of that, the ground had to be made solid. The repository could not rebuild its own database: a role value used by twenty-two migrations had been added by hand in production, and two tables existed only there. Until that was fixed, no database test could run at all. I also closed the interior database functions to anonymous callers, so only the two that are meant to be public still answer without a login, and made the workshop's invoice numbers unique and unchangeable once issued.",
+    evals:
+      "Thirty database tests, run against a database rebuilt from migrations alone, so they also prove the repository can reproduce production.\n\nThe ones that matter: a delivery must not produce a settlement line; a sale must produce exactly one, with the commission computed from the terms in force at that moment; a customer return must cancel the commission it earned; selling more than the shelf holds must fail; an issued document must reject edits and deletion but still accept being marked paid; VAT on 13,912 kr\u00f3nur must come out as 2,693.\n\nOne test earned its keep immediately. The first balance trigger used an upsert, and Postgres checks the non-negative constraint against the row it is preparing to insert before it notices the key already exists \u2014 so every sale, being a negative movement, would have failed on a full shelf. In a demo with only deliveries it looked perfect.",
+    limitations:
+      "The counter is not open and the screens do not exist. What is finished is the layer underneath: schema, rules, tests, and the security work that had to come first. The interface, the till functions and the label printing are next.\n\nTwo commercial facts are still unconfirmed by the supplier: whether their catalogue prices already include VAT, and whether the commission is computed from the catalogue price or the price actually charged. Both are configuration rather than structure, which is why I built without them \u2014 but the shop cannot open until they are answered.\n\nThere is also a limit I cannot engineer away. With one person selling, counting and closing the month, the four-eyes rule is impossible inside the system; it has to be compensated outside it, by the bookkeeper and by counting the stock with the supplier.",
+    results:
+      "The database rebuilds from migrations for the first time, which it could not do before this work, and thirty tests hold the rules that decide whether money is counted correctly.\n\nAlong the way the audit closed real exposure in the live workshop system: interior functions are no longer callable by anonymous visitors, invoice numbers are unique and frozen once issued, and supplier invoice amounts are no longer writable by the mechanic role. Password and session rules on the production project were tightened at the same time \u2014 sessions there previously never expired.",
+    principle:
+      "If getting it wrong costs money, the rule belongs in the database. Screens are where tired people work.",
+    stack: [
+      "PostgreSQL",
+      "Supabase",
+      "pgTAP",
+      "Row-level security",
+      "SQL triggers",
+      "TypeScript",
+      "GitHub Actions",
+    ],
+  },
+  {
     slug: "realtime-voice-agents-telephony-automation",
     title: "A phone agent that can't over-promise to a real customer",
     resultsPreview:
