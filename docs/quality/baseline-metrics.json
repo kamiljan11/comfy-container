@@ -1,28 +1,27 @@
 {
-  "repo": "comfy-container",
   "name": "comfy-container",
   "ok": true,
   "error": null,
-  "parser": "regex",
+  "parser": "typescript",
   "parserFallbackFiles": 0,
   "timedOut": false,
-  "elapsedMs": 156,
+  "elapsedMs": 510,
   "warnings": [],
-  "files": 76,
-  "loc": 13644,
-  "testFiles": 1,
-  "srcToTestRatio": 75,
+  "files": 77,
+  "loc": 13712,
+  "testFiles": 2,
+  "srcToTestRatio": 37.5,
   "functions": {
-    "total": 115,
-    "over60": 11,
-    "over100": 9,
+    "total": 508,
+    "over60": 24,
+    "over100": 14,
     "maxLen": {
       "length": 585,
       "name": "HomePage",
       "file": "src/routes/index.tsx"
     },
     "paramsOver4": 0,
-    "nestingOver3": 9
+    "nestingOver3": 1
   },
   "largeFiles": {
     "over400Count": 8,
@@ -51,53 +50,53 @@
     "over1000Count": 3
   },
   "shortIdentifiers": {
-    "count": 48,
+    "count": 112,
     "top10": [
       {
         "name": "s",
-        "count": 7
-      },
-      {
-        "name": "u",
-        "count": 4
-      },
-      {
-        "name": "r",
-        "count": 3
-      },
-      {
-        "name": "c",
-        "count": 3
+        "count": 19
       },
       {
         "name": "m",
-        "count": 3
+        "count": 16
       },
       {
         "name": "p",
-        "count": 2
+        "count": 10
       },
       {
         "name": "b",
-        "count": 2
+        "count": 5
       },
       {
-        "name": "h",
-        "count": 2
+        "name": "c",
+        "count": 5
       },
       {
-        "name": "T",
-        "count": 1
+        "name": "it",
+        "count": 5
       },
       {
-        "name": "br",
-        "count": 1
+        "name": "o",
+        "count": 5
+      },
+      {
+        "name": "r",
+        "count": 4
+      },
+      {
+        "name": "cs",
+        "count": 4
+      },
+      {
+        "name": "l",
+        "count": 4
       }
     ]
   },
-  "anyUsage": 1,
+  "anyUsage": 0,
   "tsIgnore": 3,
-  "eslintDisable": 4,
+  "eslintDisable": 3,
   "catchBlocks": {
     "total": 11,
     "silent": 11
@@ -105,21 +104,22 @@
   "consoleLog": 2,
   "todoFixmeHack": 33,
   "comments": {
-    "commentLines": 266,
-    "loc": 13644,
-    "ratio": 0.0195
+    "commentLines": 273,
+    "loc": 13712,
+    "ratio": 0.0199
   },
   "docCoverage": {
-    "exportedTotal": 38,
-    "documented": 8,
-    "ratio": 0.2105
+    "exportedTotal": 47,
+    "documented": 11,
+    "ratio": 0.234
   },
-  "jsxHardcodedText": 293,
+  "jsxHardcodedText": 68,
   "python": {
     "functionsTotal": 0,
     "publicFunctionsTotal": 0,
     "functionsOver60": 0,
     "missingDocstring": 0,
     "bareExcept": 0
-  }
+  },
+  "generatedAt": "2026-09-06"
 }
