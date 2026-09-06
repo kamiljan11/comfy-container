@@ -1,0 +1,125 @@
+{
+  "repo": "comfy-container",
+  "name": "comfy-container",
+  "ok": true,
+  "error": null,
+  "parser": "regex",
+  "parserFallbackFiles": 0,
+  "timedOut": false,
+  "elapsedMs": 156,
+  "warnings": [],
+  "files": 76,
+  "loc": 13644,
+  "testFiles": 1,
+  "srcToTestRatio": 75,
+  "functions": {
+    "total": 115,
+    "over60": 11,
+    "over100": 9,
+    "maxLen": {
+      "length": 585,
+      "name": "HomePage",
+      "file": "src/routes/index.tsx"
+    },
+    "paramsOver4": 0,
+    "nestingOver3": 9
+  },
+  "largeFiles": {
+    "over400Count": 8,
+    "over400Top5": [
+      {
+        "file": "src/data/caseStudies.ts",
+        "loc": 1540
+      },
+      {
+        "file": "src/data/services.ts",
+        "loc": 1389
+      },
+      {
+        "file": "src/routes/claude.tsx",
+        "loc": 1055
+      },
+      {
+        "file": "src/routes/index.tsx",
+        "loc": 821
+      },
+      {
+        "file": "src/components/ChatBot.tsx",
+        "loc": 784
+      }
+    ],
+    "over1000Count": 3
+  },
+  "shortIdentifiers": {
+    "count": 48,
+    "top10": [
+      {
+        "name": "s",
+        "count": 7
+      },
+      {
+        "name": "u",
+        "count": 4
+      },
+      {
+        "name": "r",
+        "count": 3
+      },
+      {
+        "name": "c",
+        "count": 3
+      },
+      {
+        "name": "m",
+        "count": 3
+      },
+      {
+        "name": "p",
+        "count": 2
+      },
+      {
+        "name": "b",
+        "count": 2
+      },
+      {
+        "name": "h",
+        "count": 2
+      },
+      {
+        "name": "T",
+        "count": 1
+      },
+      {
+        "name": "br",
+        "count": 1
+      }
+    ]
+  },
+  "anyUsage": 1,
+  "tsIgnore": 3,
+  "eslintDisable": 4,
+  "catchBlocks": {
+    "total": 11,
+    "silent": 11
+  },
+  "consoleLog": 2,
+  "todoFixmeHack": 33,
+  "comments": {
+    "commentLines": 266,
+    "loc": 13644,
+    "ratio": 0.0195
+  },
+  "docCoverage": {
+    "exportedTotal": 38,
+    "documented": 8,
+    "ratio": 0.2105
+  },
+  "jsxHardcodedText": 293,
+  "python": {
+    "functionsTotal": 0,
+    "publicFunctionsTotal": 0,
+    "functionsOver60": 0,
+    "missingDocstring": 0,
+    "bareExcept": 0
+  }
+}

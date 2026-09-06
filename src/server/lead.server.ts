@@ -16,6 +16,15 @@ import { generateText } from "ai";
 const MODEL = "claude-haiku-4-5-20251001";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+// Input caps — keep the brief prompt small and the lead email readable, and
+// bound how much of a visitor's own input we ever forward or pay to summarize.
+const MAX_TRANSCRIPT_MESSAGES = 20; // how many chat turns feed the AI brief / email
+const MAX_CONVERSATION_CHARS = 6000; // chat history truncation before it hits the model
+const MAX_NAME_CHARS = 120;
+const MAX_EMAIL_CHARS = 160;
+const MAX_MESSAGE_CHARS = 4000;
+const MIN_MESSAGE_CHARS = 2;
+
 export type LeadMessage = { role: "user" | "assistant"; content: string };
 export type LeadInput = {
   name?: string;
@@ -26,11 +35,17 @@ export type LeadInput = {
 };
 export type LeadResult = { ok: true } | { ok: false; error: string };
 
-function esc(s: string) {
+/** HTML-escape a string. Pure — exported for tests, no I/O. */
+export function esc(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
-function br(s: string) {
+/** HTML-escape then turn newlines into <br/>. Pure — exported for tests, no I/O. */
+export function br(s: string) {
   return esc(s).replace(/\n/g, "<br/>");
+}
+/** Same shape check used by the contact/newsletter forms. Pure — exported for tests. */
+export function isValidEmail(email: string): boolean {
+  return EMAIL_RE.test(email);
 }
 
 async function buildBrief(transcript: LeadMessage[], message: string): Promise<string> {
@@ -39,10 +54,10 @@ async function buildBrief(transcript: LeadMessage[], message: string): Promise<s
   try {
     const gateway = createAnthropic({ apiKey: key });
     const convo = transcript
-      .slice(-20)
+      .slice(-MAX_TRANSCRIPT_MESSAGES)
       .map((m) => `${m.role}: ${m.content}`)
       .join("\n")
-      .slice(0, 6000);
+      .slice(0, MAX_CONVERSATION_CHARS);
     const res = await generateText({
       model: gateway(MODEL),
       system:
@@ -70,12 +85,14 @@ export async function sendLead(input: LeadInput): Promise<LeadResult> {
   const name = (input.name || "")
     .replace(/[\r\n]+/g, " ")
     .trim()
-    .slice(0, 120);
-  const email = (input.email || "").replace(/\s+/g, "").slice(0, 160);
-  const message = (input.message || "").trim().slice(0, 4000);
-  const transcript = Array.isArray(input.transcript) ? input.transcript.slice(-20) : [];
-  if (message.length < 2) return { ok: false, error: "empty" };
-  if (!EMAIL_RE.test(email)) return { ok: false, error: "bad-email" };
+    .slice(0, MAX_NAME_CHARS);
+  const email = (input.email || "").replace(/\s+/g, "").slice(0, MAX_EMAIL_CHARS);
+  const message = (input.message || "").trim().slice(0, MAX_MESSAGE_CHARS);
+  const transcript = Array.isArray(input.transcript)
+    ? input.transcript.slice(-MAX_TRANSCRIPT_MESSAGES)
+    : [];
+  if (message.length < MIN_MESSAGE_CHARS) return { ok: false, error: "empty" };
+  if (!isValidEmail(email)) return { ok: false, error: "bad-email" };
 
   const summary = await buildBrief(transcript, message);
   const tr = transcript
