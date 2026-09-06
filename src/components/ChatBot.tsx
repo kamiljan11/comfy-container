@@ -57,12 +57,15 @@ const COPY: Record<Lang, Copy> = {
     sub: "trained on his work",
     fallback:
       "I can't reach my brain right now — but Kamil replies personally. Email hello@kamiljan.com or message him on WhatsApp.",
-    starters: [
-      "Is he a fit for my role?",
-      "What has he actually shipped?",
-      "What are his strengths and weaknesses?",
-      "🎤 Interview me about him",
-    ],
+    /*
+     * Two questions, not four. The opening screen had six tappable things on
+     * it; a visitor who has to choose between six does not choose, they read
+     * them all and then type nothing. These two cover why a recruiter opens
+     * this at all — is he a fit, and what has he actually built — and the
+     * rest stay reachable: the wizard from the "See other options" chip after
+     * any reply, and everything else by simply typing.
+     */
+    starters: ["Is he a fit for my role?", "What has he actually shipped?"],
     nudge: "Ask my AI anything 👋",
     thinking: ["Thinking…", "Searching Kamil's work…"],
     retry: "Try again",
@@ -122,12 +125,7 @@ const COPY: Record<Lang, Copy> = {
     sub: "wytrenowany na jego pracy",
     fallback:
       "Chwilowo nie mam dostępu do mózgu — ale Kamil odpisuje osobiście. Napisz na hello@kamiljan.com albo na WhatsApp.",
-    starters: [
-      "Czy pasuje do mojej roli?",
-      "Co realnie zbudował?",
-      "Jakie ma mocne i słabe strony?",
-      "🎤 Przepytaj mnie o Kamila",
-    ],
+    starters: ["Czy pasuje do mojej roli?", "Co realnie zbudował?"],
     nudge: "Zapytaj moje AI 👋",
     thinking: ["Myślę…", "Przeszukuję pracę Kamila…"],
     retry: "Spróbuj ponownie",
@@ -593,13 +591,6 @@ export default function ChatBot({ lang }: { lang: Lang }) {
                   {q}
                 </button>
               ))}
-              <button
-                type="button"
-                className="chatbot-starter chatbot-wizard-launch"
-                onClick={startWizard}
-              >
-                {t.wizardCta}
-              </button>
               <button type="button" className="chatbot-starter chatbot-cta" onClick={openLead}>
                 {t.leadCta}
               </button>
@@ -613,13 +604,33 @@ export default function ChatBot({ lang }: { lang: Lang }) {
                 ↻ {t.retry}
               </button>
             </div>
-          ) : followups.length > 0 ? (
+          ) : ready && !showStarters ? (
             <div className="chatbot-starters chatbot-followups">
               {followups.map((q) => (
                 <button key={q} type="button" className="chatbot-starter" onClick={() => send(q)}>
                   {q}
                 </button>
               ))}
+              {/*
+               * The wizard used to launch from the opening screen. It was
+               * removed from there to cut six choices down to three, and its
+               * only other entry point sat inside the wizard's own follow-up
+               * chips — reachable only once you were already in it. So it
+               * rides along with the follow-ups instead: out of the way on
+               * arrival, one tap away after the first answer.
+               *
+               * The block renders on any finished reply rather than only when
+               * the model returned a SUGGESTED line — the prompt asks for that
+               * line every time, but hanging a navigation route on the model
+               * remembering to emit it is how a feature quietly disappears.
+               */}
+              <button
+                type="button"
+                className="chatbot-starter chatbot-wizard-launch"
+                onClick={startWizard}
+              >
+                {t.wizardCta}
+              </button>
             </div>
           ) : null}
         </div>
