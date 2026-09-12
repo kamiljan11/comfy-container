@@ -62,7 +62,13 @@ jobs:
 
       - name: Install
         if: steps.scope.outputs.files != ''
-        run: npm ci || npm install
+        run: |
+          npm ci || npm install
+          # Stryker i runner musza siedziec w node_modules PROJEKTU: core laduje plugin
+          # runnera oraz `typescript` (ts-config-preprocessor) zwykla rezolucja Node od
+          # swojego pliku, wiec odpalony z cache npx (-p) nie widzial ani jednego, ani
+          # drugiego (PR #13: "Cannot find plugin", "Cannot find package 'typescript'").
+          npm install --no-save --no-audit --no-fund @stryker-mutator/core@10.0.0 @stryker-mutator/vitest-runner@10.0.0
 
       - name: Stryker na zmienionych plikach (prog 50 %)
         if: steps.scope.outputs.files != ''
@@ -86,4 +92,4 @@ jobs:
             require("fs").writeFileSync("stryker.pr.config.json", JSON.stringify(cfg, null, 2));
             console.log(JSON.stringify(cfg, null, 2));
           '
-          npx --yes -p @stryker-mutator/core@10.0.0 -p @stryker-mutator/vitest-runner@10.0.0 stryker run stryker.pr.config.json
+          npx stryker run stryker.pr.config.json
