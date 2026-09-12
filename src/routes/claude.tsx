@@ -186,7 +186,7 @@ const CONTENT: Record<Lang, Content> = {
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
       { n: "1,873", label: "logged agent sessions" },
-      { n: "144", label: "scars turned into gates" },
+      { n: "149", label: "scars turned into gates" },
       { n: "23", label: "hard stops in the git gates" },
       { n: "9", label: "reviewer departments" },
       { n: "51", label: "zero-token tools" },
@@ -250,7 +250,7 @@ const CONTENT: Record<Lang, Content> = {
         },
         {
           title: "Doctrine",
-          leaves: ["design before code", "definition of done per tier", "144 scars"],
+          leaves: ["design before code", "definition of done per tier", "149 scars"],
         },
         {
           title: "Repo template",
@@ -284,7 +284,7 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "Scar → gate —",
         body:
-          "144 real failures from the fleet are catalogued with a rule id, and every checklist item cites the scar it " +
+          "149 real failures from the fleet are catalogued with a rule id, and every checklist item cites the scar it " +
           "came from (the Google SRE rule). Postmortems end with a new gate or a new scar — never with “be more careful”.",
       },
       {
@@ -694,7 +694,7 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "What you get —",
         body:
-          "7 hooks, 3 git gates, 32 tools with 10 test suites, 9 reviewer departments, the doctrine with 144 scars, a repo " +
+          "7 hooks, 3 git gates, 32 tools with 10 test suites, 9 reviewer departments, the doctrine with 149 scars, a repo " +
           "template with CI and parsed boundary blocks, 4 coding routines and 7 desktop routines, an uninstaller, and docs " +
           "with the diagrams from this page.",
       },
@@ -734,7 +734,7 @@ const CONTENT: Record<Lang, Content> = {
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
       { n: "1873", label: "zapisanych sesji agentów" },
-      { n: "144", label: "blizny zamienione w bramki" },
+      { n: "149", label: "blizny zamienione w bramki" },
       { n: "23", label: "twarde stopy w bramkach gita" },
       { n: "9", label: "działów recenzentów" },
       { n: "51", label: "narzędzi 0-tokenowych" },
@@ -799,7 +799,7 @@ const CONTENT: Record<Lang, Content> = {
         },
         {
           title: "Doktryna",
-          leaves: ["projekt przed kodem", "definition of done per tier", "144 blizny"],
+          leaves: ["projekt przed kodem", "definition of done per tier", "149 blizny"],
         },
         {
           title: "Szablon repo",
@@ -841,7 +841,7 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "Blizna → bramka —",
         body:
-          "144 realne awarie floty są skatalogowane z identyfikatorem reguły, a każdy punkt checklisty cytuje bliznę, z " +
+          "149 realne awarie floty są skatalogowane z identyfikatorem reguły, a każdy punkt checklisty cytuje bliznę, z " +
           "której powstał (reguła Google SRE). Postmortem kończy się nową bramką albo nową blizną — nigdy „będziemy uważniejsi”.",
       },
       {
@@ -1252,7 +1252,7 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "Co dostajesz —",
         body:
-          "7 hooków, 3 bramki gita, 32 narzędzia z 10 zestawami testów, 9 działów recenzentów, doktrynę ze 144 bliznami, " +
+          "7 hooków, 3 bramki gita, 32 narzędzia z 10 zestawami testów, 9 działów recenzentów, doktrynę ze 149 bliznami, " +
           "szablon repo z CI i parsowanymi blokami granic, 4 rutyny kodowe i 7 pulpitowych, deinstalator oraz dokumentację " +
           "z diagramami z tej strony.",
       },
