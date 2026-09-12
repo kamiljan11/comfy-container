@@ -81,7 +81,12 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* clip, not hidden: hidden on both html and body turns body into its own
+     scroll container, and position: sticky pins to that box — which never
+     scrolls — so nothing on the page could stick. hidden stays as the
+     fallback for browsers without clip. */
   overflow-x: hidden;
+  overflow-x: clip;
 }
 body {
   background: var(--bg);
@@ -93,6 +98,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-x: clip;
   cursor: none;
 }
 a {
@@ -4479,5 +4485,56 @@ section {
   }
   .svc-points li {
     gap: 12px;
+  }
+}
+
+/* ── Capabilities as a stack of sheets (desktop) ─────────────────────────
+   Each card pins under the nav with a slightly larger offset than the one
+   before, so scrolling slides the next sheet over the previous and leaves
+   its top edge showing — a deck, not a grid. Pure position: sticky, no JS.
+   Phones keep the accordion from the 768px block; a pinned deck on a small
+   screen would cover most of the viewport. */
+@media (min-width: 769px) {
+  .cap {
+    /* hidden made .cap a scroll container, and sticky pins to the nearest
+       scroll container — so the cards would stick to a box that never
+       scrolls. clip trims the same overflow without that side effect. */
+    overflow: clip;
+  }
+  .cap-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 940px;
+    margin: 0 auto;
+  }
+  .cap-card {
+    position: sticky;
+    /* the fixed .nav is 120px tall on desktop and sits above everything
+       (z-index 100); anything less would pin the card's top under it.
+       Same 120 + 12 as .about-photo-wrap. */
+    top: 132px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
+    column-gap: 48px;
+    align-items: start;
+    /* shadow thrown upward onto the sheet underneath */
+    box-shadow: 0 -16px 40px rgba(2, 8, 14, 0.55);
+  }
+  /* One rule per card, 12px apart. t.caps in i18n.ts has four entries — a
+     fifth card would fall back to 132px and hide the first one's edge, so
+     add a rule here when adding a capability. */
+  .cap-card:nth-child(2) {
+    top: 144px;
+  }
+  .cap-card:nth-child(3) {
+    top: 156px;
+  }
+  .cap-card:nth-child(4) {
+    top: 168px;
+  }
+  /* lifting a pinned sheet 4px opens a gap above it and reads as a glitch */
+  .cap-card.visible:hover {
+    transform: none;
   }
 }
