@@ -4510,7 +4510,10 @@ section {
   }
   .cap-card {
     position: sticky;
-    top: 90px;
+    /* the fixed .nav is 120px tall on desktop and sits above everything
+       (z-index 100); anything less would pin the card's top under it.
+       Same 120 + 12 as .about-photo-wrap. */
+    top: 132px;
     display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
     column-gap: 48px;
@@ -4518,14 +4521,17 @@ section {
     /* shadow thrown upward onto the sheet underneath */
     box-shadow: 0 -16px 40px rgba(2, 8, 14, 0.55);
   }
+  /* One rule per card, 12px apart. t.caps in i18n.ts has four entries — a
+     fifth card would fall back to 132px and hide the first one's edge, so
+     add a rule here when adding a capability. */
   .cap-card:nth-child(2) {
-    top: 102px;
+    top: 144px;
   }
   .cap-card:nth-child(3) {
-    top: 114px;
+    top: 156px;
   }
   .cap-card:nth-child(4) {
-    top: 126px;
+    top: 168px;
   }
   /* lifting a pinned sheet 4px opens a gap above it and reads as a glitch */
   .cap-card.visible:hover {
