@@ -20,4 +20,5 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Fixed
 
--
+- Capabilities (desktop ≥769px): the four cards are now a stack of sheets — each one pins under the nav (`position: sticky`, tops 90/102/114/126px) and the next slides over it. Phones keep the accordion.
+- `position: sticky` now works site-wide: `overflow-x: hidden` on both `html` and `body` made `body` its own scroll container, so nothing could stick; switched to `overflow-x: clip` (with `hidden` kept as fallback). `.cap` uses `overflow: clip` for the same reason.
