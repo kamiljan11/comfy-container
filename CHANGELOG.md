@@ -21,6 +21,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Fixed
 
+- About (desktop): the photo's `position: sticky` engages again — `.about` had `overflow: hidden`, which made it a scroll container, so the photo scrolled 1:1 with the page; switched to `overflow: clip`. It holds for as long as the text column is taller than the photo (~108px at 1280px wide).
 - Capabilities (desktop ≥769px): the four cards are now a stack of sheets — each one pins under the 120px fixed nav (`position: sticky`, tops 132/144/156/168px) and the next slides over it. Phones keep the accordion.
 - `position: sticky` now works site-wide: `overflow-x: hidden` on both `html` and `body` made `body` its own scroll container, so nothing could stick; switched to `overflow-x: clip` (with `hidden` kept as fallback). `.cap` uses `overflow: clip` for the same reason.
 - Security: `npm audit fix` (lockfile only, no major bumps) — clears the 5 high advisories (`sharp` libheif GHSA-rgj7-g3m4-5g8c via `miniflare`/`wrangler`/`@cloudflare/vite-plugin`, and `js-yaml`) that turned the CI audit step red. 2 moderate left (`vitest` → needs major 5.x).

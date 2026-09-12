@@ -725,7 +725,11 @@ section {
   padding: 120px 0;
   background: var(--bg-alt);
   position: relative;
+  /* clip, not hidden: hidden makes .about a scroll container, and the sticky
+     .about-photo-wrap would pin to that box — which never scrolls — so the
+     photo just scrolled away. hidden stays as the fallback. */
   overflow: hidden;
+  overflow: clip;
 }
 .about::before {
   content: "";
