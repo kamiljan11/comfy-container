@@ -22,6 +22,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Fixed
 
+- CI `mutation.yml`: the `labeled`/`unlabeled` trigger from #15 now re-runs the job only when the label involved is `allow-low-mutation` (job-level `if` checks `github.event.label.name`); any other label no longer starts a full Stryker run. Found by the PR review, merged past it by mistake.
 - CI `mutation.yml` also runs on `labeled`/`unlabeled`, so applying `allow-low-mutation` (the workflow's own escape hatch) re-evaluates the check instead of leaving a red one until the next push.
 - CI `mutation.yml`: Stryker ran from the `npx -p` cache and could not resolve `@stryker-mutator/vitest-runner` nor `typescript` (both resolve from the project), so the first PR that actually exercised the gate (#13) died with `ERR_MODULE_NOT_FOUND`. Now installed into the project (`--no-save`) after `npm ci`.
 - About (desktop): the photo's `position: sticky` engages again — `.about` had `overflow: hidden`, which made it a scroll container, so the photo scrolled 1:1 with the page; switched to `overflow: clip`. It holds for as long as the text column is taller than the photo (~108px at 1280px wide).
