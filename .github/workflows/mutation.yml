@@ -25,7 +25,12 @@ permissions:
 jobs:
   mutation:
     name: Mutation (zmienione pliki)
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'allow-low-mutation') }}
+    # labeled/unlabeled lapia KAZDA etykiete (GitHub nie filtruje triggera po nazwie),
+    # wiec bez drugiego warunku dowolna etykieta odpalalaby pelny run Strykera.
+    if: >-
+      ${{ !contains(github.event.pull_request.labels.*.name, 'allow-low-mutation')
+          && (github.event.action != 'labeled' && github.event.action != 'unlabeled'
+              || github.event.label.name == 'allow-low-mutation') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
