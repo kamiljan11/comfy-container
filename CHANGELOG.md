@@ -20,4 +20,4 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Fixed
 
--
+- Security: `npm audit fix` (lockfile only, no major bumps) — clears the 5 high advisories (`sharp` libheif GHSA-rgj7-g3m4-5g8c via `miniflare`/`wrangler`/`@cloudflare/vite-plugin`, and `js-yaml`) that turned the CI audit step red. 2 moderate left (`vitest` → needs major 5.x).
