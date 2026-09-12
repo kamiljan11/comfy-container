@@ -486,6 +486,13 @@ function HomePage() {
                 <strong>{t.about.p2d}</strong>
                 {t.about.p2e}
               </p>
+              <p className="about-p">
+                {t.about.p3a}
+                <strong>{t.about.p3b}</strong>
+                {t.about.p3c}
+                <strong>{t.about.p3d}</strong>
+                {t.about.p3e}
+              </p>
             </div>
             <div className="about-photo-wrap">
               <div className="about-photo">
