@@ -13,3 +13,4 @@ Format wpisu (jedna linia, konkret, bez lania wody):
 
 - [2026-07-18] Repo Lovable: deploy idzie przez push do main — nie proponuj blokowania direct-push; zmiany jakosci przez PR (zrodlo: sesja wdrozeniowa pipeline)
 - [2026-07-18] Nie dodawaj vercel.json ani supabase/migrations w projektach Lovable (zrodlo: CLAUDE.md global)
+- [2026-09-12] `on.pull_request.types: [labeled, unlabeled]` nie filtruje po nazwie etykiety — job-level `if` musi sam sprawdzic `github.event.label.name`, inaczej kazda etykieta odpala pelny job (zrodlo: review PR #15, poprawka #16)

@@ -32,6 +32,11 @@ interface SiteTranslation {
     p2c: string;
     p2d: string;
     p2e: string;
+    p3a: string;
+    p3b: string;
+    p3c: string;
+    p3d: string;
+    p3e: string;
     meta: string[];
     milestones: Array<{ year: string; desc: string }>;
   };
@@ -80,16 +85,21 @@ export const T: Record<Lang, SiteTranslation> = {
     stats: ["Businesses built", "Active verticals", "Years building", "Countries"],
     about: {
       label: "About",
-      p1a: "Selling something is one thing; building the machine that sells, delivers and holds up under real customers is another, and ",
-      p1b: "I'm better at the second",
-      p1c: ". I ship AI into a company's production — realtime voice agents on Twilio and OpenAI Realtime over WebSockets, n8n workflows, WhatsApp bots, custom MCP servers and RAG on a type-safe React/TypeScript and Supabase stack — then ",
-      p1d: "train your team to run it after I step away",
-      p1e: ".",
-      p2a: "The proof isn't a demo, it's systems taking real orders: ",
+      p1a: "Twelve-plus years of running companies, six of them my own, put me on the paying side of software long before I shipped any. So when I build, I already know ",
+      p1b: "where the money comes from, which module sits closest to revenue, and what a wrong build costs",
+      p1c: ", because it has been my budget. That is also why I would rather tell you ",
+      p1d: "what not to build",
+      p1e: " than deliver a perfect version of the wrong thing.",
+      p2a: "AI coding agents write the code. I own the part that decides whether it survives contact with customers: the spec, the architecture call, the review, the deploy, and the phone when it breaks. The proof is systems taking real orders — ",
       p2b: "MAS Group runs a 13-stage quote-to-order pipeline live in the field as a mobile app",
-      p2c: ", Flyt does cross-border VAT quoting with deposit and refund logic, and QuickFix shipped a trilingual EN/PL/IS site and funnel in 72 hours — and I ",
-      p2d: "operate these businesses myself",
-      p2e: ". I came to Iceland in 2019 with no network and learned the market from the retail floor, which taught me the one move that matters: take something genuinely hard and turn it into steps someone else can follow.",
+      p2c: ", Flyt quotes cross-border VAT with deposit and refund logic, QuickFix went from nothing to a trilingual EN/PL/IS site and funnel in 72 hours — and ",
+      p2d: "I operate these businesses myself",
+      p2e: ", so a bug in production is my problem before it is anyone's ticket.",
+      p3a: "Every case study on this site names the alternatives I rejected and where the system still falls short, because ",
+      p3b: "the expensive mistakes are the ones nobody says out loud early",
+      p3c: ". I came to Iceland in 2019 with no network and learned the market from the retail floor. What stuck is the habit of taking something genuinely hard and turning it into steps someone else can run, which is why every build ends with ",
+      p3d: "your team trained and me stepping away",
+      p3e: ".",
       meta: ["Years building", "Active verticals", "Businesses built"],
       milestones: [
         {
@@ -242,16 +252,21 @@ export const T: Record<Lang, SiteTranslation> = {
     stats: ["Zbudowanych biznesów", "Aktywnych pionów", "Lat budowania", "Krajów"],
     about: {
       label: "O mnie",
-      p1a: "Co innego coś sprzedać, a co innego zbudować maszynę, która sprzedaje, dowozi i wytrzymuje pod naporem prawdziwych klientów — i ",
-      p1b: "w tym drugim jestem lepszy",
-      p1c: ". Wdrażam AI na produkcję firmy — agentów głosowych real-time na Twilio i OpenAI Realtime po WebSockets, przepływy n8n, boty WhatsApp, własne serwery MCP i RAG na type-safe stacku React/TypeScript i Supabase — a potem ",
-      p1d: "uczę Twój zespół to obsługiwać, gdy odchodzę od biurka",
-      p1e: ".",
-      p2a: "Dowodem nie jest demo, tylko systemy przyjmujące realne zamówienia: ",
-      p2b: "MAS Group działa na 13-etapowym pipelinie ofertowo-zamówieniowym, na żywo w terenie jako aplikacja mobilna",
-      p2c: ", Flyt liczy transgraniczny VAT z logiką depozytu i zwrotu, a QuickFix dostarczył trójjęzyczną stronę i lejek EN/PL/IS w 72 godziny — i ",
+      p1a: "Ponad dwanaście lat prowadzenia firm, w tym sześciu własnych, postawiło mnie po stronie płacącej za oprogramowanie na długo, zanim sam cokolwiek wdrożyłem. Dlatego kiedy buduję, wiem już ",
+      p1b: "skąd biorą się pieniądze, który moduł stoi najbliżej przychodu i ile kosztuje zła decyzja",
+      p1c: ", bo to był mój budżet. Z tego samego powodu wolę powiedzieć, ",
+      p1d: "czego nie budować",
+      p1e: ", niż dowieźć idealną wersję niewłaściwej rzeczy.",
+      p2a: "Kod piszą agenci AI. Ja odpowiadam za to, co decyduje, czy system przeżyje kontakt z klientami: specyfikację, decyzję o architekturze, review, wdrożenie i telefon, kiedy coś się sypie. Dowodem są systemy przyjmujące realne zamówienia — ",
+      p2b: "MAS Group działa na 13-etapowym pipelinie od oferty do zamówienia, na żywo w terenie jako aplikacja mobilna",
+      p2c: ", Flyt liczy transgraniczny VAT z logiką depozytu i zwrotu, QuickFix dostał trójjęzyczną stronę i lejek EN/PL/IS w 72 godziny — a ",
       p2d: "te firmy prowadzę sam",
-      p2e: ". Na Islandię przyjechałem w 2019 bez żadnych kontaktów i poznałem rynek od podstaw, pracując w handlu — co nauczyło mnie jednej rzeczy, która naprawdę się liczy: wziąć coś naprawdę trudnego i zamienić to w kroki, które ktoś inny może powtórzyć.",
+      p2e: ", więc błąd na produkcji jest moim problemem, zanim stanie się czyimkolwiek ticketem.",
+      p3a: "Każde studium przypadku na tej stronie wymienia alternatywy, które odrzuciłem, i to, czego system nadal nie robi dobrze, bo ",
+      p3b: "najdroższe błędy to te, o których nikt nie mówi głośno na czas",
+      p3c: ". Na Islandię przyjechałem w 2019 bez kontaktów i poznałem rynek od podstaw w handlu. Został mi z tego nawyk brania rzeczy naprawdę trudnych i zamieniania ich w kroki, które ktoś inny może wykonać, dlatego każde wdrożenie kończy się tak, że ",
+      p3d: "Twój zespół jest przeszkolony, a ja odchodzę od biurka",
+      p3e: ".",
       meta: ["Lat budowania", "Aktywnych pionów", "Zbudowanych biznesów"],
       milestones: [
         {
