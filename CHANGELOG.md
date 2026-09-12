@@ -21,6 +21,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Fixed
 
+- CI `mutation.yml`: Stryker ran from the `npx -p` cache and could not resolve `@stryker-mutator/vitest-runner` nor `typescript` (both resolve from the project), so the first PR that actually exercised the gate (#13) died with `ERR_MODULE_NOT_FOUND`. Now installed into the project (`--no-save`) after `npm ci`.
 - About (desktop): the photo's `position: sticky` engages again — `.about` had `overflow: hidden`, which made it a scroll container, so the photo scrolled 1:1 with the page; switched to `overflow: clip`. It holds for as long as the text column is taller than the photo (~108px at 1280px wide).
 - Capabilities (desktop ≥769px): the four cards are now a stack of sheets — each one pins under the 120px fixed nav (`position: sticky`, tops 132/144/156/168px) and the next slides over it. Phones keep the accordion.
 - `position: sticky` now works site-wide: `overflow-x: hidden` on both `html` and `body` made `body` its own scroll container, so nothing could stick; switched to `overflow-x: clip` (with `hidden` kept as fallback). `.cap` uses `overflow: clip` for the same reason.
