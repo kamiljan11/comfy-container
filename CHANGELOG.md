@@ -17,6 +17,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 - README: corrected the "no backend" claim (the AI chat bot and lead capture run as real server functions calling Anthropic + Resend), documented env vars and testing
 - `src/server/lead.server.ts`: magic numbers (transcript/message/name/email length caps) named as constants; `isValidEmail` extracted from an inline regex check
 - `src/components/Hero3D.tsx`: `renderer` typed as `THREE.WebGLRenderer | null` instead of `any` (the only hand-written `any` in the repo; `src/routeTree.gen.ts`'s are router-plugin-generated and out of scope), with the two resulting "possibly null" call sites (`tick`'s render loop, `onResize`) guarded instead of suppressed
+- Homepage copy (EN + PL) no longer says "I write the code" / "Full-stack": hero sub, the 2024 milestone and the Websites & Products card now match the CV and the chat bot's rule — AI coding agents write the code, Kamil owns the spec, architecture, review and deploy.
 
 ### Fixed
 

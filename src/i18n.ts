@@ -73,7 +73,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "I build things",
       h1b: "that run",
       h1em: "themselves.",
-      sub: "I write the code, run the ads, and build the AI automations, then I document them and train the teams to run them after I step away.",
+      sub: "I scope and ship the software with AI coding agents, run the ads, and build the AI automations, then I document them and train the teams to run them after I step away.",
       cta: "Work with me",
       ctaGhost: "See my work",
     },
@@ -106,7 +106,7 @@ export const T: Record<Lang, SiteTranslation> = {
         },
         {
           year: "2024",
-          desc: "Full-stack builder. Shipping websites, AI systems, and automations into production.",
+          desc: "Builder-operator. Shipping websites, AI systems, and automations into production with AI coding agents.",
         },
       ],
     },
@@ -160,7 +160,7 @@ export const T: Record<Lang, SiteTranslation> = {
     caps: [
       {
         title: "Websites & Products",
-        desc: "From idea to live product — I build it myself. Full-stack: React, Next.js, TypeScript, Supabase, Vercel, Cloudflare Workers. You get a shipped product running in production, not a prototype handed to a dev.",
+        desc: "From idea to live product, without an agency in between. AI coding agents write the code; I own the spec, the architecture, the review and the deploy — on React, Next.js, TypeScript, Supabase, Vercel and Cloudflare Workers. You get a shipped product running in production, not a prototype handed to a dev.",
         tags: ["React / Next.js", "TypeScript", "Vercel + Supabase", "Cloudflare Workers"],
       },
       {
@@ -235,7 +235,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Buduję rzeczy,",
       h1b: "które działają",
       h1em: "same.",
-      sub: "Piszę kod, prowadzę reklamy i buduję automatyzacje AI — a potem dokumentuję je i szkolę zespoły, które będą je obsługiwać po moim odejściu.",
+      sub: "Projektuję i wdrażam oprogramowanie z agentami AI, prowadzę reklamy i buduję automatyzacje AI — a potem dokumentuję je i szkolę zespoły, które będą je obsługiwać po moim odejściu.",
       cta: "Współpracujmy",
       ctaGhost: "Moje projekty",
     },
@@ -268,7 +268,7 @@ export const T: Record<Lang, SiteTranslation> = {
         },
         {
           year: "2024",
-          desc: "Full-stack builder. Strony, systemy AI i automatyzacje wdrażane na produkcję.",
+          desc: "Builder-operator. Strony, systemy AI i automatyzacje wdrażane na produkcję z agentami AI.",
         },
       ],
     },
@@ -322,7 +322,7 @@ export const T: Record<Lang, SiteTranslation> = {
     caps: [
       {
         title: "Strony i Produkty",
-        desc: "Od pomysłu do działającego produktu — buduję to osobiście. Full-stack: React, Next.js, TypeScript, Supabase, Vercel, Cloudflare Workers. Dostajesz produkt działający na produkcji, nie prototyp przekazany deweloperowi.",
+        desc: "Od pomysłu do działającego produktu, bez agencji po drodze. Kod piszą agenci AI; ja odpowiadam za specyfikację, architekturę, review i wdrożenie — na React, Next.js, TypeScript, Supabase, Vercel i Cloudflare Workers. Dostajesz produkt działający na produkcji, nie prototyp przekazany deweloperowi.",
         tags: ["React / Next.js", "TypeScript", "Vercel + Supabase", "Cloudflare Workers"],
       },
       {
