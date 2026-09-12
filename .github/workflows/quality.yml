@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         if: hashFiles('package.json') != ''
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install
         if: hashFiles('package.json') != ''
@@ -92,7 +92,7 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         if: hashFiles('playwright.config.ts', 'playwright.config.js') != ''
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install + smoke test
         if: hashFiles('playwright.config.ts', 'playwright.config.js') != ''
