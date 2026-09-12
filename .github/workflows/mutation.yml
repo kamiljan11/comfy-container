@@ -14,7 +14,10 @@ name: Mutation Testing
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    # labeled/unlabeled: etykieta allow-low-mutation jest udokumentowana sciezka
+    # ominiecia tej bramki, wiec jej zalozenie musi przeliczyc check (bez tego
+    # czerwony wynik wisial na PR do nastepnego pusha — #13).
+    types: [opened, synchronize, reopened, labeled, unlabeled]
 
 permissions:
   contents: read
