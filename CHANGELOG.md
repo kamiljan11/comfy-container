@@ -21,6 +21,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Changed
 
+- CetusPro line (hero EN+PL, `/kontakt`): "close to 40 developers" / "blisko 40 developerów".
+- Removed the `supplier-feed-to-storefront` case study (NextCar shop): no AI in it, and the portfolio sells AI delivery. NextCar stays listed as a live system; the "20 case studies" line in the root FAQ schema now matches the list.
 - `useLang` is one shared store (`useSyncExternalStore`) instead of a `useState` copy per route, so the header's language switch changes the page under it; hydration renders the server language first. `resolveLang` and `ssrLangFor` are pure and unit-tested. The homepage, CV and AI-system pages drop their own copies.
 - Hero (EN + PL) sells the outcome for the company, not the person: "Your business. Less manual work / chaos / retyping / overhead / guesswork", a sub that names the processes people search for (invoices, orders, quotes, the spreadsheet), CTA "Show me your process", and a line that bigger builds run with CetusPro, a Rzeszów software house. PL eyebrow carries the searched phrases "automatyzacja procesów" and "wdrożenia AI w firmie".
 - Hero sub (EN + PL): "fine-tuned AI coding agents" / "dostrojonymi agentami AI" — the agents run under Kamil's own hooks, review gates and skills, not stock.
