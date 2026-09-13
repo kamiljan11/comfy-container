@@ -16,6 +16,8 @@ import { Route as ClaudeRouteImport } from './routes/claude'
 import { Route as CvRouteImport } from './routes/cv'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as OMnieRouteImport } from './routes/o-mnie'
+import { Route as ObszaryIndexRouteImport } from './routes/obszary.index'
+import { Route as ObszarySlugRouteImport } from './routes/obszary.$slug'
 import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
 import { Route as UslugiSlugRouteImport } from './routes/uslugi.$slug'
 
@@ -54,6 +56,16 @@ const OMnieRoute = OMnieRouteImport.update({
   path: '/o-mnie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObszaryIndexRoute = ObszaryIndexRouteImport.update({
+  id: '/obszary/',
+  path: '/obszary/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObszarySlugRoute = ObszarySlugRouteImport.update({
+  id: '/obszary/$slug',
+  path: '/obszary/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UslugiIndexRoute = UslugiIndexRouteImport.update({
   id: '/uslugi/',
   path: '/uslugi/',
@@ -73,7 +85,9 @@ export interface FileRoutesByFullPath {
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
   '/o-mnie': typeof OMnieRoute
+  '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/obszary/': typeof ObszaryIndexRoute
   '/uslugi/': typeof UslugiIndexRoute
 }
 export interface FileRoutesByTo {
@@ -84,7 +98,9 @@ export interface FileRoutesByTo {
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
   '/o-mnie': typeof OMnieRoute
+  '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/obszary': typeof ObszaryIndexRoute
   '/uslugi': typeof UslugiIndexRoute
 }
 export interface FileRoutesById {
@@ -96,7 +112,9 @@ export interface FileRoutesById {
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
   '/o-mnie': typeof OMnieRoute
+  '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/obszary/': typeof ObszaryIndexRoute
   '/uslugi/': typeof UslugiIndexRoute
 }
 export interface FileRouteTypes {
@@ -109,7 +127,9 @@ export interface FileRouteTypes {
     | '/cv'
     | '/kontakt'
     | '/o-mnie'
+    | '/obszary/$slug'
     | '/uslugi/$slug'
+    | '/obszary/'
     | '/uslugi/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -120,7 +140,9 @@ export interface FileRouteTypes {
     | '/cv'
     | '/kontakt'
     | '/o-mnie'
+    | '/obszary/$slug'
     | '/uslugi/$slug'
+    | '/obszary'
     | '/uslugi'
   id:
     | '__root__'
@@ -131,7 +153,9 @@ export interface FileRouteTypes {
     | '/cv'
     | '/kontakt'
     | '/o-mnie'
+    | '/obszary/$slug'
     | '/uslugi/$slug'
+    | '/obszary/'
     | '/uslugi/'
   fileRoutesById: FileRoutesById
 }
@@ -143,7 +167,9 @@ export interface RootRouteChildren {
   CvRoute: typeof CvRoute
   KontaktRoute: typeof KontaktRoute
   OMnieRoute: typeof OMnieRoute
+  ObszarySlugRoute: typeof ObszarySlugRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
+  ObszaryIndexRoute: typeof ObszaryIndexRoute
   UslugiIndexRoute: typeof UslugiIndexRoute
 }
 
@@ -198,6 +224,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OMnieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/obszary/': {
+      id: '/obszary/'
+      path: '/obszary'
+      fullPath: '/obszary/'
+      preLoaderRoute: typeof ObszaryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/obszary/$slug': {
+      id: '/obszary/$slug'
+      path: '/obszary/$slug'
+      fullPath: '/obszary/$slug'
+      preLoaderRoute: typeof ObszarySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/uslugi/': {
       id: '/uslugi/'
       path: '/uslugi'
@@ -223,7 +263,9 @@ const rootRouteChildren: RootRouteChildren = {
   CvRoute: CvRoute,
   KontaktRoute: KontaktRoute,
   OMnieRoute: OMnieRoute,
+  ObszarySlugRoute: ObszarySlugRoute,
   UslugiSlugRoute: UslugiSlugRoute,
+  ObszaryIndexRoute: ObszaryIndexRoute,
   UslugiIndexRoute: UslugiIndexRoute,
 }
 export const routeTree = rootRouteImport
