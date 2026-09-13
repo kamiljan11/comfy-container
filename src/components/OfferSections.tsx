@@ -1,4 +1,4 @@
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { T, type Lang } from "../i18n";
 import { SERVICES, pickHomePains } from "../data/services";
 
@@ -40,23 +40,56 @@ export function PainGrid({ lang }: { lang: Lang }) {
 
 const STEP: Record<string, number> = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
 
+/** Same breakpoint as the CSS that turns the tab column into a row of chips. */
+const NARROW = "(max-width: 900px)";
+
+/**
+ * The tab list is a column on desktop and a scrolling row below 900px, and
+ * aria-orientation has to say which, or a screen reader announces a vertical
+ * list the user is swiping sideways. Starts vertical to match the server
+ * render, then follows the viewport.
+ */
+function useTabOrientation(): "vertical" | "horizontal" {
+  const [narrow, setNarrow] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(NARROW);
+    const sync = () => setNarrow(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return narrow ? "horizontal" : "vertical";
+}
+
 export function SolutionTabs({ lang }: { lang: Lang }) {
   const t = T[lang].solutions;
   const list = SERVICES[lang];
   const [active, setActive] = useState(0);
   const tabs = useRef<Array<HTMLButtonElement | null>>([]);
+  const orientation = useTabOrientation();
+  // SERVICES has six entries per language and services.test.ts pins that
+  // list, so an index is always valid here
   const current = list[active] ?? list[0];
-  if (!current) return null;
   const proof = current.proofs[0];
 
-  // roving tabindex: arrows move between tabs, Tab leaves the list
+  const select = (i: number) => {
+    setActive(i);
+    tabs.current[i]?.focus();
+  };
+
+  // roving tabindex: arrows move between tabs (both axes, so the chip row on
+  // a phone works too), Home/End jump to the ends, Tab leaves the list
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
+    const last = list.length - 1;
+    if (e.key === "Home" || e.key === "End") {
+      e.preventDefault();
+      select(e.key === "Home" ? 0 : last);
+      return;
+    }
     const step = STEP[e.key];
     if (!step) return;
     e.preventDefault();
-    const next = (active + step + list.length) % list.length;
-    setActive(next);
-    tabs.current[next]?.focus();
+    select((active + step + list.length) % list.length);
   };
 
   return (
@@ -66,7 +99,7 @@ export function SolutionTabs({ lang }: { lang: Lang }) {
         <h2 className="offer-title">{t.title}</h2>
         <p className="offer-lead">{t.lead}</p>
         <div className="sol-wrap">
-          <div className="sol-tabs" role="tablist" aria-orientation="vertical" onKeyDown={onKey}>
+          <div className="sol-tabs" role="tablist" aria-orientation={orientation} onKeyDown={onKey}>
             {list.map((s, i) => (
               <button
                 key={s.slug}

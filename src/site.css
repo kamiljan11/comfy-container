@@ -4688,6 +4688,8 @@ section {
     white-space: nowrap;
     padding: 10px 14px;
     font-size: 14px;
+    /* tap target, same 44px bar as .lang-toggle / .hamburger */
+    min-height: 44px;
   }
 }
 @media (max-width: 768px) {
