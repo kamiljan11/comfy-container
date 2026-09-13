@@ -10,15 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as ClaudeRouteImport } from './routes/claude'
 import { Route as CvRouteImport } from './routes/cv'
+import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
 import { Route as UslugiSlugRouteImport } from './routes/uslugi.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesRoute = CaseStudiesRouteImport.update({
@@ -36,6 +43,11 @@ const CvRoute = CvRouteImport.update({
   path: '/cv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UslugiIndexRoute = UslugiIndexRouteImport.update({
   id: '/uslugi/',
   path: '/uslugi/',
@@ -49,26 +61,32 @@ const UslugiSlugRoute = UslugiSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
+  '/kontakt': typeof KontaktRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/uslugi/': typeof UslugiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
+  '/kontakt': typeof KontaktRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/uslugi': typeof UslugiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
+  '/kontakt': typeof KontaktRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/uslugi/': typeof UslugiIndexRoute
 }
@@ -76,28 +94,42 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/blog'
     | '/case-studies'
     | '/claude'
     | '/cv'
+    | '/kontakt'
     | '/uslugi/$slug'
     | '/uslugi/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/case-studies' | '/claude' | '/cv' | '/uslugi/$slug' | '/uslugi'
-  id:
-    | '__root__'
+  to:
     | '/'
+    | '/blog'
     | '/case-studies'
     | '/claude'
     | '/cv'
+    | '/kontakt'
+    | '/uslugi/$slug'
+    | '/uslugi'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/case-studies'
+    | '/claude'
+    | '/cv'
+    | '/kontakt'
     | '/uslugi/$slug'
     | '/uslugi/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
   CaseStudiesRoute: typeof CaseStudiesRoute
   ClaudeRoute: typeof ClaudeRoute
   CvRoute: typeof CvRoute
+  KontaktRoute: typeof KontaktRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
   UslugiIndexRoute: typeof UslugiIndexRoute
 }
@@ -109,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies': {
@@ -132,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/uslugi/': {
       id: '/uslugi/'
       path: '/uslugi'
@@ -151,9 +197,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
   CaseStudiesRoute: CaseStudiesRoute,
   ClaudeRoute: ClaudeRoute,
   CvRoute: CvRoute,
+  KontaktRoute: KontaktRoute,
   UslugiSlugRoute: UslugiSlugRoute,
   UslugiIndexRoute: UslugiIndexRoute,
 }

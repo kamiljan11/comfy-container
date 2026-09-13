@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useLang } from "../hooks/useLang";
 import { type Lang } from "../i18n";
 
 export const Route = createFileRoute("/cv")({
@@ -18,37 +18,11 @@ export const Route = createFileRoute("/cv")({
 });
 
 /* ── Flags (mirrors the homepage toggle) ── */
-function FlagPL() {
-  return (
-    <svg width="22" height="15" viewBox="0 0 22 15" className="flag-svg" aria-hidden="true">
-      <rect width="22" height="15" rx="2.5" fill="#fff" />
-      <path d="M0 7.5h22V12.5a2.5 2.5 0 0 1-2.5 2.5h-17A2.5 2.5 0 0 1 0 12.5V7.5Z" fill="#dc143c" />
-    </svg>
-  );
-}
-function FlagGB() {
-  return (
-    <svg width="22" height="15" viewBox="0 0 60 30" className="flag-svg" aria-hidden="true">
-      <clipPath id="gb-r-cv">
-        <rect width="60" height="30" rx="5" />
-      </clipPath>
-      <g clipPath="url(#gb-r-cv)">
-        <rect width="60" height="30" fill="#012169" />
-        <path d="M0,0 60,30 M60,0 0,30" stroke="#fff" strokeWidth="6" />
-        <path d="M0,0 60,30 M60,0 0,30" stroke="#c8102e" strokeWidth="4" />
-        <path d="M30,0 V30 M0,15 H60" stroke="#fff" strokeWidth="10" />
-        <path d="M30,0 V30 M0,15 H60" stroke="#c8102e" strokeWidth="6" />
-      </g>
-    </svg>
-  );
-}
 
 type Job = { role: string; org: string; loc?: string; dates: string; bullets: string[] };
 type Labeled = { label: string; body: string };
 
 type CV = {
-  back: string;
-  cases: string;
   download: string;
   role: string;
   contact: string;
@@ -70,8 +44,6 @@ type CV = {
 
 const CONTENT: Record<Lang, CV> = {
   en: {
-    back: "← kamiljan.com",
-    cases: "Case studies →",
     download: "Download PDF",
     role: "AI Automation & Implementation Engineer · Builder & Operator",
     contact: "Reykjavík, Iceland · Remote-first · open to relocation",
@@ -245,8 +217,6 @@ const CONTENT: Record<Lang, CV> = {
   },
 
   pl: {
-    back: "← kamiljan.com",
-    cases: "Studia przypadków →",
     download: "Pobierz PDF",
     role: "Inżynier Automatyzacji i Wdrożeń AI · Builder & Operator",
     contact: "Reykjavík, Islandia · Praca zdalna · otwarty na relokację",
@@ -424,58 +394,17 @@ const CONTENT: Record<Lang, CV> = {
 };
 
 function CVPage() {
-  const [lang, setLang] = useState<Lang>(() => {
-    if (typeof window === "undefined") return "en";
-    const url = new URLSearchParams(window.location.search).get("lang") as Lang;
-    if (url === "en" || url === "pl") return url;
-    const saved = localStorage.getItem("kj-lang") as Lang;
-    if (saved === "en" || saved === "pl") return saved;
-    return navigator.language.startsWith("pl") ? "pl" : "en";
-  });
-
-  const toggleLang = () => {
-    setLang((l) => {
-      const next: Lang = l === "en" ? "pl" : "en";
-      if (typeof window !== "undefined") localStorage.setItem("kj-lang", next);
-      return next;
-    });
-  };
-
-  // keep ?lang= in the URL in sync so the choice carries to / and into shared links
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const u = new URL(window.location.href);
-    if (u.searchParams.get("lang") !== lang) {
-      u.searchParams.set("lang", lang);
-      window.history.replaceState({}, "", u);
-    }
-  }, [lang]);
+  const [lang] = useLang("en");
 
   const cv = CONTENT[lang];
 
   return (
     <div className="cv-page">
       <div className="read-progress" aria-hidden="true" />
-      <div className="cv-bar">
-        <Link to="/" className="cv-back">
-          {cv.back}
-        </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Link to="/case-studies" className="cv-back">
-            {cv.cases}
-          </Link>
-          <button
-            type="button"
-            className="lang-toggle"
-            onClick={toggleLang}
-            aria-label="Switch language"
-          >
-            {lang === "en" ? <FlagGB /> : <FlagPL />}
-          </button>
-          <button type="button" className="cv-download" onClick={() => window.print()}>
-            {cv.download}
-          </button>
-        </div>
+      <div className="cv-bar cv-bar-end">
+        <button type="button" className="cv-download" onClick={() => window.print()}>
+          {cv.download}
+        </button>
       </div>
 
       <article className="cv-paper">

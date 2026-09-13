@@ -1,5 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Cursor } from "../components/Cursor";
+import { SiteHeader } from "../components/SiteHeader";
 import appCss from "../styles.css?url";
 import siteCss from "../site.css?url";
 
@@ -232,5 +233,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  // one header for every route; it used to live inside the homepage only
+  return (
+    <>
+      <SiteHeader />
+      <Outlet />
+    </>
+  );
 }

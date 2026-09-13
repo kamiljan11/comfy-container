@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { LangToggle } from "../components/LangToggle";
 import { useLang } from "../hooks/useLang";
 import { SERVICES } from "../data/services";
 
@@ -12,8 +11,6 @@ import { SERVICES } from "../data/services";
 
 const COPY = {
   en: {
-    back: "← kamiljan.com",
-    cases: "Case studies →",
     eyebrow: "SERVICES",
     h1: "What I build for companies",
     lead: "Six kinds of work, all of them running in production somewhere. Every page below states what the problem usually looks like, how I approach it, and where the limits are — including the cases where I would tell you not to do it.",
@@ -22,8 +19,6 @@ const COPY = {
       "One conversation is usually enough to see whether there is anything worth automating.",
   },
   pl: {
-    back: "← kamiljan.com",
-    cases: "Case studies →",
     eyebrow: "USŁUGI",
     h1: "Co buduję dla firm",
     lead: "Sześć rodzajów pracy, każdy działający gdzieś w produkcji. Każda strona mówi, jak zwykle wygląda problem, jak do niego podchodzę i gdzie leżą granice — łącznie z przypadkami, w których odradzam robotę.",
@@ -48,24 +43,12 @@ export const Route = createFileRoute("/uslugi/")({
 });
 
 function ServicesIndex() {
-  const [lang, toggle] = useLang("pl");
+  const [lang] = useLang("pl");
   const c = COPY[lang];
   const list = SERVICES[lang];
 
   return (
     <div className="svc-page">
-      <div className="cv-bar">
-        <Link to="/" className="cv-back">
-          {c.back}
-        </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Link to="/case-studies" className="cv-back">
-            {c.cases}
-          </Link>
-          <LangToggle lang={lang} onToggle={toggle} />
-        </div>
-      </div>
-
       <div className="container">
         <header className="svc-head">
           <span className="svc-eyebrow">{c.eyebrow}</span>

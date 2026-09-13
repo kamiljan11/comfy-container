@@ -42,7 +42,7 @@ git revert <sha-zlego-commita> && git push   # -> redeploy automatyczny na Verce
 | ----------------------------------- | ----------------------------------------------------------------------- |
 | Strona nie wstaje po deploy         | rollback (wyzej), potem debug na branchu                                |
 | Bot odpowiada "unconfigured"        | `ANTHROPIC_API_KEY` brak/wygasl w Vercel — sprawdz i ustaw ponownie      |
-| Lead nie dociera mailem             | `RESEND_API_KEY` brak -> transport = stub (tylko log); sprawdz Vercel Function Logs |
+| Lead nie dociera mailem             | Leady (chat + `/kontakt`) ida prosto do Resend w `lead.server.ts`, NIE przez stub z `email.server.ts`. W Vercel Function Logs szukaj `[lead]`: `RESEND_API_KEY missing` (brak klucza, formularz pokazuje „nie dziala”), `Resend rejected the email {status}` (klucz/nadawca), `Resend request failed` (siec), `rate-limited` (>5 zgloszen / 10 min z jednego IP). `AI brief failed` = mail poszedl bez podsumowania |
 | Blad 500 na dowolnej akcji          | Vercel Function Logs -> stack trace -> `systematic-debugging`           |
 | Wygasly sekret/API key              | Vercel env vars -> zrotuj -> redeploy (push pusty commit lub Redeploy)   |
 | Domena/DNS                          | panel Name.com (rejestrator) + Vercel Domains tab                       |

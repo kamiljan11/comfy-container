@@ -172,6 +172,16 @@ body::before {
   filter: drop-shadow(0 2px 10px rgba(34, 211, 238, 0.5));
   transition: filter 0.2s;
 }
+/* text fields keep the native I-beam; the drawn pointer steps aside */
+input,
+textarea,
+select,
+[contenteditable] {
+  cursor: text;
+}
+.cursor-ptr.texting {
+  opacity: 0;
+}
 .cursor-ptr.hovering {
   filter: drop-shadow(0 2px 18px rgba(34, 211, 238, 0.85));
 }
@@ -1584,7 +1594,7 @@ section {
    background plus bottom border drew a visible seam across the panel. The
    sheet is directly before .nav in the DOM, so drop the bar's own surface and
    let the two read as one. */
-.mobile-menu.open ~ .nav {
+.nav.nav-sheet-open {
   background: transparent;
   border-bottom-color: transparent;
   backdrop-filter: none;
@@ -4710,4 +4720,392 @@ section {
   .sol-panel {
     padding: 24px 20px;
   }
+}
+
+/* ── Global header (SiteHeader.tsx) ──────────────────────────────────────
+   One fixed bar on every route. --header-h is its height, so pages that do
+   not start with a full-bleed hero can clear it. */
+:root {
+  --header-h: 120px;
+}
+@media (max-width: 768px) {
+  :root {
+    --header-h: 64px;
+  }
+}
+.cv-page,
+.svc-page {
+  padding-top: calc(var(--header-h) + 28px);
+}
+.cv-bar-end {
+  justify-content: flex-end;
+}
+@media print {
+  .nav,
+  .mobile-menu {
+    display: none !important;
+  }
+  .cv-page {
+    padding-top: 0;
+  }
+}
+
+.nav-links a[aria-current="page"],
+.nav-cta[aria-current="page"] {
+  color: var(--text);
+}
+.nav-dd {
+  position: relative;
+}
+.nav-dd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  transition: color 0.2s;
+}
+.nav-dd-btn:hover,
+.nav-dd-btn[aria-expanded="true"] {
+  color: var(--text);
+}
+.nav-dd-chev {
+  transition: transform 0.25s var(--ease-expo);
+}
+[aria-expanded="true"] > .nav-dd-chev {
+  transform: rotate(180deg);
+}
+.nav-dd-panel {
+  position: absolute;
+  top: calc(100% + 26px);
+  left: 50%;
+  width: min(600px, calc(100vw - 48px));
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  background: rgba(7, 18, 29, 0.98);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6);
+  /* visibility (not display) so the panel can fade, and so closed links drop
+     out of the tab order */
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 8px);
+  transition:
+    opacity 0.2s,
+    transform 0.25s var(--ease-expo),
+    visibility 0.2s;
+}
+.nav-dd-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+.nav-dd-narrow {
+  width: 300px;
+  grid-template-columns: 1fr;
+}
+.nav-links .nav-dd-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: background 0.2s;
+}
+.nav-links .nav-dd-item:hover,
+.nav-links .nav-dd-item:focus-visible {
+  background: var(--surface);
+}
+.nav-dd-item strong {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+.nav-dd-item span {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+.nav-links .nav-dd-all {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+  padding: 12px 14px 6px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal-2);
+}
+.nav-dd-btn:focus-visible,
+.nav-links a:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* sheet: groups open as accordions; "safe center" keeps a tall open sheet
+   scrollable from the top instead of clipping its first items */
+.mobile-menu {
+  justify-content: safe center;
+}
+.mm-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.mm-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 11px 16px;
+  background: none;
+  border: 0;
+  font-family: var(--font-head);
+  font-size: clamp(1.3rem, 5.4vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-2);
+}
+.mm-toggle[aria-expanded="true"] {
+  color: var(--text);
+}
+.mm-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px 0 10px;
+}
+.mm-sub[hidden] {
+  display: none;
+}
+.mobile-menu .mm-sub a {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  min-height: 44px;
+  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+}
+.mobile-menu .mm-sub .mm-all {
+  color: var(--teal-2);
+  font-weight: 600;
+}
+
+/* ── /kontakt ── */
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 40px;
+  padding: 40px 0 20px;
+  align-items: start;
+}
+.kontakt-h2 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 18px;
+}
+.kontakt-info .kontakt-h2 + .kontakt-steps + .kontakt-h2 {
+  margin-top: 36px;
+}
+.kontakt-steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.kontakt-steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.kontakt-steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: rgba(8, 145, 178, 0.14);
+  color: var(--teal-2);
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+}
+.kontakt-steps strong {
+  color: var(--text);
+  font-size: 15px;
+}
+.kontakt-steps span,
+.kontakt-get li {
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 1.65;
+}
+.kontakt-get {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.kontakt-card {
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+.kontakt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.kontakt-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.kontakt-form label > span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.kontakt-form input,
+.kontakt-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+.kontakt-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.kontakt-form input:focus,
+.kontakt-form textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+.kontakt-form small {
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+.kontakt-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.kontakt-send {
+  align-self: flex-start;
+}
+.kontakt-send:disabled {
+  opacity: 0.6;
+}
+.kontakt-error {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(220, 38, 38, 0.12);
+  color: #fca5a5;
+  font-size: 14px;
+}
+.kontakt-done {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  border-radius: 10px;
+  background: rgba(8, 145, 178, 0.12);
+  color: var(--text-2);
+}
+.kontakt-done strong {
+  color: var(--text);
+}
+.kontakt-alt {
+  margin: 18px 0 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
+@media (max-width: 900px) {
+  .kontakt-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .kontakt-card {
+    padding: 22px 18px;
+  }
+}
+
+/* ── /blog ── */
+.blog-soon {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.blog-soon-item {
+  padding: 24px 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+.blog-soon-tag {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.blog-soon-item h2 {
+  font-family: var(--font-head);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 8px 0 6px;
+}
+.blog-soon-item p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+.blog-meanwhile {
+  margin: 28px 0 0;
+  color: var(--text-2);
 }

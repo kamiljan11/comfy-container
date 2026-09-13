@@ -7,6 +7,9 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Added
 
+- One header on every page (`src/components/SiteHeader.tsx`, mounted in `__root`): Services and About open as click dropdowns (Escape / click outside / navigation close them), Case studies, Blog, language switch and a "Free consultation" CTA; below 900px a full-screen sheet with the groups as accordions. Subpages lose their "← kamiljan.com" bars and duplicate language toggles.
+- `/kontakt`: free 30-minute consultation page — how to prepare, what you leave with, and a form sent through the chat's proven lead path (`submitLead` → Resend) with a honeypot; `consultMessage()` unit-tested.
+- `/blog`: in the menu before the first post; `noindex` and out of the sitemap until it has content.
 - Homepage offer block after the hero, in the buyer's order (modelled on how letsautomate.pl leads): "Sound familiar?" — six problem cards, one per service, each linking to its /uslugi page — then "How I can help" — six switchable tabs (roving tabindex, arrow keys) showing the service, its lead and one system running in production. Both read from `src/data/services.ts` (`pickHomePains`, unit-tested), so the service pages stay the single source of the copy.
 - Pipeline jakosci: CI (build/lint/typecheck/test/semgrep/audit/licencje), Claude review na PR, szablony dokumentacji
 - `docs/ARCHITECTURE.md`, `docs/GLOSSARY.md`, `docs/adr/0001-*` and `0002-*`, filled-in `docs/RUNBOOK.md`, `docs/quality/BACKLOG.md`
@@ -15,6 +18,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Changed
 
+- `useLang` is one shared store (`useSyncExternalStore`) instead of a `useState` copy per route, so the header's language switch changes the page under it; hydration renders the server language first. `resolveLang` and `ssrLangFor` are pure and unit-tested. The homepage, CV and AI-system pages drop their own copies.
 - Hero (EN + PL) sells the outcome for the company, not the person: "Your business. Less manual work / chaos / retyping / overhead / guesswork", a sub that names the processes people search for (invoices, orders, quotes, the spreadsheet), CTA "Show me your process", and a line that bigger builds run with CetusPro, a Rzeszów software house. PL eyebrow carries the searched phrases "automatyzacja procesów" and "wdrożenia AI w firmie".
 - Hero sub (EN + PL): "fine-tuned AI coding agents" / "dostrojonymi agentami AI" — the agents run under Kamil's own hooks, review gates and skills, not stock.
 - `/claude`: the "Self-evolution cycle" routine (opt-in, off) is no longer listed — no point describing something that is switched off.
@@ -39,4 +43,5 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Security
 
+- Lead path (chat + `/kontakt`) is rate-limited: 5 leads per client IP in 10 minutes, then refused with a message; past 40 an hour per instance the email still goes out without the Anthropic brief, so a script loop cannot run up the model bill. Every failure in `lead.server.ts` now logs a `[lead] …` line (no personal data) instead of returning silently; RUNBOOK and README describe the real lead path.
 - `vitest` 3.2 → 5.0 (dev only) clears the last 2 moderate advisories (`vitest`, `@vitest/mocker`); `npm audit` now reports 0. vitest 5 needs Node ≥22.12, so CI (`quality.yml`, `mutation.yml`) moves from Node 20 (EOL) to 24.

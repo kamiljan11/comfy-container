@@ -1,5 +1,4 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { LangToggle } from "../components/LangToggle";
 import { useLang } from "../hooks/useLang";
 import { SERVICES, SERVICE_SLUGS, getService } from "../data/services";
 
@@ -11,16 +10,12 @@ import { SERVICES, SERVICE_SLUGS, getService } from "../data/services";
 
 const UI = {
   en: {
-    back: "← kamiljan.com",
-    services: "All services →",
     ctaTitle: "Worth a conversation?",
     ctaLead:
       "Describe the process in a couple of sentences. If there is nothing here worth automating, I will say so — that answer is free and saves us both time.",
     more: "Other things I build",
   },
   pl: {
-    back: "← kamiljan.com",
-    services: "Wszystkie usługi →",
     ctaTitle: "Warto porozmawiać?",
     ctaLead:
       "Opisz proces w dwóch zdaniach. Jeśli nie ma tu czego automatyzować, powiem to wprost — ta odpowiedź jest darmowa i oszczędza czas nam obu.",
@@ -51,7 +46,7 @@ export const Route = createFileRoute("/uslugi/$slug")({
 
 function ServicePage() {
   const { slug } = Route.useLoaderData();
-  const [lang, toggle] = useLang("pl");
+  const [lang] = useLang("pl");
   const t = UI[lang];
   const s = getService(lang, slug);
   const others = SERVICES[lang].filter((x) => x.slug !== slug);
@@ -60,18 +55,6 @@ function ServicePage() {
 
   return (
     <div className="svc-page">
-      <div className="cv-bar">
-        <Link to="/" className="cv-back">
-          {t.back}
-        </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Link to="/uslugi" className="cv-back">
-            {t.services}
-          </Link>
-          <LangToggle lang={lang} onToggle={toggle} />
-        </div>
-      </div>
-
       <div className="container">
         <header className="svc-head">
           <span className="svc-eyebrow">{s.eyebrow}</span>

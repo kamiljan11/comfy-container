@@ -12,6 +12,8 @@
  */
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { generateText } from "ai";
+import { getRequestHeader } from "@tanstack/react-start/server";
+import { createLimiter, firstForwardedIp } from "./rateLimit";
 
 const MODEL = "claude-haiku-4-5-20251001";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -35,6 +37,15 @@ export type LeadInput = {
 };
 export type LeadResult = { ok: true } | { ok: false; error: string };
 
+// Every accepted lead costs an Anthropic call and a Resend send, and the
+// server function can be POSTed to directly, so the honeypot bounds nothing.
+// Per client: 5 in 10 minutes, then refused. Per instance: past 40 an hour
+// the email still goes out, only without the AI brief — a global refusal
+// would let one script lock real visitors out. See rateLimit.ts for why
+// in-memory is enough here.
+const perClient = createLimiter({ windowMs: 10 * 60_000, max: 5 });
+const briefBudget = createLimiter({ windowMs: 60 * 60_000, max: 40 });
+
 /** HTML-escape a string. Pure — exported for tests, no I/O. */
 export function esc(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -50,7 +61,10 @@ export function isValidEmail(email: string): boolean {
 
 async function buildBrief(transcript: LeadMessage[], message: string): Promise<string> {
   const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) return "";
+  if (!key) {
+    console.warn("[lead] ANTHROPIC_API_KEY missing — sending without an AI brief");
+    return "";
+  }
   try {
     const gateway = createAnthropic({ apiKey: key });
     const convo = transcript
@@ -70,17 +84,27 @@ async function buildBrief(transcript: LeadMessage[], message: string): Promise<s
       ],
     });
     return (res.text || "").trim();
-  } catch {
+  } catch (err) {
+    console.warn("[lead] AI brief failed — sending without it", { error: String(err) });
     return "";
   }
 }
 
 export async function sendLead(input: LeadInput): Promise<LeadResult> {
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return { ok: false, error: "unconfigured" };
+  if (!apiKey) {
+    console.error("[lead] RESEND_API_KEY missing — lead not sent");
+    return { ok: false, error: "unconfigured" };
+  }
 
   // Honeypot: a bot filled the hidden field — silently accept and drop.
   if (input.hp && input.hp.trim()) return { ok: true };
+
+  const now = Date.now();
+  if (!perClient.hit(firstForwardedIp(getRequestHeader("x-forwarded-for")), now)) {
+    console.warn("[lead] rate-limited: too many leads from one client");
+    return { ok: false, error: "rate-limited" };
+  }
 
   const name = (input.name || "")
     .replace(/[\r\n]+/g, " ")
@@ -94,7 +118,7 @@ export async function sendLead(input: LeadInput): Promise<LeadResult> {
   if (message.length < MIN_MESSAGE_CHARS) return { ok: false, error: "empty" };
   if (!isValidEmail(email)) return { ok: false, error: "bad-email" };
 
-  const summary = await buildBrief(transcript, message);
+  const summary = briefBudget.hit("all", now) ? await buildBrief(transcript, message) : "";
   const tr = transcript
     .map((m) => `${m.role === "user" ? "Visitor" : "Bot"}: ${m.content}`)
     .join("\n");
@@ -127,9 +151,13 @@ export async function sendLead(input: LeadInput): Promise<LeadResult> {
         text,
       }),
     });
-    if (!r.ok) return { ok: false, error: "send-failed" };
+    if (!r.ok) {
+      console.error("[lead] Resend rejected the email", { status: r.status });
+      return { ok: false, error: "send-failed" };
+    }
     return { ok: true };
-  } catch {
+  } catch (err) {
+    console.error("[lead] Resend request failed", { error: String(err) });
     return { ok: false, error: "send-failed" };
   }
 }

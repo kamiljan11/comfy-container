@@ -2,34 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import Hero3D from "../components/Hero3D";
 import ChatBot from "../components/ChatBot";
+import { useLang } from "../hooks/useLang";
 import { PainGrid, SolutionTabs } from "../components/OfferSections";
 import { T, type Lang } from "../i18n";
-
-/* ── Flags ── */
-function FlagPL() {
-  return (
-    <svg width="22" height="15" viewBox="0 0 22 15" className="flag-svg" aria-hidden="true">
-      <rect width="22" height="15" rx="2.5" fill="#fff" />
-      <path d="M0 7.5h22V12.5a2.5 2.5 0 0 1-2.5 2.5h-17A2.5 2.5 0 0 1 0 12.5V7.5Z" fill="#dc143c" />
-    </svg>
-  );
-}
-function FlagGB() {
-  return (
-    <svg width="22" height="15" viewBox="0 0 60 30" className="flag-svg" aria-hidden="true">
-      <clipPath id="gb-r">
-        <rect width="60" height="30" rx="5" />
-      </clipPath>
-      <g clipPath="url(#gb-r)">
-        <rect width="60" height="30" fill="#012169" />
-        <path d="M0,0 60,30 M60,0 0,30" stroke="#fff" strokeWidth="6" />
-        <path d="M0,0 60,30 M60,0 0,30" stroke="#c8102e" strokeWidth="4" />
-        <path d="M30,0 V30 M0,15 H60" stroke="#fff" strokeWidth="10" />
-        <path d="M30,0 V30 M0,15 H60" stroke="#c8102e" strokeWidth="6" />
-      </g>
-    </svg>
-  );
-}
 
 /* ── Rotating colored hero word ── */
 const HERO_ROT: Record<Lang, string[]> = {
@@ -237,35 +212,9 @@ const ENGAGE_META = [
 ];
 
 function HomePage() {
-  const [lang, setLang] = useState<Lang>(() => {
-    if (typeof window === "undefined") return "en";
-    const url = new URLSearchParams(window.location.search).get("lang") as Lang;
-    if (url === "en" || url === "pl") return url;
-    const saved = localStorage.getItem("kj-lang") as Lang;
-    if (saved === "en" || saved === "pl") return saved;
-    return navigator.language.startsWith("pl") ? "pl" : "en";
-  });
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [lang] = useLang("en");
   const [openEngage, setOpenEngage] = useState<number | null>(0);
   const btnRef = useRef<HTMLAnchorElement>(null);
-
-  const toggleLang = () => {
-    setLang((l) => {
-      const next: Lang = l === "en" ? "pl" : "en";
-      if (typeof window !== "undefined") localStorage.setItem("kj-lang", next);
-      return next;
-    });
-  };
-
-  // keep ?lang= in the URL in sync, so a shared link opens in the chosen language
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const u = new URL(window.location.href);
-    if (u.searchParams.get("lang") !== lang) {
-      u.searchParams.set("lang", lang);
-      window.history.replaceState({}, "", u);
-    }
-  }, [lang]);
 
   const onBtnMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const b = btnRef.current;
@@ -338,78 +287,6 @@ function HomePage() {
       <ScrollProg />
 
       {/* ── Mobile menu overlay ── */}
-      <div className={`mobile-menu${menuOpen ? " open" : ""}`} onClick={() => setMenuOpen(false)}>
-        <a href="#work">{t.nav.work}</a>
-        <a href="#about">{t.nav.about}</a>
-        <a href="#capabilities">{t.nav.capabilities}</a>
-        <a href="#engage">{t.nav.engage}</a>
-        <a href="/uslugi">{lang === "pl" ? "Usługi" : "Services"}</a>
-        <a href="/case-studies">Case studies</a>
-        <a href="/cv">CV</a>
-        <a href="/claude">{lang === "pl" ? "System AI" : "AI system"}</a>
-        <div className="mobile-menu-divider" />
-        <a href="#contact" className="mobile-menu-cta">
-          {t.nav.cta}
-        </a>
-      </div>
-
-      {/* ── Nav ── */}
-      <nav className="nav">
-        <a href="/" className="nav-sig-wrap" aria-label="Kamil Jan">
-          <img src="/signature.webp" alt="Kamil Jan" className="nav-sig" />
-        </a>
-        <ul className="nav-links">
-          <li>
-            <a href="#work">{t.nav.work}</a>
-          </li>
-          <li>
-            <a href="#about">{t.nav.about}</a>
-          </li>
-          <li>
-            <a href="#capabilities">{t.nav.capabilities}</a>
-          </li>
-          <li>
-            <a href="#engage">{t.nav.engage}</a>
-          </li>
-          <li>
-            <a href="#contact">{t.nav.contact}</a>
-          </li>
-          <li>
-            <a href="/uslugi">{lang === "pl" ? "Usługi" : "Services"}</a>
-          </li>
-          <li>
-            <a href="/case-studies">Case studies</a>
-          </li>
-          <li>
-            <a href="/cv">CV</a>
-          </li>
-          <li>
-            <a href="/claude">{lang === "pl" ? "System AI" : "AI system"}</a>
-          </li>
-        </ul>
-        <div className="nav-right">
-          <button className="lang-toggle" onClick={toggleLang} aria-label="Switch language">
-            {lang === "en" ? <FlagGB /> : <FlagPL />}
-          </button>
-          <div className="nav-avail">
-            <span className="avail-dot" />
-            {t.nav.available}
-          </div>
-          <a href="#contact" className="nav-cta">
-            {t.nav.cta}
-          </a>
-          <button
-            className={`hamburger${menuOpen ? " open" : ""}`}
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Menu"
-            aria-expanded={menuOpen}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
-      </nav>
 
       {/* ── Hero ── */}
       <section className="hero">
