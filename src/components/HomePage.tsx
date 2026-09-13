@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import Hero3D from "./Hero3D";
 import ChatBot from "./ChatBot";
@@ -230,18 +230,6 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
   };
 
   const t = T[lang];
-
-  // Menu items like "Ways to work together" link to /o-mnie#engage. A client-side
-  // navigation renders the page first and does not jump to the anchor, and a
-  // second item on the same page changes only the hash — so scroll on every hash.
-  const hash = useRouterState({ select: (st) => st.location.hash });
-  useEffect(() => {
-    if (!hash) return;
-    const id = window.setTimeout(() => {
-      document.getElementById(hash)?.scrollIntoView({ block: "start" });
-    }, 0);
-    return () => window.clearTimeout(id);
-  }, [hash]);
 
   useEffect(() => {
     const cards = document.querySelectorAll<HTMLElement>(".work-row, .cap-card, .engage-card");

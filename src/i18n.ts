@@ -58,7 +58,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Your business.",
       h1b: "Less",
       h1em: "manual work.",
-      sub: "I find the process that eats your team's hours — invoices, orders, quotes, the spreadsheet everyone copies from — and replace it with a system or an AI automation running in production. Built with fine-tuned AI coding agents, documented, and your team trained to own it.",
+      sub: "I find the process that eats your team's hours, and replace it with a system or an AI automation. Then I train your team to run it day to day.",
       cta: "Show me your process",
       ctaGhost: "See systems in production",
       partner:
@@ -221,11 +221,11 @@ export const T: Record<Lang, SiteTranslation> = {
 
   pl: {
     hero: {
-      eyebrow: "Automatyzacja procesów i wdrożenia AI w firmie · Builder & Operator",
+      eyebrow: "AI Automation & Implementation Engineer · Builder & Operator",
       h1a: "Twoja firma.",
       h1b: "Mniej",
       h1em: "ręcznej pracy.",
-      sub: "Znajduję proces, który zjada godziny Twojego zespołu — faktury, zamówienia, wyceny, arkusz, z którego wszyscy przepisują — i zastępuję go systemem albo automatyzacją AI działającą na produkcji. Budowane z dostrojonymi agentami AI, udokumentowane, a Twój zespół przeszkolony, żeby to prowadził.",
+      sub: "Znajduję proces, który zjada godziny Twojego zespołu, i zastępuję go systemem albo automatyzacją AI. Potem szkolę Twój zespół, żeby używał tego na co dzień.",
       cta: "Pokaż mi swój proces",
       ctaGhost: "Zobacz działające systemy",
       partner:
