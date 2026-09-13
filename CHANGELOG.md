@@ -22,6 +22,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Changed
 
+- `/case-studies`: one list instead of two. The dark TOC card grid above the white study list is gone; each white card now shows the number, title, a two-line preview and the first three tags before it is opened — the information the TOC cards carried — so nothing is listed twice and the white headers are no longer bare titles. Dead `.cs-toc*` CSS removed.
 - CetusPro line (hero EN+PL, `/kontakt`): "close to 40 developers" / "blisko 40 developerów".
 - Removed the `supplier-feed-to-storefront` case study (NextCar shop): no AI in it, and the portfolio sells AI delivery. NextCar stays listed as a live system; the "20 case studies" line in the root FAQ schema now matches the list.
 - `useLang` is one shared store (`useSyncExternalStore`) instead of a `useState` copy per route, so the header's language switch changes the page under it; hydration renders the server language first. `resolveLang` and `ssrLangFor` are pure and unit-tested. The homepage, CV and AI-system pages drop their own copies.
