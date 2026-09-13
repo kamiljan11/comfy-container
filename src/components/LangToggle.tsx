@@ -39,7 +39,12 @@ export function FlagGB() {
 
 export function LangToggle({ lang, onToggle }: { lang: Lang; onToggle: () => void }) {
   return (
-    <button type="button" className="lang-toggle" onClick={onToggle} aria-label="Switch language">
+    <button
+      type="button"
+      className="lang-toggle"
+      onClick={onToggle}
+      aria-label={lang === "pl" ? "Przełącz na angielski" : "Switch to Polish"}
+    >
       {lang === "en" ? <FlagGB /> : <FlagPL />}
     </button>
   );

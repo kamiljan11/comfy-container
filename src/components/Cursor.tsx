@@ -41,6 +41,9 @@ export function Cursor() {
     const onOver = (e: MouseEvent) => {
       const t = e.target as Element | null;
       el.classList.toggle("hovering", !!t?.closest?.("a, button, summary, details"));
+      // over a text field the native I-beam shows where the caret will land;
+      // an arrow drawn on top of it hides exactly that
+      el.classList.toggle("texting", !!t?.closest?.("input, textarea, select, [contenteditable]"));
     };
 
     document.addEventListener("mousemove", onMove, { passive: true });

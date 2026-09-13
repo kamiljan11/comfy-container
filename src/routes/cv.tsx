@@ -1,6 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
-import { useEffect, useState } from "react";
 import { type Lang } from "../i18n";
 
 export const Route = createFileRoute("/cv")({
@@ -24,8 +23,6 @@ type Job = { role: string; org: string; loc?: string; dates: string; bullets: st
 type Labeled = { label: string; body: string };
 
 type CV = {
-  back: string;
-  cases: string;
   download: string;
   role: string;
   contact: string;
@@ -47,8 +44,6 @@ type CV = {
 
 const CONTENT: Record<Lang, CV> = {
   en: {
-    back: "← kamiljan.com",
-    cases: "Case studies →",
     download: "Download PDF",
     role: "AI Automation & Implementation Engineer · Builder & Operator",
     contact: "Reykjavík, Iceland · Remote-first · open to relocation",
@@ -222,8 +217,6 @@ const CONTENT: Record<Lang, CV> = {
   },
 
   pl: {
-    back: "← kamiljan.com",
-    cases: "Studia przypadków →",
     download: "Pobierz PDF",
     role: "Inżynier Automatyzacji i Wdrożeń AI · Builder & Operator",
     contact: "Reykjavík, Islandia · Praca zdalna · otwarty na relokację",

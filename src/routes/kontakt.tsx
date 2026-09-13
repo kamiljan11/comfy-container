@@ -46,6 +46,7 @@ type Copy = {
   sentBody: string;
   failed: string;
   unconfigured: string;
+  limited: string;
   or: string;
 };
 
@@ -88,6 +89,7 @@ const COPY: Record<Lang, Copy> = {
     sentBody: "Odpiszę na podany e-mail z propozycją terminu.",
     failed: "Nie udało się wysłać formularza. Napisz proszę bezpośrednio:",
     unconfigured: "Formularz chwilowo nie działa. Napisz proszę bezpośrednio:",
+    limited: "Za dużo zgłoszeń z tego adresu w krótkim czasie. Spróbuj za kilka minut albo napisz:",
     or: "albo napisz na",
   },
   en: {
@@ -128,6 +130,8 @@ const COPY: Record<Lang, Copy> = {
     sentBody: "I will reply to the email you gave with a proposed time.",
     failed: "The form could not be sent. Please write directly:",
     unconfigured: "The form is unavailable right now. Please write directly:",
+    limited:
+      "Too many requests from this address in a short time. Try again in a few minutes or write to:",
     or: "or write to",
   },
 };
@@ -217,8 +221,15 @@ function ContactPage() {
                 </label>
                 <label>
                   <span>{c.message}</span>
-                  <textarea name="message" required minLength={10} maxLength={3500} rows={5} />
-                  <small>{c.messageHint}</small>
+                  <textarea
+                    name="message"
+                    required
+                    minLength={10}
+                    maxLength={3500}
+                    rows={5}
+                    aria-describedby="kontakt-hint"
+                  />
+                  <small id="kontakt-hint">{c.messageHint}</small>
                 </label>
                 {/* honeypot: hidden from people and from assistive tech, bots fill it */}
                 <input
@@ -230,7 +241,11 @@ function ContactPage() {
                 />
                 {status.state === "error" && (
                   <p className="kontakt-error" role="alert">
-                    {status.reason === "unconfigured" ? c.unconfigured : c.failed}{" "}
+                    {status.reason === "unconfigured"
+                      ? c.unconfigured
+                      : status.reason === "rate-limited"
+                        ? c.limited
+                        : c.failed}{" "}
                     <a href="mailto:hello@kamiljan.com">hello@kamiljan.com</a>
                   </p>
                 )}

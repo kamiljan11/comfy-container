@@ -76,6 +76,9 @@ function setLang(next: Lang) {
   listeners.forEach((fn) => fn());
 }
 
+/** The store behind useLang, exported so its behaviour is testable without a DOM. */
+export const langStore = { get: snapshot, set: setLang, subscribe };
+
 export function useLang(ssrDefault: Lang = "en"): [Lang, () => void] {
   const lang = useSyncExternalStore(subscribe, snapshot, () => ssrDefault);
 

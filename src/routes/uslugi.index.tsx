@@ -11,8 +11,6 @@ import { SERVICES } from "../data/services";
 
 const COPY = {
   en: {
-    back: "← kamiljan.com",
-    cases: "Case studies →",
     eyebrow: "SERVICES",
     h1: "What I build for companies",
     lead: "Six kinds of work, all of them running in production somewhere. Every page below states what the problem usually looks like, how I approach it, and where the limits are — including the cases where I would tell you not to do it.",
@@ -21,8 +19,6 @@ const COPY = {
       "One conversation is usually enough to see whether there is anything worth automating.",
   },
   pl: {
-    back: "← kamiljan.com",
-    cases: "Case studies →",
     eyebrow: "USŁUGI",
     h1: "Co buduję dla firm",
     lead: "Sześć rodzajów pracy, każdy działający gdzieś w produkcji. Każda strona mówi, jak zwykle wygląda problem, jak do niego podchodzę i gdzie leżą granice — łącznie z przypadkami, w których odradzam robotę.",

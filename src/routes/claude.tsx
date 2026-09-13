@@ -1,6 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
-import { useEffect, useState } from "react";
 import { type Lang } from "../i18n";
 
 export const Route = createFileRoute("/claude")({
@@ -90,9 +89,6 @@ type VaultLabels = {
 type CadenceRow = { name: string; dots: number; freq: string; manual?: boolean };
 
 type Content = {
-  back: string;
-  cases: string;
-  cv: string;
   title: string;
   role: string;
   intro: string;
@@ -149,9 +145,6 @@ type Content = {
 
 const CONTENT: Record<Lang, Content> = {
   en: {
-    back: "← kamiljan.com",
-    cases: "Case studies →",
-    cv: "CV →",
     title: "Coding Higher Mind — the AI system behind the work",
     role: "Two runtimes, hardened prompts, event-driven gates, reviewer departments, a learning loop — counted, not estimated. Now open source.",
     intro:
@@ -691,9 +684,6 @@ const CONTENT: Record<Lang, Content> = {
   },
 
   pl: {
-    back: "← kamiljan.com",
-    cases: "Case studies →",
-    cv: "CV →",
     title: "Coding Higher Mind — system AI, na którym stoi ta praca",
     role: "Dwa runtime'y, utwardzane prompty, bramki na zdarzeniach, działy recenzentów, pętla uczenia — policzone, nie szacowane. Od dziś open source.",
     intro:

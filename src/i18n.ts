@@ -1,15 +1,6 @@
 export type Lang = "en" | "pl";
 
 interface SiteTranslation {
-  nav: {
-    work: string;
-    about: string;
-    capabilities: string;
-    engage: string;
-    contact: string;
-    available: string;
-    cta: string;
-  };
   hero: {
     eyebrow: string;
     h1a: string;
@@ -62,15 +53,6 @@ interface SiteTranslation {
 
 export const T: Record<Lang, SiteTranslation> = {
   en: {
-    nav: {
-      work: "Work",
-      about: "About",
-      capabilities: "Capabilities",
-      engage: "Engage",
-      contact: "Contact",
-      available: "Available",
-      cta: "Let's talk",
-    },
     hero: {
       eyebrow: "AI Automation & Implementation Engineer · Builder & Operator",
       h1a: "Your business.",
@@ -238,15 +220,6 @@ export const T: Record<Lang, SiteTranslation> = {
   },
 
   pl: {
-    nav: {
-      work: "Projekty",
-      about: "O mnie",
-      capabilities: "Kompetencje",
-      engage: "Współpraca",
-      contact: "Kontakt",
-      available: "Dostępny",
-      cta: "Porozmawiajmy",
-    },
     hero: {
       eyebrow: "Automatyzacja procesów i wdrożenia AI w firmie · Builder & Operator",
       h1a: "Twoja firma.",

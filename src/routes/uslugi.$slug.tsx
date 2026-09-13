@@ -10,16 +10,12 @@ import { SERVICES, SERVICE_SLUGS, getService } from "../data/services";
 
 const UI = {
   en: {
-    back: "← kamiljan.com",
-    services: "All services →",
     ctaTitle: "Worth a conversation?",
     ctaLead:
       "Describe the process in a couple of sentences. If there is nothing here worth automating, I will say so — that answer is free and saves us both time.",
     more: "Other things I build",
   },
   pl: {
-    back: "← kamiljan.com",
-    services: "Wszystkie usługi →",
     ctaTitle: "Warto porozmawiać?",
     ctaLead:
       "Opisz proces w dwóch zdaniach. Jeśli nie ma tu czego automatyzować, powiem to wprost — ta odpowiedź jest darmowa i oszczędza czas nam obu.",

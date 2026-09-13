@@ -43,4 +43,5 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Security
 
+- Lead path (chat + `/kontakt`) is rate-limited: 5 leads per client IP in 10 minutes, then refused with a message; past 40 an hour per instance the email still goes out without the Anthropic brief, so a script loop cannot run up the model bill. Every failure in `lead.server.ts` now logs a `[lead] …` line (no personal data) instead of returning silently; RUNBOOK and README describe the real lead path.
 - `vitest` 3.2 → 5.0 (dev only) clears the last 2 moderate advisories (`vitest`, `@vitest/mocker`); `npm audit` now reports 0. vitest 5 needs Node ≥22.12, so CI (`quality.yml`, `mutation.yml`) moves from Node 20 (EOL) to 24.

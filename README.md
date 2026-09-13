@@ -55,7 +55,7 @@ console-logged (stub transport).
 | Variable | Used by | Without it |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | chat bot, AI lead brief | bot answers "unconfigured"; lead email sends without an AI summary |
-| `RESEND_API_KEY` | contact form, newsletter, lead capture | mail is console-logged only (stub transport) |
+| `RESEND_API_KEY` | chat lead capture + `/kontakt` (direct to Resend in `lead.server.ts`); contact form + newsletter (via `email.server.ts`) | leads return `unconfigured` and log `[lead] RESEND_API_KEY missing`; the other forms fall back to the console stub |
 | `EMAIL_PROVIDER` | selects the transport in `email.server.ts` | defaults to `stub` |
 | `RESEND_FROM` | overrides the lead email's From header | falls back to a pre-verified sender, see `docs/adr/` |
 | `LEAD_TO` | overrides where lead emails land | defaults to `hello@kamiljan.com` |
