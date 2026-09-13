@@ -70,7 +70,6 @@ export function SolutionTabs({ lang }: { lang: Lang }) {
   // SERVICES has six entries per language and services.test.ts pins that
   // list, so an index is always valid here
   const current = list[active] ?? list[0];
-  const proof = current.proofs[0];
 
   const select = (i: number) => {
     setActive(i);
@@ -129,15 +128,6 @@ export function SolutionTabs({ lang }: { lang: Lang }) {
             <span className="sol-eyebrow">{current.eyebrow}</span>
             <h3 className="sol-h">{current.h1}</h3>
             <p className="sol-lead">{current.lead}</p>
-            {proof && (
-              <div className="sol-proof">
-                <span className="sol-proof-label">
-                  {t.proofLabel} · {proof.sector}
-                </span>
-                <strong>{proof.title}</strong>
-                <span>{proof.metric}</span>
-              </div>
-            )}
             <a className="btn-primary sol-cta" href={serviceHref(current.slug, lang)}>
               {t.more}
             </a>
