@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { SERVICES } from "../data/services";
+import { AREAS } from "../data/areas";
 import { useLang, ssrLangFor } from "../hooks/useLang";
 import { LangToggle } from "./LangToggle";
 
@@ -17,7 +18,7 @@ import { LangToggle } from "./LangToggle";
  * router <Link>s, so moving between pages stays client-side.
  */
 
-type Menu = "services" | "about";
+type Menu = "services" | "areas" | "about";
 
 type AboutItem = { to: "/o-mnie" | "/cv" | "/claude"; hash?: string; label: string; hint: string };
 
@@ -25,6 +26,8 @@ type Copy = {
   nav: string;
   services: string;
   allServices: string;
+  areas: string;
+  allAreas: string;
   cases: string;
   blog: string;
   about: string;
@@ -38,6 +41,8 @@ const COPY: Record<Lang, Copy> = {
     nav: "Main",
     services: "Services",
     allServices: "All services",
+    areas: "Areas",
+    allAreas: "All areas",
     cases: "Case studies",
     blog: "Blog",
     about: "About",
@@ -61,6 +66,8 @@ const COPY: Record<Lang, Copy> = {
     nav: "Główne",
     services: "Usługi",
     allServices: "Wszystkie usługi",
+    areas: "Obszary",
+    allAreas: "Wszystkie obszary",
     cases: "Realizacje",
     blog: "Blog",
     about: "O mnie",
@@ -102,6 +109,7 @@ export function SiteHeader() {
   const [lang, toggleLang] = useLang(ssrLangFor(pathname));
   const t = COPY[lang];
   const services = SERVICES[lang];
+  const areas = AREAS[lang];
 
   const [open, setOpen] = useState<Menu | null>(null);
   const [sheet, setSheet] = useState(false);
@@ -109,7 +117,11 @@ export function SiteHeader() {
   const navRef = useRef<HTMLElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const buttons = useRef<Record<Menu, HTMLButtonElement | null>>({ services: null, about: null });
+  const buttons = useRef<Record<Menu, HTMLButtonElement | null>>({
+    services: null,
+    areas: null,
+    about: null,
+  });
 
   // a new page closes whatever was open
   useEffect(() => {
@@ -194,6 +206,38 @@ export function SiteHeader() {
               ))}
               <Link className="nav-dd-all" to="/uslugi" onClick={() => setOpen(null)}>
                 {t.allServices} →
+              </Link>
+            </div>
+          </li>
+          <li className="nav-dd">
+            <button
+              ref={(el) => {
+                buttons.current.areas = el;
+              }}
+              type="button"
+              className="nav-dd-btn"
+              aria-expanded={open === "areas"}
+              aria-controls="dd-areas"
+              onClick={() => toggle("areas")}
+            >
+              {t.areas}
+              <Chevron />
+            </button>
+            <div id="dd-areas" className={`nav-dd-panel${open === "areas" ? " open" : ""}`}>
+              {areas.map((a) => (
+                <Link
+                  key={a.slug}
+                  className="nav-dd-item"
+                  to="/obszary/$slug"
+                  params={{ slug: a.slug }}
+                  onClick={() => setOpen(null)}
+                >
+                  <strong>{a.navLabel}</strong>
+                  <span>{a.micro[0]}</span>
+                </Link>
+              ))}
+              <Link className="nav-dd-all" to="/obszary" onClick={() => setOpen(null)}>
+                {t.allAreas} →
               </Link>
             </div>
           </li>
@@ -288,6 +332,28 @@ export function SiteHeader() {
             ))}
             <Link to="/uslugi" className="mm-all">
               {t.allServices} →
+            </Link>
+          </div>
+        </div>
+        <div className="mm-group">
+          <button
+            type="button"
+            className="mm-toggle"
+            aria-expanded={sheetGroup === "areas"}
+            aria-controls="mm-areas"
+            onClick={() => setSheetGroup((g) => (g === "areas" ? null : "areas"))}
+          >
+            {t.areas}
+            <Chevron />
+          </button>
+          <div className="mm-sub" id="mm-areas" hidden={sheetGroup !== "areas"}>
+            {areas.map((a) => (
+              <Link key={a.slug} to="/obszary/$slug" params={{ slug: a.slug }}>
+                {a.navLabel}
+              </Link>
+            ))}
+            <Link to="/obszary" className="mm-all">
+              {t.allAreas} →
             </Link>
           </div>
         </div>

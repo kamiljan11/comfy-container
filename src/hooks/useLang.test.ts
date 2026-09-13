@@ -22,7 +22,16 @@ describe("resolveLang", () => {
 
 describe("ssrLangFor", () => {
   it("renders the Polish-slug pages in Polish on the server", () => {
-    for (const p of ["/uslugi", "/uslugi/integracje", "/kontakt", "/blog", "/blog/", "/o-mnie"]) {
+    for (const p of [
+      "/uslugi",
+      "/uslugi/integracje",
+      "/kontakt",
+      "/blog",
+      "/blog/",
+      "/o-mnie",
+      "/obszary",
+      "/obszary/hr-i-rekrutacja",
+    ]) {
       expect(ssrLangFor(p)).toBe("pl");
     }
   });
