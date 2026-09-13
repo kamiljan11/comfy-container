@@ -11,6 +11,12 @@ import { useEffect, useRef } from "react";
  * afterwards — a client-side navigation, an opened accordion — never lit up.
  * It also left those listeners behind on unmount.
  *
+ * Position goes through `transform`, coalesced to one write per frame. It
+ * used to set `left`/`top` on every mousemove: that is a layout write per
+ * event, and together with the drop-shadow filter it made the pointer stutter
+ * while dragging a text selection, when the browser is also repainting the
+ * highlight. A transform stays on the compositor.
+ *
  * Hidden under 768px by CSS; touch devices have no pointer to replace.
  */
 export function Cursor() {
@@ -20,9 +26,17 @@ export function Cursor() {
     const el = ptrRef.current;
     if (!el) return;
 
+    let x = 0;
+    let y = 0;
+    let frame = 0;
+    const paint = () => {
+      frame = 0;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    };
     const onMove = (e: MouseEvent) => {
-      el.style.left = `${e.clientX}px`;
-      el.style.top = `${e.clientY}px`;
+      x = e.clientX;
+      y = e.clientY;
+      if (!frame) frame = requestAnimationFrame(paint);
     };
     const onOver = (e: MouseEvent) => {
       const t = e.target as Element | null;
@@ -34,6 +48,7 @@ export function Cursor() {
     return () => {
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseover", onOver);
+      cancelAnimationFrame(frame);
     };
   }, []);
 

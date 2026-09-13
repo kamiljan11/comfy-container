@@ -25,6 +25,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Fixed
 
+- Custom cursor no longer stutters while selecting text: it was positioned with `left`/`top` on every mousemove (a layout write per event, plus a drop-shadow filter repaint); now `transform: translate3d` coalesced to one write per animation frame, `will-change: transform`.
 - Capabilities deck now works on phones too: it was desktop-only (≥769px) with an accordion below. The sticky stack is the base rule at every width (`--deck-top` = nav + 12px: 132px desktop / 76px phone, `--deck-step` 12px / 10px); the accordion (button, chevron, `openCap` state) is removed since neither breakpoint used it any more, and `.cap-title` is a real `h3`.
 - CI `mutation.yml`: the `labeled`/`unlabeled` trigger from #15 now re-runs the job only when the label involved is `allow-low-mutation` (job-level `if` checks `github.event.label.name`); any other label no longer starts a full Stryker run. Found by the PR review, merged past it by mistake.
 - CI `mutation.yml` also runs on `labeled`/`unlabeled`, so applying `allow-low-mutation` (the workflow's own escape hatch) re-evaluates the check instead of leaving a red one until the next push.
