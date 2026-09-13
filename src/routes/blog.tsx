@@ -31,16 +31,16 @@ type Copy = {
 const COPY: Record<Lang, Copy> = {
   pl: {
     eyebrow: "BLOG",
-    h1: "Wpisy w przygotowaniu",
-    lead: "Pierwsze artykuły są w drodze — o automatyzacji i wdrożeniach AI w firmie, z przykładami z systemów działających na produkcji.",
+    h1: "Dzielę się tym, co robię z AI",
+    lead: "Czego się uczę, nad czym pracuję, co mnie ostatnio zaciekawiło — i wdrożenia, którymi mogę się podzielić publicznie. Pierwsze wpisy w drodze.",
     meanwhile: "Na razie zobacz",
     services: "usługi",
     cases: "realizacje",
   },
   en: {
     eyebrow: "BLOG",
-    h1: "Posts are coming",
-    lead: "The first articles are on the way — about automation and AI in a company, with examples from systems running in production.",
+    h1: "Sharing what I'm building with AI",
+    lead: "What I'm learning, what I'm working on, what caught my interest — and public implementations I can share. First posts on the way.",
     meanwhile: "Meanwhile, see the",
     services: "services",
     cases: "case studies",
