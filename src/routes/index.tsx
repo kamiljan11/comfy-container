@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import Hero3D from "../components/Hero3D";
 import ChatBot from "../components/ChatBot";
+import { PainGrid, SolutionTabs } from "../components/OfferSections";
 import { T, type Lang } from "../i18n";
 
 /* ── Flags ── */
@@ -32,8 +33,10 @@ function FlagGB() {
 
 /* ── Rotating colored hero word ── */
 const HERO_ROT: Record<Lang, string[]> = {
-  en: ["themselves.", "on autopilot.", "without you.", "24/7.", "while you sleep."],
-  pl: ["same.", "na autopilocie.", "bez ciebie.", "24/7.", "gdy śpisz."],
+  // what a company gets, not what I do ("Your business. Less …"); kept short so
+  // the line never overflows on a phone
+  en: ["manual work.", "chaos.", "retyping.", "overhead.", "guesswork."],
+  pl: ["ręcznej pracy.", "chaosu.", "przepisywania.", "kosztów.", "zgadywania."],
 };
 function RotatingWord({ lang }: { lang: Lang }) {
   const words = HERO_ROT[lang];
@@ -455,6 +458,7 @@ function HomePage() {
               {t.hero.ctaGhost}
             </a>
           </div>
+          <p className="hero-partner">{t.hero.partner}</p>
           <div className="hero-stats">
             <StatCounter value={6} suffix="+" label={t.stats[0]} />
             <StatCounter value={12} suffix="+" label={t.about.meta[0]} />
@@ -464,6 +468,10 @@ function HomePage() {
 
       {/* ── Tech marquee ── */}
       <Marquee />
+
+      {/* ── Offer: the problem first, then the ways it gets solved ── */}
+      <PainGrid lang={lang} />
+      <SolutionTabs lang={lang} />
 
       {/* ── About ── */}
       <section className="about" id="about">

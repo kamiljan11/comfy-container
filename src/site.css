@@ -645,6 +645,13 @@ section {
   border-color: var(--border-teal);
   transform: translateY(-2px);
 }
+.hero-partner {
+  max-width: 560px;
+  margin: 18px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
 .hero-stats {
   display: flex;
   gap: 56px;
@@ -4501,5 +4508,206 @@ section {
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
     column-gap: 48px;
     align-items: start;
+  }
+}
+
+/* ── Offer: problems grid + solution tabs (homepage) ─────────────────────
+   Buyer's order: the problem they recognise, then the ways it gets solved.
+   Copy lives in src/data/services.ts; see components/OfferSections.tsx. */
+.pains,
+.solutions {
+  padding: 110px 0;
+  position: relative;
+}
+.pains {
+  background: var(--bg-alt);
+}
+.offer-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+  max-width: 760px;
+  margin: 18px 0 14px;
+}
+.offer-lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 640px;
+  margin: 0 0 48px;
+}
+.pains-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.pain-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 28px 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.25s,
+    transform 0.25s;
+}
+.pain-card:hover {
+  border-color: var(--border-teal);
+  transform: translateY(-3px);
+}
+.pain-tag,
+.sol-eyebrow,
+.sol-num,
+.sol-proof-label {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.pain-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--text);
+  margin: 0;
+}
+.pain-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin: 0;
+}
+.sol-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: 28px;
+  align-items: start;
+}
+.sol-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sol-tab {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 18px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--r-lg);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 16px;
+  text-align: left;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+.sol-tab:hover {
+  color: var(--text);
+}
+.sol-tab.active {
+  background: var(--surface);
+  border-color: var(--border-teal);
+  color: var(--text);
+}
+.sol-panel {
+  padding: 40px 38px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+.sol-h {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(22px, 2.6vw, 30px);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text);
+  margin: 12px 0 16px;
+}
+.sol-lead {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-2);
+  margin: 0 0 24px;
+}
+.sol-proof {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  margin: 0 0 28px;
+  border-left: 2px solid var(--teal);
+  background: var(--bg-alt);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.sol-proof strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.sol-cta {
+  display: inline-flex;
+}
+.pain-card:focus-visible,
+.sol-tab:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+@media (max-width: 900px) {
+  .pains-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sol-wrap {
+    grid-template-columns: 1fr;
+  }
+  /* tabs become a row of chips that scrolls inside itself, not the page */
+  .sol-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .sol-tab {
+    flex: none;
+    width: auto;
+    white-space: nowrap;
+    padding: 10px 14px;
+    font-size: 14px;
+    /* tap target, same 44px bar as .lang-toggle / .hamburger */
+    min-height: 44px;
+  }
+}
+@media (max-width: 768px) {
+  .pains,
+  .solutions {
+    padding: 64px 0;
+  }
+  .pains-grid {
+    grid-template-columns: 1fr;
+  }
+  .offer-lead {
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+  .pain-card {
+    padding: 20px;
+  }
+  .sol-panel {
+    padding: 24px 20px;
   }
 }

@@ -7,6 +7,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Added
 
+- Homepage offer block after the hero, in the buyer's order (modelled on how letsautomate.pl leads): "Sound familiar?" — six problem cards, one per service, each linking to its /uslugi page — then "How I can help" — six switchable tabs (roving tabindex, arrow keys) showing the service, its lead and one system running in production. Both read from `src/data/services.ts` (`pickHomePains`, unit-tested), so the service pages stay the single source of the copy.
 - Pipeline jakosci: CI (build/lint/typecheck/test/semgrep/audit/licencje), Claude review na PR, szablony dokumentacji
 - `docs/ARCHITECTURE.md`, `docs/GLOSSARY.md`, `docs/adr/0001-*` and `0002-*`, filled-in `docs/RUNBOOK.md`, `docs/quality/BACKLOG.md`
 - `LICENSE`, `.env.example`
@@ -14,6 +15,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Changed
 
+- Hero (EN + PL) sells the outcome for the company, not the person: "Your business. Less manual work / chaos / retyping / overhead / guesswork", a sub that names the processes people search for (invoices, orders, quotes, the spreadsheet), CTA "Show me your process", and a line that bigger builds run with CetusPro, a Rzeszów software house. PL eyebrow carries the searched phrases "automatyzacja procesów" and "wdrożenia AI w firmie".
 - Hero sub (EN + PL): "fine-tuned AI coding agents" / "dostrojonymi agentami AI" — the agents run under Kamil's own hooks, review gates and skills, not stock.
 - `/claude`: the "Self-evolution cycle" routine (opt-in, off) is no longer listed — no point describing something that is switched off.
 - About (EN + PL) shortened to two paragraphs per Kamil: the paying-side paragraph stays; the second is now one sentence (AI agents write the code, Kamil reviews it and owns spec/architecture/review/deploy/the phone when it breaks); the proof list and the third paragraph are gone. Trade-off: the sticky photo holds ~100px again instead of ~420px.

@@ -18,7 +18,10 @@ interface SiteTranslation {
     sub: string;
     cta: string;
     ctaGhost: string;
+    partner: string;
   };
+  pains: { label: string; title: string; lead: string };
+  solutions: { label: string; title: string; lead: string; more: string; proofLabel: string };
   stats: string[];
   about: {
     label: string;
@@ -70,12 +73,26 @@ export const T: Record<Lang, SiteTranslation> = {
     },
     hero: {
       eyebrow: "AI Automation & Implementation Engineer · Builder & Operator",
-      h1a: "I build things",
-      h1b: "that run",
-      h1em: "themselves.",
-      sub: "I scope and ship the software with fine-tuned AI coding agents, run the ads, and build the AI automations, then I document them and train the teams to run them after I step away.",
-      cta: "Work with me",
-      ctaGhost: "See my work",
+      h1a: "Your business.",
+      h1b: "Less",
+      h1em: "manual work.",
+      sub: "I find the process that eats your team's hours — invoices, orders, quotes, the spreadsheet everyone copies from — and replace it with a system or an AI automation running in production. Built with fine-tuned AI coding agents, documented, and your team trained to own it.",
+      cta: "Show me your process",
+      ctaGhost: "See systems in production",
+      partner:
+        "Bigger builds run with CetusPro, a Rzeszów software house whose developers join when a project needs the headcount.",
+    },
+    pains: {
+      label: "Sound familiar?",
+      title: "Problems I get called in for",
+      lead: "None of these hurt at ten orders a month. All of them hurt at a hundred. Each card opens the page on how it gets fixed.",
+    },
+    solutions: {
+      label: "How I can help",
+      title: "Six ways to take work off your team",
+      lead: "Pick the one closest to what hurts. Each opens a page with the problems, the approach and systems already running in production.",
+      more: "See how it works →",
+      proofLabel: "Running in production",
     },
     stats: ["Businesses built", "Active verticals", "Years building", "Countries"],
     about: {
@@ -231,13 +248,27 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: "Porozmawiajmy",
     },
     hero: {
-      eyebrow: "Inżynier Automatyzacji i Wdrożeń AI · Builder & Operator",
-      h1a: "Buduję rzeczy,",
-      h1b: "które działają",
-      h1em: "same.",
-      sub: "Projektuję i wdrażam oprogramowanie z dostrojonymi agentami AI, prowadzę reklamy i buduję automatyzacje AI — a potem dokumentuję je i szkolę zespoły, które będą je obsługiwać po moim odejściu.",
-      cta: "Współpracujmy",
-      ctaGhost: "Moje projekty",
+      eyebrow: "Automatyzacja procesów i wdrożenia AI w firmie · Builder & Operator",
+      h1a: "Twoja firma.",
+      h1b: "Mniej",
+      h1em: "ręcznej pracy.",
+      sub: "Znajduję proces, który zjada godziny Twojego zespołu — faktury, zamówienia, wyceny, arkusz, z którego wszyscy przepisują — i zastępuję go systemem albo automatyzacją AI działającą na produkcji. Budowane z dostrojonymi agentami AI, udokumentowane, a Twój zespół przeszkolony, żeby to prowadził.",
+      cta: "Pokaż mi swój proces",
+      ctaGhost: "Zobacz działające systemy",
+      partner:
+        "Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro — ich developerzy dołączają, gdy projekt wymaga większego zespołu.",
+    },
+    pains: {
+      label: "Znasz to?",
+      title: "Problemy, do których mnie wzywają",
+      lead: "Żaden nie boli przy dziesięciu zamówieniach miesięcznie. Wszystkie bolą przy stu. Każda karta prowadzi do strony, jak to naprawić.",
+    },
+    solutions: {
+      label: "Jak mogę pomóc",
+      title: "Sześć sposobów, żeby zdjąć pracę z Twojego zespołu",
+      lead: "Wybierz to, co najbliżej Twojego problemu. Każda pozycja prowadzi do strony z problemami, podejściem i systemami, które już działają na produkcji.",
+      more: "Zobacz, jak to działa →",
+      proofLabel: "Działa w produkcji",
     },
     stats: ["Zbudowanych biznesów", "Aktywnych pionów", "Lat budowania", "Krajów"],
     about: {
