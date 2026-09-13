@@ -1,5 +1,13 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+  Outlet,
+  Link,
+  createRootRoute,
+  HeadContent,
+  Scripts,
+  useRouterState,
+} from "@tanstack/react-router";
 import { Cursor } from "../components/Cursor";
+import { useLang, ssrLangFor } from "../hooks/useLang";
 import { SiteHeader } from "../components/SiteHeader";
 import appCss from "../styles.css?url";
 import siteCss from "../site.css?url";
@@ -206,8 +214,15 @@ export const Route = createRootRoute({
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
+  // The document language follows the same store the header and the pages
+  // read: Polish on the server for the Polish-slug routes (/uslugi, /obszary,
+  // /kontakt, /blog, /o-mnie), English elsewhere, and the reader's choice
+  // once hydrated. A fixed lang="en" over Polish copy misled search engines
+  // and screen readers alike.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const [lang] = useLang(ssrLangFor(pathname));
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         <HeadContent />
         <script

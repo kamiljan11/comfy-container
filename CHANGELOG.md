@@ -23,6 +23,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Changed
 
+- Service and area pages (`/uslugi/$slug`, `/obszary/$slug`) redesigned so they read like a landing page, not a wall of text (Kamil: "kiepsko się czyta, więcej bajerów"): hero with a soft glow, the three micro-promises as chips and two CTAs; problem cards with a line icon per tag; the answer as a numbered timeline; proofs as metric tiles; a new four-step "How we work together" rail (free 30-min call → process map and quote → built in stages → training and handover); FAQ as an accordion whose questions are real `h3`s; a closing CTA card; a reading-progress bar. Sections fade in on scroll only when JS is running and only for elements below the fold — under `prefers-reduced-motion` or without JS the page is the plain document. Landmarks fixed on the way: one `<main>` per page (there was none), hero is a `section` so the site bar stays the only banner. Old `.svc-*` body rules removed; the index pages keep theirs. Contrast measured ≥ 8.5:1 on every text run.
 - `/case-studies`: one list instead of two. The dark TOC card grid above the white study list is gone; each white card now shows the number, title, a two-line preview and the first three tags before it is opened — the information the TOC cards carried — so nothing is listed twice and the white headers are no longer bare titles. Dead `.cs-toc*` CSS removed.
 - CetusPro line (hero EN+PL, `/kontakt`): "close to 40 developers" / "blisko 40 developerów".
 - Removed the `supplier-feed-to-storefront` case study (NextCar shop): no AI in it, and the portfolio sells AI delivery. NextCar stays listed as a live system; the "20 case studies" line in the root FAQ schema now matches the list.
@@ -39,6 +40,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Fixed
 
+- `<html lang>` follows the page language (was a fixed `en` even over Polish copy on `/uslugi`, `/obszary`, `/kontakt`, `/blog`, `/o-mnie`): Polish on the server for those routes, English elsewhere, the reader's choice after hydration.
 - Custom cursor no longer stutters while selecting text: it was positioned with `left`/`top` on every mousemove (a layout write per event, plus a drop-shadow filter repaint); now `transform: translate3d` coalesced to one write per animation frame, `will-change: transform`.
 - Capabilities deck now works on phones too: it was desktop-only (≥769px) with an accordion below. The sticky stack is the base rule at every width (`--deck-top` = nav + 12px: 132px desktop / 76px phone, `--deck-step` 12px / 10px); the accordion (button, chevron, `openCap` state) is removed since neither breakpoint used it any more, and `.cap-title` is a real `h3`.
 - CI `mutation.yml`: the `labeled`/`unlabeled` trigger from #15 now re-runs the job only when the label involved is `allow-low-mutation` (job-level `if` checks `github.event.label.name`); any other label no longer starts a full Stryker run. Found by the PR review, merged past it by mistake.
