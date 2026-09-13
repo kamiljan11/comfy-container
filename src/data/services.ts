@@ -1386,3 +1386,19 @@ export function getService(lang: Lang, slug: string): Service | undefined {
 }
 
 export const SERVICE_SLUGS = PL.map((s) => s.slug);
+
+export type HomePain = ServiceProblem & { slug: string };
+
+/**
+ * Six problem cards for the homepage, one per service: the i-th problem of the
+ * i-th service. Every service lists its problems in the same tag order (data,
+ * efficiency, process, risk, technology, people), so walking the diagonal
+ * gives six different tags and every card links to a different service page.
+ * A service without problems is skipped rather than rendering an empty card.
+ */
+export function pickHomePains(services: Service[]): HomePain[] {
+  return services.flatMap((s, i) => {
+    const p = s.problems.length > 0 ? s.problems[i % s.problems.length] : undefined;
+    return p ? [{ ...p, slug: s.slug }] : [];
+  });
+}
