@@ -15,6 +15,7 @@ import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as ClaudeRouteImport } from './routes/claude'
 import { Route as CvRouteImport } from './routes/cv'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as OMnieRouteImport } from './routes/o-mnie'
 import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
 import { Route as UslugiSlugRouteImport } from './routes/uslugi.$slug'
 
@@ -48,6 +49,11 @@ const KontaktRoute = KontaktRouteImport.update({
   path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OMnieRoute = OMnieRouteImport.update({
+  id: '/o-mnie',
+  path: '/o-mnie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UslugiIndexRoute = UslugiIndexRouteImport.update({
   id: '/uslugi/',
   path: '/uslugi/',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
+  '/o-mnie': typeof OMnieRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/uslugi/': typeof UslugiIndexRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
+  '/o-mnie': typeof OMnieRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/uslugi': typeof UslugiIndexRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
+  '/o-mnie': typeof OMnieRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
   '/uslugi/': typeof UslugiIndexRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/claude'
     | '/cv'
     | '/kontakt'
+    | '/o-mnie'
     | '/uslugi/$slug'
     | '/uslugi/'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/claude'
     | '/cv'
     | '/kontakt'
+    | '/o-mnie'
     | '/uslugi/$slug'
     | '/uslugi'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/claude'
     | '/cv'
     | '/kontakt'
+    | '/o-mnie'
     | '/uslugi/$slug'
     | '/uslugi/'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   ClaudeRoute: typeof ClaudeRoute
   CvRoute: typeof CvRoute
   KontaktRoute: typeof KontaktRoute
+  OMnieRoute: typeof OMnieRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
   UslugiIndexRoute: typeof UslugiIndexRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/o-mnie': {
+      id: '/o-mnie'
+      path: '/o-mnie'
+      fullPath: '/o-mnie'
+      preLoaderRoute: typeof OMnieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/uslugi/': {
       id: '/uslugi/'
       path: '/uslugi'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClaudeRoute: ClaudeRoute,
   CvRoute: CvRoute,
   KontaktRoute: KontaktRoute,
+  OMnieRoute: OMnieRoute,
   UslugiSlugRoute: UslugiSlugRoute,
   UslugiIndexRoute: UslugiIndexRoute,
 }

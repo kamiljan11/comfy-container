@@ -59,6 +59,9 @@ export const getRouter = () => {
     routeTree,
     context: {},
     scrollRestoration: true,
+    // /o-mnie#engage etc. from the header dropdown: without this the router's
+    // own scroll restoration wins and the page stays at the top.
+    defaultHashScrollIntoView: { block: "start" },
     defaultPreloadStaleTime: 0,
     defaultErrorComponent: DefaultErrorComponent,
   });
