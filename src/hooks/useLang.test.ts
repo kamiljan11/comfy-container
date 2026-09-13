@@ -22,7 +22,7 @@ describe("resolveLang", () => {
 
 describe("ssrLangFor", () => {
   it("renders the Polish-slug pages in Polish on the server", () => {
-    for (const p of ["/uslugi", "/uslugi/integracje", "/kontakt", "/blog", "/blog/"]) {
+    for (const p of ["/uslugi", "/uslugi/integracje", "/kontakt", "/blog", "/blog/", "/o-mnie"]) {
       expect(ssrLangFor(p)).toBe("pl");
     }
   });
@@ -36,6 +36,7 @@ describe("ssrLangFor", () => {
       "/uslugix",
       "/blogroll",
       "/kontakty",
+      "/o-mniej",
     ]) {
       expect(ssrLangFor(p)).toBe("en");
     }

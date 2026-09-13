@@ -19,7 +19,7 @@ import { LangToggle } from "./LangToggle";
 
 type Menu = "services" | "about";
 
-type AboutItem = { to: "/" | "/cv" | "/claude"; hash?: string; label: string; hint: string };
+type AboutItem = { to: "/o-mnie" | "/cv" | "/claude"; hash?: string; label: string; hint: string };
 
 type Copy = {
   nav: string;
@@ -42,9 +42,17 @@ const COPY: Record<Lang, Copy> = {
     blog: "Blog",
     about: "About",
     aboutItems: [
-      { to: "/", hash: "about", label: "About me", hint: "Who I am and how I work" },
+      { to: "/o-mnie", label: "About me", hint: "Who I am and how I work" },
+      { to: "/o-mnie", hash: "capabilities", label: "Capabilities", hint: "What I build and run" },
+      {
+        to: "/o-mnie",
+        hash: "engage",
+        label: "Ways to work together",
+        hint: "Consulting, builds, hiring",
+      },
       { to: "/cv", label: "CV", hint: "Roles, companies, experience" },
       { to: "/claude", label: "AI system", hint: "How I build with AI agents" },
+      { to: "/o-mnie", hash: "beyond", label: "Books", hint: "Two free guidebooks" },
     ],
     cta: "Free consultation",
     menu: "Menu",
@@ -57,9 +65,17 @@ const COPY: Record<Lang, Copy> = {
     blog: "Blog",
     about: "O mnie",
     aboutItems: [
-      { to: "/", hash: "about", label: "O mnie", hint: "Kim jestem i jak pracuję" },
+      { to: "/o-mnie", label: "O mnie", hint: "Kim jestem i jak pracuję" },
+      { to: "/o-mnie", hash: "capabilities", label: "Kompetencje", hint: "Co buduję i prowadzę" },
+      {
+        to: "/o-mnie",
+        hash: "engage",
+        label: "Formy współpracy",
+        hint: "Doradztwo, wdrożenia, etat",
+      },
       { to: "/cv", label: "CV", hint: "Role, firmy, doświadczenie" },
       { to: "/claude", label: "System AI", hint: "Jak buduję z agentami AI" },
+      { to: "/o-mnie", hash: "beyond", label: "Książki", hint: "Dwa darmowe przewodniki" },
     ],
     cta: "Bezpłatna konsultacja",
     menu: "Menu",

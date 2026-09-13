@@ -5109,3 +5109,27 @@ section {
   margin: 28px 0 0;
   color: var(--text-2);
 }
+
+/* ── /o-mnie page head (the homepage opens with the hero instead) ── */
+.omnie-head {
+  padding: calc(var(--header-h) + 72px) 0 24px;
+  background: var(--bg-alt);
+}
+.omnie-h1 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(44px, 7vw, 88px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+  margin: 14px 0 28px;
+}
+.omnie-head + .about {
+  padding-top: 48px;
+}
+
+/* anchored sections land below the fixed header, not under it */
+section[id],
+header[id] {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}

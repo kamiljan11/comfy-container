@@ -7,6 +7,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Added
 
+- `/o-mnie`: the personal half of the old homepage (About, capabilities, ways to work together, contact, books) under its own heading and stats; the homepage keeps the offer, the Work list and contact. Both render from `src/components/HomePage.tsx` (`variant`). The header's About dropdown lists About me, Capabilities, Ways to work together, CV, AI system and Books; the hero CTA goes to `/kontakt`; `/o-mnie` renders Polish on the server.
 - One header on every page (`src/components/SiteHeader.tsx`, mounted in `__root`): Services and About open as click dropdowns (Escape / click outside / navigation close them), Case studies, Blog, language switch and a "Free consultation" CTA; below 900px a full-screen sheet with the groups as accordions. Subpages lose their "← kamiljan.com" bars and duplicate language toggles.
 - `/kontakt`: free 30-minute consultation page — how to prepare, what you leave with, and a form sent through the chat's proven lead path (`submitLead` → Resend) with a honeypot; `consultMessage()` unit-tested.
 - `/blog`: in the menu before the first post; `noindex` and out of the sitemap until it has content.
