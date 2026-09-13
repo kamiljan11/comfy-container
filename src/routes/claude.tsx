@@ -701,8 +701,9 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "One honest note —",
         body:
-          "the system speaks Polish today (hook messages, rubrics, doctrine). Everything is plain text; an English pass is " +
-          "the first roadmap item. The installer, the README and the docs are in English.",
+          "the protocol has a full English version (PG_LANG=en, set by the installer from your locale) and every gate " +
+          "message carries an English BLOCKED line with its escape hatch; the doctrine and reviewer rubrics are still " +
+          "Polish — the model reads them fine — and the README exists in both languages.",
       },
     ],
     installLink: "Open the repository →",
@@ -1259,8 +1260,9 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "Jedna uczciwa uwaga —",
         body:
-          "system mówi dziś po polsku (komunikaty hooków, rubryki, doktryna). Wszystko jest zwykłym tekstem; angielska " +
-          "wersja to pierwszy punkt roadmapy. Instalator, README i dokumentacja są po angielsku.",
+          "protokół ma pełną wersję angielską (PG_LANG=en, instalator ustawia ją z locale), a każdy komunikat blokady " +
+          "niesie angielską linię BLOCKED z wyjątkiem; doktryna i rubryki recenzentów zostają po polsku — model czyta je " +
+          "bez problemu — a README jest w obu językach.",
       },
     ],
     installLink: "Otwórz repozytorium →",
