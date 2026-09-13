@@ -32,11 +32,6 @@ interface SiteTranslation {
     p2c: string;
     p2d: string;
     p2e: string;
-    p3a: string;
-    p3b: string;
-    p3c: string;
-    p3d: string;
-    p3e: string;
     meta: string[];
     milestones: Array<{ year: string; desc: string }>;
   };
@@ -78,7 +73,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "I build things",
       h1b: "that run",
       h1em: "themselves.",
-      sub: "I scope and ship the software with AI coding agents, run the ads, and build the AI automations, then I document them and train the teams to run them after I step away.",
+      sub: "I scope and ship the software with fine-tuned AI coding agents, run the ads, and build the AI automations, then I document them and train the teams to run them after I step away.",
       cta: "Work with me",
       ctaGhost: "See my work",
     },
@@ -90,16 +85,11 @@ export const T: Record<Lang, SiteTranslation> = {
       p1c: ", because it has been my budget. That is also why I would rather tell you ",
       p1d: "what not to build",
       p1e: " than deliver a perfect version of the wrong thing.",
-      p2a: "AI coding agents write the code. I own the part that decides whether it survives contact with customers: the spec, the architecture call, the review, the deploy, and the phone when it breaks. The proof is systems taking real orders — ",
-      p2b: "MAS Group runs a 13-stage quote-to-order pipeline live in the field as a mobile app",
-      p2c: ", Flyt quotes cross-border VAT with deposit and refund logic, QuickFix went from nothing to a trilingual EN/PL/IS site and funnel in 72 hours — and ",
-      p2d: "I operate these businesses myself",
-      p2e: ", so a bug in production is my problem before it is anyone's ticket.",
-      p3a: "Every case study on this site names the alternatives I rejected and where the system still falls short, because ",
-      p3b: "the expensive mistakes are the ones nobody says out loud early",
-      p3c: ". I came to Iceland in 2019 with no network and learned the market from the retail floor. What stuck is the habit of taking something genuinely hard and turning it into steps someone else can run, which is why every build ends with ",
-      p3d: "your team trained and me stepping away",
-      p3e: ".",
+      p2a: "AI coding agents write the code; I ",
+      p2b: "review it",
+      p2c: " and ",
+      p2d: "own what decides whether the system survives contact with customers",
+      p2e: ": the spec, the architecture call, the review, the deploy, and the phone when it breaks.",
       meta: ["Years building", "Active verticals", "Businesses built"],
       milestones: [
         {
@@ -245,7 +235,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Buduję rzeczy,",
       h1b: "które działają",
       h1em: "same.",
-      sub: "Projektuję i wdrażam oprogramowanie z agentami AI, prowadzę reklamy i buduję automatyzacje AI — a potem dokumentuję je i szkolę zespoły, które będą je obsługiwać po moim odejściu.",
+      sub: "Projektuję i wdrażam oprogramowanie z dostrojonymi agentami AI, prowadzę reklamy i buduję automatyzacje AI — a potem dokumentuję je i szkolę zespoły, które będą je obsługiwać po moim odejściu.",
       cta: "Współpracujmy",
       ctaGhost: "Moje projekty",
     },
@@ -257,16 +247,11 @@ export const T: Record<Lang, SiteTranslation> = {
       p1c: ", bo to był mój budżet. Z tego samego powodu wolę powiedzieć, ",
       p1d: "czego nie budować",
       p1e: ", niż dowieźć idealną wersję niewłaściwej rzeczy.",
-      p2a: "Kod piszą agenci AI. Ja odpowiadam za to, co decyduje, czy system przeżyje kontakt z klientami: specyfikację, decyzję o architekturze, review, wdrożenie i telefon, kiedy coś się sypie. Dowodem są systemy przyjmujące realne zamówienia — ",
-      p2b: "MAS Group działa na 13-etapowym pipelinie od oferty do zamówienia, na żywo w terenie jako aplikacja mobilna",
-      p2c: ", Flyt liczy transgraniczny VAT z logiką depozytu i zwrotu, QuickFix dostał trójjęzyczną stronę i lejek EN/PL/IS w 72 godziny — a ",
-      p2d: "te firmy prowadzę sam",
-      p2e: ", więc błąd na produkcji jest moim problemem, zanim stanie się czyimkolwiek ticketem.",
-      p3a: "Każde studium przypadku na tej stronie wymienia alternatywy, które odrzuciłem, i to, czego system nadal nie robi dobrze, bo ",
-      p3b: "najdroższe błędy to te, o których nikt nie mówi głośno na czas",
-      p3c: ". Na Islandię przyjechałem w 2019 bez kontaktów i poznałem rynek od podstaw w handlu. Został mi z tego nawyk brania rzeczy naprawdę trudnych i zamieniania ich w kroki, które ktoś inny może wykonać, dlatego każde wdrożenie kończy się tak, że ",
-      p3d: "Twój zespół jest przeszkolony, a ja odchodzę od biurka",
-      p3e: ".",
+      p2a: "Kod piszą agenci AI — ja go ",
+      p2b: "weryfikuję",
+      p2c: " i ",
+      p2d: "odpowiadam za to, co decyduje, czy system przeżyje kontakt z klientami",
+      p2e: ": specyfikację, decyzję o architekturze, review, wdrożenie i telefon, kiedy coś się sypie.",
       meta: ["Lat budowania", "Aktywnych pionów", "Zbudowanych biznesów"],
       milestones: [
         {

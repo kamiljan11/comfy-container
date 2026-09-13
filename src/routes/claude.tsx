@@ -579,7 +579,6 @@ const CONTENT: Record<Lang, Content> = {
       { name: "Weekly system report", dots: 1, freq: "Sunday" },
       { name: "CVE watch", dots: 1, freq: "monthly" },
       { name: "Reviewer calibration", dots: 1, freq: "monthly" },
-      { name: "Self-evolution cycle", dots: 0, freq: "opt-in, off", manual: true },
       { name: "Repo cleaner", dots: 0, freq: "manual only", manual: true },
     ],
     schedItems: [
@@ -612,12 +611,6 @@ const CONTENT: Record<Lang, Content> = {
         body:
           "a full clone of the agent configuration and a generated one-click restore for a new machine. A backup that " +
           "was never restored is not a backup, so the restore script is part of the backup.",
-      },
-      {
-        label: "Self-evolution cycle (opt-in) —",
-        body:
-          "reads recent transcripts, detects patterns — repeated corrections, repeated tool errors, rules that were " +
-          "bypassed — and proposes edits with cited evidence. Only proposals I approve become standing rules.",
       },
     ],
     memTitle: "Memory, telemetry and the retro that rebuilt the system",
@@ -1139,7 +1132,6 @@ const CONTENT: Record<Lang, Content> = {
       { name: "Tygodniowy raport systemu", dots: 1, freq: "niedziela" },
       { name: "Nadzór CVE", dots: 1, freq: "co miesiąc" },
       { name: "Kalibracja recenzentów", dots: 1, freq: "co miesiąc" },
-      { name: "Cykl samodoskonalenia", dots: 0, freq: "opt-in, wyłączony", manual: true },
       { name: "Sprzątacz repo", dots: 0, freq: "tylko ręcznie", manual: true },
     ],
     schedItems: [
@@ -1172,12 +1164,6 @@ const CONTENT: Record<Lang, Content> = {
         body:
           "pełny klon konfiguracji agenta i wygenerowany restore na nową maszynę jednym kliknięciem. Backup, którego " +
           "nigdy nie odtworzono, nie jest backupem, więc skrypt restore jest częścią backupu.",
-      },
-      {
-        label: "Cykl samodoskonalenia (opt-in) —",
-        body:
-          "czyta ostatnie transkrypty, wykrywa wzorce — powtórzone korekty, powtórzone błędy narzędzi, obchodzone reguły — " +
-          "i proponuje zmiany z cytowanym dowodem. Stałymi regułami zostają tylko te, które zatwierdzę.",
       },
     ],
     memTitle: "Pamięć, telemetria i retro, które przebudowało system",

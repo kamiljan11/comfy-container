@@ -14,6 +14,9 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Changed
 
+- Hero sub (EN + PL): "fine-tuned AI coding agents" / "dostrojonymi agentami AI" — the agents run under Kamil's own hooks, review gates and skills, not stock.
+- `/claude`: the "Self-evolution cycle" routine (opt-in, off) is no longer listed — no point describing something that is switched off.
+- About (EN + PL) shortened to two paragraphs per Kamil: the paying-side paragraph stays; the second is now one sentence (AI agents write the code, Kamil reviews it and owns spec/architecture/review/deploy/the phone when it breaks); the proof list and the third paragraph are gone. Trade-off: the sticky photo holds ~100px again instead of ~420px.
 - README: corrected the "no backend" claim (the AI chat bot and lead capture run as real server functions calling Anthropic + Resend), documented env vars and testing
 - `src/server/lead.server.ts`: magic numbers (transcript/message/name/email length caps) named as constants; `isValidEmail` extracted from an inline regex check
 - `src/components/Hero3D.tsx`: `renderer` typed as `THREE.WebGLRenderer | null` instead of `any` (the only hand-written `any` in the repo; `src/routeTree.gen.ts`'s are router-plugin-generated and out of scope), with the two resulting "possibly null" call sites (`tick`'s render loop, `onResize`) guarded instead of suppressed
