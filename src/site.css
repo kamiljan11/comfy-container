@@ -5628,6 +5628,44 @@ header[id] {
   color: var(--text-2);
 }
 
+/* ── Hero drawing ── */
+.sl-hero-grid {
+  display: grid;
+  gap: 36px 48px;
+  align-items: center;
+}
+.sl-hero-art {
+  margin: 0;
+  width: 100%;
+  max-width: 560px;
+}
+.ill {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* dashed "flow" paths crawl along their direction; static under reduced
+   motion (the site-wide rule at the top of this file also zeroes them) */
+@media (prefers-reduced-motion: no-preference) {
+  .ill-flow {
+    stroke-dashoffset: 60;
+    animation: ill-flow 4s linear infinite;
+  }
+  @keyframes ill-flow {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+@media (min-width: 920px) {
+  .sl-hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+  .sl-hero-art {
+    justify-self: end;
+  }
+}
+
 /* ── Sibling pages ── */
 .sl-more {
   margin-top: 56px;

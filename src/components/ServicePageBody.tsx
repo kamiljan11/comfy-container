@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, type ReactElement, type RefObject }
 import { Link } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { type Service } from "../data/services";
+import { Illustration } from "./illustrations";
 
 /**
  * The body of one service (/uslugi/$slug) or area (/obszary/$slug) page. Both
@@ -437,33 +438,39 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
 
       {/* section, not header: see the landmark note at the top of this file */}
       <section className="sl-hero" aria-labelledby="sl-hero-h">
-        <div className="sl-wrap">
-          <span className="sl-eyebrow">{s.eyebrow}</span>
-          <h1 className="sl-h1" id="sl-hero-h">
-            {s.h1}
-          </h1>
-          <p className="sl-lead">{s.lead}</p>
+        <div className="sl-wrap sl-hero-grid">
+          <div className="sl-hero-copy">
+            <span className="sl-eyebrow">{s.eyebrow}</span>
+            <h1 className="sl-h1" id="sl-hero-h">
+              {s.h1}
+            </h1>
+            <p className="sl-lead">{s.lead}</p>
 
-          <ul className="sl-chips">
-            {s.micro.map((m, i) => (
-              <li key={`${String(i)}-${m}`} className="sl-chip">
-                <span className="sl-chip-dot" aria-hidden="true" />
-                {m}
-              </li>
-            ))}
-          </ul>
+            <ul className="sl-chips">
+              {s.micro.map((m, i) => (
+                <li key={`${String(i)}-${m}`} className="sl-chip">
+                  <span className="sl-chip-dot" aria-hidden="true" />
+                  {m}
+                </li>
+              ))}
+            </ul>
 
-          <div className="sl-actions">
-            <Link to="/kontakt" className="sl-btn">
-              {t.ctaPrimary}
-              <span className="sl-btn-arrow" aria-hidden="true">
-                →
-              </span>
-            </Link>
-            <a href="#sl-problems" className="sl-btn-ghost">
-              {t.ctaSecondary}
-            </a>
+            <div className="sl-actions">
+              <Link to="/kontakt" className="sl-btn">
+                {t.ctaPrimary}
+                <span className="sl-btn-arrow" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+              <a href="#sl-problems" className="sl-btn-ghost">
+                {t.ctaSecondary}
+              </a>
+            </div>
           </div>
+
+          {/* the before/after drawing for this page; a page without one
+              just renders the copy full-width */}
+          <Illustration slug={s.slug} lang={lang} />
         </div>
       </section>
 
