@@ -62,7 +62,7 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: "Show me your process",
       ctaGhost: "See systems in production",
       partner:
-        "Bigger builds run with CetusPro, a Rzeszów software house whose developers join when a project needs the headcount.",
+        "Bigger builds run with CetusPro, a Rzeszów software house with close to 40 developers who join when a project needs the headcount.",
     },
     pains: {
       label: "Sound familiar?",
@@ -229,7 +229,7 @@ export const T: Record<Lang, SiteTranslation> = {
       cta: "Pokaż mi swój proces",
       ctaGhost: "Zobacz działające systemy",
       partner:
-        "Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro — ich developerzy dołączają, gdy projekt wymaga większego zespołu.",
+        "Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro — blisko 40 developerów dołącza, gdy projekt wymaga większego zespołu.",
     },
     pains: {
       label: "Znasz to?",
