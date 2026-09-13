@@ -22,6 +22,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ### Fixed
 
+- Capabilities deck now works on phones too: it was desktop-only (≥769px) with an accordion below. The sticky stack is the base rule at every width (`--deck-top` = nav + 12px: 132px desktop / 76px phone, `--deck-step` 12px / 10px); the accordion (button, chevron, `openCap` state) is removed since neither breakpoint used it any more, and `.cap-title` is a real `h3`.
 - CI `mutation.yml`: the `labeled`/`unlabeled` trigger from #15 now re-runs the job only when the label involved is `allow-low-mutation` (job-level `if` checks `github.event.label.name`); any other label no longer starts a full Stryker run. Found by the PR review, merged past it by mistake.
 - CI `mutation.yml` also runs on `labeled`/`unlabeled`, so applying `allow-low-mutation` (the workflow's own escape hatch) re-evaluates the check instead of leaving a red one until the next push.
 - CI `mutation.yml`: Stryker ran from the `npx -p` cache and could not resolve `@stryker-mutator/vitest-runner` nor `typescript` (both resolve from the project), so the first PR that actually exercised the gate (#13) died with `ERR_MODULE_NOT_FOUND`. Now installed into the project (`--no-save`) after `npm ci`.

@@ -243,7 +243,6 @@ function HomePage() {
     return navigator.language.startsWith("pl") ? "pl" : "en";
   });
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openCap, setOpenCap] = useState<number | null>(0);
   const [openEngage, setOpenEngage] = useState<number | null>(0);
   const btnRef = useRef<HTMLAnchorElement>(null);
 
@@ -595,31 +594,12 @@ function HomePage() {
           <span className="section-label">{t.capabilities.label}</span>
           <div className="cap-grid">
             {t.caps.map((c, i) => (
-              <div key={i} className={`cap-card${openCap === i ? " expanded" : ""}`}>
+              <div key={i} className="cap-card">
                 <div className="card-glow" aria-hidden="true" />
-                <button
-                  className="cap-head"
-                  onClick={() => setOpenCap(openCap === i ? null : i)}
-                  aria-expanded={openCap === i}
-                >
+                <div className="cap-head">
                   <div className="cap-num">{CAP_NUMS[i]}</div>
-                  <div className="cap-title">{c.title}</div>
-                  <svg
-                    className="cap-chevron"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                  >
-                    <path
-                      d="M4 6l4 4 4-4"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
+                  <h3 className="cap-title">{c.title}</h3>
+                </div>
                 <div className="cap-body">
                   <div className="cap-body-inner">
                     <div className="cap-desc">{c.desc}</div>
