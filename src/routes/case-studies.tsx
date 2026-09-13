@@ -120,15 +120,6 @@ function CaseStudiesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(CS_SCHEMA) }}
       />
-      <div className="cv-bar">
-        <Link to="/" className="cv-back">
-          ← kamiljan.com
-        </Link>
-        <a href="/cv" className="cv-download">
-          View CV →
-        </a>
-      </div>
-
       <header className="cs-head">
         <h1>Case studies</h1>
         <p className="cs-intro">

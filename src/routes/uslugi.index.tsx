@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { LangToggle } from "../components/LangToggle";
 import { useLang } from "../hooks/useLang";
 import { SERVICES } from "../data/services";
 
@@ -48,24 +47,12 @@ export const Route = createFileRoute("/uslugi/")({
 });
 
 function ServicesIndex() {
-  const [lang, toggle] = useLang("pl");
+  const [lang] = useLang("pl");
   const c = COPY[lang];
   const list = SERVICES[lang];
 
   return (
     <div className="svc-page">
-      <div className="cv-bar">
-        <Link to="/" className="cv-back">
-          {c.back}
-        </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Link to="/case-studies" className="cv-back">
-            {c.cases}
-          </Link>
-          <LangToggle lang={lang} onToggle={toggle} />
-        </div>
-      </div>
-
       <div className="container">
         <header className="svc-head">
           <span className="svc-eyebrow">{c.eyebrow}</span>

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useLang } from "../hooks/useLang";
 import { useEffect, useState } from "react";
 import { type Lang } from "../i18n";
 
@@ -20,30 +21,6 @@ export const Route = createFileRoute("/claude")({
 const REPO_URL = "https://github.com/kamiljan11/coding-higher-mind";
 
 /* ── Flags (mirrors the homepage toggle) ── */
-function FlagPL() {
-  return (
-    <svg width="22" height="15" viewBox="0 0 22 15" className="flag-svg" aria-hidden="true">
-      <rect width="22" height="15" rx="2.5" fill="#fff" />
-      <path d="M0 7.5h22V12.5a2.5 2.5 0 0 1-2.5 2.5h-17A2.5 2.5 0 0 1 0 12.5V7.5Z" fill="#dc143c" />
-    </svg>
-  );
-}
-function FlagGB() {
-  return (
-    <svg width="22" height="15" viewBox="0 0 60 30" className="flag-svg" aria-hidden="true">
-      <clipPath id="gb-r-ai">
-        <rect width="60" height="30" rx="5" />
-      </clipPath>
-      <g clipPath="url(#gb-r-ai)">
-        <rect width="60" height="30" fill="#012169" />
-        <path d="M0,0 60,30 M60,0 0,30" stroke="#fff" strokeWidth="6" />
-        <path d="M0,0 60,30 M60,0 0,30" stroke="#c8102e" strokeWidth="4" />
-        <path d="M30,0 V30 M0,15 H60" stroke="#fff" strokeWidth="10" />
-        <path d="M30,0 V30 M0,15 H60" stroke="#c8102e" strokeWidth="6" />
-      </g>
-    </svg>
-  );
-}
 
 type Item = { label: string; body: string };
 type Section = { title: string; lead?: string; items: Item[] };
@@ -1816,60 +1793,13 @@ function ItemList({ items }: { items: Item[] }) {
 }
 
 function ClaudePage() {
-  const [lang, setLang] = useState<Lang>(() => {
-    if (typeof window === "undefined") return "en";
-    const url = new URLSearchParams(window.location.search).get("lang") as Lang;
-    if (url === "en" || url === "pl") return url;
-    const saved = localStorage.getItem("kj-lang") as Lang;
-    if (saved === "en" || saved === "pl") return saved;
-    return navigator.language.startsWith("pl") ? "pl" : "en";
-  });
-
-  const toggleLang = () => {
-    setLang((l) => {
-      const next: Lang = l === "en" ? "pl" : "en";
-      if (typeof window !== "undefined") localStorage.setItem("kj-lang", next);
-      return next;
-    });
-  };
-
-  // keep ?lang= in the URL in sync so the choice carries to / and into shared links
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const u = new URL(window.location.href);
-    if (u.searchParams.get("lang") !== lang) {
-      u.searchParams.set("lang", lang);
-      window.history.replaceState({}, "", u);
-    }
-  }, [lang]);
+  const [lang] = useLang("en");
 
   const c = CONTENT[lang];
 
   return (
     <div className="cv-page">
       <div className="read-progress" aria-hidden="true" />
-      <div className="cv-bar">
-        <Link to="/" className="cv-back">
-          {c.back}
-        </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <Link to="/case-studies" className="cv-back">
-            {c.cases}
-          </Link>
-          <Link to="/cv" className="cv-back">
-            {c.cv}
-          </Link>
-          <button
-            type="button"
-            className="lang-toggle"
-            onClick={toggleLang}
-            aria-label="Switch language"
-          >
-            {lang === "en" ? <FlagGB /> : <FlagPL />}
-          </button>
-        </div>
-      </div>
-
       <article className="cv-paper">
         <header className="cv-head">
           <h1>{c.title}</h1>
