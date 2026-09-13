@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { FEATURED, SECONDARY, type CaseStudy } from "../data/caseStudies";
+import { CASE_STUDIES, FEATURED, SECONDARY, type CaseStudy } from "../data/caseStudies";
+import { useLang } from "../hooks/useLang";
+import { type Lang } from "../i18n";
 
 /** Approximate reading time from all prose fields (~200 wpm). */
 function readMins(cs: CaseStudy): number {
@@ -47,6 +49,75 @@ export const Route = createFileRoute("/case-studies")({
   }),
   component: CaseStudiesPage,
 });
+
+/** Everything on the page that is not study copy. The studies themselves come
+ *  from CASE_STUDIES[lang]; the route's meta stays English because the slug is. */
+const UI: Record<
+  Lang,
+  {
+    h1: string;
+    intro: string;
+    problem: string;
+    context: string;
+    role: string;
+    decisions: string;
+    why: string;
+    rejected: string;
+    tradeoff: string;
+    build: string;
+    evals: string;
+    limitations: string;
+    results: string;
+    principle: string;
+    min: string;
+    backTop: string;
+    more: string;
+    moreSub: string;
+  }
+> = {
+  en: {
+    h1: "Case studies",
+    intro:
+      "How a few of these systems were actually built — the problem, the decisions I made and the alternatives I rejected, how I knew it worked, and what I'd do differently. Tap any one to read it in full.",
+    problem: "The problem",
+    context: "Context & constraints",
+    role: "My role.",
+    decisions: "The decisions that mattered",
+    why: "Why",
+    rejected: "Rejected",
+    tradeoff: "Trade-off",
+    build: "Building & deploying it",
+    evals: "How I knew it worked",
+    limitations: "What didn't work",
+    results: "Results & impact",
+    principle: "What I'd carry forward",
+    min: "min",
+    backTop: "↑ Back to top",
+    more: "More work",
+    moreSub: "Shorter write-ups — same honesty, less depth.",
+  },
+  pl: {
+    h1: "Realizacje",
+    intro:
+      "Jak naprawdę powstało kilka z tych systemów — problem, decyzje, które podjąłem, i alternatywy, które odrzuciłem, skąd wiedziałem, że działa, i co zrobiłbym inaczej. Kliknij dowolną, żeby przeczytać całość.",
+    problem: "Problem",
+    context: "Kontekst i ograniczenia",
+    role: "Moja rola.",
+    decisions: "Decyzje, które miały znaczenie",
+    why: "Dlaczego",
+    rejected: "Odrzucone",
+    tradeoff: "Kompromis",
+    build: "Budowa i wdrożenie",
+    evals: "Skąd wiedziałem, że działa",
+    limitations: "Co nie zadziałało",
+    results: "Wyniki i wpływ",
+    principle: "Co zabieram dalej",
+    min: "min",
+    backTop: "↑ Do góry",
+    more: "Więcej prac",
+    moreSub: "Krótsze opisy — ta sama szczerość, mniej głębi.",
+  },
+};
 
 /** Whitelisted proof domains mentioned in study prose, mapped to a URL that actually resolves. */
 const PROOF_LINKS: Record<string, string> = {
@@ -97,6 +168,12 @@ function Paras({ text }: { text: string }) {
 }
 
 function CaseStudiesPage() {
+  // English slug, so the server renders English; the reader's saved choice
+  // (or the header toggle) switches the studies and the labels together.
+  const [lang] = useLang("en");
+  const t = UI[lang];
+  const studies = CASE_STUDIES[lang];
+
   // Open a collapsed study when it's linked from the TOC or a shared #hash.
   useEffect(() => {
     const openFromHash = () => {
@@ -121,15 +198,11 @@ function CaseStudiesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(CS_SCHEMA) }}
       />
       <header className="cs-head">
-        <h1>Case studies</h1>
-        <p className="cs-intro">
-          How a few of these systems were actually built — the problem, the decisions I made and the
-          alternatives I rejected, how I knew it worked, and what I'd do differently. Tap any one to
-          read it in full.
-        </p>
+        <h1>{t.h1}</h1>
+        <p className="cs-intro">{t.intro}</p>
       </header>
 
-      {FEATURED.map((cs, i) => (
+      {studies.map((cs, i) => (
         <details key={cs.slug} id={cs.slug} className="cs-fold">
           {/* Collapsed, this is one card: title, preview and a few tags are
               always visible — the same info the old separate TOC cards
@@ -147,7 +220,9 @@ function CaseStudiesPage() {
                     {s}
                   </span>
                 ))}
-                <span className="cs-fold-time">{readMins(cs)} min</span>
+                <span className="cs-fold-time">
+                  {readMins(cs)} {t.min}
+                </span>
               </span>
             </span>
             <span className="cs-chev" aria-hidden="true">
@@ -165,32 +240,32 @@ function CaseStudiesPage() {
             </div>
 
             <section className="cs-sec">
-              <h3>The problem</h3>
+              <h3>{t.problem}</h3>
               <Paras text={cs.problem} />
             </section>
 
             <section className="cs-sec">
-              <h3>Context &amp; constraints</h3>
+              <h3>{t.context}</h3>
               <Paras text={cs.context} />
               <p className="cs-role">
-                <b>My role.</b> {cs.myRole}
+                <b>{t.role}</b> {cs.myRole}
               </p>
             </section>
 
             <section className="cs-sec">
-              <h3>The decisions that mattered</h3>
+              <h3>{t.decisions}</h3>
               <ol className="cs-decisions">
                 {cs.decisions.map((d, i) => (
                   <li key={i} className="cs-decision">
                     <p className="cs-d-head">{d.decision}</p>
                     <p className="cs-d-line">
-                      <span className="cs-d-label">Why</span> {d.why}
+                      <span className="cs-d-label">{t.why}</span> {d.why}
                     </p>
                     <p className="cs-d-line">
-                      <span className="cs-d-label cs-d-rej">Rejected</span> {d.rejected}
+                      <span className="cs-d-label cs-d-rej">{t.rejected}</span> {d.rejected}
                     </p>
                     <p className="cs-d-line">
-                      <span className="cs-d-label cs-d-trade">Trade-off</span> {d.tradeoff}
+                      <span className="cs-d-label cs-d-trade">{t.tradeoff}</span> {d.tradeoff}
                     </p>
                   </li>
                 ))}
@@ -198,27 +273,27 @@ function CaseStudiesPage() {
             </section>
 
             <section className="cs-sec">
-              <h3>Building &amp; deploying it</h3>
+              <h3>{t.build}</h3>
               <Paras text={cs.build} />
             </section>
 
             <section className="cs-sec">
-              <h3>How I knew it worked</h3>
+              <h3>{t.evals}</h3>
               <Paras text={cs.evals} />
             </section>
 
             <section className="cs-sec">
-              <h3>What didn't work</h3>
+              <h3>{t.limitations}</h3>
               <Paras text={cs.limitations} />
             </section>
 
             <section className="cs-sec">
-              <h3>Results &amp; impact</h3>
+              <h3>{t.results}</h3>
               <Paras text={cs.results} />
             </section>
 
             <section className="cs-sec">
-              <h3>What I'd carry forward</h3>
+              <h3>{t.principle}</h3>
               <Paras text={cs.principle} />
             </section>
 
@@ -230,7 +305,7 @@ function CaseStudiesPage() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
-              ↑ Back to top
+              {t.backTop}
             </a>
           </div>
         </details>
@@ -238,8 +313,8 @@ function CaseStudiesPage() {
 
       {SECONDARY.length > 0 && (
         <section className="cs-more">
-          <h2 className="cs-more-h">More work</h2>
-          <p className="cs-more-sub">Shorter write-ups — same honesty, less depth.</p>
+          <h2 className="cs-more-h">{t.more}</h2>
+          <p className="cs-more-sub">{t.moreSub}</p>
           <div className="cs-more-grid">
             {SECONDARY.map((s) => (
               <div key={s.slug} className="cs-card">

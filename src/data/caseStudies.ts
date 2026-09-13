@@ -1,3 +1,6 @@
+import { type Lang } from "../i18n";
+import { FEATURED_PL } from "./caseStudies.pl";
+
 export type Decision = { decision: string; why: string; rejected: string; tradeoff: string };
 export type CaseStudy = {
   slug: string;
@@ -1473,3 +1476,7 @@ export const FEATURED: CaseStudy[] = [
 ];
 
 export const SECONDARY: SecondaryStudy[] = [];
+
+/** The twenty studies per language, same slugs and order in both. English is
+ *  the source of truth for facts; ./caseStudies.pl.ts is its translation. */
+export const CASE_STUDIES: Record<Lang, CaseStudy[]> = { en: FEATURED, pl: FEATURED_PL };
