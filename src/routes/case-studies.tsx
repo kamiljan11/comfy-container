@@ -127,42 +127,35 @@ function CaseStudiesPage() {
           alternatives I rejected, how I knew it worked, and what I'd do differently. Tap any one to
           read it in full.
         </p>
-        <nav className="cs-toc-grid" aria-label="Case studies">
-          {FEATURED.map((cs, i) => (
-            <a key={cs.slug} href={`#${cs.slug}`} className="cs-toc-card">
-              <span className="cs-toc-num">{String(i + 1).padStart(2, "0")}</span>
-              <span className="cs-toc-body">
-                <span className="cs-toc-title">{cs.title}</span>
-                <span className="cs-toc-preview">{cs.resultsPreview}</span>
-                <span className="cs-toc-meta">
-                  {cs.stack.slice(0, 3).map((s) => (
-                    <span key={s} className="cs-tag">
-                      {s}
-                    </span>
-                  ))}
-                  <span className="cs-toc-time">{readMins(cs)} min</span>
-                </span>
-              </span>
-            </a>
-          ))}
-        </nav>
       </header>
 
       {FEATURED.map((cs, i) => (
         <details key={cs.slug} id={cs.slug} className="cs-fold">
-          {/* collapsed, this is one clickable line: twenty of these scan in a
-              screen or two. Everything else waits until it is opened. */}
+          {/* Collapsed, this is one card: title, preview and a few tags are
+              always visible — the same info the old separate TOC cards
+              showed — so twenty of these scan in a screen or two without a
+              second, duplicate list above them. Everything else waits until
+              it is opened. */}
           <summary className="cs-fold-sum">
             <span className="cs-fold-num">{String(i + 1).padStart(2, "0")}</span>
-            <h2>{cs.title}</h2>
-            <span className="cs-fold-time">{readMins(cs)} min</span>
+            <span className="cs-fold-headline">
+              <h2>{cs.title}</h2>
+              <p className="cs-fold-preview-inline">{cs.resultsPreview}</p>
+              <span className="cs-fold-meta">
+                {cs.stack.slice(0, 3).map((s) => (
+                  <span key={s} className="cs-tag">
+                    {s}
+                  </span>
+                ))}
+                <span className="cs-fold-time">{readMins(cs)} min</span>
+              </span>
+            </span>
             <span className="cs-chev" aria-hidden="true">
               ▾
             </span>
           </summary>
 
           <div className="cs-fold-body">
-            <p className="cs-fold-preview">{cs.resultsPreview}</p>
             <div className="cs-stack cs-fold-stack">
               {cs.stack.map((s) => (
                 <span key={s} className="cs-tag">

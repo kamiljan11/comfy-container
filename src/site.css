@@ -3255,101 +3255,6 @@ section {
   margin-top: 14px;
   max-width: 68ch;
 }
-.cs-toc {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border-2);
-}
-.cs-toc a {
-  color: var(--teal-2);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-.cs-toc a:hover {
-  color: var(--teal);
-  text-decoration: underline;
-}
-
-/* case-study TOC as cards */
-.cs-toc-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border-2);
-}
-.cs-toc-card {
-  display: flex;
-  gap: 12px;
-  background: var(--surface-2);
-  border: 1px solid var(--border-2);
-  border-radius: 10px;
-  padding: 15px 16px;
-  transition:
-    border-color 0.2s,
-    transform 0.2s;
-}
-.cs-toc-card:hover {
-  border-color: var(--teal);
-  transform: translateY(-2px);
-}
-.cs-toc-num {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 13px;
-  color: var(--teal-2);
-  line-height: 1.9;
-  flex-shrink: 0;
-}
-.cs-toc-body {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-  flex: 1;
-}
-.cs-toc-title {
-  font-family: var(--font-serif);
-  color: var(--text-1);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.28;
-  letter-spacing: -0.005em;
-}
-.cs-toc-preview {
-  color: var(--text-2);
-  font-size: 12.5px;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.cs-toc-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  margin-top: auto;
-}
-.cs-toc-meta .cs-tag {
-  color: var(--teal-2);
-  background: rgba(45, 212, 191, 0.08);
-  border-color: rgba(45, 212, 191, 0.2);
-}
-.cs-toc-time {
-  font-size: 11.5px;
-  color: var(--text-2);
-  font-weight: 600;
-  margin-left: auto;
-  white-space: nowrap;
-  opacity: 0.75;
-}
 .cs-fold-time {
   flex-shrink: 0;
   font-size: 11.5px;
@@ -3398,14 +3303,17 @@ section {
 .cs-fold[open] {
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.5);
 }
-/* collapsed: a single clickable line, so nineteen studies stay scannable */
+/* Collapsed, each study is one card: number, title, a clamped preview and a
+   few tags are all visible before opening — this used to be a second, darker
+   grid of cards above the (white) list; now there is one list and it carries
+   the same information the cards did. */
 .cs-fold-sum {
   list-style: none;
   cursor: pointer;
   display: flex;
   gap: 14px;
-  align-items: baseline;
-  padding: 17px 24px;
+  align-items: flex-start;
+  padding: 20px 24px;
   transition: background 0.18s;
 }
 .cs-fold-sum::-webkit-details-marker {
@@ -3421,10 +3329,16 @@ section {
   font-size: 12px;
   color: #0f9d94;
   letter-spacing: 0.04em;
+  padding-top: 2px;
 }
-.cs-fold-sum h2 {
+.cs-fold-headline {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.cs-fold-sum h2 {
   font-family: var(--font-serif);
   font-size: 1.16rem;
   font-weight: 600;
@@ -3436,11 +3350,21 @@ section {
   font-size: 1.5rem;
   line-height: 1.22;
 }
-.cs-fold-preview {
+.cs-fold-preview-inline {
   color: #3c4044;
-  font-size: 15px;
-  margin: 4px 0 14px;
-  line-height: 1.62;
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.cs-fold-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
 }
 .cs-fold-stack {
   margin-bottom: 22px;
@@ -3745,14 +3669,12 @@ section {
 /* Typography: no orphans in titles, better rag in paragraphs. */
 .cs-head h1,
 .cs-fold-main h2,
-.cs-toc-title,
 .cs-card h3,
 .cs-more-h {
   text-wrap: balance;
 }
 .cs-sec p,
 .cs-fold-preview,
-.cs-toc-preview,
 .cs-card p,
 .cs-intro {
   text-wrap: pretty;
@@ -3799,12 +3721,6 @@ section {
       animation: cs-enter 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
       animation-timeline: view();
       animation-range: entry 0% entry 45%;
-    }
-    /* Opacity-only on TOC cards so the hover lift keeps working. */
-    .cs-toc-card {
-      animation: cs-fade 0.5s ease both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 50%;
     }
   }
 }
@@ -4038,17 +3954,6 @@ section {
   margin-top: 12px;
 }
 
-/* TOC hover polish. */
-.cs-toc-num {
-  transition: color 0.2s;
-}
-.cs-toc-card:hover {
-  box-shadow: 0 10px 28px rgba(45, 212, 191, 0.1);
-}
-.cs-toc-card:hover .cs-toc-num {
-  color: var(--teal);
-}
-
 /* ── Site-wide polish (homepage + CV) ── */
 
 /* Brand text selection — dark shell vs light paper. */
@@ -4142,9 +4047,6 @@ section {
   .cs-more-grid {
     grid-template-columns: 1fr;
   }
-  .cs-toc-grid {
-    grid-template-columns: 1fr;
-  }
   .cs-fold-sum {
     padding: 20px 18px;
     gap: 12px;
@@ -4157,8 +4059,6 @@ section {
   }
 }
 @media print {
-  .cs-toc,
-  .cs-toc-grid,
   .cs-back-top,
   .cs-foot {
     display: none !important;
@@ -4178,11 +4078,6 @@ section {
 .footer-sig,
 .contact-sig img {
   aspect-ratio: 1 / 1;
-}
-.cs-toc a {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
 }
 .cs-back-top {
   display: inline-flex;
