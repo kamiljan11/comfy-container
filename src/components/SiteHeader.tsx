@@ -140,11 +140,14 @@ export function SiteHeader() {
     return () => document.removeEventListener("keydown", onKey);
   }, [sheet]);
 
-  // Ctrl+K / ⌘K opens the command palette from anywhere on the site
+  // Ctrl+K (⌘K on a Mac) opens the command palette from anywhere on the site.
+  // Only the platform's own modifier: on a Mac, Ctrl+K in a text field means
+  // "delete to the end of the line" and must keep working.
   useEffect(() => {
-    if (/Mac|iPhone|iPad/.test(navigator.userAgent)) setKbd("⌘K");
+    const mac = /Mac|iPhone|iPad/.test(navigator.userAgent);
+    if (mac) setKbd("⌘K");
     const onKey = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      if ((mac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setOpen(null);
         setSheet(false);
@@ -289,7 +292,7 @@ export function SiteHeader() {
             }}
             aria-label={paletteCopy.open}
             aria-haspopup="dialog"
-            aria-keyshortcuts="Control+K Meta+K"
+            aria-keyshortcuts={kbd === "⌘K" ? "Meta+K" : "Control+K"}
           >
             <svg
               viewBox="0 0 24 24"

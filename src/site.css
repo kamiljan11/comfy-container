@@ -2192,6 +2192,11 @@ section {
     width: 44px;
     height: 44px;
   }
+  .nav-search {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
   .nav-sig-wrap {
     min-height: 44px;
   }
