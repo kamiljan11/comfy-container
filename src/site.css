@@ -5658,7 +5658,9 @@ header[id] {
   }
 }
 @media (min-width: 920px) {
-  .sl-hero-grid {
+  /* two columns only when there is a drawing to fill the second one; a page
+     without one keeps the copy full-width instead of leaving an empty track */
+  .sl-hero-grid:has(.sl-hero-art) {
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   }
   .sl-hero-art {
