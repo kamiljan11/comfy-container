@@ -5,6 +5,9 @@ import { SERVICES } from "../data/services";
 import { AREAS } from "../data/areas";
 import { useLang, ssrLangFor } from "../hooks/useLang";
 import { LangToggle } from "./LangToggle";
+import { CommandPalette } from "./CommandPalette";
+import { ABOUT_ITEMS } from "../data/siteMap";
+import { PALETTE_COPY } from "../lib/palette";
 
 /**
  * The one header for every page (ADR 0003). It used to live inside the
@@ -20,13 +23,6 @@ import { LangToggle } from "./LangToggle";
 
 type Menu = "services" | "areas" | "about";
 
-type AboutItem = {
-  to: "/o-mnie" | "/cv" | "/claude" | "/ksiazki";
-  hash?: string;
-  label: string;
-  hint: string;
-};
-
 type Copy = {
   nav: string;
   services: string;
@@ -36,7 +32,6 @@ type Copy = {
   cases: string;
   blog: string;
   about: string;
-  aboutItems: AboutItem[];
   cta: string;
   menu: string;
 };
@@ -51,19 +46,6 @@ const COPY: Record<Lang, Copy> = {
     cases: "Case studies",
     blog: "Blog",
     about: "About",
-    aboutItems: [
-      { to: "/o-mnie", label: "About me", hint: "Who I am and how I work" },
-      { to: "/o-mnie", hash: "capabilities", label: "Capabilities", hint: "What I build and run" },
-      {
-        to: "/o-mnie",
-        hash: "engage",
-        label: "Ways to work together",
-        hint: "Consulting, builds, hiring",
-      },
-      { to: "/cv", label: "CV", hint: "Roles, companies, experience" },
-      { to: "/claude", label: "AI system", hint: "How I build with AI agents" },
-      { to: "/ksiazki", label: "Books", hint: "Two free guidebooks" },
-    ],
     cta: "Free consultation",
     menu: "Menu",
   },
@@ -76,19 +58,6 @@ const COPY: Record<Lang, Copy> = {
     cases: "Realizacje",
     blog: "Blog",
     about: "O mnie",
-    aboutItems: [
-      { to: "/o-mnie", label: "O mnie", hint: "Kim jestem i jak pracuję" },
-      { to: "/o-mnie", hash: "capabilities", label: "Kompetencje", hint: "Co buduję i prowadzę" },
-      {
-        to: "/o-mnie",
-        hash: "engage",
-        label: "Formy współpracy",
-        hint: "Doradztwo, wdrożenia, etat",
-      },
-      { to: "/cv", label: "CV", hint: "Role, firmy, doświadczenie" },
-      { to: "/claude", label: "System AI", hint: "Jak buduję z agentami AI" },
-      { to: "/ksiazki", label: "Książki", hint: "Dwa darmowe przewodniki" },
-    ],
     cta: "Bezpłatna konsultacja",
     menu: "Menu",
   },
@@ -115,10 +84,15 @@ export function SiteHeader() {
   const t = COPY[lang];
   const services = SERVICES[lang];
   const areas = AREAS[lang];
+  const aboutItems = ABOUT_ITEMS[lang];
+  const paletteCopy = PALETTE_COPY[lang];
 
   const [open, setOpen] = useState<Menu | null>(null);
   const [sheet, setSheet] = useState(false);
   const [sheetGroup, setSheetGroup] = useState<Menu | null>(null);
+  const [palette, setPalette] = useState(false);
+  // "Ctrl K" on the server and first render, "⌘K" once we know it is a Mac
+  const [kbd, setKbd] = useState("Ctrl K");
   const navRef = useRef<HTMLElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
@@ -165,6 +139,21 @@ export function SiteHeader() {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [sheet]);
+
+  // Ctrl+K / ⌘K opens the command palette from anywhere on the site
+  useEffect(() => {
+    if (/Mac|iPhone|iPad/.test(navigator.userAgent)) setKbd("⌘K");
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setOpen(null);
+        setSheet(false);
+        setPalette((o) => !o);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
 
   const toggle = (m: Menu) => setOpen((o) => (o === m ? null : m));
   const current = (p: string) =>
@@ -274,7 +263,7 @@ export function SiteHeader() {
               id="dd-about"
               className={`nav-dd-panel nav-dd-narrow${open === "about" ? " open" : ""}`}
             >
-              {t.aboutItems.map((a) => (
+              {aboutItems.map((a) => (
                 <Link
                   key={a.label}
                   className="nav-dd-item"
@@ -290,6 +279,30 @@ export function SiteHeader() {
           </li>
         </ul>
         <div className="nav-right">
+          <button
+            type="button"
+            className="nav-search"
+            onClick={() => {
+              setOpen(null);
+              setSheet(false);
+              setPalette(true);
+            }}
+            aria-label={paletteCopy.open}
+            aria-haspopup="dialog"
+            aria-keyshortcuts="Control+K Meta+K"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" strokeLinecap="round" />
+            </svg>
+            <kbd className="nav-search-kbd">{kbd}</kbd>
+          </button>
           <LangToggle lang={lang} onToggle={toggleLang} />
           <Link to="/kontakt" className="nav-cta" aria-current={current("/kontakt")}>
             {t.cta}
@@ -376,7 +389,7 @@ export function SiteHeader() {
             <Chevron />
           </button>
           <div className="mm-sub" id="mm-about" hidden={sheetGroup !== "about"}>
-            {t.aboutItems.map((a) => (
+            {aboutItems.map((a) => (
               <Link key={a.label} to={a.to} hash={a.hash}>
                 {a.label}
               </Link>
@@ -388,6 +401,13 @@ export function SiteHeader() {
           {t.cta}
         </Link>
       </div>
+
+      <CommandPalette
+        lang={lang}
+        open={palette}
+        onOpenChange={setPalette}
+        onToggleLang={toggleLang}
+      />
     </>
   );
 }
