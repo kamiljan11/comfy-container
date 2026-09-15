@@ -58,7 +58,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Your business.",
       h1b: "Less",
       h1em: "manual work.",
-      sub: "I find the process that eats your team's hours, and replace it with a system or an AI automation. Then I train your team to run it day to day.",
+      sub: "I find the process that eats your team's hours and your company's money. I replace it with something concrete: a quote calculator instead of a spreadsheet, data that moves between your programs on its own, or an AI assistant that answers customers. Then I train your team to use it every day.",
       cta: "Show me your process",
       ctaGhost: "See systems in production",
       partner:
@@ -67,7 +67,7 @@ export const T: Record<Lang, SiteTranslation> = {
     pains: {
       label: "Sound familiar?",
       title: "Problems I get called in for",
-      lead: "None of these hurt at ten orders a month. All of them hurt at a hundred. Each card opens the page on how it gets fixed.",
+      lead: "Sometimes one order is enough for it to hurt, and every next one makes it worse.",
     },
     solutions: {
       label: "How I can help",
@@ -225,7 +225,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Twoja firma.",
       h1b: "Mniej",
       h1em: "ręcznej pracy.",
-      sub: "Znajduję proces, który zjada godziny Twojego zespołu, i zastępuję go systemem albo automatyzacją AI. Potem szkolę Twój zespół, żeby używał tego na co dzień.",
+      sub: "Znajduję proces, który zjada godziny Twojego zespołu i pieniądze firmy. Zastępuję go czymś konkretnym: kalkulatorem wycen zamiast arkusza, danymi, które same przechodzą między programami, albo asystentem AI, który odpowiada klientom. Potem szkolę zespół, żeby korzystał z tego na co dzień.",
       cta: "Pokaż mi swój proces",
       ctaGhost: "Zobacz działające systemy",
       partner:
@@ -234,7 +234,7 @@ export const T: Record<Lang, SiteTranslation> = {
     pains: {
       label: "Znasz to?",
       title: "Problemy, do których mnie wzywają",
-      lead: "Żaden nie boli przy dziesięciu zamówieniach miesięcznie. Wszystkie bolą przy stu. Każda karta prowadzi do strony, jak to naprawić.",
+      lead: "Czasem boli już przy jednym zamówieniu, a z każdym kolejnym bardziej.",
     },
     solutions: {
       label: "Jak mogę pomóc",

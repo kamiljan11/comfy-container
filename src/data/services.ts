@@ -49,8 +49,7 @@ const PL: Service[] = [
     micro: ["Jedno źródło stanu", "Obsługa z telefonu", "Rośnie razem z firmą"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć rzeczy, które psują się razem z firmą",
-    problemsLead:
-      "Żadna z nich nie boli przy dziesięciu zamówieniach miesięcznie. Wszystkie zaczynają boleć przy stu.",
+    problemsLead: "Czasem bolą już przy jednym zamówieniu, a z każdym kolejnym coraz bardziej.",
     problems: [
       {
         tag: "Dane",
@@ -720,7 +719,8 @@ const EN: Service[] = [
     micro: ["One source of state", "Works from a phone", "Grows with the company"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six things that break as the company grows",
-    problemsLead: "None of these hurt at ten orders a month. All of them hurt at a hundred.",
+    problemsLead:
+      "Sometimes they hurt from the first order, and they get worse with every one after it.",
     problems: [
       {
         tag: "Data",
