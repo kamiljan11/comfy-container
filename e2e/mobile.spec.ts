@@ -59,3 +59,21 @@ test("contact form fields are at least 16 px, so iOS does not zoom", async ({ pa
   expect(sizes.length).toBeGreaterThan(0);
   for (const s of sizes) expect(s).toBeGreaterThanOrEqual(16);
 });
+
+test("the chat panel's own links are 44 px tap targets", async ({ page }) => {
+  // Measured with the panel OPEN: closed it renders at scale(.97), so every control
+  // in it reads 43 px in an audit while really being 44. These two links were the
+  // genuine miss at 60x30.
+  await load(page, "/?lang=pl");
+  await page.locator(".chatbot-fab").click();
+  // the panel animates from scale(.97) to its full size; measuring before that
+  // settles reads 43.7 px even when the rule is right
+  await expect(page.locator(".chatbot-panel")).toHaveCSS("transform", "none");
+  const foot = page.locator(".chatbot-foot a");
+  await expect(foot.first()).toBeVisible();
+  const heights = await foot.evaluateAll((els) =>
+    els.map((el) => el.getBoundingClientRect().height),
+  );
+  expect(heights.length).toBeGreaterThan(0);
+  for (const h of heights) expect(h).toBeGreaterThanOrEqual(44);
+});
