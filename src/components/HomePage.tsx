@@ -432,12 +432,12 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
                             {tag}
                           </span>
                         ))}
+                        {/* a row that opens a GitHub write-up says so; a live product link does not */}
+                        {p.href?.startsWith("https://github.com/") ? (
+                          <span className="work-tag">GitHub</span>
+                        ) : null}
                       </div>
                       <div className="work-year">{p.year}</div>
-                      {/* a row that links to a GitHub write-up says so; a live product link does not */}
-                      {p.href?.startsWith("https://github.com/") ? (
-                        <div className="work-year">GitHub</div>
-                      ) : null}
                       {p.href ? (
                         <svg
                           className="work-arrow"
