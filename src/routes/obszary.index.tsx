@@ -9,14 +9,16 @@ const COPY = {
     eyebrow: "AREAS",
     h1: "Where automation lands in a company",
     lead: "Six places where the same kinds of work show up — sales, customer service, administration, HR, data, and the processes that fit no template. Each page names the pains of that function and what I build there.",
-    cta: "Book a free consultation",
+    cta: "Not sure where to start?",
+    button: "Book a free consultation",
     ctaLead: "One conversation is usually enough to see which area to start with.",
   },
   pl: {
     eyebrow: "OBSZARY",
     h1: "Gdzie w firmie ląduje automatyzacja",
     lead: "Sześć miejsc, w których pojawia się ta sama praca — sprzedaż, obsługa klienta, administracja, HR, dane i procesy, do których nie pasuje żaden szablon. Każda strona nazywa bóle danej funkcji i to, co tam buduję.",
-    cta: "Umów bezpłatną konsultację",
+    cta: "Nie wiesz, od czego zacząć?",
+    button: "Umów bezpłatną konsultację",
     ctaLead: "Jedna rozmowa zwykle wystarcza, żeby zobaczyć, od którego obszaru zacząć.",
   },
 } as const;
@@ -74,7 +76,7 @@ function AreasIndex() {
           <h2>{c.cta}</h2>
           <p>{c.ctaLead}</p>
           <Link className="btn-primary" to="/kontakt">
-            {c.cta}
+            {c.button}
           </Link>
         </section>
       </div>
