@@ -19,6 +19,24 @@
 - Reczny fallback: `npm run build` lokalnie tylko do weryfikacji builda — nie wgrywa niczego,
   produkcja idzie wylacznie przez Vercel.
 
+## Testy E2E (Playwright)
+
+- CI: job `E2E smoke (Playwright)` w `.github/workflows/quality.yml` (wymagany check) -> `npx playwright test`
+  z `playwright.config.ts`. Do 2026-09-15 w repo nie bylo configu, wiec job przechodzil bez uruchomienia testu.
+- Serwer testowy: `webServer` buduje z `NITRO_PRESET=node-server` i startuje `node .output/server/index.mjs`
+  na porcie 4173. `vite preview` NIE dziala dla tego builda (plugin TanStack szuka `dist/server/server.js`,
+  nitro pisze `.output/`).
+- Lokalnie: `npx playwright install chromium` (raz), potem `npx playwright test`. Poza CI dzialajacy serwer
+  na 4173 jest uzywany ponownie.
+- `workers: 1` celowo: strona glowna renderuje scene Three.js, rownolegle przegladarki dawaly timeouty
+  przy zamykaniu kontekstu (6/12 lokalnie); na jednym workerze 12/12.
+- Klucze API niepotrzebne: chatbot wola serwer dopiero po wyslaniu wiadomosci, testy tego nie robia.
+- Porazka: `test-results/<test>/error-context.md` (snapshot strony) + `npx playwright show-trace test-results/<test>/trace.zip`.
+- W CI: przy porazce artefakt `playwright-test-results` (Summary runu, 7 dni) = ten sam `test-results/`;
+  job ma `timeout-minutes: 20`. Decyzja o buildzie node-server: `docs/adr/0004-e2e-against-node-server-build.md`.
+- Specy: `e2e/smoke.spec.ts` (strona glowna bez bledow konsoli), `e2e/palette.spec.ts` (paleta komend +
+  regresja: drugi skok do case study na tej samej stronie otwiera wlasciwe studium).
+
 ## Rollback (cel: <5 min)
 
 ```bash

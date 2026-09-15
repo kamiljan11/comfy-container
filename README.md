@@ -45,6 +45,15 @@ npm test          # vitest — pure helpers only, see src/server/*.test.ts
 npm run build
 ```
 
+End-to-end tests (Playwright). The required CI check "E2E smoke (Playwright)" runs the same thing:
+
+```bash
+npx playwright install chromium   # once
+npx playwright test               # builds the site as a Node server, runs e2e/*.spec.ts
+```
+
+Why a Node-server build: `docs/adr/0004-e2e-against-node-server-build.md`.
+
 ## Environment variables
 
 Everything is optional in dev — see `.env.example` for the full list with comments. Nothing here
