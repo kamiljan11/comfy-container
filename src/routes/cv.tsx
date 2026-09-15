@@ -136,7 +136,7 @@ const CONTENT: Record<Lang, CV> = {
         dates: "2022–2024",
         bullets: [
           "Helped build the travel operation from the ground up: website (Bokun), pricing, sales channels, reseller and partner deals, and trade-fair representation.",
-          "Ran digital marketing (Meta & Google Ads) and sales newsletters; did product development and on-glacier guiding. Helped grow it into a top-rated glacier tour with 1,000+ five-star guests.",
+          "Ran digital marketing (Meta & Google Ads) and sales newsletters; did product development and on-glacier guiding. Helped grow it into a well-reviewed glacier-tour operator with more than 1,000 five-star guests.",
         ],
       },
       {
@@ -309,7 +309,7 @@ const CONTENT: Record<Lang, CV> = {
         dates: "2022–2024",
         bullets: [
           "Współbudował biznes turystyczny od podstaw: strona (Bokun), cennik, kanały sprzedaży, umowy z resellerami i partnerami oraz reprezentacja na targach.",
-          "Prowadził marketing cyfrowy (Meta i Google Ads) i newslettery sprzedażowe; rozwój produktu i prowadzenie wycieczek na lodowcu. Współtworzył jeden z najwyżej ocenianych tourów lodowcowych, 1000+ gości z 5 gwiazdkami.",
+          "Prowadził marketing cyfrowy (Meta i Google Ads) i newslettery sprzedażowe; rozwój produktu i prowadzenie wycieczek na lodowcu. Pomógł zbudować dobrze ocenianego operatora wycieczek lodowcowych — ponad 1000 gości wystawiło mu pięć gwiazdek.",
         ],
       },
       {

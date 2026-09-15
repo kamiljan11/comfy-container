@@ -141,7 +141,7 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         outcome:
-          "Built the full operation from scratch — website, pricing structure, influencer marketing, trade fair presence, and on-glacier guiding. Ran the project end-to-end including custom tour design. Grew it into a top-rated glacier tour with 1,000+ five-star guests.",
+          "Built the full operation from scratch — website, pricing structure, influencer marketing, trade fair presence, and on-glacier guiding. Ran the project end-to-end including custom tour design. By the time I left it was a well-reviewed glacier-tour operator with more than 1,000 five-star guests.",
       },
       {
         outcome:
@@ -169,7 +169,7 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         title: "AI & Automation",
-        desc: "n8n workflows, voice agents, WhatsApp bots, LLM integrations — running in production. But building is only half of it: I coach teams to actually adopt AI, turn complex tools into simple daily habits, and leave behind documentation and AI champions who keep it running without me.",
+        desc: "n8n workflows, LLM integrations, automated status calls and SMS — running in production; a two-way voice agent is still being hardened. But building is only half of it: I coach teams to actually adopt AI, turn complex tools into simple daily habits, and leave behind documentation and people who can run it without me.",
         tags: [
           "n8n Workflows",
           "Structured JSON Outputs",
@@ -308,7 +308,7 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         outcome:
-          "Zbudowałem cały biznes od zera — stronę, strukturę cenową, influencer marketing, obecność na targach i prowadzenie wycieczek na lodowcu. Projekt od A do Z, łącznie z designem wycieczek na zamówienie. Wyrósł na jeden z najwyżej ocenianych tourów lodowcowych, 1000+ gości z 5 gwiazdkami.",
+          "Zbudowałem cały biznes od zera — stronę, strukturę cenową, influencer marketing, obecność na targach i prowadzenie wycieczek na lodowcu. Projekt od A do Z, łącznie z designem wycieczek na zamówienie. Kiedy odchodziłem, był dobrze ocenianym operatorem wycieczek lodowcowych — ponad 1000 gości wystawiło mu pięć gwiazdek.",
       },
       {
         outcome:
@@ -336,7 +336,7 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         title: "AI i Automatyzacja",
-        desc: "Workflowy n8n, agenty głosowe, boty WhatsApp, integracje LLM — działające na produkcji. Ale budowanie to połowa roboty: szkolę zespoły z realnej adopcji AI, zamieniam złożone narzędzia w proste codzienne nawyki i zostawiam dokumentację oraz AI championów, którzy utrzymają to beze mnie.",
+        desc: "Workflowy n8n, integracje LLM, automatyczne telefony i SMS-y o statusie — działające na produkcji; dwukierunkowy agent głosowy jest jeszcze dopracowywany. Ale budowanie to połowa roboty: szkolę zespoły z realnej adopcji AI, zamieniam złożone narzędzia w proste codzienne nawyki i zostawiam dokumentację oraz ludzi, którzy poprowadzą to beze mnie.",
         tags: ["Workflowy n8n", "Agenty Głosowe", "Integracje LLM", "Wdrażanie AI"],
       },
       {

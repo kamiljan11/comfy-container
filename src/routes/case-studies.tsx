@@ -78,7 +78,7 @@ const UI: Record<
   en: {
     h1: "Case studies",
     intro:
-      "How a few of these systems were actually built — the problem, the decisions I made and the alternatives I rejected, how I knew it worked, and what I'd do differently. Tap any one to read it in full.",
+      "Twenty projects, each written up the same way: the problem, the decisions I made and the alternatives I rejected, how I knew it worked, and what I'd do differently. Open any one to read it in full.",
     problem: "The problem",
     context: "Context & constraints",
     role: "My role.",
@@ -99,7 +99,7 @@ const UI: Record<
   pl: {
     h1: "Realizacje",
     intro:
-      "Jak naprawdę powstało kilka z tych systemów — problem, decyzje, które podjąłem, i alternatywy, które odrzuciłem, skąd wiedziałem, że działa, i co zrobiłbym inaczej. Kliknij dowolną, żeby przeczytać całość.",
+      "Dwadzieścia projektów, każdy opisany tak samo: problem, decyzje, które podjąłem, i alternatywy, które odrzuciłem, skąd wiedziałem, że działa, i co zrobiłbym inaczej. Otwórz dowolny, żeby przeczytać całość.",
     problem: "Problem",
     context: "Kontekst i ograniczenia",
     role: "Moja rola.",
