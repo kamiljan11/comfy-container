@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { wrapLabel } from "../lib/wrapLabel";
+import { stackLines, wrapLabel } from "../lib/wrapLabel";
 import { useLang } from "../hooks/useLang";
 import { type Lang } from "../i18n";
 
@@ -1377,11 +1377,12 @@ function AiArch({ t }: { t: ArchLabels }) {
 /* ══ Diagram: mind map (8 branches around the centre) ══ */
 function AiMindMap({ t }: { t: MindLabels }) {
   const bw = 180;
-  // leaves wrap to the box width; the boxes and rows grow with the longest
-  // branch, so a longer label never spills out (10px italic ≈ 30 chars here)
-  const leafLines = t.branches.map((b) => b.leaves.flatMap((l) => wrapLabel(l, 30)));
-  const lines = Math.max(...leafLines.map((l) => l.length));
-  const bh = 54 + 15 * (lines - 1);
+  // Leaves wrap to the box width (10px italic ≈ 30 chars here). A wrapped
+  // leaf's second line sits closer than the next leaf, so a two-line item
+  // still reads as one item; boxes and rows grow with the tallest branch.
+  const leafGroups = t.branches.map((b) => b.leaves.map((l) => wrapLabel(l, 30)));
+  const leafY = leafGroups.map((groups) => stackLines(groups, 38, 12, 18));
+  const bh = Math.max(38, ...leafY.flat(2)) + 16;
   const gap = 32;
   const rowY = [0, 1, 2, 3].map((r) => 36 + r * (bh + gap));
   const bottom = rowY[3] + bh;
@@ -1414,17 +1415,19 @@ function AiMindMap({ t }: { t: MindLabels }) {
               <text x={p.x + bw / 2} y={p.y + 20} textAnchor="middle" className="aid-t">
                 {b.title}
               </text>
-              {leafLines[i].map((l, j) => (
-                <text
-                  key={`${String(j)}-${l}`}
-                  x={p.x + bw / 2}
-                  y={p.y + 38 + j * 15}
-                  textAnchor="middle"
-                  className="aid-xs"
-                >
-                  {l}
-                </text>
-              ))}
+              {leafGroups[i].map((lines, k) =>
+                lines.map((l, j) => (
+                  <text
+                    key={`${String(k)}-${String(j)}`}
+                    x={p.x + bw / 2}
+                    y={p.y + leafY[i][k][j]}
+                    textAnchor="middle"
+                    className="aid-xs"
+                  >
+                    {l}
+                  </text>
+                )),
+              )}
             </g>
           );
         })}

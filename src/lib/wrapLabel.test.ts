@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { wrapLabel } from "./wrapLabel";
+import { stackLines, wrapLabel } from "./wrapLabel";
 
 describe("wrapLabel", () => {
   it("leaves a label that fits on one line", () => {
@@ -37,5 +37,16 @@ describe("wrapLabel", () => {
     const text =
       "every escape hatch is a named variable (ALLOW_…=1), logged and reported in the weekly audit — bypassing the hooks is banned by standing rule";
     for (const line of wrapLabel(text, 80)) expect(line.length).toBeLessThanOrEqual(80);
+  });
+});
+
+describe("stackLines", () => {
+  it("keeps a wrapped item's lines closer than the gap to the next item", () => {
+    expect(stackLines([["a"], ["b", "c"], ["d"]], 38, 12, 18)).toEqual([[38], [56, 68], [86]]);
+  });
+
+  it("handles no items and single items", () => {
+    expect(stackLines([], 38, 12, 18)).toEqual([]);
+    expect(stackLines([["only"]], 10, 12, 18)).toEqual([[10]]);
   });
 });

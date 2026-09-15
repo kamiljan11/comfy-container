@@ -35,3 +35,29 @@ export function wrapLabel(text: string, max: number): string[] {
   if (line) lines.push(line);
   return lines;
 }
+
+/**
+ * Baselines for a stack of wrapped items: lines of one item sit `lineGap`
+ * apart, the next item starts `groupGap` below — so a label wrapped onto two
+ * lines still reads as one item and not as two. Returns one array of
+ * y-offsets per item, in the order given.
+ */
+export function stackLines(
+  groups: string[][],
+  start: number,
+  lineGap: number,
+  groupGap: number,
+): number[][] {
+  const out: number[][] = [];
+  let y = start;
+  groups.forEach((lines, k) => {
+    if (k > 0) y += groupGap;
+    const row: number[] = [];
+    lines.forEach((_, j) => {
+      if (j > 0) y += lineGap;
+      row.push(y);
+    });
+    out.push(row);
+  });
+  return out;
+}
