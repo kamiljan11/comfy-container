@@ -1474,7 +1474,8 @@ section {
   transition: color 0.2s;
 }
 .footer-links a:hover {
-  color: var(--text-2);
+  /* the resting colour is --text-2 now, so hover steps up to --text */
+  color: var(--text);
 }
 
 /* ── Cap card shimmer sweep ── */
@@ -3307,7 +3308,6 @@ section {
   border-top: 4px solid var(--teal);
   font-family: var(--font-body);
   line-height: 1.62;
-  scroll-margin-top: 18px;
   overflow: hidden;
   transition: box-shadow 0.25s;
 }
