@@ -2131,6 +2131,11 @@ section {
   .contact {
     padding: 56px 0 384px;
   }
+  /* /o-mnie: the Beyond Work aside follows, and the desktop `.contact:has(+ .beyond)`
+     tail (104 px) outranked the line above, sliding the portrait under the text */
+  .contact:has(+ .beyond) {
+    padding-bottom: 384px;
+  }
   .contact-h2 {
     font-size: clamp(1.7rem, 8vw, 2.5rem);
     margin-bottom: 14px;
@@ -2215,6 +2220,12 @@ section {
   }
   .contact-alts a {
     padding: 13px 6px;
+    /* 44 px hit area; "CV" is a 31 px wide word, so widen the target, not the text */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
   }
   .footer-links a {
     padding: 14px 6px;
@@ -2223,7 +2234,7 @@ section {
     height: 2px;
   }
   .marquee-item {
-    font-size: 10px;
+    font-size: 12px;
     padding-right: 36px;
   }
   .marquee-sep {
@@ -3073,6 +3084,24 @@ section {
   overflow-x: auto;
   margin: 14px 0 4px;
   -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 768px) {
+  /* the diagrams are wider than a phone and scroll inside .aid-scroll: say so
+     (#0a7d8c is the teal the paper pages already use for labels, AA on paper) */
+  .aid-scroll::before {
+    content: "Swipe →";
+    display: block;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #0a7d8c;
+  }
+  html[lang="pl"] .aid-scroll::before {
+    content: "Przesuń →";
+  }
 }
 .aid {
   display: block;
@@ -4409,6 +4438,11 @@ section {
     flex-direction: row;
     overflow-x: auto;
     scrollbar-width: none;
+    /* say it scrolls: fade at the right edge, room for the last chip to clear it, snap */
+    padding-right: 40px;
+    scroll-snap-type: x proximity;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
   }
   .sol-tab {
     flex: none;
@@ -4418,6 +4452,7 @@ section {
     font-size: 14px;
     /* tap target, same 44px bar as .lang-toggle / .hamburger */
     min-height: 44px;
+    scroll-snap-align: start;
   }
 }
 @media (max-width: 768px) {
@@ -4782,6 +4817,8 @@ section {
   .kontakt-grid {
     grid-template-columns: 1fr;
     gap: 28px;
+    /* the form sat ~80 px below the intro on phones */
+    padding-top: 12px;
   }
   .kontakt-card {
     padding: 22px 18px;
@@ -5766,6 +5803,12 @@ header[id] {
 
 /* ── Narrow viewports ── */
 @media (max-width: 760px) {
+  /* sibling links were 39 px tall: 44 px tap target */
+  .sl-more-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
   .sl {
     --sl-pad: 22px;
     padding-bottom: 72px;
@@ -5949,91 +5992,28 @@ header[id] {
   }
 }
 
-/* ── Mobile pass (2026-09-15, measured at 360/390/430 px with the mobile-optimization
-   audit): tap targets ≥44 px, labels ≥12 px, body text 16 px, a legible fixed nav. ── */
-.sl-more-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-}
-.nav {
-  -webkit-backdrop-filter: saturate(140%) blur(12px);
-  backdrop-filter: saturate(140%) blur(12px);
-}
+/* ── Phone type floor (2026-09-15 mobile pass). Kept LAST in the file on purpose:
+   several of these labels get smaller sizes in component-level mobile rules above
+   (e.g. .sl-proc-meta, .cad-freq), and the 12 px floor must win. Labels and tags
+   were 10-11.5 px; case-study body text was 15.5 px. ── */
 @media (max-width: 768px) {
   .sl-eyebrow,
   .sl-tag,
   .sl-proc-meta,
   .svc-eyebrow,
   .cap-tag,
-  .marquee-item,
   .ai-stat-l,
   .cad-freq,
-  .cs-sec h3 {
+  .cs-sec h3,
+  .cs-d-label,
+  .section-label,
+  .pain-tag,
+  .sol-num,
+  .work-tag,
+  .hero-stat-lbl {
     font-size: 12px;
   }
   .cs-sec p {
     font-size: 16px;
-  }
-}
-
-@media (max-width: 768px) {
-  /* contact row (WhatsApp, e-mail, CV, LinkedIn, GitHub) and the chat's starter
-     questions were 29–43 px tall: tap targets ≥44 px */
-  .contact-alts a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-  }
-  .chatbot-starter {
-    min-height: 44px;
-  }
-}
-
-@media (max-width: 768px) {
-  /* the solution tabs scroll sideways inside their row: show that with a fade at
-     the right edge, give the last chip room to clear it, and snap chip by chip */
-  .sol-tabs {
-    padding-right: 40px;
-    scroll-snap-type: x proximity;
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
-    mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
-  }
-  .sol-tab {
-    scroll-snap-align: start;
-  }
-  /* /kontakt: the form sat ~80 px below the intro on phones */
-  .kontakt-grid {
-    padding-top: 12px;
-    gap: 32px;
-  }
-}
-
-@media (max-width: 768px) {
-  /* /claude diagrams are wider than a phone and scroll inside .aid-scroll:
-     say so, in the same style as the work carousel's hint */
-  .aid-scroll::before {
-    content: "Swipe →";
-    display: block;
-    margin-bottom: 8px;
-    text-align: right;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--teal);
-    opacity: 0.75;
-  }
-  html[lang="pl"] .aid-scroll::before {
-    content: "Przesuń →";
-  }
-}
-
-@media (max-width: 768px) {
-  /* /o-mnie: the Beyond Work aside follows the contact block, and the desktop
-     `.contact:has(+ .beyond)` tail (104 px) outranked the phone padding that keeps
-     the portrait below the text, so the portrait slid under the heading (257 px) */
-  .contact:has(+ .beyond) {
-    padding-bottom: 384px;
   }
 }
