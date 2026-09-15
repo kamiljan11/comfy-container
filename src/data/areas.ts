@@ -14,7 +14,7 @@ const PL: Service[] = [
   {
     slug: "sprzedaz-i-marketing",
     navLabel: "Sprzedaż i marketing",
-    metaTitle: "Automatyzacja sprzedaży i marketingu — Kamil Jan",
+    metaTitle: "Automatyzacja sprzedaży i marketingu | Kamil Jan",
     metaDescription:
       "Automatyzacja sprzedaży i marketingu: każdy lead z zapisanym źródłem, oferta i umowa z jednego cennika, wysyłka z limitami. Sprawdzone we własnych firmach.",
     eyebrow: "SPRZEDAŻ I MARKETING",
@@ -76,7 +76,7 @@ const PL: Service[] = [
       },
       {
         title: "Umowa z danych, podpis i faktura spięte ze stanem",
-        body: "Kraj, pakiet i VAT na wejściu, poprawny dokument na wyjściu — bez szablonu przerabianego ręcznie. Podpis elektroniczny i fakturowanie zgłaszają się webhookami do jednej maszyny stanów w Postgresie, więc transakcja nie utknie po cichu jako podpisana, ale niezafakturowana.",
+        body: "Kraj, pakiet i VAT na wejściu, poprawny dokument na wyjściu: bez szablonu przerabianego ręcznie. Podpis elektroniczny i fakturowanie zgłaszają się webhookami do jednej maszyny stanów w Postgresie, więc transakcja nie utknie po cichu jako podpisana, ale niezafakturowana.",
       },
       {
         title: "Wysyłka z hamulcami zamontowanymi przed silnikiem",
@@ -84,7 +84,7 @@ const PL: Service[] = [
       },
       {
         title: "Etapy lejka jako zdarzenia, nie kolumny na tablicy",
-        body: "W Reykjawwwik każdy z 14 etapów ma zapisane, co zrobić teraz i mniej więcej co powiedzieć klientowi, a każde przejście zostawia wpis w tabeli zdarzeń. Przed ryzykownym skokiem — na przykład startem prac bez podpisanej umowy — system zatrzymuje się i prosi o potwierdzenie.",
+        body: "W Reykjawwwik każdy z 14 etapów ma zapisane, co zrobić teraz i mniej więcej co powiedzieć klientowi, a każde przejście zostawia wpis w tabeli zdarzeń. Przed ryzykownym skokiem, na przykład startem prac bez podpisanej umowy, system zatrzymuje się i prosi o potwierdzenie.",
       },
       {
         title: "Kreacja reklamowa zaczyna się od researchu, nie od promptu",
@@ -106,7 +106,7 @@ const PL: Service[] = [
       {
         sector: "Druk / B2B",
         title: "Kampania cold mailingowa prowadzona przez agenta",
-        metric: "11 maja – 19 czerwca 2026, żadna domena powyżej trzech maili",
+        metric: "Od 11 maja do 19 czerwca 2026, żadna domena powyżej trzech maili",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -117,7 +117,7 @@ const PL: Service[] = [
       },
       {
         q: "Czy automat będzie pisał do klientów w moim imieniu?",
-        a: "Pierwszy kontakt i przypomnienia — tak, w granicach, które ustalimy. Rozmowę z człowiekiem — nie: w mojej kampanii automatyzacja kończyła się w chwili, gdy ktoś odpisał. Uczciwie dodam, że raz wykrywanie odpowiedzi przeoczyło odmowę i firma, która powiedziała „nie”, dostała jeszcze dwa maile. Wniosek, który z tego wyciągnąłem: wykrywanie odpowiedzi trzeba zbudować przed pierwszą wysyłką, a nie po niej.",
+        a: "Pierwszy kontakt i przypomnienia: tak, w granicach, które ustalimy. Rozmowę z człowiekiem: nie. W mojej kampanii automatyzacja kończyła się w chwili, gdy ktoś odpisał. Uczciwie dodam, że raz wykrywanie odpowiedzi przeoczyło odmowę i firma, która powiedziała „nie”, dostała jeszcze dwa maile. Wniosek, który z tego wyciągnąłem: wykrywanie odpowiedzi trzeba zbudować przed pierwszą wysyłką, a nie po niej.",
       },
       {
         q: "Mamy już CRM. Trzeba go wymieniać?",
@@ -125,18 +125,18 @@ const PL: Service[] = [
       },
       {
         q: "Czy AI napisze nam reklamy i maile?",
-        a: "Pomoże, jeśli dostanie brief. Moje pierwsze kreacje z generatora wyglądały sztucznie, a poprawiło je dopiero dodanie researchu przed promptem. Maile w mojej kampanii pisał agent według spisanych reguł i raz i tak napisał zdanie, którego nie mogłem potwierdzić — jego własna kontrola wyłapała to dopiero po wysyłce. Danych o tym, jak te reklamy sprzedają, nie mam i nie będę udawał, że mam.",
+        a: "Pomoże, jeśli dostanie brief. Moje pierwsze kreacje z generatora wyglądały sztucznie, a poprawiło je dopiero dodanie researchu przed promptem. Maile w mojej kampanii pisał agent według spisanych reguł i raz i tak napisał zdanie, którego nie mogłem potwierdzić. Jego własna kontrola wyłapała to dopiero po wysyłce. Danych o tym, jak te reklamy sprzedają, nie mam i nie będę udawał, że mam.",
       },
       {
         q: "Kto to zbuduje?",
-        a: "Kod piszą agenci AI, a ja odpowiadam za specyfikację, architekturę, przegląd kodu, wdrożenie i działanie na produkcji. Gdy projekt potrzebuje większego zespołu, dołącza CetusPro — software house z Rzeszowa, blisko 40 developerów.",
+        a: "Kod piszą agenci AI, a ja odpowiadam za specyfikację, architekturę, przegląd kodu, wdrożenie i działanie na produkcji. Gdy projekt potrzebuje większego zespołu, dołącza CetusPro, software house z Rzeszowa, blisko 40 developerów.",
       },
     ],
   },
   {
     slug: "obsluga-klienta",
     navLabel: "Obsługa klienta",
-    metaTitle: "Automatyzacja obsługi klienta — Kamil Jan",
+    metaTitle: "Automatyzacja obsługi klienta | Kamil Jan",
     metaDescription:
       "Automatyzacja obsługi klienta na Twoich danych: statusy wysyłane z systemu, odpowiedzi tylko z zapisanych faktów i człowiek tam, gdzie jest potrzebny.",
     eyebrow: "OBSŁUGA KLIENTA",
@@ -254,7 +254,7 @@ const PL: Service[] = [
   {
     slug: "administracja-i-dokumenty",
     navLabel: "Administracja i dokumenty",
-    metaTitle: "Automatyzacja administracji i dokumentów — Kamil Jan",
+    metaTitle: "Automatyzacja administracji i dokumentów | Kamil Jan",
     metaDescription:
       "Automatyzacja administracji i dokumentów: umowy i faktury składane z danych, które firma już ma, akceptacje zapisane w systemie, terminy pod kontrolą.",
     eyebrow: "ADMINISTRACJA I DOKUMENTY",
@@ -273,7 +273,7 @@ const PL: Service[] = [
       {
         tag: "Dane",
         title: "Pięć wersji tego samego wzoru umowy",
-        body: "Na dysku leżą „umowa_final”, „umowa_final2” i „umowa_nowa”. Nikt nie jest pewien, która ma aktualne warunki, więc każdy bierze tę, którą otwierał ostatnio — a klient dostaje zapisy, które już nie obowiązują.",
+        body: "Na dysku leżą „umowa_final”, „umowa_final2” i „umowa_nowa”. Nikt nie jest pewien, która ma aktualne warunki, więc każdy bierze tę, którą otwierał ostatnio, a klient dostaje zapisy, które już nie obowiązują.",
       },
       {
         tag: "Efektywność",
@@ -312,7 +312,7 @@ const PL: Service[] = [
       },
       {
         title: "Akceptacja jako zdarzenie w systemie",
-        body: "Zgoda nie powinna wynikać z wątku mailowego. Klient klika link w ofercie, a system zmienia status zamówienia i zapisuje godzinę — tak działa akceptacja wyceny w kanale zamówień części dla klientów indywidualnych, prowadzonym w całości w arkuszu Google. W CRM dla zespołów audytu każde zlecenie jest na jednym z dziewięciu nazwanych etapów, a powiadomienia wychodzą ze zmiany etapu, więc stan widać bez przeszukiwania skrzynek.",
+        body: "Zgoda nie powinna wynikać z wątku mailowego. Klient klika link w ofercie, a system zmienia status zamówienia i zapisuje godzinę: tak działa akceptacja wyceny w kanale zamówień części dla klientów indywidualnych, prowadzonym w całości w arkuszu Google. W CRM dla zespołów audytu każde zlecenie jest na jednym z dziewięciu nazwanych etapów, a powiadomienia wychodzą ze zmiany etapu, więc stan widać bez przeszukiwania skrzynek.",
       },
       {
         title: "Wystawiony dokument się nie zmienia",
@@ -353,7 +353,7 @@ const PL: Service[] = [
       },
       {
         q: "Czy musimy zmieniać CRM albo program księgowy?",
-        a: "Zwykle nie. Jeśli narzędzie udostępnia API albo choćby eksport danych, dokumenty mogą brać dane stamtąd. Czasem najlepszym systemem jest arkusz, w którym ktoś już pracuje: w mojej firmie handlującej częściami kanał zamówień dla klientów indywidualnych — wyceny, akceptacje, faktury z VAT i SMS-y — działa w arkuszu Google, bez kosztów infrastruktury.",
+        a: "Zwykle nie. Jeśli narzędzie udostępnia API albo choćby eksport danych, dokumenty mogą brać dane stamtąd. Czasem najlepszym systemem jest arkusz, w którym ktoś już pracuje: w mojej firmie handlującej częściami kanał zamówień dla klientów indywidualnych, czyli wyceny, akceptacje, faktury z VAT i SMS-y, działa w arkuszu Google, bez kosztów infrastruktury.",
       },
       {
         q: "Czy podpis elektroniczny i archiwum będą zgodne z przepisami?",
@@ -365,19 +365,19 @@ const PL: Service[] = [
       },
       {
         q: "Kto to buduje i co, jeśli projekt jest większy?",
-        a: "Kod piszą agenty AI, a ja odpowiadam za wszystko dookoła: specyfikację, architekturę, review, wdrożenie i działanie na produkcji. Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro — ich developerzy dołączają, gdy projekt wymaga większego zespołu.",
+        a: "Kod piszą agenty AI, a ja odpowiadam za wszystko dookoła: specyfikację, architekturę, review, wdrożenie i działanie na produkcji. Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro: ich developerzy dołączają, gdy projekt wymaga większego zespołu.",
       },
     ],
   },
   {
     slug: "hr-i-rekrutacja",
     navLabel: "HR i rekrutacja",
-    metaTitle: "Automatyzacja HR i rekrutacji — Kamil Jan",
+    metaTitle: "Automatyzacja HR i rekrutacji | Kamil Jan",
     metaDescription:
       "Automatyzacja HR i rekrutacji: kandydaci w jednym miejscu, onboarding i offboarding z etapami, dokumenty kadrowe z danych. Decyzje o ludziach zostają u ludzi.",
     eyebrow: "HR I REKRUTACJA",
     h1: "HR, który ma czas dla ludzi, a nie dla arkuszy",
-    lead: "Automatyzuję w HR i rekrutacji to, co jest powtarzalną logistyką: zbieranie zgłoszeń, obieg dokumentów, listy zadań przy przyjęciu i odejściu pracownika, wnioski urlopowe. Decyzji o ludziach nie oddaję automatowi. Podejmuje je człowiek — tylko na pełnych danych i bez szukania ich w kilku miejscach.",
+    lead: "Automatyzuję w HR i rekrutacji to, co jest powtarzalną logistyką: zbieranie zgłoszeń, obieg dokumentów, listy zadań przy przyjęciu i odejściu pracownika, wnioski urlopowe. Decyzji o ludziach nie oddaję automatowi. Podejmuje je człowiek: tylko na pełnych danych i bez szukania ich w kilku miejscach.",
     micro: [
       "Kandydat w jednym miejscu",
       "Decyzja zostaje u człowieka",
@@ -386,7 +386,7 @@ const PL: Service[] = [
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć miejsc, w których HR traci czas i kandydatów",
     problemsLead:
-      "Rekrutacja i kadry to w dużej części logistyka: przenoszenie danych, pilnowanie terminów, zbieranie podpisów. Tę część da się zapisać w systemie. Rozmów z ludźmi — nie.",
+      "Rekrutacja i kadry to w dużej części logistyka: przenoszenie danych, pilnowanie terminów, zbieranie podpisów. Tę część da się zapisać w systemie. Rozmów z ludźmi zapisać się nie da.",
     problems: [
       {
         tag: "Dane",
@@ -406,7 +406,7 @@ const PL: Service[] = [
       {
         tag: "Ryzyko",
         title: "Były pracownik wciąż ma dostęp",
-        body: "Przy odejściu łatwo pominąć jedno narzędzie. Poczta, CRM albo dysk z danymi klientów zostają otwarte, dopóki ktoś przypadkiem tego nie zauważy — a dane osobowe kandydatów leżą w skrzynce dłużej, niż ktokolwiek planował.",
+        body: "Przy odejściu łatwo pominąć jedno narzędzie. Poczta, CRM albo dysk z danymi klientów zostają otwarte, dopóki ktoś przypadkiem tego nie zauważy, a dane osobowe kandydatów leżą w skrzynce dłużej, niż ktokolwiek planował.",
       },
       {
         tag: "Technologia",
@@ -430,7 +430,7 @@ const PL: Service[] = [
       },
       {
         title: "Przyjęcie i odejście jako etapy, nie lista w mailu",
-        body: "Onboarding i offboarding mają nazwane etapy i tylko dozwolone przejścia między nimi — tak jak zamówienie w platformie MAS Group. Zadanie dla IT, prośba o podpis czy przypomnienie wychodzą z jednego konkretnego przejścia, więc etapu nie da się przeskoczyć, a to samo zadanie nie wyjdzie dwa razy. Przy odejściu lista kont do zamknięcia tworzy się sama.",
+        body: "Onboarding i offboarding mają nazwane etapy i tylko dozwolone przejścia między nimi, tak jak zamówienie w platformie MAS Group. Zadanie dla IT, prośba o podpis czy przypomnienie wychodzą z jednego konkretnego przejścia, więc etapu nie da się przeskoczyć, a to samo zadanie nie wyjdzie dwa razy. Przy odejściu lista kont do zamknięcia tworzy się sama.",
       },
       {
         title: "Dokumenty kadrowe z danych, nie z ręcznie wypełnianego szablonu",
@@ -471,7 +471,7 @@ const PL: Service[] = [
     faq: [
       {
         q: "Ile kosztuje automatyzacja w HR?",
-        a: "Zależy od liczby procesów i systemów do spięcia: samo przyjmowanie zgłoszeń to inna skala niż onboarding z kontami, dokumentami i zestawieniem dla płac. Pierwsza rozmowa jest bezpłatna, a widełki dostajesz po obejrzeniu procesu — nie wcześniej.",
+        a: "Zależy od liczby procesów i systemów do spięcia: samo przyjmowanie zgłoszeń to inna skala niż onboarding z kontami, dokumentami i zestawieniem dla płac. Pierwsza rozmowa jest bezpłatna, a widełki dostajesz po obejrzeniu procesu, nie wcześniej.",
       },
       {
         q: "Czy AI będzie odrzucać kandydatów?",
@@ -483,7 +483,7 @@ const PL: Service[] = [
       },
       {
         q: "Skąd wiesz, jak działa HR?",
-        a: "Nie jestem specjalistą od kadr i nie udaję, że znam prawo pracy — treść umów i regulaminów ustala Wasz dział kadr albo prawnik. Rekrutację znam od strony pracodawcy: w MAS Group sam rekrutuję developerów i szkolę zespół sprzedaży. Resztę robię tak jak przy systemie warsztatowym, który zbudowałem, nie będąc mechanikiem: to osoba wykonująca pracę definiuje, co jest poprawnym wynikiem.",
+        a: "Nie jestem specjalistą od kadr i nie udaję, że znam prawo pracy: treść umów i regulaminów ustala Wasz dział kadr albo prawnik. Rekrutację znam od strony pracodawcy: w MAS Group sam rekrutuję developerów i szkolę zespół sprzedaży. Resztę robię tak jak przy systemie warsztatowym, który zbudowałem, nie będąc mechanikiem: to osoba wykonująca pracę definiuje, co jest poprawnym wynikiem.",
       },
       {
         q: "Co z danymi osobowymi kandydatów i pracowników?",
@@ -498,12 +498,12 @@ const PL: Service[] = [
   {
     slug: "dane-i-raporty",
     navLabel: "Dane i raporty",
-    metaTitle: "Automatyzacja danych i raportów w firmie — Kamil Jan",
+    metaTitle: "Automatyzacja danych i raportów w firmie | Kamil Jan",
     metaDescription:
       "Automatyzacja danych i raportów: zestawienia liczone z jednego źródła, a nie sklejane z arkuszy. Brak świeżych danych widać od razu, a nie przy decyzji.",
     eyebrow: "DANE I RAPORTY",
     h1: "Raport z jednego źródła zamiast z pięciu arkuszy",
-    lead: "Buduję zestawienia i panele liczone z tych samych danych, na których firma pracuje na co dzień — bez sklejania plików i ręcznego poprawiania formuł. A gdy dane przestaną spływać, raport ma to powiedzieć wprost, a nie pokazywać liczby sprzed tygodnia jako aktualne.",
+    lead: "Buduję zestawienia i panele liczone z tych samych danych, na których firma pracuje na co dzień, bez sklejania plików i ręcznego poprawiania formuł. A gdy dane przestaną spływać, raport ma to powiedzieć wprost, a nie pokazywać liczby sprzed tygodnia jako aktualne.",
     micro: ["Jedno źródło liczb", "Brak danych widać od razu", "Bez sklejania arkuszy"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć powodów, dla których nikt nie ufa raportowi",
@@ -605,7 +605,7 @@ const PL: Service[] = [
       },
       {
         q: "Czy budujesz hurtownie danych i systemy BI dla dużych firm?",
-        a: "Nie, i nie będę udawał, że jest inaczej. Dobrze znam bazy operacyjne, na których firma pracuje na co dzień — Postgres, uprawnienia, historię zdarzeń — i raporty liczone prosto z nich. Hurtownia danych dla dużej organizacji to pokrewna, ale osobna specjalizacja. Jeśli jej potrzebujesz, powiem to na pierwszej rozmowie, zamiast brać projekt, którego nie dowiozę.",
+        a: "Nie, i nie będę udawał, że jest inaczej. Dobrze znam bazy operacyjne, na których firma pracuje na co dzień, czyli Postgres, uprawnienia i historię zdarzeń, oraz raporty liczone prosto z nich. Hurtownia danych dla dużej organizacji to pokrewna, ale osobna specjalizacja. Jeśli jej potrzebujesz, powiem to na pierwszej rozmowie, zamiast brać projekt, którego nie dowiozę.",
       },
       {
         q: "Kto napisze kod i co, jeśli projekt jest większy?",
@@ -616,7 +616,7 @@ const PL: Service[] = [
   {
     slug: "nietypowe-procesy-ai",
     navLabel: "Nietypowe procesy",
-    metaTitle: "Nietypowe procesy: automatyzacja, reguły i AI — Kamil Jan",
+    metaTitle: "Nietypowe procesy: automatyzacja, reguły i AI | Kamil Jan",
     metaDescription:
       "Automatyzacja procesów, których nie obsłuży gotowe narzędzie: rozliczenia komisowe, depozyty, umowy o dofinansowanie. Reguły w bazie, AI na krótkiej smyczy.",
     eyebrow: "NIETYPOWE PROCESY",
@@ -635,17 +635,17 @@ const PL: Service[] = [
       {
         tag: "Dane",
         title: "Twój przypadek nie ma pola w żadnym formularzu",
-        body: "Prowizja liczona inaczej dla każdego dostawcy, warunek zwrotu, wyjątek dla jednego klienta. Ląduje w dodatkowej kolumnie, w notatce albo w mailu — i tylko jedna osoba wie, gdzie tego szukać.",
+        body: "Prowizja liczona inaczej dla każdego dostawcy, warunek zwrotu, wyjątek dla jednego klienta. Ląduje w dodatkowej kolumnie, w notatce albo w mailu, a tylko jedna osoba wie, gdzie tego szukać.",
       },
       {
         tag: "Efektywność",
         title: "Narzędzie obsługuje typową część, resztę robi się ręcznie",
-        body: "Płacisz za system, który prowadzi proces do połowy. Druga połowa toczy się obok — w arkuszu i przez telefon — i zjada czas, który miał zostać zaoszczędzony.",
+        body: "Płacisz za system, który prowadzi proces do połowy. Druga połowa toczy się obok, w arkuszu i przez telefon, i zjada czas, który miał zostać zaoszczędzony.",
       },
       {
         tag: "Procesy",
         title: "Dwa zestawienia tego samego miesiąca się nie zgadzają",
-        body: "Raport dla partnera powstaje z innych liczb niż te, których użyła kasa. Wiadomo tylko, że się różnią — nie wiadomo, czyja arytmetyka jest błędna.",
+        body: "Raport dla partnera powstaje z innych liczb niż te, których użyła kasa. Wiadomo tylko, że się różnią. Nie wiadomo, czyja arytmetyka jest błędna.",
       },
       {
         tag: "Ryzyko",
@@ -682,7 +682,7 @@ const PL: Service[] = [
       },
       {
         title: "Model formułuje, kod wykonuje",
-        body: "W logistyce MAS Group automatyczne telefony o statusie zamówienia i SMS-y idą same z procesu zamówień, po polsku i po angielsku. Tam, gdzie w rozmowie pracuje model, może wyłącznie sformułować zdanie i wybrać ścieżkę — każdą zmianę zamówienia i każdą wysyłkę wykonuje deterministyczny kod. Dwukierunkowy agent głosowy jest jeszcze dopracowywany, ale ta granica nie zmienia się od pierwszej wersji.",
+        body: "W logistyce MAS Group automatyczne telefony o statusie zamówienia i SMS-y idą same z procesu zamówień, po polsku i po angielsku. Tam, gdzie w rozmowie pracuje model, może wyłącznie sformułować zdanie i wybrać ścieżkę: każdą zmianę zamówienia i każdą wysyłkę wykonuje deterministyczny kod. Dwukierunkowy agent głosowy jest jeszcze dopracowywany, ale ta granica nie zmienia się od pierwszej wersji.",
       },
       {
         title: "System tam, gdzie człowiek już pracuje",
@@ -690,7 +690,7 @@ const PL: Service[] = [
       },
       {
         title: "Poprawną odpowiedź ustala ktoś z branży",
-        body: "System warsztatowy zbudowałem, nie będąc mechanikiem, więc to pracujący mechanik definiował, co jest poprawną odpowiedzią. Czasy pracy w wycenie liczą się z zamkniętych zleceń tego warsztatu, nie z oszacowania modelu. Swoją branżę znasz Ty — moja robota to zamienić tę wiedzę w reguły.",
+        body: "System warsztatowy zbudowałem, nie będąc mechanikiem, więc to pracujący mechanik definiował, co jest poprawną odpowiedzią. Czasy pracy w wycenie liczą się z zamkniętych zleceń tego warsztatu, nie z oszacowania modelu. Swoją branżę znasz Ty: moja robota to zamienić tę wiedzę w reguły.",
       },
     ],
     proofsTitle: "Działa w produkcji",
@@ -723,11 +723,11 @@ const PL: Service[] = [
       },
       {
         q: "Czy AI poradzi sobie tam, gdzie nie ma schematu?",
-        a: "Właśnie tam najłatwiej o pomyłkę, która brzmi pewnie. Dlatego model dostaje zadania, w których pomyłka nie przesuwa pieniędzy ani zamówień — sformułowanie wiadomości i wybór ścieżki — a liczy, rozlicza i wysyła deterministyczny kod. Formalnego zestawu testów jakości modelu jeszcze nie mam i mówię to od razu.",
+        a: "Właśnie tam najłatwiej o pomyłkę, która brzmi pewnie. Dlatego model dostaje zadania, w których pomyłka nie przesuwa pieniędzy ani zamówień, czyli sformułowanie wiadomości i wybór ścieżki, a liczy, rozlicza i wysyła deterministyczny kod. Formalnego zestawu testów jakości modelu jeszcze nie mam i mówię to od razu.",
       },
       {
         q: "Czy nie prościej dopasować proces do gotowego narzędzia?",
-        a: "Czasem tak — i wtedy mówię to wprost. Jeśli nietypowość wynika z przyzwyczajenia, taniej zmienić przyzwyczajenie i kupić gotowe narzędzie. Budować warto tam, gdzie na tej nietypowej części zarabiasz albo gdzie pomyłka kosztuje pieniądze. Czasem najlepszym systemem okazuje się arkusz ze skryptem.",
+        a: "Czasem tak, a wtedy mówię to wprost. Jeśli nietypowość wynika z przyzwyczajenia, taniej zmienić przyzwyczajenie i kupić gotowe narzędzie. Budować warto tam, gdzie na tej nietypowej części zarabiasz albo gdzie pomyłka kosztuje pieniądze. Czasem najlepszym systemem okazuje się arkusz ze skryptem.",
       },
     ],
   },
@@ -737,7 +737,7 @@ const EN: Service[] = [
   {
     slug: "sprzedaz-i-marketing",
     navLabel: "Sales and marketing",
-    metaTitle: "Sales and marketing automation — Kamil Jan",
+    metaTitle: "Sales and marketing automation | Kamil Jan",
     metaDescription:
       "Sales and marketing automation: every lead with its source, quote and contract from one price list, sending with hard limits. Tested in my own companies.",
     eyebrow: "SALES AND MARKETING",
@@ -807,7 +807,7 @@ const EN: Service[] = [
       },
       {
         title: "Pipeline stages as events, not columns on a board",
-        body: "In Reykjawwwik each of the 14 stages carries what to do now and roughly what to tell the client, and every transition writes a row to an events table. Before a risky jump — starting work without a signed contract, say — the system stops and asks for confirmation.",
+        body: "In Reykjawwwik each of the 14 stages carries what to do now and roughly what to tell the client, and every transition writes a row to an events table. Before a risky jump, such as starting work without a signed contract, the system stops and asks for confirmation.",
       },
       {
         title: "Ad creative starts with research, not a prompt",
@@ -848,18 +848,18 @@ const EN: Service[] = [
       },
       {
         q: "Can AI write our ads and emails?",
-        a: "It helps, given a brief. My first generated creatives looked fake, and what fixed them was adding research before the prompt. In my campaign an agent wrote the emails to written rules and still put in one line I couldn't back — its own review caught that only after the send. What I don't have is data on how those ads sell, and I won't pretend otherwise.",
+        a: "It helps, given a brief. My first generated creatives looked fake, and what fixed them was adding research before the prompt. In my campaign an agent wrote the emails to written rules and still put in one line I couldn't back. Its own review caught that only after the send. What I don't have is data on how those ads sell, and I won't pretend otherwise.",
       },
       {
         q: "Who builds it?",
-        a: "AI coding agents write the code; I own the spec, the architecture, the review, the deploy and how it runs in production. When a project needs a bigger team, CetusPro joins — a Rzeszów software house with close to 40 developers.",
+        a: "AI coding agents write the code; I own the spec, the architecture, the review, the deploy and how it runs in production. When a project needs a bigger team, CetusPro joins, a Rzeszów software house with close to 40 developers.",
       },
     ],
   },
   {
     slug: "obsluga-klienta",
     navLabel: "Customer service",
-    metaTitle: "Customer service automation — Kamil Jan",
+    metaTitle: "Customer service automation | Kamil Jan",
     metaDescription:
       "Customer service automation built on your data: updates sent by the system, answers only from recorded facts, and a person where one is needed.",
     eyebrow: "CUSTOMER SERVICE",
@@ -978,7 +978,7 @@ const EN: Service[] = [
   {
     slug: "administracja-i-dokumenty",
     navLabel: "Admin and documents",
-    metaTitle: "Administration and document automation — Kamil Jan",
+    metaTitle: "Administration and document automation | Kamil Jan",
     metaDescription:
       "Administration and document automation: contracts and invoices built from data you already hold, approvals recorded in the system, deadlines in view.",
     eyebrow: "ADMINISTRATION AND DOCUMENTS",
@@ -1036,7 +1036,7 @@ const EN: Service[] = [
       },
       {
         title: "Approval as an event in the system",
-        body: "Consent shouldn't be inferred from an email thread. The customer clicks a link in the quote and the system changes the order's status and records the time — that's how quotes are accepted in the consumer parts order desk, which runs entirely inside a Google spreadsheet. In the energy-audit CRM every job sits in one of nine named stages and notifications fire from stage changes, so you can see where it stands without searching inboxes.",
+        body: "Consent shouldn't be inferred from an email thread. The customer clicks a link in the quote and the system changes the order's status and records the time: that's how quotes are accepted in the consumer parts order desk, which runs entirely inside a Google spreadsheet. In the energy-audit CRM every job sits in one of nine named stages and notifications fire from stage changes, so you can see where it stands without searching inboxes.",
       },
       {
         title: "An issued document doesn't change",
@@ -1077,7 +1077,7 @@ const EN: Service[] = [
       },
       {
         q: "Do we have to replace our CRM or accounting software?",
-        a: "Usually not. If the tool offers an API or even a data export, documents can draw their data from it. Sometimes the best system is the spreadsheet someone already works in: in my parts business, the consumer order desk — quotes, acceptances, VAT invoices and SMS — runs in a Google spreadsheet at zero infrastructure cost.",
+        a: "Usually not. If the tool offers an API or even a data export, documents can draw their data from it. Sometimes the best system is the spreadsheet someone already works in: in my parts business, the consumer order desk, covering quotes, acceptances, VAT invoices and SMS, runs in a Google spreadsheet at zero infrastructure cost.",
       },
       {
         q: "Will the e-signatures and the archive be legally compliant?",
@@ -1096,12 +1096,12 @@ const EN: Service[] = [
   {
     slug: "hr-i-rekrutacja",
     navLabel: "HR & recruitment",
-    metaTitle: "HR and recruitment automation — Kamil Jan",
+    metaTitle: "HR and recruitment automation | Kamil Jan",
     metaDescription:
       "HR and recruitment automation: candidates in one place, staged onboarding and offboarding, HR documents built from data. Decisions about people stay human.",
     eyebrow: "HR & RECRUITMENT",
     h1: "HR with time for people, not spreadsheets",
-    lead: "I automate the part of HR and recruitment that is repeatable logistics: collecting applications, moving documents, the checklists when someone joins or leaves, leave requests. I don't hand decisions about people to an automation. A person makes them — just with complete data and without hunting through several places for it.",
+    lead: "I automate the part of HR and recruitment that is repeatable logistics: collecting applications, moving documents, the checklists when someone joins or leaves, leave requests. I don't hand decisions about people to an automation. A person makes them: just with complete data and without hunting through several places for it.",
     micro: [
       "Every candidate in one place",
       "A person makes the call",
@@ -1130,7 +1130,7 @@ const EN: Service[] = [
       {
         tag: "Risk",
         title: "A former employee still has access",
-        body: "When someone leaves, one tool is easy to miss. Email, the CRM or a drive full of customer data stays open until somebody notices by accident — and candidates' personal data sits in an inbox longer than anyone planned.",
+        body: "When someone leaves, one tool is easy to miss. Email, the CRM or a drive full of customer data stays open until somebody notices by accident, and candidates' personal data sits in an inbox longer than anyone planned.",
       },
       {
         tag: "Tooling",
@@ -1154,7 +1154,7 @@ const EN: Service[] = [
       },
       {
         title: "Joining and leaving as stages, not a list in an email",
-        body: "Onboarding and offboarding get named stages and only the transitions declared legal — the same way an order works in the MAS Group platform. A task for IT, a signature request or a reminder fires from one specific transition, so a stage can't be skipped and the same task can't go out twice. When someone leaves, the list of accounts to close builds itself.",
+        body: "Onboarding and offboarding get named stages and only the transitions declared legal, the same way an order works in the MAS Group platform. A task for IT, a signature request or a reminder fires from one specific transition, so a stage can't be skipped and the same task can't go out twice. When someone leaves, the list of accounts to close builds itself.",
       },
       {
         title: "HR documents built from data, not from a template filled by hand",
@@ -1195,7 +1195,7 @@ const EN: Service[] = [
     faq: [
       {
         q: "What does HR automation cost?",
-        a: "It depends on how many processes and systems need connecting: taking in applications is a different scale from onboarding with accounts, documents and a payroll summary. The first conversation is free, and you get a range once I've seen the process — not before.",
+        a: "It depends on how many processes and systems need connecting: taking in applications is a different scale from onboarding with accounts, documents and a payroll summary. The first conversation is free, and you get a range once I've seen the process, not before.",
       },
       {
         q: "Will AI reject candidates?",
@@ -1207,7 +1207,7 @@ const EN: Service[] = [
       },
       {
         q: "How would you know how HR works?",
-        a: "I'm not an HR specialist and I don't pretend to know employment law — the content of contracts and policies comes from your HR team or your lawyer. I know recruitment from the employer's side: at MAS Group I hire the developers and train the sales team myself. The rest works the way it did with the workshop system I built without being a mechanic: the person who does the work defines what a correct result is.",
+        a: "I'm not an HR specialist and I don't pretend to know employment law: the content of contracts and policies comes from your HR team or your lawyer. I know recruitment from the employer's side: at MAS Group I hire the developers and train the sales team myself. The rest works the way it did with the workshop system I built without being a mechanic: the person who does the work defines what a correct result is.",
       },
       {
         q: "What about candidates' and employees' personal data?",
@@ -1222,12 +1222,12 @@ const EN: Service[] = [
   {
     slug: "dane-i-raporty",
     navLabel: "Data & reporting",
-    metaTitle: "Data and reporting automation for business — Kamil Jan",
+    metaTitle: "Data and reporting automation for business | Kamil Jan",
     metaDescription:
       "Data and reporting automation: figures computed from one source, not stitched together from spreadsheets. Stale data shows at once, not at decision time.",
     eyebrow: "DATA & REPORTING",
     h1: "A report built from one source, not five spreadsheets",
-    lead: "I build reports and dashboards computed from the same data the company runs on every day — no stitching files together, no hand-fixed formulas. And when data stops arriving, the report should say so plainly instead of showing last week's numbers as current.",
+    lead: "I build reports and dashboards computed from the same data the company runs on every day, no stitching files together, no hand-fixed formulas. And when data stops arriving, the report should say so plainly instead of showing last week's numbers as current.",
     micro: ["One source of numbers", "Missing data shows at once", "No stitched spreadsheets"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six reasons nobody trusts the report",
@@ -1252,7 +1252,7 @@ const EN: Service[] = [
       {
         tag: "Risk",
         title: "A green dashboard on dead data",
-        body: "The source stopped feeding the report, but the chart looks normal — it just doesn't move. Nothing turns red, so nobody notices, and decisions get made on a state that no longer exists.",
+        body: "The source stopped feeding the report, but the chart looks normal. It just doesn't move. Nothing turns red, so nobody notices, and decisions get made on a state that no longer exists.",
       },
       {
         tag: "Tooling",
@@ -1329,7 +1329,7 @@ const EN: Service[] = [
       },
       {
         q: "Do you build data warehouses and BI for large companies?",
-        a: "No, and I won't pretend otherwise. I know operational databases well — the ones a company runs on every day: Postgres, permissions, event history — and reports computed straight from them. An enterprise data warehouse is an adjacent but separate specialism. If that's what you need, I'll say so on the first call rather than take on a project I can't deliver.",
+        a: "No, and I won't pretend otherwise. I know operational databases well, the ones a company runs on every day: Postgres, permissions, event history, and reports computed straight from them. An enterprise data warehouse is an adjacent but separate specialism. If that's what you need, I'll say so on the first call rather than take on a project I can't deliver.",
       },
       {
         q: "Who writes the code, and what if the project is bigger?",
@@ -1340,7 +1340,7 @@ const EN: Service[] = [
   {
     slug: "nietypowe-procesy-ai",
     navLabel: "Unusual processes",
-    metaTitle: "Unusual processes: automation, rules and AI — Kamil Jan",
+    metaTitle: "Unusual processes: automation, rules and AI | Kamil Jan",
     metaDescription:
       "Automating processes no off-the-shelf tool fits: consignment settlements, pooled deposits, funding contracts. Rules in the database, AI on a short leash.",
     eyebrow: "UNUSUAL PROCESSES",
@@ -1359,7 +1359,7 @@ const EN: Service[] = [
       {
         tag: "Data",
         title: "Your case has no field in any form",
-        body: "A commission calculated differently per supplier, a refund condition, an exception for one customer. It ends up in an extra column, a note or an email — and only one person knows where to look.",
+        body: "A commission calculated differently per supplier, a refund condition, an exception for one customer. It ends up in an extra column, a note or an email, and only one person knows where to look.",
       },
       {
         tag: "Efficiency",
@@ -1406,7 +1406,7 @@ const EN: Service[] = [
       },
       {
         title: "The model phrases, code acts",
-        body: "In MAS Group's logistics, automated status calls and SMS fire from the order flow on their own, in English and Polish. Where a model takes part in a call it can only phrase a sentence and pick a route — every order change and every send is done by deterministic code. The two-way voice agent is still hardening, but that boundary hasn't moved since the first version.",
+        body: "In MAS Group's logistics, automated status calls and SMS fire from the order flow on their own, in English and Polish. Where a model takes part in a call it can only phrase a sentence and pick a route: every order change and every send is done by deterministic code. The two-way voice agent is still hardening, but that boundary hasn't moved since the first version.",
       },
       {
         title: "The system goes where the person already works",
@@ -1414,7 +1414,7 @@ const EN: Service[] = [
       },
       {
         title: "Someone from the trade defines the correct answer",
-        body: "I built the workshop system without being a mechanic, so a working mechanic defined what a correct answer is. Labour times in quotes come from that shop's own closed jobs, not from a model's estimate. You know your trade — my job is turning that knowledge into rules.",
+        body: "I built the workshop system without being a mechanic, so a working mechanic defined what a correct answer is. Labour times in quotes come from that shop's own closed jobs, not from a model's estimate. You know your trade: my job is turning that knowledge into rules.",
       },
     ],
     proofsTitle: "Running in production",
@@ -1447,7 +1447,7 @@ const EN: Service[] = [
       },
       {
         q: "Can AI handle work that has no pattern?",
-        a: "That's exactly where a confident-sounding mistake is easiest. So the model gets the jobs where a mistake can't move money or change an order — phrasing a message and picking a route — while deterministic code does the counting, the settling and the sending. I don't have a formal eval harness yet, and I say so up front.",
+        a: "That's exactly where a confident-sounding mistake is easiest. So the model gets the jobs where a mistake can't move money or change an order, namely phrasing a message and picking a route, while deterministic code does the counting, the settling and the sending. I don't have a formal eval harness yet, and I say so up front.",
       },
       {
         q: "Wouldn't it be simpler to fit the process to an off-the-shelf tool?",

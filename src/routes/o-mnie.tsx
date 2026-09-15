@@ -5,7 +5,7 @@ import { HomePage } from "../components/HomePage";
 export const Route = createFileRoute("/o-mnie")({
   head: () => ({
     meta: [
-      { title: "O mnie — Kamil Jan | automatyzacja i wdrożenia AI" },
+      { title: "O mnie | Kamil Jan | automatyzacja i wdrożenia AI" },
       {
         name: "description",
         content:

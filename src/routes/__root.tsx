@@ -42,13 +42,13 @@ const PERSON_SCHEMA = {
   author: [
     {
       "@type": "Book",
-      name: "Simplified Practical Spirituality — The Complete Guidebook",
+      name: "Simplified Practical Spirituality: The Complete Guidebook",
       url: "https://kamiljan.com/books/Simplified-Practical-Spirituality.pdf",
       isAccessibleForFree: true,
     },
     {
       "@type": "Book",
-      name: "Simplified Practical Spirituality² — The Short Version",
+      name: "Simplified Practical Spirituality²: The Short Version",
       url: "https://kamiljan.com/books/Simplified-Practical-Spirituality-Short.pdf",
       isAccessibleForFree: true,
     },
@@ -61,7 +61,7 @@ const WEBSITE_SCHEMA = {
   url: "https://kamiljan.com",
   name: "Kamil Jan",
   description:
-    "Portfolio of Kamil Jan — entrepreneur, operator, and AI automation & implementation engineer based in Reykjavík, Iceland.",
+    "Portfolio of Kamil Jan, entrepreneur, operator, and AI automation & implementation engineer based in Reykjavík, Iceland.",
 };
 
 function NotFoundComponent() {
@@ -93,7 +93,7 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "robots", content: "index, follow" },
       { name: "theme-color", content: "#06090a" },
-      { title: "Kamil Jan — AI Builder, Operator & Team Enablement | Reykjavík" },
+      { title: "Kamil Jan | AI Builder, Operator & Team Enablement | Reykjavík" },
       {
         name: "description",
         content:
@@ -111,7 +111,7 @@ export const Route = createRootRoute({
       { property: "og:locale", content: "en_US" },
       {
         property: "og:title",
-        content: "Kamil Jan — AI Builder, Operator & Team Enablement | Reykjavík",
+        content: "Kamil Jan | AI Builder, Operator & Team Enablement | Reykjavík",
       },
       {
         property: "og:description",
@@ -124,7 +124,7 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Kamil Jan — AI Builder, Operator & Team Enablement | Reykjavík",
+        content: "Kamil Jan | AI Builder, Operator & Team Enablement | Reykjavík",
       },
       {
         name: "twitter:description",

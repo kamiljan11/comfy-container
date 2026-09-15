@@ -5,11 +5,11 @@ import { Frame, type DrawingProps, type Copy } from "./Frame";
 const COPY: Copy = {
   pl: {
     title: "Trzy wersje wzoru kontra jeden szablon i dane",
-    desc: "Po lewej stos trzech kopii tego samego wzoru umowy — v1, v2, v3 — ze znakiem zapytania, która jest aktualna, a w wierzchnim dokumencie zieje puste wymagane pole. Po prawej jeden rekord danych i jeden szablon z nazwanymi polami wchodzą do bramki, która przepuszcza tylko komplet, i dopiero z niej wychodzą trzy gotowe dokumenty: DOCX, PDF i faktura.",
+    desc: "Po lewej stos trzech kopii tego samego wzoru umowy (v1, v2, v3) ze znakiem zapytania, która jest aktualna, a w wierzchnim dokumencie zieje puste wymagane pole. Po prawej jeden rekord danych i jeden szablon z nazwanymi polami wchodzą do bramki, która przepuszcza tylko komplet, i dopiero z niej wychodzą trzy gotowe dokumenty: DOCX, PDF i faktura.",
   },
   en: {
     title: "Three template versions versus one template and the data",
-    desc: "On the left a stack of three copies of the same contract template — v1, v2, v3 — with a question mark over which one is current, and a blank required field gaping in the top document. On the right one data record and one template with named fields pass through a gate that only lets a complete set through, and out of it come three finished documents: DOCX, PDF and invoice.",
+    desc: "On the left a stack of three copies of the same contract template (v1, v2, v3) with a question mark over which one is current, and a blank required field gaping in the top document. On the right one data record and one template with named fields pass through a gate that only lets a complete set through, and out of it come three finished documents: DOCX, PDF and invoice.",
   },
 };
 

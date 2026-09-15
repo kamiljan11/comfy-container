@@ -5,7 +5,7 @@ import { Frame, type DrawingProps, type Copy } from "./Frame";
 const COPY: Copy = {
   pl: {
     title: "Trzy źródła zgłoszeń, jedna karta, decyzja u człowieka",
-    desc: "Po lewej zgłoszenia ze skrzynki, arkusza i portalu z ogłoszeniami schodzą się na jednej osobie, która przepisuje je ręcznie — ten sam kandydat trafia do bazy dwa razy. Po prawej te same trzy źródła wpadają jednym obiegiem do wspólnej karty kandydata, duplikat zostaje scalony, a sprawa idzie nazwanymi etapami do człowieka, który podejmuje decyzję. Automat porządkuje dane, nie ocenia ludzi.",
+    desc: "Po lewej zgłoszenia ze skrzynki, arkusza i portalu z ogłoszeniami schodzą się na jednej osobie, która przepisuje je ręcznie, więc ten sam kandydat trafia do bazy dwa razy. Po prawej te same trzy źródła wpadają jednym obiegiem do wspólnej karty kandydata, duplikat zostaje scalony, a sprawa idzie nazwanymi etapami do człowieka, który podejmuje decyzję. Automat porządkuje dane, nie ocenia ludzi.",
   },
   en: {
     title: "Three intake channels, one record, the decision stays human",

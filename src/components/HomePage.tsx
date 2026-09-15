@@ -143,23 +143,23 @@ const PROJECT_META = [
     name: "MAS Group",
     tags: ["Operations", "B2B"],
     year: "2021–now",
-    href: "https://www.masgroup.is" as string | null,
+    href: "https://github.com/kamiljan11/mas-group" as string | null,
   },
   {
     num: "02",
     logo: "/logos/flyt.webp",
     name: "Flyt",
     tags: ["Marketplace", "SaaS"],
-    year: "2023",
-    href: "https://flyt.is" as string | null,
+    year: "2026",
+    href: "https://github.com/kamiljan11/flyt-marketplace" as string | null,
   },
   {
     num: "03",
     logo: "/logos/quickfix.webp",
     name: "QuickFix",
     tags: ["Brand", "Growth"],
-    year: "2022",
-    href: "https://quickfix.is" as string | null,
+    year: "2026",
+    href: "https://github.com/kamiljan11/quickfix-iceland" as string | null,
   },
   {
     num: "04",
@@ -167,23 +167,24 @@ const PROJECT_META = [
     name: "Sleipnir Glacier Tours",
     tags: ["Tourism", "Operations"],
     year: "2022–2024",
-    href: "https://sleipnirtours.is" as string | null,
+    // no public repo for Sleipnir, so no link (the project list points at GitHub, not live sites)
+    href: null as string | null,
   },
   {
     num: "05",
     logo: "/logos/reykjawwwik.svg",
     name: "Reykjawwwik",
     tags: ["Agency", "Product"],
-    year: "2023",
-    href: "https://reykjawwwik.is" as string | null,
+    year: "2026",
+    href: "https://github.com/kamiljan11/reykjawwwik-platform" as string | null,
   },
   {
     num: "06",
     logo: "/logos/ekomoc.webp",
     name: "Ekomoc CRM",
     tags: ["SaaS", "CRM"],
-    year: "2024",
-    href: null as string | null,
+    year: "2026",
+    href: "https://github.com/kamiljan11/ekomoc" as string | null,
   },
   {
     num: "07",
@@ -380,13 +381,6 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
                     {t.about.p1c}
                     <strong>{t.about.p1d}</strong>
                     {t.about.p1e}
-                  </p>
-                  <p className="about-p">
-                    {t.about.p2a}
-                    <strong>{t.about.p2b}</strong>
-                    {t.about.p2c}
-                    <strong>{t.about.p2d}</strong>
-                    {t.about.p2e}
                   </p>
                 </div>
                 <div className="about-photo-wrap">

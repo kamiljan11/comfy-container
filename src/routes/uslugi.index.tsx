@@ -8,7 +8,7 @@ const COPY = {
   en: {
     eyebrow: "SERVICES",
     h1: "What I build for companies",
-    lead: "Six kinds of work, all of them running in production somewhere. Every page below states what the problem usually looks like, how I approach it, and where the limits are — including the cases where I would tell you not to do it.",
+    lead: "Six kinds of work, all of them running in production somewhere. I also say plainly where the limits are, including the cases where I would tell you not to do it.",
     cta: "Talk it through",
     button: "Book a free consultation",
     ctaLead:
@@ -17,7 +17,7 @@ const COPY = {
   pl: {
     eyebrow: "USŁUGI",
     h1: "Co buduję dla firm",
-    lead: "Sześć rodzajów pracy, każdy działający gdzieś w produkcji. Każda strona mówi, jak zwykle wygląda problem, jak do niego podchodzę i gdzie leżą granice — łącznie z przypadkami, w których odradzam robotę.",
+    lead: "Sześć rodzajów pracy, każdy działający gdzieś w produkcji. Mówię też wprost, gdzie leżą granice, łącznie z przypadkami, w których odradzam robotę.",
     cta: "Porozmawiajmy",
     button: "Umów bezpłatną konsultację",
     ctaLead: "Jedna rozmowa zwykle wystarcza, żeby zobaczyć, czy jest tu w ogóle co automatyzować.",
@@ -27,7 +27,7 @@ const COPY = {
 export const Route = createFileRoute("/uslugi/")({
   head: () => ({
     meta: [
-      { title: "Usługi — automatyzacja, AI i systemy dla firm | Kamil Jan" },
+      { title: "Usługi: automatyzacja, AI i systemy dla firm | Kamil Jan" },
       {
         name: "description",
         content:

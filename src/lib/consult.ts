@@ -10,8 +10,8 @@ export function consultMessage(input: { company: string; message: string; lang: 
   const company = input.company.trim();
   const head =
     input.lang === "pl"
-      ? "Bezpłatna konsultacja — formularz /kontakt"
-      : "Free consultation — /kontakt form";
+      ? "Bezpłatna konsultacja: formularz /kontakt"
+      : "Free consultation: /kontakt form";
   const companyLine = company ? `${input.lang === "pl" ? "Firma" : "Company"}: ${company}` : "";
   return [head, companyLine, "", input.message.trim()].filter((l, i) => i !== 1 || l).join("\n");
 }

@@ -5,11 +5,11 @@ import { Frame, type DrawingProps, type Copy } from "./Frame";
 const COPY: Copy = {
   pl: {
     title: "Ręczne przepisywanie między narzędziami kontra jeden przepływ",
-    desc: "Po lewej człowiek ręcznie przenosi dane między trzema niepołączonymi systemami — CRM, ERP i WMS — nad nim znak ostrzegawczy; po prawej te same trzy systemy zasilają jeden automatyczny przepływ synchronizacji, potwierdzony znakiem zaznaczenia.",
+    desc: "Po lewej człowiek ręcznie przenosi dane między trzema niepołączonymi systemami (CRM, ERP i WMS), nad nim znak ostrzegawczy; po prawej te same trzy systemy zasilają jeden automatyczny przepływ synchronizacji, potwierdzony znakiem zaznaczenia.",
   },
   en: {
     title: "Manual copy-paste between tools versus one synced flow",
-    desc: "On the left a person carries data by hand between three disconnected systems — CRM, ERP and WMS — under a warning sign; on the right the same three systems feed one automatic sync flow confirmed by a check mark.",
+    desc: "On the left a person carries data by hand between three disconnected systems (CRM, ERP and WMS), under a warning sign; on the right the same three systems feed one automatic sync flow confirmed by a check mark.",
   },
 };
 
