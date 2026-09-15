@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   isMacPlatform,
   isPaletteShortcut,
-  normalize,
   paletteItems,
   paletteKeywords,
   paletteScore,
@@ -115,13 +114,6 @@ describe("isMacPlatform / shortcutHint", () => {
   it("shows and announces the platform's own shortcut", () => {
     expect(shortcutHint(true)).toEqual({ label: "⌘K", aria: "Meta+K" });
     expect(shortcutHint(false)).toEqual({ label: "Ctrl K", aria: "Control+K" });
-  });
-});
-
-describe("normalize", () => {
-  it("drops case and Polish diacritics, including ł", () => {
-    expect(normalize("Zażółć GĘŚLĄ jaźń")).toBe("zazolc gesla jazn");
-    expect(normalize("Łódź")).toBe("lodz");
   });
 });
 

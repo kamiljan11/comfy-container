@@ -3,6 +3,7 @@ import { SERVICES } from "../data/services";
 import { AREAS } from "../data/areas";
 import { CASE_STUDIES } from "../data/caseStudies";
 import { ABOUT_ITEMS } from "../data/siteMap";
+import { normalizeText } from "./text";
 
 /**
  * The command palette (Ctrl+K / ⌘K) as data: every page of the site, built
@@ -158,11 +159,6 @@ export function shortcutHint(mac: boolean): { label: string; aria: string } {
   return mac ? { label: "⌘K", aria: "Meta+K" } : { label: "Ctrl K", aria: "Control+K" };
 }
 
-/** Lower case, no diacritics, "ł" as "l" (it has no decomposed form). */
-export function normalize(text: string): string {
-  return text.toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/\p{M}/gu, "");
-}
-
 /**
  * The palette's filter (cmdk `filter` signature). Every typed word has to
  * appear in the label or the hint; a label that starts with the query ranks
@@ -170,10 +166,10 @@ export function normalize(text: string): string {
  * Returns 0 to hide an item.
  */
 export function paletteScore(_value: string, search: string, keywords: string[] = []): number {
-  const query = normalize(search).trim();
+  const query = normalizeText(search).trim();
   if (!query) return 1;
-  const label = normalize(keywords[0] ?? "");
-  const haystack = normalize(keywords.join(" "));
+  const label = normalizeText(keywords[0] ?? "");
+  const haystack = normalizeText(keywords.join(" "));
   const words = query.split(/\s+/);
   if (!words.every((w) => haystack.includes(w))) return 0;
   if (label.startsWith(query)) return 1;

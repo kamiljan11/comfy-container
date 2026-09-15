@@ -75,6 +75,7 @@ export function CommandPalette({ lang, open, onOpenChange, onToggleLang }: Props
               </CommandGroup>
             ))}
             <CommandGroup heading={t.groups.actions}>
+              {/* stays open on purpose: the list re-renders in the other language and the search goes on */}
               <CommandItem value="action:lang" keywords={[t.switchLang]} onSelect={onToggleLang}>
                 <span className="cmdp-label">{t.switchLang}</span>
               </CommandItem>
