@@ -17,7 +17,7 @@ const dialog = (page: Page) => page.locator('[role="dialog"].cmdp[data-state="op
  * list scrolled, the click point landed on the dialog overlay), and the thing under
  * test is the router-hash behaviour after the jump, not the pointer.
  */
-async function pickCase(page: Page, slug: string) {
+async function selectCase(page: Page, slug: string) {
   const row = page.locator(`[cmdk-item][data-value="case:${slug}"]`);
   const title = (await row.locator(".cmdp-label").innerText()).trim();
   await page.keyboard.type(title);
@@ -25,6 +25,10 @@ async function pickCase(page: Page, slug: string) {
     "data-value",
     `case:${slug}`,
   );
+}
+
+async function pickCase(page: Page, slug: string) {
+  await selectCase(page, slug);
   await page.keyboard.press("Enter");
   // wait until the dialog is gone, not just closing, before the next step
   await expect(page.locator('[role="dialog"].cmdp')).toHaveCount(0);
@@ -75,16 +79,19 @@ test("two jumps on /case-studies each open the study they point at", async ({ pa
   expect(slugs.length).toBeGreaterThan(8);
   const [first, second] = [slugs[3], slugs[8]];
 
-  await pickCase(page, first);
+  // Jump, then press Ctrl+K at once, while the palette is still animating closed:
+  // the reopened dialog must start with an empty search, not the title just typed
+  // (the mounted content used to keep it, and the next pick found nothing).
+  await selectCase(page, first);
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("Control+k");
+  await expect(dialog(page)).toBeVisible();
+  await expect(dialog(page).locator("[cmdk-input]")).toHaveValue("");
   await expect(page).toHaveURL(
     (url) => url.pathname === "/case-studies" && url.hash === `#${first}`,
   );
-  await expect(dialog(page)).toBeHidden();
   await expect(page.locator(`details#${first}`)).toHaveAttribute("open", "");
 
-  await openWithShortcut(page);
-  // a new opening starts with an empty search, not the last query
-  await expect(page.locator("[cmdk-input]")).toHaveValue("");
   await pickCase(page, second);
   await expect(page).toHaveURL(
     (url) => url.pathname === "/case-studies" && url.hash === `#${second}`,

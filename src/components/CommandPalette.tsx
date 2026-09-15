@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
@@ -42,10 +42,14 @@ export function CommandPalette({ lang, open, onOpenChange, onToggleLang }: Props
   const items = useMemo(() => paletteItems(lang), [lang]);
   // Every opening starts with an empty search. Ctrl+K pressed while the dialog is
   // still animating closed reuses the mounted content, which kept the last query.
+  // Reset while rendering the opening (React's "adjust state on a prop change"),
+  // so the old query is never painted, not even for one frame as with an effect.
   const [query, setQuery] = useState("");
-  useEffect(() => {
+  const [wasOpen, setWasOpen] = useState(open);
+  if (open !== wasOpen) {
+    setWasOpen(open);
     if (open) setQuery("");
-  }, [open]);
+  }
 
   const go = (href: string) => {
     onOpenChange(false);
