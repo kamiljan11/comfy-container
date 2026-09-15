@@ -54,3 +54,12 @@ describe("case studies in two languages", () => {
     });
   });
 });
+
+describe("case-study count", () => {
+  it("is twenty — the /case-studies intro says so in words", () => {
+    // src/routes/case-studies.tsx: "Twenty projects" / "Dwadzieścia projektów".
+    // Change both intros together with this number.
+    expect(CASE_STUDIES.en).toHaveLength(20);
+    expect(CASE_STUDIES.pl).toHaveLength(20);
+  });
+});
