@@ -161,6 +161,8 @@ export default tseslint.config(
       ".next",
       ".vercel",
       "node_modules",
+      ".stryker-tmp",
+      "reports/mutation",
       "**/*.gen.ts",
       "**/*.d.ts",
     ],
