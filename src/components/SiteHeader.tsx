@@ -8,6 +8,7 @@ import { LangToggle } from "./LangToggle";
 import { CommandPalette } from "./CommandPalette";
 import { ABOUT_ITEMS } from "../data/siteMap";
 import { PALETTE_COPY } from "../lib/palette";
+import { useCommandPalette } from "../hooks/useCommandPalette";
 
 /**
  * The one header for every page (ADR 0003). It used to live inside the
@@ -90,9 +91,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState<Menu | null>(null);
   const [sheet, setSheet] = useState(false);
   const [sheetGroup, setSheetGroup] = useState<Menu | null>(null);
-  const [palette, setPalette] = useState(false);
-  // "Ctrl K" on the server and first render, "⌘K" once we know it is a Mac
-  const [kbd, setKbd] = useState("Ctrl K");
+  const palette = useCommandPalette();
   const navRef = useRef<HTMLElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
@@ -140,23 +139,12 @@ export function SiteHeader() {
     return () => document.removeEventListener("keydown", onKey);
   }, [sheet]);
 
-  // Ctrl+K (⌘K on a Mac) opens the command palette from anywhere on the site.
-  // Only the platform's own modifier: on a Mac, Ctrl+K in a text field means
-  // "delete to the end of the line" and must keep working.
+  // the palette covers the page, so whatever menu was open closes under it
   useEffect(() => {
-    const mac = /Mac|iPhone|iPad/.test(navigator.userAgent);
-    if (mac) setKbd("⌘K");
-    const onKey = (e: KeyboardEvent) => {
-      if ((mac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        setOpen(null);
-        setSheet(false);
-        setPalette((o) => !o);
-      }
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
+    if (!palette.open) return;
+    setOpen(null);
+    setSheet(false);
+  }, [palette.open]);
 
   const toggle = (m: Menu) => setOpen((o) => (o === m ? null : m));
   const current = (p: string) =>
@@ -286,13 +274,11 @@ export function SiteHeader() {
             type="button"
             className="nav-search"
             onClick={() => {
-              setOpen(null);
-              setSheet(false);
-              setPalette(true);
+              palette.setOpen(true);
             }}
             aria-label={paletteCopy.open}
             aria-haspopup="dialog"
-            aria-keyshortcuts={kbd === "⌘K" ? "Meta+K" : "Control+K"}
+            aria-keyshortcuts={palette.shortcut.aria}
           >
             <svg
               viewBox="0 0 24 24"
@@ -304,7 +290,7 @@ export function SiteHeader() {
               <circle cx="11" cy="11" r="7" />
               <path d="m20 20-3.5-3.5" strokeLinecap="round" />
             </svg>
-            <kbd className="nav-search-kbd">{kbd}</kbd>
+            <kbd className="nav-search-kbd">{palette.shortcut.label}</kbd>
           </button>
           <LangToggle lang={lang} onToggle={toggleLang} />
           <Link to="/kontakt" className="nav-cta" aria-current={current("/kontakt")}>
@@ -407,8 +393,8 @@ export function SiteHeader() {
 
       <CommandPalette
         lang={lang}
-        open={palette}
-        onOpenChange={setPalette}
+        open={palette.open}
+        onOpenChange={palette.setOpen}
         onToggleLang={toggleLang}
       />
     </>

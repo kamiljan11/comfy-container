@@ -135,6 +135,29 @@ export function paletteKeywords(item: PaletteItem): string[] {
   return [item.label, item.hint, item.href];
 }
 
+/** A Mac (or an iPhone/iPad with a keyboard): the palette's modifier is ⌘, not Ctrl. */
+export function isMacPlatform(userAgent: string): boolean {
+  return /Mac|iPhone|iPad/.test(userAgent);
+}
+
+type ShortcutKeys = Pick<KeyboardEvent, "key" | "ctrlKey" | "metaKey" | "altKey" | "shiftKey">;
+
+/**
+ * Whether a keydown opens the palette: K with the platform's own modifier and
+ * nothing else. Only ⌘K on a Mac, because Ctrl+K in a Mac text field deletes to
+ * the end of the line; no Alt (AltGr is Ctrl+Alt on Windows) and no Shift
+ * (Ctrl+Shift+K is a browser shortcut).
+ */
+export function isPaletteShortcut(e: ShortcutKeys, mac: boolean): boolean {
+  const modifier = mac ? e.metaKey && !e.ctrlKey : e.ctrlKey && !e.metaKey;
+  return modifier && !e.altKey && !e.shiftKey && e.key.toLowerCase() === "k";
+}
+
+/** The shortcut as shown on the header button and announced to screen readers. */
+export function shortcutHint(mac: boolean): { label: string; aria: string } {
+  return mac ? { label: "⌘K", aria: "Meta+K" } : { label: "Ctrl K", aria: "Control+K" };
+}
+
 /** Lower case, no diacritics, "ł" as "l" (it has no decomposed form). */
 export function normalize(text: string): string {
   return text.toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/\p{M}/gu, "");

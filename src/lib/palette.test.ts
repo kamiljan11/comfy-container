@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { normalize, paletteItems, paletteKeywords, paletteScore } from "./palette";
+import {
+  isMacPlatform,
+  isPaletteShortcut,
+  normalize,
+  paletteItems,
+  paletteKeywords,
+  paletteScore,
+  shortcutHint,
+} from "./palette";
 import { SERVICES, SERVICE_SLUGS } from "../data/services";
 import { AREAS, AREA_SLUGS } from "../data/areas";
 import { CASE_STUDIES } from "../data/caseStudies";
@@ -55,6 +63,58 @@ describe("paletteKeywords", () => {
     const kw = paletteKeywords(item);
     expect(kw[0]).toBe(item.label);
     expect(paletteScore(item.id, "uslugi", kw)).toBe(1);
+  });
+});
+
+describe("isPaletteShortcut", () => {
+  type Mods = Partial<Record<"ctrlKey" | "metaKey" | "altKey" | "shiftKey", boolean>>;
+  const key = (k: string, mods: Mods = {}) => ({
+    key: k,
+    ctrlKey: false,
+    metaKey: false,
+    altKey: false,
+    shiftKey: false,
+    ...mods,
+  });
+
+  it("opens on Ctrl+K off a Mac and on Cmd+K on a Mac", () => {
+    expect(isPaletteShortcut(key("k", { ctrlKey: true }), false)).toBe(true);
+    expect(isPaletteShortcut(key("k", { metaKey: true }), true)).toBe(true);
+  });
+
+  it("leaves Ctrl+K alone on a Mac, where it deletes to the end of the line", () => {
+    expect(isPaletteShortcut(key("k", { ctrlKey: true }), true)).toBe(false);
+  });
+
+  it("ignores the other platform's modifier and both at once", () => {
+    expect(isPaletteShortcut(key("k", { metaKey: true }), false)).toBe(false);
+    expect(isPaletteShortcut(key("k", { ctrlKey: true, metaKey: true }), false)).toBe(false);
+    expect(isPaletteShortcut(key("k", { ctrlKey: true, metaKey: true }), true)).toBe(false);
+  });
+
+  it("ignores AltGr (Ctrl+Alt), Shift and other keys", () => {
+    expect(isPaletteShortcut(key("k", { ctrlKey: true, altKey: true }), false)).toBe(false);
+    expect(isPaletteShortcut(key("K", { ctrlKey: true, shiftKey: true }), false)).toBe(false);
+    expect(isPaletteShortcut(key("j", { ctrlKey: true }), false)).toBe(false);
+    expect(isPaletteShortcut(key("k"), false)).toBe(false);
+  });
+
+  it("still works with Caps Lock on", () => {
+    expect(isPaletteShortcut(key("K", { ctrlKey: true }), false)).toBe(true);
+  });
+});
+
+describe("isMacPlatform / shortcutHint", () => {
+  it("tells a Mac or iOS device from the rest", () => {
+    expect(isMacPlatform("Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5)")).toBe(true);
+    expect(isMacPlatform("Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X)")).toBe(true);
+    expect(isMacPlatform("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")).toBe(false);
+    expect(isMacPlatform("Mozilla/5.0 (X11; Linux x86_64)")).toBe(false);
+  });
+
+  it("shows and announces the platform's own shortcut", () => {
+    expect(shortcutHint(true)).toEqual({ label: "⌘K", aria: "Meta+K" });
+    expect(shortcutHint(false)).toEqual({ label: "Ctrl K", aria: "Control+K" });
   });
 });
 

@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
+import { hashToId, openStudy } from "../lib/caseStudyHash";
 import { useEffect } from "react";
 import { CASE_STUDIES, FEATURED, SECONDARY, type CaseStudy } from "../data/caseStudies";
 import { useLang } from "../hooks/useLang";
@@ -182,18 +183,9 @@ function CaseStudiesPage() {
   const hash = useRouterState({ select: (s) => s.location.hash });
 
   useEffect(() => {
-    const openStudy = (raw: string) => {
-      const id = decodeURIComponent(raw);
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (el && el.tagName === "DETAILS") {
-        (el as HTMLDetailsElement).open = true;
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    };
-    openStudy(hash);
+    openStudy(hashToId(hash), document);
     const onHashChange = () => {
-      openStudy(window.location.hash.slice(1));
+      openStudy(hashToId(window.location.hash), document);
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
