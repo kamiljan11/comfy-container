@@ -5948,3 +5948,92 @@ header[id] {
     top: 12px;
   }
 }
+
+/* ── Mobile pass (2026-09-15, measured at 360/390/430 px with the mobile-optimization
+   audit): tap targets ≥44 px, labels ≥12 px, body text 16 px, a legible fixed nav. ── */
+.sl-more-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.nav {
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  backdrop-filter: saturate(140%) blur(12px);
+}
+@media (max-width: 768px) {
+  .sl-eyebrow,
+  .sl-tag,
+  .sl-proc-meta,
+  .svc-eyebrow,
+  .cap-tag,
+  .marquee-item,
+  .ai-stat-l,
+  .cad-freq,
+  .cs-sec h3 {
+    font-size: 12px;
+  }
+  .cs-sec p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* contact row (WhatsApp, e-mail, CV, LinkedIn, GitHub) and the chat's starter
+     questions were 29–43 px tall: tap targets ≥44 px */
+  .contact-alts a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .chatbot-starter {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* the solution tabs scroll sideways inside their row: show that with a fade at
+     the right edge, give the last chip room to clear it, and snap chip by chip */
+  .sol-tabs {
+    padding-right: 40px;
+    scroll-snap-type: x proximity;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent);
+  }
+  .sol-tab {
+    scroll-snap-align: start;
+  }
+  /* /kontakt: the form sat ~80 px below the intro on phones */
+  .kontakt-grid {
+    padding-top: 12px;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* /claude diagrams are wider than a phone and scroll inside .aid-scroll:
+     say so, in the same style as the work carousel's hint */
+  .aid-scroll::before {
+    content: "Swipe →";
+    display: block;
+    margin-bottom: 8px;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    opacity: 0.75;
+  }
+  html[lang="pl"] .aid-scroll::before {
+    content: "Przesuń →";
+  }
+}
+
+@media (max-width: 768px) {
+  /* /o-mnie: the Beyond Work aside follows the contact block, and the desktop
+     `.contact:has(+ .beyond)` tail (104 px) outranked the phone padding that keeps
+     the portrait below the text, so the portrait slid under the heading (257 px) */
+  .contact:has(+ .beyond) {
+    padding-bottom: 384px;
+  }
+}
