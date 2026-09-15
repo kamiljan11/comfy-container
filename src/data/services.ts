@@ -1,10 +1,8 @@
 import { type Lang } from "../i18n";
 
 /**
- * Service pages under /uslugi — SEO landing pages, deliberately kept out of the
- * main navigation. The homepage sells a person to hire; these sell the work.
- * Keeping them unlinked from the header means a recruiter reading the site
- * front-to-back never lands in an agency pitch, while search still indexes them.
+ * Service pages under /uslugi, listed in the header's Usługi menu and fed to
+ * the homepage offer block (pickHomePains) and ServicePageBody.
  *
  * Every proof line here maps to something that is actually running in
  * production. Nothing on these pages is a number I cannot point at.
