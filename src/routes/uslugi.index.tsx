@@ -2,12 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { SERVICES } from "../data/services";
 
-/**
- * Index of the service pages. Deliberately absent from the site header — the
- * homepage sells a person to hire, these pages sell the work, and a recruiter
- * reading front-to-back should not land in an agency pitch. Search engines
- * still reach them through the sitemap and the links between them.
- */
+/** Index of the service pages — "Wszystkie usługi" in the header's Usługi menu. */
 
 const COPY = {
   en: {
@@ -15,6 +10,7 @@ const COPY = {
     h1: "What I build for companies",
     lead: "Six kinds of work, all of them running in production somewhere. Every page below states what the problem usually looks like, how I approach it, and where the limits are — including the cases where I would tell you not to do it.",
     cta: "Talk it through",
+    button: "Book a free consultation",
     ctaLead:
       "One conversation is usually enough to see whether there is anything worth automating.",
   },
@@ -23,6 +19,7 @@ const COPY = {
     h1: "Co buduję dla firm",
     lead: "Sześć rodzajów pracy, każdy działający gdzieś w produkcji. Każda strona mówi, jak zwykle wygląda problem, jak do niego podchodzę i gdzie leżą granice — łącznie z przypadkami, w których odradzam robotę.",
     cta: "Porozmawiajmy",
+    button: "Umów bezpłatną konsultację",
     ctaLead: "Jedna rozmowa zwykle wystarcza, żeby zobaczyć, czy jest tu w ogóle co automatyzować.",
   },
 } as const;
@@ -76,9 +73,9 @@ function ServicesIndex() {
         <section className="svc-cta">
           <h2>{c.cta}</h2>
           <p>{c.ctaLead}</p>
-          <a className="btn-primary" href="mailto:hello@kamiljan.com">
-            hello@kamiljan.com
-          </a>
+          <Link className="btn-primary" to="/kontakt">
+            {c.button}
+          </Link>
         </section>
       </div>
     </div>
