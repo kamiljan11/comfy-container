@@ -33,7 +33,7 @@ export function resolveLang(search: string, saved: string | null, browser: strin
 /** Pure: what the server renders on a given path. Polish-first pages are the
  *  ones with Polish slugs and Polish meta. Exported for tests. */
 export function ssrLangFor(pathname: string): Lang {
-  return /^\/(uslugi|obszary|kontakt|blog|o-mnie)(\/|$)/.test(pathname) ? "pl" : "en";
+  return /^\/(uslugi|obszary|kontakt|blog|o-mnie|ksiazki)(\/|$)/.test(pathname) ? "pl" : "en";
 }
 
 let current: Lang | null = null;
