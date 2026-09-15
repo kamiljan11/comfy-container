@@ -21,7 +21,7 @@ export const Route = createFileRoute("/obszary/$slug")({
     const a = getArea("pl", params.slug);
     return {
       meta: [
-        { title: a?.metaTitle ?? "Obszary — Kamil Jan" },
+        { title: a?.metaTitle ?? "Obszary | Kamil Jan" },
         { name: "description", content: a?.metaDescription ?? "" },
       ],
       links: [{ rel: "canonical", href: `https://kamiljan.com/obszary/${params.slug}` }],

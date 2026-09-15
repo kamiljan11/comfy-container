@@ -26,7 +26,7 @@ function readMins(cs: CaseStudy): number {
 const CS_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "Kamil Jan Włodarczyk — Engineering Case Studies",
+  name: "Kamil Jan Włodarczyk | Engineering Case Studies",
   url: "https://kamiljan.com/case-studies",
   hasPart: FEATURED.map((cs) => ({
     "@type": "Article",
@@ -39,11 +39,11 @@ const CS_SCHEMA = {
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
     meta: [
-      { title: "Kamil Jan Włodarczyk — Case Studies" },
+      { title: "Kamil Jan Włodarczyk | Case Studies" },
       {
         name: "description",
         content:
-          "Engineering case studies by Kamil Jan Włodarczyk — AI automation & implementation engineer. How real production systems were built: the problem, the decisions and rejected alternatives, how I knew it worked, and the honest trade-offs.",
+          "Engineering case studies by Kamil Jan Włodarczyk, AI automation & implementation engineer. How real production systems were built: the problem, the decisions and rejected alternatives, how I knew it worked, and the honest trade-offs.",
       },
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/case-studies" }],
@@ -95,7 +95,7 @@ const UI: Record<
     min: "min",
     backTop: "↑ Back to top",
     more: "More work",
-    moreSub: "Shorter write-ups — same honesty, less depth.",
+    moreSub: "Shorter write-ups: same honesty, less depth.",
   },
   pl: {
     h1: "Realizacje",
@@ -116,7 +116,7 @@ const UI: Record<
     min: "min",
     backTop: "↑ Do góry",
     more: "Więcej prac",
-    moreSub: "Krótsze opisy — ta sama szczerość, mniej głębi.",
+    moreSub: "Krótsze opisy: ta sama szczerość, mniej głębi.",
   },
 };
 
@@ -206,8 +206,8 @@ function CaseStudiesPage() {
       {studies.map((cs, i) => (
         <details key={cs.slug} id={cs.slug} className="cs-fold">
           {/* Collapsed, this is one card: title, preview and a few tags are
-              always visible — the same info the old separate TOC cards
-              showed — so twenty of these scan in a screen or two without a
+              always visible: the same info the old separate TOC cards
+              showed, so twenty of these scan in a screen or two without a
               second, duplicate list above them. Everything else waits until
               it is opened. */}
           <summary className="cs-fold-sum">

@@ -30,7 +30,7 @@ const COPY: Record<Lang, { eyebrow: string; download: string; start: string }> =
 export const Route = createFileRoute("/ksiazki")({
   head: () => ({
     meta: [
-      { title: "Książki — Simplified Practical Spirituality | Kamil Jan" },
+      { title: "Książki | Simplified Practical Spirituality | Kamil Jan" },
       {
         name: "description",
         content:

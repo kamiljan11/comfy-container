@@ -12,7 +12,7 @@ import { useLang } from "../hooks/useLang";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Blog — automatyzacja i AI w firmie | Kamil Jan" },
+      { title: "Blog: automatyzacja i AI w firmie | Kamil Jan" },
       { name: "robots", content: "noindex, follow" },
     ],
   }),
@@ -32,7 +32,7 @@ const COPY: Record<Lang, Copy> = {
   pl: {
     eyebrow: "BLOG",
     h1: "Dzielę się tym, co robię z AI",
-    lead: "Czego się uczę, nad czym pracuję, co mnie ostatnio zaciekawiło — i wdrożenia, którymi mogę się podzielić publicznie. Pierwsze wpisy w drodze.",
+    lead: "Czego się uczę, nad czym pracuję, co mnie ostatnio zaciekawiło, oraz wdrożenia, którymi mogę się podzielić publicznie. Pierwsze wpisy w drodze.",
     meanwhile: "Na razie zobacz",
     services: "usługi",
     cases: "realizacje",
@@ -40,7 +40,7 @@ const COPY: Record<Lang, Copy> = {
   en: {
     eyebrow: "BLOG",
     h1: "Sharing what I'm building with AI",
-    lead: "What I'm learning, what I'm working on, what caught my interest — and public implementations I can share. First posts on the way.",
+    lead: "What I'm learning, what I'm working on, what caught my interest, and public implementations I can share. First posts on the way.",
     meanwhile: "Meanwhile, see the",
     services: "services",
     cases: "case studies",

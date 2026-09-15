@@ -25,7 +25,7 @@ export const submitContactForm = createServerFn({ method: "POST" })
     await sendEmail({
       to: "hello@kamiljan.com",
       replyTo: data.email,
-      subject: `[kamiljan.com] ${data.subject || "Contact form"} — from ${data.name}`,
+      subject: `[kamiljan.com] ${data.subject || "Contact form"} from ${data.name}`,
       text: `Name: ${data.name}\nEmail: ${data.email}\n\n${data.message}`,
     });
     return { ok: true, receivedAt: new Date().toISOString() };
