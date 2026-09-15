@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { wrapLabel } from "../lib/wrapLabel";
 import { useLang } from "../hooks/useLang";
 import { type Lang } from "../i18n";
 
@@ -1375,24 +1376,27 @@ function AiArch({ t }: { t: ArchLabels }) {
 
 /* ══ Diagram: mind map (8 branches around the centre) ══ */
 function AiMindMap({ t }: { t: MindLabels }) {
-  const cx = 380;
-  const cy = 250;
-  // Branch anchors: two columns of four, connected to the centre by curves.
-  const pos = [
-    { x: 30, y: 36 },
-    { x: 30, y: 152 },
-    { x: 30, y: 268 },
-    { x: 30, y: 384 },
-    { x: 550, y: 36 },
-    { x: 550, y: 152 },
-    { x: 550, y: 268 },
-    { x: 550, y: 384 },
-  ];
   const bw = 180;
-  const bh = 84;
+  // leaves wrap to the box width; the boxes and rows grow with the longest
+  // branch, so a longer label never spills out (10px italic ≈ 30 chars here)
+  const leafLines = t.branches.map((b) => b.leaves.flatMap((l) => wrapLabel(l, 30)));
+  const lines = Math.max(...leafLines.map((l) => l.length));
+  const bh = 54 + 15 * (lines - 1);
+  const gap = 32;
+  const rowY = [0, 1, 2, 3].map((r) => 36 + r * (bh + gap));
+  const bottom = rowY[3] + bh;
+  const cx = 380;
+  const cy = (36 + bottom) / 2;
+  // Branch anchors: two columns of four, connected to the centre by curves.
+  const pos = [...rowY.map((y) => ({ x: 30, y })), ...rowY.map((y) => ({ x: 550, y }))];
   return (
     <div className="aid-scroll">
-      <svg viewBox="0 0 760 520" className="aid" role="img" aria-label={t.caption}>
+      <svg
+        viewBox={`0 0 760 ${String(bottom + 44)}`}
+        className="aid"
+        role="img"
+        aria-label={t.caption}
+      >
         {t.branches.map((b, i) => {
           const p = pos[i];
           const left = i < 4;
@@ -1410,9 +1414,9 @@ function AiMindMap({ t }: { t: MindLabels }) {
               <text x={p.x + bw / 2} y={p.y + 20} textAnchor="middle" className="aid-t">
                 {b.title}
               </text>
-              {b.leaves.map((l, j) => (
+              {leafLines[i].map((l, j) => (
                 <text
-                  key={l}
+                  key={`${String(j)}-${l}`}
                   x={p.x + bw / 2}
                   y={p.y + 38 + j * 15}
                   textAnchor="middle"
@@ -1431,7 +1435,7 @@ function AiMindMap({ t }: { t: MindLabels }) {
         <text x={cx} y={cy + 14} textAnchor="middle" className="aid-xs">
           {t.centerSub}
         </text>
-        <text x={cx} y="500" textAnchor="middle" className="aid-xs">
+        <text x={cx} y={bottom + 30} textAnchor="middle" className="aid-xs">
           {t.caption}
         </text>
       </svg>
@@ -1440,16 +1444,35 @@ function AiMindMap({ t }: { t: MindLabels }) {
 }
 
 /* ══ Diagram: the life of a change (N stages) ══ */
+/* Chips alternate between two rows, so a chip may be almost two steps wide
+   without touching its same-row neighbours; the rows are stacked with a gap,
+   so neighbours in the other row never overlap either. Labels are wrapped to
+   CHIP_CHARS per line (wrapLabel), and the heights follow the longest label —
+   the copy can change without anything spilling out of its box. */
+const CHIP_CHARS = 20;
+const CHIP_LINE = 13;
+
 function AiPipeline({ t }: { t: PipeLabels }) {
   const n = t.stages.length;
-  const x0 = 46;
-  const x1 = 660;
+  const x0 = 78;
+  const x1 = 652;
   const step = (x1 - x0) / (n - 1);
   const xs = Array.from({ length: n }, (_, i) => x0 + i * step);
-  const chipW = Math.min(96, step - 6);
+  const chipW = Math.min(128, 2 * step - 16);
+  const chips = t.gates.map((g) => wrapLabel(g, CHIP_CHARS));
+  const chipH = 10 + CHIP_LINE * Math.max(...chips.map((c) => c.length));
+  const rowY = [94, 94 + chipH + 16];
+  const blocked = wrapLabel(`✕ ${t.blocked}`, 110);
+  const blockedY = rowY[1] + chipH + 26;
+  const captionY = blockedY + 14 * (blocked.length - 1) + 24;
   return (
     <div className="aid-scroll">
-      <svg viewBox="0 0 760 210" className="aid" role="img" aria-label={t.caption}>
+      <svg
+        viewBox={`0 0 760 ${String(captionY + 12)}`}
+        className="aid"
+        role="img"
+        aria-label={t.caption}
+      >
         <defs>
           <marker
             id="aipr"
@@ -1470,46 +1493,55 @@ function AiPipeline({ t }: { t: PipeLabels }) {
         </text>
 
         {xs.map((x, i) => {
-          const words = t.gates[i].split(" + ");
+          const y = rowY[i % 2];
+          const lines = chips[i];
+          // vertically centre however many lines this chip has
+          const firstLine = y + chipH / 2 - ((lines.length - 1) * CHIP_LINE) / 2 + 3.5;
           return (
             <g key={i}>
               <circle cx={x} cy="62" r="5" className="aid-node" />
               <text x={x} y={i % 2 === 0 ? 42 : 28} textAnchor="middle" className="aid-s aid-stage">
                 {t.stages[i]}
               </text>
-              <path d={`M${x} 70 L${x} ${i % 2 === 0 ? 92 : 112}`} className="aid-ln aid-thin" />
+              <path
+                d={`M${String(x)} 70 L${String(x)} ${String(y - 2)}`}
+                className="aid-ln aid-thin"
+              />
               <rect
                 x={x - chipW / 2}
-                y={i % 2 === 0 ? 94 : 114}
+                y={y}
                 width={chipW}
-                height="34"
+                height={chipH}
                 rx="7"
                 className="aid-chip"
               />
-              <text
-                x={x}
-                y={i % 2 === 0 ? 109 : 129}
-                textAnchor="middle"
-                className="aid-xs aid-chip-t"
-              >
-                {words[0]}
-              </text>
-              <text
-                x={x}
-                y={i % 2 === 0 ? 122 : 142}
-                textAnchor="middle"
-                className="aid-xs aid-chip-t"
-              >
-                {words.length > 1 ? "+ " + words.slice(1).join(" + ") : ""}
-              </text>
+              {lines.map((line, j) => (
+                <text
+                  key={j}
+                  x={x}
+                  y={firstLine + j * CHIP_LINE}
+                  textAnchor="middle"
+                  className="aid-xs aid-chip-t"
+                >
+                  {line}
+                </text>
+              ))}
             </g>
           );
         })}
 
-        <text x="380" y="176" textAnchor="middle" className="aid-xs aid-red">
-          ✕ {t.blocked}
-        </text>
-        <text x="380" y="200" textAnchor="middle" className="aid-xs">
+        {blocked.map((line, j) => (
+          <text
+            key={j}
+            x="380"
+            y={blockedY + j * 14}
+            textAnchor="middle"
+            className="aid-xs aid-red"
+          >
+            {line}
+          </text>
+        ))}
+        <text x="380" y={captionY} textAnchor="middle" className="aid-xs">
           {t.caption}
         </text>
       </svg>
@@ -1519,6 +1551,15 @@ function AiPipeline({ t }: { t: PipeLabels }) {
 
 /* ══ Diagram: review pipeline ══ */
 function AiReview({ t }: { t: ReviewLabels }) {
+  // Both boxes stay centred on y=94 (where the arrows meet) and grow with
+  // their wrapped labels: bold 13px fits ~13 chars in the 130px band, 10px
+  // italic ~18 chars in the 112px aggregate box.
+  const gateLines = wrapLabel(t.gates, 13);
+  const bandH = 46 + 16 * gateLines.length;
+  const bandY = 94 - bandH / 2;
+  const aggLines = wrapLabel(t.aggregateSub, 18);
+  const aggH = 42 + 14 * aggLines.length;
+  const aggY = 94 - aggH / 2;
   return (
     <div className="aid-scroll">
       <svg viewBox="0 0 760 236" className="aid" role="img" aria-label={t.caption}>
@@ -1541,11 +1582,24 @@ function AiReview({ t }: { t: ReviewLabels }) {
         </text>
 
         <path d="M144 94 L176 94" className="aid-ln" markerEnd="url(#airv)" />
-        <rect x="180" y="62" width="130" height="64" rx="9" className="aid-band" />
-        <text x="245" y="88" textAnchor="middle" className="aid-t aid-accent">
-          {t.gates}
-        </text>
-        <text x="245" y="106" textAnchor="middle" className="aid-xs">
+        <rect x="180" y={bandY} width="130" height={bandH} rx="9" className="aid-band" />
+        {gateLines.map((line, j) => (
+          <text
+            key={j}
+            x="245"
+            y={bandY + 22 + 16 * j}
+            textAnchor="middle"
+            className="aid-t aid-accent"
+          >
+            {line}
+          </text>
+        ))}
+        <text
+          x="245"
+          y={bandY + 40 + 16 * (gateLines.length - 1)}
+          textAnchor="middle"
+          className="aid-xs"
+        >
           {t.gatesSub}
         </text>
 
@@ -1575,15 +1629,21 @@ function AiReview({ t }: { t: ReviewLabels }) {
           </g>
         ))}
 
-        <rect x="508" y="66" width="112" height="56" rx="9" className="aid-box" />
-        <text x="564" y="88" textAnchor="middle" className="aid-t">
+        <rect x="508" y={aggY} width="112" height={aggH} rx="9" className="aid-box" />
+        <text x="564" y={aggY + 22} textAnchor="middle" className="aid-t">
           {t.aggregate}
         </text>
-        <text x="564" y="106" textAnchor="middle" className="aid-xs">
-          {t.aggregateSub}
-        </text>
+        {aggLines.map((line, j) => (
+          <text key={j} x="564" y={aggY + 40 + 14 * j} textAnchor="middle" className="aid-xs">
+            {line}
+          </text>
+        ))}
 
-        <path d="M564 122 L564 148" className="aid-ln" markerEnd="url(#airv)" />
+        <path
+          d={`M564 ${String(aggY + aggH)} L564 148`}
+          className="aid-ln"
+          markerEnd="url(#airv)"
+        />
         <rect x="508" y="152" width="112" height="48" rx="9" className="aid-box aid-strong" />
         <text x="564" y="172" textAnchor="middle" className="aid-t">
           {t.verifier}
