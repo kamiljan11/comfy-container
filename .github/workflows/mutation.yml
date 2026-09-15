@@ -88,7 +88,7 @@ jobs:
           # runner z fixem i reprodukcja z docs/RUNBOOK.md zabije mutanty na Vitest 5 (straznik nizej to sprawdzi).
           # Ten sam wiersz `npm install` stoi w docs/RUNBOOK.md (reprodukcja) — zmieniaj oba naraz.
           npm install --no-save --no-audit --no-fund @stryker-mutator/core@10.0.0 @stryker-mutator/vitest-runner@10.0.0 vitest@4.1.11
-          node -e 'const v = require("vitest/package.json").version; console.log("vitest dla Strykera: " + v); if (v !== "4.1.11") process.exit(1)'
+          node -e 'const fs = require("fs"); const ver = (p) => JSON.parse(fs.readFileSync("node_modules/" + p + "/package.json", "utf8")).version; const v = ver("vitest"), r = ver("@stryker-mutator/vitest-runner"); console.log("vitest " + v + ", vitest-runner " + r); if (v !== "4.1.11" || r !== "10.0.0") process.exit(1)'
 
       - name: Stryker na zmienionych plikach (prog 50 %)
         if: steps.scope.outputs.files != ''
@@ -115,13 +115,13 @@ jobs:
           rc=0
           npx stryker run stryker.pr.config.json || rc=$?
           # Straznik: "Survived" jest dowodem tylko wtedy, gdy testy naprawde sie wykonaly. Mutant pokryty testami
-          # (coveredBy), a z testsCompleted 0 = runner nie odpalil zadnego testu -> wynik niewazny, FAIL.
+          # (coveredBy), a z testsCompleted 0 albo bez tego pola (w schemacie jest opcjonalne) = runner nie odpalil zadnego testu -> wynik niewazny, FAIL.
           REPORT=reports/mutation/mutation.json
           if [ ! -f "$REPORT" ]; then echo "::error::Stryker nie zapisal $REPORT (exit $rc)"; exit 1; fi
           node -e '
             const report = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
             const unrun = Object.entries(report.files).flatMap(([file, { mutants }]) => mutants
-              .filter((m) => m.status === "Survived" && (m.coveredBy ?? []).length > 0 && m.testsCompleted === 0)
+              .filter((m) => m.status === "Survived" && (m.coveredBy ?? []).length > 0 && (m.testsCompleted ?? 0) === 0)
               .map((m) => `${file}:${m.location.start.line} ${m.mutatorName}`));
             if (unrun.length > 0) {
               console.log(`::error::${unrun.length} mutant(ow) "Survived" bez ani jednego wykonanego testu, choc testy je pokrywaja: runner nie odpalil testow, wynik jest niewazny. Sprawdz vitest vs @stryker-mutator/vitest-runner (stryker-js#6210).`);
