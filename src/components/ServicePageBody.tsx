@@ -415,6 +415,19 @@ function ReadingProgress() {
 
 const pad2 = (n: number) => String(n).padStart(2, "0");
 
+/** FAQPage JSON-LD for the questions shown on the page. "<" is escaped so a
+ *  question can never close the script tag it sits in. */
+const faqJsonLd = (faq: Service["faq"]) =>
+  JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  }).replace(/</g, "\\u003c");
+
 /* ── Page ───────────────────────────────────────────────────────────────── */
 
 type Props = {
@@ -597,6 +610,12 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
               </h2>
             </div>
 
+            {/* structured data for the FAQ that is on this page — search and
+                answer engines may only use questions the reader can see */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: faqJsonLd(s.faq) }}
+            />
             <div className="sl-faq">
               {s.faq.map((f, i) => (
                 <details

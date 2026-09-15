@@ -64,61 +64,6 @@ const WEBSITE_SCHEMA = {
     "Portfolio of Kamil Jan — entrepreneur, operator, and AI automation & implementation engineer based in Reykjavík, Iceland.",
 };
 
-const FAQ_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Who is Kamil Jan?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Kamil Jan is an entrepreneur, operator, and AI automation & implementation engineer based in Reykjavík, Iceland. He is the founder of MAS Group, Flyt, Reykjawwwik, and QuickFix — 12+ years of building, six businesses of his own, shipping AI systems into production since 2024.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What does Kamil Jan do?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Kamil Jan builds businesses and the systems that run them. He specializes in systems architecture, AI automation (LLM workflows, voice agents, MCP servers), and growth marketing. He is available as a co-founder, advisor, or senior hire.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is Kamil Jan available for hire or co-founding?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Kamil Jan is open to AI implementation and enablement roles, co-founding, advisory and project engagements, or a full-time senior role. Contact him at hello@kamiljan.com.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How can I contact Kamil Jan?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "You can reach Kamil Jan by email at hello@kamiljan.com, or find him on LinkedIn at linkedin.com/in/kamiljan11.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Where can I see Kamil Jan's actual work?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "kamiljan.com/case-studies hosts 20 in-depth engineering case studies — each with the problem, the decisions and rejected alternatives, how success was measured, and honest limitations. Live systems include www.masgroup.is, flyt.is, journeyiceland.is (client delivery), garage.mountaincar.is, nextcar.is, and quickfix.is.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What AI tools and technologies does Kamil Jan work with?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Kamil Jan works with LLM workflows, RetellAI voice agents, MCP servers, Cloudflare Workers, TanStack Router, Three.js, n8n, fal.ai, Twilio, Supabase, Meta Ads, and Playwright — among others. He builds and deploys AI tooling in production, not just demos.",
-      },
-    },
-  ],
-};
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -232,10 +177,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_SCHEMA) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
         />
       </head>
       <body>
