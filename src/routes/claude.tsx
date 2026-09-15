@@ -147,23 +147,19 @@ type Content = {
 const CONTENT: Record<Lang, Content> = {
   en: {
     title: "Coding Higher Mind — the AI system behind the work",
-    role: "Two runtimes, hardened prompts, event-driven gates, reviewer departments, a learning loop — counted, not estimated. Now open source.",
+    role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
     intro:
-      "My CV says AI coding agents write the code while I own the spec, the review and the deploy. That claim deserves " +
-      "evidence, so this page shows the machine itself, in depth: what runs in the background, what it enforces, how it " +
-      "learns from its own failures, and where its limits are. Everything below is live today, and every number was " +
-      "produced by a shell command on the day this page shipped — counted, not estimated. The whole system is published " +
-      "as a repository you can install on your own machine in five minutes.",
+      "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped — counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
       { n: "1,873", label: "logged agent sessions" },
-      { n: "149", label: "scars turned into gates" },
+      { n: "149", label: "past failures turned into automatic checks" },
       { n: "23", label: "hard stops in the git gates" },
-      { n: "9", label: "reviewer departments" },
+      { n: "9", label: "specialist AI reviewers" },
       { n: "51", label: "zero-token tools" },
       { n: "40", label: "routines (5 code · 35 desktop)" },
       { n: "31", label: "repos under strict protection" },
-      { n: "95", label: "secrets the model never sees" },
+      { n: "95", label: "keys and passwords the AI never sees" },
     ],
     mapTitle: "The whole machine on one map",
     arch: {
@@ -178,8 +174,8 @@ const CONTENT: Record<Lang, Content> = {
       shared: "same rules · same memory",
       vault: "VAULT",
       vaultSub: "95 secrets",
-      vaultNote1: "keys injected as env —",
-      vaultNote2: "never visible in chat",
+      vaultNote1: "keys go to the process,",
+      vaultNote2: "never to the chat",
       memory: "MEMORY",
       memorySub: "1,900+ notes",
       memoryNote1: "loaded at session start,",
@@ -188,13 +184,11 @@ const CONTENT: Record<Lang, Content> = {
       gatesList: "prompt · edit · command · stop · commit · push · CI · review · production proof",
       prod: ["MAS Group", "Workshop 3.0", "Flyt", "kamiljan.com", "client sites"],
       caption:
-        "Direction flows down, evidence flows back up. Nothing reaches the bottom row without passing the gate band.",
+        "I set the direction. Every change passes the automatic checks (gates) before it reaches a product. Proof comes back up.",
     },
     mindTitle: "Mind map — what „higher mind” is made of",
     mindLead:
-      "PG (PROMPT-GUARD) is the system that sits above every coding session. The name comes from my other long project, " +
-      "a free guidebook on practical spirituality: practice over belief. A rule you intend to follow is a belief; a gate " +
-      "that fires on an event is a practice.",
+      "The system that watches over every coding session is called PG (Prompt-Guard). “Higher mind” comes from my other long project, a free guidebook on practical spirituality, whose rule is practice over belief. Here that means: a rule you intend to follow is a belief; a check that runs on its own is a practice.",
     mind: {
       center: "HIGHER MIND",
       centerSub: "PG · PROMPT-GUARD",
@@ -211,17 +205,21 @@ const CONTENT: Record<Lang, Content> = {
           title: "Git gates",
           leaves: [
             "secrets · base freshness",
-            "deps · duplicates · TODO ledger",
+            "deps · duplicates · TODOs",
             "SQL lint · boundaries",
           ],
         },
         {
           title: "Reviewer departments",
-          leaves: ["code · security · data · ops", "ux · product · qa", "verifier · catfish"],
+          leaves: [
+            "code · security · data · ops",
+            "ux · product · qa",
+            "verifier · devil's advocate",
+          ],
         },
         {
           title: "Doctrine",
-          leaves: ["design before code", "definition of done per tier", "149 scars"],
+          leaves: ["design before code", "“done” per risk tier", "149 scars"],
         },
         {
           title: "Repo template",
@@ -237,38 +235,30 @@ const CONTENT: Record<Lang, Content> = {
         },
         {
           title: "Self-tests",
-          leaves: ["every gate blocks its case", "rule → gate coverage", "weekly audit"],
+          leaves: ["every gate has a test", "rule → gate coverage", "weekly audit"],
         },
       ],
-      caption: "Eight branches, one rule: nothing important lives only in prose.",
+      caption:
+        "Eight parts, one rule: nothing important exists only as written text — every rule has an automatic check.",
     },
     ideasTitle: "Three ideas the whole thing rests on",
     ideas: [
       {
-        label: "Gates, not prose —",
-        body:
-          "the audit that started this found every rule written as text broken at scale: 0 architecture decision " +
-          "records in 6 of 7 repos, changelog 105 commits behind, code review invoked in 2.5 % of sessions, 79 % of " +
-          "commits straight to main. A rule the agent can forget is not a rule, so everything that matters fires on an " +
-          "event and has a test proving it blocks its own case. A script checks that every written rule has a gate.",
+        label: "Checks, not written rules —",
+        body: "the audit that started all this found that every rule written only as text was broken at scale: 6 of 7 repositories had 0 architecture decision records, the changelog was 105 commits behind, code review ran in only 2.5 % of sessions, and 79 % of commits went straight to the main branch. An AI agent can forget a rule, so a written rule is not enough. Everything that matters now runs by itself when something happens (that is a gate), and every gate has a test proving it blocks what it should. A script checks that every written rule has a gate.",
       },
       {
-        label: "Scar → gate —",
-        body:
-          "149 real failures from the fleet are catalogued with a rule id, and every checklist item cites the scar it " +
-          "came from (the Google SRE rule). Postmortems end with a new gate or a new scar — never with “be more careful”.",
+        label: "Every failure becomes a check (scar → gate) —",
+        body: "149 real failures across my projects are catalogued, each with a rule id. I call them scars. Every checklist item cites the scar it came from (a rule taken from Google SRE). A postmortem ends with a new gate or a new scar — never with “be more careful”.",
       },
       {
-        label: "Proof, not prose —",
-        body:
-          "“done” means a command, an exit code and an observed state. Reports end with VERIFIED, UNVERIFIED or FAILED. " +
-          "Agents are measured to overstate success (in one benchmark 75.8 % of reported successes had no evidence) and " +
-          "to fold under pushback — the status line is the counterweight.",
+        label: "Proof, not claims —",
+        body: "“done” means a command was run, it returned a result (exit code), and the state afterwards was checked. Every report ends with one word: VERIFIED, UNVERIFIED or FAILED. AI agents measurably overstate success — in one benchmark 75.8 % of reported successes had no evidence — and they give in when pushed back. The status word is the counterweight.",
       },
     ],
     pipeTitle: "The life of one change",
     pipeLead:
-      "Nine gates fire on events, not on anyone remembering to check. Any red result stops the change right there.",
+      "Nine checkpoints run by themselves at fixed moments: when I send a prompt, when the agent edits a file, and so on up to production. Nobody has to remember to check. Any red result stops the change on the spot.",
     pipe: {
       stages: [
         "prompt",
@@ -284,42 +274,36 @@ const CONTENT: Record<Lang, Content> = {
       gates: [
         "protocol injected",
         "lint + typecheck",
-        "guard blocks + no-verify",
+        "guard + no-verify",
         "tier + tests + reviewers",
         "18 checks + secrets",
         "no main + size + cycles",
-        "quality + mutation + gitleaks",
+        "mutation + secrets",
         "current merge-ref only",
         "200 from real domain",
       ],
       live: "LIVE",
       blocked:
-        "every escape hatch is a named variable (ALLOW_…=1), logged and reported in the weekly audit — bypassing the hooks is banned by standing rule",
-      caption: "Nine gates on the path of a change; the human decides, the gates remember.",
+        "each exception is a named switch (ALLOW_…=1), logged and shown in the weekly audit · skipping the checks is banned",
+      caption:
+        "Nine checkpoints on the path of a change. I make the decisions; the checks make sure nothing is forgotten.",
     },
     gatesItems: [
       {
-        label: "On every prompt —",
-        body:
-          "a hook injects the protocol: ambiguity triggers questions, not execution; facts need a source opened first; " +
-          "a blocker goes in the first line of the report, and “how is it going?” never gets the answer “fine” — it gets " +
-          "goal, budget, risks and the decisions that are the sponsor’s to make.",
+        label: "When I send a prompt —",
+        body: "a hook (a script that runs when something happens) adds the working rules (the protocol) to the prompt. If the task is unclear, the agent asks questions instead of guessing. A fact needs an opened source first. Anything blocking the work goes in the first line of the report. And “how is it going?” never gets the answer “fine” — it gets the goal, the budget, the risks and the decisions that belong to the sponsor.",
       },
       {
-        label: "On every file edit, also edits made through the shell —",
-        body: "lint and typecheck run on the changed file and errors return to the agent that made the edit, in the same session.",
+        label: "After every file edit, including edits made in the terminal —",
+        body: "the changed file is checked for style and type errors (lint and typecheck). Errors go straight back to the agent that made the edit, in the same session.",
       },
       {
-        label: "On every shell command —",
-        body:
-          "a guard blocks --no-verify, force-push, hard resets, recursive deletes outside build folders, merging pull " +
-          "requests from a script, secrets typed into a command line and curl-piped-to-shell.",
+        label: "At every terminal command —",
+        body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging pull requests from a script, secrets typed into a command, and running a downloaded script straight in the shell (curl | sh).",
       },
       {
-        label: "On every session end —",
-        body:
-          "the stop gate computes the risk tier from the diff (paths and size, never the prompt), runs lint, types and " +
-          "tests on everything that changed, and refuses to close a T2+ session without the required reviewer departments.",
+        label: "When a session ends —",
+        body: "the stop gate decides how risky the change is (the risk tier) from what actually changed — file paths and size, never from what the prompt says. It runs lint, types and tests on everything that changed. A session at tier T2 or higher cannot close until the required AI reviewers have checked it.",
       },
       {
         label: "On every commit —",
@@ -331,211 +315,170 @@ const CONTENT: Record<Lang, Content> = {
           "foreign keys); GitHub’s own workflow parser on workflow files; a removed security step in CI.",
       },
       {
-        label: "On every push —",
-        body:
-          "no direct push to main; more than 400 source lines is split; a new import cycle or an import against the layers " +
-          "declared in the architecture document is blocked; a branch someone else committed to in the last 24 hours " +
-          "gets a warning.",
+        label: "At every push —",
+        body: "nothing goes straight to the main branch. A change of more than 400 source lines is split into smaller ones. A new circular import (import cycle), or an import that breaks the layers declared in the architecture document, is blocked. If someone else committed to the same branch in the last 24 hours, you get a warning.",
       },
       {
-        label: "In CI and at merge —",
-        body:
-          "the same gates plus gitleaks and mutation testing on the changed files (a test that kills no mutant is theatre); " +
-          "31 repositories have strict branch protection generated from the workflow job names; a merge script accepts a " +
-          "pull request only when its checks ran on the current merge result — because green checks on a stale base once " +
-          "broke main in production.",
+        label: "On the build server (CI) and at merge —",
+        body: "the same checks run again, plus a secret scanner (gitleaks) and mutation testing on the changed files: the tool plants small bugs on purpose, and a test that catches none of them is theatre. 31 repositories have strict branch protection, generated from the names of the CI jobs. A merge script accepts a pull request only if its checks ran on the current merge result — because once, green checks on an outdated base broke main in production.",
       },
     ],
-    tierTitle: "Risk tier — computed from the diff, never declared",
+    tierTitle: "Risk level (tier) — measured from the change, never declared",
     tierLead:
-      "Proportionality is a gate too: a prototype is not nagged for architecture records, a payments change cannot close without security.",
+      "The amount of checking is proportional, and that is enforced too. A prototype isn't nagged for architecture records. A change to payments cannot close without a security review.",
     tiers: [
-      { label: "T0 —", body: "docs, copy, styles, assets: zero-token gates only." },
-      { label: "T1 —", body: "an isolated component or utility: code review recommended." },
+      {
+        label: "T0 —",
+        body: "docs, copy, styles, assets — script checks only, with no AI tokens used.",
+      },
+      {
+        label: "T1 —",
+        body: "a single, isolated component or helper — code review is recommended.",
+      },
       {
         label: "T2 —",
-        body: "shared logic, API routes, edge functions, dependencies, CI or build config, more than 150 lines: code + ops review required, ux for UI, data for schema.",
+        body: "shared logic, API routes, edge functions, dependencies, CI or build configuration, or more than 150 lines. Required: code and operations review, plus UX review when the interface changes and data review when the schema changes.",
       },
       {
         label: "T3 —",
-        body: "auth, row-level security and multi-tenancy, payments, secrets, SQL migrations, scheduled jobs, admin, more than 600 lines: code + security + data + ops, then a verifier — the security, data and verifier roles run on the strongest model.",
+        body: "login and permissions (auth, row-level security, multi-tenancy), payments, secrets, SQL migrations, scheduled jobs, admin, or more than 600 lines. Required: code, security, data and operations review, then a verifier. The security, data and verifier roles run on the strongest model.",
       },
       {
-        label: "Per repository —",
-        body: "a tier floor, a lifecycle phase (prototype · poc · mvp · production — promoting to production requires a written production-readiness review in the same commit) and an optional QA URL that makes the QA department mandatory on T3 with a user interface.",
+        label: "For each repository —",
+        body: "a minimum tier, a lifecycle stage (prototype · poc · mvp · production) and an optional QA address. Moving to production requires a written production-readiness review in the same commit. With a QA address set, the QA reviewer becomes mandatory for T3 changes that touch a user interface.",
       },
     ],
     reviewTitle: "Review like a software house, not like a chat",
     reviewLead:
-      "Departments with fresh context, aggregation in code, a verifier whose only job is to refute.",
+      "Each AI reviewer covers one speciality and starts with a clean slate (fresh context). A script, not a model, combines their findings: an issue blocks the change only if enough reviewers report it independently or the verifier reproduces it, and an issue without proof is dropped (the k-of-n rule). The verifier's only job is to disprove.",
     review: {
       orchestrator: "ORCHESTRATOR",
-      gates: "0-TOKEN GATES",
+      gates: "SCRIPTS",
       gatesSub: "lint · types · tests · SQL",
       finders: ["code", "security", "data · ops", "ux · product · qa"],
       aggregate: "AGGREGATE",
-      aggregateSub: "k-of-n · evidence or dropped",
+      aggregateSub: "k-of-n · needs proof",
       verifier: "VERIFIER",
       verifierSub: "reproduce or refute",
       fixer: "FIX + RE-GATE",
-      rule: "no chat between agents · a finding without an executed command does not exist",
+      rule: "no chat between agents · a finding without an executed command does not count",
       caption:
-        "Agents never see red lint; the aggregation has no opinion; the verifier is a bug-hunter, not a confirmer.",
+        "Reviewers get only code that passed the scripts. A script merges findings. The verifier hunts for bugs, not confirmations.",
     },
     reviewItems: [
       {
-        label: "Nine departments —",
-        body:
-          "code, security, data, ops, ux, product, qa, verifier and catfish. Each is a rubric of at most eight numbered " +
-          "rules, each rule with a command to run, a severity policy, a JSON schema and a worked rejected false positive. " +
-          "They read only; the main session fixes.",
+        label: "Nine specialist reviewers —",
+        body: "code, security, data, operations, UX, product, QA, a verifier and a devil's advocate (catfish). Each works from a checklist of at most eight numbered rules. Every rule has a command to run, a severity policy, a fixed output format (JSON schema) and a worked example of a false alarm it must reject. Reviewers only read; the main session makes the fixes.",
       },
       {
-        label: "Why fresh context —",
-        body:
-          "the author of code, human or model, does not see its own mistakes. Reviewers start empty, get the diff and the " +
-          "task, and never see each other’s findings — agents that discuss converge on the majority even when the " +
-          "minority was right.",
+        label: "Why a clean slate —",
+        body: "whoever wrote the code, a human or a model, doesn't see its own mistakes. Reviewers start empty, get only the change and the task, and never see each other's findings. Agents that discuss drift toward the majority, even when the minority was right.",
       },
       {
-        label: "Councils with a catfish —",
-        body:
-          "architecture decisions go through facts → positions → a mandatory dissenter → aggregation → a decision record. " +
-          "Injected dissent is the one intervention shown to cut quiet-agreement failures in agent groups.",
+        label: "Decision councils with a devil's advocate —",
+        body: "architecture decisions go through fixed steps: facts → positions → a mandatory dissenter → aggregation → a written decision record. Injected dissent is the one intervention shown to cut failures caused by quiet agreement in groups of agents.",
       },
       {
         label: "Calibrated monthly —",
-        body:
-          "the same defect wrapped two ways (a bare diff, a diff with a persuasive description) is reviewed by six " +
-          "fresh reviewers in random order. Disagreement means length or description bias, and a human adjusts the rubric " +
-          "— the auditor never edits the instrument it measures.",
+        body: "once a month the same bug is packaged two ways — a bare change, and the same change with a persuasive description — and six fresh reviewers check it in random order. If they disagree, length or description is biasing them, and a human adjusts the checklist. The auditor never adjusts the instrument it measures.",
       },
     ],
-    loopTitle: "Scar → gate — how the system learns",
+    loopTitle: "Every failure becomes a check — how the system learns",
     loopLead:
-      "A failure is not closed when it is fixed; it is closed when it cannot happen again without a script noticing.",
+      "A failure isn't closed when it's fixed. It's closed when it can't happen again without a script noticing. Each catalogued failure is called a scar.",
     loop: {
       steps: [
         "incident or repeated correction",
-        "postmortem: five whys",
-        "scar with a rule id",
-        "gate + positive test",
-        "rule → gate coverage",
+        "root cause: five whys",
+        "scar + rule id",
+        "gate + test that it blocks",
+        "every rule has a gate",
         "weekly audit",
       ],
       caption:
-        "The loop feeds itself: the weekly audit finds gates that stopped firing, and that becomes a scar.",
+        "The loop feeds itself: the weekly audit finds checks that stopped working, and each one becomes a new scar.",
     },
     loopItems: [
       {
-        label: "A stale base broke main —",
-        body:
-          "two pull requests were green, each against its own snapshot of main; merged together they produced an invalid " +
-          "workflow on the default branch. Now: merge only when the checks ran on the current merge result, strict " +
-          "branch protection on 31 repositories, and a scar with the exact mechanism.",
+        label: "An outdated base broke main —",
+        body: "two pull requests each passed their checks, but each was checked against its own older copy of the main branch. Merged together, they produced a broken workflow file on the main branch. Now: merge only when the checks ran on the current merge result, strict branch protection on 31 repositories, and a scar that records the exact mechanism.",
       },
       {
-        label: "A hook that never ran —",
-        body:
-          "the push gate read its input twice and silently did nothing for six days. Now every git hook has a test that " +
-          "runs the whole script with real input, and the weekly audit checks that gates still block their own cases.",
+        label: "A check that never ran —",
+        body: "the push gate read its input twice and, for six days, silently did nothing. Now every git hook has a test that runs the whole script with real input, and the weekly audit checks that every gate still blocks what it should.",
       },
       {
         label: "45 copies of a company identity —",
-        body:
-          "across 11 files, all of which passed lint, types, tests and review. Now a duplicate-literal gate on added lines: " +
-          "the same string three times in two files is a block, with an escape hatch that is logged.",
+        body: "spread across 11 files, and every one of them passed lint, types, tests and review. Now a duplicate check runs on added lines: the same text three times in two files is blocked. An escape hatch exists, and every use of it is logged.",
       },
       {
-        label: "A silent fallback on an invoice —",
-        body:
-          "a “?? default” quietly changed the seller after a profile was removed. Now SILENT-FALLBACK on any field with " +
-          "consequences is a blocker in the code review rubric: a missing match must throw a named error.",
+        label: "An invoice that silently changed the seller —",
+        body: "a default value (“?? default”) quietly swapped the seller after a profile was deleted. Now a silent fallback (SILENT-FALLBACK) on any field with consequences is a blocker in the code review checklist: when no match is found, the code must stop with a named error.",
       },
     ],
     sections: [
       {
-        title: "Two runtimes, one system",
+        title: "Two AI tools, one system",
         items: [
           {
             label: "Claude Code —",
-            body:
-              "the terminal runtime for repository work: this site, the production apps behind MAS Group, Flyt and the " +
-              "garage system, plus their CI. It talks to GitHub, mail, the browser and the desktop through MCP servers, " +
-              "and it is the runtime where the hooks and git gates apply.",
+            body: "the terminal tool for work on code: this site, the production apps behind MAS Group, Flyt and the garage system, and their CI. It connects to GitHub, mail, the browser and the desktop through MCP servers (connectors). This is where the hooks and git gates apply.",
           },
           {
             label: "Claude Desktop (Cowork) —",
-            body:
-              "the operations runtime: mail triage, documents, research, outreach, design, and the routines that keep " +
-              "the system itself alive. No hooks there, so the protocol travels as text in every prompt.",
+            body: "the tool for operations: mail triage, documents, research, outreach, design, and the routines that keep the system itself running. It has no hooks, so the working rules travel as text inside every prompt.",
           },
           {
             label: "105 skills —",
-            body:
-              "versioned instruction packages the system routes tasks to: 50 in the coding runtime, 55 on the desktop. A " +
-              "router matches the task deterministically and announces the pipeline before work starts.",
+            body: "versioned instruction packages that tasks are routed to: 50 in the coding tool, 55 on the desktop. A router matches each task by fixed rules (deterministically) and announces which steps it will run before work starts.",
           },
           {
-            label: "Model routing —",
-            body:
-              "the strongest model is reserved for hard reasoning and for T3 security, data and verification; routine " +
-              "tool work and lookups go to cheaper tiers. Capacity is a budget, and the system spends it deliberately.",
+            label: "Choosing the model —",
+            body: "the strongest model is kept for hard reasoning and for the security, data and verification reviews at T3. Routine tool work and lookups go to cheaper models. Computing capacity is a budget, and the system spends it on purpose.",
           },
         ],
       },
     ],
     statusTitle:
-      "VERIFIED · UNVERIFIED · FAILED — the status line that stops the model from hypnotising you",
+      "VERIFIED · UNVERIFIED · FAILED — the status word that stops the AI telling you what you want to hear",
     statusLead:
-      "Every substantive report ends with one of three words. It is the smallest piece of the system and the one that " +
-      "travels best — especially into Claude Cowork, where there are no hooks and the only protection is the prompt.",
+      "Every substantive report ends with one of three words. It's the smallest part of the system and the easiest to take elsewhere — especially to Claude Desktop (Cowork), which has no hooks, so the prompt is the only protection.",
     statusItems: [
       {
         label: "VERIFIED —",
-        body: "the claim carries its artifact: the command and its exit code, the HTTP status, the test output line, the diff, a screenshot path — quoted, not described.",
+        body: "the claim comes with its proof, quoted rather than described: the command and its exit code, the HTTP status, the line from the test output, the diff, the path to a screenshot.",
       },
       {
         label: "UNVERIFIED —",
-        body: "the work was done but the proof is missing: exactly what is missing and how to check it, plus what would change the conclusion. A report with no status line is treated as this.",
+        body: "the work is done but the proof is missing. The report says exactly what is missing, how to check it, and what would change the conclusion. A report with no status word counts as UNVERIFIED.",
       },
       {
         label: "FAILED / BLOCKED —",
-        body: "what happened, verbatim, no softening. A blocker — missing access, decision, data, secret, broken tool — goes in the first line of the report, never in a closing section.",
+        body: "what happened, word for word, without softening. Anything blocking the work — missing access, a decision, data or a secret, or a broken tool — goes in the first line of the report, never at the end.",
       },
       {
         label: "Why it exists —",
-        body:
-          "models agree with a user’s wrong claim in about 58 % of pushback cases and predict 61–77 % success while " +
-          "achieving 22–35 %. The longer a conversation runs, the more the model mirrors your framing and confidence. " +
-          "The status line forces a claim to carry evidence or to admit it has none, and “are you sure?” triggers " +
-          "re-derivation from evidence rather than a polite reversal.",
+        body: "when a user pushes back with a wrong claim, models agree in about 58 % of cases. They predict 61–77 % success and achieve 22–35 %. The longer a conversation runs, the more the model mirrors your framing and your confidence. The status word forces every claim to show evidence or admit it has none. And “are you sure?” makes the model re-check the evidence instead of politely changing its answer.",
       },
     ],
-    statusCoworkLabel: "In Cowork and scheduled tasks —",
+    statusCoworkLabel: "In Claude Desktop and scheduled tasks —",
     statusCowork:
-      "a seven-line verification block is appended to every background prompt: do not assume the prompt is true, " +
-      "permission to refuse and report failure, restate claims as neutral questions, no success without evidence, " +
-      "attack your own result before reporting, re-derive when challenged, end with the status. The block is in the " +
-      "repository, ready to paste.",
-    vaultSectionTitle: "Secrets the model never sees",
+      "every background prompt gets a seven-line verification block: don't assume the prompt is true; you may refuse and report failure; restate claims as neutral questions; no success without evidence; attack your own result before reporting; re-check when challenged; end with the status word. The block is in the repository, ready to paste.",
+    vaultSectionTitle: "Passwords and keys the AI never sees",
     vaultFlow: {
       vault: "VAULT",
       vaultSub: "95 secrets · self-hosted",
       bridge: "BRIDGE",
-      bridgeSub: "injects as env vars",
+      bridgeSub: "passes to the process",
       target: "TARGET PROCESS",
       targetSub: "deploy · API call · CI",
       never: ["chat ✕", "code ✕", "logs ✕"],
-      caption: "The agent can use a credential it can never read.",
+      caption: "The agent can use a password or key it can never read.",
     },
     vaultItems: [
       {
-        label: "Self-hosted vault —",
-        body:
-          "95 API keys, tokens and logins live in a vault on my own hardware. A bridge injects them as environment " +
-          "variables directly into the target process. Values never appear in chat, code or logs — the command guard " +
-          "blocks a secret typed into a command line, and the commit-time and CI scans keep it that way.",
+        label: "A vault on my own hardware —",
+        body: "95 API keys, tokens and logins are stored in a vault on my own hardware. A bridge passes them straight into the process that needs them, as environment variables. The values never appear in the chat, the code or the logs. The command guard blocks a secret typed into a command, and the scans at commit time and in CI keep it that way.",
       },
     ],
     schedTitle: "Routines — the part that runs while nobody is typing",
@@ -555,56 +498,38 @@ const CONTENT: Record<Lang, Content> = {
     schedItems: [
       {
         label: "PR reviewer (weekdays) —",
-        body:
-          "reviews open pull requests across the fleet like a senior engineer. Mechanical fixes land as separate commits " +
-          "with proof attached; design and security findings stay comments for me to judge.",
+        body: "reviews open pull requests across all my repositories, the way a senior engineer would. Mechanical fixes land as separate commits with proof attached. Design and security findings stay as comments for me to decide.",
       },
       {
         label: "Guard health (weekly) —",
-        body:
-          "33 deterministic checks that the quality system itself is still wired: hooks registered, gates blocking their " +
-          "own cases, which escape hatches were used and why, which routine started and never finished.",
+        body: "33 script checks that the quality system itself is still connected: hooks are registered, gates still block what they should, which escape hatches were used and why, and which routine started but never finished.",
       },
       {
-        label: "CVE watch (monthly) —",
-        body:
-          "a deterministic dependency scan of the live products first — zero model tokens when clean. Fixes are " +
-          "patch/minor only and arrive as pull requests with evidence, never direct pushes.",
+        label: "Vulnerability watch (CVE, monthly) —",
+        body: "first a script scans the dependencies of the live products — no AI tokens used when nothing is found. Fixes are limited to patch and minor updates, and always arrive as pull requests with evidence, never as direct pushes.",
       },
       {
-        label: "Watchdog (every two hours, desktop) —",
-        body:
-          "finds routines that are overdue or died mid-run, retries, self-heals what it can, pushes a phone notification " +
-          "only when it cannot, and resumes work a rate limit interrupted from a checkpoint file.",
+        label: "Watchdog (every two hours, Claude Desktop) —",
+        body: "finds routines that are overdue or crashed mid-run, retries them and fixes what it can. It sends a phone notification only when it can't. If a usage limit interrupted work, it resumes from a saved checkpoint.",
       },
       {
-        label: "Backup with a restore script (daily, desktop) —",
-        body:
-          "a full clone of the agent configuration and a generated one-click restore for a new machine. A backup that " +
-          "was never restored is not a backup, so the restore script is part of the backup.",
+        label: "Backup with a restore script (daily, Claude Desktop) —",
+        body: "a full copy of the agent configuration plus a generated script that restores it on a new machine in one click. A backup that was never restored is not a backup, so the restore script is part of the backup.",
       },
     ],
-    memTitle: "Memory, telemetry and the retro that rebuilt the system",
+    memTitle: "Memory, measurement and the retrospective that rebuilt the system",
     memItems: [
       {
         label: "Persistent memory —",
-        body:
-          "a local vault of 1,900+ notes is loaded at the start of every session and sessions document themselves when " +
-          "they end, so the next one starts from a checkpoint file instead of from scratch.",
+        body: "a local base of 1,900+ notes is loaded at the start of every session. Each session writes its own notes when it ends, so the next one starts from a saved checkpoint instead of from scratch.",
       },
       {
         label: "Telemetry, not feelings —",
-        body:
-          "every gate skip is logged with a reason; 1,873 session transcripts and the git history of 39 repositories are " +
-          "mined by scripts: corrections per session, repeated tool errors, fixes within 24 hours of the previous commit " +
-          "to the same file, churn hotspots. The numbers decide what becomes a gate.",
+        body: "every skipped check is logged with a reason. Scripts mine 1,873 session transcripts and the git history of 39 repositories: corrections per session, repeated tool errors, fixes made within 24 hours of the previous commit to the same file, and the files that change most often (churn hotspots). The numbers decide what becomes a gate.",
       },
       {
-        label: "The retro that mattered —",
-        body:
-          "twelve repair loops in a single session were traced to their causes; three of them were the same defect — the " +
-          "system declared a control it physically did not have. The answer was structural: every gate got a positive " +
-          "test, and rule-to-gate coverage became a script.",
+        label: "The retrospective that mattered —",
+        body: "twelve repair loops in one session were traced to their causes. Three had the same defect: the system claimed a check it didn't physically have. The answer was structural: every gate got a test proving it blocks, and checking that every rule has a gate became a script.",
       },
       {
         label: "The same method, applied to me —",
@@ -617,31 +542,20 @@ const CONTENT: Record<Lang, Content> = {
     scaleItems: [
       {
         label: "The honest answer —",
-        body:
-          "one function is easy; a 200,000-line system with cross-file dependencies and unwritten architectural " +
-          "assumptions is where consistency drifts. So the assumptions are written where a script can read them: the " +
-          "architecture document of every repository carries a parsed block of layers and forbidden imports, and the " +
-          "push gate blocks a new import cycle or an import against the layers. Old cycles only warn — historical debt is " +
-          "never cleaned automatically.",
+        body: "one function is easy. A 200,000-line system, with dependencies between files and unwritten assumptions about its architecture, is where consistency drifts. So the assumptions are written where a script can read them: every repository's architecture document has a machine-readable block of layers and forbidden imports, and the push gate blocks a new import cycle or an import that breaks the layers. Old cycles only warn — historical debt is never cleaned up automatically.",
       },
       {
-        label: "Blast radius before edit —",
-        body:
-          "a changed file imported by more than 40 others is flagged, and the design step before code asks who calls it, " +
-          "what else reads the data, and which tier the change lands in.",
+        label: "Checking the impact before an edit —",
+        body: "a changed file that more than 40 other files import is flagged. The design step before any code asks: who calls this, what else reads this data, and which risk tier the change falls into.",
       },
       {
-        label: "Navigable by a human, not only by a machine —",
-        body:
-          "the tool index and the system map are generated from the tools’ own headers; a tool without a self-description " +
-          "shows up as debt. The criterion for every style decision is one question: can a senior who has never seen the " +
-          "repository run it in 15 minutes, find the place to change in 15 minutes and understand why — without reading " +
-          "my transcripts?",
+        label: "Readable by a person, not only by a machine —",
+        body: "the tool index and the system map are generated from each tool's own header; a tool without a description shows up as debt. Every style decision is judged by one question: can a senior engineer who has never seen the repository run it in 15 minutes, find the place to change in 15 minutes, and understand why — without reading my transcripts?",
       },
     ],
     installTitle: "Install it yourself",
     installLead:
-      "The whole system is a public repository, sanitized and portable: Node 20+, git and Claude Code are the only requirements.",
+      "The whole system is a public repository, cleaned of private data and portable. You only need Node 20+, git and Claude Code.",
     installSteps: [
       "git clone " + REPO_URL + ".git",
       "node install.mjs --dry-run   # shows the plan, touches nothing",
@@ -650,10 +564,7 @@ const CONTENT: Record<Lang, Content> = {
     installItems: [
       {
         label: "What the installer promises —",
-        body:
-          "it never overwrites a file you changed (differing versions land next to yours), it merges rather than replaces " +
-          "your settings, it appends the rules between markers so updates replace only that block, git hooks are opt-in, " +
-          "and it ends with a self-test — green output is the proof, not the installer’s word.",
+        body: "it never overwrites a file you changed (the other version lands next to yours). It merges your settings instead of replacing them. It adds its rules between markers, so an update replaces only that block. Git hooks are optional. It ends with a self-test: the green output is the proof, not the installer's word.",
       },
       {
         label: "What you get —",
@@ -664,10 +575,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "One honest note —",
-        body:
-          "the protocol has a full English version (PG_LANG=en, set by the installer from your locale) and every gate " +
-          "message carries an English BLOCKED line with its escape hatch; the doctrine and reviewer rubrics are still " +
-          "Polish — the model reads them fine — and the README exists in both languages.",
+        body: "the working rules have a full English version (PG_LANG=en, which the installer sets from your system language), and every block message includes an English BLOCKED line with its escape hatch. The doctrine and the reviewer checklists are still in Polish — the model reads them fine — and the README is in both languages.",
       },
     ],
     installLink: "Open the repository →",
@@ -680,29 +588,24 @@ const CONTENT: Record<Lang, Content> = {
       "finished — it is that the failure modes of working with AI are engineered against, in the open, instead of being " +
       "wished away.",
     colophon:
-      "This page went through the pipeline it describes: drafted by an agent, pushed through the gates above, reviewed " +
-      "and shipped by me. The numbers came from shell commands on the day it shipped, not from memory.",
+      "This page went through the process it describes: an agent drafted it, it passed the gates above, and I reviewed and published it. The numbers came from commands run on the day it shipped, not from memory.",
   },
 
   pl: {
     title: "Coding Higher Mind — system AI, na którym stoi ta praca",
-    role: "Dwa runtime'y, utwardzane prompty, bramki na zdarzeniach, działy recenzentów, pętla uczenia — policzone, nie szacowane. Od dziś open source.",
+    role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
     intro:
-      "Moje CV mówi, że kod piszą agenty AI, a ja odpowiadam za specyfikację, review i wdrożenie. Takie twierdzenie " +
-      "wymaga dowodu, więc ta strona pokazuje samą maszynę, w głąb: co działa w tle, co wymusza, jak uczy się na " +
-      "własnych błędach i gdzie leżą jej granice. Wszystko poniżej działa dziś, a każdą liczbę wyprodukowała komenda " +
-      "shellowa w dniu publikacji — policzone, nie szacowane. Cały system jest opublikowany jako repozytorium, które " +
-      "instalujesz u siebie w pięć minut.",
+      "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji — policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
       { n: "1873", label: "zapisanych sesji agentów" },
-      { n: "149", label: "blizny zamienione w bramki" },
+      { n: "149", label: "awarii zamienionych w automatyczne kontrole" },
       { n: "23", label: "twarde stopy w bramkach gita" },
-      { n: "9", label: "działów recenzentów" },
+      { n: "9", label: "wyspecjalizowanych recenzentów AI" },
       { n: "51", label: "narzędzi 0-tokenowych" },
       { n: "40", label: "rutyn (5 code · 35 desktop)" },
       { n: "31", label: "repo pod ścisłą ochroną" },
-      { n: "95", label: "sekretów, których model nie widzi" },
+      { n: "95", label: "kluczy i haseł, których AI nigdy nie widzi" },
     ],
     mapTitle: "Cała maszyna na jednej mapie",
     arch: {
@@ -715,26 +618,24 @@ const CONTENT: Record<Lang, Content> = {
       coworkSub1: "poczta · dokumenty · research",
       coworkSub2: "outreach · design · operacje",
       shared: "te same reguły · ta sama pamięć",
-      vault: "VAULT",
+      vault: "SEJF",
       vaultSub: "95 sekretów",
-      vaultNote1: "klucze idą jako env —",
-      vaultNote2: "nigdy nie ma ich w czacie",
+      vaultNote1: "klucz trafia do procesu,",
+      vaultNote2: "nigdy do czatu",
       memory: "PAMIĘĆ",
       memorySub: "1900+ notatek",
       memoryNote1: "ładowana na starcie sesji,",
-      memoryNote2: "sesje dokumentują się same",
+      memoryNote2: "sesje same się opisują",
       gates: "BRAMKI",
       gatesList:
         "prompt · edycja · komenda · stop · commit · push · CI · review · dowód z produkcji",
       prod: ["MAS Group", "Workshop 3.0", "Flyt", "kamiljan.com", "strony klientów"],
       caption:
-        "Kierunek płynie w dół, dowody wracają w górę. Nic nie dociera do dolnego rzędu bez przejścia pasa bramek.",
+        "Ja wyznaczam kierunek. Każda zmiana przechodzi automatyczne kontrole (bramki), zanim trafi do produktu. Dowody wracają w górę.",
     },
     mindTitle: "Mapa myśli — z czego składa się „wyższy umysł”",
     mindLead:
-      "PG (PROMPT-GUARD) to system, który stoi ponad każdą sesją kodowania. Nazwa pochodzi od mojego drugiego długiego " +
-      "projektu, darmowego przewodnika po praktycznej duchowości: praktyka ponad przekonanie. Reguła, której zamierzasz " +
-      "przestrzegać, to przekonanie; bramka, która odpala się na zdarzeniu, to praktyka.",
+      "System, który czuwa nad każdą sesją kodowania, nazywa się PG (Prompt-Guard). „Wyższy umysł” to nazwa z mojego drugiego długiego projektu — darmowego przewodnika po praktycznej duchowości, którego zasadą jest praktyka ponad przekonanie. Tutaj znaczy to tyle: reguła, której zamierzasz przestrzegać, to przekonanie; kontrola, która uruchamia się sama, to praktyka.",
     mind: {
       center: "WYŻSZY UMYSŁ",
       centerSub: "PG · PROMPT-GUARD",
@@ -751,17 +652,21 @@ const CONTENT: Record<Lang, Content> = {
           title: "Bramki gita",
           leaves: [
             "sekrety · świeżość bazy",
-            "zależności · duplikaty · rejestr TODO",
+            "zależności · duplikaty · TODO",
             "lint SQL · granice",
           ],
         },
         {
           title: "Działy recenzentów",
-          leaves: ["code · security · data · ops", "ux · product · qa", "weryfikator · catfish"],
+          leaves: [
+            "kod · bezpieczeństwo · dane · ops",
+            "ux · produkt · qa",
+            "weryfikator · adwokat diabła",
+          ],
         },
         {
           title: "Doktryna",
-          leaves: ["projekt przed kodem", "definition of done per tier", "149 blizny"],
+          leaves: ["projekt przed kodem", "„gotowe” wg poziomu ryzyka", "149 blizny"],
         },
         {
           title: "Szablon repo",
@@ -774,49 +679,37 @@ const CONTENT: Record<Lang, Content> = {
         {
           title: "Rutyny",
           leaves: [
-            "recenzent PR · zdrowie strażników",
+            "recenzent PR · stan zabezpieczeń",
             "nadzór CVE · kalibracja",
             "watchdog · backup · raporty",
           ],
         },
         {
           title: "Samotesty",
-          leaves: [
-            "każda bramka blokuje swój przypadek",
-            "pokrycie reguła → bramka",
-            "cotygodniowy audyt",
-          ],
+          leaves: ["każda bramka ma test", "pokrycie reguła → bramka", "cotygodniowy audyt"],
         },
       ],
-      caption: "Osiem gałęzi, jedna zasada: nic ważnego nie żyje wyłącznie w prozie.",
+      caption:
+        "Osiem części, jedna zasada: nic ważnego nie istnieje tylko jako tekst — każda reguła ma automatyczną kontrolę.",
     },
     ideasTitle: "Trzy idee, na których stoi całość",
     ideas: [
       {
-        label: "Bramki, nie proza —",
-        body:
-          "audyt, od którego to się zaczęło, wykazał, że każda reguła zapisana tekstem była łamana na skalę: 0 rekordów " +
-          "decyzji architektonicznych w 6 z 7 repo, changelog 105 commitów za, code review w 2,5 % sesji, 79 % commitów " +
-          "prosto na main. Reguła, którą agent może zapomnieć, nie jest regułą — więc wszystko, co ważne, odpala się na " +
-          "zdarzeniu i ma test dowodzący, że blokuje swój przypadek. Skrypt sprawdza, czy każda zapisana reguła ma bramkę.",
+        label: "Kontrole, nie spisane reguły —",
+        body: "audyt, od którego wszystko się zaczęło, wykazał, że każda reguła zapisana tylko jako tekst była masowo łamana: 6 z 7 repozytoriów miało 0 spisanych decyzji architektonicznych, dziennik zmian był 105 commitów w tyle, recenzja kodu odbyła się tylko w 2,5 % sesji, a 79 % commitów trafiało prosto na gałąź główną. Agent AI może o regule zapomnieć, więc sama spisana reguła nie wystarczy. Wszystko, co ważne, uruchamia się teraz samo przy określonym zdarzeniu (to jest bramka), a każda bramka ma test, który dowodzi, że blokuje to, co powinna. Skrypt sprawdza, czy każda spisana reguła ma swoją bramkę.",
       },
       {
-        label: "Blizna → bramka —",
-        body:
-          "149 realne awarie floty są skatalogowane z identyfikatorem reguły, a każdy punkt checklisty cytuje bliznę, z " +
-          "której powstał (reguła Google SRE). Postmortem kończy się nową bramką albo nową blizną — nigdy „będziemy uważniejsi”.",
+        label: "Każda awaria staje się kontrolą (blizna → bramka) —",
+        body: "149 prawdziwych awarii z moich projektów jest skatalogowanych, każda z identyfikatorem reguły. Nazywam je bliznami. Każdy punkt listy kontrolnej wskazuje bliznę, z której powstał (zasada z Google SRE). Analiza po awarii kończy się nową bramką albo nową blizną — nigdy obietnicą „będziemy uważniejsi”.",
       },
       {
-        label: "Dowód, nie proza —",
-        body:
-          "„gotowe” to komenda, exit code i obejrzany stan. Raport kończy się statusem VERIFIED, UNVERIFIED albo FAILED. " +
-          "Agenci zmierzalnie zawyżają sukces (w jednym benchmarku 75,8 % zgłoszonych sukcesów nie miało dowodu) i " +
-          "ustępują pod naciskiem — linia statusu jest przeciwwagą.",
+        label: "Dowód, nie deklaracje —",
+        body: "„gotowe” oznacza, że komenda została uruchomiona, zwróciła wynik (exit code), a stan po niej został sprawdzony. Każdy raport kończy się jednym słowem: VERIFIED, UNVERIFIED albo FAILED. Agenci AI mierzalnie zawyżają sukces — w jednym benchmarku 75,8 % zgłoszonych sukcesów nie miało dowodu — i ustępują, gdy się na nich naciska. Słowo statusu jest przeciwwagą.",
       },
     ],
     pipeTitle: "Życie jednej zmiany",
     pipeLead:
-      "Dziewięć bramek odpala się na zdarzeniach, nie na czyjejś pamięci. Każdy czerwony wynik zatrzymuje zmianę w tym miejscu.",
+      "Dziewięć punktów kontrolnych uruchamia się samo w stałych momentach: gdy wysyłam polecenie, gdy agent edytuje plik, i tak dalej aż do produkcji. Nikt nie musi pamiętać o sprawdzaniu. Każdy czerwony wynik zatrzymuje zmianę w miejscu.",
     pipe: {
       stages: [
         "prompt",
@@ -831,43 +724,37 @@ const CONTENT: Record<Lang, Content> = {
       ],
       gates: [
         "protokół w prompt",
-        "lint + typecheck",
-        "strażnik + zakaz no-verify",
+        "lint + typy",
+        "strażnik + no-verify",
         "tier + testy + recenzenci",
         "18 kontroli + sekrety",
         "bez main + rozmiar + cykle",
-        "quality + mutacje + gitleaks",
+        "mutacje + sekrety",
         "tylko aktualny merge-ref",
         "200 z prawdziwej domeny",
       ],
       live: "LIVE",
       blocked:
-        "każdy wyjątek to nazwana zmienna (ALLOW_…=1), logowana i raportowana w cotygodniowym audycie — obchodzenie hooków jest zakazane stałą regułą",
-      caption: "Dziewięć bramek na drodze zmiany; człowiek decyduje, bramki pamiętają.",
+        "każdy wyjątek to nazwany przełącznik (ALLOW_…=1), logowany i widoczny w cotygodniowym audycie · omijanie kontroli jest zakazane",
+      caption:
+        "Dziewięć punktów kontroli na drodze zmiany. Decyzje podejmuję ja; kontrole pilnują, żeby nic nie umknęło.",
     },
     gatesItems: [
       {
-        label: "Przy każdym prompcie —",
-        body:
-          "hook wstrzykuje protokół: niejasność uruchamia pytania, nie wykonanie; fakt wymaga najpierw otwartego źródła; " +
-          "bloker ląduje w pierwszej linii raportu, a na „jak idzie?” nie ma odpowiedzi „dobrze” — jest cel, budżet, " +
-          "ryzyka i decyzje, które należą do sponsora.",
+        label: "Gdy wysyłam polecenie —",
+        body: "hook — skrypt uruchamiany przy zdarzeniu — dokleja do polecenia zasady pracy (protokół). Gdy zadanie jest niejasne, agent zadaje pytania zamiast zgadywać. Fakt wymaga najpierw otwarcia źródła. Przeszkoda, która blokuje pracę, trafia do pierwszej linii raportu. A na pytanie „jak idzie?” nie ma odpowiedzi „dobrze” — jest cel, budżet, ryzyka i decyzje, które należą do sponsora projektu.",
       },
       {
-        label: "Po każdej edycji pliku, także tej zrobionej przez shell —",
-        body: "lint i typecheck lecą na zmienionym pliku, a błędy wracają do agenta, który edytował — w tej samej sesji.",
+        label: "Po każdej edycji pliku, także tej zrobionej w terminalu —",
+        body: "zmieniony plik jest sprawdzany pod kątem stylu i błędów typów (lint i typecheck). Błędy wracają od razu do agenta, który go edytował — w tej samej sesji.",
       },
       {
-        label: "Przy każdej komendzie shellowej —",
-        body:
-          "strażnik blokuje --no-verify, force-push, twarde resety, rekurencyjne kasowanie poza katalogami buildu, " +
-          "merge'owanie pull requestów ze skryptu, sekrety wpisane w linię komendy i curl przekierowany do shella.",
+        label: "Przy każdej komendzie w terminalu —",
+        body: "strażnik blokuje groźne komendy: pomijanie kontroli (--no-verify), nadpisywanie lub kasowanie historii (force-push, twardy reset), rekurencyjne kasowanie poza katalogami buildu, scalanie pull requestów ze skryptu, sekrety wpisane w komendę i uruchamianie pobranego skryptu prosto w powłoce (curl | sh).",
       },
       {
-        label: "Na koniec każdej sesji —",
-        body:
-          "bramka stop liczy tier ryzyka z diffu (ścieżki i rozmiar, nigdy z promptu), odpala lint, typy i testy na " +
-          "wszystkim, co się zmieniło, i odmawia zamknięcia sesji T2+ bez wymaganych działów recenzentów.",
+        label: "Gdy sesja się kończy —",
+        body: "bramka końcowa ocenia, jak ryzykowna jest zmiana (poziom ryzyka, tzw. tier), na podstawie tego, co faktycznie się zmieniło — ścieżek i rozmiaru, nigdy treści polecenia. Uruchamia lint, typy i testy na wszystkim, co się zmieniło. Sesji na poziomie T2 lub wyższym nie da się zamknąć, dopóki nie sprawdzą jej wymagani recenzenci AI.",
       },
       {
         label: "Przy każdym commicie —",
@@ -880,212 +767,170 @@ const CONTENT: Record<Lang, Content> = {
           "bezpieczeństwa w CI.",
       },
       {
-        label: "Przy każdym pushu —",
-        body:
-          "brak bezpośredniego pusha na main; powyżej 400 linii źródłowych zmiana jest dzielona; nowy cykl importów " +
-          "albo import wbrew warstwom zadeklarowanym w dokumencie architektury jest blokowany; gałąź, na której ktoś " +
-          "inny commitował w ostatnie 24 godziny, dostaje ostrzeżenie.",
+        label: "Przy każdym wysłaniu zmian (push) —",
+        body: "nic nie trafia prosto na gałąź główną (main). Zmiana powyżej 400 linii kodu źródłowego jest dzielona na mniejsze. Nowy cykl importów albo import łamiący warstwy opisane w dokumencie architektury jest blokowany. Gdy na tej samej gałęzi ktoś inny commitował w ciągu ostatnich 24 godzin, pojawia się ostrzeżenie.",
       },
       {
-        label: "W CI i przy merge'u —",
-        body:
-          "te same bramki plus gitleaks i testy mutacyjne na zmienionych plikach (test, który nie zabija żadnego mutanta, " +
-          "to teatr); 31 repozytoriów ma ścisłą ochronę gałęzi generowaną z nazw jobów w workflow; skrypt merge'u " +
-          "przyjmuje pull request tylko wtedy, gdy checki odpaliły się na aktualnym wyniku merge'a — bo zielone checki " +
-          "na nieaktualnej bazie raz rozwaliły main na produkcji.",
+        label: "Na serwerze budującym (CI) i przy scalaniu —",
+        body: "te same kontrole uruchamiają się jeszcze raz, a do tego skaner sekretów (gitleaks) i testy mutacyjne na zmienionych plikach: narzędzie celowo wprowadza drobne błędy, a test, który nie wyłapie żadnego, to teatr. 31 repozytoriów ma ścisłą ochronę gałęzi, generowaną z nazw zadań w CI. Skrypt scalający przyjmuje pull request tylko wtedy, gdy kontrole przeszły na aktualnym wyniku scalenia — bo kiedyś zielone kontrole na nieaktualnej bazie zepsuły gałąź główną na produkcji.",
       },
     ],
-    tierTitle: "Tier ryzyka — liczony z diffu, nigdy deklarowany",
+    tierTitle: "Poziom ryzyka (tier) — liczony ze zmiany, nigdy deklarowany",
     tierLead:
-      "Proporcjonalność też jest bramką: prototyp nie jest nękany rekordami architektury, a zmiana w płatnościach nie zamknie się bez security.",
+      "Liczba kontroli jest proporcjonalna — i to też jest pilnowane. Prototyp nie jest zmuszany do spisywania decyzji architektonicznych. Zmiana w płatnościach nie zamknie się bez przeglądu bezpieczeństwa.",
     tiers: [
-      { label: "T0 —", body: "docs, copy, style, assety: tylko bramki 0-tokenowe." },
-      { label: "T1 —", body: "izolowany komponent albo util: code review zalecane." },
+      {
+        label: "T0 —",
+        body: "dokumentacja, teksty, style, grafiki — tylko kontrole skryptowe, bez zużycia tokenów AI.",
+      },
+      {
+        label: "T1 —",
+        body: "pojedynczy, odizolowany komponent albo funkcja pomocnicza — recenzja kodu jest zalecana.",
+      },
       {
         label: "T2 —",
-        body: "wspólna logika, trasy API, edge functions, zależności, config CI lub buildu, ponad 150 linii: wymagane review code + ops, ux przy UI, data przy schemacie.",
+        body: "wspólna logika, endpointy API, funkcje brzegowe (edge functions), zależności, konfiguracja CI lub buildu albo ponad 150 linii. Wymagana recenzja kodu i operacji; do tego UX, gdy zmienia się interfejs, i danych, gdy zmienia się schemat bazy.",
       },
       {
         label: "T3 —",
-        body: "auth, row-level security i multi-tenancy, płatności, sekrety, migracje SQL, zadania cykliczne, admin, ponad 600 linii: code + security + data + ops, potem weryfikator — role security, data i weryfikatora idą na najmocniejszy model.",
+        body: "logowanie i uprawnienia (auth, row-level security, multi-tenancy), płatności, sekrety, migracje SQL, zadania cykliczne, panel admina albo ponad 600 linii. Wymagana recenzja kodu, bezpieczeństwa, danych i operacji, a potem weryfikator. Role bezpieczeństwa, danych i weryfikatora działają na najmocniejszym modelu.",
       },
       {
-        label: "Per repozytorium —",
-        body: "podłoga tieru, faza cyklu życia (prototype · poc · mvp · production — promocja do produkcji wymaga spisanego przeglądu gotowości w tym samym commicie) i opcjonalny adres QA, który czyni dział QA obowiązkowym na T3 z interfejsem.",
+        label: "Dla każdego repozytorium —",
+        body: "minimalny poziom ryzyka, etap życia projektu (prototype · poc · mvp · production) i opcjonalny adres do testów QA. Przejście na produkcję wymaga spisanego przeglądu gotowości produkcyjnej w tym samym commicie. Gdy adres QA jest ustawiony, recenzent QA staje się obowiązkowy przy zmianach T3 dotykających interfejsu.",
       },
     ],
     reviewTitle: "Review jak w software housie, nie jak na czacie",
     reviewLead:
-      "Działy ze świeżym kontekstem, agregacja w kodzie, weryfikator, którego jedynym zadaniem jest obalać.",
+      "Każdy recenzent AI odpowiada za jedną specjalizację i zaczyna z czystą kartą (świeży kontekst). Ich uwagi łączy skrypt, nie model: problem blokuje zmianę tylko wtedy, gdy niezależnie zgłosi go wystarczająco wielu recenzentów albo odtworzy go weryfikator, a problem bez dowodu odpada (reguła k-z-n). Jedynym zadaniem weryfikatora jest obalanie.",
     review: {
       orchestrator: "ORKIESTRATOR",
-      gates: "BRAMKI 0-TOKENOWE",
+      gates: "SKRYPTY",
       gatesSub: "lint · typy · testy · SQL",
-      finders: ["code", "security", "data · ops", "ux · product · qa"],
+      finders: ["kod", "bezpieczeństwo", "dane · operacje", "ux · produkt · qa"],
       aggregate: "AGREGACJA",
-      aggregateSub: "k-z-n · dowód albo odpada",
+      aggregateSub: "k-z-n · z dowodem",
       verifier: "WERYFIKATOR",
       verifierSub: "odtwórz albo obal",
       fixer: "FIX + BRAMKI",
-      rule: "zero czatu między agentami · finding bez wykonanej komendy nie istnieje",
+      rule: "zero czatu między agentami · uwaga bez wykonanej komendy się nie liczy",
       caption:
-        "Agenci nigdy nie widzą czerwonego lintu; agregacja nie ma opinii; weryfikator szuka błędów, nie potwierdzeń.",
+        "Recenzenci dostają tylko kod po kontrolach skryptowych. Uwagi łączy skrypt. Weryfikator szuka błędów, a nie potwierdzeń.",
     },
     reviewItems: [
       {
-        label: "Dziewięć działów —",
-        body:
-          "code, security, data, ops, ux, product, qa, weryfikator i catfish. Każdy to rubryka najwyżej ośmiu " +
-          "numerowanych reguł, każda z komendą do wykonania, polityką severity, schematem JSON i przerobionym fałszywym " +
-          "alarmem. Tylko czytają; naprawia sesja główna.",
+        label: "Dziewięciu recenzentów —",
+        body: "kod, bezpieczeństwo, dane, operacje, UX, produkt, QA, weryfikator i adwokat diabła (catfish). Każdy pracuje według listy najwyżej ośmiu ponumerowanych reguł. Każda reguła ma komendę do uruchomienia, zasady oceny wagi błędu, stały format wyniku (schemat JSON) i przykład fałszywego alarmu, który trzeba odrzucić. Recenzenci tylko czytają; poprawki robi główna sesja.",
       },
       {
-        label: "Dlaczego świeży kontekst —",
-        body:
-          "autor kodu, człowiek czy model, nie widzi własnych błędów. Recenzenci startują z pustym kontekstem, dostają " +
-          "diff i zadanie, i nigdy nie widzą cudzych findingów — agenci, którzy dyskutują, zbiegają do większości nawet " +
-          "wtedy, gdy rację miała mniejszość.",
+        label: "Dlaczego czysta karta —",
+        body: "autor kodu, człowiek czy model, nie widzi własnych błędów. Recenzenci zaczynają od zera, dostają tylko zmianę i zadanie i nigdy nie widzą uwag pozostałych. Agenci, którzy ze sobą dyskutują, dryfują ku większości — nawet gdy rację miała mniejszość.",
       },
       {
-        label: "Narady z catfishem —",
-        body:
-          "decyzje architektoniczne idą przez fakty → stanowiska → obowiązkowego dysydenta → agregację → rekord decyzji. " +
-          "Wstrzyknięty sprzeciw to jedyna interwencja, która zmierzalnie tnie „cichą zgodę” w grupach agentów.",
+        label: "Narady z adwokatem diabła —",
+        body: "decyzje architektoniczne przechodzą stałe kroki: fakty → stanowiska → obowiązkowy głos sprzeciwu → agregacja → spisana decyzja. Wstrzyknięty sprzeciw to jedyna interwencja, co do której wykazano, że ogranicza porażki wynikające z „cichej zgody” w grupach agentów.",
       },
       {
         label: "Kalibrowane co miesiąc —",
-        body:
-          "ten sam defekt w dwóch opakowaniach (goły diff, diff z przekonującym opisem) recenzuje sześciu świeżych " +
-          "recenzentów w losowej kolejności. Rozjazd oznacza bias na długość lub opis, a rubrykę poprawia człowiek — " +
-          "audytor nigdy nie stroi instrumentu, który mierzy.",
+        body: "raz w miesiącu ten sam błąd jest podany na dwa sposoby — sama zmiana oraz ta sama zmiana z przekonującym opisem — i sprawdza go sześciu świeżych recenzentów w losowej kolejności. Rozbieżność oznacza, że na ocenę wpływa długość albo opis, a listę reguł poprawia człowiek. Audytor nigdy nie poprawia narzędzia, którym mierzy.",
       },
     ],
-    loopTitle: "Blizna → bramka — jak system się uczy",
+    loopTitle: "Każda awaria staje się kontrolą — jak system się uczy",
     loopLead:
-      "Awaria nie jest zamknięta, gdy jest naprawiona; jest zamknięta, gdy nie może się powtórzyć bez tego, żeby skrypt to zauważył.",
+      "Awaria nie jest zamknięta, gdy zostanie naprawiona. Jest zamknięta dopiero wtedy, gdy nie może się powtórzyć bez tego, żeby zauważył to skrypt. Każdą skatalogowaną awarię nazywam blizną.",
     loop: {
       steps: [
         "incydent albo powtórzona korekta",
-        "postmortem: pięć razy „dlaczego”",
-        "blizna z identyfikatorem reguły",
-        "bramka + test pozytywny",
-        "pokrycie reguła → bramka",
+        "analiza przyczyn: pięć „dlaczego”",
+        "blizna + numer reguły",
+        "bramka + test, że blokuje",
+        "każda reguła ma bramkę",
         "cotygodniowy audyt",
       ],
       caption:
-        "Pętla karmi się sama: cotygodniowy audyt znajduje bramki, które przestały strzelać, i to staje się blizną.",
+        "Pętla napędza się sama: cotygodniowy audyt wyłapuje kontrole, które przestały działać, i każda z nich staje się nową blizną.",
     },
     loopItems: [
       {
-        label: "Nieaktualna baza rozwaliła main —",
-        body:
-          "dwa pull requesty były zielone, każdy wobec własnego zdjęcia maina; zmergowane razem dały nieważny workflow " +
-          "na gałęzi domyślnej. Dziś: merge tylko, gdy checki odpaliły się na aktualnym wyniku merge'a, ścisła ochrona " +
-          "gałęzi na 31 repozytoriach i blizna z dokładnym mechanizmem.",
+        label: "Nieaktualna baza zepsuła main —",
+        body: "dwa pull requesty przeszły kontrole, ale każdy był sprawdzany na własnej, starszej kopii gałęzi głównej. Scalone razem dały nieprawidłowy plik workflow na gałęzi głównej. Teraz: scalanie tylko wtedy, gdy kontrole przeszły na aktualnym wyniku scalenia, ścisła ochrona gałęzi w 31 repozytoriach i blizna opisująca dokładny mechanizm.",
       },
       {
-        label: "Hook, który nigdy nie ruszył —",
-        body:
-          "bramka pusha czytała wejście dwa razy i przez sześć dni po cichu nie robiła nic. Dziś każdy hook gita ma test, " +
-          "który uruchamia cały skrypt z prawdziwym wejściem, a cotygodniowy audyt sprawdza, czy bramki nadal blokują " +
-          "swoje przypadki.",
+        label: "Kontrola, która nigdy nie ruszyła —",
+        body: "bramka przy pushu czytała dane wejściowe dwa razy i przez sześć dni po cichu nic nie robiła. Teraz każdy hook gita ma test, który uruchamia cały skrypt na prawdziwych danych, a cotygodniowy audyt sprawdza, czy bramki nadal blokują to, co powinny.",
       },
       {
         label: "45 kopii tożsamości firmy —",
-        body:
-          "w 11 plikach, z których każdy przeszedł lint, typy, testy i review. Dziś bramka duplikatów na dodanych liniach: " +
-          "ten sam napis trzy razy w dwóch plikach to blokada, z logowanym wyjątkiem.",
+        body: "rozsianych po 11 plikach — a każdy z nich przeszedł lint, typy, testy i recenzję. Teraz nowe linie przechodzą kontrolę duplikatów: ten sam tekst trzy razy w dwóch plikach jest blokowany. Wyjątek jest możliwy, ale każde jego użycie jest logowane.",
       },
       {
-        label: "Cichy fallback na fakturze —",
-        body:
-          "„?? domyślny” po cichu zmienił sprzedawcę po usunięciu profilu. Dziś SILENT-FALLBACK na każdym polu o skutkach " +
-          "jest blockerem w rubryce code review: brak dopasowania ma rzucić nazwanym błędem.",
+        label: "Faktura, która po cichu zmieniła sprzedawcę —",
+        body: "wartość domyślna („?? domyślny”) po cichu podmieniła sprzedawcę po usunięciu profilu. Teraz cicha wartość zastępcza (SILENT-FALLBACK) na każdym polu, które ma skutki, blokuje zmianę w recenzji kodu: gdy brak dopasowania, kod ma przerwać z nazwanym błędem.",
       },
     ],
     sections: [
       {
-        title: "Dwa runtime'y, jeden system",
+        title: "Dwa narzędzia AI, jeden system",
         items: [
           {
             label: "Claude Code —",
-            body:
-              "runtime terminalowy do pracy na repozytoriach: ta strona, produkcyjne aplikacje MAS Group, Flyt i systemu " +
-              "warsztatowego, plus ich CI. Z GitHubem, pocztą, przeglądarką i pulpitem rozmawia przez serwery MCP i to " +
-              "tu obowiązują hooki i bramki gita.",
+            body: "narzędzie terminalowe do pracy z kodem: ta strona, produkcyjne aplikacje MAS Group, Flyt i systemu warsztatowego oraz ich CI. Z GitHubem, pocztą, przeglądarką i pulpitem łączy się przez serwery MCP (konektory). To tu działają hooki i bramki gita.",
           },
           {
             label: "Claude Desktop (Cowork) —",
-            body:
-              "runtime operacyjny: triage poczty, dokumenty, research, outreach, projektowanie i rutyny, które " +
-              "utrzymują przy życiu sam system. Nie ma tam hooków, więc protokół podróżuje jako tekst w każdym prompcie.",
+            body: "narzędzie do operacji: porządkowanie poczty, dokumenty, wyszukiwanie informacji, kontakt z klientami (outreach), projektowanie i rutyny, które utrzymują przy życiu sam system. Nie ma tam hooków, więc zasady pracy jadą jako tekst w każdym poleceniu.",
           },
           {
             label: "105 skilli —",
-            body:
-              "wersjonowane pakiety instrukcji, do których system kieruje zadania: 50 w runtime kodowym, 55 na pulpicie. " +
-              "Router dopasowuje zadanie deterministycznie i ogłasza pipeline przed startem.",
+            body: "wersjonowane pakiety instrukcji, do których trafiają zadania: 50 w narzędziu do kodu, 55 na pulpicie. Router dopasowuje zadanie według stałych reguł (deterministycznie) i przed startem ogłasza, jakie kroki wykona.",
           },
           {
-            label: "Routing modeli —",
-            body:
-              "najmocniejszy model jest rezerwowany na trudne rozumowanie i na T3 security, data i weryfikację; rutynowa " +
-              "praca narzędziowa i wyszukiwania idą do tańszych warstw. Moc obliczeniowa to budżet — i system wydaje go świadomie.",
+            label: "Dobór modelu —",
+            body: "najmocniejszy model jest zarezerwowany na trudne rozumowanie oraz na recenzje bezpieczeństwa, danych i weryfikację przy T3. Rutynowa praca z narzędziami i wyszukiwanie idą do tańszych modeli. Moc obliczeniowa to budżet, a system wydaje go świadomie.",
           },
         ],
       },
     ],
     statusTitle:
-      "VERIFIED · UNVERIFIED · FAILED — linia statusu, która nie pozwala modelowi Cię zahipnotyzować",
+      "VERIFIED · UNVERIFIED · FAILED — słowo statusu, które nie pozwala AI mówić tego, co chcesz usłyszeć",
     statusLead:
-      "Każdy istotny raport kończy się jednym z trzech słów. To najmniejszy element systemu i ten, który najlepiej " +
-      "podróżuje — szczególnie do Claude Cowork, gdzie nie ma hooków i jedyną ochroną jest prompt.",
+      "Każdy istotny raport kończy się jednym z trzech słów. To najmniejsza część systemu i najłatwiejsza do przeniesienia gdzie indziej — zwłaszcza do Claude Desktop (Cowork), gdzie nie ma hooków i jedyną ochroną jest samo polecenie.",
     statusItems: [
       {
         label: "VERIFIED —",
-        body: "twierdzenie niesie swój artefakt: komendę i exit code, status HTTP, linię wyniku testów, diff, ścieżkę do zrzutu ekranu — zacytowane, nie opisane.",
+        body: "twierdzenie ma dołączony dowód — zacytowany, nie opisany: komendę i jej kod wyjścia, status HTTP, linię z wyniku testów, diff, ścieżkę do zrzutu ekranu.",
       },
       {
         label: "UNVERIFIED —",
-        body: "praca zrobiona, ale brakuje dowodu: dokładnie czego brakuje i jak to sprawdzić, plus co zmieniłoby wniosek. Raport bez linii statusu jest traktowany właśnie tak.",
+        body: "praca jest zrobiona, ale brakuje dowodu. Raport mówi dokładnie, czego brakuje, jak to sprawdzić i co zmieniłoby wniosek. Raport bez słowa statusu liczy się jako UNVERIFIED.",
       },
       {
         label: "FAILED / BLOCKED —",
-        body: "co się stało, dosłownie, bez łagodzenia. Bloker — brak dostępu, decyzji, danych, sekretu, padłe narzędzie — idzie w pierwszej linii raportu, nigdy w sekcji na końcu.",
+        body: "co się stało, dosłownie, bez łagodzenia. Przeszkoda — brak dostępu, decyzji, danych albo sekretu, zepsute narzędzie — trafia do pierwszej linii raportu, nigdy na koniec.",
       },
       {
         label: "Dlaczego to istnieje —",
-        body:
-          "modele zgadzają się z błędnym twierdzeniem użytkownika w około 58 % prób pod presją i przewidują 61–77 % " +
-          "sukcesu, osiągając 22–35 %. Im dłużej trwa rozmowa, tym bardziej model odbija Twoje ujęcie i Twoją pewność. " +
-          "Linia statusu zmusza twierdzenie, by niosło dowód albo przyznało, że go nie ma, a „jesteś pewien?” uruchamia " +
-          "ponowne wyprowadzenie z dowodów, nie uprzejmą zmianę zdania.",
+        body: "gdy użytkownik naciska błędnym twierdzeniem, modele przyznają mu rację w około 58 % przypadków. Przewidują 61–77 % sukcesu, a osiągają 22–35 %. Im dłużej trwa rozmowa, tym bardziej model przejmuje Twój sposób myślenia i Twoją pewność. Słowo statusu zmusza każde twierdzenie, by pokazało dowód albo przyznało, że go nie ma. A pytanie „jesteś pewien?” sprawia, że model sprawdza dowody od nowa, zamiast grzecznie zmienić zdanie.",
       },
     ],
-    statusCoworkLabel: "W Cowork i zadaniach cyklicznych —",
+    statusCoworkLabel: "W Claude Desktop i zadaniach cyklicznych —",
     statusCowork:
-      "do każdego promptu w tle doklejany jest siedmioliniowy blok weryfikacji: nie zakładaj, że prompt jest prawdziwy, " +
-      "masz prawo odmówić i zgłosić porażkę, przeformułuj twierdzenia na neutralne pytania, zero sukcesu bez dowodu, " +
-      "zaatakuj własny wynik przed raportem, wyprowadź od nowa, gdy ktoś podważa, zakończ statusem. Blok jest w " +
-      "repozytorium, gotowy do wklejenia.",
-    vaultSectionTitle: "Sekrety, których model nigdy nie widzi",
+      "do każdego polecenia w tle dołączany jest siedmioliniowy blok weryfikacji: nie zakładaj, że polecenie jest prawdziwe; możesz odmówić i zgłosić porażkę; przeformułuj twierdzenia na neutralne pytania; zero sukcesu bez dowodu; zaatakuj własny wynik przed raportem; sprawdź od nowa, gdy ktoś podważa; zakończ słowem statusu. Blok jest w repozytorium, gotowy do wklejenia.",
+    vaultSectionTitle: "Hasła i klucze, których AI nigdy nie widzi",
     vaultFlow: {
-      vault: "VAULT",
+      vault: "SEJF",
       vaultSub: "95 sekretów · self-hosted",
-      bridge: "MOST",
-      bridgeSub: "wstrzykuje jako zmienne env",
+      bridge: "POŚREDNIK",
+      bridgeSub: "przekazuje do procesu",
       target: "PROCES DOCELOWY",
       targetSub: "deploy · wywołanie API · CI",
       never: ["czat ✕", "kod ✕", "logi ✕"],
-      caption: "Agent może użyć poświadczenia, którego nigdy nie może odczytać.",
+      caption: "Agent może użyć hasła lub klucza, którego nigdy nie zobaczy.",
     },
     vaultItems: [
       {
-        label: "Self-hosted vault —",
-        body:
-          "95 kluczy API, tokenów i loginów żyje w vaulcie na moim własnym sprzęcie. Most wstrzykuje je jako zmienne " +
-          "środowiskowe prosto do procesu docelowego. Wartości nigdy nie pojawiają się w czacie, kodzie ani logach — " +
-          "strażnik komend blokuje sekret wpisany w linię komendy, a skany przy commicie i w CI pilnują, żeby tak zostało.",
+        label: "Sejf na moim własnym sprzęcie —",
+        body: "95 kluczy API, tokenów i loginów leży w sejfie (vault) na moim własnym sprzęcie. Pośrednik przekazuje je prosto do procesu, który ich potrzebuje, jako zmienne środowiskowe. Wartości nigdy nie pojawiają się w czacie, kodzie ani logach. Strażnik komend blokuje sekret wpisany w komendę, a skany przy commicie i w CI pilnują, żeby tak zostało.",
       },
     ],
     schedTitle: "Rutyny — część, która działa, gdy nikt nie pisze",
@@ -1096,7 +941,7 @@ const CONTENT: Record<Lang, Content> = {
       { name: "Watchdog", dots: 5, freq: "co 2 godziny" },
       { name: "Backup konfiguracji + skrypt restore", dots: 5, freq: "codziennie" },
       { name: "Sesje → notatki pamięci", dots: 4, freq: "codziennie / pn + czw" },
-      { name: "Zdrowie strażników", dots: 1, freq: "co tydzień" },
+      { name: "Stan zabezpieczeń", dots: 1, freq: "co tydzień" },
       { name: "Tygodniowy raport systemu", dots: 1, freq: "niedziela" },
       { name: "Nadzór CVE", dots: 1, freq: "co miesiąc" },
       { name: "Kalibracja recenzentów", dots: 1, freq: "co miesiąc" },
@@ -1105,56 +950,38 @@ const CONTENT: Record<Lang, Content> = {
     schedItems: [
       {
         label: "Recenzent PR (dni robocze) —",
-        body:
-          "robi review otwartych pull requestów całej floty jak senior. Poprawki mechaniczne lądują osobnymi commitami " +
-          "z dowodem; uwagi projektowe i bezpieczeństwa zostają komentarzami do mojej decyzji.",
+        body: "przegląda otwarte pull requesty we wszystkich moich repozytoriach tak, jak zrobiłby to senior. Poprawki mechaniczne trafiają jako osobne commity z dowodem. Uwagi o projekcie i bezpieczeństwie zostają komentarzami — decyzja należy do mnie.",
       },
       {
-        label: "Zdrowie strażników (co tydzień) —",
-        body:
-          "33 deterministyczne kontrole tego, czy system jakości sam jest nadal wpięty: hooki zarejestrowane, bramki " +
-          "blokują swoje przypadki, które wyjątki zostały użyte i dlaczego, która rutyna wystartowała i nie skończyła.",
+        label: "Stan zabezpieczeń (co tydzień) —",
+        body: "33 kontrole skryptowe tego, czy system jakości nadal jest podłączony: czy hooki są zarejestrowane, czy bramki nadal blokują to, co powinny, które wyjątki zostały użyte i dlaczego, która rutyna wystartowała i nie skończyła.",
       },
       {
-        label: "Nadzór CVE (co miesiąc) —",
-        body:
-          "najpierw deterministyczny skan zależności żywych produktów — zero tokenów, gdy czysto. Poprawki wyłącznie " +
-          "patch/minor i wyłącznie jako pull requesty z dowodem, nigdy push na main.",
+        label: "Nadzór podatności (CVE, co miesiąc) —",
+        body: "najpierw skrypt skanuje zależności działających produktów — bez zużycia tokenów AI, gdy nic nie znajdzie. Poprawki to wyłącznie aktualizacje patch/minor i zawsze jako pull requesty z dowodem, nigdy prosto na main.",
       },
       {
-        label: "Watchdog (co dwie godziny, pulpit) —",
-        body:
-          "znajduje rutyny spóźnione albo padłe w trakcie, ponawia, naprawia co się da, wysyła powiadomienie na telefon " +
-          "tylko wtedy, gdy nie może, i wznawia pracę przerwaną przez limit z pliku checkpointu.",
+        label: "Watchdog (co dwie godziny, Claude Desktop) —",
+        body: "wyłapuje rutyny spóźnione albo przerwane w trakcie, ponawia je i naprawia, co się da. Powiadomienie na telefon wysyła tylko wtedy, gdy sam nie da rady. Pracę przerwaną przez limit użycia wznawia od zapisanego punktu (checkpointu).",
       },
       {
-        label: "Backup ze skryptem restore (codziennie, pulpit) —",
-        body:
-          "pełny klon konfiguracji agenta i wygenerowany restore na nową maszynę jednym kliknięciem. Backup, którego " +
-          "nigdy nie odtworzono, nie jest backupem, więc skrypt restore jest częścią backupu.",
+        label: "Kopia zapasowa ze skryptem przywracania (codziennie, Claude Desktop) —",
+        body: "pełna kopia konfiguracji agenta i wygenerowany skrypt, który jednym kliknięciem odtwarza ją na nowej maszynie. Kopia, której nigdy nie odtworzono, nie jest kopią zapasową — dlatego skrypt przywracania jest jej częścią.",
       },
     ],
-    memTitle: "Pamięć, telemetria i retro, które przebudowało system",
+    memTitle: "Pamięć, pomiary i retrospektywa, która przebudowała system",
     memItems: [
       {
         label: "Pamięć trwała —",
-        body:
-          "lokalny vault 1900+ notatek ładuje się na starcie każdej sesji, a sesje dokumentują się same przy zamknięciu, " +
-          "więc następna startuje z pliku checkpointu, nie od zera.",
+        body: "lokalna baza 1900+ notatek ładuje się na starcie każdej sesji. Każda sesja przy zamknięciu sama zapisuje notatki, więc następna startuje od zapisanego punktu, a nie od zera.",
       },
       {
         label: "Telemetria, nie odczucia —",
-        body:
-          "każde pominięcie bramki jest logowane z powodem; 1873 transkrypty sesji i historia gita 39 repozytoriów są " +
-          "przekopywane skryptami: korekty na sesję, powtórzone błędy narzędzi, poprawki w 24 godziny po poprzednim " +
-          "commicie tego samego pliku, hotspoty churnu. To liczby decydują, co staje się bramką.",
+        body: "każde pominięcie kontroli jest logowane z powodem. Skrypty przekopują 1873 zapisy sesji i historię gita 39 repozytoriów: korekty na sesję, powtarzające się błędy narzędzi, poprawki w ciągu 24 godzin od poprzedniego commitu w tym samym pliku i pliki zmieniane najczęściej. To liczby decydują, co staje się bramką.",
       },
       {
-        label: "Retro, które miało znaczenie —",
-        body:
-          "dwanaście pętli naprawczych z jednej sesji zostało doprowadzonych do przyczyn; trzy z nich to ten sam defekt — " +
-          "system deklarował kontrolę, której fizycznie nie miał. Odpowiedź była strukturalna: każda bramka dostała test " +
-          "pozytywny, a pokrycie reguła → bramka stało się skryptem.",
+        label: "Retrospektywa, która miała znaczenie —",
+        body: "dwanaście pętli naprawczych z jednej sesji prześledzono do przyczyn. Trzy miały ten sam defekt: system deklarował kontrolę, której fizycznie nie miał. Odpowiedź była strukturalna: każda bramka dostała test dowodzący, że blokuje, a sprawdzanie, czy każda reguła ma bramkę, stało się skryptem.",
       },
       {
         label: "Ta sama metoda, zastosowana do mnie —",
@@ -1163,34 +990,24 @@ const CONTENT: Record<Lang, Content> = {
           "github.com/kamiljan11/code-reading-quest.",
       },
     ],
-    scaleTitle: "Czy to trzyma się na skali?",
+    scaleTitle: "Czy to się sprawdza przy dużej skali?",
     scaleItems: [
       {
         label: "Uczciwa odpowiedź —",
-        body:
-          "jedna funkcja jest łatwa; system na 200 tysięcy linii, z zależnościami między plikami i niepisanymi założeniami " +
-          "architektonicznymi, to miejsce, gdzie spójność się rozjeżdża. Dlatego założenia są zapisane tam, gdzie skrypt " +
-          "je przeczyta: dokument architektury każdego repozytorium niesie parsowany blok warstw i zakazanych importów, a " +
-          "bramka pusha blokuje nowy cykl importów albo import wbrew warstwom. Stare cykle tylko ostrzegają — długu " +
-          "historycznego nigdy nie sprząta się automatycznie.",
+        body: "jedna funkcja to nic trudnego. System na 200 tysięcy linii, z zależnościami między plikami i niespisanymi założeniami architektonicznymi, to miejsce, gdzie spójność się rozjeżdża. Dlatego założenia są zapisane tam, gdzie skrypt je przeczyta: dokument architektury każdego repozytorium ma czytelny dla maszyny blok warstw i zakazanych importów, a bramka przy pushu blokuje nowy cykl importów albo import łamiący warstwy. Stare cykle tylko ostrzegają — długu historycznego nigdy nie sprząta się automatycznie.",
       },
       {
-        label: "Zasięg rażenia przed edycją —",
-        body:
-          "zmieniany plik importowany przez ponad 40 innych jest flagowany, a krok projektowy przed kodem pyta, kto to " +
-          "woła, co jeszcze czyta te dane i w którym tierze ląduje zmiana.",
+        label: "Zasięg zmiany przed edycją —",
+        body: "zmieniany plik, który importuje ponad 40 innych plików, jest oznaczany. Krok projektowy przed kodem pyta: kto to wywołuje, co jeszcze czyta te dane i na jaki poziom ryzyka trafia zmiana.",
       },
       {
-        label: "Nawigowalne dla człowieka, nie tylko dla maszyny —",
-        body:
-          "indeks narzędzi i mapa systemu są generowane z nagłówków samych narzędzi; narzędzie bez samoopisu pokazuje się " +
-          "jako dług. Kryterium każdej decyzji stylu to jedno pytanie: czy senior, który nigdy nie widział repozytorium, " +
-          "uruchomi je w 15 minut, znajdzie miejsce zmiany w 15 minut i zrozumie dlaczego — bez czytania moich transkryptów?",
+        label: "Czytelne dla człowieka, nie tylko dla maszyny —",
+        body: "indeks narzędzi i mapa systemu są generowane z nagłówków samych narzędzi; narzędzie bez opisu pokazuje się jako dług. Każdą decyzję o stylu ocenia jedno pytanie: czy doświadczony programista, który nigdy nie widział repozytorium, uruchomi je w 15 minut, w 15 minut znajdzie miejsce do zmiany i zrozumie dlaczego — bez czytania zapisów moich sesji?",
       },
     ],
     installTitle: "Zainstaluj to u siebie",
     installLead:
-      "Cały system to publiczne repozytorium, sanityzowane i przenośne: Node 20+, git i Claude Code to jedyne wymagania.",
+      "Cały system to publiczne repozytorium, oczyszczone z prywatnych danych i przenośne. Potrzebujesz tylko Node 20+, gita i Claude Code.",
     installSteps: [
       "git clone " + REPO_URL + ".git",
       "node install.mjs --dry-run   # pokazuje plan, niczego nie dotyka",
@@ -1199,10 +1016,7 @@ const CONTENT: Record<Lang, Content> = {
     installItems: [
       {
         label: "Co obiecuje instalator —",
-        body:
-          "nigdy nie nadpisuje pliku, który zmieniłeś (inne wersje lądują obok Twoich), scala zamiast podmieniać Twoje " +
-          "ustawienia, dokleja reguły między znacznikami, więc aktualizacja podmienia tylko ten blok, hooki gita są opt-in, " +
-          "a całość kończy się samotestem — zielony wynik jest dowodem, nie słowo instalatora.",
+        body: "nigdy nie nadpisuje pliku, który zmieniłeś (druga wersja ląduje obok Twojej). Scala Twoje ustawienia zamiast je podmieniać. Dokleja reguły między znacznikami, więc aktualizacja podmienia tylko ten blok. Hooki gita są opcjonalne. Na końcu uruchamia samotest: dowodem jest zielony wynik, a nie słowo instalatora.",
       },
       {
         label: "Co dostajesz —",
@@ -1213,10 +1027,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Jedna uczciwa uwaga —",
-        body:
-          "protokół ma pełną wersję angielską (PG_LANG=en, instalator ustawia ją z locale), a każdy komunikat blokady " +
-          "niesie angielską linię BLOCKED z wyjątkiem; doktryna i rubryki recenzentów zostają po polsku — model czyta je " +
-          "bez problemu — a README jest w obu językach.",
+        body: "zasady pracy mają pełną wersję angielską (PG_LANG=en, instalator ustawia ją według języka systemu), a każdy komunikat blokady ma angielską linię BLOCKED z opisem wyjątku. Doktryna i listy reguł recenzentów są na razie po polsku — model czyta je bez problemu — a README jest w obu językach.",
       },
     ],
     installLink: "Otwórz repozytorium →",
@@ -1229,8 +1040,7 @@ const CONTENT: Record<Lang, Content> = {
       "nie jest to, że system jest skończony — tylko to, że tryby awarii pracy z AI są tu obudowane inżynierią, jawnie, " +
       "zamiast być zaklinane.",
     colophon:
-      "Ta strona przeszła przez pipeline, który opisuje: naszkicowana przez agenta, przepchnięta przez powyższe bramki, " +
-      "zrecenzowana i wydana przeze mnie. Liczby pochodzą z komend shellowych z dnia publikacji, nie z pamięci.",
+      "Ta strona przeszła przez proces, który opisuje: szkic napisał agent, tekst przeszedł przez opisane wyżej bramki, a ja go zrecenzowałem i opublikowałem. Liczby pochodzą z komend uruchomionych w dniu publikacji, nie z pamięci.",
   },
 };
 
