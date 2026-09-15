@@ -20,7 +20,12 @@ import { LangToggle } from "./LangToggle";
 
 type Menu = "services" | "areas" | "about";
 
-type AboutItem = { to: "/o-mnie" | "/cv" | "/claude"; hash?: string; label: string; hint: string };
+type AboutItem = {
+  to: "/o-mnie" | "/cv" | "/claude" | "/ksiazki";
+  hash?: string;
+  label: string;
+  hint: string;
+};
 
 type Copy = {
   nav: string;
@@ -57,7 +62,7 @@ const COPY: Record<Lang, Copy> = {
       },
       { to: "/cv", label: "CV", hint: "Roles, companies, experience" },
       { to: "/claude", label: "AI system", hint: "How I build with AI agents" },
-      { to: "/o-mnie", hash: "beyond", label: "Books", hint: "Two free guidebooks" },
+      { to: "/ksiazki", label: "Books", hint: "Two free guidebooks" },
     ],
     cta: "Free consultation",
     menu: "Menu",
@@ -82,7 +87,7 @@ const COPY: Record<Lang, Copy> = {
       },
       { to: "/cv", label: "CV", hint: "Role, firmy, doświadczenie" },
       { to: "/claude", label: "System AI", hint: "Jak buduję z agentami AI" },
-      { to: "/o-mnie", hash: "beyond", label: "Książki", hint: "Dwa darmowe przewodniki" },
+      { to: "/ksiazki", label: "Książki", hint: "Dwa darmowe przewodniki" },
     ],
     cta: "Bezpłatna konsultacja",
     menu: "Menu",

@@ -15,6 +15,7 @@ import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as ClaudeRouteImport } from './routes/claude'
 import { Route as CvRouteImport } from './routes/cv'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as KsiazkiRouteImport } from './routes/ksiazki'
 import { Route as OMnieRouteImport } from './routes/o-mnie'
 import { Route as ObszaryIndexRouteImport } from './routes/obszary.index'
 import { Route as ObszarySlugRouteImport } from './routes/obszary.$slug'
@@ -51,6 +52,11 @@ const KontaktRoute = KontaktRouteImport.update({
   path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KsiazkiRoute = KsiazkiRouteImport.update({
+  id: '/ksiazki',
+  path: '/ksiazki',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OMnieRoute = OMnieRouteImport.update({
   id: '/o-mnie',
   path: '/o-mnie',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
+  '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
+  '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
+  '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/claude'
     | '/cv'
     | '/kontakt'
+    | '/ksiazki'
     | '/o-mnie'
     | '/obszary/$slug'
     | '/uslugi/$slug'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/claude'
     | '/cv'
     | '/kontakt'
+    | '/ksiazki'
     | '/o-mnie'
     | '/obszary/$slug'
     | '/uslugi/$slug'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/claude'
     | '/cv'
     | '/kontakt'
+    | '/ksiazki'
     | '/o-mnie'
     | '/obszary/$slug'
     | '/uslugi/$slug'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   ClaudeRoute: typeof ClaudeRoute
   CvRoute: typeof CvRoute
   KontaktRoute: typeof KontaktRoute
+  KsiazkiRoute: typeof KsiazkiRoute
   OMnieRoute: typeof OMnieRoute
   ObszarySlugRoute: typeof ObszarySlugRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ksiazki': {
+      id: '/ksiazki'
+      path: '/ksiazki'
+      fullPath: '/ksiazki'
+      preLoaderRoute: typeof KsiazkiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/o-mnie': {
       id: '/o-mnie'
       path: '/o-mnie'
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClaudeRoute: ClaudeRoute,
   CvRoute: CvRoute,
   KontaktRoute: KontaktRoute,
+  KsiazkiRoute: KsiazkiRoute,
   OMnieRoute: OMnieRoute,
   ObszarySlugRoute: ObszarySlugRoute,
   UslugiSlugRoute: UslugiSlugRoute,
