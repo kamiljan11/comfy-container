@@ -353,7 +353,7 @@ const PL: Service[] = [
       },
       {
         q: "Czy musimy zmieniać CRM albo program księgowy?",
-        a: "Zwykle nie. Jeśli narzędzie udostępnia API albo choćby eksport danych, dokumenty mogą brać dane stamtąd. Czasem najlepszym systemem jest arkusz, w którym ktoś już pracuje: w mojej firmie handlującej częściami kanał zamówień dla klientów indywidualnych, czyli wyceny, akceptacje, faktury z VAT i SMS-y, działa w arkuszu Google, bez kosztów infrastruktury.",
+        a: "Zwykle nie. Jeśli narzędzie udostępnia API albo choćby eksport danych, dokumenty mogą brać dane stamtąd. Czasem najlepszym systemem jest arkusz, w którym ktoś już pracuje: w mojej firmie handlującej częściami kanał zamówień dla klientów indywidualnych działa w arkuszu Google, bez kosztów infrastruktury: wyceny, akceptacje, faktury z VAT i SMS-y.",
       },
       {
         q: "Czy podpis elektroniczny i archiwum będą zgodne z przepisami?",

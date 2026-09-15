@@ -434,6 +434,10 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
                         ))}
                       </div>
                       <div className="work-year">{p.year}</div>
+                      {/* a row that links to a GitHub write-up says so; a live product link does not */}
+                      {p.href?.startsWith("https://github.com/") ? (
+                        <div className="work-year">GitHub</div>
+                      ) : null}
                       {p.href ? (
                         <svg
                           className="work-arrow"
@@ -460,6 +464,11 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
                         href={p.href}
                         target="_blank"
                         rel="noreferrer"
+                        aria-label={
+                          p.href.startsWith("https://github.com/")
+                            ? `${p.name} (GitHub)`
+                            : undefined
+                        }
                         className="work-row work-row-link"
                       >
                         {inner}
