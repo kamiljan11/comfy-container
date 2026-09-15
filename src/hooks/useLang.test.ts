@@ -29,6 +29,7 @@ describe("ssrLangFor", () => {
       "/blog",
       "/blog/",
       "/o-mnie",
+      "/ksiazki",
       "/obszary",
       "/obszary/hr-i-rekrutacja",
     ]) {
