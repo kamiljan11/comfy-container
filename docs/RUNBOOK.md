@@ -32,6 +32,8 @@
   przy zamykaniu kontekstu (6/12 lokalnie); na jednym workerze 12/12.
 - Klucze API niepotrzebne: chatbot wola serwer dopiero po wyslaniu wiadomosci, testy tego nie robia.
 - Porazka: `test-results/<test>/error-context.md` (snapshot strony) + `npx playwright show-trace test-results/<test>/trace.zip`.
+- W CI: przy porazce artefakt `playwright-test-results` (Summary runu, 7 dni) = ten sam `test-results/`;
+  job ma `timeout-minutes: 20`. Decyzja o buildzie node-server: `docs/adr/0004-e2e-against-node-server-build.md`.
 - Specy: `e2e/smoke.spec.ts` (strona glowna bez bledow konsoli), `e2e/palette.spec.ts` (paleta komend +
   regresja: drugi skok do case study na tej samej stronie otwiera wlasciwe studium).
 
