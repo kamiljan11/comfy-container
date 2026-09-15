@@ -72,7 +72,7 @@ export const T: Record<Lang, SiteTranslation> = {
     solutions: {
       label: "How I can help",
       title: "Six ways to take work off your team",
-      lead: "Pick the one closest to what hurts. Each opens a page with the problems, the approach and systems already running in production.",
+      lead: "Pick the one closest to what hurts.",
       more: "See how it works →",
       proofLabel: "Running in production",
     },
@@ -239,7 +239,7 @@ export const T: Record<Lang, SiteTranslation> = {
     solutions: {
       label: "Jak mogę pomóc",
       title: "Sześć sposobów, żeby zdjąć pracę z Twojego zespołu",
-      lead: "Wybierz to, co najbliżej Twojego problemu. Każda pozycja prowadzi do strony z problemami, podejściem i systemami, które już działają na produkcji.",
+      lead: "Wybierz to, co najbliżej Twojego problemu.",
       more: "Zobacz, jak to działa →",
       proofLabel: "Działa w produkcji",
     },
