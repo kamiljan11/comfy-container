@@ -86,6 +86,7 @@ jobs:
           # mutant przechodzi po 0 testach -> "Survived" (PR #38: 0/24 i 0/80). Upstream: stryker-js#6210, fix w PR
           # #6214; zadna kombinacja coverageAnalysis x vitest.related tego nie obchodzi. Zdejmij pin, gdy wyjdzie
           # runner z fixem i reprodukcja z docs/RUNBOOK.md zabije mutanty na Vitest 5 (straznik nizej to sprawdzi).
+          # Ten sam wiersz `npm install` stoi w docs/RUNBOOK.md (reprodukcja) — zmieniaj oba naraz.
           npm install --no-save --no-audit --no-fund @stryker-mutator/core@10.0.0 @stryker-mutator/vitest-runner@10.0.0 vitest@4.1.11
           node -e 'const v = require("vitest/package.json").version; console.log("vitest dla Strykera: " + v); if (v !== "4.1.11") process.exit(1)'
 
