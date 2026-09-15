@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
+import { hashToId, openStudy } from "../lib/caseStudyHash";
 import { useEffect } from "react";
 import { CASE_STUDIES, FEATURED, SECONDARY, type CaseStudy } from "../data/caseStudies";
 import { useLang } from "../hooks/useLang";
@@ -174,21 +175,21 @@ function CaseStudiesPage() {
   const t = UI[lang];
   const studies = CASE_STUDIES[lang];
 
-  // Open a collapsed study when it's linked from the TOC or a shared #hash.
+  // Open a collapsed study when it's linked from the TOC, a shared #hash or the
+  // command palette. A router navigation re-renders with the new hash BEFORE it
+  // pushes the URL (and pushState fires no hashchange), so the router's hash is
+  // read here; the hashchange listener covers native jumps (plain #links, the
+  // address bar).
+  const hash = useRouterState({ select: (s) => s.location.hash });
+
   useEffect(() => {
-    const openFromHash = () => {
-      const id = decodeURIComponent(window.location.hash.slice(1));
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (el && el.tagName === "DETAILS") {
-        (el as HTMLDetailsElement).open = true;
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+    openStudy(hashToId(hash), document);
+    const onHashChange = () => {
+      openStudy(hashToId(window.location.hash), document);
     };
-    openFromHash();
-    window.addEventListener("hashchange", openFromHash);
-    return () => window.removeEventListener("hashchange", openFromHash);
-  }, []);
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [hash]);
 
   return (
     <div className="cv-page">

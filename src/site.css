@@ -2192,6 +2192,11 @@ section {
     width: 44px;
     height: 44px;
   }
+  .nav-search {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
   .nav-sig-wrap {
     min-height: 44px;
   }
@@ -5808,5 +5813,138 @@ header[id] {
   .sl-btn,
   .sl-btn-ghost {
     width: 100%;
+  }
+}
+
+/* ── Command palette (Ctrl+K / ⌘K) ──
+   The dialog reuses the Radix + cmdk primitives from src/components/ui; the
+   shadcn theme tokens there are the light template ones, so the look is set
+   here from the site's own tokens (unlayered CSS beats Tailwind's layers). */
+.nav-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 9px;
+  background: none;
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  color: var(--text-2);
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.nav-search:hover {
+  border-color: var(--border-teal);
+  color: var(--teal-2);
+}
+.nav-search:focus-visible {
+  outline: 2px solid var(--teal-2);
+  outline-offset: 2px;
+}
+.nav-search svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+.nav-search-kbd {
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: 0.04em;
+  color: inherit;
+}
+@media (max-width: 900px) {
+  .nav-search-kbd {
+    display: none;
+  }
+}
+
+.cmdp {
+  top: 14vh;
+  translate: -50% 0;
+  width: min(640px, calc(100vw - 32px));
+  max-width: none;
+  padding: 0;
+  gap: 0;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.cmdp > button {
+  top: 15px;
+  right: 14px;
+  color: var(--text-2);
+}
+.cmdp [cmdk-root] {
+  background: transparent;
+  color: inherit;
+}
+.cmdp [cmdk-input-wrapper] {
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px 0 16px;
+  color: var(--text-2);
+}
+.cmdp [cmdk-input] {
+  height: 54px;
+  font-size: 15px;
+  color: var(--text);
+}
+.cmdp [cmdk-input]::placeholder {
+  color: var(--text-2);
+}
+.cmdp [cmdk-list] {
+  max-height: min(440px, 62vh);
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.cmdp [cmdk-group-heading] {
+  padding: 12px 10px 6px;
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-2);
+}
+.cmdp [cmdk-item] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+}
+.cmdp [cmdk-item][data-selected="true"] {
+  background: var(--teal-glow);
+  box-shadow: inset 0 0 0 1px var(--border-teal);
+  color: var(--text);
+}
+.cmdp-label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.cmdp-hint {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--text-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cmdp [cmdk-empty] {
+  padding: 28px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-2);
+}
+@media (max-width: 520px) {
+  .cmdp {
+    top: 12px;
   }
 }

@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { type Service } from "../data/services";
 import { Illustration } from "./illustrations";
+import { normalizeText } from "../lib/text";
 
 /**
  * The body of one service (/uslugi/$slug) or area (/obszary/$slug) page. Both
@@ -227,12 +228,9 @@ const TAG_ICONS: Record<string, string> = {
   knowledge: "book",
 };
 
-/** Diacritics off so "Efektywność" and "Zespół" hit the same keys as plain
- *  ASCII would. ł has no NFD decomposition, hence the explicit replace. The
- *  combining range is written as escapes so the file stays ASCII-safe for
- *  scripts/check-encoding.mjs. */
-const normalizeTag = (tag: string) =>
-  tag.toLowerCase().replace(/ł/g, "l").normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+/** Diacritics off (`normalizeText`, shared with the command palette) so
+ *  "Efektywność" and "Zespół" hit the same keys as plain ASCII would. */
+const normalizeTag = (tag: string) => normalizeText(tag).trim();
 
 function TagIcon({ tag }: { tag: string }) {
   const key = TAG_ICONS[normalizeTag(tag)] ?? "spark";
