@@ -489,7 +489,7 @@ const CONTENT: Record<Lang, Content> = {
       { name: "Watchdog", dots: 5, freq: "every 2 hours" },
       { name: "Config backup + restore script", dots: 5, freq: "daily" },
       { name: "Sessions → memory notes", dots: 4, freq: "daily / Mon + Thu" },
-      { name: "Guard health", dots: 1, freq: "weekly" },
+      { name: "Safeguard status", dots: 1, freq: "weekly" },
       { name: "Weekly system report", dots: 1, freq: "Sunday" },
       { name: "CVE watch", dots: 1, freq: "monthly" },
       { name: "Reviewer calibration", dots: 1, freq: "monthly" },
@@ -501,7 +501,7 @@ const CONTENT: Record<Lang, Content> = {
         body: "reviews open pull requests across all my repositories, the way a senior engineer would. Mechanical fixes land as separate commits with proof attached. Design and security findings stay as comments for me to decide.",
       },
       {
-        label: "Guard health (weekly) —",
+        label: "Safeguard status (weekly) —",
         body: "33 script checks that the quality system itself is still connected: hooks are registered, gates still block what they should, which escape hatches were used and why, and which routine started but never finished.",
       },
       {
@@ -620,7 +620,7 @@ const CONTENT: Record<Lang, Content> = {
       shared: "te same reguły · ta sama pamięć",
       vault: "SEJF",
       vaultSub: "95 sekretów",
-      vaultNote1: "klucz trafia do procesu,",
+      vaultNote1: "klucze trafiają do procesu,",
       vaultNote2: "nigdy do czatu",
       memory: "PAMIĘĆ",
       memorySub: "1900+ notatek",
@@ -802,7 +802,7 @@ const CONTENT: Record<Lang, Content> = {
     ],
     reviewTitle: "Review jak w software housie, nie jak na czacie",
     reviewLead:
-      "Każdy recenzent AI odpowiada za jedną specjalizację i zaczyna z czystą kartą (świeży kontekst). Ich uwagi łączy skrypt, nie model: problem blokuje zmianę tylko wtedy, gdy niezależnie zgłosi go wystarczająco wielu recenzentów albo odtworzy go weryfikator, a problem bez dowodu odpada (reguła k-z-n). Jedynym zadaniem weryfikatora jest obalanie.",
+      "Każdy recenzent AI odpowiada za jedną specjalizację i zaczyna od zera (świeży kontekst). Ich uwagi łączy skrypt, nie model: problem blokuje zmianę tylko wtedy, gdy niezależnie zgłosi go wystarczająco wielu recenzentów albo odtworzy go weryfikator, a problem bez dowodu odpada (reguła k-z-n). Jedynym zadaniem weryfikatora jest obalanie.",
     review: {
       orchestrator: "ORKIESTRATOR",
       gates: "SKRYPTY",
@@ -823,7 +823,7 @@ const CONTENT: Record<Lang, Content> = {
         body: "kod, bezpieczeństwo, dane, operacje, UX, produkt, QA, weryfikator i adwokat diabła (catfish). Każdy pracuje według listy najwyżej ośmiu ponumerowanych reguł. Każda reguła ma komendę do uruchomienia, zasady oceny wagi błędu, stały format wyniku (schemat JSON) i przykład fałszywego alarmu, który trzeba odrzucić. Recenzenci tylko czytają; poprawki robi główna sesja.",
       },
       {
-        label: "Dlaczego czysta karta —",
+        label: "Dlaczego od zera —",
         body: "autor kodu, człowiek czy model, nie widzi własnych błędów. Recenzenci zaczynają od zera, dostają tylko zmianę i zadanie i nigdy nie widzą uwag pozostałych. Agenci, którzy ze sobą dyskutują, dryfują ku większości — nawet gdy rację miała mniejszość.",
       },
       {
