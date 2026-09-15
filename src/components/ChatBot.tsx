@@ -87,7 +87,7 @@ const COPY: Record<Lang, Copy> = {
       {
         label: "Add AI / automation to my business",
         reply:
-          "His core work: ship AI into your production — voice agents, WhatsApp bots, n8n workflows, LLM and RAG — then train your team to run it. Tell him the task that eats the most time and he'll map it. Send it below.",
+          "His core work: ship AI into your production — n8n workflows, LLM integrations, automated status calls and SMS — then train your team to run it. Tell him the task that eats the most time and he'll map it. Send it below.",
       },
       {
         label: "Train my team to use AI",
@@ -147,7 +147,7 @@ const COPY: Record<Lang, Copy> = {
       {
         label: "Wdrożyć AI / automatyzację w firmie",
         reply:
-          "Jego rdzeń: wdrożyć AI na Twoją produkcję — agenci głosowi, boty WhatsApp, n8n, LLM i RAG — a potem nauczyć zespół to obsługiwać. Napisz, które zadanie zżera najwięcej czasu, a on to zmapuje. Wyślij poniżej.",
+          "Jego rdzeń: wdrożyć AI na Twoją produkcję — workflowy n8n, integracje LLM, automatyczne telefony i SMS-y o statusie — a potem nauczyć zespół to obsługiwać. Napisz, które zadanie zżera najwięcej czasu, a on to zmapuje. Wyślij poniżej.",
       },
       {
         label: "Przeszkolić zespół z AI",
