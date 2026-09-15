@@ -11,6 +11,25 @@ import { test, expect, type Page } from "@playwright/test";
 // for its exit animation, and treating it as open made the next step race it.
 const dialog = (page: Page) => page.locator('[role="dialog"].cmdp[data-state="open"]');
 
+/**
+ * Pick a case study the way a keyboard user does: type its exact title, check it is
+ * the selected row, press Enter. Clicking deep list rows proved flaky on CI (after the
+ * list scrolled, the click point landed on the dialog overlay), and the thing under
+ * test is the router-hash behaviour after the jump, not the pointer.
+ */
+async function pickCase(page: Page, slug: string) {
+  const row = page.locator(`[cmdk-item][data-value="case:${slug}"]`);
+  const title = (await row.locator(".cmdp-label").innerText()).trim();
+  await page.keyboard.type(title);
+  await expect(page.locator('[cmdk-item][data-selected="true"]')).toHaveAttribute(
+    "data-value",
+    `case:${slug}`,
+  );
+  await page.keyboard.press("Enter");
+  // wait until the dialog is gone, not just closing, before the next step
+  await expect(page.locator('[role="dialog"].cmdp')).toHaveCount(0);
+}
+
 /** Open with Ctrl+K once the page has hydrated (the shortcut is a client listener). */
 async function openWithShortcut(page: Page) {
   await expect(async () => {
@@ -56,7 +75,7 @@ test("two jumps on /case-studies each open the study they point at", async ({ pa
   expect(slugs.length).toBeGreaterThan(8);
   const [first, second] = [slugs[3], slugs[8]];
 
-  await page.locator(`[cmdk-item][data-value="case:${first}"]`).click();
+  await pickCase(page, first);
   await expect(page).toHaveURL(
     (url) => url.pathname === "/case-studies" && url.hash === `#${first}`,
   );
@@ -64,7 +83,9 @@ test("two jumps on /case-studies each open the study they point at", async ({ pa
   await expect(page.locator(`details#${first}`)).toHaveAttribute("open", "");
 
   await openWithShortcut(page);
-  await page.locator(`[cmdk-item][data-value="case:${second}"]`).click();
+  // a new opening starts with an empty search, not the last query
+  await expect(page.locator("[cmdk-input]")).toHaveValue("");
+  await pickCase(page, second);
   await expect(page).toHaveURL(
     (url) => url.pathname === "/case-studies" && url.hash === `#${second}`,
   );
