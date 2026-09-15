@@ -21,11 +21,6 @@ interface SiteTranslation {
     p1c: string;
     p1d: string;
     p1e: string;
-    p2a: string;
-    p2b: string;
-    p2c: string;
-    p2d: string;
-    p2e: string;
     meta: string[];
     milestones: Array<{ year: string; desc: string }>;
   };
@@ -58,7 +53,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Your business.",
       h1b: "Less",
       h1em: "manual work.",
-      sub: "I find the process that eats your team's hours, and replace it with a system or an AI automation. Then I train your team to run it day to day.",
+      sub: "I find the process that eats your team's hours and your company's money. I replace it with something concrete: a quote calculator instead of a spreadsheet, data that moves between your programs on its own, or an AI assistant that answers customers. Then I train your team to use it every day.",
       cta: "Show me your process",
       ctaGhost: "See systems in production",
       partner:
@@ -67,12 +62,12 @@ export const T: Record<Lang, SiteTranslation> = {
     pains: {
       label: "Sound familiar?",
       title: "Problems I get called in for",
-      lead: "None of these hurt at ten orders a month. All of them hurt at a hundred. Each card opens the page on how it gets fixed.",
+      lead: "Sometimes one order is enough for it to hurt, and every next one makes it worse.",
     },
     solutions: {
       label: "How I can help",
       title: "Six ways to take work off your team",
-      lead: "Pick the one closest to what hurts. Each opens a page with the problems, the approach and systems already running in production.",
+      lead: "Pick the one closest to what hurts.",
       more: "See how it works →",
       proofLabel: "Running in production",
     },
@@ -84,24 +79,19 @@ export const T: Record<Lang, SiteTranslation> = {
       p1c: ", because it has been my budget. That is also why I would rather tell you ",
       p1d: "what not to build",
       p1e: " than deliver a perfect version of the wrong thing.",
-      p2a: "AI coding agents write the code; I ",
-      p2b: "review it",
-      p2c: " and ",
-      p2d: "own what decides whether the system survives contact with customers",
-      p2e: ": the spec, the architecture call, the review, the deploy, and the phone when it breaks.",
       meta: ["Years building", "Active verticals", "Businesses built"],
       milestones: [
         {
           year: "2012",
-          desc: "Started building at 16. First network, first company, field sales — top performer by 18.",
+          desc: "Started building at 16. First network, first company, field sales: top performer by 18.",
         },
         {
           year: "2019",
-          desc: "Moved to Iceland. Rebuilt from zero — retail, social media, co-launched Sleipnir Glacier Tours.",
+          desc: "Moved to Iceland. Rebuilt from zero: retail, social media, co-launched Sleipnir Glacier Tours.",
         },
         {
           year: "2021",
-          desc: "CEO & Operator. Built MAS Group from scratch — auto parts, print, freight, and rental — with dedicated team leads in each vertical.",
+          desc: "CEO & Operator. Built MAS Group from scratch (auto parts, print, freight, and rental) with dedicated team leads in each vertical.",
         },
         {
           year: "2024",
@@ -116,60 +106,60 @@ export const T: Record<Lang, SiteTranslation> = {
       label: "Beyond Work",
       title: "Twelve years of practice, one guidebook",
       open: "Two free books",
-      body: "Before I built AI systems, my long project was inner: twelve years of spiritual practice and study, six of them spent writing it down. It took two earlier books to learn how to write this one. The result is \"Simplified Practical Spirituality\" — a practical, tradition-agnostic guidebook. Both editions are free and always will be. This is the one thing I make that isn't for sale: no funnel, no upsell, nothing to buy. It's what I have to give back, and it stays that way. Start with the short one.",
-      short: "Short version — 102 pages, ~1 hour",
-      full: "Complete guidebook — 205 pages",
+      body: "Before I built AI systems, my long project was inner: twelve years of spiritual practice and study, six of them spent writing it down. It took two earlier books to learn how to write this one. The result is \"Simplified Practical Spirituality,\" a practical, tradition-agnostic guidebook. Both editions are free and always will be. This is the one thing I make that isn't for sale: no funnel, no upsell, nothing to buy. It's what I have to give back, and it stays that way. Start with the short one.",
+      short: "Short version: 102 pages, about an hour",
+      full: "Complete guidebook: 205 pages",
       hint: "PDFs with clickable contents and chapter navigation.",
     },
     contact: {
       h2: "Ready to build something?",
-      sub: "Whether you have a project in mind, want to explore a collaboration, or are looking for someone to hire — I respond to every relevant message personally.",
+      sub: "Have a project in mind, want to talk about working together, or looking for someone to hire? I reply personally.",
       findMe: "or find me on",
     },
     projects: [
       {
         outcome:
-          "Built a custom B2B operations platform — pricing calculators per product line, quote-to-order pipeline with 13-stage tracking, commission management, and role-based access for clients, sales reps, and admins. Deployed across MAS Group's auto parts, print, and logistics verticals.",
+          "Built a custom B2B operations platform: pricing calculators per product line, quote-to-order pipeline with 13-stage tracking, commission management, and role-based access for clients, sales reps, and admins. Deployed across MAS Group's auto parts, print, and logistics verticals.",
       },
       {
         outcome:
-          "Built a group-order and import platform for Iceland — pooled container campaigns with deposit-and-refund logic, on-demand import quotes from any EU retailer, and an admin dashboard with bulk notifications, campaign tracking, and real-time revenue metrics.",
+          "Built a group-order and import platform for Iceland: pooled container campaigns with deposit-and-refund logic, on-demand import quotes from any EU retailer, and an admin dashboard with bulk notifications, campaign tracking, and real-time revenue metrics.",
       },
       {
         outcome:
-          "Built a multi-language marketing site (EN / PL / IS) for a Reykjavík handyman brand — service pages, before/after gallery, floating WhatsApp contact, and a deposit-saver landing page. Full brand and sales flow deployed in 72h.",
+          "Built a multi-language marketing site (EN / PL / IS) for a Reykjavík handyman brand: service pages, before/after gallery, floating WhatsApp contact, and a deposit-saver landing page. Full brand and sales flow deployed in 72h.",
       },
       {
         outcome:
-          "Built the full operation from scratch — website, pricing structure, influencer marketing, trade fair presence, and on-glacier guiding. Ran the project end-to-end including custom tour design. By the time I left it was a well-reviewed glacier-tour operator with more than 1,000 five-star guests.",
+          "Built the full operation from scratch: website, pricing structure, influencer marketing, trade fair presence, and on-glacier guiding. Ran the project end-to-end including custom tour design. By the time I left it was a well-reviewed glacier-tour operator with more than 1,000 five-star guests.",
       },
       {
         outcome:
-          "Built a full SaaS platform for a web agency — multi-market pricing engine across 10 countries with geo-detection, lead-to-contract pipeline, admin CRM, PDF contract generation with per-country VAT logic, and push notifications. React + Supabase.",
+          "Built a full SaaS platform for a web agency: multi-market pricing engine across 10 countries with geo-detection, lead-to-contract pipeline, admin CRM, PDF contract generation with per-country VAT logic, and push notifications. React + Supabase.",
       },
       {
         outcome:
-          "Built a field-sales CRM for energy audit teams — 9-stage order pipeline, role-based access (salesperson / auditor / admin), automated DOCX/PDF generation for government funding contracts, map view, push notifications, and performance leaderboard.",
+          "Built a field-sales CRM for energy audit teams: 9-stage order pipeline, role-based access (salesperson / auditor / admin), automated DOCX/PDF generation for government funding contracts, map view, push notifications, and performance leaderboard.",
       },
       {
         outcome:
-          "Built an AI-native workshop management system — quoting computed from the shop's own labor-time history, calendar, customer SMS and approval flow, plus an assistant grounded in the shop's real data with a zero-token fast path for diagnostic codes. Live in production at a Keflavík garage.",
+          "Built an AI-native workshop management system: quoting computed from the shop's own labor-time history, calendar, customer SMS and approval flow, plus an assistant grounded in the shop's real data with a zero-token fast path for diagnostic codes. Live in production at a Keflavík garage.",
       },
     ],
     caps: [
       {
         title: "Websites & Products",
-        desc: "From idea to live product, without an agency in between. AI coding agents write the code; I own the spec, the architecture, the review and the deploy — on React, Next.js, TypeScript, Supabase, Vercel and Cloudflare Workers. You get a shipped product running in production, not a prototype handed to a dev.",
+        desc: "From idea to live product, without an agency in between. AI coding agents write the code; I own the spec, the architecture, the review and the deploy, on React, Next.js, TypeScript, Supabase, Vercel and Cloudflare Workers. You get a shipped product running in production, not a prototype handed to a dev.",
         tags: ["React / Next.js", "TypeScript", "Vercel + Supabase", "Cloudflare Workers"],
       },
       {
         title: "Growth & Marketing Systems",
-        desc: "Meta and Google ads, funnel architecture, email sequences, content pipelines. I don't just run campaigns — I build the full marketing machine that generates and converts leads, then document it so it outlasts any single person.",
+        desc: "Meta and Google ads, funnel architecture, email sequences, content pipelines. I don't just run campaigns: I build the full marketing machine that generates and converts leads, then document it so it outlasts any single person.",
         tags: ["Meta & Google Ads", "Funnel Architecture", "Email Sequences", "Content Systems"],
       },
       {
         title: "AI & Automation",
-        desc: "n8n workflows, LLM integrations, automated status calls and SMS — running in production; a two-way voice agent is still being hardened. But building is only half of it: I coach teams to actually adopt AI, turn complex tools into simple daily habits, and leave behind documentation and people who can run it without me.",
+        desc: "n8n workflows, LLM integrations, automated status calls and SMS, running in production; a two-way voice agent is still being hardened. But building is only half of it: I coach teams to actually adopt AI, turn complex tools into simple daily habits, and leave behind documentation and people who can run it without me.",
         tags: [
           "n8n Workflows",
           "Structured JSON Outputs",
@@ -182,7 +172,7 @@ export const T: Record<Lang, SiteTranslation> = {
       },
       {
         title: "Strategy, Leadership & Consulting",
-        desc: "I've built, led, and trained teams across five companies — from field sales reps to developers. I've taught people to actually adopt new tools and processes, not just sit through a deck. A coach who makes complex things simple — and who's done the building, so the advice comes from shipping, not slides.",
+        desc: "I've built, led, and trained teams across five companies, from field sales reps to developers. I've taught people to actually adopt new tools and processes, not just sit through a deck. A coach who makes complex things simple, and who's done the building, so the advice comes from shipping, not slides.",
         tags: ["Team Leadership", "Coaching & Training", "Business Operations", "Consulting"],
       },
     ],
@@ -190,28 +180,28 @@ export const T: Record<Lang, SiteTranslation> = {
       {
         mode: "Consulting",
         title: "Think it through together",
-        desc: "One session or an ongoing relationship. Bring me your problem — a product idea, a growth challenge, a system that needs fixing — and I will tell you exactly what I would build and how.",
+        desc: "One session or an ongoing relationship. Bring me your problem (a product idea, a growth challenge, a system that needs fixing) and I will tell you exactly what I would build and how.",
         detail: "Single session or retainer · Flexible scope",
         cta: "Let's talk",
       },
       {
         mode: "Build For You",
         title: "I handle the full build",
-        desc: "Website, automation, marketing system, AI integration — whatever needs shipping. You bring the vision, I handle the execution from start to finish and hand you everything running and documented.",
+        desc: "Website, automation, marketing system, AI integration: whatever needs shipping. You bring the vision, I handle the execution from start to finish and hand you everything running and documented.",
         detail: "Project-based · Full delivery · Documented handoff",
         cta: "Start a project",
       },
       {
         mode: "Build With Your Team",
-        title: "I build it — and train your team to own it",
-        desc: "An AI enablement engagement: I ship a real workflow into production while your team learns to run it — structured training plus hands-on coaching, complex tools turned into simple daily habits. Done-with-you, not done-and-gone, so your people can keep it going without me.",
+        title: "I build it and train your team to own it",
+        desc: "An AI enablement engagement: I ship a real workflow into production while your team learns to run it, with structured training plus hands-on coaching, complex tools turned into simple daily habits. Done-with-you, not done-and-gone, so your people can keep it going without me.",
         detail: "Enablement · Train-while-building · Documented handoff",
         cta: "Build with your team",
       },
       {
         mode: "Hire Me",
         title: "Full-time or long-term",
-        desc: "Open to both employment and long-term project engagements. Remote-first. Most effective where someone needs to build the AI infrastructure from scratch and get a team to actually use it — I've done both in my own companies. Equally strong owning the product, growth, or operations layer.",
+        desc: "Open to both employment and long-term project engagements. Remote-first. Most effective where someone needs to build the AI infrastructure from scratch and get a team to actually use it. I've done both in my own companies. Equally strong owning the product, growth, or operations layer.",
         detail:
           "Full-time or contract · Remote-first · AI Automation / Implementation Engineer · AI Solutions Engineer",
         cta: "Get in touch",
@@ -225,21 +215,21 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Twoja firma.",
       h1b: "Mniej",
       h1em: "ręcznej pracy.",
-      sub: "Znajduję proces, który zjada godziny Twojego zespołu, i zastępuję go systemem albo automatyzacją AI. Potem szkolę Twój zespół, żeby używał tego na co dzień.",
+      sub: "Znajduję proces, który zjada godziny Twojego zespołu i pieniądze firmy. Zastępuję go czymś konkretnym: kalkulatorem wycen zamiast arkusza, danymi, które same przechodzą między programami, albo asystentem AI, który odpowiada klientom. Potem szkolę zespół, żeby korzystał z tego na co dzień.",
       cta: "Pokaż mi swój proces",
       ctaGhost: "Zobacz działające systemy",
       partner:
-        "Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro — blisko 40 developerów dołącza, gdy projekt wymaga większego zespołu.",
+        "Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro: blisko 40 developerów dołącza, gdy projekt wymaga większego zespołu.",
     },
     pains: {
       label: "Znasz to?",
       title: "Problemy, do których mnie wzywają",
-      lead: "Żaden nie boli przy dziesięciu zamówieniach miesięcznie. Wszystkie bolą przy stu. Każda karta prowadzi do strony, jak to naprawić.",
+      lead: "Czasem boli już przy jednym zamówieniu, a z każdym kolejnym bardziej.",
     },
     solutions: {
       label: "Jak mogę pomóc",
       title: "Sześć sposobów, żeby zdjąć pracę z Twojego zespołu",
-      lead: "Wybierz to, co najbliżej Twojego problemu. Każda pozycja prowadzi do strony z problemami, podejściem i systemami, które już działają na produkcji.",
+      lead: "Wybierz to, co najbliżej Twojego problemu.",
       more: "Zobacz, jak to działa →",
       proofLabel: "Działa w produkcji",
     },
@@ -251,24 +241,19 @@ export const T: Record<Lang, SiteTranslation> = {
       p1c: ", bo to był mój budżet. Z tego samego powodu wolę powiedzieć, ",
       p1d: "czego nie budować",
       p1e: ", niż dowieźć idealną wersję niewłaściwej rzeczy.",
-      p2a: "Kod piszą agenci AI — ja go ",
-      p2b: "weryfikuję",
-      p2c: " i ",
-      p2d: "odpowiadam za to, co decyduje, czy system przeżyje kontakt z klientami",
-      p2e: ": specyfikację, decyzję o architekturze, review, wdrożenie i telefon, kiedy coś się sypie.",
       meta: ["Lat budowania", "Aktywnych pionów", "Zbudowanych biznesów"],
       milestones: [
         {
           year: "2012",
-          desc: "Zacząłem budować w wieku 16 lat. Pierwsza sieć, pierwsza firma, sprzedaż terenowa — najlepszy sprzedawca w wieku 18 lat.",
+          desc: "Zacząłem budować w wieku 16 lat. Pierwsza sieć, pierwsza firma, sprzedaż terenowa: najlepszy sprzedawca w wieku 18 lat.",
         },
         {
           year: "2019",
-          desc: "Przeprowadzka na Islandię. Od zera — handel, media społecznościowe, współtworzenie Sleipnir Glacier Tours.",
+          desc: "Przeprowadzka na Islandię. Od zera: handel, media społecznościowe, współtworzenie Sleipnir Glacier Tours.",
         },
         {
           year: "2021",
-          desc: "CEO i Operator. MAS Group od zera — części, druk, logistyka, wynajem — z dedykowanymi liderami w każdym pionie.",
+          desc: "CEO i Operator. MAS Group od zera (części, druk, logistyka, wynajem) z dedykowanymi liderami w każdym pionie.",
         },
         {
           year: "2024",
@@ -283,65 +268,65 @@ export const T: Record<Lang, SiteTranslation> = {
       label: "Poza pracą",
       title: "Dwanaście lat praktyki, jeden przewodnik",
       open: "Dwie darmowe książki",
-      body: 'Zanim zacząłem budować systemy AI, moim długim projektem była praca wewnętrzna: dwanaście lat praktyki i poszukiwań, z czego sześć spędziłem na spisywaniu. Zanim powstała wersja ostateczna, napisałem dwie wcześniejsze książki. Tak powstało „Simplified Practical Spirituality" — praktyczny przewodnik ponad tradycjami (po angielsku). Obie wersje są darmowe i takie zostaną. To jedyna rzecz, którą robię, a która nie jest na sprzedaż: żadnego lejka, żadnego upsellu, nie ma czego kupować. To mój wkład od siebie i tak ma zostać. Zacznij od krótkiej.',
-      short: "Wersja skrócona — 102 strony, ~1 godzina",
-      full: "Pełny przewodnik — 205 stron",
+      body: 'Zanim zacząłem budować systemy AI, moim długim projektem była praca wewnętrzna: dwanaście lat praktyki i poszukiwań, z czego sześć spędziłem na spisywaniu. Zanim powstała wersja ostateczna, napisałem dwie wcześniejsze książki. Tak powstało „Simplified Practical Spirituality", praktyczny przewodnik ponad tradycjami (po angielsku). Obie wersje są darmowe i takie zostaną. To jedyna rzecz, którą robię, a która nie jest na sprzedaż: żadnego lejka, żadnego upsellu, nie ma czego kupować. To mój wkład od siebie i tak ma zostać. Zacznij od krótkiej.',
+      short: "Wersja skrócona: 102 strony, około godziny",
+      full: "Pełny przewodnik: 205 stron",
       hint: "PDF-y z klikalnym spisem treści i nawigacją po rozdziałach.",
     },
     contact: {
       h2: "Gotowy coś zbudować?",
-      sub: "Czy masz konkretny projekt, chcesz omówić współpracę, czy szukasz kogoś do zatrudnienia — osobiście odpowiadam na każde trafne zapytanie.",
+      sub: "Masz konkretny projekt, chcesz porozmawiać o współpracy albo szukasz kogoś do zatrudnienia? Odpowiadam osobiście.",
       findMe: "lub znajdź mnie na",
     },
     projects: [
       {
         outcome:
-          "Zbudowałem własną platformę operacyjną B2B — kalkulatory cen per linia produktów, pipeline ofert z 13-etapowym śledzeniem, zarządzanie prowizjami i dostęp oparty na rolach dla klientów, handlowców i adminów. Wdrożone w pionach części, druku i logistyki MAS Group.",
+          "Zbudowałem własną platformę operacyjną B2B: kalkulatory cen per linia produktów, pipeline ofert z 13-etapowym śledzeniem, zarządzanie prowizjami i dostęp oparty na rolach dla klientów, handlowców i adminów. Wdrożone w pionach części, druku i logistyki MAS Group.",
       },
       {
         outcome:
-          "Zbudowałem platformę zbiorowych zamówień i importu na Islandię — grupowe kampanie kontenerowe z logiką depozytu i zwrotu, zapytania o import z dowolnego sklepu w UE, panel admina z masowymi powiadomieniami i śledzeniem przychodów w czasie rzeczywistym.",
+          "Zbudowałem platformę zbiorowych zamówień i importu na Islandię: grupowe kampanie kontenerowe z logiką depozytu i zwrotu, zapytania o import z dowolnego sklepu w UE, panel admina z masowymi powiadomieniami i śledzeniem przychodów w czasie rzeczywistym.",
       },
       {
         outcome:
-          "Zbudowałem wielojęzyczną stronę marketingową (EN / PL / IS) dla reykjavíkskiej marki handymana — strony usług, galeria przed/po, pływający widget WhatsApp i dedykowana strona kaucyjna. Pełna marka i flow sprzedaży w 72h.",
+          "Zbudowałem wielojęzyczną stronę marketingową (EN / PL / IS) dla reykjavíkskiej marki handymana: strony usług, galeria przed/po, pływający widget WhatsApp i dedykowana strona kaucyjna. Pełna marka i flow sprzedaży w 72h.",
       },
       {
         outcome:
-          "Zbudowałem cały biznes od zera — stronę, strukturę cenową, influencer marketing, obecność na targach i prowadzenie wycieczek na lodowcu. Projekt od A do Z, łącznie z designem wycieczek na zamówienie. Kiedy odchodziłem, był dobrze ocenianym operatorem wycieczek lodowcowych — ponad 1000 gości wystawiło mu pięć gwiazdek.",
+          "Zbudowałem cały biznes od zera: stronę, strukturę cenową, influencer marketing, obecność na targach i prowadzenie wycieczek na lodowcu. Projekt od A do Z, łącznie z designem wycieczek na zamówienie. Kiedy odchodziłem, był dobrze ocenianym operatorem wycieczek lodowcowych: ponad 1000 gości wystawiło mu pięć gwiazdek.",
       },
       {
         outcome:
-          "Zbudowałem pełną platformę SaaS dla agencji webowej — silnik cenowy na 10 rynkach z geolokalizacją, pipeline od leada do umowy, CRM dla admina, generowanie PDF umów z logiką VAT per kraj i push notyfikacje. React + Supabase.",
+          "Zbudowałem pełną platformę SaaS dla agencji webowej: silnik cenowy na 10 rynkach z geolokalizacją, pipeline od leada do umowy, CRM dla admina, generowanie PDF umów z logiką VAT per kraj i push notyfikacje. React + Supabase.",
       },
       {
         outcome:
-          "Zbudowałem CRM dla zespołów sprzedaży audytów energetycznych — 9-etapowy pipeline zamówień, dostęp oparty na rolach (handlowiec / audytor / admin), automatyczne generowanie DOCX/PDF dla wniosków Czyste Powietrze, widok mapy, push notyfikacje i tabela wyników.",
+          "Zbudowałem CRM dla zespołów sprzedaży audytów energetycznych: 9-etapowy pipeline zamówień, dostęp oparty na rolach (handlowiec / audytor / admin), automatyczne generowanie DOCX/PDF dla wniosków Czyste Powietrze, widok mapy, push notyfikacje i tabela wyników.",
       },
       {
         outcome:
-          "Zbudowałem AI-natywny system zarządzania warsztatem — wyceny liczone z historii rzeczywistych czasów pracy warsztatu, kalendarz, SMS-y do klientów i flow akceptacji, plus asystent osadzony w danych warsztatu z zero-tokenową szybką ścieżką dla kodów diagnostycznych. Działa produkcyjnie w warsztacie w Keflavíku.",
+          "Zbudowałem AI-natywny system zarządzania warsztatem: wyceny liczone z historii rzeczywistych czasów pracy warsztatu, kalendarz, SMS-y do klientów i flow akceptacji, plus asystent osadzony w danych warsztatu z zero-tokenową szybką ścieżką dla kodów diagnostycznych. Działa produkcyjnie w warsztacie w Keflavíku.",
       },
     ],
     caps: [
       {
         title: "Strony i Produkty",
-        desc: "Od pomysłu do działającego produktu, bez agencji po drodze. Kod piszą agenci AI; ja odpowiadam za specyfikację, architekturę, review i wdrożenie — na React, Next.js, TypeScript, Supabase, Vercel i Cloudflare Workers. Dostajesz produkt działający na produkcji, nie prototyp przekazany deweloperowi.",
+        desc: "Od pomysłu do działającego produktu, bez agencji po drodze. Kod piszą agenci AI; ja odpowiadam za specyfikację, architekturę, review i wdrożenie, na React, Next.js, TypeScript, Supabase, Vercel i Cloudflare Workers. Dostajesz produkt działający na produkcji, nie prototyp przekazany deweloperowi.",
         tags: ["React / Next.js", "TypeScript", "Vercel + Supabase", "Cloudflare Workers"],
       },
       {
         title: "Wzrost i Marketing",
-        desc: "Reklamy Meta i Google, architektura funnela, sekwencje e-mail, pipeline treści. Nie tylko prowadzę kampanie — buduję całą maszynę marketingową i dokumentuję ją tak, by działała bez żadnej konkretnej osoby.",
+        desc: "Reklamy Meta i Google, architektura funnela, sekwencje e-mail, pipeline treści. Nie tylko prowadzę kampanie: buduję całą maszynę marketingową i dokumentuję ją tak, by działała bez żadnej konkretnej osoby.",
         tags: ["Meta i Google Ads", "Architektura Funnela", "Sekwencje E-mail", "Systemy Treści"],
       },
       {
         title: "AI i Automatyzacja",
-        desc: "Workflowy n8n, integracje LLM, automatyczne telefony i SMS-y o statusie — działające na produkcji; dwukierunkowy agent głosowy jest jeszcze dopracowywany. Ale budowanie to połowa roboty: szkolę zespoły z realnej adopcji AI, zamieniam złożone narzędzia w proste codzienne nawyki i zostawiam dokumentację oraz ludzi, którzy poprowadzą to beze mnie.",
+        desc: "Workflowy n8n, integracje LLM, automatyczne telefony i SMS-y o statusie, działające na produkcji; dwukierunkowy agent głosowy jest jeszcze dopracowywany. Ale budowanie to połowa roboty: szkolę zespoły z realnej adopcji AI, zamieniam złożone narzędzia w proste codzienne nawyki i zostawiam dokumentację oraz ludzi, którzy poprowadzą to beze mnie.",
         tags: ["Workflowy n8n", "Agenty Głosowe", "Integracje LLM", "Wdrażanie AI"],
       },
       {
         title: "Strategia, Przywództwo i Consulting",
-        desc: "Budowałem, prowadziłem i szkoliłem zespoły w pięciu firmach — od handlowców po deweloperów. Uczyłem ludzi, żeby naprawdę zaczęli używać nowych narzędzi i procesów, a nie tylko odsiedzieli prezentację. Coach, który upraszcza złożone rzeczy — i który sam to wszystko zbudował, więc rada bierze się z wdrażania, nie ze slajdów.",
+        desc: "Budowałem, prowadziłem i szkoliłem zespoły w pięciu firmach, od handlowców po deweloperów. Uczyłem ludzi, żeby naprawdę zaczęli używać nowych narzędzi i procesów, a nie tylko odsiedzieli prezentację. Coach, który upraszcza złożone rzeczy i który sam to wszystko zbudował, więc rada bierze się z wdrażania, nie ze slajdów.",
         tags: ["Przywództwo Zespołu", "Szkolenia i Coaching", "Operacje Biznesowe", "Consulting"],
       },
     ],
@@ -349,28 +334,28 @@ export const T: Record<Lang, SiteTranslation> = {
       {
         mode: "Consulting",
         title: "Przemyślmy to razem",
-        desc: "Jedna sesja lub stała współpraca. Przynieś mi swój problem — pomysł na produkt, wyzwanie wzrostowe, system do naprawienia — a powiem Ci dokładnie co bym zbudował i jak.",
+        desc: "Jedna sesja lub stała współpraca. Przynieś mi swój problem (pomysł na produkt, wyzwanie wzrostowe, system do naprawienia), a powiem Ci dokładnie co bym zbudował i jak.",
         detail: "Pojedyncza sesja lub retainer · Elastyczny zakres",
         cta: "Porozmawiajmy",
       },
       {
         mode: "Buduję Za Ciebie",
         title: "Przejmuję cały build",
-        desc: "Strona, automatyzacja, system marketingowy, integracja AI — cokolwiek wymaga dostarczenia. Ty przynosisz wizję, ja zajmuję się realizacją od A do Z i przekazuję wszystko działające i udokumentowane.",
+        desc: "Strona, automatyzacja, system marketingowy, integracja AI: cokolwiek wymaga dostarczenia. Ty przynosisz wizję, ja zajmuję się realizacją od A do Z i przekazuję wszystko działające i udokumentowane.",
         detail: "Projekt · Pełne dostarczenie · Udokumentowane przekazanie",
         cta: "Zacznij projekt",
       },
       {
         mode: "Buduję z Twoim Zespołem",
-        title: "Buduję — i uczę Twój zespół to prowadzić",
-        desc: "Wdrożenie AI z naciskiem na ludzi: wdrażam realny workflow na produkcję, a Twój zespół uczy się go obsługiwać — ustrukturyzowane szkolenie plus praktyczny coaching, złożone narzędzia zamienione w proste codzienne nawyki. Buduję z Tobą, nie buduję i znikam, żeby Twoi ludzie mogli to prowadzić beze mnie.",
+        title: "Buduję i uczę Twój zespół to prowadzić",
+        desc: "Wdrożenie AI z naciskiem na ludzi: wdrażam realny workflow na produkcję, a Twój zespół uczy się go obsługiwać: ustrukturyzowane szkolenie plus praktyczny coaching, złożone narzędzia zamienione w proste codzienne nawyki. Buduję z Tobą, nie buduję i znikam, żeby Twoi ludzie mogli to prowadzić beze mnie.",
         detail: "Wdrożenie · Szkolę w trakcie budowy · Udokumentowane przekazanie",
         cta: "Zbuduj z zespołem",
       },
       {
         mode: "Zatrudnij Mnie",
         title: "Etat lub długoterminowo",
-        desc: "Otwarty zarówno na zatrudnienie, jak i długoterminowe projekty. Remote-first. Najskuteczniejszy tam, gdzie trzeba zbudować infrastrukturę AI od zera i sprawić, żeby zespół naprawdę z niej korzystał — jedno i drugie robiłem we własnych firmach. Równie mocny w przejęciu warstwy produktowej, wzrostowej lub operacyjnej.",
+        desc: "Otwarty zarówno na zatrudnienie, jak i długoterminowe projekty. Remote-first. Najskuteczniejszy tam, gdzie trzeba zbudować infrastrukturę AI od zera i sprawić, żeby zespół naprawdę z niej korzystał. Jedno i drugie robiłem we własnych firmach. Równie mocny w przejęciu warstwy produktowej, wzrostowej lub operacyjnej.",
         detail:
           "Etat lub kontrakt · Remote-first · AI Coach / Lead ds. wdrażania AI · Head of AI / Ops",
         cta: "Skontaktuj się",

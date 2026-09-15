@@ -14,7 +14,7 @@ import { consultMessage } from "../lib/consult";
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
-      { title: "Bezpłatna konsultacja 30 min — Kamil Jan" },
+      { title: "Bezpłatna konsultacja 30 min | Kamil Jan" },
       {
         name: "description",
         content:
@@ -59,7 +59,7 @@ const COPY: Record<Lang, Copy> = {
     prep: [
       {
         title: "Wybierz jeden proces",
-        body: "Ten, o który najczęściej ktoś pyta albo który najczęściej się sypie — faktury, wyceny, zamówienia, raport w arkuszu.",
+        body: "Ten, o który najczęściej ktoś pyta albo który najczęściej się sypie: faktury, wyceny, zamówienia, raport w arkuszu.",
       },
       {
         title: "Policz go z grubsza",
@@ -72,7 +72,7 @@ const COPY: Record<Lang, Copy> = {
     ],
     getTitle: "Co wyniesiesz z rozmowy",
     get: [
-      "Ocenę, czy ten proces w ogóle warto automatyzować — i uczciwe „nie”, jeśli rachunek nie wychodzi",
+      "Ocenę, czy ten proces w ogóle warto automatyzować, oraz uczciwe „nie”, jeśli rachunek nie wychodzi",
       "Kolejność kroków: co najpierw, co później, co zostawić ludziom",
       "Rozeznanie, czy wystarczy mniejsze wdrożenie, czy potrzebny jest większy zespół (z rzeszowskim software house'em CetusPro i jego blisko 40 developerami)",
     ],
@@ -85,7 +85,7 @@ const COPY: Record<Lang, Copy> = {
       "2–3 zdania wystarczą. Odpiszę w ciągu jednego dnia roboczego z propozycją terminu.",
     send: "Wyślij zgłoszenie",
     sending: "Wysyłam…",
-    sent: "Dziękuję — zgłoszenie dotarło",
+    sent: "Dziękuję, zgłoszenie dotarło",
     sentBody: "Odpiszę na podany e-mail z propozycją terminu.",
     failed: "Nie udało się wysłać formularza. Napisz proszę bezpośrednio:",
     unconfigured: "Formularz chwilowo nie działa. Napisz proszę bezpośrednio:",
@@ -100,7 +100,7 @@ const COPY: Record<Lang, Copy> = {
     prep: [
       {
         title: "Pick one process",
-        body: "The one people ask about most, or the one that breaks most often — invoices, quotes, orders, the report in a spreadsheet.",
+        body: "The one people ask about most, or the one that breaks most often: invoices, quotes, orders, the report in a spreadsheet.",
       },
       {
         title: "Size it roughly",
@@ -113,7 +113,7 @@ const COPY: Record<Lang, Copy> = {
     ],
     getTitle: "What you leave with",
     get: [
-      "A view on whether this process is worth automating at all — and an honest “no” if the numbers do not work",
+      "A view on whether this process is worth automating at all, and an honest “no” if the numbers do not work",
       "An order of steps: what first, what later, what to leave with people",
       "A sense of whether a small build is enough or a bigger team is needed (with CetusPro, a Rzeszów software house with close to 40 developers)",
     ],
@@ -126,7 +126,7 @@ const COPY: Record<Lang, Copy> = {
       "Two or three sentences are enough. I reply within one working day with a proposed time.",
     send: "Send request",
     sending: "Sending…",
-    sent: "Thank you — your request arrived",
+    sent: "Thank you, your request arrived",
     sentBody: "I will reply to the email you gave with a proposed time.",
     failed: "The form could not be sent. Please write directly:",
     unconfigured: "The form is unavailable right now. Please write directly:",

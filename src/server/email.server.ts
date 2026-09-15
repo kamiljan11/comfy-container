@@ -117,7 +117,7 @@ export const welcomeSequence: SequenceEmail[] = [
   {
     delayHours: 0,
     subject: "Welcome to MySpiritWay (now at kamiljan.com)",
-    body: "Hi {{name}},\n\nThanks for connecting. You'll find the full Simplified Practical Spirituality at https://kamiljan.com/spirituality.\n\n— Kamil",
+    body: "Hi {{name}},\n\nThanks for connecting. You'll find the full Simplified Practical Spirituality at https://kamiljan.com/spirituality.\n\nKamil",
   },
   // TODO: paste extracted email-campaign content here once exported from Systeme.io.
 ];

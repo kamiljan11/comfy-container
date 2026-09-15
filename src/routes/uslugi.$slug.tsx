@@ -25,7 +25,7 @@ export const Route = createFileRoute("/uslugi/$slug")({
     const s = getService("pl", params.slug);
     return {
       meta: [
-        { title: s?.metaTitle ?? "Usługi — Kamil Jan" },
+        { title: s?.metaTitle ?? "Usługi | Kamil Jan" },
         { name: "description", content: s?.metaDescription ?? "" },
       ],
       links: [{ rel: "canonical", href: `https://kamiljan.com/uslugi/${params.slug}` }],

@@ -5,11 +5,11 @@ import { type Lang } from "../i18n";
 export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
-      { title: "Kamil Jan Włodarczyk — CV" },
+      { title: "Kamil Jan Włodarczyk | CV" },
       {
         name: "description",
         content:
-          "CV of Kamil Jan Włodarczyk — AI automation & implementation engineer, builder and operator. Reykjavík, remote-first.",
+          "CV of Kamil Jan Włodarczyk, AI automation & implementation engineer, builder and operator. Reykjavík, remote-first.",
       },
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/cv" }],
@@ -58,7 +58,7 @@ const CONTENT: Record<Lang, CV> = {
     summary:
       "AI automation & implementation engineer and builder-operator. Ships AI into production for SMEs, then trains " +
       "the team to keep it running. Works the way 2026 actually works: AI coding agents write the code, and I own " +
-      "everything around them — the spec, the architecture call, the review, the deploy, and the customer on the " +
+      "everything around them: the spec, the architecture call, the review, the deploy, and the customer on the " +
       "other end when something breaks at 4pm on a Tuesday. Came up through sales and marketing in Poland; top " +
       "performer, founded and ran a marketing agency. Rebuilt from the floor up after moving to Iceland in 2019, " +
       "and now runs several ventures hands-on.",
@@ -69,7 +69,7 @@ const CONTENT: Record<Lang, CV> = {
       },
       {
         label: "How I build:",
-        body: "I direct AI coding agents rather than typing the code myself. What I own is the part that decides whether a system survives contact with customers: scoping it, choosing the architecture, reviewing what comes back, shipping it, and operating it afterwards. Every system on this page was built that way and is running in production. I am closing the gap deliberately, not pretending it isn't there — daily predict-then-verify code-reading practice with a public log, plus Boot.dev Python and SQL.",
+        body: "I direct AI coding agents rather than typing the code myself. What I own is the part that decides whether a system survives contact with customers: scoping it, choosing the architecture, reviewing what comes back, shipping it, and operating it afterwards. Every system on this page was built that way and is running in production. I am closing the gap deliberately, not pretending it isn't there: daily predict-then-verify code-reading practice with a public log, plus Boot.dev Python and SQL.",
       },
       {
         label: "Shipped on:",
@@ -199,7 +199,7 @@ const CONTENT: Record<Lang, CV> = {
       },
       {
         label: "Engineered learning system:",
-        body: "built my own training platform — every code exercise executed and verified before it can teach, spaced repetition, and a curriculum that updates from real job listings (public: github.com/kamiljan11/code-reading-quest; write-up at kamiljan.com/case-studies).",
+        body: "built my own training platform: every code exercise executed and verified before it can teach, spaced repetition, and a curriculum that updates from real job listings (public: github.com/kamiljan11/code-reading-quest; write-up at kamiljan.com/case-studies).",
       },
     ],
     languages: [
@@ -231,7 +231,7 @@ const CONTENT: Record<Lang, CV> = {
     summary:
       "Inżynier automatyzacji i wdrożeń AI i builder-operator. Wdraża AI na produkcję w MŚP, a potem szkoli " +
       "zespół, żeby sam to utrzymał. Pracuje tak, jak realnie wygląda 2026: kod piszą agenty AI, a ja odpowiadam za " +
-      "wszystko dookoła — specyfikację, decyzję architektoniczną, review, wdrożenie i za klienta po drugiej stronie, " +
+      "wszystko dookoła: specyfikację, decyzję architektoniczną, review, wdrożenie i za klienta po drugiej stronie, " +
       "kiedy coś się sypie we wtorek po południu. Zaczynał od sprzedaży i marketingu w Polsce; najlepszy sprzedawca, " +
       "założył i prowadził własną agencję. Po przeprowadzce na Islandię w 2019 odbudował się od zera i dziś sam " +
       "prowadzi kilka biznesów.",
@@ -242,7 +242,7 @@ const CONTENT: Record<Lang, CV> = {
       },
       {
         label: "Jak buduję:",
-        body: "Kod piszą agenty AI, nie ja ręcznie. Moja część to ta, która decyduje, czy system przeżyje kontakt z klientami: zakres, wybór architektury, review tego, co wraca, wdrożenie i utrzymanie później. Każdy system na tej stronie powstał w ten sposób i działa na produkcji. Lukę domykam świadomie, a nie udaję, że jej nie ma — codzienna praktyka czytania kodu w trybie przewidz-i-sprawdz z publicznym logiem, plus Boot.dev Python i SQL.",
+        body: "Kod piszą agenty AI, nie ja ręcznie. Moja część to ta, która decyduje, czy system przeżyje kontakt z klientami: zakres, wybór architektury, review tego, co wraca, wdrożenie i utrzymanie później. Każdy system na tej stronie powstał w ten sposób i działa na produkcji. Lukę domykam świadomie, a nie udaję, że jej nie ma: codzienna praktyka czytania kodu w trybie przewidz-i-sprawdz z publicznym logiem, plus Boot.dev Python i SQL.",
       },
       {
         label: "Stack, na którym wdrażam:",
@@ -309,7 +309,7 @@ const CONTENT: Record<Lang, CV> = {
         dates: "2022–2024",
         bullets: [
           "Współbudował biznes turystyczny od podstaw: strona (Bokun), cennik, kanały sprzedaży, umowy z resellerami i partnerami oraz reprezentacja na targach.",
-          "Prowadził marketing cyfrowy (Meta i Google Ads) i newslettery sprzedażowe; rozwój produktu i prowadzenie wycieczek na lodowcu. Pomógł zbudować dobrze ocenianego operatora wycieczek lodowcowych — ponad 1000 gości wystawiło mu pięć gwiazdek.",
+          "Prowadził marketing cyfrowy (Meta i Google Ads) i newslettery sprzedażowe; rozwój produktu i prowadzenie wycieczek na lodowcu. Pomógł zbudować dobrze ocenianego operatora wycieczek lodowcowych. Ponad 1000 gości wystawiło mu pięć gwiazdek.",
         ],
       },
       {
@@ -360,7 +360,7 @@ const CONTENT: Record<Lang, CV> = {
     education: [
       {
         label: "Samouk, na produkcji.",
-        body: "Applied AI i inżynieria produktu wyuczone przez wdrażanie systemów, których firmy używają na co dzień, a nie na wykładach. Obecnie Boot.dev (Python, SQL, Git) i codzienna praktyka czytania kodu — bo review tego, co napisała za ciebie AI, jest coś warte tylko wtedy, gdy potrafisz to przeczytać.",
+        body: "Applied AI i inżynieria produktu wyuczone przez wdrażanie systemów, których firmy używają na co dzień, a nie na wykładach. Obecnie Boot.dev (Python, SQL, Git) i codzienna praktyka czytania kodu, bo review tego, co napisała za ciebie AI, jest coś warte tylko wtedy, gdy potrafisz to przeczytać.",
       },
       {
         label: "Wykształcenie średnie ogólne",
@@ -372,7 +372,7 @@ const CONTENT: Record<Lang, CV> = {
       },
       {
         label: "Zaprojektowany system nauki:",
-        body: "zbudował własną platformę treningową — każde ćwiczenie kodu wykonane i zweryfikowane zanim może uczyć, spaced repetition, curriculum aktualizowane z realnych ofert pracy (publiczne: github.com/kamiljan11/code-reading-quest; opis na kamiljan.com/case-studies).",
+        body: "zbudował własną platformę treningową: każde ćwiczenie kodu wykonane i zweryfikowane zanim może uczyć, spaced repetition, curriculum aktualizowane z realnych ofert pracy (publiczne: github.com/kamiljan11/code-reading-quest; opis na kamiljan.com/case-studies).",
       },
     ],
     languages: [

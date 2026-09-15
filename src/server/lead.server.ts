@@ -33,7 +33,7 @@ export type LeadInput = {
   email?: string;
   message?: string;
   transcript?: LeadMessage[];
-  hp?: string; // honeypot — real users never fill this
+  hp?: string; // honeypot, real users never fill this
 };
 export type LeadResult = { ok: true } | { ok: false; error: string };
 
@@ -62,7 +62,7 @@ export function isValidEmail(email: string): boolean {
 async function buildBrief(transcript: LeadMessage[], message: string): Promise<string> {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {
-    console.warn("[lead] ANTHROPIC_API_KEY missing — sending without an AI brief");
+    console.warn("[lead] ANTHROPIC_API_KEY missing, sending without an AI brief");
     return "";
   }
   try {
@@ -85,7 +85,7 @@ async function buildBrief(transcript: LeadMessage[], message: string): Promise<s
     });
     return (res.text || "").trim();
   } catch (err) {
-    console.warn("[lead] AI brief failed — sending without it", { error: String(err) });
+    console.warn("[lead] AI brief failed, sending without it", { error: String(err) });
     return "";
   }
 }
@@ -93,7 +93,7 @@ async function buildBrief(transcript: LeadMessage[], message: string): Promise<s
 export async function sendLead(input: LeadInput): Promise<LeadResult> {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
-    console.error("[lead] RESEND_API_KEY missing — lead not sent");
+    console.error("[lead] RESEND_API_KEY missing, lead not sent");
     return { ok: false, error: "unconfigured" };
   }
 
@@ -146,7 +146,7 @@ export async function sendLead(input: LeadInput): Promise<LeadResult> {
         from,
         to: [to],
         reply_to: email,
-        subject: `New lead from kamiljan.com — ${name || email}`,
+        subject: `New lead from kamiljan.com: ${name || email}`,
         html,
         text,
       }),

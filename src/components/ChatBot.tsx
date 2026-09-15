@@ -50,13 +50,13 @@ type Copy = {
 const COPY: Record<Lang, Copy> = {
   en: {
     greet:
-      "Hi — I'm Kamil's AI assistant. Ask me about his work, skills, or whether he's a fit for your role.",
+      "Hi, I'm Kamil's AI assistant. Ask me about his work, skills, or whether he's a fit for your role.",
     placeholder: "Ask anything…",
     human: "Prefer a human?",
     title: "Kamil's AI",
     sub: "trained on his work",
     fallback:
-      "I can't reach my brain right now — but Kamil replies personally. Email hello@kamiljan.com or message him on WhatsApp.",
+      "I can't reach my brain right now, but Kamil replies personally. Email hello@kamiljan.com or message him on WhatsApp.",
     /*
      * Two questions, not four. The opening screen had six tappable things on
      * it; a visitor who has to choose between six does not choose, they read
@@ -77,32 +77,32 @@ const COPY: Record<Lang, Copy> = {
       {
         label: "Hire Kamil for a role",
         reply:
-          "Kamil is open to AI Automation & Implementation Engineer, AI solutions engineer, AI implementation and enablement, and Head of AI / Ops / Growth roles — remote-first. He ships AI into production and gets the team to actually run it. The fastest move is a one-line brief of the role — send it below and he replies personally.",
+          "Kamil is open to AI Automation & Implementation Engineer, AI solutions engineer, AI implementation and enablement, and Head of AI / Ops / Growth roles, remote-first. He ships AI into production and gets the team to actually run it. The fastest move is a one-line brief of the role: send it below and he replies personally.",
       },
       {
         label: "Get a product or site built",
         reply:
-          "He handles the full build end to end and hands it over running and documented — React/TypeScript on Supabase, Vercel and Cloudflare, built by directing AI coding agents while he owns the spec, the review and the deploy. Tell him what you need and he'll scope it. Send it below.",
+          "He handles the full build end to end and hands it over running and documented: React/TypeScript on Supabase, Vercel and Cloudflare, built by directing AI coding agents while he owns the spec, the review and the deploy. Tell him what you need and he'll scope it. Send it below.",
       },
       {
         label: "Add AI / automation to my business",
         reply:
-          "His core work: ship AI into your production — n8n workflows, LLM integrations, automated status calls and SMS — then train your team to run it. Tell him the task that eats the most time and he'll map it. Send it below.",
+          "His core work: ship AI into your production (n8n workflows, LLM integrations, automated status calls and SMS), then train your team to run it. Tell him the task that eats the most time and he'll map it. Send it below.",
       },
       {
         label: "Train my team to use AI",
         reply:
-          "An AI enablement engagement: he ships a real workflow into production while your team learns to run it — train-while-building, documented handoff. Share your team's setup and he'll tell you where he'd start. Send it below.",
+          "An AI enablement engagement: he ships a real workflow into production while your team learns to run it, training while building, with a documented handoff. Share your team's setup and he'll tell you where he'd start. Send it below.",
       },
       {
         label: "Growth & marketing",
         reply:
-          "He builds the whole funnel — site, tracking, copy, Meta and Google Ads, lead-gen systems — and judges on ROAS, not clicks. Tell him the goal and the market. Send it below.",
+          "He builds the whole funnel (site, tracking, copy, Meta and Google Ads, lead-gen systems) and judges on ROAS, not clicks. Tell him the goal and the market. Send it below.",
       },
       {
         label: "Just exploring",
         reply:
-          "All good — ask me anything about Kamil's work, or browse his projects. When you're ready, he's one message away.",
+          "All good. Ask me anything about Kamil's work, or browse his projects. When you're ready, he's one message away.",
       },
     ],
     leadCta: "✉️ Send Kamil a message",
@@ -113,18 +113,18 @@ const COPY: Record<Lang, Copy> = {
     leadSend: "Send to Kamil",
     leadSending: "Sending…",
     leadCancel: "Cancel",
-    leadSent: "Sent — Kamil will reply personally to {email}.",
-    leadErr: "Couldn't send right now — reach him directly:",
+    leadSent: "Sent. Kamil will reply personally to {email}.",
+    leadErr: "Couldn't send right now. Reach him directly:",
   },
   pl: {
     greet:
-      "Cześć — jestem AI asystentem Kamila. Pytaj o jego pracę, umiejętności albo czy pasuje do Twojej roli.",
+      "Cześć, jestem AI asystentem Kamila. Pytaj o jego pracę, umiejętności albo czy pasuje do Twojej roli.",
     placeholder: "Zapytaj o cokolwiek…",
     human: "Wolisz człowieka?",
     title: "AI Kamila",
     sub: "wytrenowany na jego pracy",
     fallback:
-      "Chwilowo nie mam dostępu do mózgu — ale Kamil odpisuje osobiście. Napisz na hello@kamiljan.com albo na WhatsApp.",
+      "Chwilowo nie mam dostępu do mózgu, ale Kamil odpisuje osobiście. Napisz na hello@kamiljan.com albo na WhatsApp.",
     starters: ["Czy pasuje do mojej roli?", "Co realnie zbudował?"],
     nudge: "Zapytaj moje AI 👋",
     thinking: ["Myślę…", "Przeszukuję pracę Kamila…"],
@@ -137,32 +137,32 @@ const COPY: Record<Lang, Copy> = {
       {
         label: "Zatrudnić Kamila (etat/rola)",
         reply:
-          "Kamil jest otwarty na role: Inżynier Automatyzacji i Wdrożeń AI, AI solutions engineer, wdrażanie i enablement AI oraz Head of AI / Ops / Growth — remote-first. Wdraża AI na produkcję i sprawia, że zespół realnie z niej korzysta. Najszybciej: wyślij jednolinijkowy opis roli poniżej, odpisuje osobiście.",
+          "Kamil jest otwarty na role: Inżynier Automatyzacji i Wdrożeń AI, AI solutions engineer, wdrażanie i enablement AI oraz Head of AI / Ops / Growth, remote-first. Wdraża AI na produkcję i sprawia, że zespół realnie z niej korzysta. Najszybciej: wyślij jednolinijkowy opis roli poniżej, odpisuje osobiście.",
       },
       {
         label: "Zbudować produkt lub stronę",
         reply:
-          "Przejmuje cały build od A do Z i oddaje działające oraz udokumentowane — React/TypeScript na Supabase, Vercel i Cloudflare, budowane przez kierowanie agentami AI, przy czym specyfikacja, review i wdrożenie są po jego stronie. Napisz czego potrzebujesz, a wyceni zakres. Wyślij poniżej.",
+          "Przejmuje cały build od A do Z i oddaje działające oraz udokumentowane: React/TypeScript na Supabase, Vercel i Cloudflare, budowane przez kierowanie agentami AI, przy czym specyfikacja, review i wdrożenie są po jego stronie. Napisz czego potrzebujesz, a wyceni zakres. Wyślij poniżej.",
       },
       {
         label: "Wdrożyć AI / automatyzację w firmie",
         reply:
-          "Jego rdzeń: wdrożyć AI na Twoją produkcję — workflowy n8n, integracje LLM, automatyczne telefony i SMS-y o statusie — a potem nauczyć zespół to obsługiwać. Napisz, które zadanie zżera najwięcej czasu, a on to zmapuje. Wyślij poniżej.",
+          "Jego rdzeń: wdrożyć AI na Twoją produkcję (workflowy n8n, integracje LLM, automatyczne telefony i SMS-y o statusie), a potem nauczyć zespół to obsługiwać. Napisz, które zadanie zżera najwięcej czasu, a on to zmapuje. Wyślij poniżej.",
       },
       {
         label: "Przeszkolić zespół z AI",
         reply:
-          "Wdrożenie AI z naciskiem na ludzi: wdraża realny workflow na produkcję, a Twój zespół uczy się go obsługiwać — buduje i uczy w trakcie, z dokumentacją. Opisz sytuację zespołu, a powie od czego zacząć. Wyślij poniżej.",
+          "Wdrożenie AI z naciskiem na ludzi: wdraża realny workflow na produkcję, a Twój zespół uczy się go obsługiwać, buduje i uczy w trakcie, z dokumentacją. Opisz sytuację zespołu, a powie od czego zacząć. Wyślij poniżej.",
       },
       {
         label: "Wzrost i marketing",
         reply:
-          "Buduje cały lejek — strona, tracking, copy, reklamy Meta i Google, systemy lead-gen — i ocenia po ROAS, nie po klikach. Podaj cel i rynek. Wyślij poniżej.",
+          "Buduje cały lejek (strona, tracking, copy, reklamy Meta i Google, systemy lead-gen) i ocenia po ROAS, nie po klikach. Podaj cel i rynek. Wyślij poniżej.",
       },
       {
         label: "Tylko się rozglądam",
         reply:
-          "Spoko — pytaj o cokolwiek z pracy Kamila albo przejrzyj projekty. Jak będziesz gotów, jest o jedną wiadomość stąd.",
+          "Spoko, pytaj o cokolwiek z pracy Kamila albo przejrzyj projekty. Jak będziesz gotów, jest o jedną wiadomość stąd.",
       },
     ],
     leadCta: "✉️ Wyślij wiadomość do Kamila",
@@ -173,8 +173,8 @@ const COPY: Record<Lang, Copy> = {
     leadSend: "Wyślij do Kamila",
     leadSending: "Wysyłam…",
     leadCancel: "Anuluj",
-    leadSent: "Wysłane — Kamil odpisze osobiście na {email}.",
-    leadErr: "Nie udało się wysłać — złap go bezpośrednio:",
+    leadSent: "Wysłane. Kamil odpisze osobiście na {email}.",
+    leadErr: "Nie udało się wysłać. Złap go bezpośrednio:",
   },
 };
 
@@ -678,7 +678,7 @@ export default function ChatBot({ lang }: { lang: Lang }) {
               placeholder={t.leadMsgPh}
               aria-label={t.leadMsgPh}
             />
-            {/* honeypot — hidden from humans */}
+            {/* honeypot, hidden from humans */}
             <input
               className="chatbot-lead-hp"
               tabIndex={-1}

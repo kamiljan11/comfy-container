@@ -40,17 +40,16 @@ const PL: Service[] = [
   {
     slug: "systemy-dla-firm",
     navLabel: "Systemy dla firm",
-    metaTitle: "Systemy i aplikacje wewnętrzne dla firm — Kamil Jan",
+    metaTitle: "Systemy i aplikacje wewnętrzne dla firm | Kamil Jan",
     metaDescription:
-      "Buduję systemy odwzorowujące realny proces firmy: etapy zamówienia, reguły cenowe, uprawnienia w bazie. Wdrożenia działające w produkcji, obsługiwane z telefonu.",
+      "Aplikacje do codziennej pracy firmy: zamówienia, wyceny i zlecenia w jednym miejscu, obsługiwane z telefonu. Wdrożenia działające na produkcji.",
     eyebrow: "SYSTEMY DLA FIRM",
     h1: "System, który zna Twój proces lepiej niż arkusz",
-    lead: "Buduję aplikacje odwzorowujące to, jak Twoja firma naprawdę pracuje — z etapami, regułami cenowymi i uprawnieniami, które dziś istnieją głównie w czyjejś głowie. Jedno miejsce zamiast pięciu. Stan widoczny bez dzwonienia po ludziach.",
+    lead: "Buduję aplikacje do codziennej pracy firmy: zamówień, wycen, zleceń. Zamiast arkusza, maili i telefonów wszyscy widzą w jednym miejscu, na jakim etapie jest sprawa i kto ma ją teraz ruszyć. Przykład: platforma, która prowadzi zamówienia firmy dystrybucyjnej B2B przez 13 etapów.",
     micro: ["Jedno źródło stanu", "Obsługa z telefonu", "Rośnie razem z firmą"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć rzeczy, które psują się razem z firmą",
-    problemsLead:
-      "Żadna z nich nie boli przy dziesięciu zamówieniach miesięcznie. Wszystkie zaczynają boleć przy stu.",
+    problemsLead: "Czasem bolą już przy jednym zamówieniu, a z każdym kolejnym coraz bardziej.",
     problems: [
       {
         tag: "Dane",
@@ -65,7 +64,7 @@ const PL: Service[] = [
       {
         tag: "Procesy",
         title: "Zlecenie stoi w etapie, którego nikt nie pilnuje",
-        body: "Nie ma sygnału, że coś utknęło. Dowiadujesz się od klienta, któremu skończyła się cierpliwość — albo nie dowiadujesz się wcale, bo klient po prostu odszedł.",
+        body: "Nie ma sygnału, że coś utknęło. Dowiadujesz się od klienta, któremu skończyła się cierpliwość, albo nie dowiadujesz się wcale, bo klient po prostu odszedł.",
       },
       {
         tag: "Ryzyko",
@@ -75,7 +74,7 @@ const PL: Service[] = [
       {
         tag: "Technologia",
         title: "Gotowe narzędzie każe zmienić sposób pracy",
-        body: "Płacisz abonament za dopasowanie firmy do cudzego procesu. Wasz prawdziwy proces i tak żyje obok — w arkuszu, którego to narzędzie miało się pozbyć.",
+        body: "Płacisz abonament za dopasowanie firmy do cudzego procesu. Wasz prawdziwy proces i tak żyje obok: w arkuszu, którego to narzędzie miało się pozbyć.",
       },
       {
         tag: "Zasoby",
@@ -94,7 +93,7 @@ const PL: Service[] = [
       },
       {
         title: "Uprawnienia pilnowane przez bazę, nie przez ekran",
-        body: "Kto co widzi, rozstrzygają polityki Postgresa. Ukryty przycisk da się obejść, politykę bazy — nie. Kosztowało mnie to jedną awarię na produkcji: dwie polityki odwołały się do siebie nawzajem i zapętliły zapytania. Naprawione funkcją SECURITY DEFINER, a wnioskiem jest zestaw testów per rola, który dziś pisałbym od pierwszego dnia.",
+        body: "Kto co widzi, rozstrzygają polityki Postgresa. Ukryty przycisk da się obejść, ale polityki bazy już nie. Kosztowało mnie to jedną awarię na produkcji: dwie polityki odwołały się do siebie nawzajem i zapętliły zapytania. Naprawione funkcją SECURITY DEFINER, a wnioskiem jest zestaw testów per rola, który dziś pisałbym od pierwszego dnia.",
       },
       {
         title: "Zbudowane pod telefon w terenie",
@@ -136,7 +135,7 @@ const PL: Service[] = [
     faq: [
       {
         q: "Ile to kosztuje?",
-        a: "Zależy od liczby procesów, integracji i tego, czy system ma zastąpić jedno narzędzie czy pięć. Po rozmowie i obejrzeniu procesu dostajesz widełki dla swojego przypadku — bez zobowiązań i bez wysyłania oferty, zanim zrozumiem, o czym mówimy.",
+        a: "Zależy od liczby procesów, integracji i tego, czy system ma zastąpić jedno narzędzie czy pięć. Po rozmowie i obejrzeniu procesu dostajesz widełki dla swojego przypadku, bez zobowiązań i bez wysyłania oferty, zanim zrozumiem, o czym mówimy.",
       },
       {
         q: "Czym to się różni od gotowego SaaS-a?",
@@ -144,11 +143,11 @@ const PL: Service[] = [
       },
       {
         q: "Ile trwa wdrożenie?",
-        a: "Pierwszy działający kawałek — tygodnie, nie miesiące, bo zaczynam od jednego procesu. Pełny system rośnie etapami i każdy z nich trafia do produkcji osobno, więc korzyść pojawia się przed końcem prac.",
+        a: "Pierwszy działający kawałek: tygodnie, nie miesiące, bo zaczynam od jednego procesu. Pełny system rośnie etapami i każdy z nich trafia do produkcji osobno, więc korzyść pojawia się przed końcem prac.",
       },
       {
         q: "Co się stanie, jeśli przestaniemy współpracować?",
-        a: "Kod i dane są Twoje, w Twoim repozytorium i Twojej bazie. Nie buduję niczego, co da się uruchomić wyłącznie u mnie — to byłoby zabezpieczenie mojego interesu Twoim kosztem.",
+        a: "Kod i dane są Twoje, w Twoim repozytorium i Twojej bazie. Nie buduję niczego, co da się uruchomić wyłącznie u mnie: to byłoby zabezpieczenie mojego interesu Twoim kosztem.",
       },
     ],
   },
@@ -156,12 +155,12 @@ const PL: Service[] = [
   {
     slug: "automatyzacja-procesow",
     navLabel: "Automatyzacja procesów",
-    metaTitle: "Automatyzacja procesów i powtarzalnych zadań — Kamil Jan",
+    metaTitle: "Automatyzacja procesów i powtarzalnych zadań | Kamil Jan",
     metaDescription:
       "Automatyzuję powtarzalne zadania tam, gdzie zwracają się w mierzalnym czasie: obieg dokumentów, powiadomienia, przepisywanie danych między narzędziami.",
     eyebrow: "AUTOMATYZACJA PROCESÓW",
     h1: "Przestań płacić ludziom za przenoszenie danych",
-    lead: "Automatyzuję powtarzalne zadania tam, gdzie zwracają się w czasie, który da się policzyć. Nie każdy proces warto automatyzować i mówię wprost, kiedy nie warto — także wtedy, gdy oznacza to mniejsze zlecenie.",
+    lead: "Automatyzuję powtarzalne zadania tam, gdzie zwracają się w czasie, który da się policzyć. Nie każdy proces warto automatyzować i mówię wprost, kiedy nie warto.",
     micro: ["Zwrot policzony przed startem", "Wdrożenie etapami", "Zero ukrytych zależności"],
     problemsEyebrow: "CENA RĘCZNEJ ROBOTY",
     problemsTitle: "Sześć kosztów, których nie widać na fakturze",
@@ -190,7 +189,7 @@ const PL: Service[] = [
       {
         tag: "Technologia",
         title: "Narzędzia nie rozmawiają, więc rozmawia człowiek",
-        body: "CRM nie widzi magazynu, magazyn nie widzi księgowości. Spina to osoba, która ręcznie przenosi dane — i jest jedynym miejscem, gdzie te systemy się spotykają.",
+        body: "CRM nie widzi magazynu, magazyn nie widzi księgowości. Spina to osoba, która ręcznie przenosi dane i jest jedynym miejscem, gdzie te systemy się spotykają.",
       },
       {
         tag: "Zasoby",
@@ -246,15 +245,15 @@ const PL: Service[] = [
     faq: [
       {
         q: "Ile kosztuje automatyzacja jednego procesu?",
-        a: "Rozpiętość jest duża, bo prosty obieg maila i integracja trzech systemów z regułami biznesowymi to zupełnie inna robota. Po obejrzeniu procesu dostajesz widełki i szacowany zwrot — jeśli ten drugi nie wygląda dobrze, powiem to wprost.",
+        a: "Rozpiętość jest duża, bo prosty obieg maila i integracja trzech systemów z regułami biznesowymi to zupełnie inna robota. Po obejrzeniu procesu dostajesz widełki i szacowany zwrot, a jeśli ten drugi nie wygląda dobrze, powiem to wprost.",
       },
       {
         q: "Czy to się opłaca przy małym zespole?",
-        a: "Czasem tak, czasem nie. Przy dwóch osobach i dziesięciu zamówieniach miesięcznie zwykle nie — i wtedy tak mówię. Opłaca się tam, gdzie czynność się powtarza, kosztuje uwagę i rośnie razem z firmą.",
+        a: "Czasem tak, czasem nie. Przy dwóch osobach i dziesięciu zamówieniach miesięcznie zwykle nie, a wtedy tak mówię. Opłaca się tam, gdzie czynność się powtarza, kosztuje uwagę i rośnie razem z firmą.",
       },
       {
         q: "Co jeśli proces się zmieni?",
-        a: "Zmieni się na pewno. Buduję tak, żeby zmiana reguły była zmianą konfiguracji, a nie przepisywaniem od nowa — ale mówię też uczciwie, które zmiany będą kosztowne, zanim zaczniemy.",
+        a: "Zmieni się na pewno. Buduję tak, żeby zmiana reguły była zmianą konfiguracji, a nie przepisywaniem od nowa, ale mówię też uczciwie, które zmiany będą kosztowne, zanim zaczniemy.",
       },
       {
         q: "Czym to się różni od gotowego narzędzia no-code?",
@@ -266,12 +265,12 @@ const PL: Service[] = [
   {
     slug: "ai-w-procesach",
     navLabel: "AI w procesach",
-    metaTitle: "AI w firmie — wdrożenia oparte na Twoich danych — Kamil Jan",
+    metaTitle: "AI w firmie: wdrożenia oparte na Twoich danych | Kamil Jan",
     metaDescription:
       "Wdrażam AI tam, gdzie liczy z Twoich danych, a nie zgaduje. Odpowiedzi z własnych liczb firmy, deterministyczne tam, gdzie wystarczy tabela, sekrety poza zasięgiem modelu.",
     eyebrow: "SZTUCZNA INTELIGENCJA",
     h1: "Nie kolejny chatbot: AI, które liczy z Twoich danych",
-    lead: "Model, który zgaduje, jest groźniejszy niż brak modelu, bo brzmi wiarygodnie. Buduję rozwiązania, w których AI pracuje na Twoich liczbach i Twoich regułach — a tam, gdzie odpowiedź musi być zawsze identyczna, w ogóle nie pyta modelu.",
+    lead: "Model, który zgaduje, jest groźniejszy niż brak modelu, bo brzmi wiarygodnie. Buduję rozwiązania, w których AI pracuje na Twoich liczbach i Twoich regułach, a tam, gdzie odpowiedź musi być zawsze identyczna, w ogóle nie pyta modelu.",
     micro: ["Odpowiedzi z Twoich danych", "Koszt pod kontrolą", "Granice powiedziane wprost"],
     problemsEyebrow: "DLACZEGO PILOTAŻE UMIERAJĄ",
     problemsTitle: "Sześć powodów, dla których AI nie weszło do produkcji",
@@ -316,7 +315,7 @@ const PL: Service[] = [
     points: [
       {
         title: "Odpowiedź z Twoich danych, nie z internetu",
-        body: "W systemie warsztatowym wycena bierze się z historii czasów pracy tego konkretnego warsztatu. Model nie zgaduje, ile trwa wymiana — czyta, ile trwała u Ciebie.",
+        body: "W systemie warsztatowym wycena bierze się z historii czasów pracy tego konkretnego warsztatu. Model nie zgaduje, ile trwa wymiana. Czyta, ile trwała u Ciebie.",
       },
       {
         title: "Gdzie wystarczy tabela, nie ma modelu",
@@ -332,7 +331,7 @@ const PL: Service[] = [
       },
       {
         title: "Granice powiedziane, zanim zapytasz",
-        body: "Korzystam z modeli przez API — nie trenuję ich ani nie dostrajam. Formalnego zestawu testów jakości modelu jeszcze nie mam i mówię to od razu, bo dowiedzenie się o tym później kosztowałoby Cię więcej.",
+        body: "Korzystam z modeli przez API. Nie trenuję ich ani nie dostrajam. Formalnego zestawu testów jakości modelu jeszcze nie mam i mówię to od razu, bo dowiedzenie się o tym później kosztowałoby Cię więcej.",
       },
     ],
     proofsTitle: "Działa w produkcji",
@@ -369,7 +368,7 @@ const PL: Service[] = [
       },
       {
         q: "Jak sprawdzicie, czy to działa?",
-        a: "Ustalamy przed startem, co znaczy trafna odpowiedź w Twoim procesie, i sprawdzamy to na realnych przypadkach. Nie mam jeszcze formalnego zestawu testów jakości modelu — to jest luka, o której mówię otwarcie.",
+        a: "Ustalamy przed startem, co znaczy trafna odpowiedź w Twoim procesie, i sprawdzamy to na realnych przypadkach. Nie mam jeszcze formalnego zestawu testów jakości modelu: to jest luka, o której mówię otwarcie.",
       },
     ],
   },
@@ -377,12 +376,12 @@ const PL: Service[] = [
   {
     slug: "integracje",
     navLabel: "Integracje narzędzi",
-    metaTitle: "Integracje systemów i przepływ danych między narzędziami — Kamil Jan",
+    metaTitle: "Integracje systemów i przepływ danych między narzędziami | Kamil Jan",
     metaDescription:
       "Łączę systemy, które nie rozmawiają ze sobą: CRM, ERP, magazyn, księgowość, płatności. Dane płyną bez ręcznego przepisywania, a awarie są widoczne.",
     eyebrow: "INTEGRACJE",
     h1: "Twoje narzędzia spina dziś człowiek. Niech spina je kod",
-    lead: "Łączę systemy, które każdy z osobna działa dobrze, a razem wymagają osoby przenoszącej dane. Integracja to nie tylko połączenie — to też decyzja, co się dzieje, gdy druga strona przestaje odpowiadać.",
+    lead: "Łączę systemy, które każdy z osobna działa dobrze, a razem wymagają osoby przenoszącej dane. Integracja to nie tylko połączenie: to też decyzja, co się dzieje, gdy druga strona przestaje odpowiadać.",
     micro: ["Dane płyną same", "Awarie widoczne", "Odporne na aktualizacje"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć objawów systemów, które się nie znają",
@@ -468,7 +467,7 @@ const PL: Service[] = [
     faq: [
       {
         q: "Z jakimi systemami potrafisz się połączyć?",
-        a: "Z każdym, który udostępnia API albo eksport danych — CRM-y, systemy księgowe i magazynowe, bramki płatnicze, poczta, kalendarze, narzędzia do podpisu elektronicznego. Przy systemach zamkniętych sprawdzam wykonalność przed wyceną, zamiast obiecywać w ciemno.",
+        a: "Z każdym, który udostępnia API albo eksport danych: CRM-y, systemy księgowe i magazynowe, bramki płatnicze, poczta, kalendarze, narzędzia do podpisu elektronicznego. Przy systemach zamkniętych sprawdzam wykonalność przed wyceną, zamiast obiecywać w ciemno.",
       },
       {
         q: "Co jeśli dostawca zmieni API?",
@@ -476,11 +475,11 @@ const PL: Service[] = [
       },
       {
         q: "Ile trwa integracja?",
-        a: "Proste połączenie dwóch systemów z jasnym API to kwestia dni. Czas zjadają wyjątki, mapowanie pól i ustalenie, co jest źródłem prawdy — czyli dokładnie ta część, którą pominięcie mści się później.",
+        a: "Proste połączenie dwóch systemów z jasnym API to kwestia dni. Czas zjadają wyjątki, mapowanie pól i ustalenie, co jest źródłem prawdy, czyli dokładnie ta część, którą pominięcie mści się później.",
       },
       {
         q: "Czy integracja to lepszy pomysł niż wymiana systemu?",
-        a: "Zwykle tak, jeśli obecne narzędzia robią swoją robotę i problem leży wyłącznie w przepływie danych. Wymiana systemu to koszt, migracja i szkolenie zespołu od nowa — sensowne dopiero, gdy narzędzie realnie blokuje rozwój.",
+        a: "Zwykle tak, jeśli obecne narzędzia robią swoją robotę i problem leży wyłącznie w przepływie danych. Wymiana systemu to koszt, migracja i szkolenie zespołu od nowa: sensowne dopiero, gdy narzędzie realnie blokuje rozwój.",
       },
     ],
   },
@@ -488,12 +487,12 @@ const PL: Service[] = [
   {
     slug: "doradztwo-ai",
     navLabel: "Doradztwo",
-    metaTitle: "Doradztwo w automatyzacji i AI — od czego zacząć — Kamil Jan",
+    metaTitle: "Doradztwo w automatyzacji i AI: od czego zacząć | Kamil Jan",
     metaDescription:
       "Wskazuję, gdzie automatyzacja i AI zwrócą się najszybciej, a gdzie nie warto ich wdrażać. Mapa procesów, priorytety i szacowany zwrot przed decyzją o budowie.",
     eyebrow: "DORADZTWO",
     h1: "Zanim wydasz na automatyzację, sprawdź, czy się zwróci",
-    lead: "Wskazuję miejsca, w których automatyzacja i AI zwrócą się najszybciej — oraz te, w których nie warto ich ruszać. To druga lista bywa cenniejsza, bo oszczędza budżet, który już miał być wydany.",
+    lead: "Wskazuję miejsca, w których automatyzacja i AI zwrócą się najszybciej, oraz te, w których nie warto ich ruszać. To druga lista bywa cenniejsza, bo oszczędza budżet, który już miał być wydany.",
     micro: ["Priorytety wg zwrotu", "Konkretny plan", "Bez zobowiązania do budowy"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć powodów, dla których projekt stoi w miejscu",
@@ -534,7 +533,7 @@ const PL: Service[] = [
     answerEyebrow: "JAK TO WYGLĄDA",
     answerTitle: "Rozmowa, mapa, priorytety, decyzja",
     answerLead:
-      "Efektem jest dokument, z którym możesz pójść do kogokolwiek — także do kogoś innego niż ja.",
+      "Efektem jest dokument, z którym możesz pójść do kogokolwiek, także do kogoś innego niż ja.",
     points: [
       {
         title: "Zaczynamy od procesu, nie od technologii",
@@ -546,7 +545,7 @@ const PL: Service[] = [
       },
       {
         title: "Lista rzeczy, których nie warto robić",
-        body: "Równie ważna jak lista rekomendacji. Procesy zbyt rzadkie, zbyt zmienne albo takie, gdzie człowiek jest po prostu tańszy — mówię o nich wprost.",
+        body: "Równie ważna jak lista rekomendacji. Procesy zbyt rzadkie, zbyt zmienne albo takie, gdzie człowiek jest po prostu tańszy: mówię o nich wprost.",
       },
       {
         title: "Rekomendacja wraz z tym, co może pójść źle",
@@ -583,11 +582,11 @@ const PL: Service[] = [
       },
       {
         q: "Czy skończy się na strategii, czy pomożesz też wdrożyć?",
-        a: "Mogę zrobić jedno i drugie, ale to są osobne decyzje. Dostajesz dokument, z którym możesz pójść do dowolnego wykonawcy — również dlatego, żeby rekomendacja nie była podejrzana o to, że sprzedaje moją własną robotę.",
+        a: "Mogę zrobić jedno i drugie, ale to są osobne decyzje. Dostajesz dokument, z którym możesz pójść do dowolnego wykonawcy, również dlatego, żeby rekomendacja nie była podejrzana o to, że sprzedaje moją własną robotę.",
       },
       {
         q: "Skąd wiesz, jak działa moja branża?",
-        a: "Nie zakładam, że wiem. System warsztatowy zbudowałem, nie będąc mechanikiem — od tego, że pracujący mechanik definiował, co jest poprawną odpowiedzią. To samo podejście stosuję wszędzie: wiedzę branżową ma klient, ja mam metodę.",
+        a: "Nie zakładam, że wiem. System warsztatowy zbudowałem, nie będąc mechanikiem: zacząłem od tego, że pracujący mechanik definiował, co jest poprawną odpowiedzią. To samo podejście stosuję wszędzie: wiedzę branżową ma klient, ja mam metodę.",
       },
       {
         q: "Co dostaję na koniec?",
@@ -599,12 +598,12 @@ const PL: Service[] = [
   {
     slug: "wdrozenie-i-szkolenie",
     navLabel: "Wdrożenie i szkolenie",
-    metaTitle: "Wdrożenie systemu i szkolenie zespołu z AI — Kamil Jan",
+    metaTitle: "Wdrożenie systemu i szkolenie zespołu z AI | Kamil Jan",
     metaDescription:
       "Doprowadzam system do momentu, w którym zespół używa go bez mojego udziału. Szkolenia z AI i automatyzacji oparte na procesach, które ludzie faktycznie wykonują.",
     eyebrow: "WDROŻENIE I SZKOLENIE",
     h1: "System, którego zespół faktycznie zaczyna używać",
-    lead: "Zbudowanie systemu to połowa roboty. Druga połowa to doprowadzenie do momentu, w którym ludzie używają go bez przypominania — i ta połowa decyduje, czy projekt był inwestycją czy kosztem.",
+    lead: "Zbudowanie systemu to połowa roboty. Druga połowa to doprowadzenie do momentu, w którym ludzie używają go bez przypominania, a ta połowa decyduje, czy projekt był inwestycją czy kosztem.",
     micro: ["Nauka na waszym procesie", "Materiały zostają u Was", "Wsparcie po starcie"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć powodów, dla których gotowy system leży odłogiem",
@@ -689,11 +688,11 @@ const PL: Service[] = [
     faq: [
       {
         q: "Ile trwa wdrożenie zespołu?",
-        a: "Sama nauka obsługi to zwykle jedna lub dwie sesje. Realne wdrożenie liczy się w tygodniach po starcie, bo dopiero wtedy pojawiają się sytuacje, których nikt nie przewidział — i to one decydują, czy zespół zaufa narzędziu.",
+        a: "Sama nauka obsługi to zwykle jedna lub dwie sesje. Realne wdrożenie liczy się w tygodniach po starcie, bo dopiero wtedy pojawiają się sytuacje, których nikt nie przewidział, a to one decydują, czy zespół zaufa narzędziu.",
       },
       {
         q: "Czy szkolicie też z narzędzi, których nie budowaliście?",
-        a: "Tak, jeśli chodzi o pracę z AI i automatyzacją w codziennych zadaniach. Szkolenie z konkretnego systemu zewnętrznego ma sens tylko wtedy, gdy najpierw go poznam — inaczej byłoby czytaniem cudzej dokumentacji na głos.",
+        a: "Tak, jeśli chodzi o pracę z AI i automatyzacją w codziennych zadaniach. Szkolenie z konkretnego systemu zewnętrznego ma sens tylko wtedy, gdy najpierw go poznam: inaczej byłoby czytaniem cudzej dokumentacji na głos.",
       },
       {
         q: "Co, jeśli zespół nie chce nowego systemu?",
@@ -701,7 +700,7 @@ const PL: Service[] = [
       },
       {
         q: "Co zostaje po zakończeniu współpracy?",
-        a: "Działający system, dokumentacja pisana pod realne sytuacje, przeszkolony zespół i dostęp do wszystkiego po Waszej stronie. Celem jest to, żebyście mnie nie potrzebowali — a nie żebyście dzwonili przy każdej zmianie.",
+        a: "Działający system, dokumentacja pisana pod realne sytuacje, przeszkolony zespół i dostęp do wszystkiego po Waszej stronie. Celem jest to, żebyście mnie nie potrzebowali, a nie żebyście dzwonili przy każdej zmianie.",
       },
     ],
   },
@@ -711,16 +710,17 @@ const EN: Service[] = [
   {
     slug: "systemy-dla-firm",
     navLabel: "Internal systems",
-    metaTitle: "Internal business systems built around your process — Kamil Jan",
+    metaTitle: "Internal business systems built around your process | Kamil Jan",
     metaDescription:
-      "I build systems that mirror how a company actually works: order stages, pricing rules, permissions enforced in the database. Running in production, operated from phones.",
+      "Apps a company runs its daily work on: orders, quotes and jobs in one place, operated from a phone. Running in production.",
     eyebrow: "INTERNAL SYSTEMS",
     h1: "A system that knows your process better than the spreadsheet does",
-    lead: "I build applications that mirror how your company actually works — the stages, the pricing rules and the permissions that today live mostly in someone's head. One place instead of five. Status you can see without phoning three people.",
+    lead: "I build the apps a company runs its daily work on: orders, quotes, jobs. Instead of a spreadsheet, emails and phone calls, everyone sees in one place what stage each case is at and who has to move it next. Example: a platform that takes a B2B distributor's orders through 13 stages.",
     micro: ["One source of state", "Works from a phone", "Grows with the company"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six things that break as the company grows",
-    problemsLead: "None of these hurt at ten orders a month. All of them hurt at a hundred.",
+    problemsLead:
+      "Sometimes they hurt from the first order, and they get worse with every one after it.",
     problems: [
       {
         tag: "Data",
@@ -735,7 +735,7 @@ const EN: Service[] = [
       {
         tag: "Process",
         title: "A job sits in a stage nobody owns",
-        body: "Nothing signals that it stalled. You find out from a customer who ran out of patience — or you don't find out, because they simply left.",
+        body: "Nothing signals that it stalled. You find out from a customer who ran out of patience, or you don't find out, because they simply left.",
       },
       {
         tag: "Risk",
@@ -806,7 +806,7 @@ const EN: Service[] = [
     faq: [
       {
         q: "What does it cost?",
-        a: "It depends on how many processes and integrations are involved, and whether the system replaces one tool or five. After a conversation and a look at the process you get a range for your case — not a proposal written before I understand what we're talking about.",
+        a: "It depends on how many processes and integrations are involved, and whether the system replaces one tool or five. After a conversation and a look at the process you get a range for your case, not a proposal written before I understand what we're talking about.",
       },
       {
         q: "How is this different from off-the-shelf SaaS?",
@@ -818,7 +818,7 @@ const EN: Service[] = [
       },
       {
         q: "What happens if we stop working together?",
-        a: "The code and the data are yours, in your repository and your database. I don't build anything that only runs on my side — that would be protecting my position at your expense.",
+        a: "The code and the data are yours, in your repository and your database. I don't build anything that only runs on my side: that would be protecting my position at your expense.",
       },
     ],
   },
@@ -826,12 +826,12 @@ const EN: Service[] = [
   {
     slug: "automatyzacja-procesow",
     navLabel: "Process automation",
-    metaTitle: "Process and task automation with a measured payback — Kamil Jan",
+    metaTitle: "Process and task automation with a measured payback | Kamil Jan",
     metaDescription:
       "I automate repetitive work where it pays back in time you can measure: document flows, notifications, data moved between tools. Failures are visible, not silent.",
     eyebrow: "PROCESS AUTOMATION",
     h1: "Stop paying people to move data between windows",
-    lead: "I automate repetitive work where it pays back in time you can actually count. Not every process is worth automating, and I say so plainly when it isn't — including when that means a smaller job for me.",
+    lead: "I automate repetitive work where it pays back in time you can actually count. Not every process is worth automating, and I say so plainly when it isn't.",
     micro: ["Payback counted first", "Shipped in stages", "No hidden coupling"],
     problemsEyebrow: "THE COST OF MANUAL WORK",
     problemsTitle: "Six costs that never appear on an invoice",
@@ -840,7 +840,7 @@ const EN: Service[] = [
       {
         tag: "Data",
         title: "Scaling means hiring",
-        body: "Twice the orders needs twice the hands doing the same steps. What grows isn't only cost — it's the number of places something can fall through.",
+        body: "Twice the orders needs twice the hands doing the same steps. What grows isn't only cost: it's the number of places something can fall through.",
       },
       {
         tag: "Efficiency",
@@ -855,7 +855,7 @@ const EN: Service[] = [
       {
         tag: "Risk",
         title: "Monotony produces errors",
-        body: "At the hundredth repetition attention drops. That's physiology, not carelessness — and it usually costs in documents and in amounts.",
+        body: "At the hundredth repetition attention drops. That's physiology, not carelessness, and it usually costs in documents and in amounts.",
       },
       {
         tag: "Tooling",
@@ -916,15 +916,15 @@ const EN: Service[] = [
     faq: [
       {
         q: "What does automating one process cost?",
-        a: "The range is wide, because a simple email flow and an integration of three systems with business rules are different jobs. After looking at the process you get a range and an estimated payback — and if the second one looks weak, I'll tell you.",
+        a: "The range is wide, because a simple email flow and an integration of three systems with business rules are different jobs. After looking at the process you get a range and an estimated payback, and if the second one looks weak, I'll tell you.",
       },
       {
         q: "Is it worth it for a small team?",
-        a: "Sometimes yes, sometimes no. At two people and ten orders a month, usually not — and that's what I'll say. It pays where the task repeats, costs attention, and grows with the company.",
+        a: "Sometimes yes, sometimes no. At two people and ten orders a month, usually not, and that's what I'll say. It pays where the task repeats, costs attention, and grows with the company.",
       },
       {
         q: "What if the process changes?",
-        a: "It will. I build so that changing a rule is a configuration change rather than a rewrite — while being honest up front about which changes will be expensive.",
+        a: "It will. I build so that changing a rule is a configuration change rather than a rewrite, while being honest up front about which changes will be expensive.",
       },
       {
         q: "How is this different from off-the-shelf no-code tools?",
@@ -936,12 +936,12 @@ const EN: Service[] = [
   {
     slug: "ai-w-procesach",
     navLabel: "AI in your process",
-    metaTitle: "AI in business — grounded in your own data — Kamil Jan",
+    metaTitle: "AI in business: grounded in your own data | Kamil Jan",
     metaDescription:
       "I deploy AI where it computes from your data instead of guessing. Answers grounded in your numbers, deterministic where a table suffices, secrets the model never sees.",
     eyebrow: "ARTIFICIAL INTELLIGENCE",
     h1: "Not another chatbot: AI that computes from your data",
-    lead: "A model that guesses is more dangerous than no model, because it sounds credible. I build systems where AI works from your numbers and your rules — and where the answer must be identical every time, it doesn't ask a model at all.",
+    lead: "A model that guesses is more dangerous than no model, because it sounds credible. I build systems where AI works from your numbers and your rules, and where the answer must be identical every time, it doesn't ask a model at all.",
     micro: ["Grounded in your data", "Cost under control", "Limits stated up front"],
     problemsEyebrow: "WHY PILOTS DIE",
     problemsTitle: "Six reasons AI never reached production",
@@ -966,7 +966,7 @@ const EN: Service[] = [
       {
         tag: "Risk",
         title: "A model that invents a price will send it to a customer",
-        body: "On a quote, a contract or a settlement, a mistake isn't a rendering bug — it's money and liability. You need a boundary the model can't reach past.",
+        body: "On a quote, a contract or a settlement, a mistake isn't a rendering bug: it's money and liability. You need a boundary the model can't reach past.",
       },
       {
         tag: "Tooling",
@@ -986,7 +986,7 @@ const EN: Service[] = [
     points: [
       {
         title: "Answers from your data, not from the internet",
-        body: "In the workshop system a quote comes from that specific shop's labour-time history. The model doesn't guess how long a replacement takes — it reads how long it took at your place.",
+        body: "In the workshop system a quote comes from that specific shop's labour-time history. The model doesn't guess how long a replacement takes. It reads how long it took at your place.",
       },
       {
         title: "Where a table is enough, there is no model",
@@ -1002,7 +1002,7 @@ const EN: Service[] = [
       },
       {
         title: "Limits stated before you ask",
-        body: "I use foundation models via API — I don't train or fine-tune them. There is no formal eval harness yet, and I say so immediately, because finding that out later would cost you more.",
+        body: "I use foundation models via API. I don't train or fine-tune them. There is no formal eval harness yet, and I say so immediately, because finding that out later would cost you more.",
       },
     ],
     proofsTitle: "Running in production",
@@ -1039,7 +1039,7 @@ const EN: Service[] = [
       },
       {
         q: "How will we know it works?",
-        a: "We agree up front what a correct answer means in your process and check it against real cases. I don't have a formal eval harness yet — that's a gap I state openly rather than paper over.",
+        a: "We agree up front what a correct answer means in your process and check it against real cases. I don't have a formal eval harness yet: that's a gap I state openly rather than paper over.",
       },
     ],
   },
@@ -1047,12 +1047,12 @@ const EN: Service[] = [
   {
     slug: "integracje",
     navLabel: "Integrations",
-    metaTitle: "System integrations and data flow between tools — Kamil Jan",
+    metaTitle: "System integrations and data flow between tools | Kamil Jan",
     metaDescription:
       "I connect systems that don't talk: CRM, ERP, warehouse, accounting, payments. Data moves without retyping, and failures are loud rather than silent.",
     eyebrow: "INTEGRATIONS",
     h1: "A person is bridging your tools. Let code do it",
-    lead: "I connect systems that each work fine alone and together need somebody to carry data across. Integration isn't only the connection — it's also deciding what happens when the other side stops answering.",
+    lead: "I connect systems that each work fine alone and together need somebody to carry data across. Integration isn't only the connection: it's also deciding what happens when the other side stops answering.",
     micro: ["Data moves itself", "Failures are visible", "Survives API changes"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six symptoms of systems that don't know each other",
@@ -1138,7 +1138,7 @@ const EN: Service[] = [
     faq: [
       {
         q: "Which systems can you connect to?",
-        a: "Anything with an API or a data export — CRMs, accounting and warehouse systems, payment gateways, mail, calendars, e-signature tools. For closed systems I check feasibility before quoting rather than promising blind.",
+        a: "Anything with an API or a data export: CRMs, accounting and warehouse systems, payment gateways, mail, calendars, e-signature tools. For closed systems I check feasibility before quoting rather than promising blind.",
       },
       {
         q: "What if the vendor changes their API?",
@@ -1146,11 +1146,11 @@ const EN: Service[] = [
       },
       {
         q: "How long does an integration take?",
-        a: "A simple connection between two systems with clean APIs is a matter of days. The time goes into exceptions, field mapping and deciding what the source of truth is — exactly the part that punishes you later if skipped.",
+        a: "A simple connection between two systems with clean APIs is a matter of days. The time goes into exceptions, field mapping and deciding what the source of truth is, exactly the part that punishes you later if skipped.",
       },
       {
         q: "Is integrating better than replacing the system?",
-        a: "Usually yes, if the current tools do their job and the problem is only the flow between them. Replacing means cost, migration and retraining — worth it only when a tool genuinely blocks growth.",
+        a: "Usually yes, if the current tools do their job and the problem is only the flow between them. Replacing means cost, migration and retraining: worth it only when a tool genuinely blocks growth.",
       },
     ],
   },
@@ -1158,12 +1158,12 @@ const EN: Service[] = [
   {
     slug: "doradztwo-ai",
     navLabel: "Advisory",
-    metaTitle: "Automation and AI advisory — where to start — Kamil Jan",
+    metaTitle: "Automation and AI advisory: where to start | Kamil Jan",
     metaDescription:
       "I identify where automation and AI pay back fastest, and where they aren't worth deploying. Process map, priorities and estimated return before you commit to building.",
     eyebrow: "ADVISORY",
     h1: "Before you spend on automation, find out whether it pays back",
-    lead: "I identify where automation and AI will pay back fastest — and where they aren't worth touching. That second list is often the more valuable one, because it saves a budget that was already being spent.",
+    lead: "I identify where automation and AI will pay back fastest, and where they aren't worth touching. That second list is often the more valuable one, because it saves a budget that was already being spent.",
     micro: ["Priorities by payback", "A concrete plan", "No obligation to build"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six reasons the project isn't moving",
@@ -1198,13 +1198,12 @@ const EN: Service[] = [
       {
         tag: "Team",
         title: "People fear they're automating away their own jobs",
-        body: "Left unaddressed, the project picks up quiet resistance — invisible in the schedule, very visible in the fact that nobody uses the finished tool.",
+        body: "Left unaddressed, the project picks up quiet resistance: invisible in the schedule, very visible in the fact that nobody uses the finished tool.",
       },
     ],
     answerEyebrow: "WHAT IT LOOKS LIKE",
     answerTitle: "Conversation, map, priorities, decision",
-    answerLead:
-      "The output is a document you can take to anyone — including someone other than me.",
+    answerLead: "The output is a document you can take to anyone, including someone other than me.",
     points: [
       {
         title: "We start from the process, not the technology",
@@ -1216,7 +1215,7 @@ const EN: Service[] = [
       },
       {
         title: "A list of things not worth doing",
-        body: "As important as the recommendations. Processes too rare, too variable, or where a person is simply cheaper — I name them explicitly.",
+        body: "As important as the recommendations. Processes too rare, too variable, or where a person is simply cheaper: I name them explicitly.",
       },
       {
         title: "Each recommendation with what could go wrong",
@@ -1253,7 +1252,7 @@ const EN: Service[] = [
       },
       {
         q: "Does it end at strategy, or do you help build?",
-        a: "I can do both, but they're separate decisions. You get a document you can take to any contractor — partly so the recommendation can't be suspected of selling my own work.",
+        a: "I can do both, but they're separate decisions. You get a document you can take to any contractor, partly so the recommendation can't be suspected of selling my own work.",
       },
       {
         q: "How would you know how my industry works?",
@@ -1269,12 +1268,12 @@ const EN: Service[] = [
   {
     slug: "wdrozenie-i-szkolenie",
     navLabel: "Rollout & training",
-    metaTitle: "System rollout and team training on AI and automation — Kamil Jan",
+    metaTitle: "System rollout and team training on AI and automation | Kamil Jan",
     metaDescription:
       "I take a system to the point where the team uses it without me. Training on AI and automation grounded in the processes people actually perform.",
     eyebrow: "ROLLOUT & TRAINING",
     h1: "A system the team actually starts using",
-    lead: "Building the system is half the work. The other half is getting to the point where people use it without being reminded — and that half decides whether the project was an investment or a cost.",
+    lead: "Building the system is half the work. The other half is getting to the point where people use it without being reminded, and that half decides whether the project was an investment or a cost.",
     micro: ["Learning on your own data", "Materials stay with you", "Support after launch"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six reasons a finished system sits unused",
@@ -1359,11 +1358,11 @@ const EN: Service[] = [
     faq: [
       {
         q: "How long does training a team take?",
-        a: "Learning the tool itself is usually one or two sessions. The real rollout is measured in the weeks after launch, because that's when the unpredicted cases appear — and those decide whether the team trusts the tool.",
+        a: "Learning the tool itself is usually one or two sessions. The real rollout is measured in the weeks after launch, because that's when the unpredicted cases appear, and those decide whether the team trusts the tool.",
       },
       {
         q: "Do you train on tools you didn't build?",
-        a: "Yes, for working with AI and automation in everyday tasks. Training on a specific third-party system only makes sense once I've learned it properly — otherwise it's reading someone else's documentation aloud.",
+        a: "Yes, for working with AI and automation in everyday tasks. Training on a specific third-party system only makes sense once I've learned it properly: otherwise it's reading someone else's documentation aloud.",
       },
       {
         q: "What if the team doesn't want the new system?",
@@ -1371,7 +1370,7 @@ const EN: Service[] = [
       },
       {
         q: "What's left when we finish?",
-        a: "A working system, documentation written for real situations, a trained team, and access to everything on your side. The goal is that you don't need me — not that you call me for every change.",
+        a: "A working system, documentation written for real situations, a trained team, and access to everything on your side. The goal is that you don't need me, not that you call me for every change.",
       },
     ],
   },
