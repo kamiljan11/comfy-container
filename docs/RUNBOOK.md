@@ -36,6 +36,28 @@ git revert <sha-zlego-commita> && git push   # -> redeploy automatyczny na Verce
 - Awaria bota/leada: sprawdz, czy `ANTHROPIC_API_KEY`/`RESEND_API_KEY` sa ustawione w Vercel —
   bez nich system degraduje sie celowo (patrz `docs/ARCHITECTURE.md` -> Kill switch), nie pada.
 
+## CI — bramka Mutation (`.github/workflows/mutation.yml`)
+
+- Job "Mutation (zmienione pliki)" (wymagany): Stryker `@stryker-mutator/core` + `vitest-runner` 10.0.0 tylko na
+  plikach `src/**/*.ts(x)` zmienionych w PR (bez testow/typow), `coverageAnalysis` perTest, `ignoreStatic`,
+  prog `thresholds.break: 50`. Swiadome ominiecie = etykieta PR `allow-low-mutation`.
+- Stryker liczy na **vitest@4.1.11** (`npm install --no-save` tylko w jobie; `package.json` zostaje na Vitest 5).
+  Powod: runner 10.0.0 na Vitest 5 filtruje testy mutanta wzorcem "describe it", a Vitest 5 dopasowuje
+  "describe > it" -> 0 testow na mutanta, wszystko "Survived" (PR #38: 0/24 i 0/80). Upstream: stryker-js#6210.
+- Straznik po Strykerze: mutant "Survived" z `coveredBy` > 0 i `testsCompleted` 0 = FAIL
+  "runner nie odpalil testow". Ten komunikat != slabe testy — sprawdz wersje vitest vs runner.
+- Zdjecie pinu (gdy wyjdzie runner z fixem #6210): podbij runner w kroku Install, usun `vitest@4.1.11`, odpal
+  reprodukcje nizej na Vitest 5 — straznik zielony i realne zabicia = mozna mergowac.
+
+Reprodukcja lokalna 1:1 z CI (Git Bash, `pip install pyyaml`; wynik tez w `reports/mutation/mutation.json`):
+
+```bash
+npm ci
+npm install --no-save --no-audit --no-fund @stryker-mutator/core@10.0.0 @stryker-mutator/vitest-runner@10.0.0 vitest@4.1.11
+FILES=src/lib/caseStudyHash.ts,src/lib/palette.ts bash -eo pipefail <(python -c "import yaml; s = yaml.safe_load(open('.github/workflows/mutation.yml', encoding='utf-8'))['jobs']['mutation']['steps']; print(next(x for x in s if x.get('name', '').startswith('Stryker'))['run'])")
+npm ci   # przywraca Vitest 5 z package-lock w node_modules
+```
+
 ## Typowe awarie
 
 | Objaw                              | Pierwszy krok                                                          |

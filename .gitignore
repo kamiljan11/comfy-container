@@ -34,3 +34,8 @@ tsconfig.tsbuildinfo
 
 # build artefact from the book pipeline, not part of the site
 public/books/_build_report.json
+
+# Stryker (bramka Mutation, lokalna reprodukcja z docs/RUNBOOK.md)
+.stryker-tmp/
+reports/mutation/
+stryker.pr.config.json
