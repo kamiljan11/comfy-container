@@ -6010,7 +6010,11 @@ header[id] {
   .pain-tag,
   .sol-num,
   .work-tag,
-  .hero-stat-lbl {
+  .hero-stat-lbl,
+  .cs-fold-time,
+  .engage-mode,
+  .hero-eyebrow,
+  .chatbot-sub {
     font-size: 12px;
   }
   .cs-sec p {
