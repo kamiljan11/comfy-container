@@ -228,10 +228,8 @@ const TAG_ICONS: Record<string, string> = {
   knowledge: "book",
 };
 
-/** Diacritics off so "Efektywność" and "Zespół" hit the same keys as plain
- *  ASCII would. ł has no NFD decomposition, hence the explicit replace. The
- *  combining range is written as escapes so the file stays ASCII-safe for
- *  scripts/check-encoding.mjs. */
+/** Diacritics off (`normalizeText`, shared with the command palette) so
+ *  "Efektywność" and "Zespół" hit the same keys as plain ASCII would. */
 const normalizeTag = (tag: string) => normalizeText(tag).trim();
 
 function TagIcon({ tag }: { tag: string }) {
