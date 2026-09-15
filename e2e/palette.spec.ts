@@ -83,9 +83,14 @@ test("two jumps on /case-studies each open the study they point at", async ({ pa
   // the reopened dialog must start with an empty search, not the title just typed
   // (the mounted content used to keep it, and the next pick found nothing).
   await selectCase(page, first);
+  // mark this dialog element, so the reopen can prove it landed inside the close
+  // animation (same element back) rather than on a fresh mount, where an empty
+  // search would pass without testing anything
+  await dialog(page).evaluate((el) => el.setAttribute("data-e2e-first-opening", ""));
   await page.keyboard.press("Enter");
   await page.keyboard.press("Control+k");
   await expect(dialog(page)).toBeVisible();
+  await expect(dialog(page)).toHaveAttribute("data-e2e-first-opening", "");
   await expect(dialog(page).locator("[cmdk-input]")).toHaveValue("");
   await expect(page).toHaveURL(
     (url) => url.pathname === "/case-studies" && url.hash === `#${first}`,
