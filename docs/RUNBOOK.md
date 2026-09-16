@@ -30,12 +30,22 @@
   na 4173 jest uzywany ponownie.
 - `workers: 1` celowo: strona glowna renderuje scene Three.js, rownolegle przegladarki dawaly timeouty
   przy zamykaniu kontekstu (6/12 lokalnie); na jednym workerze 12/12.
-- Klucze API niepotrzebne: chatbot wola serwer dopiero po wyslaniu wiadomosci, testy tego nie robia.
+- Klucze API niepotrzebne. Jeden test (`e2e/mobile.spec.ts`, linki bledu w formularzu leada) wysyla formularz,
+  ale przechwytuje `**/_serverFn/**` i zwraca 500, wiec zadanie nie dochodzi do `lead.server.ts`. W CI nie ma
+  `RESEND_API_KEY`, a `sendLead()` i tak konczy sie wczesniej bez klucza.
+- UWAGA przy recznym klikaniu formularza leada na lokalnym buildzie: jesli masz `RESEND_API_KEY` wyeksportowany
+  w powloce, wyslanie formularza wysle PRAWDZIWEGO maila na `LEAD_TO` (domyslnie hello@kamiljan.com). Repo nie
+  ma `.env`, wiec normalnie konczy sie to stanem bledu; do sprawdzania stanu bledu uzywaj przechwycenia jak w tescie.
 - Porazka: `test-results/<test>/error-context.md` (snapshot strony) + `npx playwright show-trace test-results/<test>/trace.zip`.
 - W CI: przy porazce artefakt `playwright-test-results` (Summary runu, 7 dni) = ten sam `test-results/`;
   job ma `timeout-minutes: 20`. Decyzja o buildzie node-server: `docs/adr/0004-e2e-against-node-server-build.md`.
 - Specy: `e2e/smoke.spec.ts` (strona glowna bez bledow konsoli), `e2e/palette.spec.ts` (paleta komend +
-  regresja: drugi skok do case study na tej samej stronie otwiera wlasciwe studium).
+  regresja: drugi skok do case study na tej samej stronie otwiera wlasciwe studium; Ctrl+K w trakcie animacji
+  zamykania startuje z pustym wyszukiwaniem), `e2e/mobile.spec.ts` (projekt `mobile`, Pixel 7: brak przewijania
+  w bok, portret na /o-mnie, 44 px linki siostrzane i linki panelu czatu, 16 px pola formularza).
+- Pomiar kontrolek panelu czatu tylko przy OTWARTYM panelu i po `expect(panel).toHaveCSS("transform", "none")`:
+  zamkniety `.chatbot-panel` ma `scale(.97)`, wiec kazda kontrolka mierzy sie jako 43 px zamiast 44, a w trakcie
+  animacji otwierania 43.7 px. To zrodlo falszywych alarmow w audytach mobile.
 
 ## Rollback (cel: <5 min)
 
