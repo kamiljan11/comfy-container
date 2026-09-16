@@ -77,3 +77,27 @@ test("the chat panel's own links are 44 px tap targets", async ({ page }) => {
   expect(heights.length).toBeGreaterThan(0);
   for (const h of heights) expect(h).toBeGreaterThanOrEqual(44);
 });
+
+test("the lead form's error links are 44 px tap targets too", async ({ page }) => {
+  // The same rule covers `.chatbot-lead-err a`. The error state is reached by
+  // failing the submit at the network layer, so no lead is actually sent.
+  await load(page, "/?lang=pl");
+  await page.route("**/_serverFn/**", (route) =>
+    route.fulfill({ status: 500, contentType: "application/json", body: "{}" }),
+  );
+  await page.locator(".chatbot-fab").click();
+  await expect(page.locator(".chatbot-panel")).toHaveCSS("transform", "none");
+  await page.locator(".chatbot-starter.chatbot-cta").click();
+  const fields = page.locator(".chatbot-lead-in");
+  await fields.nth(0).fill("E2E");
+  await fields.nth(1).fill("e2e@example.com");
+  await fields.nth(2).fill("checking the error state");
+  await page.locator(".chatbot-lead-send").click();
+  const links = page.locator(".chatbot-lead-err a");
+  await expect(links.first()).toBeVisible();
+  const heights = await links.evaluateAll((els) =>
+    els.map((el) => el.getBoundingClientRect().height),
+  );
+  expect(heights.length).toBeGreaterThan(0);
+  for (const h of heights) expect(h).toBeGreaterThanOrEqual(44);
+});

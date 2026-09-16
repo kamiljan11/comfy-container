@@ -2807,10 +2807,6 @@ section {
     min-width: 44px;
     padding: 6px;
   }
-  .chatbot-foot {
-    /* the taller links need the row to breathe, not to grow the panel's bottom */
-    padding-bottom: 4px;
-  }
   .chatbot-nudge {
     bottom: 30px;
     right: 86px;
