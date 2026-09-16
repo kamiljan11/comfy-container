@@ -2795,6 +2795,18 @@ section {
     max-width: none;
     height: 72dvh;
   }
+  /* the panel's own links: 11 px text in a 12 px-padded row measured 60x30 with the
+     panel open, the only chat control under 44 px (the buttons are 44 and only look
+     smaller in an audit, because the closed panel renders at scale(.97)) */
+  .chatbot-foot a,
+  .chatbot-lead-err a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 6px;
+  }
   .chatbot-nudge {
     bottom: 30px;
     right: 86px;
