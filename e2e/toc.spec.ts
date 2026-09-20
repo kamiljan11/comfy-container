@@ -32,3 +32,30 @@ test("the table of contents lists the page's sections and jumps to one", async (
   await expect(target).toHaveText(label);
   await expect(target).toBeInViewport();
 });
+
+test("the list follows the language switch, labels and fragments both", async ({ page }) => {
+  // The server renders English and the language hook switches the page in the
+  // browser; a list built once kept the headings the reader never saw, and the
+  // ids kept the language it first mounted in.
+  await page.goto("/claude?lang=pl");
+  await page.waitForLoadState("networkidle");
+
+  const toc = page.locator(".ptoc");
+  await toc.locator(".ptoc-sum").click();
+  const rows = toc.locator(".ptoc-list a");
+  const pl = await rows.allInnerTexts();
+  const plHref = await rows.first().getAttribute("href");
+
+  await page.locator(".lang-toggle").click();
+  await expect(page.locator(".cv-paper h2").first()).not.toHaveText(pl[0] ?? "");
+
+  await expect(async () => {
+    const en = await rows.allInnerTexts();
+    expect(en[0]).not.toBe(pl[0]);
+    const enHref = await rows.first().getAttribute("href");
+    expect(enHref).not.toBe(plHref);
+    // and the link still lands on the heading it names
+    const target = page.locator(`#${String(enHref).slice(1)}`);
+    await expect(target).toHaveText((en[0] ?? "").trim());
+  }).toPass({ timeout: 10_000 });
+});

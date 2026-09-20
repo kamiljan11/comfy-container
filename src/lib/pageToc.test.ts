@@ -1,11 +1,30 @@
 import { describe, expect, it } from "vitest";
 import { collectToc, headingId } from "./pageToc";
 
-/** A stand-in for the page: only what collectToc touches. */
-function fakeDoc(headings: { text: string; id?: string }[]): ParentNode {
-  const nodes = headings.map((h) => ({ textContent: h.text, id: h.id ?? "" }));
+/**
+ * A stand-in for the page: enough of an element to be read and written the way
+ * collectToc does it. The same nodes survive between calls, which is what makes
+ * the language switch testable here (the real page keeps its DOM too).
+ */
+function fakeNode(text: string, id = "") {
+  const attrs = new Map<string, string>();
   return {
-    querySelectorAll: () => nodes,
+    textContent: text,
+    id,
+    getAttribute: (name: string) => attrs.get(name) ?? null,
+    setAttribute: (name: string, value: string) => {
+      attrs.set(name, value);
+    },
+  };
+}
+
+type FakeNode = ReturnType<typeof fakeNode>;
+
+function fakeDoc(nodes: FakeNode[], extraIds: string[] = []): ParentNode {
+  const others = extraIds.map((id) => fakeNode("", id));
+  return {
+    querySelectorAll: (selector: string) =>
+      selector === "[id]" ? [...nodes, ...others].filter((n) => n.id) : nodes,
   } as unknown as ParentNode;
 }
 
@@ -26,25 +45,50 @@ describe("headingId", () => {
 
 describe("collectToc", () => {
   it("lists the headings and writes back the ids it generated", () => {
-    const doc = fakeDoc([{ text: "Prompt layer" }, { text: "Git gates" }]);
-    const entries = collectToc(doc);
+    const nodes = [fakeNode("Prompt layer"), fakeNode("Git gates")];
+    const entries = collectToc(fakeDoc(nodes));
     expect(entries).toEqual([
       { id: "prompt-layer-1", label: "Prompt layer" },
       { id: "git-gates-2", label: "Git gates" },
     ]);
-    // the links point at these ids, so they have to exist on the page
-    const ids = [...doc.querySelectorAll("h2")].map((h) => h.id);
-    expect(ids).toEqual(["prompt-layer-1", "git-gates-2"]);
+    // the links point at these ids, so they have to be on the page
+    expect(nodes.map((n) => n.id)).toEqual(["prompt-layer-1", "git-gates-2"]);
   });
 
-  it("keeps an id the page already had", () => {
-    const entries = collectToc(fakeDoc([{ text: "Self-tests", id: "aivr" }]));
+  it("keeps an id the page author wrote", () => {
+    const entries = collectToc(fakeDoc([fakeNode("Self-tests", "aivr")]));
     expect(entries).toEqual([{ id: "aivr", label: "Self-tests" }]);
   });
 
   it("skips a heading with no text, which would be a dead row", () => {
-    const entries = collectToc(fakeDoc([{ text: "  " }, { text: "Doctrine" }]));
+    const entries = collectToc(fakeDoc([fakeNode("  "), fakeNode("Doctrine")]));
     expect(entries).toHaveLength(1);
     expect(entries[0]?.label).toBe("Doctrine");
+  });
+
+  it("follows the language: the same heading gets the fragment of the words now shown", () => {
+    // the page renders English first and the language hook switches it in the
+    // browser, so the second pass must not leave a Polish heading under an
+    // English fragment
+    const nodes = [fakeNode("Prompt layer"), fakeNode("Git gates")];
+    const doc = fakeDoc(nodes);
+    collectToc(doc);
+
+    nodes[0]!.textContent = "Warstwa promptu";
+    nodes[1]!.textContent = "Bramki gita";
+    const after = collectToc(doc);
+
+    expect(after).toEqual([
+      { id: "warstwa-promptu-1", label: "Warstwa promptu" },
+      { id: "bramki-gita-2", label: "Bramki gita" },
+    ]);
+    expect(nodes.map((n) => n.id)).toEqual(["warstwa-promptu-1", "bramki-gita-2"]);
+  });
+
+  it("never takes an id another element on the page already uses", () => {
+    const nodes = [fakeNode("Prompt layer")];
+    const entries = collectToc(fakeDoc(nodes, ["prompt-layer-1"]));
+    expect(entries[0]?.id).toBe("prompt-layer-1-2");
+    expect(nodes[0]?.id).toBe("prompt-layer-1-2");
   });
 });

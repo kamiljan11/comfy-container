@@ -26,13 +26,16 @@ type Props = {
 };
 
 export function PageToc({ bodyRef, label, lang, min = 4 }: Props) {
-  const [entries, setEntries] = useState<TocEntry[]>([]);
+  // null until the headings have been read: the page is server-rendered, and
+  // without holding the space the first paragraph jumps down on hydration
+  const [entries, setEntries] = useState<TocEntry[] | null>(null);
 
   useEffect(() => {
     if (!bodyRef.current) return;
     setEntries(collectToc(bodyRef.current));
   }, [bodyRef, lang]);
 
+  if (!entries) return <div className="ptoc-slot" aria-hidden="true" />;
   if (entries.length < min) return null;
 
   return (
