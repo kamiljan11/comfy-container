@@ -2932,6 +2932,95 @@ section {
   }
 }
 
+/* Table of contents for /claude: 16 screens on a phone, so the reader gets a
+   way to jump. Collapsed by default, because the page itself is the content
+   and a 15-item list above the first paragraph would be a wall. Rendered only
+   after mount (src/components/PageToc.tsx), which is why nothing here has to
+   reserve space for it. */
+.ptoc-slot {
+  height: 70px;
+}
+.ptoc {
+  margin: 0 0 26px;
+  border: 1px solid #d9d6cf;
+  border-radius: 10px;
+  background: #faf9f6;
+}
+.ptoc-sum {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 14px;
+  font: 600 13px/1 var(--font-body);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #4a4a44;
+  cursor: pointer;
+  list-style: none;
+}
+.ptoc-sum::-webkit-details-marker {
+  display: none;
+}
+.ptoc-sum::after {
+  content: "+";
+  font-size: 16px;
+  font-weight: 400;
+  /* 4.6:1 on #faf9f6: the marker carries the open/closed state, so it has to
+     be readable, not decorative */
+  color: #63605a;
+}
+.ptoc[open] .ptoc-sum::after {
+  content: "−";
+}
+.ptoc-count {
+  margin-left: auto;
+  padding: 2px 7px;
+  border-radius: 20px;
+  background: #ece9e2;
+  font-size: 11px;
+  color: #6b675f;
+}
+.ptoc[open] .ptoc-sum {
+  border-bottom: 1px solid #e6e3dc;
+}
+.ptoc-list {
+  margin: 0;
+  padding: 10px 14px 14px 30px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #3a3a34;
+}
+.ptoc-list li {
+  margin: 0 0 4px;
+}
+.ptoc-list a {
+  display: inline-block;
+  min-height: 24px;
+  padding: 5px 0;
+  color: #2a2a26;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+/* On a touch screen these fifteen links are the navigation, so they get the
+   same 44 px as every other target on the site. A mouse does not need the
+   extra height, and the list stays compact there. */
+@media (pointer: coarse) {
+  .ptoc-list a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 4px 0;
+  }
+  .ptoc-list li {
+    margin: 0;
+  }
+}
+.ptoc-list a:hover {
+  border-bottom-color: #8a867d;
+}
+
 .cv-sec {
   margin-bottom: 22px;
 }

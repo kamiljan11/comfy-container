@@ -101,3 +101,17 @@ test("the lead form's error links are 44 px tap targets too", async ({ page }) =
   expect(heights.length).toBeGreaterThan(0);
   for (const h of heights) expect(h).toBeGreaterThanOrEqual(44);
 });
+
+test("the /claude table of contents is a set of 44 px targets", async ({ page }) => {
+  await load(page, "/claude?lang=pl");
+  await page.locator(".ptoc-sum").click();
+  const links = page.locator(".ptoc-list a");
+  await expect(links.first()).toBeVisible();
+  const heights = await links.evaluateAll((els) =>
+    els.map((el) => el.getBoundingClientRect().height),
+  );
+  expect(heights.length).toBeGreaterThan(4);
+  for (const h of heights) expect(h).toBeGreaterThanOrEqual(44);
+  const sum = await page.locator(".ptoc-sum").boundingBox();
+  expect(sum?.height ?? 0).toBeGreaterThanOrEqual(44);
+});

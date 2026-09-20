@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { stackLines, wrapLabel } from "../lib/wrapLabel";
+import { useRef } from "react";
 import { useLang } from "../hooks/useLang";
+import { PageToc } from "../components/PageToc";
 import { type Lang } from "../i18n";
 
 export const Route = createFileRoute("/claude")({
@@ -91,6 +93,7 @@ type CadenceRow = { name: string; dots: number; freq: string; manual?: boolean }
 
 type Content = {
   title: string;
+  tocLabel: string;
   role: string;
   intro: string;
   repoCta: string;
@@ -147,6 +150,7 @@ type Content = {
 const CONTENT: Record<Lang, Content> = {
   en: {
     title: "Coding Higher Mind: the AI system behind the work",
+    tocLabel: "On this page",
     role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
     intro:
       "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
@@ -593,6 +597,7 @@ const CONTENT: Record<Lang, Content> = {
 
   pl: {
     title: "Coding Higher Mind: system AI, na którym stoi ta praca",
+    tocLabel: "Spis treści",
     role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
     intro:
       "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
@@ -1659,15 +1664,19 @@ function ClaudePage() {
   const [lang] = useLang("en");
 
   const c = CONTENT[lang];
+  const bodyRef = useRef<HTMLElement>(null);
 
   return (
     <div className="cv-page">
       <div className="read-progress" aria-hidden="true" />
-      <article className="cv-paper">
+      <article className="cv-paper" ref={bodyRef}>
         <header className="cv-head">
           <h1>{c.title}</h1>
           <p className="cv-role">{c.role}</p>
         </header>
+
+        {/* sixteen screens on a phone: the reader gets a way to jump */}
+        <PageToc bodyRef={bodyRef} label={c.tocLabel} lang={lang} />
 
         <section className="cv-sec">
           <p>{c.intro}</p>
