@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- The site assistant now knows the site it sits on. Its prompt is a closed world, and it had never been told about the six service pages, the six area pages, the 22 case studies, the free 30-minute consultation that the contact form books, CetusPro joining for bigger builds, or Workshop 3.0. It also claimed Ekomoc was a private build with no URL, which is wrong twice over: it runs in production and its write-up is public. The assistant now answers a named problem by pointing at the one page that covers it, and it never sends anyone to the blog, which has no articles yet. `src/server/bot.prompt.test.ts` fails if a service or area page is added or renamed and the prompt is not updated with it.
+
 - Workshop 3.0 in Selected projects now opens its GitHub write-up (`kamiljan11/mas-warsztat`) like every other row, instead of the login screen of the live app. The write-up says what the system does, how tenants are kept apart and what it runs on; the application itself stays private. The live address is in the write-up.
 - Hero subtitle cut from 295 characters to 129 (Kamil: "mega za długo jak na hero"). The headline already promises less manual work, so the subtitle no longer restates it in three sentences: it names the work that leaves the team (quotes, retyping data between programs, customer replies) and keeps the line about training the team afterwards.
 
