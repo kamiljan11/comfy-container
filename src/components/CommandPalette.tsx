@@ -180,8 +180,11 @@ export function CommandPalette({ lang, open, onOpenChange, onToggleLang }: Props
                         value={i.id}
                         keywords={paletteKeywords(i)}
                         onSelect={() => {
-                          // a question answers itself here; everything else is a page
-                          if (i.answer) setAnswer(i);
+                          // a question answers itself here; everything else is a
+                          // page. An FAQ row without an answer would navigate
+                          // instead, which palette.test.ts rules out by checking
+                          // every row carries one.
+                          if (i.group === "faq" && i.answer) setAnswer(i);
                           else go(i.href);
                         }}
                       >
