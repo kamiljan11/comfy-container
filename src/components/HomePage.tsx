@@ -192,7 +192,7 @@ const PROJECT_META = [
     name: "Workshop 3.0",
     tags: ["SaaS", "AI"],
     year: "2026",
-    href: "https://app.garage.mountaincar.is" as string | null,
+    href: "https://github.com/kamiljan11/mas-warsztat" as string | null,
   },
 ];
 
