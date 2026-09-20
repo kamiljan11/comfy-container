@@ -7,6 +7,8 @@
  * rendered headings instead. Pure functions here; the component only calls them.
  */
 
+import { normalizeText } from "./text";
+
 export type TocEntry = { id: string; label: string };
 
 /** Marks an id this module generated, so a later pass may replace it. */
@@ -18,11 +20,7 @@ const OWNED = "data-toc-id";
  * `index` keeps two identically named headings apart.
  */
 export function headingId(text: string, index: number): string {
-  const slug = text
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/ł/gi, "l")
-    .toLowerCase()
+  const slug = normalizeText(text)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 48);
