@@ -64,6 +64,15 @@ describe("paletteItems", () => {
     }
   });
 
+  it("does not let a page address drag in every question under it", () => {
+    // "uslugi" must find the services page, not the 25 questions living under it
+    const hits = paletteItems("pl").filter(
+      (i) => paletteScore(i.id, "uslugi", paletteKeywords(i)) > 0,
+    );
+    expect(hits.some((i) => i.href === "/uslugi")).toBe(true);
+    expect(hits.filter((i) => i.group === "faq")).toHaveLength(0);
+  });
+
   it("gives every row its own id", () => {
     const ids = paletteItems("pl").map((i) => i.id);
     expect(new Set(ids).size).toBe(ids.length);

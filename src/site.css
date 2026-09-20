@@ -6010,6 +6010,13 @@ header[id] {
   font-size: 11.5px;
   color: var(--text-2);
 }
+/* A keyboard legend is for keyboards: on a touch phone it only eats height in
+   an already short list. */
+@media (pointer: coarse) {
+  .cmdp-foot {
+    display: none;
+  }
+}
 .cmdp-foot span {
   display: inline-flex;
   align-items: center;

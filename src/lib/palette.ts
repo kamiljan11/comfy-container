@@ -198,7 +198,11 @@ function faqRows(
  * language ("uslugi" on the English site, "case" on the Polish one).
  */
 export function paletteKeywords(item: PaletteItem): string[] {
-  return [item.label, item.hint, item.href];
+  // The address is a keyword for destinations, so the Polish slug finds a page
+  // in either language. FAQ rows are deliberately left out of that: 25 of them
+  // sit under /uslugi/, and typing "uslugi" used to surface all of them
+  // alongside the page the visitor actually meant.
+  return item.group === "faq" ? [item.label, item.hint] : [item.label, item.hint, item.href];
 }
 
 /** A Mac (or an iPhone/iPad with a keyboard): the palette's modifier is ⌘, not Ctrl. */

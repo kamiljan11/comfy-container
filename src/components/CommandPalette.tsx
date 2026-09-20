@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "./ui/dialog";
@@ -65,6 +65,35 @@ export function CommandPalette({ lang, open, onOpenChange, onToggleLang }: Props
     }
   }
 
+  // Focus follows the view: the list unmounts when an answer opens, and a
+  // keyboard user left on a detached input has nowhere to type.
+  const answerRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    // one frame later: Radix's focus scope moves focus itself when the view
+    // swaps, and doing it in the same tick loses the race
+    const frame = requestAnimationFrame(() => {
+      if (answer) answerRef.current?.focus();
+      else inputRef.current?.focus();
+    });
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  }, [answer, open]);
+
+  // "Copied" is feedback, not a new label: put the address back so the next
+  // reader still sees what was copied.
+  useEffect(() => {
+    if (!copied) return;
+    const timer = setTimeout(() => {
+      setCopied(false);
+    }, 2_000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [copied]);
+
   const go = (href: string) => {
     onOpenChange(false);
     void navigate({ href });
@@ -92,12 +121,13 @@ export function CommandPalette({ lang, open, onOpenChange, onToggleLang }: Props
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className="cmdp"
-        onKeyDown={(e) => {
+        onEscapeKeyDown={(e) => {
           // Escape in the answer view goes back to the list; it only closes the
-          // palette when the list is what you are looking at.
-          if (e.key === "Escape" && answer) {
+          // palette when the list is what you are looking at. This has to be
+          // Radix's own hook: its dismissable layer listens on the document and
+          // closes before a handler on the content ever sees the key.
+          if (answer) {
             e.preventDefault();
-            e.stopPropagation();
             setAnswer(null);
           }
         }}
@@ -110,6 +140,7 @@ export function CommandPalette({ lang, open, onOpenChange, onToggleLang }: Props
             <p className="cmdp-answer-a">{answer.answer}</p>
             <div className="cmdp-answer-actions">
               <button
+                ref={answerRef}
                 type="button"
                 className="cmdp-answer-open"
                 onClick={() => {
@@ -131,7 +162,12 @@ export function CommandPalette({ lang, open, onOpenChange, onToggleLang }: Props
           </div>
         ) : (
           <Command filter={paletteScore} loop>
-            <CommandInput placeholder={t.placeholder} value={query} onValueChange={setQuery} />
+            <CommandInput
+              ref={inputRef}
+              placeholder={t.placeholder}
+              value={query}
+              onValueChange={setQuery}
+            />
             <CommandList>
               <CommandEmpty>{t.empty}</CommandEmpty>
               {GROUPS.map((group) => (

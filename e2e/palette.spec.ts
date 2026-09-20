@@ -122,10 +122,15 @@ test("a question is answered inside the palette, and the page does not move", as
   await expect(answer.locator(".cmdp-answer-a")).not.toBeEmpty();
   expect(page.url()).toBe(before);
 
+  // the keyboard lands on the answer's own button, not on a detached input
+  await expect(page.locator(".cmdp-answer-open")).toBeFocused();
+
   // Escape goes back to the list here, it does not close the palette
   await page.keyboard.press("Escape");
   await expect(page.locator("[cmdk-input]")).toBeVisible();
   await expect(page.locator(".cmdp-answer")).toHaveCount(0);
+  // and typing works again straight away
+  await expect(page.locator("[cmdk-input]")).toBeFocused();
 });
 
 test("the answer can open the question on its own page", async ({ page }) => {
@@ -164,4 +169,10 @@ test("the email address copies without leaving the page", async ({ page, context
   );
   const clip = await page.evaluate(() => navigator.clipboard.readText());
   expect(clip).toBe("hello@kamiljan.com");
+
+  // the confirmation is temporary: the address comes back
+  await expect(page.locator('[cmdk-item][data-value="action:copy"] .cmdp-hint')).toHaveText(
+    "hello@kamiljan.com",
+    { timeout: 5_000 },
+  );
 });
