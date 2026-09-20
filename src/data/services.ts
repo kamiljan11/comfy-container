@@ -45,8 +45,8 @@ const PL: Service[] = [
       "Aplikacje do codziennej pracy firmy: zamówienia, wyceny i zlecenia w jednym miejscu, obsługiwane z telefonu. Wdrożenia działające na produkcji.",
     eyebrow: "SYSTEMY DLA FIRM",
     h1: "System, który zna Twój proces lepiej niż arkusz",
-    lead: "Buduję aplikacje do codziennej pracy firmy: zamówień, wycen, zleceń. Zamiast arkusza, maili i telefonów wszyscy widzą w jednym miejscu, na jakim etapie jest sprawa i kto ma ją teraz ruszyć. Przykład: platforma, która prowadzi zamówienia firmy dystrybucyjnej B2B przez 13 etapów.",
-    micro: ["Jedno źródło stanu", "Obsługa z telefonu", "Rośnie razem z firmą"],
+    lead: "Buduję aplikacje do codziennej pracy firmy: zamówień, wycen, zleceń. Zamiast arkusza, maili i telefonów wszyscy widzą w jednym miejscu, na jakim etapie jest sprawa i kto ma ją teraz ruszyć.",
+    micro: ["Zamówienia, wyceny, zlecenia", "Obsługa z telefonu", "Rośnie razem z firmą"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć rzeczy, które psują się razem z firmą",
     problemsLead: "Czasem bolą już przy jednym zamówieniu, a z każdym kolejnym coraz bardziej.",
@@ -89,7 +89,7 @@ const PL: Service[] = [
     points: [
       {
         title: "Stan jako maszyna, nie jako pole tekstowe",
-        body: "W platformie MAS Group zamówienie ma 13 nazwanych etapów i wyłącznie dozwolone przejścia między nimi. Nie da się przeskoczyć etapu ani wysłać tego samego SMS-a dwa razy, bo powiadomienie wychodzi z jednego konkretnego przejścia i znikąd indziej.",
+        body: "W platformie B2B, którą prowadzę, zamówienie ma nazwane etapy i wyłącznie dozwolone przejścia między nimi. Nie da się przeskoczyć etapu ani wysłać tego samego SMS-a dwa razy, bo powiadomienie wychodzi z jednego konkretnego przejścia i znikąd indziej.",
       },
       {
         title: "Uprawnienia pilnowane przez bazę, nie przez ekran",
@@ -97,7 +97,7 @@ const PL: Service[] = [
       },
       {
         title: "Zbudowane pod telefon w terenie",
-        body: "Zespół handlowy MAS Group prowadzi cały proces z telefonu, między jednym klientem a drugim. System, który działa w takich warunkach, działa wszędzie.",
+        body: "Handlowcy prowadzą cały proces z telefonu, między jednym klientem a drugim. System, który działa w takich warunkach, działa wszędzie.",
       },
       {
         title: "Jeden proces naraz, nie plan na pół roku",
@@ -161,7 +161,7 @@ const PL: Service[] = [
     eyebrow: "AUTOMATYZACJA PROCESÓW",
     h1: "Przestań płacić ludziom za przenoszenie danych",
     lead: "Automatyzuję powtarzalne zadania tam, gdzie zwracają się w czasie, który da się policzyć. Nie każdy proces warto automatyzować i mówię wprost, kiedy nie warto.",
-    micro: ["Zwrot policzony przed startem", "Wdrożenie etapami", "Zero ukrytych zależności"],
+    micro: ["Ręczne kroki znikają", "Wdrożenie etapami", "Zero ukrytych zależności"],
     problemsEyebrow: "CENA RĘCZNEJ ROBOTY",
     problemsTitle: "Sześć kosztów, których nie widać na fakturze",
     problemsLead: "Ręczna praca nie ma osobnej pozycji w księgach. Ma za to bardzo konkretną cenę.",
@@ -271,7 +271,7 @@ const PL: Service[] = [
     eyebrow: "SZTUCZNA INTELIGENCJA",
     h1: "Nie kolejny chatbot: AI, które liczy z Twoich danych",
     lead: "Model, który zgaduje, jest groźniejszy niż brak modelu, bo brzmi wiarygodnie. Buduję rozwiązania, w których AI pracuje na Twoich liczbach i Twoich regułach, a tam, gdzie odpowiedź musi być zawsze identyczna, w ogóle nie pyta modelu.",
-    micro: ["Odpowiedzi z Twoich danych", "Koszt pod kontrolą", "Granice powiedziane wprost"],
+    micro: ["Asystent na Twoich danych", "Koszt pod kontrolą", "Granice powiedziane wprost"],
     problemsEyebrow: "DLACZEGO PILOTAŻE UMIERAJĄ",
     problemsTitle: "Sześć powodów, dla których AI nie weszło do produkcji",
     problemsLead:
@@ -382,7 +382,7 @@ const PL: Service[] = [
     eyebrow: "INTEGRACJE",
     h1: "Twoje narzędzia spina dziś człowiek. Niech spina je kod",
     lead: "Łączę systemy, które każdy z osobna działa dobrze, a razem wymagają osoby przenoszącej dane. Integracja to nie tylko połączenie: to też decyzja, co się dzieje, gdy druga strona przestaje odpowiadać.",
-    micro: ["Dane płyną same", "Awarie widoczne", "Odporne na aktualizacje"],
+    micro: ["Dane same między programami", "Awarie widoczne", "Odporne na aktualizacje"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć objawów systemów, które się nie znają",
     problemsLead:
@@ -493,7 +493,7 @@ const PL: Service[] = [
     eyebrow: "DORADZTWO",
     h1: "Zanim wydasz na automatyzację, sprawdź, czy się zwróci",
     lead: "Wskazuję miejsca, w których automatyzacja i AI zwrócą się najszybciej, oraz te, w których nie warto ich ruszać. To druga lista bywa cenniejsza, bo oszczędza budżet, który już miał być wydany.",
-    micro: ["Priorytety wg zwrotu", "Konkretny plan", "Bez zobowiązania do budowy"],
+    micro: ["Co automatyzować najpierw", "Konkretny plan", "Bez zobowiązania do budowy"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć powodów, dla których projekt stoi w miejscu",
     problemsLead:
@@ -566,7 +566,7 @@ const PL: Service[] = [
       {
         sector: "Wdrożenia",
         title: "Systemy oddane zespołom, które prowadzą je beze mnie",
-        metric: "Zespół terenowy MAS Group na co dzień bez mojego udziału",
+        metric: "Zespół w terenie na co dzień, bez mojego udziału",
       },
       {
         sector: "Warsztat",
@@ -604,7 +604,7 @@ const PL: Service[] = [
     eyebrow: "WDROŻENIE I SZKOLENIE",
     h1: "System, którego zespół faktycznie zaczyna używać",
     lead: "Zbudowanie systemu to połowa roboty. Druga połowa to doprowadzenie do momentu, w którym ludzie używają go bez przypominania, a ta połowa decyduje, czy projekt był inwestycją czy kosztem.",
-    micro: ["Nauka na waszym procesie", "Materiały zostają u Was", "Wsparcie po starcie"],
+    micro: ["Zespół umie to prowadzić", "Materiały zostają u Was", "Wsparcie po starcie"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć powodów, dla których gotowy system leży odłogiem",
     problemsLead: "Najdroższy system to ten, który działa poprawnie i z którego nikt nie korzysta.",
@@ -715,8 +715,8 @@ const EN: Service[] = [
       "Apps a company runs its daily work on: orders, quotes and jobs in one place, operated from a phone. Running in production.",
     eyebrow: "INTERNAL SYSTEMS",
     h1: "A system that knows your process better than the spreadsheet does",
-    lead: "I build the apps a company runs its daily work on: orders, quotes, jobs. Instead of a spreadsheet, emails and phone calls, everyone sees in one place what stage each case is at and who has to move it next. Example: a platform that takes a B2B distributor's orders through 13 stages.",
-    micro: ["One source of state", "Works from a phone", "Grows with the company"],
+    lead: "I build the apps a company runs its daily work on: orders, quotes, jobs. Instead of a spreadsheet, emails and phone calls, everyone sees in one place what stage each case is at and who has to move it next.",
+    micro: ["Orders, quotes and jobs", "Works from a phone", "Grows with the company"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six things that break as the company grows",
     problemsLead:
@@ -760,7 +760,7 @@ const EN: Service[] = [
     points: [
       {
         title: "State as a machine, not as a text field",
-        body: "In the MAS Group platform an order has 13 named stages and only the transitions I declared legal. A stage can't be skipped and the same SMS can't fire twice, because the notification leaves from one specific transition and nowhere else.",
+        body: "In a B2B order platform I run, an order has named stages and only the transitions I declared legal. A stage can't be skipped and the same SMS can't fire twice, because the notification leaves from one specific transition and nowhere else.",
       },
       {
         title: "Permissions enforced by the database, not by the screen",
@@ -768,7 +768,7 @@ const EN: Service[] = [
       },
       {
         title: "Built for a phone in the field",
-        body: "The MAS Group sales team runs the whole process from their phones, between customers. A system that survives that survives anywhere.",
+        body: "The sales team runs the whole process from their phones, between customers. A system that survives that survives anywhere.",
       },
       {
         title: "One process at a time, not a six-month plan",
@@ -832,7 +832,7 @@ const EN: Service[] = [
     eyebrow: "PROCESS AUTOMATION",
     h1: "Stop paying people to move data between windows",
     lead: "I automate repetitive work where it pays back in time you can actually count. Not every process is worth automating, and I say so plainly when it isn't.",
-    micro: ["Payback counted first", "Shipped in stages", "No hidden coupling"],
+    micro: ["Manual steps disappear", "Shipped in stages", "No hidden coupling"],
     problemsEyebrow: "THE COST OF MANUAL WORK",
     problemsTitle: "Six costs that never appear on an invoice",
     problemsLead: "Manual work has no line in the accounts. It has a very specific price.",
@@ -942,7 +942,7 @@ const EN: Service[] = [
     eyebrow: "ARTIFICIAL INTELLIGENCE",
     h1: "Not another chatbot: AI that computes from your data",
     lead: "A model that guesses is more dangerous than no model, because it sounds credible. I build systems where AI works from your numbers and your rules, and where the answer must be identical every time, it doesn't ask a model at all.",
-    micro: ["Grounded in your data", "Cost under control", "Limits stated up front"],
+    micro: ["An assistant on your data", "Cost under control", "Limits stated up front"],
     problemsEyebrow: "WHY PILOTS DIE",
     problemsTitle: "Six reasons AI never reached production",
     problemsLead:
@@ -1053,7 +1053,7 @@ const EN: Service[] = [
     eyebrow: "INTEGRATIONS",
     h1: "A person is bridging your tools. Let code do it",
     lead: "I connect systems that each work fine alone and together need somebody to carry data across. Integration isn't only the connection: it's also deciding what happens when the other side stops answering.",
-    micro: ["Data moves itself", "Failures are visible", "Survives API changes"],
+    micro: ["Data between your tools", "Failures are visible", "Survives API changes"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six symptoms of systems that don't know each other",
     problemsLead:
@@ -1164,7 +1164,7 @@ const EN: Service[] = [
     eyebrow: "ADVISORY",
     h1: "Before you spend on automation, find out whether it pays back",
     lead: "I identify where automation and AI will pay back fastest, and where they aren't worth touching. That second list is often the more valuable one, because it saves a budget that was already being spent.",
-    micro: ["Priorities by payback", "A concrete plan", "No obligation to build"],
+    micro: ["What to automate first", "A concrete plan", "No obligation to build"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six reasons the project isn't moving",
     problemsLead:
@@ -1236,7 +1236,7 @@ const EN: Service[] = [
       {
         sector: "Deployments",
         title: "Systems handed to teams that run them without me",
-        metric: "MAS Group's field team, daily, unaided",
+        metric: "The field team, daily, unaided",
       },
       {
         sector: "Workshop",
@@ -1274,7 +1274,7 @@ const EN: Service[] = [
     eyebrow: "ROLLOUT & TRAINING",
     h1: "A system the team actually starts using",
     lead: "Building the system is half the work. The other half is getting to the point where people use it without being reminded, and that half decides whether the project was an investment or a cost.",
-    micro: ["Learning on your own data", "Materials stay with you", "Support after launch"],
+    micro: ["Your team can run it", "Materials stay with you", "Support after launch"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six reasons a finished system sits unused",
     problemsLead: "The most expensive system is the one that works correctly and nobody opens.",

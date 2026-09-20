@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { T, type Lang } from "../i18n";
 import { SERVICES, pickHomePains } from "../data/services";
+import { PainIcon } from "./PainIcon";
 
 /**
  * The homepage's offer block, in the order a buyer thinks: first the problem
@@ -27,7 +28,10 @@ export function PainGrid({ lang }: { lang: Lang }) {
         <div className="pains-grid">
           {pains.map((p) => (
             <a key={p.slug} className="pain-card" href={serviceHref(p.slug, lang)}>
-              <span className="pain-tag">{p.tag}</span>
+              <span className="pain-head">
+                <PainIcon slug={p.slug} />
+                <span className="pain-tag">{p.tag}</span>
+              </span>
               <h3 className="pain-title">{p.title}</h3>
               <p className="pain-body">{p.body}</p>
             </a>

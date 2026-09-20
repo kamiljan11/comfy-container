@@ -4420,6 +4420,35 @@ section {
   border-color: var(--border-teal);
   transform: translateY(-3px);
 }
+/* Tag and drawing on one line: the drawing shows the failure the card is
+   about, the tag names the area it belongs to. */
+.pain-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.pain-icon {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  color: var(--teal-2);
+  opacity: 0.9;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.pain-card:hover .pain-icon {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pain-icon {
+    transition: none;
+  }
+  .pain-card:hover .pain-icon {
+    transform: none;
+  }
+}
 .pain-tag,
 .sol-eyebrow,
 .sol-num,
@@ -4489,11 +4518,15 @@ section {
   border-radius: var(--r-lg);
 }
 .sol-h {
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: clamp(22px, 2.6vw, 30px);
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  /* Serif here on purpose: the section already shouts in Syne ("Sześć sposobów
+     …"), and a second display heading right under it made the block read as one
+     long headline. Newsreader is already loaded and already carries the case
+     studies, so this is the site's existing editorial voice, not a new face. */
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(23px, 2.7vw, 32px);
+  letter-spacing: -0.01em;
+  line-height: 1.22;
   color: var(--text);
   margin: 12px 0 16px;
 }

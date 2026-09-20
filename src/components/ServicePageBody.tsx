@@ -36,7 +36,6 @@ type Step = { meta: string; title: string; body: string };
 
 type Copy = {
   ctaPrimary: string;
-  ctaSecondary: string;
   proofsEyebrow: string;
   caseStudies: string;
   processEyebrow: string;
@@ -52,7 +51,6 @@ type Copy = {
 const COPY: Record<Lang, Copy> = {
   pl: {
     ctaPrimary: "Umów bezpłatną konsultację",
-    ctaSecondary: "Zobacz typowe problemy",
     proofsEyebrow: "DOWODY",
     caseStudies: "Pełne opisy wdrożeń z decyzjami i odrzuconymi alternatywami",
     processEyebrow: "WSPÓŁPRACA",
@@ -89,7 +87,6 @@ const COPY: Record<Lang, Copy> = {
   },
   en: {
     ctaPrimary: "Book a free consultation",
-    ctaSecondary: "See the usual problems",
     proofsEyebrow: "EVIDENCE",
     caseStudies: "Full write-ups with the decisions and the rejected alternatives",
     processEyebrow: "WORKING TOGETHER",
@@ -480,9 +477,6 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
                   →
                 </span>
               </Link>
-              <a href="#sl-problems" className="sl-btn-ghost">
-                {t.ctaSecondary}
-              </a>
             </div>
           </div>
 

@@ -72,7 +72,7 @@ const PL: Service[] = [
       },
       {
         title: "Jedna cena w rozmowie, ofercie i umowie",
-        body: "Cały cennik Reykjawwwik siedzi w jednym pliku, z którego czytają konfigurator, oferta, umowa i asystenci AI. Rozmowa kończy się wyceną na ekranie zamiast obietnicą wysłania czegoś później, a cena nie rozjedzie się między rozmową a fakturą. Osobny przykład to MAS Group: handlowcy wyceniają druk w aplikacji na własnym telefonie, czasem jeszcze przy kliencie.",
+        body: "Cały cennik Reykjawwwik siedzi w jednym pliku, z którego czytają konfigurator, oferta, umowa i asystenci AI. Rozmowa kończy się wyceną na ekranie zamiast obietnicą wysłania czegoś później, a cena nie rozjedzie się między rozmową a fakturą. W innym wdrożeniu handlowcy wyceniają druk w aplikacji na własnym telefonie, czasem jeszcze przy kliencie.",
       },
       {
         title: "Umowa z danych, podpis i faktura spięte ze stanem",
@@ -190,11 +190,11 @@ const PL: Service[] = [
     points: [
       {
         title: "Status wysyłany z przejścia, nie z pamięci",
-        body: "W platformie MAS Group zamówienie przechodzi przez 13 nazwanych etapów zapisanych w bazie danych. SMS o odprawie celnej wychodzi z jednego konkretnego przejścia i znikąd indziej, więc nie może pójść dwa razy ani z etapu, którego zamówienie naprawdę nie osiągnęło. Gdy klient pyta, gdzie jest zamówienie, SMS-y z aktualizacjami ma już w telefonie, a nikt nie musiał pamiętać o ich wysłaniu.",
+        body: "W platformie B2B, którą prowadzę, zamówienie przechodzi przez nazwane etapy zapisane w bazie danych. SMS o odprawie celnej wychodzi z jednego konkretnego przejścia i znikąd indziej, więc nie może pójść dwa razy ani z etapu, którego zamówienie naprawdę nie osiągnęło. Gdy klient pyta, gdzie jest zamówienie, SMS-y z aktualizacjami ma już w telefonie, a nikt nie musiał pamiętać o ich wysłaniu.",
       },
       {
         title: "Powtarzalne rozmowy bez człowieka, ale z granicą",
-        body: "Połączenia i SMS-y o statusie działają w MAS Group bez nadzoru, po polsku i po angielsku. Połączenie o statusie to stały skrypt czytany przez syntezator mowy, bez modelu językowego. W dwukierunkowym agencie głosowym model tylko formułuje zdania i wybiera ścieżkę, a każdą zmianę zamówienia i każdą wysyłkę wykonuje zwykły, przewidywalny kod. Ten agent działa, ale wciąż go dopracowuję i nie nazywam go gotowym produktem.",
+        body: "Połączenia i SMS-y o statusie działają bez nadzoru w firmie, którą prowadzę, po polsku i po angielsku. Połączenie o statusie to stały skrypt czytany przez syntezator mowy, bez modelu językowego. W dwukierunkowym agencie głosowym model tylko formułuje zdania i wybiera ścieżkę, a każdą zmianę zamówienia i każdą wysyłkę wykonuje zwykły, przewidywalny kod. Ten agent działa, ale wciąż go dopracowuję i nie nazywam go gotowym produktem.",
       },
       {
         title: "Akceptacja jednym kliknięciem, zapisana przez system",
@@ -430,7 +430,7 @@ const PL: Service[] = [
       },
       {
         title: "Przyjęcie i odejście jako etapy, nie lista w mailu",
-        body: "Onboarding i offboarding mają nazwane etapy i tylko dozwolone przejścia między nimi, tak jak zamówienie w platformie MAS Group. Zadanie dla IT, prośba o podpis czy przypomnienie wychodzą z jednego konkretnego przejścia, więc etapu nie da się przeskoczyć, a to samo zadanie nie wyjdzie dwa razy. Przy odejściu lista kont do zamknięcia tworzy się sama.",
+        body: "Onboarding i offboarding mają nazwane etapy i tylko dozwolone przejścia między nimi, tak jak zamówienie w platformie B2B, którą prowadzę. Zadanie dla IT, prośba o podpis czy przypomnienie wychodzą z jednego konkretnego przejścia, więc etapu nie da się przeskoczyć, a to samo zadanie nie wyjdzie dwa razy. Przy odejściu lista kont do zamknięcia tworzy się sama.",
       },
       {
         title: "Dokumenty kadrowe z danych, nie z ręcznie wypełnianego szablonu",
@@ -483,7 +483,7 @@ const PL: Service[] = [
       },
       {
         q: "Skąd wiesz, jak działa HR?",
-        a: "Nie jestem specjalistą od kadr i nie udaję, że znam prawo pracy: treść umów i regulaminów ustala Wasz dział kadr albo prawnik. Rekrutację znam od strony pracodawcy: w MAS Group sam rekrutuję developerów i szkolę zespół sprzedaży. Resztę robię tak jak przy systemie warsztatowym, który zbudowałem, nie będąc mechanikiem: to osoba wykonująca pracę definiuje, co jest poprawnym wynikiem.",
+        a: "Nie jestem specjalistą od kadr i nie udaję, że znam prawo pracy: treść umów i regulaminów ustala Wasz dział kadr albo prawnik. Rekrutację znam od strony pracodawcy: we własnej firmie sam rekrutuję developerów i szkolę zespół sprzedaży. Resztę robię tak jak przy systemie warsztatowym, który zbudowałem, nie będąc mechanikiem: to osoba wykonująca pracę definiuje, co jest poprawnym wynikiem.",
       },
       {
         q: "Co z danymi osobowymi kandydatów i pracowników?",
@@ -548,7 +548,7 @@ const PL: Service[] = [
     points: [
       {
         title: "Zdarzenie zapisane w chwili, gdy się dzieje",
-        body: "W kalkulatorze wycen, z którego handlowcy MAS Group korzystają w terenie, każda zmiana statusu zamówienia trafia do historii: z jakiego etapu, na jaki, kiedy i kto ją zrobił. Prowizja jest przypięta do zamówienia, z którego wynika, więc na koniec miesiąca nikt nie musi jej odtwarzać.",
+        body: "W kalkulatorze wycen, z którego handlowcy korzystają w terenie, każda zmiana statusu zamówienia trafia do historii: z jakiego etapu, na jaki, kiedy i kto ją zrobił. Prowizja jest przypięta do zamówienia, z którego wynika, więc na koniec miesiąca nikt nie musi jej odtwarzać.",
       },
       {
         title: "Panel czyta ten sam stan, na którym działa proces",
@@ -682,7 +682,7 @@ const PL: Service[] = [
       },
       {
         title: "Model formułuje, kod wykonuje",
-        body: "W logistyce MAS Group automatyczne telefony o statusie zamówienia i SMS-y idą same z procesu zamówień, po polsku i po angielsku. Tam, gdzie w rozmowie pracuje model, może wyłącznie sformułować zdanie i wybrać ścieżkę: każdą zmianę zamówienia i każdą wysyłkę wykonuje deterministyczny kod. Dwukierunkowy agent głosowy jest jeszcze dopracowywany, ale ta granica nie zmienia się od pierwszej wersji.",
+        body: "W logistyce, którą prowadzę, automatyczne telefony o statusie zamówienia i SMS-y idą same z procesu zamówień, po polsku i po angielsku. Tam, gdzie w rozmowie pracuje model, może wyłącznie sformułować zdanie i wybrać ścieżkę: każdą zmianę zamówienia i każdą wysyłkę wykonuje deterministyczny kod. Dwukierunkowy agent głosowy jest jeszcze dopracowywany, ale ta granica nie zmienia się od pierwszej wersji.",
       },
       {
         title: "System tam, gdzie człowiek już pracuje",
@@ -795,7 +795,7 @@ const EN: Service[] = [
       },
       {
         title: "One price in the call, the quote and the contract",
-        body: "Reykjawwwik's whole catalogue sits in one file that the configurator, the offer, the contract and the AI assistants all read. A call ends with a priced offer on screen instead of a promise to send something over, and the price can't drift between the call and the invoice. A separate example is MAS Group, where the reps price print jobs in an app on their own phones, sometimes with the customer standing there.",
+        body: "Reykjawwwik's whole catalogue sits in one file that the configurator, the offer, the contract and the AI assistants all read. A call ends with a priced offer on screen instead of a promise to send something over, and the price can't drift between the call and the invoice. In another build the reps price print jobs in an app on their own phones, sometimes with the customer standing there.",
       },
       {
         title: "Contracts from data, signature and billing tied to state",
@@ -914,11 +914,11 @@ const EN: Service[] = [
     points: [
       {
         title: "Status sent from a transition, not from memory",
-        body: "In the MAS Group platform an order moves through 13 named stages held in the database. The customs SMS leaves from one specific transition and nowhere else, so it can't go out twice or from a stage the order never really reached. By the time a customer asks where their order is, the SMS updates are already on their phone, and nobody had to remember to send them.",
+        body: "In a B2B order platform I run, an order moves through named stages held in the database. The customs SMS leaves from one specific transition and nowhere else, so it can't go out twice or from a stage the order never really reached. By the time a customer asks where their order is, the SMS updates are already on their phone, and nobody had to remember to send them.",
       },
       {
         title: "Repetitive conversations without a person, but with a boundary",
-        body: "Status calls and SMS run unattended at MAS Group, in Polish and English. A status call is a fixed script read by text-to-speech, with no language model in it. In the two-way voice agent the model only phrases the sentence and picks the route; every order change and every send is done by ordinary, predictable code. That agent works, but it's still hardening and I don't call it finished.",
+        body: "Status calls and SMS run unattended in a company I operate, in Polish and English. A status call is a fixed script read by text-to-speech, with no language model in it. In the two-way voice agent the model only phrases the sentence and picks the route; every order change and every send is done by ordinary, predictable code. That agent works, but it's still hardening and I don't call it finished.",
       },
       {
         title: "Approval in one click, recorded by the system",
@@ -1154,7 +1154,7 @@ const EN: Service[] = [
       },
       {
         title: "Joining and leaving as stages, not a list in an email",
-        body: "Onboarding and offboarding get named stages and only the transitions declared legal, the same way an order works in the MAS Group platform. A task for IT, a signature request or a reminder fires from one specific transition, so a stage can't be skipped and the same task can't go out twice. When someone leaves, the list of accounts to close builds itself.",
+        body: "Onboarding and offboarding get named stages and only the transitions declared legal, the same way an order works in the B2B platform I run. A task for IT, a signature request or a reminder fires from one specific transition, so a stage can't be skipped and the same task can't go out twice. When someone leaves, the list of accounts to close builds itself.",
       },
       {
         title: "HR documents built from data, not from a template filled by hand",
@@ -1207,7 +1207,7 @@ const EN: Service[] = [
       },
       {
         q: "How would you know how HR works?",
-        a: "I'm not an HR specialist and I don't pretend to know employment law: the content of contracts and policies comes from your HR team or your lawyer. I know recruitment from the employer's side: at MAS Group I hire the developers and train the sales team myself. The rest works the way it did with the workshop system I built without being a mechanic: the person who does the work defines what a correct result is.",
+        a: "I'm not an HR specialist and I don't pretend to know employment law: the content of contracts and policies comes from your HR team or your lawyer. I know recruitment from the employer's side: in my own company I hire the developers and train the sales team myself. The rest works the way it did with the workshop system I built without being a mechanic: the person who does the work defines what a correct result is.",
       },
       {
         q: "What about candidates' and employees' personal data?",
@@ -1272,7 +1272,7 @@ const EN: Service[] = [
     points: [
       {
         title: "An event recorded the moment it happens",
-        body: "In the pricing app MAS Group's sales reps use in the field, every order status change goes into a history: from which stage, to which, when, and by whom. Commissions attach to the order that generated them, so nobody has to rebuild them at month-end.",
+        body: "In the pricing app the sales reps use in the field, every order status change goes into a history: from which stage, to which, when, and by whom. Commissions attach to the order that generated them, so nobody has to rebuild them at month-end.",
       },
       {
         title: "The dashboard reads the same state the process runs on",
@@ -1406,7 +1406,7 @@ const EN: Service[] = [
       },
       {
         title: "The model phrases, code acts",
-        body: "In MAS Group's logistics, automated status calls and SMS fire from the order flow on their own, in English and Polish. Where a model takes part in a call it can only phrase a sentence and pick a route: every order change and every send is done by deterministic code. The two-way voice agent is still hardening, but that boundary hasn't moved since the first version.",
+        body: "In the logistics operation I run, automated status calls and SMS fire from the order flow on their own, in English and Polish. Where a model takes part in a call it can only phrase a sentence and pick a route: every order change and every send is done by deterministic code. The two-way voice agent is still hardening, but that boundary hasn't moved since the first version.",
       },
       {
         title: "The system goes where the person already works",
