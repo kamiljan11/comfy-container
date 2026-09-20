@@ -104,3 +104,64 @@ test("two jumps on /case-studies each open the study they point at", async ({ pa
   await expect(dialog(page)).toBeHidden();
   await expect(page.locator(`details#${second}`)).toHaveAttribute("open", "");
 });
+
+test("a question is answered inside the palette, and the page does not move", async ({ page }) => {
+  await page.goto("/uslugi?lang=pl");
+  await page.waitForLoadState("networkidle");
+  await openWithShortcut(page);
+
+  const before = page.url();
+  await page.keyboard.type("ile to kosztuje");
+  const first = page.locator('[cmdk-item][data-selected="true"]');
+  await expect(first).toHaveAttribute("data-value", /^faq:/);
+  await page.keyboard.press("Enter");
+
+  // the answer replaces the list without a navigation
+  const answer = page.locator(".cmdp-answer");
+  await expect(answer).toBeVisible();
+  await expect(answer.locator(".cmdp-answer-a")).not.toBeEmpty();
+  expect(page.url()).toBe(before);
+
+  // Escape goes back to the list here, it does not close the palette
+  await page.keyboard.press("Escape");
+  await expect(page.locator("[cmdk-input]")).toBeVisible();
+  await expect(page.locator(".cmdp-answer")).toHaveCount(0);
+});
+
+test("the answer can open the question on its own page", async ({ page }) => {
+  await page.goto("/uslugi?lang=pl");
+  await page.waitForLoadState("networkidle");
+  await openWithShortcut(page);
+
+  await page.keyboard.type("ile to kosztuje");
+  await page.keyboard.press("Enter");
+  await page.locator(".cmdp-answer-open").click();
+
+  await expect(page).toHaveURL((url) => /^\/(uslugi|obszary)\//.test(url.pathname));
+  const hash = new URL(page.url()).hash;
+  expect(hash).toMatch(/^#faq-\d+$/);
+  // the linked question is open, not a collapsed list
+  await expect(page.locator(`details${hash}`)).toHaveAttribute("open", "");
+});
+
+test("the email address copies without leaving the page", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/?lang=pl");
+  await page.waitForLoadState("networkidle");
+  await openWithShortcut(page);
+
+  await page.keyboard.type("skopiuj adres");
+  await expect(page.locator('[cmdk-item][data-selected="true"]')).toHaveAttribute(
+    "data-value",
+    "action:copy",
+  );
+  await page.keyboard.press("Enter");
+
+  // the palette stays open and says it copied
+  await expect(dialog(page)).toBeVisible();
+  await expect(page.locator('[cmdk-item][data-value="action:copy"] .cmdp-hint')).toHaveText(
+    "Skopiowano",
+  );
+  const clip = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clip).toBe("hello@kamiljan.com");
+});

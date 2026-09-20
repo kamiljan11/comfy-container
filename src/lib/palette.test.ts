@@ -6,6 +6,7 @@ import {
   paletteKeywords,
   paletteScore,
   shortcutHint,
+  type PaletteGroup,
 } from "./palette";
 import { SERVICES, SERVICE_SLUGS } from "../data/services";
 import { AREAS, AREA_SLUGS } from "../data/areas";
@@ -39,11 +40,33 @@ describe("paletteItems", () => {
 
   it("links services, areas and case studies to pages that exist", () => {
     const items = paletteItems("pl");
-    const slugOf = (prefix: string) =>
-      items.filter((i) => i.href.startsWith(prefix)).map((i) => i.href.slice(prefix.length));
-    expect(slugOf("/uslugi/")).toEqual(SERVICE_SLUGS);
-    expect(slugOf("/obszary/")).toEqual(AREA_SLUGS);
-    expect(slugOf("/case-studies#")).toEqual(CASE_STUDIES.pl.map((c) => c.slug));
+    // FAQ rows point into the same two sections, so match on the group, not on
+    // the address: /uslugi/systemy-dla-firm and /uslugi/systemy-dla-firm#faq-3
+    // both start with the same prefix.
+    const slugOf = (group: PaletteGroup, prefix: string) =>
+      items.filter((i) => i.group === group).map((i) => i.href.slice(prefix.length));
+    expect(slugOf("services", "/uslugi/")).toEqual(SERVICE_SLUGS);
+    expect(slugOf("areas", "/obszary/")).toEqual(AREA_SLUGS);
+    expect(slugOf("cases", "/case-studies#")).toEqual(CASE_STUDIES.pl.map((c) => c.slug));
+  });
+
+  it("answers every question from the service and area pages", () => {
+    const faq = paletteItems("pl").filter((i) => i.group === "faq");
+    const asked = [...SERVICES.pl, ...AREAS.pl].flatMap((p) => p.faq);
+    expect(faq).toHaveLength(asked.length);
+    // a sanity floor: the six service and six area pages carry 55 questions today
+    expect(faq.length).toBeGreaterThan(40);
+    for (const row of faq) {
+      // the answer travels with the row: that is what lets the palette answer
+      // without a page load
+      expect(row.answer?.trim().length ?? 0).toBeGreaterThan(20);
+      expect(row.href).toMatch(/^\/(uslugi|obszary)\/[a-z-]+#faq-\d+$/);
+    }
+  });
+
+  it("gives every row its own id", () => {
+    const ids = paletteItems("pl").map((i) => i.id);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 });
 

@@ -27,7 +27,12 @@
   na porcie 4173. `vite preview` NIE dziala dla tego builda (plugin TanStack szuka `dist/server/server.js`,
   nitro pisze `.output/`).
 - Lokalnie: `npx playwright install chromium` (raz), potem `npx playwright test`. Poza CI dzialajacy serwer
-  na 4173 jest uzywany ponownie.
+  na porcie testowym jest uzywany ponownie.
+- **Windows: `Error: Process from config.webServer exited early` = port zarezerwowany przez system.** Hyper-V/WSL
+  rezerwuje cale zakresy portow (na tej maszynie m.in. 4122-4221, wiec domyslny 4173 w srodku). Serwer nie moze
+  zbindowac i konczy sie po cichu z kodem 0, a Playwright widzi tylko "exited early". Sprawdz zakresy:
+  `netsh interface ipv4 show excludedportrange protocol=tcp`, potem odpal z wolnym portem:
+  `E2E_PORT=5200 npx playwright test`. Na Linuksie (CI) problem nie wystepuje.
 - `workers: 1` celowo: strona glowna renderuje scene Three.js, rownolegle przegladarki dawaly timeouty
   przy zamykaniu kontekstu (6/12 lokalnie); na jednym workerze 12/12.
 - Klucze API niepotrzebne. Jeden test (`e2e/mobile.spec.ts`, linki bledu w formularzu leada) wysyla formularz,
@@ -88,14 +93,14 @@ npm ci   # przywraca Vitest 5 z package-lock w node_modules
 
 ## Typowe awarie
 
-| Objaw                              | Pierwszy krok                                                          |
-| ----------------------------------- | ----------------------------------------------------------------------- |
-| Strona nie wstaje po deploy         | rollback (wyzej), potem debug na branchu                                |
-| Bot odpowiada "unconfigured"        | `ANTHROPIC_API_KEY` brak/wygasl w Vercel — sprawdz i ustaw ponownie      |
-| Lead nie dociera mailem             | Leady (chat + `/kontakt`) ida prosto do Resend w `lead.server.ts`, NIE przez stub z `email.server.ts`. W Vercel Function Logs szukaj `[lead]`: `RESEND_API_KEY missing` (brak klucza, formularz pokazuje „nie dziala”), `Resend rejected the email {status}` (klucz/nadawca), `Resend request failed` (siec), `rate-limited` (>5 zgloszen / 10 min z jednego IP). `AI brief failed` = mail poszedl bez podsumowania |
-| Blad 500 na dowolnej akcji          | Vercel Function Logs -> stack trace -> `systematic-debugging`           |
-| Wygasly sekret/API key              | Vercel env vars -> zrotuj -> redeploy (push pusty commit lub Redeploy)   |
-| Domena/DNS                          | panel Name.com (rejestrator) + Vercel Domains tab                       |
+| Objaw                        | Pierwszy krok                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Strona nie wstaje po deploy  | rollback (wyzej), potem debug na branchu                                                                                                                                                                                                                                                                                                                                                                            |
+| Bot odpowiada "unconfigured" | `ANTHROPIC_API_KEY` brak/wygasl w Vercel — sprawdz i ustaw ponownie                                                                                                                                                                                                                                                                                                                                                 |
+| Lead nie dociera mailem      | Leady (chat + `/kontakt`) ida prosto do Resend w `lead.server.ts`, NIE przez stub z `email.server.ts`. W Vercel Function Logs szukaj `[lead]`: `RESEND_API_KEY missing` (brak klucza, formularz pokazuje „nie dziala”), `Resend rejected the email {status}` (klucz/nadawca), `Resend request failed` (siec), `rate-limited` (>5 zgloszen / 10 min z jednego IP). `AI brief failed` = mail poszedl bez podsumowania |
+| Blad 500 na dowolnej akcji   | Vercel Function Logs -> stack trace -> `systematic-debugging`                                                                                                                                                                                                                                                                                                                                                       |
+| Wygasly sekret/API key       | Vercel env vars -> zrotuj -> redeploy (push pusty commit lub Redeploy)                                                                                                                                                                                                                                                                                                                                              |
+| Domena/DNS                   | panel Name.com (rejestrator) + Vercel Domains tab                                                                                                                                                                                                                                                                                                                                                                   |
 
 ## Kontakty
 

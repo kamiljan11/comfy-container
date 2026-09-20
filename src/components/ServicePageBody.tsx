@@ -4,6 +4,7 @@ import { type Lang } from "../i18n";
 import { type Service } from "../data/services";
 import { Illustration } from "./illustrations";
 import { normalizeText } from "../lib/text";
+import { hashToId, openStudy } from "../lib/caseStudyHash";
 
 /**
  * The body of one service (/uslugi/$slug) or area (/obszary/$slug) page. Both
@@ -379,6 +380,24 @@ function useReveal(rootRef: RefObject<HTMLElement | null>) {
   }, [rootRef]);
 }
 
+/**
+ * A link that points at one question (the command palette sends people here
+ * after answering it in place) has to open that question, not drop the reader
+ * at a collapsed list. Same opener the case-study page uses.
+ */
+function useFaqHash() {
+  useEffect(() => {
+    const openFromHash = () => {
+      openStudy(hashToId(window.location.hash), document);
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => {
+      window.removeEventListener("hashchange", openFromHash);
+    };
+  }, []);
+}
+
 /** Reading progress. Decorative, so it is aria-hidden and costs one rAF. */
 function ReadingProgress() {
   const barRef = useRef<HTMLDivElement>(null);
@@ -429,6 +448,7 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
   const rootRef = useRef<HTMLDivElement>(null);
   const t = COPY[lang];
   useReveal(rootRef);
+  useFaqHash();
 
   return (
     <div className="sl" ref={rootRef}>
@@ -599,6 +619,7 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
               {s.faq.map((f, i) => (
                 <details
                   key={`${String(i)}-${f.q}`}
+                  id={`faq-${String(i + 1)}`}
                   className="sl-faq-item"
                   open={i === 0}
                   data-sl-reveal

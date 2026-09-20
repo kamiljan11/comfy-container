@@ -9,7 +9,11 @@
 // so no API keys are needed for these tests.
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 4173;
+// 4173 by default, overridable because Windows with Hyper-V reserves whole
+// port ranges (here 4122-4221, see `netsh interface ipv4 show excludedportrange
+// protocol=tcp`). A server that cannot bind exits silently and Playwright only
+// reports "webServer exited early", so: E2E_PORT=4183 npx playwright test.
+const PORT = Number(process.env.E2E_PORT ?? 4173);
 const baseURL = `http://localhost:${PORT}`;
 
 export default defineConfig({
