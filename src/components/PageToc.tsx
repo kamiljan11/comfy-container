@@ -15,17 +15,23 @@ type Props = {
   /** The article whose headings make the list. */
   bodyRef: RefObject<HTMLElement | null>;
   label: string;
+  /**
+   * The page language. The headings are read from the DOM, and the server
+   * renders English before the language hook switches the page, so without
+   * this the list keeps the headings of the language the visitor never saw.
+   */
+  lang: string;
   /** Below this many headings a list is noise, not navigation. */
   min?: number;
 };
 
-export function PageToc({ bodyRef, label, min = 4 }: Props) {
+export function PageToc({ bodyRef, label, lang, min = 4 }: Props) {
   const [entries, setEntries] = useState<TocEntry[]>([]);
 
   useEffect(() => {
     if (!bodyRef.current) return;
     setEntries(collectToc(bodyRef.current));
-  }, [bodyRef]);
+  }, [bodyRef, lang]);
 
   if (entries.length < min) return null;
 

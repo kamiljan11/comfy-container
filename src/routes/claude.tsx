@@ -1676,7 +1676,7 @@ function ClaudePage() {
         </header>
 
         {/* sixteen screens on a phone: the reader gets a way to jump */}
-        <PageToc bodyRef={bodyRef} label={c.tocLabel} />
+        <PageToc bodyRef={bodyRef} label={c.tocLabel} lang={lang} />
 
         <section className="cv-sec">
           <p>{c.intro}</p>
