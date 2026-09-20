@@ -13,7 +13,7 @@ import { normalizeText } from "./text";
  * component only renders them.
  */
 
-export type PaletteGroup = "pages" | "services" | "areas" | "cases";
+export type PaletteGroup = "pages" | "services" | "areas" | "cases" | "faq";
 
 export type PaletteItem = {
   id: string;
@@ -21,6 +21,11 @@ export type PaletteItem = {
   label: string;
   hint: string;
   href: string;
+  /**
+   * FAQ rows carry their answer, so the palette can answer the question in
+   * place. Everything else navigates and has none.
+   */
+  answer?: string;
 };
 
 type PaletteCopy = {
@@ -32,6 +37,15 @@ type PaletteCopy = {
   groups: Record<PaletteGroup | "actions", string>;
   switchLang: string;
   email: string;
+  copyEmail: string;
+  copied: string;
+  whatsapp: string;
+  linkedin: string;
+  answerOpen: string;
+  answerBack: string;
+  keyMove: string;
+  keyPick: string;
+  keyClose: string;
 };
 
 export const PALETTE_COPY: Record<Lang, PaletteCopy> = {
@@ -46,10 +60,20 @@ export const PALETTE_COPY: Record<Lang, PaletteCopy> = {
       services: "Services",
       areas: "Areas",
       cases: "Case studies",
+      faq: "Answers",
       actions: "Actions",
     },
     switchLang: "Przełącz na polski",
     email: "Write an email",
+    copyEmail: "Copy the email address",
+    copied: "Copied",
+    whatsapp: "Message on WhatsApp",
+    linkedin: "Open LinkedIn",
+    answerOpen: "Read it on the page",
+    answerBack: "Back to the list",
+    keyMove: "move",
+    keyPick: "open",
+    keyClose: "close",
   },
   pl: {
     title: "Szukaj na stronie",
@@ -63,10 +87,20 @@ export const PALETTE_COPY: Record<Lang, PaletteCopy> = {
       services: "Usługi",
       areas: "Obszary",
       cases: "Realizacje",
+      faq: "Odpowiedzi",
       actions: "Akcje",
     },
     switchLang: "Switch to English",
     email: "Napisz e-mail",
+    copyEmail: "Skopiuj adres e-mail",
+    copied: "Skopiowano",
+    whatsapp: "Napisz na WhatsAppie",
+    linkedin: "Otwórz LinkedIn",
+    answerOpen: "Przeczytaj na stronie",
+    answerBack: "Wróć do listy",
+    keyMove: "ruch",
+    keyPick: "otwórz",
+    keyClose: "zamknij",
   },
 };
 
@@ -75,7 +109,11 @@ const PAGES: Record<Lang, { label: string; hint: string; href: string }[]> = {
     { label: "Home", hint: "The offer on one page", href: "/" },
     { label: "Services", hint: "All six kinds of work", href: "/uslugi" },
     { label: "Areas", hint: "Where in a company the work lands", href: "/obszary" },
-    { label: "Case studies", hint: "Twenty projects in full", href: "/case-studies" },
+    {
+      label: "Case studies",
+      hint: `${String(CASE_STUDIES.en.length)} projects in full`,
+      href: "/case-studies",
+    },
     { label: "Free consultation", hint: "30 minutes, no obligation", href: "/kontakt" },
     { label: "Blog", hint: "First posts on the way", href: "/blog" },
   ],
@@ -83,7 +121,11 @@ const PAGES: Record<Lang, { label: string; hint: string; href: string }[]> = {
     { label: "Strona główna", hint: "Oferta na jednej stronie", href: "/" },
     { label: "Usługi", hint: "Sześć rodzajów pracy", href: "/uslugi" },
     { label: "Obszary", hint: "Gdzie w firmie ląduje automatyzacja", href: "/obszary" },
-    { label: "Realizacje", hint: "Dwadzieścia projektów w pełnym opisie", href: "/case-studies" },
+    {
+      label: "Realizacje",
+      hint: `${String(CASE_STUDIES.pl.length)} projektów w pełnym opisie`,
+      href: "/case-studies",
+    },
     { label: "Bezpłatna konsultacja", hint: "30 minut, bez zobowiązań", href: "/kontakt" },
     { label: "Blog", hint: "Pierwsze wpisy w drodze", href: "/blog" },
   ],
@@ -124,7 +166,30 @@ export function paletteItems(lang: Lang): PaletteItem[] {
     href: `/case-studies#${c.slug}`,
   }));
 
-  return [...pages, ...services, ...areas, ...cases];
+  const faq = [...faqRows(SERVICES[lang], "uslugi"), ...faqRows(AREAS[lang], "obszary")];
+
+  return [...pages, ...services, ...areas, ...cases, ...faq];
+}
+
+/**
+ * One row per question on a service or area page. The answer travels with the
+ * row so the palette can show it without a page load; `href` is where the same
+ * answer lives on the site, for readers who want the surrounding page.
+ */
+function faqRows(
+  pages: { slug: string; navLabel: string; faq: { q: string; a: string }[] }[],
+  section: "uslugi" | "obszary",
+): PaletteItem[] {
+  return pages.flatMap((page) =>
+    page.faq.map((entry, i) => ({
+      id: `faq:${section}:${page.slug}:${String(i)}`,
+      group: "faq" as const,
+      label: entry.q,
+      hint: page.navLabel,
+      href: `/${section}/${page.slug}#faq-${String(i + 1)}`,
+      answer: entry.a,
+    })),
+  );
 }
 
 /**
@@ -133,7 +198,11 @@ export function paletteItems(lang: Lang): PaletteItem[] {
  * language ("uslugi" on the English site, "case" on the Polish one).
  */
 export function paletteKeywords(item: PaletteItem): string[] {
-  return [item.label, item.hint, item.href];
+  // The address is a keyword for destinations, so the Polish slug finds a page
+  // in either language. FAQ rows are deliberately left out of that: 25 of them
+  // sit under /uslugi/, and typing "uslugi" used to surface all of them
+  // alongside the page the visitor actually meant.
+  return item.group === "faq" ? [item.label, item.hint] : [item.label, item.hint, item.href];
 }
 
 /** A Mac (or an iPhone/iPad with a keyboard): the palette's modifier is ⌘, not Ctrl. */
