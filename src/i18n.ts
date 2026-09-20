@@ -53,7 +53,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Your business.",
       h1b: "Less",
       h1em: "manual work.",
-      sub: "I find the process that eats your team's hours and your company's money. I replace it with something concrete: a quote calculator instead of a spreadsheet, data that moves between your programs on its own, or an AI assistant that answers customers. Then I train your team to use it every day.",
+      sub: "Quotes, data retyped between programs, customer replies: I build the systems that do that instead of your team. Then I train them to run it.",
       cta: "Show me your process",
       ctaGhost: "See systems in production",
       partner:
@@ -215,7 +215,7 @@ export const T: Record<Lang, SiteTranslation> = {
       h1a: "Twoja firma.",
       h1b: "Mniej",
       h1em: "ręcznej pracy.",
-      sub: "Znajduję proces, który zjada godziny Twojego zespołu i pieniądze firmy. Zastępuję go czymś konkretnym: kalkulatorem wycen zamiast arkusza, danymi, które same przechodzą między programami, albo asystentem AI, który odpowiada klientom. Potem szkolę zespół, żeby korzystał z tego na co dzień.",
+      sub: "Wyceny, przepisywanie danych, odpowiedzi klientom: buduję systemy, które robią to za Twój zespół. Potem uczę go z nich korzystać.",
       cta: "Pokaż mi swój proces",
       ctaGhost: "Zobacz działające systemy",
       partner:

@@ -6,6 +6,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 ## [Unreleased]
 
 - Workshop 3.0 in Selected projects now opens its GitHub write-up (`kamiljan11/mas-warsztat`) like every other row, instead of the login screen of the live app. The write-up says what the system does, how tenants are kept apart and what it runs on; the application itself stays private. The live address is in the write-up.
+- Hero subtitle cut from 295 characters to 129 (Kamil: "mega za długo jak na hero"). The headline already promises less manual work, so the subtitle no longer restates it in three sentences: it names the work that leaves the team (quotes, retyping data between programs, customer replies) and keeps the line about training the team afterwards.
 
 - The chat panel's own WhatsApp and e-mail links are 44 px tap targets on phones, as are the links in the lead form's error message; they measured 60x30, the only chat controls genuinely under 44. Checking the live site after the mobile pass also settled a false alarm worth writing down: an audit that measures the chat while it is closed reads every control inside it as 43 px, because the closed panel renders at `scale(.97)`. Open, they are 44. A new phone test opens the panel before measuring. Live numbers after the pass, 22 routes at 360/390/430 px: no sideways scroll, no text under 12 px (was 327), no form field under 16 px.
 
