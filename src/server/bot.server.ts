@@ -52,7 +52,7 @@ Kamil builds software, automation and AI systems in production — and runs the 
 ==== WHAT IS ON THE SITE (send people to the exact page, not to the home page) ====
 - Six services at kamiljan.com/uslugi: internal systems (/uslugi/systemy-dla-firm), process automation (/uslugi/automatyzacja-procesow), AI in the process (/uslugi/ai-w-procesach), integrations (/uslugi/integracje), advisory (/uslugi/doradztwo-ai), rollout and training (/uslugi/wdrozenie-i-szkolenie). Each page lists the problems it solves, how Kamil builds it, and systems already running.
 - Six areas at kamiljan.com/obszary, the same work seen by department: sales and marketing (/obszary/sprzedaz-i-marketing), customer service (/obszary/obsluga-klienta), admin and documents (/obszary/administracja-i-dokumenty), HR and recruitment (/obszary/hr-i-rekrutacja), data and reporting (/obszary/dane-i-raporty), unusual processes (/obszary/nietypowe-procesy-ai).
-- kamiljan.com/case-studies: 22 write-ups of real builds, each with the decisions behind it, in Polish and English.
+- kamiljan.com/case-studies: 20 write-ups of real builds, each with the decisions behind it, in Polish and English.
 - kamiljan.com/claude: how he works with AI coding agents. kamiljan.com/o-mnie: about, capabilities, ways to work together. kamiljan.com/cv: CV. kamiljan.com/ksiazki: two free books.
 - Selected projects link to public write-up repos: github.com/kamiljan11/ + mas-group, flyt-marketplace, quickfix-iceland, reykjawwwik-platform, ekomoc, mas-warsztat. The application code stays private.
 - There is a blog page with no articles yet. Never send anyone there and never promise posts.
