@@ -47,6 +47,14 @@ const PL: Uses = {
       title: "Powiadomienia na telefon",
       body: "Nowy lead, zaakceptowana oferta albo utknięta sprawa trafia do właściwej osoby, gdy się dzieje.",
     },
+    {
+      title: "Umowa do podpisu online",
+      body: "Umowa składa się z danych oferty i od razu idzie do podpisu elektronicznego. Podpisana wraca do systemu sama.",
+    },
+    {
+      title: "Notatka ze spotkania w CRM",
+      body: "Po rozmowie z klientem AI przygotowuje podsumowanie i kolejne kroki, a handlowiec tylko je zatwierdza.",
+    },
   ],
   "obsluga-klienta": [
     {
@@ -80,6 +88,14 @@ const PL: Uses = {
     {
       title: "Szkic odpowiedzi od AI",
       body: "Pracownik dostaje gotowy szkic na podstawie historii klienta, poprawia go i wysyła.",
+    },
+    {
+      title: "Historia klienta w jednym widoku",
+      body: "Otwierasz sprawę i widzisz krótkie podsumowanie wcześniejszych rozmów, zamiast czytać cały wątek.",
+    },
+    {
+      title: "Wiadomości z danymi zamówienia",
+      body: "Szablon sam uzupełnia numer, termin i nazwisko, więc nikt nie przepisuje ich ręcznie.",
     },
   ],
   "administracja-i-dokumenty": [
@@ -115,6 +131,14 @@ const PL: Uses = {
       title: "Formularz zamiast maila",
       body: "Zgłoszenie z wymaganymi polami, więc nikt nie musi dopytywać o brakujące dane.",
     },
+    {
+      title: "Przypomnienia o zaległych płatnościach",
+      body: "Faktura po terminie dostaje uprzejme przypomnienie, potem kolejne, a Ty widzisz listę zaległości.",
+    },
+    {
+      title: "Podpis elektroniczny",
+      body: "Dokument idzie do podpisu online, a podpisana wersja wraca do właściwego miejsca w systemie.",
+    },
   ],
   "hr-i-rekrutacja": [
     {
@@ -148,6 +172,14 @@ const PL: Uses = {
     {
       title: "Odpowiedź także dla odrzuconych",
       body: "Każdy kandydat dostaje informację po zakończeniu rekrutacji, a nie ciszę.",
+    },
+    {
+      title: "Offboarding z listą kontrolną",
+      body: "Odebranie dostępów, zwrot sprzętu i dokumenty końcowe, każde z osobą odpowiedzialną, żeby nic nie zostało.",
+    },
+    {
+      title: "Ewidencja czasu pracy",
+      body: "Godziny zapisywane z telefonu zamiast na kartce, a zestawienie dla kadr gotowe na koniec miesiąca.",
     },
   ],
   "dane-i-raporty": [
@@ -183,6 +215,14 @@ const PL: Uses = {
       title: "Pytania do danych zwykłym językiem",
       body: "AI odpowiada na pytanie o liczby i pokazuje, z których danych je wzięła.",
     },
+    {
+      title: "Prognoza z historii",
+      body: "Sprzedaż albo obłożenie na kolejne tygodnie policzone z Waszych danych, z widocznym założeniem.",
+    },
+    {
+      title: "Sprawdzanie danych przy wpisie",
+      body: "Błędny NIP, e-mail czy kwota zostają wyłapane w formularzu, zanim trafią do raportu.",
+    },
   ],
   "nietypowe-procesy-ai": [
     {
@@ -216,6 +256,14 @@ const PL: Uses = {
     {
       title: "Proces, którego nie ma w żadnym narzędziu",
       body: "Zaczynamy od tego, jak robicie to dziś, i sprawdzamy, która część opłaca się automatyzować.",
+    },
+    {
+      title: "Tłumaczenia ze słownikiem firmy",
+      body: "Dokumenty tłumaczone z zachowaniem Waszej terminologii, do sprawdzenia przez człowieka przed wysyłką.",
+    },
+    {
+      title: "Zadania wyciągane z maili",
+      body: "AI czyta wiadomość i proponuje zadanie z terminem, a Ty je zatwierdzasz jednym kliknięciem.",
     },
   ],
 };
@@ -254,6 +302,14 @@ const EN: Uses = {
       title: "Alerts on the phone",
       body: "A new lead, an accepted offer or a stuck case reaches the right person when it happens.",
     },
+    {
+      title: "A contract signed online",
+      body: "The contract is built from the offer data and goes straight to e-signature. The signed copy comes back into the system on its own.",
+    },
+    {
+      title: "Meeting notes in the CRM",
+      body: "After a call, AI drafts the summary and next steps, and the salesperson only approves them.",
+    },
   ],
   "obsluga-klienta": [
     {
@@ -287,6 +343,14 @@ const EN: Uses = {
     {
       title: "A draft reply from AI",
       body: "The team member gets a draft based on the client's history, edits it and sends it.",
+    },
+    {
+      title: "The customer's history at a glance",
+      body: "You open a case and see a short summary of earlier conversations instead of reading the whole thread.",
+    },
+    {
+      title: "Messages with the order details",
+      body: "The template fills in the number, date and name, so nobody retypes them.",
     },
   ],
   "administracja-i-dokumenty": [
@@ -322,6 +386,14 @@ const EN: Uses = {
       title: "A form instead of an email",
       body: "Requests with the required fields, so nobody has to chase missing details.",
     },
+    {
+      title: "Reminders for overdue payments",
+      body: "An overdue invoice gets a polite reminder, then another, and you see the list of what is outstanding.",
+    },
+    {
+      title: "E-signature",
+      body: "A document goes out for online signature and the signed version lands back in the right place in the system.",
+    },
   ],
   "hr-i-rekrutacja": [
     {
@@ -355,6 +427,14 @@ const EN: Uses = {
     {
       title: "An answer for rejected candidates too",
       body: "Everyone hears back when the process ends, instead of silence.",
+    },
+    {
+      title: "Offboarding with a checklist",
+      body: "Access removed, equipment returned, final documents done, each with an owner, so nothing is left behind.",
+    },
+    {
+      title: "Time tracking",
+      body: "Hours logged from a phone instead of on paper, with the monthly summary for payroll ready at month end.",
     },
   ],
   "dane-i-raporty": [
@@ -390,6 +470,14 @@ const EN: Uses = {
       title: "Questions to the data in plain language",
       body: "AI answers a question about the numbers and shows which data it used.",
     },
+    {
+      title: "A forecast from your history",
+      body: "Sales or bookings for the coming weeks worked out from your own data, with the assumption shown.",
+    },
+    {
+      title: "Checking data at entry",
+      body: "A wrong tax ID, email or amount is caught in the form before it reaches a report.",
+    },
   ],
   "nietypowe-procesy-ai": [
     {
@@ -423,6 +511,14 @@ const EN: Uses = {
     {
       title: "A process no tool covers",
       body: "We start from how you do it today and check which part is worth automating.",
+    },
+    {
+      title: "Translations with your glossary",
+      body: "Documents translated in your company's terms, checked by a person before they go out.",
+    },
+    {
+      title: "Tasks pulled out of emails",
+      body: "AI reads a message and proposes a task with a due date, which you approve with one click.",
     },
   ],
 };

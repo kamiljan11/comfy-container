@@ -5,10 +5,10 @@ import { SERVICES } from "./services";
 describe("area use cases", () => {
   for (const lang of ["pl", "en"] as const) {
     for (const a of AREAS[lang]) {
-      it(`${a.slug} (${lang}) lists 8 distinct, short uses`, () => {
+      it(`${a.slug} (${lang}) lists 10 distinct, short uses`, () => {
         const uses = a.uses ?? [];
-        expect(uses).toHaveLength(8);
-        expect(new Set(uses.map((u) => u.title)).size).toBe(8);
+        expect(uses).toHaveLength(10);
+        expect(new Set(uses.map((u) => u.title)).size).toBe(10);
         for (const u of uses) {
           expect(u.title.length, u.title).toBeLessThanOrEqual(50);
           expect(u.body.length, u.body).toBeLessThanOrEqual(160);
