@@ -10,6 +10,20 @@ import { describe, expect, it } from "vitest";
  * from it without a source in src/data/caseStudies.ts.
  */
 const FORBIDDEN: { phrase: RegExp; why: string }[] = [
+  {
+    phrase: /(blisko|close to|około|about) 40 (developer|programist)/i,
+    why: "CetusPro headcount not confirmed for publication (2026-09-21)",
+  },
+  {
+    phrase: /(live at|działa na) masgroup\.is/i,
+    why: "masgroup.is is the company site, not the platform",
+  },
+  {
+    // any "(www.masgroup.is)" after a description reads as "the platform is
+    // here"; claude-review on PR #60 found one the narrower pattern missed
+    phrase: /\(www\.masgroup\.is\)|MAS Group at www\.masgroup\.is/i,
+    why: "masgroup.is is the company site, not the platform",
+  },
   { phrase: /top-rated/i, why: "Sleipnir: the case study says well-reviewed" },
   { phrase: /najwyżej ocenian/i, why: "Sleipnir: the case study says well-reviewed" },
   { phrase: /hand-built/i, why: "AI coding agents write the code; Kamil owns spec/review/deploy" },

@@ -59,7 +59,7 @@ const COPY: Record<Lang, Copy> = {
     get: [
       "Ocenę, czy ten proces w ogóle warto automatyzować, oraz uczciwe „nie”, jeśli rachunek nie wychodzi",
       "Kolejność kroków: co najpierw, co później, co zostawić ludziom",
-      "Rozeznanie, czy wystarczy mniejsze wdrożenie, czy potrzebny jest większy zespół (z rzeszowskim software house'em CetusPro i jego blisko 40 developerami)",
+      "Rozeznanie, czy wystarczy mniejsze wdrożenie, czy potrzebny jest większy zespół (z rzeszowskim software house'em CetusPro)",
     ],
     formTitle: "Umów konsultację",
   },
@@ -86,7 +86,7 @@ const COPY: Record<Lang, Copy> = {
     get: [
       "A view on whether this process is worth automating at all, and an honest “no” if the numbers do not work",
       "An order of steps: what first, what later, what to leave with people",
-      "A sense of whether a small build is enough or a bigger team is needed (with CetusPro, a Rzeszów software house with close to 40 developers)",
+      "A sense of whether a small build is enough or a bigger team is needed (with CetusPro, a Rzeszów software house)",
     ],
     formTitle: "Book the consultation",
   },

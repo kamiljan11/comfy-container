@@ -1221,6 +1221,7 @@ section {
   color: var(--teal-2);
 }
 .work-year {
+  white-space: nowrap;
   font-size: 12px;
   color: var(--muted);
   text-align: right;
@@ -1228,7 +1229,7 @@ section {
 }
 .work-arrow {
   position: absolute;
-  right: 36px;
+  right: 28px;
   top: 50%;
   transform: translateY(-50%) translateX(-8px);
   color: var(--teal-2);
@@ -1236,6 +1237,10 @@ section {
   transition:
     opacity 0.2s,
     transform 0.2s var(--ease-expo);
+}
+/* the arrow sits in the right padding, so it never lands on the year */
+.work-row-link {
+  padding-right: 64px;
 }
 .work-row:hover .work-arrow {
   opacity: 1;

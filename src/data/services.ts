@@ -80,11 +80,11 @@ const PL: Service[] = [
       {
         tag: "Zasoby",
         title: "Firma stoi na pamięci jednej osoby",
-        body: "Wiedza o tym, jak to naprawdę działa, siedzi w głowie kogoś, kto kiedyś pojedzie na urlop. To nie jest ryzyko teoretyczne, tylko kwestia terminu.",
+        body: "Wiedza o tym, jak to naprawdę działa, siedzi w głowie kogoś, kto kiedyś pojedzie na urlop. To ryzyko ma dokładną datę: dzień, w którym ta osoba pójdzie na zwolnienie albo zmieni pracę.",
       },
     ],
     answerEyebrow: "JAK TO ROBIĘ",
-    answerTitle: "Proces zapisany w bazie, nie w ustaleniach",
+    answerTitle: "System pilnuje kolejności kroków sam",
     answerLead:
       "Zaczynam od tego, co ludzie już robią. Dopiero potem decyduję, co z tego da się zapisać tak, żeby pilnowało się samo.",
     points: [
@@ -94,11 +94,11 @@ const PL: Service[] = [
       },
       {
         title: "Każdy widzi tylko to, co powinien",
-        body: "Handlowiec widzi swoich klientów, klient swoje zamówienia, szef całość. Pilnuje tego sama baza danych, a nie ukryty przycisk, więc nie da się tego obejść. Raz dwie takie reguły zablokowały się nawzajem na produkcji; od tamtej pory każdą rolę sprawdzam osobnym testem od pierwszego dnia.",
+        body: "Handlowiec widzi swoich klientów, klient swoje zamówienia, szef całość. Pilnuje tego sam system, a nie ukryty przycisk, więc nie da się tego obejść. Każdą rolę sprawdzam osobnym testem, zanim system trafi do Was.",
       },
       {
-        title: "Zbudowane pod telefon w terenie",
-        body: "Handlowcy prowadzą cały proces z telefonu, między jednym klientem a drugim. System, który działa w takich warunkach, działa wszędzie.",
+        title: "Działa na komputerze i na telefonie",
+        body: "Zespół obsługuje cały proces z komputera w biurze albo z telefonu, gdziekolwiek akurat pracuje. To te same dane w obu miejscach, bez instalowania osobnej aplikacji.",
       },
       {
         title: "Jeden proces naraz, nie plan na pół roku",
@@ -125,7 +125,7 @@ const PL: Service[] = [
       },
       {
         q: "Co się stanie, jeśli przestaniemy współpracować?",
-        a: "Kod i dane są Twoje, w Twoim repozytorium i Twojej bazie. Nie buduję niczego, co da się uruchomić wyłącznie u mnie: to byłoby zabezpieczenie mojego interesu Twoim kosztem.",
+        a: "Kod i dane są Twoje, nie moje. Nie buduję niczego, co działa wyłącznie u mnie: to byłoby zabezpieczenie mojego interesu Twoim kosztem.",
       },
     ],
   },
@@ -142,7 +142,7 @@ const PL: Service[] = [
     micro: ["Ręczne kroki znikają", "Wdrożenie etapami", "Zero ukrytych zależności"],
     problemsEyebrow: "CENA RĘCZNEJ ROBOTY",
     problemsTitle: "Sześć kosztów, których nie widać na fakturze",
-    problemsLead: "Ręczna praca nie ma osobnej pozycji w księgach. Ma za to bardzo konkretną cenę.",
+    problemsLead: "Ręczna praca nie ma osobnej pozycji w księgach. Ma za to konkretną cenę.",
     problems: [
       {
         tag: "Dane",
@@ -250,12 +250,12 @@ const PL: Service[] = [
       {
         tag: "Procesy",
         title: "AI obok procesu zamiast w procesie",
-        body: "Ktoś kopiuje dane do okna czatu i przepisuje odpowiedź z powrotem. To nie jest automatyzacja, tylko dodatkowy ręczny etap z lepszą nazwą.",
+        body: "Ktoś kopiuje dane do okna czatu i przepisuje odpowiedź z powrotem. To dodatkowy ręczny etap z lepszą nazwą, nie automatyzacja.",
       },
       {
         tag: "Ryzyko",
         title: "Model, który zmyśli cenę, wyśle ją klientowi",
-        body: "Przy wycenie, umowie albo rozliczeniu pomyłka nie jest usterką wyświetlania, tylko pieniędzmi i odpowiedzialnością. Potrzebna jest granica, za którą model nie sięga.",
+        body: "Przy wycenie, umowie albo rozliczeniu pomyłka kosztuje realne pieniądze i rodzi odpowiedzialność. Potrzebna jest granica, za którą model nie sięga.",
       },
       {
         tag: "Technologia",
@@ -275,11 +275,11 @@ const PL: Service[] = [
     points: [
       {
         title: "Odpowiedź z Twoich danych, nie z internetu",
-        body: "W systemie warsztatowym wycena bierze się z historii czasów pracy tego konkretnego warsztatu. Model nie zgaduje, ile trwa wymiana. Czyta, ile trwała u Ciebie.",
+        body: "Wycena bierze się z Twojej własnej historii zleceń, nie z internetowych średnich. Model nie zgaduje, ile trwa dana czynność. Sprawdza, ile trwała u Ciebie ostatnim razem.",
       },
       {
         title: "Gdzie wystarczy tabela, nie ma modelu",
-        body: "Wyszukiwarka 12 857 kodów diagnostycznych odpowiada z bazy: natychmiast, zawsze tak samo i za zero tokenów. Model jest drogi i zmienny, więc trafia tylko tam, gdzie naprawdę wnosi wartość.",
+        body: "Jeśli pytanie ma jedną poprawną odpowiedź zapisaną w tabeli, wyszukiwarka odpowiada z bazy: natychmiast, zawsze tak samo i bez kosztu modelu. Model jest drogi i zmienny, więc trafia tylko tam, gdzie naprawdę wnosi wartość.",
       },
       {
         title: "Zamknięty świat faktów",
@@ -287,7 +287,7 @@ const PL: Service[] = [
       },
       {
         title: "Sekrety, których model nigdy nie widzi",
-        body: "Klucze i tokeny leżą w vaulcie na własnym sprzęcie i trafiają prosto do procesu docelowego. Nie pojawiają się w czacie, w kodzie ani w logach, a skan przy każdym commicie pilnuje, żeby tak zostało.",
+        body: "Klucze i hasła leżą w osobnym, szyfrowanym sejfie i trafiają prosto do docelowego systemu. Nie pojawiają się w czacie, w kodzie ani w logach, a automatyczna kontrola pilnuje, żeby tak zostało.",
       },
       {
         title: "Granice powiedziane, zanim zapytasz",
@@ -384,7 +384,7 @@ const PL: Service[] = [
       },
       {
         title: "Poświadczenia poza kodem",
-        body: "Klucze do integracji siedzą w vaulcie i trafiają do procesu jako zmienne środowiskowe. Skan przy commicie blokuje przypadkowe wrzucenie klucza do repozytorium.",
+        body: "Klucze do integracji są przechowywane osobno od kodu i trafiają do systemu automatycznie, bez ręcznego wklejania. Automatyczna kontrola pilnuje, żeby żaden klucz nie trafił przypadkiem do kodu.",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -473,7 +473,7 @@ const PL: Service[] = [
       },
       {
         title: "Rekomendacja wraz z tym, co może pójść źle",
-        body: "Każda propozycja ma nazwane ryzyko i koszt wycofania się. Wdrożenie bez ścieżki odwrotu to nie jest plan, tylko zakład.",
+        body: "Każda propozycja ma nazwane ryzyko i koszt wycofania się. Wdrożenie bez ścieżki odwrotu to zakład, nie plan.",
       },
       {
         title: "Bez zobowiązania, że budujemy razem",
@@ -492,7 +492,7 @@ const PL: Service[] = [
       },
       {
         q: "Skąd wiesz, jak działa moja branża?",
-        a: "Nie zakładam, że wiem. System warsztatowy zbudowałem, nie będąc mechanikiem: zacząłem od tego, że pracujący mechanik definiował, co jest poprawną odpowiedzią. To samo podejście stosuję wszędzie: wiedzę branżową ma klient, ja mam metodę.",
+        a: "Nie zakładam, że wiem. W każdym projekcie zaczynam od rozmowy z kimś, kto tę pracę wykonuje na co dzień, i to ta osoba mówi mi, co jest poprawną odpowiedzią, zanim ruszę z budową. Wiedzę branżową ma klient, ja mam metodę.",
       },
       {
         q: "Co dostaję na koniec?",
@@ -638,11 +638,11 @@ const EN: Service[] = [
       {
         tag: "People",
         title: "The company runs on one person's memory",
-        body: "How it really works sits with somebody who will eventually take a holiday. That isn't a theoretical risk, it's a date in the calendar.",
+        body: "How it really works sits with somebody who will eventually take a holiday. That risk has an exact date: the day that person goes on leave or changes jobs.",
       },
     ],
     answerEyebrow: "HOW I BUILD",
-    answerTitle: "The process written into the database, not into an agreement",
+    answerTitle: "The system enforces the steps on its own",
     answerLead:
       "I start from what people already do. Only then do I decide what can be written down so that it enforces itself.",
     points: [
@@ -652,11 +652,11 @@ const EN: Service[] = [
       },
       {
         title: "Everyone sees only what they should",
-        body: "A rep sees their own customers, a customer their own orders, the owner everything. The database itself enforces that, not a hidden button, so it can't be worked around. Once two of those rules locked each other up in production; since then every role gets its own test from day one.",
+        body: "A rep sees their own customers, a customer their own orders, the owner everything. The system enforces that on its own, not a hidden button, so it can't be worked around. Every role gets its own test before the system reaches you.",
       },
       {
-        title: "Built for a phone in the field",
-        body: "The sales team runs the whole process from their phones, between customers. A system that survives that survives anywhere.",
+        title: "Works on a computer and on a phone",
+        body: "The team runs the whole process from a computer in the office or from a phone, wherever they happen to be working. It is the same data in both places, with no separate app to install.",
       },
       {
         title: "One process at a time, not a six-month plan",
@@ -683,7 +683,7 @@ const EN: Service[] = [
       },
       {
         q: "What happens if we stop working together?",
-        a: "The code and the data are yours, in your repository and your database. I don't build anything that only runs on my side: that would be protecting my position at your expense.",
+        a: "The code and the data are yours, not mine. I don't build anything that only runs on my side: that would be protecting my position at your expense.",
       },
     ],
   },
@@ -700,7 +700,7 @@ const EN: Service[] = [
     micro: ["Manual steps disappear", "Shipped in stages", "No hidden coupling"],
     problemsEyebrow: "THE COST OF MANUAL WORK",
     problemsTitle: "Six costs that never appear on an invoice",
-    problemsLead: "Manual work has no line in the accounts. It has a very specific price.",
+    problemsLead: "Manual work has no line in the accounts. It has a specific price.",
     problems: [
       {
         tag: "Data",
@@ -775,7 +775,7 @@ const EN: Service[] = [
       },
       {
         q: "How is this different from off-the-shelf no-code tools?",
-        a: "No-code handles connecting A to B very well. It runs out where real business logic starts, along with exception handling and responsibility for what happens on unusual input.",
+        a: "No-code handles connecting A to B well. It runs out where real business logic starts, along with exception handling and responsibility for what happens on unusual input.",
       },
     ],
   },
@@ -808,12 +808,12 @@ const EN: Service[] = [
       {
         tag: "Process",
         title: "AI beside the process instead of inside it",
-        body: "Somebody pastes data into a chat window and copies the answer back. That isn't automation, it's an extra manual step with a better name.",
+        body: "Somebody pastes data into a chat window and copies the answer back. It's an extra manual step with a better name, not automation.",
       },
       {
         tag: "Risk",
         title: "A model that invents a price will send it to a customer",
-        body: "On a quote, a contract or a settlement, a mistake isn't a rendering bug: it's money and liability. You need a boundary the model can't reach past.",
+        body: "On a quote, a contract or a settlement, a mistake costs real money and carries liability. You need a boundary the model can't reach past.",
       },
       {
         tag: "Tooling",
@@ -833,11 +833,11 @@ const EN: Service[] = [
     points: [
       {
         title: "Answers from your data, not from the internet",
-        body: "In the workshop system a quote comes from that specific shop's labour-time history. The model doesn't guess how long a replacement takes. It reads how long it took at your place.",
+        body: "A quote comes from your own job history, not from internet averages. The model doesn't guess how long a task takes. It checks how long it took at your place last time.",
       },
       {
         title: "Where a table is enough, there is no model",
-        body: "A 12,857-code diagnostic lookup answers from the database: instantly, identically, at zero tokens. Models are expensive and variable, so they go only where they genuinely add something.",
+        body: "If a question has one correct answer sitting in a table, a lookup answers from the database: instantly, identically, at no model cost. Models are expensive and variable, so they go only where they genuinely add something.",
       },
       {
         title: "A closed world of facts",
@@ -845,7 +845,7 @@ const EN: Service[] = [
       },
       {
         title: "Secrets the model never sees",
-        body: "Keys and tokens live in a vault on my own hardware and are injected straight into the target process. They never appear in chat, code or logs, and a scan on every commit keeps it that way.",
+        body: "Keys and passwords sit in a separate, encrypted store and go straight into the target system. They never appear in chat, code or logs, and an automatic check keeps it that way.",
       },
       {
         title: "Limits stated before you ask",
@@ -942,7 +942,7 @@ const EN: Service[] = [
       },
       {
         title: "Credentials outside the code",
-        body: "Integration keys live in a vault and reach the process as environment variables. A commit-time scan blocks a key from accidentally entering the repository.",
+        body: "Integration keys are stored separately from the code and reach the system automatically, without manual copy-pasting. An automatic check makes sure no key accidentally ends up in the code.",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -1009,7 +1009,7 @@ const EN: Service[] = [
       {
         tag: "Team",
         title: "People fear they're automating away their own jobs",
-        body: "Left unaddressed, the project picks up quiet resistance: invisible in the schedule, very visible in the fact that nobody uses the finished tool.",
+        body: "Left unaddressed, the project picks up quiet resistance: invisible in the schedule, visible in the fact that nobody uses the finished tool.",
       },
     ],
     answerEyebrow: "WHAT IT LOOKS LIKE",
@@ -1030,7 +1030,7 @@ const EN: Service[] = [
       },
       {
         title: "Each recommendation with what could go wrong",
-        body: "Every proposal carries a named risk and a cost of backing out. A rollout without a way back isn't a plan, it's a bet.",
+        body: "Every proposal carries a named risk and a cost of backing out. A rollout without a way back is a bet, not a plan.",
       },
       {
         title: "No obligation to build it with me",
@@ -1049,7 +1049,7 @@ const EN: Service[] = [
       },
       {
         q: "How would you know how my industry works?",
-        a: "I don't assume I do. I built the workshop system without being a mechanic, by having a working mechanic define what a correct answer looks like. Same approach everywhere: the client brings the domain, I bring the method.",
+        a: "I don't assume I do. On every project I start by talking to somebody who does the work day to day, and that person defines what a correct answer looks like before I build anything. The client brings the domain, I bring the method.",
       },
       {
         q: "What do I get at the end?",
