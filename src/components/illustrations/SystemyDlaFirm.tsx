@@ -5,11 +5,11 @@ import { Frame, type DrawingProps, type Copy } from "./Frame";
 const COPY: Copy = {
   pl: {
     title: "Trzy wersje tej samej liczby kontra jedno źródło",
-    desc: "Po lewej arkusz, czat i notatka pokazują trzy różne kwoty, a osoba przepisuje je między nimi; po prawej jedna baza zasila telefon i ścieżkę etapów od 1 do 13 zakończoną potwierdzeniem.",
+    desc: "Po lewej arkusz, czat i notatka pokazują trzy różne kwoty, a osoba przepisuje je między nimi; po prawej jedna baza zasila telefon i ścieżkę etapów zakończoną potwierdzeniem.",
   },
   en: {
     title: "Three versions of one number versus one source",
-    desc: "On the left a spreadsheet, a chat thread and a paper note each show a different amount while a person retypes between them; on the right one database feeds a phone and a stage rail from 1 to 13 ending in a check mark.",
+    desc: "On the left a spreadsheet, a chat thread and a paper note each show a different amount while a person retypes between them; on the right one database feeds a phone and a stage rail ending in a check mark.",
   },
 };
 
@@ -127,14 +127,6 @@ export function SystemyDlaFirm({ lang }: DrawingProps) {
           stroke="var(--teal-2, #67e8f9)"
         />
         <path d="M585 246l5 6 10-12" stroke="var(--teal-2, #67e8f9)" strokeWidth="2" />
-        <g fill="var(--text-2, #94a3b8)" fontSize="12" textAnchor="middle">
-          <text x="372" y="274">
-            1
-          </text>
-          <text x="592" y="274">
-            13
-          </text>
-        </g>
       </g>
     </Frame>
   );

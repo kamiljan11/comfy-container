@@ -5,11 +5,11 @@ import { Frame, type DrawingProps, type Copy } from "./Frame";
 const COPY: Copy = {
   pl: {
     title: "AI obok procesu kontra AI w procesie",
-    desc: "Po lewej człowiek przepisuje dane między systemem firmy a oknem czatu i na końcu zostaje oferta, której nikt nie umie zweryfikować. Po prawej jedno zapytanie jest kierowane albo do tabeli 12 857 rekordów, która odpowiada za zero tokenów, albo do modelu zamkniętego w Twoich danych, i wraca jedna sprawdzona kwota.",
+    desc: "Po lewej człowiek przepisuje dane między systemem firmy a oknem czatu i na końcu zostaje oferta, której nikt nie umie zweryfikować. Po prawej jedno zapytanie jest kierowane albo do tabeli 12 857 rekordów, która odpowiada bez modelu, albo do modelu zamkniętego w Twoich danych, i wraca jedna sprawdzona kwota.",
   },
   en: {
     title: "AI beside the process vs AI inside the process",
-    desc: "On the left a person retypes data between the business system and a chat window and ends with a quote nobody can verify. On the right one question is routed either to a 12 857-row table that answers for zero tokens or to a model locked inside your own data, and a single checked amount comes back.",
+    desc: "On the left a person retypes data between the business system and a chat window and ends with a quote nobody can verify. On the right one question is routed either to a 12 857-row table that answers without the model or to a model locked inside your own data, and a single checked amount comes back.",
   },
 };
 
@@ -97,9 +97,6 @@ export function AiWProcesach({ lang }: DrawingProps) {
           />
           <text x="402" y="180" fontSize="18" textAnchor="middle" fill="var(--teal-2, #67e8f9)">
             12 857
-          </text>
-          <text x="402" y="199" fontSize="15" textAnchor="middle" fill="var(--text-2, #94a3b8)">
-            0 tok
           </text>
           <text x="564" y="166" fontSize="18" textAnchor="middle" fill="var(--teal-2, #67e8f9)">
             AI

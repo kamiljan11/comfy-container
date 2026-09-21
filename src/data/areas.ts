@@ -5,9 +5,9 @@ import { type Service } from "./services";
  * Area pages under /obszary — one per business function (the six letsautomate.pl
  * also uses; Kamil chose the same set). Same shape as a service page so the
  * service layout renders both. Written and fact-checked by the 2026-09-13 area
- * workflow: every proof and number was verified against caseStudies.ts /
- * services.ts, and an area with no fitting production system has an empty
- * proofs list rather than a stretched one.
+ * workflow: every claim and number was verified against caseStudies.ts /
+ * services.ts. The metric tiles these pages once ended with were removed on
+ * 2026-09-21; the case studies carry that evidence now.
  */
 
 const PL: Service[] = [

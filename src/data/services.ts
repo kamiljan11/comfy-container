@@ -4,8 +4,10 @@ import { type Lang } from "../i18n";
  * Service pages under /uslugi, listed in the header's Usługi menu and fed to
  * the homepage offer block (pickHomePains) and ServicePageBody.
  *
- * Every proof line here maps to something that is actually running in
- * production. Nothing on these pages is a number I cannot point at.
+ * Every claim here maps to something that is actually running in production.
+ * The pages used to end in a tile row of production metrics; Kamil cut it
+ * (2026-09-21) because the tiles read as engineering shorthand. The evidence
+ * now lives in /case-studies, linked from each page's closing section.
  */
 
 export type ServiceProblem = { tag: string; title: string; body: string };

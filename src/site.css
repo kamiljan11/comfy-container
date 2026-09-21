@@ -5212,17 +5212,16 @@ header[id] {
 .sl-h1 {
   margin-top: 16px;
   font-family: var(--font-head);
-  /* Syne 800 is wide: at the old 3.25rem a single long Polish word
-     ("przenoszenie", "automatyzacja") ran out of the column and under the
-     drawing. Smaller top size, and Polish hyphenation as the last resort. */
-  font-size: clamp(1.9rem, 4.4vw, 2.85rem);
-  overflow-wrap: break-word;
-  hyphens: auto;
+  /* Full width now (see .sl-hero-head), so the size only has to fit the
+     longest word on a phone: "automatyzację," at 1.7rem is ~330 px, inside a
+     358 px column at 390. No hyphens or forced breaks: a word split without a
+     hyphen ("przenoszeni / e") read worse than the overflow it was hiding. */
+  font-size: clamp(1.7rem, 5vw, 3.1rem);
   font-weight: 800;
   line-height: 1.06;
   letter-spacing: -0.026em;
   color: var(--text);
-  max-width: 20ch;
+  max-width: 24ch;
 }
 /* gradient headline, but only where it can be painted — a browser without
    background-clip: text keeps the solid colour instead of transparent type */
@@ -5275,8 +5274,7 @@ header[id] {
   gap: 12px;
   margin-top: 32px;
 }
-.sl-btn,
-.sl-btn-ghost {
+.sl-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5302,11 +5300,6 @@ header[id] {
 .sl-btn-arrow {
   transition: transform 0.3s var(--ease-expo);
 }
-.sl-btn-ghost {
-  border: 1px solid var(--border-2);
-  color: var(--text-2);
-  background: transparent;
-}
 @media (hover: hover) {
   .sl-btn:hover {
     background: var(--teal-2);
@@ -5317,11 +5310,6 @@ header[id] {
   }
   .sl-btn:hover .sl-btn-arrow {
     transform: translateX(4px);
-  }
-  .sl-btn-ghost:hover {
-    border-color: var(--border-teal);
-    color: var(--teal-2);
-    background: var(--surface);
   }
 }
 
@@ -5782,6 +5770,18 @@ header[id] {
   line-height: 1.62;
   color: var(--text-2);
 }
+.sl-cta-cases {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 6px;
+  font-size: 14.5px;
+  color: var(--teal-2);
+  text-underline-offset: 4px;
+}
+.sl-cta-cases:hover {
+  text-decoration: underline;
+}
 .sl-cta-note {
   margin-top: 18px;
   font-size: 13px;
@@ -5797,7 +5797,7 @@ header[id] {
 .sl-hero-art {
   margin: 0;
   width: 100%;
-  max-width: 560px;
+  max-width: 620px;
 }
 .ill {
   display: block;
@@ -5821,7 +5821,10 @@ header[id] {
   /* two columns only when there is a drawing to fill the second one; a page
      without one keeps the copy full-width instead of leaving an empty track */
   .sl-hero-grid:has(.sl-hero-art) {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    /* the drawing gets the wider track: at 395 px its 12 px labels rendered at
+       about 7 px and the before/after read as a thumbnail */
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    margin-top: 28px;
   }
   .sl-hero-art {
     justify-self: end;
@@ -5913,8 +5916,7 @@ header[id] {
     flex-direction: column;
     align-items: stretch;
   }
-  .sl-btn,
-  .sl-btn-ghost {
+  .sl-btn {
     width: 100%;
   }
 }

@@ -49,10 +49,8 @@ export function Integracje({ lang }: DrawingProps) {
           <path d="M178 176 186 180 178 184" />
           <path d="M186 220 132 262" />
           <path d="M137 253 132 262 142 260" />
-          <circle cx="232" cy="118" r="13" />
-          <path d="M232 131V184" />
-          <path d="M198 160 232 146 266 160" />
-          <path d="M232 184 214 222M232 184 250 222" />
+          <circle cx="232" cy="128" r="13" />
+          <path d="M208 170c0-13.3 10.7-24 24-24s24 10.7 24 24" />
           <rect x="188" y="160" width="20" height="26" rx="3" />
           <rect x="258" y="160" width="20" height="26" rx="3" />
           <path d="M193 169h10M193 176h10M263 169h10M263 176h10" opacity=".7" />
