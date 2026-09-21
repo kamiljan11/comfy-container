@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { faqJsonLd } from "../lib/faqJsonLd";
+import { pageFaq } from "../data/sharedFaq";
 import { AREAS, AREA_SLUGS, getArea } from "../data/areas";
 import { ServicePageBody } from "../components/ServicePageBody";
 
@@ -26,7 +27,7 @@ export const Route = createFileRoute("/obszary/$slug")({
       ],
       links: [{ rel: "canonical", href: `https://kamiljan.com/obszary/${params.slug}` }],
       // FAQPage for the FAQ this page shows (Polish, as rendered on the server)
-      scripts: a ? [{ type: "application/ld+json", children: faqJsonLd(a.faq) }] : [],
+      scripts: a ? [{ type: "application/ld+json", children: faqJsonLd(pageFaq(a, "pl")) }] : [],
     };
   },
   component: AreaPage,

@@ -5639,6 +5639,74 @@ header[id] {
 .sl-sec-last {
   padding-top: 84px;
 }
+/* "What can be automated here" (area pages): a two-column list, not cards,
+   so it reads as a catalogue and not as a second set of problems */
+.sl-uses {
+  list-style: none;
+  margin: 30px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0 40px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+}
+.sl-use {
+  position: relative;
+  padding: 16px 0 16px 26px;
+  border-top: 1px solid var(--border);
+}
+.sl-use::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 23px;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--teal-2);
+  box-shadow: 0 0 12px var(--teal-glow-2);
+}
+.sl-use-h3 {
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+.sl-use-p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+/* the halfway way out: one strip, text and a button */
+.sl-mid {
+  border-top: 1px solid var(--border-teal);
+  border-bottom: 1px solid var(--border-teal);
+  background: linear-gradient(90deg, var(--surface-2), var(--bg-alt));
+}
+.sl-mid-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 28px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+.sl-mid-p {
+  margin: 0;
+  /* shrinks before the button wraps under it */
+  flex: 1 1 320px;
+  font-family: var(--font-head);
+  font-size: clamp(17px, 2vw, 20px);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text);
+  text-wrap: balance;
+}
+
 .sl-cta {
   position: relative;
   isolation: isolate;

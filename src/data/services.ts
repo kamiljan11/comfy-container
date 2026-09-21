@@ -31,6 +31,8 @@ export type Service = {
   answerTitle: string;
   answerLead: string;
   points: ServicePoint[];
+  /** Concrete "what can be automated here" examples; area pages only (src/data/areaUses.ts). */
+  uses?: ServicePoint[];
   faqTitle: string;
   faq: ServiceFaq[];
 };
