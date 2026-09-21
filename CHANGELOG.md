@@ -5,6 +5,13 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- Service and area pages, second pass from Kamil:
+  - The internal-systems heading says what the reader gets: "Widzisz, na jakim etapie jest każda sprawa" / "See where every job stands, and who moves it next" (it was "a system that knows your process better than the spreadsheet").
+  - The first two "how I build" points read like a database manual ("state as a machine", "Postgres policies", "SECURITY DEFINER"). They now say what that means for the business: no stage gets skipped and no customer gets the same message twice; everyone sees only what they should. The production incident stays, told plainly.
+  - The "examples from production" section is gone from all twelve pages, with its data, type and styles. Its tiles were written in the same engineering shorthand.
+  - Service headings no longer run out of their column: Syne 800 is wide, and at 3.25rem a single long Polish word ("przenoszenie") ran under the drawing. Smaller top size plus Polish hyphenation; measured on all six service pages at 390, 1280 and 1680 px, the heading overflows by 0 px and stays 48 px clear of the drawing.
+- Books page: "twelve years of practice, of which six I spent writing it down" read as if half the time went on typing. It now says the last six of those years went into writing the book. The "the one thing I make that isn't for sale" sentence is removed.
+
 - Homepage and service pages, from Kamil's read-through:
   - The six "problems I get called in for" cards carry a drawing each (`src/components/PainIcon.tsx`), keyed by service slug so it stays with its card in both languages. Each one draws that card's specific failure (one order state in three panels, a run stopped mid-flow waiting for a pointer, an assistant sitting beside the loop, last week's chart behind a clock, three identical vendor boxes with one checked, a team where the second person is dashed), not a generic glyph. Decorative, so they are `aria-hidden`.
   - The solution card's heading is set in Newsreader instead of Syne. The section heading above it already shouts in the display face, and two of them stacked read as one long headline; Newsreader is already loaded and already carries the case studies.

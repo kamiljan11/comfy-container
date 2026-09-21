@@ -36,8 +36,6 @@ type Step = { meta: string; title: string; body: string };
 
 type Copy = {
   ctaPrimary: string;
-  proofsEyebrow: string;
-  caseStudies: string;
   processEyebrow: string;
   processTitle: string;
   processLead: string;
@@ -51,8 +49,6 @@ type Copy = {
 const COPY: Record<Lang, Copy> = {
   pl: {
     ctaPrimary: "Umów bezpłatną konsultację",
-    proofsEyebrow: "DOWODY",
-    caseStudies: "Pełne opisy wdrożeń z decyzjami i odrzuconymi alternatywami",
     processEyebrow: "WSPÓŁPRACA",
     processTitle: "Jak wygląda współpraca",
     processLead:
@@ -87,8 +83,6 @@ const COPY: Record<Lang, Copy> = {
   },
   en: {
     ctaPrimary: "Book a free consultation",
-    proofsEyebrow: "EVIDENCE",
-    caseStudies: "Full write-ups with the decisions and the rejected alternatives",
     processEyebrow: "WORKING TOGETHER",
     processTitle: "How we work together",
     processLead:
@@ -542,38 +536,6 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
             </ol>
           </div>
         </section>
-
-        {s.proofs.length > 0 && (
-          <section className="sl-sec" id="sl-proofs" aria-labelledby="sl-proofs-h">
-            <div className="sl-wrap">
-              <div className="sl-sec-head" data-sl-reveal>
-                <span className="sl-eyebrow">{t.proofsEyebrow}</span>
-                <h2 className="sl-h2" id="sl-proofs-h">
-                  {s.proofsTitle}
-                </h2>
-              </div>
-
-              <div className="sl-proofs">
-                {s.proofs.map((p, i) => (
-                  <article key={`${String(i)}-${p.sector}`} className="sl-proof" data-sl-reveal>
-                    <span className="sl-tag sl-tag-teal">{p.sector}</span>
-                    <h3 className="sl-proof-h3">{p.title}</h3>
-                    <p className="sl-metric">{p.metric}</p>
-                  </article>
-                ))}
-              </div>
-
-              <p className="sl-proof-link">
-                <Link to="/case-studies">
-                  {t.caseStudies}
-                  <span className="sl-arrow" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
-              </p>
-            </div>
-          </section>
-        )}
 
         <section className="sl-sec" id="sl-process" aria-labelledby="sl-process-h">
           <div className="sl-wrap">

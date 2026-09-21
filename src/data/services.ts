@@ -10,7 +10,6 @@ import { type Lang } from "../i18n";
 
 export type ServiceProblem = { tag: string; title: string; body: string };
 export type ServicePoint = { title: string; body: string };
-export type ServiceProof = { sector: string; title: string; metric: string };
 export type ServiceFaq = { q: string; a: string };
 
 export type Service = {
@@ -30,8 +29,6 @@ export type Service = {
   answerTitle: string;
   answerLead: string;
   points: ServicePoint[];
-  proofsTitle: string;
-  proofs: ServiceProof[];
   faqTitle: string;
   faq: ServiceFaq[];
 };
@@ -44,7 +41,7 @@ const PL: Service[] = [
     metaDescription:
       "Aplikacje do codziennej pracy firmy: zamówienia, wyceny i zlecenia w jednym miejscu, obsługiwane z telefonu. Wdrożenia działające na produkcji.",
     eyebrow: "SYSTEMY DLA FIRM",
-    h1: "System, który zna Twój proces lepiej niż arkusz",
+    h1: "Widzisz, na jakim etapie jest każda sprawa",
     lead: "Buduję aplikacje do codziennej pracy firmy: zamówień, wycen, zleceń. Zamiast arkusza, maili i telefonów wszyscy widzą w jednym miejscu, na jakim etapie jest sprawa i kto ma ją teraz ruszyć.",
     micro: ["Zamówienia, wyceny, zlecenia", "Obsługa z telefonu", "Rośnie razem z firmą"],
     problemsEyebrow: "ZNASZ TO?",
@@ -88,12 +85,12 @@ const PL: Service[] = [
       "Zaczynam od tego, co ludzie już robią. Dopiero potem decyduję, co z tego da się zapisać tak, żeby pilnowało się samo.",
     points: [
       {
-        title: "Stan jako maszyna, nie jako pole tekstowe",
-        body: "W platformie B2B, którą prowadzę, zamówienie ma nazwane etapy i wyłącznie dozwolone przejścia między nimi. Nie da się przeskoczyć etapu ani wysłać tego samego SMS-a dwa razy, bo powiadomienie wychodzi z jednego konkretnego przejścia i znikąd indziej.",
+        title: "Żaden etap nie zostanie pominięty",
+        body: "Każde zamówienie przechodzi przez etapy w ustalonej kolejności. Nie da się pominąć kroku ani wysłać klientowi tej samej wiadomości dwa razy, bo powiadomienie wychodzi dokładnie w chwili, gdy sprawa przechodzi na następny etap.",
       },
       {
-        title: "Uprawnienia pilnowane przez bazę, nie przez ekran",
-        body: "Kto co widzi, rozstrzygają polityki Postgresa. Ukryty przycisk da się obejść, ale polityki bazy już nie. Kosztowało mnie to jedną awarię na produkcji: dwie polityki odwołały się do siebie nawzajem i zapętliły zapytania. Naprawione funkcją SECURITY DEFINER, a wnioskiem jest zestaw testów per rola, który dziś pisałbym od pierwszego dnia.",
+        title: "Każdy widzi tylko to, co powinien",
+        body: "Handlowiec widzi swoich klientów, klient swoje zamówienia, szef całość. Pilnuje tego sama baza danych, a nie ukryty przycisk, więc nie da się tego obejść. Raz dwie takie reguły zablokowały się nawzajem na produkcji; od tamtej pory każdą rolę sprawdzam osobnym testem od pierwszego dnia.",
       },
       {
         title: "Zbudowane pod telefon w terenie",
@@ -106,29 +103,6 @@ const PL: Service[] = [
       {
         title: "Zostaję po uruchomieniu",
         body: "System bez zespołu, który go używa, to koszt, nie inwestycja. Szkolę ludzi i jestem wtedy, gdy pojawia się pierwszy przypadek, którego nikt nie przewidział.",
-      },
-    ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Trzy branże, jeden proces od wyceny do dostawy",
-        metric: "13 etapów, obsługa z telefonu przez zespół nietechniczny",
-      },
-      {
-        sector: "Logistyka",
-        title: "Wpłaty na kontener, który może się nie zapełnić",
-        metric: "Ścieżka zwrotu jako jawna maszyna stanów w Postgresie",
-      },
-      {
-        sector: "Doradztwo",
-        title: "Pipeline dziewięciu etapów generujący umowy dotacyjne",
-        metric: "Dokumenty DOCX i PDF gotowe do podpisu",
-      },
-      {
-        sector: "Motoryzacja / handel",
-        title: "Katalog z pliku dostawcy, który warsztat prowadzi sam",
-        metric: "1932 pozycje w 229 kategoriach, panel po stronie klienta",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -221,24 +195,6 @@ const PL: Service[] = [
       {
         title: "Etapami, z korzyścią po każdym",
         body: "Nie wielki projekt na kwartał, tylko kolejne kawałki wchodzące do użytku jeden po drugim. Po każdym widać, co się zmieniło w liczbach.",
-      },
-    ],
-    proofsTitle: "Przykłady z produkcji",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Logistyka od zamówienia po odprawę bez ręcznego pilnowania",
-        metric: "Powiadomienia wychodzą z przejść w maszynie stanów",
-      },
-      {
-        sector: "Motoryzacja",
-        title: "Wycena z historii czasów pracy warsztatu",
-        metric: "Liczby z własnych danych, nie z oszacowania",
-      },
-      {
-        sector: "Usługi cyfrowe",
-        title: "Od zapytania do umowy PDF bez przepisywania",
-        metric: "Dziesięć rynków, właściwy VAT w każdym",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -334,24 +290,6 @@ const PL: Service[] = [
         body: "Korzystam z modeli przez API. Nie trenuję ich ani nie dostrajam. Formalnego zestawu testów jakości modelu jeszcze nie mam i mówię to od razu, bo dowiedzenie się o tym później kosztowałoby Cię więcej.",
       },
     ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Motoryzacja",
-        title: "Wycena liczona z historii warsztatu, nie z oszacowania modelu",
-        metric: "12 857 kodów diagnostycznych z tabeli, zero tokenów",
-      },
-      {
-        sector: "Portfolio",
-        title: "Asystent odpowiadający wyłącznie z zapisanych faktów",
-        metric: "Nie potrafi wymyślić kwalifikacji, których nie ma",
-      },
-      {
-        sector: "Własna infrastruktura",
-        title: "Agenty na harmonogramie z audytem samego systemu",
-        metric: "Skan zależności bez udziału modelu, gdy nie ma znalezisk",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -443,24 +381,6 @@ const PL: Service[] = [
       {
         title: "Poświadczenia poza kodem",
         body: "Klucze do integracji siedzą w vaulcie i trafiają do procesu jako zmienne środowiskowe. Skan przy commicie blokuje przypadkowe wrzucenie klucza do repozytorium.",
-      },
-    ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Zamówienie, powiadomienia SMS i odprawa w jednym przepływie",
-        metric: "Zdarzenia wychodzą z przejść, nie z ręcznego kliknięcia",
-      },
-      {
-        sector: "Logistyka",
-        title: "Płatności i zwroty spięte ze stanem kampanii kontenerowej",
-        metric: "Stan rozstrzyga baza, nie zadanie cykliczne",
-      },
-      {
-        sector: "Usługi cyfrowe",
-        title: "Wycena, umowa i podpis w jednej ścieżce",
-        metric: "Dziesięć rynków, reguły VAT per kraj",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -556,24 +476,6 @@ const PL: Service[] = [
         body: "Dokument jest Twój i możesz go zrealizować z kimkolwiek. Doradztwo, którego jedynym celem jest sprzedaż własnego wdrożenia, nie jest doradztwem.",
       },
     ],
-    proofsTitle: "Skąd to wiem",
-    proofs: [
-      {
-        sector: "Własne firmy",
-        title: "Sam prowadzę operacje, które automatyzuję",
-        metric: "Handel B2B, warsztat, logistyka, agencja",
-      },
-      {
-        sector: "Wdrożenia",
-        title: "Systemy oddane zespołom, które prowadzą je beze mnie",
-        metric: "Zespół w terenie na co dzień, bez mojego udziału",
-      },
-      {
-        sector: "Warsztat",
-        title: "Zbudowane dla branży, w której nie byłem specjalistą",
-        metric: "Mechanik definiował, co znaczy poprawna odpowiedź",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -666,24 +568,6 @@ const PL: Service[] = [
         body: "Najwięcej uczy się w tygodniach po starcie, gdy pojawia się to, czego nikt nie przewidział. Zamykanie projektu w dniu uruchomienia to zostawianie klienta w najtrudniejszym momencie.",
       },
     ],
-    proofsTitle: "Robione w praktyce",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Zespół terenowy prowadzi cały proces bez mojego udziału",
-        metric: "Osoby nietechniczne, praca z telefonu",
-      },
-      {
-        sector: "Motoryzacja",
-        title: "System oddany warsztatowi, w którym pracuje na co dzień",
-        metric: "Definicję poprawnej odpowiedzi ustalał mechanik",
-      },
-      {
-        sector: "Własna praktyka",
-        title: "Ta sama metoda zastosowana do siebie",
-        metric: "Codzienna praktyka czytania kodu prowadzona publicznie",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -714,7 +598,7 @@ const EN: Service[] = [
     metaDescription:
       "Apps a company runs its daily work on: orders, quotes and jobs in one place, operated from a phone. Running in production.",
     eyebrow: "INTERNAL SYSTEMS",
-    h1: "A system that knows your process better than the spreadsheet does",
+    h1: "See where every job stands, and who moves it next",
     lead: "I build the apps a company runs its daily work on: orders, quotes, jobs. Instead of a spreadsheet, emails and phone calls, everyone sees in one place what stage each case is at and who has to move it next.",
     micro: ["Orders, quotes and jobs", "Works from a phone", "Grows with the company"],
     problemsEyebrow: "SOUND FAMILIAR?",
@@ -759,12 +643,12 @@ const EN: Service[] = [
       "I start from what people already do. Only then do I decide what can be written down so that it enforces itself.",
     points: [
       {
-        title: "State as a machine, not as a text field",
-        body: "In a B2B order platform I run, an order has named stages and only the transitions I declared legal. A stage can't be skipped and the same SMS can't fire twice, because the notification leaves from one specific transition and nowhere else.",
+        title: "No stage gets skipped",
+        body: "Every order moves through its stages in a set order. A step can't be skipped and the customer can't get the same message twice, because the notification goes out at the exact moment the order moves on.",
       },
       {
-        title: "Permissions enforced by the database, not by the screen",
-        body: "Who sees what is decided by Postgres policies. A hidden button can be bypassed; a database policy can't. This cost me one production outage: two policies referenced each other into infinite recursion. Fixed with a SECURITY DEFINER function, and the lesson is a per-role test suite I would now write from day one.",
+        title: "Everyone sees only what they should",
+        body: "A rep sees their own customers, a customer their own orders, the owner everything. The database itself enforces that, not a hidden button, so it can't be worked around. Once two of those rules locked each other up in production; since then every role gets its own test from day one.",
       },
       {
         title: "Built for a phone in the field",
@@ -777,29 +661,6 @@ const EN: Service[] = [
       {
         title: "I stay after launch",
         body: "A system without a team using it is a cost, not an investment. I train the people and I'm there when the first case nobody predicted shows up.",
-      },
-    ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "Three verticals, one quote-to-delivery process",
-        metric: "13 stages, run from phones by a non-technical team",
-      },
-      {
-        sector: "Logistics",
-        title: "Deposits toward a container that might never fill",
-        metric: "Refund path as an explicit state machine in Postgres",
-      },
-      {
-        sector: "Consulting",
-        title: "A nine-stage pipeline generating funding contracts",
-        metric: "DOCX and PDF ready for signature",
-      },
-      {
-        sector: "Automotive / trade",
-        title: "A supplier file turned into a catalogue the workshop runs itself",
-        metric: "1,932 items across 229 categories, admin on the client side",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -892,24 +753,6 @@ const EN: Service[] = [
       {
         title: "In stages, with a benefit after each one",
         body: "Not a quarter-long project, but pieces going into use one after another. After each one you can see what changed in the numbers.",
-      },
-    ],
-    proofsTitle: "Examples from production",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "Logistics from order to customs without manual chasing",
-        metric: "Notifications fire from state transitions",
-      },
-      {
-        sector: "Automotive",
-        title: "Quotes computed from the shop's own labour history",
-        metric: "Numbers from your data, not from an estimate",
-      },
-      {
-        sector: "Digital services",
-        title: "From enquiry to contract PDF with no retyping",
-        metric: "Ten markets, the right VAT in each",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -1005,24 +848,6 @@ const EN: Service[] = [
         body: "I use foundation models via API. I don't train or fine-tune them. There is no formal eval harness yet, and I say so immediately, because finding that out later would cost you more.",
       },
     ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "Automotive",
-        title: "Quotes computed from shop history, not model estimation",
-        metric: "12,857 diagnostic codes from a table, zero tokens",
-      },
-      {
-        sector: "Portfolio",
-        title: "An assistant answering only from recorded facts",
-        metric: "Cannot invent a qualification that isn't there",
-      },
-      {
-        sector: "Own infrastructure",
-        title: "Scheduled agents auditing the system itself",
-        metric: "Deterministic dependency scan, no model when clean",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -1114,24 +939,6 @@ const EN: Service[] = [
       {
         title: "Credentials outside the code",
         body: "Integration keys live in a vault and reach the process as environment variables. A commit-time scan blocks a key from accidentally entering the repository.",
-      },
-    ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "Orders, SMS notifications and customs in one flow",
-        metric: "Events fire from transitions, not from a manual click",
-      },
-      {
-        sector: "Logistics",
-        title: "Payments and refunds tied to container campaign state",
-        metric: "State settled by the database, not by a cron job",
-      },
-      {
-        sector: "Digital services",
-        title: "Quote, contract and signature in one path",
-        metric: "Ten markets, per-country VAT rules",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -1226,24 +1033,6 @@ const EN: Service[] = [
         body: "The document is yours and you can execute it with anyone. Advisory whose only purpose is selling the adviser's own build isn't advisory.",
       },
     ],
-    proofsTitle: "Where this comes from",
-    proofs: [
-      {
-        sector: "Own companies",
-        title: "I run the operations I automate",
-        metric: "B2B trade, a workshop, logistics, an agency",
-      },
-      {
-        sector: "Deployments",
-        title: "Systems handed to teams that run them without me",
-        metric: "The field team, daily, unaided",
-      },
-      {
-        sector: "Workshop",
-        title: "Built for a trade I wasn't an expert in",
-        metric: "A working mechanic defined what a correct answer is",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -1334,24 +1123,6 @@ const EN: Service[] = [
       {
         title: "I'm there for the first unusual cases",
         body: "The most is learned in the weeks after launch, when the unpredicted shows up. Closing a project on go-live day leaves the client alone at the hardest moment.",
-      },
-    ],
-    proofsTitle: "Done in practice",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "A field team running the whole process without me",
-        metric: "Non-technical people, working from phones",
-      },
-      {
-        sector: "Automotive",
-        title: "A system handed to the workshop that uses it daily",
-        metric: "A mechanic defined what a correct answer is",
-      },
-      {
-        sector: "Own practice",
-        title: "The same method applied to myself",
-        metric: "Daily code-reading practice kept in public",
       },
     ],
     faqTitle: "Questions I get asked",

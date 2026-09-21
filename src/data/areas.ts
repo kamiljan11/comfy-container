@@ -91,24 +91,6 @@ const PL: Service[] = [
         body: "Zanim powstanie obraz, jest brief marki pobrany z działającej strony, profil klienta z obawami uszeregowanymi według wagi i decyzja, co ta grupa uzna za wiarygodne. Tekst zaczyna od problemu czytelnika, nie od oferty, a każdą kreację zatwierdza albo odrzuca człowiek.",
       },
     ],
-    proofsTitle: "Sprawdzone na własnej sprzedaży",
-    proofs: [
-      {
-        sector: "Usługi cyfrowe",
-        title: "Od zapytania do podpisanej i zafakturowanej umowy",
-        metric: "Dziesięć rynków z jednego zestawu reguł, VAT per kraj",
-      },
-      {
-        sector: "Handel B2B",
-        title: "Wycena druku z telefonu, przy kliencie",
-        metric: "Ceny sprawdzone linia po linii z dokumentami dostawcy",
-      },
-      {
-        sector: "Druk / B2B",
-        title: "Kampania cold mailingowa prowadzona przez agenta",
-        metric: "Od 11 maja do 19 czerwca 2026, żadna domena powyżej trzech maili",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -209,24 +191,6 @@ const PL: Service[] = [
         body: "Tego nauczyłem się na własnym błędzie. W kampanii cold mailingowej dla własnej firmy wykrywanie odpowiedzi zbudowałem na końcu. Przez to ciepły kontakt, który prosił o próbkę i cenę, czekał dwanaście dni na odpowiedź, a firma, która odmówiła, dostała jeszcze dwa maile. Wniosek: sprawdzanie odpowiedzi i blokada kolejnych wysyłek po reakcji odbiorcy muszą działać, zanim wyjdzie pierwsza wiadomość.",
       },
     ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Statusy zamówień bez ręcznego dzwonienia i pisania",
-        metric: "Połączenia i SMS-y po polsku i angielsku, bez nadzoru",
-      },
-      {
-        sector: "Warsztat",
-        title: "Wycena, kalendarz, SMS i akceptacja klienta w jednym systemie",
-        metric: "Warsztat pracuje na nim codziennie",
-      },
-      {
-        sector: "Części samochodowe",
-        title: "Od zapytania do akceptacji, faktury i SMS-a",
-        metric: "Około dwudziestu zamówień w pierwszym kwartale, zero kosztów infrastruktury",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -325,24 +289,6 @@ const PL: Service[] = [
       {
         title: "Dane należą do firmy, nie do abonamentu",
         body: "Wypożyczalnia trzymała klientów, rezerwacje i wzór umowy w płatnym programie bez eksportu i bez dostępnego API. Wyciągnąłem dane, zbudowałem zamiennik, a migrację sprawdziłem maszynowo, wiersz po wierszu. Pierwsze przejście, robione na oko, po cichu zgubiło 32 z 82 wpisów w kalendarzu. Porównanie znalazło je, zanim dwóch klientów zjawiło się po ten sam samochód. Dziś dane leżą w bazie firmy, a eksport to jedno zapytanie.",
-      },
-    ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Doradztwo",
-        title: "Umowy dotacyjne generowane prosto z CRM",
-        metric: "Brak wymaganego pola zatrzymuje umowę, zamiast ją wypuścić",
-      },
-      {
-        sector: "Usługi cyfrowe",
-        title: "Umowa dla każdego rynku z jednego zestawu reguł",
-        metric: "Dziesięć rynków, VAT i klauzule zależne od kraju",
-      },
-      {
-        sector: "Wynajem pojazdów",
-        title: "Umowy najmu z protokołem wydania i podpisem elektronicznym",
-        metric: "Podpisana umowa zapisana z własną treścią, zmiana wzoru jej nie rusza",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -449,24 +395,6 @@ const PL: Service[] = [
         body: "Model może przenieść doświadczenie i języki z CV do jednolitej karty albo streścić zgłoszenie. Nie odrzuca kandydatów i nie wystawia im ocen. Asystent na tej stronie działa podobnie: odpowiada tylko z zapisanych faktów, a gdy czegoś nie wie, mówi to wprost zamiast zgadywać.",
       },
     ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Trzy branże, jeden proces od wyceny do dostawy",
-        metric: "13 etapów, obsługa z telefonu przez zespół nietechniczny",
-      },
-      {
-        sector: "Doradztwo",
-        title: "Pipeline dziewięciu etapów generujący umowy dotacyjne",
-        metric: "Dokumenty DOCX i PDF gotowe do podpisu",
-      },
-      {
-        sector: "Portfolio · własny projekt",
-        title: "Asystent na moim portfolio, który mówi rekruterom także o moich lukach",
-        metric: "Nie potrafi wymyślić kwalifikacji, których nie ma",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -565,24 +493,6 @@ const PL: Service[] = [
       {
         title: "Uzgodnienie wiersz po wierszu, nie ocena na oko",
         body: "Przy przenoszeniu danych wypożyczalni z płatnego systemu, który nie dawał eksportu, pierwsze podejście robione na oko zgubiło 32 z 82 wpisów w kalendarzu. Pięć z nich to przyszłe blokady pojazdów, które nowa aplikacja pokazywała jako wolne. Wyłapało to dopiero mechaniczne porównanie danych źródłowych z bazą. Od tamtej pory import jest dla mnie skończony wtedy, gdy takie porównanie się domyka, a nie wtedy, gdy ekran wygląda dobrze.",
-      },
-    ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Logistyka",
-        title: "Panel wspólnych kontenerów ze stanem depozytów na żywo",
-        metric: "Zły stan kampanii widać w panelu, zanim zapyta kupujący",
-      },
-      {
-        sector: "Handel B2B",
-        title: "Historia statusów i prowizje przypięte do zamówienia",
-        metric: "Bez odtwarzania prowizji na koniec miesiąca",
-      },
-      {
-        sector: "Wynajem pojazdów",
-        title: "Migracja z płatnego systemu uzgodniona wiersz po wierszu",
-        metric: "82 z 82 wpisów zgodnych po uzupełnieniu brakujących 32",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -693,24 +603,6 @@ const PL: Service[] = [
         body: "System warsztatowy zbudowałem, nie będąc mechanikiem, więc to pracujący mechanik definiował, co jest poprawną odpowiedzią. Czasy pracy w wycenie liczą się z zamkniętych zleceń tego warsztatu, nie z oszacowania modelu. Swoją branżę znasz Ty: moja robota to zamienić tę wiedzę w reguły.",
       },
     ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Import i logistyka",
-        title: "Depozyt, który zwraca się sam, gdy kontener się nie zapełni",
-        metric: "Jawna maszyna stanów w Postgresie, bez ręcznych zwrotów",
-      },
-      {
-        sector: "Audyty energetyczne",
-        title: "Umowy o dofinansowanie generowane prosto z danych zlecenia",
-        metric: "Zespoły terenowe generują je codziennie z telefonu",
-      },
-      {
-        sector: "Motoryzacja",
-        title: "AI dla warsztatu w branży, z której nie pochodzę",
-        metric: "Czasy pracy z zamkniętych zleceń warsztatu, nie z modelu",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -814,24 +706,6 @@ const EN: Service[] = [
         body: "Before any image exists there's a brand brief pulled from the live site, a customer profile with concerns ranked by intensity, and a decision about what this audience reads as credible. The copy leads with the reader's problem, not the offer, and a person approves or kills every creative.",
       },
     ],
-    proofsTitle: "Tested on my own sales",
-    proofs: [
-      {
-        sector: "Digital services",
-        title: "From enquiry to a signed, billed contract",
-        metric: "Ten markets from one rule set, VAT per country",
-      },
-      {
-        sector: "B2B trade",
-        title: "Print quotes from a phone, at the counter",
-        metric: "Prices checked line by line against the supplier's documents",
-      },
-      {
-        sector: "Print / B2B",
-        title: "A cold-email campaign run by an agent",
-        metric: "11 May - 19 June 2026, no domain ever got a fourth email",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -933,24 +807,6 @@ const EN: Service[] = [
         body: "I learned this from my own mistake. In a cold email campaign for my own company I built reply detection last. Because of that, a warm lead who asked for a sample and a price waited twelve days for an answer, and a company that had declined got two more emails. The lesson: reply checking, and a block on further sends once someone responds, have to work before the first message goes out.",
       },
     ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "Order updates without anyone dialling or typing them",
-        metric: "Calls and SMS in Polish and English, unattended",
-      },
-      {
-        sector: "Workshop",
-        title: "Quoting, calendar, SMS and customer approval in one system",
-        metric: "The shop runs on it daily",
-      },
-      {
-        sector: "Auto parts",
-        title: "From enquiry to approval, invoice and SMS",
-        metric: "About twenty orders in the first quarter, zero infrastructure cost",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -1049,24 +905,6 @@ const EN: Service[] = [
       {
         title: "The data belongs to the company, not the subscription",
         body: "The rental kept its clients, bookings and contract template in a paid product with no export and no API we could reach. I pulled the data out, built the replacement and checked the migration mechanically, row by row. The first pass, done by eye, had quietly dropped 32 of 82 calendar entries. The comparison found them before two customers turned up for the same van. Today the data sits in the company's own database, and an export is one query away.",
-      },
-    ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "Consulting",
-        title: "Funding contracts generated straight from the CRM",
-        metric: "A missing required field stops the contract instead of shipping it",
-      },
-      {
-        sector: "Digital services",
-        title: "A contract for each market from one rule set",
-        metric: "Ten markets, VAT and clauses set per country",
-      },
-      {
-        sector: "Vehicle rental",
-        title: "Rental contracts with a handover protocol and e-signature",
-        metric: "Each signed contract keeps its own text, untouched by template edits",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -1173,24 +1011,6 @@ const EN: Service[] = [
         body: "A model can move experience and languages from a CV into a standard card, or summarise an application. It doesn't reject candidates and it doesn't score them. The assistant on this site works the same way: it answers only from recorded facts, and when it doesn't know, it says so instead of guessing.",
       },
     ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "Three verticals, one quote-to-delivery process",
-        metric: "13 stages, run from phones by a non-technical team",
-      },
-      {
-        sector: "Consulting",
-        title: "A nine-stage pipeline generating funding contracts",
-        metric: "DOCX and PDF ready for signature",
-      },
-      {
-        sector: "Portfolio · own project",
-        title: "A portfolio assistant that tells recruiters about my gaps too",
-        metric: "Cannot invent a qualification that isn't there",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -1289,24 +1109,6 @@ const EN: Service[] = [
       {
         title: "Reconciled row by row, not judged by eye",
         body: "When I moved the rental's data off a paid system that had no export, my first pass, done by eye, dropped 32 of 82 calendar entries. Five of them were future blocks on vehicles the new app showed as free. Only a mechanical comparison of the source data against the database caught it. Since then an import is finished for me when that comparison closes, not when the screen looks right.",
-      },
-    ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "Logistics",
-        title: "Pooled container dashboard with live deposit state",
-        metric: "A campaign in the wrong state shows up before a buyer asks",
-      },
-      {
-        sector: "B2B trade",
-        title: "Status history and commissions tied to the order",
-        metric: "Commissions no longer rebuilt at month-end",
-      },
-      {
-        sector: "Vehicle rental",
-        title: "A migration off a paid system, reconciled row by row",
-        metric: "82 of 82 entries match after backfilling the missing 32",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -1415,24 +1217,6 @@ const EN: Service[] = [
       {
         title: "Someone from the trade defines the correct answer",
         body: "I built the workshop system without being a mechanic, so a working mechanic defined what a correct answer is. Labour times in quotes come from that shop's own closed jobs, not from a model's estimate. You know your trade: my job is turning that knowledge into rules.",
-      },
-    ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "Import and logistics",
-        title: "A deposit that refunds itself if the container never fills",
-        metric: "Explicit Postgres state machine, no manual refund pass",
-      },
-      {
-        sector: "Energy audits",
-        title: "Funding contracts generated straight from order data",
-        metric: "Field teams produce them daily from their phones",
-      },
-      {
-        sector: "Automotive",
-        title: "Workshop AI for a trade I don't come from",
-        metric: "Labour times from the shop's own closed jobs, not a model",
       },
     ],
     faqTitle: "Questions I get asked",
