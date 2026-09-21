@@ -1,5 +1,6 @@
 import { type Lang } from "../i18n";
 import { type Service } from "./services";
+import { AREA_USES } from "./areaUses";
 
 /**
  * Area pages under /obszary — one per business function (the six letsautomate.pl
@@ -1241,7 +1242,10 @@ const EN: Service[] = [
   },
 ];
 
-export const AREAS: Record<Lang, Service[]> = { en: EN, pl: PL };
+const withUses = (list: Service[], lang: Lang): Service[] =>
+  list.map((a) => ({ ...a, uses: AREA_USES[lang][a.slug] ?? [] }));
+
+export const AREAS: Record<Lang, Service[]> = { en: withUses(EN, "en"), pl: withUses(PL, "pl") };
 
 export function getArea(lang: Lang, slug: string): Service | undefined {
   return AREAS[lang].find((a) => a.slug === slug);

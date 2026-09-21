@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, type ReactElement, type RefObject }
 import { Link } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { type Service } from "../data/services";
+import { pageFaq } from "../data/sharedFaq";
 import { Illustration } from "./illustrations";
 import { ConsultForm } from "./ConsultForm";
 import { normalizeText } from "../lib/text";
@@ -42,6 +43,11 @@ type Copy = {
   processLead: string;
   steps: Step[];
   faqEyebrow: string;
+  usesEyebrow: string;
+  usesTitle: string;
+  usesLead: string;
+  midTitle: string;
+  midButton: string;
   finalTitle: string;
   finalLead: string;
   finalNote: string;
@@ -83,6 +89,12 @@ const COPY: Record<Lang, Copy> = {
       "Trzydzieści minut wystarczy, żeby powiedzieć, czy jest tu co automatyzować. Jeśli nie ma, usłyszysz to wprost, zanim powstanie jakakolwiek oferta.",
     finalNote: "Bez zobowiązań. Bez oferty, zanim zrozumiem proces.",
     casesLink: "Zobacz, co już zbudowałem",
+    usesEyebrow: "PRZYKŁADY",
+    usesTitle: "Co da się tu zautomatyzować",
+    usesLead:
+      "Kilka typowych zastosowań w tym obszarze. Twój proces może wyglądać inaczej, dlatego zaczynam od rozmowy o nim.",
+    midTitle: "Widzisz tu coś ze swojej firmy? Opisz to w dwóch zdaniach.",
+    midButton: "Przejdź do formularza",
   },
   en: {
     ctaPrimary: "Book a free consultation",
@@ -118,6 +130,12 @@ const COPY: Record<Lang, Copy> = {
       "Thirty minutes is enough to tell you whether there is anything here worth automating. If there is not, you will hear it plainly, before any proposal exists.",
     finalNote: "No obligation. No proposal before I understand the process.",
     casesLink: "See what I have built",
+    usesEyebrow: "EXAMPLES",
+    usesTitle: "What can be automated here",
+    usesLead:
+      "A few typical uses in this area. Your process may look different, which is why I start by talking it through.",
+    midTitle: "See something from your own company here? Describe it in two sentences.",
+    midButton: "Go to the form",
   },
 };
 
@@ -548,6 +566,39 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
           </div>
         </section>
 
+        {s.uses && s.uses.length > 0 && (
+          <section className="sl-sec" id="sl-uses" aria-labelledby="sl-uses-h">
+            <div className="sl-wrap">
+              <div className="sl-sec-head" data-sl-reveal>
+                <span className="sl-eyebrow">{t.usesEyebrow}</span>
+                <h2 className="sl-h2" id="sl-uses-h">
+                  {t.usesTitle}
+                </h2>
+                <p className="sl-sec-lead">{t.usesLead}</p>
+              </div>
+              <ul className="sl-uses">
+                {s.uses.map((u) => (
+                  <li key={u.title} className="sl-use" data-sl-reveal>
+                    <h3 className="sl-use-h3">{u.title}</h3>
+                    <p className="sl-use-p">{u.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
+        {/* a way out halfway down, for the reader who has already recognised
+            their problem and does not need the rest of the page */}
+        <aside className="sl-mid" aria-label={t.midButton}>
+          <div className="sl-wrap sl-mid-in">
+            <p className="sl-mid-p">{t.midTitle}</p>
+            <a href="#sl-cta" className="sl-btn">
+              {t.midButton}
+            </a>
+          </div>
+        </aside>
+
         <section className="sl-sec" id="sl-process" aria-labelledby="sl-process-h">
           <div className="sl-wrap">
             <div className="sl-sec-head" data-sl-reveal>
@@ -583,7 +634,7 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
             </div>
 
             <div className="sl-faq">
-              {s.faq.map((f, i) => (
+              {pageFaq(s, lang).map((f, i) => (
                 <details
                   key={`${String(i)}-${f.q}`}
                   id={`faq-${String(i + 1)}`}
