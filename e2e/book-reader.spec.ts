@@ -28,9 +28,18 @@ test("the reader turns pages, switches books and loads only nearby pages", async
   const before = await count.textContent();
   await page.keyboard.press("ArrowRight");
   await expect(count).not.toHaveText(before ?? "");
+  // go far enough that the cover leaves the loaded window (WINDOW = 4)
+  for (let i = 0; i < 3; i++) {
+    const at = await count.textContent();
+    await page.keyboard.press("ArrowRight");
+    await expect(count).not.toHaveText(at ?? "");
+  }
+  await expect(page.locator('.bf-page img[src$="/short/p-001.webp"]')).toHaveCount(0);
 
   await page.getByRole("button", { name: /Pełny/ }).click();
   await expect(count).toHaveText("Strona 1 / 199");
+  // and the new book really opens on its cover, not on the old book's page
+  await expect(page.locator('.bf-page img[src$="/full/p-001.webp"]')).toHaveCount(1);
 
   expect(errors).toEqual([]);
 });
@@ -62,4 +71,19 @@ test("a crash inside the flipbook shows the fallback and keeps the PDFs", async 
   await expect(page.locator(".books-reader-error")).toContainText("Czytnik nie wczytał się");
   await expect(page.getByRole("link", { name: "Pobierz PDF" }).first()).toBeVisible();
   expect(logged.some((t) => t.includes("[books] flipbook crashed"))).toBe(true);
+});
+
+test("narrowing the window switches to hard pages and keeps the page", async ({ page }) => {
+  await page.goto("/ksiazki?lang=pl");
+  const count = page.locator(".bf-count");
+  await expect(count).toHaveText("Strona 1 / 99", { timeout: 20000 });
+  await page.getByRole("button", { name: "Następna strona" }).click();
+  await expect(count).toHaveText("Strona 2 / 99");
+  expect(await page.locator('.bf-page[data-density="hard"]').count()).toBe(0);
+  // a phone rotated to portrait, or a split screen
+  await page.setViewportSize({ width: 412, height: 900 });
+  await expect(page.locator('.bf-page[data-density="hard"]')).toHaveCount(99);
+  await expect(count).toHaveText("Strona 2 / 99");
+  await page.getByRole("button", { name: "Następna strona" }).click();
+  await expect(count).toHaveText("Strona 3 / 99");
 });

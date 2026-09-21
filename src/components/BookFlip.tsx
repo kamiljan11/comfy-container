@@ -72,8 +72,18 @@ function prefersReducedMotion(): boolean {
  * page: on a phone (Galaxy S25 Ultra, Brave) the page looked like it shattered.
  * Hard pages turn as one rigid sheet around the spine instead.
  */
-function isNarrow(): boolean {
-  return window.matchMedia("(max-width: 767px)").matches;
+const NARROW = "(max-width: 767px)";
+
+/** Follows the viewport, so rotating a phone or a split screen switches too. */
+function useHardPages(): boolean {
+  const [hard, setHard] = useState(() => window.matchMedia(NARROW).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(NARROW);
+    const sync = () => setHard(mq.matches);
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return hard;
 }
 
 type Props = { book: BookKey; title: string; lang: Lang; hintId?: string };
@@ -84,10 +94,15 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
   const bookRef = useRef<FlipBookRef | null>(null);
   const [current, setCurrent] = useState(0);
   const [reduced] = useState(prefersReducedMotion);
-  const [hard] = useState(isNarrow);
+  const hard = useHardPages();
 
-  // a new book starts on its cover
-  useEffect(() => setCurrent(0), [book]);
+  // a new book starts on its cover; reset during render (not in an effect) so
+  // the remount below already gets startPage 0, not the old book's page
+  const [shownBook, setShownBook] = useState(book);
+  if (shownBook !== book) {
+    setShownBook(book);
+    setCurrent(0);
+  }
 
   const api = () => bookRef.current?.pageFlip();
   const next = useCallback(() => api()?.flipNext(), []);
@@ -132,7 +147,8 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
       >
         <LoadedPages.Provider value={load}>
           <HTMLFlipBook
-            key={book}
+            // page-flip reads density once, so a switch remounts on the same page
+            key={`${book}-${hard ? "hard" : "soft"}`}
             ref={bookRef}
             className="bf-book"
             style={BOOK_STYLE}
@@ -143,7 +159,7 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
             maxWidth={520}
             minHeight={369}
             maxHeight={738}
-            startPage={0}
+            startPage={current}
             drawShadow={!reduced}
             flippingTime={reduced ? 1 : 700}
             usePortrait
