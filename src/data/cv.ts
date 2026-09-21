@@ -122,7 +122,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
         dates: "Jan 2024–present",
         bullets: [
           "Build every system in this CV with AI coding agents writing the code; own the spec, architecture, review, deployment and upkeep.",
-          "Run a personal agent runtime: 33 scheduled agents (about 18 active daily) and about 140 skill definitions across two runtimes.",
+          "Run a personal agent runtime: 41 scheduled tasks and about 140 skill definitions across two runtimes.",
           "Built voice agents on Twilio and the OpenAI Realtime API, WhatsApp bots, MCP servers and RAG pipelines.",
         ],
       },
@@ -320,7 +320,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
         dates: "sty 2024–obecnie",
         bullets: [
           "Budowa wszystkich systemów z tego CV w modelu, w którym kod piszą agenty AI: specyfikacja, architektura, review, wdrożenie i utrzymanie.",
-          "Własne środowisko agentowe: 33 agenty na harmonogramie (ok. 18 aktywnych dziennie) i ok. 140 definicji skilli w dwóch środowiskach.",
+          "Własne środowisko agentowe: 41 zadań na harmonogramie i ok. 140 definicji skilli w dwóch środowiskach.",
           "Agenty głosowe na Twilio i OpenAI Realtime API, boty WhatsApp, serwery MCP i pipeline'y RAG.",
         ],
       },

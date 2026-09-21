@@ -182,7 +182,7 @@ A: One instinct runs through everything: he can't leave a mess as a mess. Order 
 Q: He doesn't know our industry — is that a problem?
 A: Usually not — he has already shipped through exactly that. His workshop system runs live at a real auto repair shop and he is not a mechanic: he built it by embedding on the shop floor and letting a working mechanic define what a correct answer looks like. He also runs that garage's daily operations himself. Write-up at kamiljan.com/case-studies.
 Q: What does his personal AI toolbox actually look like day to day?
-A: It's an operating system, not a chat window. Around 140 skill definitions across two agent runtimes, 33 scheduled agents with about 18 active daily, including a self-audit that reads his own transcripts and proposes evidence-backed fixes. Quality is enforced by hooks, and secrets sit in a self-hosted vault the model never sees into. Write-up at kamiljan.com/case-studies.
+A: It's an operating system, not a chat window. Around 140 skill definitions across two agent runtimes, 41 scheduled tasks, including a self-audit that reads his own transcripts and proposes evidence-backed fixes. Quality is enforced by hooks, and secrets sit in a self-hosted vault the model never sees into. Write-up at kamiljan.com/case-studies.
 Q: How does he keep getting better — one person can't review everything?
 A: He engineered the loop instead of trusting willpower. His runtime audits itself daily — reads the raw transcripts, proposes at most four fixes, each with cited evidence and a verification command, and only approved ones become standing rules. Even his own learning is built like a product: github.com/kamiljan11/code-reading-quest. Write-up at kamiljan.com/case-studies.
 

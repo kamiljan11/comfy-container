@@ -11,6 +11,19 @@ import { describe, expect, it } from "vitest";
  */
 const FORBIDDEN: { phrase: RegExp; why: string }[] = [
   {
+    phrase:
+      /33 (scheduled agents|agenty na harmonogramie|zdefiniowanych)|(about|około|ok\.) 18 (active|aktywnych)/i,
+    why: "counted 2026-09-21: 41 scheduled tasks (35 Cowork + 6 Claude Code); '18 active daily' unverifiable",
+  },
+  {
+    phrase: /second deal mid-close|drugi kontrakt jest w trakcie zamykania/i,
+    why: "dated, unverifiable sales claim removed from the Reykjawwwik case study (2026-09-21)",
+  },
+  {
+    phrase: /28 (tables|tabel), 7 (edge functions|funkcji brzegowych)/i,
+    why: "stale MAS Warsztat inventory; repo on 2026-09-21 had ~86 tables, 30 edge functions, 177 migrations",
+  },
+  {
     phrase: /(blisko|close to|około|about) 40 (developer|programist)/i,
     why: "CetusPro headcount not confirmed for publication (2026-09-21)",
   },
