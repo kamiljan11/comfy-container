@@ -10,13 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as ClaudeRouteImport } from './routes/claude'
 import { Route as CvRouteImport } from './routes/cv'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as KsiazkiRouteImport } from './routes/ksiazki'
 import { Route as OMnieRouteImport } from './routes/o-mnie'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ObszaryIndexRouteImport } from './routes/obszary.index'
 import { Route as ObszarySlugRouteImport } from './routes/obszary.$slug'
 import { Route as UslugiIndexRouteImport } from './routes/uslugi.index'
@@ -25,11 +26,6 @@ import { Route as UslugiSlugRouteImport } from './routes/uslugi.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesRoute = CaseStudiesRouteImport.update({
@@ -62,6 +58,16 @@ const OMnieRoute = OMnieRouteImport.update({
   path: '/o-mnie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ObszaryIndexRoute = ObszaryIndexRouteImport.update({
   id: '/obszary/',
   path: '/obszary/',
@@ -85,44 +91,47 @@ const UslugiSlugRoute = UslugiSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
   '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/obszary/': typeof ObszaryIndexRoute
   '/uslugi/': typeof UslugiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
   '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/obszary': typeof ObszaryIndexRoute
   '/uslugi': typeof UslugiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
   '/case-studies': typeof CaseStudiesRoute
   '/claude': typeof ClaudeRoute
   '/cv': typeof CvRoute
   '/kontakt': typeof KontaktRoute
   '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/obszary/': typeof ObszaryIndexRoute
   '/uslugi/': typeof UslugiIndexRoute
 }
@@ -130,58 +139,62 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/blog'
     | '/case-studies'
     | '/claude'
     | '/cv'
     | '/kontakt'
     | '/ksiazki'
     | '/o-mnie'
+    | '/blog/$slug'
     | '/obszary/$slug'
     | '/uslugi/$slug'
+    | '/blog/'
     | '/obszary/'
     | '/uslugi/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/blog'
     | '/case-studies'
     | '/claude'
     | '/cv'
     | '/kontakt'
     | '/ksiazki'
     | '/o-mnie'
+    | '/blog/$slug'
     | '/obszary/$slug'
     | '/uslugi/$slug'
+    | '/blog'
     | '/obszary'
     | '/uslugi'
   id:
     | '__root__'
     | '/'
-    | '/blog'
     | '/case-studies'
     | '/claude'
     | '/cv'
     | '/kontakt'
     | '/ksiazki'
     | '/o-mnie'
+    | '/blog/$slug'
     | '/obszary/$slug'
     | '/uslugi/$slug'
+    | '/blog/'
     | '/obszary/'
     | '/uslugi/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlogRoute: typeof BlogRoute
   CaseStudiesRoute: typeof CaseStudiesRoute
   ClaudeRoute: typeof ClaudeRoute
   CvRoute: typeof CvRoute
   KontaktRoute: typeof KontaktRoute
   KsiazkiRoute: typeof KsiazkiRoute
   OMnieRoute: typeof OMnieRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   ObszarySlugRoute: typeof ObszarySlugRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   ObszaryIndexRoute: typeof ObszaryIndexRoute
   UslugiIndexRoute: typeof UslugiIndexRoute
 }
@@ -193,13 +206,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies': {
@@ -244,6 +250,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OMnieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/obszary/': {
       id: '/obszary/'
       path: '/obszary'
@@ -277,15 +297,16 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlogRoute: BlogRoute,
   CaseStudiesRoute: CaseStudiesRoute,
   ClaudeRoute: ClaudeRoute,
   CvRoute: CvRoute,
   KontaktRoute: KontaktRoute,
   KsiazkiRoute: KsiazkiRoute,
   OMnieRoute: OMnieRoute,
+  BlogSlugRoute: BlogSlugRoute,
   ObszarySlugRoute: ObszarySlugRoute,
   UslugiSlugRoute: UslugiSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   ObszaryIndexRoute: ObszaryIndexRoute,
   UslugiIndexRoute: UslugiIndexRoute,
 }

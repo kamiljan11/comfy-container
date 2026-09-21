@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 import { SERVICES } from "../data/services";
 import { AREAS } from "../data/areas";
 import { CASE_STUDIES } from "../data/caseStudies";
+import { POSTS } from "../data/posts";
 
 const PROMPT = readFileSync(new URL("./bot.server.ts", import.meta.url), "utf8");
 
@@ -28,8 +29,11 @@ describe("the bot's prompt knows the site", () => {
     expect(PROMPT).toContain("kamiljan.com/kontakt");
   });
 
-  it("never sends anyone to the blog, which has no articles", () => {
-    expect(PROMPT).toContain("blog page with no articles");
-    expect(PROMPT).not.toContain("kamiljan.com/blog");
+  it("names every blog post and counts them the way the data does", () => {
+    // it used to say the blog was empty; claude-review caught that on the PR
+    // that published the first post
+    const count = `${String(POSTS.length)} post${POSTS.length === 1 ? "" : "s"} so far`;
+    expect(PROMPT).toContain(count);
+    for (const p of POSTS) expect(PROMPT).toContain(`kamiljan.com/blog/${p.slug}`);
   });
 });
