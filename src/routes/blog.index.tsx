@@ -1,9 +1,9 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
 import { POSTS } from "../data/posts";
 import { formatDate } from "../lib/formatDate";
+import { pageMeta } from "../lib/seo";
 
 /**
  * /blog — the list of posts from src/data/posts.ts, newest first. It was a

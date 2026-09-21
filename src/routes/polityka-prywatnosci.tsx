@@ -1,8 +1,8 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { PRIVACY, PRIVACY_UPDATED } from "../data/privacy";
 import { formatDate } from "../lib/formatDate";
+import { pageMeta } from "../lib/seo";
 
 /**
  * /polityka-prywatnosci — the GDPR information the consultation form and the

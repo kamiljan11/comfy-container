@@ -1,10 +1,10 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { faqJsonLd } from "../lib/faqJsonLd";
 import { pageFaq } from "../data/sharedFaq";
 import { SERVICES, SERVICE_SLUGS, getService } from "../data/services";
 import { ServicePageBody } from "../components/ServicePageBody";
+import { pageMeta } from "../lib/seo";
 
 /**
  * One service page. The slug is language-independent (Polish, because these

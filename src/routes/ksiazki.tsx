@@ -1,4 +1,3 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { T, type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
@@ -6,6 +5,7 @@ import { FlowWaves } from "../components/FlowWaves";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { type BookKey } from "../data/bookPages";
 import { BookErrorBoundary } from "../components/BookErrorBoundary";
+import { pageMeta } from "../lib/seo";
 
 /* The flipbook is client-only (page-flip measures the DOM) and loaded lazily,
    so the page renders on the server without it. If the chunk fails to load,

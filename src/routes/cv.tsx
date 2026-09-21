@@ -1,7 +1,7 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { CV_CONTENT } from "../data/cv";
+import { pageMeta } from "../lib/seo";
 
 export const Route = createFileRoute("/cv")({
   head: () => ({

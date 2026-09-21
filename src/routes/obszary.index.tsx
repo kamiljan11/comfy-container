@@ -1,7 +1,7 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { AREAS } from "../data/areas";
+import { pageMeta } from "../lib/seo";
 
 /** Index of the area pages — where in a company the work lands. */
 

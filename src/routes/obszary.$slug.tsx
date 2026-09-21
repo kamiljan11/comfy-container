@@ -1,10 +1,10 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { faqJsonLd } from "../lib/faqJsonLd";
 import { pageFaq } from "../data/sharedFaq";
 import { AREAS, AREA_SLUGS, getArea } from "../data/areas";
 import { ServicePageBody } from "../components/ServicePageBody";
+import { pageMeta } from "../lib/seo";
 
 /**
  * One area page: a business function (sales, customer service, admin, HR,

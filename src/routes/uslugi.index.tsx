@@ -1,7 +1,7 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { SERVICES } from "../data/services";
+import { pageMeta } from "../lib/seo";
 
 /** Index of the service pages — "Wszystkie usługi" in the header's Usługi menu. */
 

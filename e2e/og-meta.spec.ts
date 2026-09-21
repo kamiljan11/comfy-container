@@ -2,6 +2,9 @@
 // this test every page except blog posts sent the homepage's og:title.
 import { test, expect } from "@playwright/test";
 
+// English pages keep the root en_US; everything else is Polish on the server
+const EN = new Set(["/case-studies", "/claude", "/cv"]);
+
 const PAGES = [
   "/case-studies",
   "/claude",
@@ -42,6 +45,8 @@ test("every page has its own og:title, matching its <title>, and its own og:url"
     expect(ogTitle, `${path} still shares the homepage title`).not.toBe(homeOg);
     expect(ogTitle, path).toBe(title);
     expect(meta(html, "twitter:title"), path).toBe(ogTitle);
+    expect(meta(html, "og:description")?.length ?? 0, `${path} og:description`).toBeGreaterThan(40);
+    expect(meta(html, "og:locale"), path).toBe(EN.has(path) ? "en_US" : "pl_PL");
     expect(meta(html, "og:url"), path).toBe(`https://kamiljan.com${path}`);
     expect(seen.get(ogTitle ?? ""), `${path} shares og:title with`).toBeUndefined();
     seen.set(ogTitle ?? "", path);

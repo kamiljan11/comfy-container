@@ -1,10 +1,10 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { stackLines, wrapLabel } from "../lib/wrapLabel";
 import { useRef } from "react";
 import { useLang } from "../hooks/useLang";
 import { PageToc } from "../components/PageToc";
 import { type Lang } from "../i18n";
+import { pageMeta } from "../lib/seo";
 
 export const Route = createFileRoute("/claude")({
   head: () => ({

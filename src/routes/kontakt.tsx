@@ -1,8 +1,8 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
 import { ConsultForm } from "../components/ConsultForm";
+import { pageMeta } from "../lib/seo";
 
 /**
  * /kontakt — the page every "free consultation" button lands on. The form uses

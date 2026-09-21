@@ -1,10 +1,10 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { hashToId, openStudy } from "../lib/caseStudyHash";
 import { useEffect } from "react";
 import { CASE_STUDIES, FEATURED, SECONDARY, type CaseStudy } from "../data/caseStudies";
 import { useLang } from "../hooks/useLang";
 import { type Lang } from "../i18n";
+import { pageMeta } from "../lib/seo";
 
 /** Approximate reading time from all prose fields (~200 wpm). */
 function readMins(cs: CaseStudy): number {

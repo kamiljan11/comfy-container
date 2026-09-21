@@ -1,10 +1,10 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
 import { findPost, type Block } from "../data/posts";
 import { formatDate } from "../lib/formatDate";
 import { inlineSegments } from "../lib/inline";
+import { pageMeta } from "../lib/seo";
 
 /**
  * One blog post. Content comes from src/data/posts.ts; this file only lays it

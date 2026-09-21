@@ -1,6 +1,6 @@
-import { pageMeta } from "../lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { HomePage } from "../components/HomePage";
+import { pageMeta } from "../lib/seo";
 
 /** /o-mnie — who Kamil is. Same body as the homepage, the personal half. */
 export const Route = createFileRoute("/o-mnie")({
