@@ -4845,6 +4845,23 @@ section {
 .kontakt-done strong {
   color: var(--text);
 }
+/* the one-line GDPR notice under every consultation form */
+.kontakt-privacy {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.kontakt-privacy a {
+  color: var(--teal-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.privacy-updated {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
 .kontakt-alt {
   margin: 18px 0 0;
   font-size: 13px;

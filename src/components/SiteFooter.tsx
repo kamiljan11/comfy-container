@@ -25,6 +25,7 @@ type Copy = {
   contact: string;
   cta: string;
   place: string;
+  privacy: string;
 };
 
 const COPY: Record<Lang, Copy> = {
@@ -39,6 +40,7 @@ const COPY: Record<Lang, Copy> = {
     contact: "Contact",
     cta: "Free consultation",
     place: "Reykjavík, Iceland · remote-first",
+    privacy: "Privacy policy",
   },
   pl: {
     services: "Usługi",
@@ -51,6 +53,7 @@ const COPY: Record<Lang, Copy> = {
     contact: "Kontakt",
     cta: "Bezpłatna konsultacja",
     place: "Reykjavík, Islandia · praca zdalna",
+    privacy: "Polityka prywatności",
   },
 };
 
@@ -154,6 +157,7 @@ export function SiteFooter() {
 
       <div className="sf-bottom">
         <span>&copy; {new Date().getFullYear()} Kamil Jan Włodarczyk</span>
+        <Link to="/polityka-prywatnosci">{t.privacy}</Link>
         <span>{t.place}</span>
       </div>
     </footer>
