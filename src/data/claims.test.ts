@@ -19,8 +19,9 @@ const FORBIDDEN: { phrase: RegExp; why: string }[] = [
     why: "masgroup.is is the company site, not the platform",
   },
   {
-    // the bot prompt said it this way (pg-review 2026-09-21)
-    phrase: /MAS Group (\(www\.masgroup\.is\)|at www\.masgroup\.is)/i,
+    // any "(www.masgroup.is)" after a description reads as "the platform is
+    // here"; claude-review on PR #60 found one the narrower pattern missed
+    phrase: /\(www\.masgroup\.is\)|MAS Group at www\.masgroup\.is/i,
     why: "masgroup.is is the company site, not the platform",
   },
   { phrase: /top-rated/i, why: "Sleipnir: the case study says well-reviewed" },
