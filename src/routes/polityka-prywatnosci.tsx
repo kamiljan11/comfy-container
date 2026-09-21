@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { PRIVACY, PRIVACY_UPDATED } from "../data/privacy";
 import { formatDate } from "../lib/formatDate";
+import { pageMeta } from "../lib/seo";
 
 /**
  * /polityka-prywatnosci — the GDPR information the consultation form and the
@@ -12,12 +13,13 @@ import { formatDate } from "../lib/formatDate";
 export const Route = createFileRoute("/polityka-prywatnosci")({
   head: () => ({
     meta: [
-      { title: "Polityka prywatności | Kamil Jan" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Polityka prywatności | Kamil Jan",
+        description:
           "Jakie dane zbiera kamiljan.com, po co, kto je przetwarza i jakie masz prawa. Administrator: Kamil Jan Włodarczyk.",
-      },
+        url: "https://kamiljan.com/polityka-prywatnosci",
+        locale: "pl_PL",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/polityka-prywatnosci" }],
   }),

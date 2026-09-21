@@ -4,16 +4,17 @@ import { useRef } from "react";
 import { useLang } from "../hooks/useLang";
 import { PageToc } from "../components/PageToc";
 import { type Lang } from "../i18n";
+import { pageMeta } from "../lib/seo";
 
 export const Route = createFileRoute("/claude")({
   head: () => ({
     meta: [
-      { title: "Kamil Jan | Coding Higher Mind: the AI system behind the work" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Kamil Jan | Coding Higher Mind: the AI system behind the work",
+        description:
           "How Kamil Jan actually works with AI, in depth: two agent runtimes, prompt hardening, event-driven quality gates, reviewer departments with fresh context, a scar-to-gate learning loop, routines, and the VERIFIED / UNVERIFIED / FAILED protocol. Open source.",
-      },
+        url: "https://kamiljan.com/claude",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/claude" }],
   }),

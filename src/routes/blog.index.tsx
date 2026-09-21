@@ -3,6 +3,7 @@ import { type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
 import { POSTS } from "../data/posts";
 import { formatDate } from "../lib/formatDate";
+import { pageMeta } from "../lib/seo";
 
 /**
  * /blog — the list of posts from src/data/posts.ts, newest first. It was a
@@ -12,12 +13,13 @@ import { formatDate } from "../lib/formatDate";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog: automatyzacja i AI w praktyce | Kamil Jan" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Blog: automatyzacja i AI w praktyce | Kamil Jan",
+        description:
           "Wpisy o tym, co buduję z AI: narzędzia, które sam napisałem, wdrożenia, którymi mogę się podzielić, i rzeczy, których się przy tym nauczyłem.",
-      },
+        url: "https://kamiljan.com/blog",
+        locale: "pl_PL",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/blog" }],
   }),

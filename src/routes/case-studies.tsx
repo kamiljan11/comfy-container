@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { CASE_STUDIES, FEATURED, SECONDARY, type CaseStudy } from "../data/caseStudies";
 import { useLang } from "../hooks/useLang";
 import { type Lang } from "../i18n";
+import { pageMeta } from "../lib/seo";
 
 /** Approximate reading time from all prose fields (~200 wpm). */
 function readMins(cs: CaseStudy): number {
@@ -39,12 +40,12 @@ const CS_SCHEMA = {
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
     meta: [
-      { title: "Kamil Jan Włodarczyk | Case Studies" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Kamil Jan Włodarczyk | Case Studies",
+        description:
           "Engineering case studies by Kamil Jan Włodarczyk, AI automation & implementation engineer. How real production systems were built: the problem, the decisions and rejected alternatives, how I knew it worked, and the honest trade-offs.",
-      },
+        url: "https://kamiljan.com/case-studies",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/case-studies" }],
   }),

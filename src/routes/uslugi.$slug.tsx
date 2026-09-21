@@ -4,6 +4,7 @@ import { faqJsonLd } from "../lib/faqJsonLd";
 import { pageFaq } from "../data/sharedFaq";
 import { SERVICES, SERVICE_SLUGS, getService } from "../data/services";
 import { ServicePageBody } from "../components/ServicePageBody";
+import { pageMeta } from "../lib/seo";
 
 /**
  * One service page. The slug is language-independent (Polish, because these
@@ -26,8 +27,12 @@ export const Route = createFileRoute("/uslugi/$slug")({
     const s = getService("pl", params.slug);
     return {
       meta: [
-        { title: s?.metaTitle ?? "Usługi | Kamil Jan" },
-        { name: "description", content: s?.metaDescription ?? "" },
+        ...pageMeta({
+          title: s?.metaTitle ?? "Usługi | Kamil Jan",
+          description: s?.metaDescription ?? "",
+          url: `https://kamiljan.com/uslugi/${params.slug}`,
+          locale: "pl_PL",
+        }),
       ],
       links: [{ rel: "canonical", href: `https://kamiljan.com/uslugi/${params.slug}` }],
       // FAQPage for the FAQ this page shows (Polish, as rendered on the server)

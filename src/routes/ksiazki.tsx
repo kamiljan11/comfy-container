@@ -5,6 +5,7 @@ import { FlowWaves } from "../components/FlowWaves";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { type BookKey } from "../data/bookPages";
 import { BookErrorBoundary } from "../components/BookErrorBoundary";
+import { pageMeta } from "../lib/seo";
 
 /* The flipbook is client-only (page-flip measures the DOM) and loaded lazily,
    so the page renders on the server without it. If the chunk fails to load,
@@ -95,12 +96,13 @@ const COPY: Record<Lang, Copy> = {
 export const Route = createFileRoute("/ksiazki")({
   head: () => ({
     meta: [
-      { title: "Książki | Simplified Practical Spirituality | Kamil Jan" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Książki | Simplified Practical Spirituality | Kamil Jan",
+        description:
           "Dwie darmowe książki Kamila Jana: praktyczny przewodnik ponad tradycjami, w wersji skróconej (99 stron) i pełnej (199 stron). PDF po angielsku, bez zapisu na listę.",
-      },
+        url: "https://kamiljan.com/ksiazki",
+        locale: "pl_PL",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/ksiazki" }],
   }),

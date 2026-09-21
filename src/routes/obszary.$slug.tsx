@@ -4,6 +4,7 @@ import { faqJsonLd } from "../lib/faqJsonLd";
 import { pageFaq } from "../data/sharedFaq";
 import { AREAS, AREA_SLUGS, getArea } from "../data/areas";
 import { ServicePageBody } from "../components/ServicePageBody";
+import { pageMeta } from "../lib/seo";
 
 /**
  * One area page: a business function (sales, customer service, admin, HR,
@@ -22,8 +23,12 @@ export const Route = createFileRoute("/obszary/$slug")({
     const a = getArea("pl", params.slug);
     return {
       meta: [
-        { title: a?.metaTitle ?? "Obszary | Kamil Jan" },
-        { name: "description", content: a?.metaDescription ?? "" },
+        ...pageMeta({
+          title: a?.metaTitle ?? "Obszary | Kamil Jan",
+          description: a?.metaDescription ?? "",
+          url: `https://kamiljan.com/obszary/${params.slug}`,
+          locale: "pl_PL",
+        }),
       ],
       links: [{ rel: "canonical", href: `https://kamiljan.com/obszary/${params.slug}` }],
       // FAQPage for the FAQ this page shows (Polish, as rendered on the server)

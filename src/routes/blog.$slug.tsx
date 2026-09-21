@@ -4,6 +4,7 @@ import { useLang } from "../hooks/useLang";
 import { findPost, type Block } from "../data/posts";
 import { formatDate } from "../lib/formatDate";
 import { inlineSegments } from "../lib/inline";
+import { pageMeta } from "../lib/seo";
 
 /**
  * One blog post. Content comes from src/data/posts.ts; this file only lays it
@@ -22,12 +23,13 @@ export const Route = createFileRoute("/blog/$slug")({
     const url = `https://kamiljan.com/blog/${params.slug}`;
     return {
       meta: [
-        { title: b ? `${b.title} | Kamil Jan` : "Blog | Kamil Jan" },
-        { name: "description", content: b?.description ?? "" },
+        ...pageMeta({
+          title: b ? `${b.title} | Kamil Jan` : "Blog | Kamil Jan",
+          description: b?.description ?? "",
+          url,
+          locale: "pl_PL",
+        }),
         { property: "og:type", content: "article" },
-        { property: "og:title", content: b?.title ?? "" },
-        { property: "og:description", content: b?.description ?? "" },
-        { property: "og:url", content: url },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: p

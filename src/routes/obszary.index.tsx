@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { AREAS } from "../data/areas";
+import { pageMeta } from "../lib/seo";
 
 /** Index of the area pages — where in a company the work lands. */
 
@@ -26,15 +27,14 @@ const COPY = {
 export const Route = createFileRoute("/obszary/")({
   head: () => ({
     meta: [
-      {
+      ...pageMeta({
         title:
           "Obszary: automatyzacja w sprzedaży, obsłudze, administracji, HR i danych | Kamil Jan",
-      },
-      {
-        name: "description",
-        content:
+        description:
           "Automatyzacja procesów i AI według obszaru firmy: sprzedaż i marketing, obsługa klienta, administracja i dokumenty, HR i rekrutacja, dane i raporty, nietypowe procesy.",
-      },
+        url: "https://kamiljan.com/obszary",
+        locale: "pl_PL",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/obszary" }],
   }),

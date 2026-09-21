@@ -1,16 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { CV_CONTENT } from "../data/cv";
+import { pageMeta } from "../lib/seo";
 
 export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
-      { title: "Kamil Jan Włodarczyk | CV" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Kamil Jan Włodarczyk | CV",
+        description:
           "CV of Kamil Jan Włodarczyk, AI automation & implementation engineer, builder and operator. Reykjavík, remote-first.",
-      },
+        url: "https://kamiljan.com/cv",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/cv" }],
   }),
