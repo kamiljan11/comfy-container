@@ -1427,7 +1427,7 @@ export const FEATURED: CaseStudy[] = [
       {
         decision:
           "Give the self-improvement loop a hard net-negative rule: its pull requests must remove more code than they add.",
-        why: "An unconstrained 'improve the code weekly' agent is a code-growth machine: it refactors by addition, pads with helpers, and the fleet gets heavier every Sunday. Forcing net deletion flips the incentive: the only allowed improvements are simplifications, dead-code removal, and consolidation.",
+        why: "An unconstrained 'keep improving the code' agent is a code-growth machine: it refactors by addition, pads with helpers, and the fleet gets heavier with every run. Forcing net deletion flips the incentive: the only allowed improvements are simplifications, dead-code removal, and consolidation.",
         rejected:
           "A free-form improvement loop judged on 'quality'. Quality is exactly the thing a model will claim while adding 400 lines.",
         tradeoff:

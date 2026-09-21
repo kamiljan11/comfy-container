@@ -1421,7 +1421,7 @@ export const FEATURED_PL: CaseStudy[] = [
       {
         decision:
           "Nadać pętli samodoskonalenia twardą zasadę netto na minus: jej pull requesty muszą usuwać więcej kodu, niż dodają.",
-        why: "Nieograniczony agent z zadaniem „co tydzień popraw kod” to maszyna do puchnięcia kodu: refaktoryzuje przez dodawanie, dosypuje funkcje pomocnicze, a flota z każdą niedzielą robi się cięższa. Wymuszenie usuwania netto odwraca bodziec: jedyne dozwolone poprawki to uproszczenia, usuwanie martwego kodu i konsolidacja.",
+        why: "Nieograniczony agent z zadaniem „regularnie poprawiaj kod” to maszyna do puchnięcia kodu: refaktoryzuje przez dodawanie, dosypuje funkcje pomocnicze, a flota z każdym przebiegiem robi się cięższa. Wymuszenie usuwania netto odwraca bodziec: jedyne dozwolone poprawki to uproszczenia, usuwanie martwego kodu i konsolidacja.",
         rejected:
           "Dowolna pętla poprawek oceniana po „jakości”. Jakość to dokładnie to, na co model będzie się powoływał, dodając 400 linii.",
         tradeoff:

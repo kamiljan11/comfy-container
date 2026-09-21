@@ -16,6 +16,7 @@ import { Route as CvRouteImport } from './routes/cv'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as KsiazkiRouteImport } from './routes/ksiazki'
 import { Route as OMnieRouteImport } from './routes/o-mnie'
+import { Route as PolitykaPrywatnosciRouteImport } from './routes/polityka-prywatnosci'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ObszaryIndexRouteImport } from './routes/obszary.index'
@@ -58,6 +59,11 @@ const OMnieRoute = OMnieRouteImport.update({
   path: '/o-mnie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PolitykaPrywatnosciRoute = PolitykaPrywatnosciRouteImport.update({
+  id: '/polityka-prywatnosci',
+  path: '/polityka-prywatnosci',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/kontakt': typeof KontaktRoute
   '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
+  '/polityka-prywatnosci': typeof PolitykaPrywatnosciRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/kontakt': typeof KontaktRoute
   '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
+  '/polityka-prywatnosci': typeof PolitykaPrywatnosciRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/kontakt': typeof KontaktRoute
   '/ksiazki': typeof KsiazkiRoute
   '/o-mnie': typeof OMnieRoute
+  '/polityka-prywatnosci': typeof PolitykaPrywatnosciRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/obszary/$slug': typeof ObszarySlugRoute
   '/uslugi/$slug': typeof UslugiSlugRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/ksiazki'
     | '/o-mnie'
+    | '/polityka-prywatnosci'
     | '/blog/$slug'
     | '/obszary/$slug'
     | '/uslugi/$slug'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/ksiazki'
     | '/o-mnie'
+    | '/polityka-prywatnosci'
     | '/blog/$slug'
     | '/obszary/$slug'
     | '/uslugi/$slug'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/kontakt'
     | '/ksiazki'
     | '/o-mnie'
+    | '/polityka-prywatnosci'
     | '/blog/$slug'
     | '/obszary/$slug'
     | '/uslugi/$slug'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   KontaktRoute: typeof KontaktRoute
   KsiazkiRoute: typeof KsiazkiRoute
   OMnieRoute: typeof OMnieRoute
+  PolitykaPrywatnosciRoute: typeof PolitykaPrywatnosciRoute
   BlogSlugRoute: typeof BlogSlugRoute
   ObszarySlugRoute: typeof ObszarySlugRoute
   UslugiSlugRoute: typeof UslugiSlugRoute
@@ -250,6 +263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OMnieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/polityka-prywatnosci': {
+      id: '/polityka-prywatnosci'
+      path: '/polityka-prywatnosci'
+      fullPath: '/polityka-prywatnosci'
+      preLoaderRoute: typeof PolitykaPrywatnosciRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   KontaktRoute: KontaktRoute,
   KsiazkiRoute: KsiazkiRoute,
   OMnieRoute: OMnieRoute,
+  PolitykaPrywatnosciRoute: PolitykaPrywatnosciRoute,
   BlogSlugRoute: BlogSlugRoute,
   ObszarySlugRoute: ObszarySlugRoute,
   UslugiSlugRoute: UslugiSlugRoute,
