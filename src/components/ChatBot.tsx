@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { askBot } from "../lib/bot.functions";
 import { submitLead } from "../lib/lead.functions";
@@ -745,7 +746,7 @@ export default function ChatBot({ lang }: { lang: Lang }) {
           <a href="mailto:hello@kamiljan.com">Email</a>
           <span className="chatbot-foot-sep">·</span>
           {/* messages go to an AI model; the policy says what happens to them */}
-          <a href="/polityka-prywatnosci">{t.privacy}</a>
+          <Link to="/polityka-prywatnosci">{t.privacy}</Link>
         </div>
       </div>
 

@@ -2,12 +2,18 @@
 // facts it states to the code, so a change on one side fails the build.
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { PRIVACY } from "./privacy";
+import { PRIVACY, PRIVACY_UPDATED } from "./privacy";
 
 const src = (p: string) => readFileSync(new URL(p, import.meta.url), "utf8");
 const text = (lang: "pl" | "en") => JSON.stringify(PRIVACY[lang]);
 
 describe("privacy policy", () => {
+  it("keeps its date in one ISO constant", () => {
+    // claude-review on PR #57: the date was typed three times, per language
+    expect(PRIVACY_UPDATED).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(JSON.stringify(PRIVACY)).not.toMatch(/\d{4}/);
+  });
+
   it("has the same sections in both languages", () => {
     expect(PRIVACY.pl.sections).toHaveLength(PRIVACY.en.sections.length);
   });

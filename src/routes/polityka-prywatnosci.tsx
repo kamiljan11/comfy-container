@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
-import { PRIVACY } from "../data/privacy";
+import { PRIVACY, PRIVACY_UPDATED } from "../data/privacy";
+import { formatDate } from "../lib/formatDate";
 
 /**
  * /polityka-prywatnosci — the GDPR information the consultation form and the
@@ -31,7 +32,10 @@ function PrivacyPage() {
       <article className="post">
         <h1 className="post-h1">{d.title}</h1>
         <p className="post-lead">{d.lead}</p>
-        <p className="privacy-updated">{d.updated}</p>
+        <p className="privacy-updated">
+          {d.updatedLabel}:{" "}
+          <time dateTime={PRIVACY_UPDATED}>{formatDate(PRIVACY_UPDATED, lang)}</time>
+        </p>
         <div className="post-body">
           {d.sections.map((s) => (
             <section key={s.h}>

@@ -25,17 +25,19 @@ export type PrivacySection = { h: string; p: string[] };
 export type PrivacyDoc = {
   title: string;
   lead: string;
-  updated: string;
+  /** "Ostatnia zmiana" / "Last updated"; the date itself is PRIVACY_UPDATED */
+  updatedLabel: string;
   sections: PrivacySection[];
 };
 
+/** The one place the policy date lives; the page formats it per language. */
 export const PRIVACY_UPDATED = "2026-09-21";
 
 export const PRIVACY: Record<Lang, PrivacyDoc> = {
   pl: {
     title: "Polityka prywatności",
     lead: "Co dzieje się z danymi, które zostawiasz na tej stronie. Krótko, bo strona zbiera ich niewiele.",
-    updated: "Ostatnia zmiana: 21 września 2026",
+    updatedLabel: "Ostatnia zmiana",
     sections: [
       {
         h: "Kto jest administratorem",
@@ -93,7 +95,7 @@ export const PRIVACY: Record<Lang, PrivacyDoc> = {
   en: {
     title: "Privacy policy",
     lead: "What happens to the data you leave on this site. Short, because the site collects very little.",
-    updated: "Last updated: 21 September 2026",
+    updatedLabel: "Last updated",
     sections: [
       {
         h: "Who is responsible",

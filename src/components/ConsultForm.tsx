@@ -176,7 +176,12 @@ export function ConsultForm({ lang, source, idPrefix }: Props) {
           </p>
         )}
         <p className="kontakt-privacy">
-          {c.privacy} <a href="/polityka-prywatnosci">{c.privacyLink}</a>
+          {c.privacy}{" "}
+          {/* new tab: the fields are uncontrolled, so leaving the page would
+              wipe a half-written request (claude-review, PR #57) */}
+          <a href="/polityka-prywatnosci" target="_blank" rel="noreferrer">
+            {c.privacyLink}
+          </a>
         </p>
         <button
           type="submit"

@@ -12,7 +12,7 @@ test("a consultation form links the policy", async ({ page }) => {
   await page.goto("/uslugi/integracje?lang=pl");
   await page.waitForLoadState("networkidle");
   await expect(
-    page.locator('#sl-cta .kontakt-privacy a[href="/polityka-prywatnosci"]'),
+    page.locator('#sl-cta .kontakt-privacy a[href="/polityka-prywatnosci"][target="_blank"]'),
   ).toHaveCount(1);
 });
 
