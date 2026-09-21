@@ -1204,6 +1204,7 @@ section {
   color: var(--teal-2);
 }
 .work-year {
+  white-space: nowrap;
   font-size: 12px;
   color: var(--muted);
   text-align: right;

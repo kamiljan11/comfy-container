@@ -5,6 +5,7 @@ import ChatBot from "./ChatBot";
 import { useLang } from "../hooks/useLang";
 import { PainGrid, SolutionTabs } from "./OfferSections";
 import { T, type Lang } from "../i18n";
+import { localizeYears } from "../lib/years";
 
 /* ── Rotating colored hero word ── */
 const HERO_ROT: Record<Lang, string[]> = {
@@ -437,9 +438,7 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
                           <span className="work-tag">GitHub</span>
                         ) : null}
                       </div>
-                      <div className="work-year">
-                        {lang === "pl" ? p.year.replace("now", "obecnie") : p.year}
-                      </div>
+                      <div className="work-year">{localizeYears(p.year, lang)}</div>
                       {p.href ? (
                         <svg
                           className="work-arrow"

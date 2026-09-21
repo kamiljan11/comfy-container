@@ -18,6 +18,11 @@ const FORBIDDEN: { phrase: RegExp; why: string }[] = [
     phrase: /(live at|działa na) masgroup\.is/i,
     why: "masgroup.is is the company site, not the platform",
   },
+  {
+    // the bot prompt said it this way (pg-review 2026-09-21)
+    phrase: /MAS Group (\(www\.masgroup\.is\)|at www\.masgroup\.is)/i,
+    why: "masgroup.is is the company site, not the platform",
+  },
   { phrase: /top-rated/i, why: "Sleipnir: the case study says well-reviewed" },
   { phrase: /najwyżej ocenian/i, why: "Sleipnir: the case study says well-reviewed" },
   { phrase: /hand-built/i, why: "AI coding agents write the code; Kamil owns spec/review/deploy" },
