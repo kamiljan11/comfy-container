@@ -115,3 +115,30 @@ test("the /claude table of contents is a set of 44 px targets", async ({ page })
   const sum = await page.locator(".ptoc-sum").boundingBox();
   expect(sum?.height ?? 0).toBeGreaterThanOrEqual(44);
 });
+
+test("service headings keep every word on one line on a phone", async ({ page }) => {
+  // at 390 the column is ~358 px; "automatyzację," split mid-word before the
+  // heading moved above the columns and its phone size came down to 1.7rem
+  for (const path of [
+    "/uslugi/automatyzacja-procesow",
+    "/uslugi/doradztwo-ai",
+    "/uslugi/wdrozenie-i-szkolenie",
+  ]) {
+    await load(page, `${path}?lang=pl`);
+    const r = await page.evaluate(() => {
+      const h = document.querySelector(".sl-h1") as HTMLElement;
+      const cs = getComputedStyle(h);
+      const probe = document.createElement("span");
+      probe.style.cssText = `font:${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily};letter-spacing:${cs.letterSpacing};white-space:nowrap;position:absolute;visibility:hidden`;
+      document.body.appendChild(probe);
+      let widest = 0;
+      for (const w of (h.textContent ?? "").split(/\s+/)) {
+        probe.textContent = w;
+        widest = Math.max(widest, probe.offsetWidth);
+      }
+      probe.remove();
+      return { widest, heading: h.clientWidth };
+    });
+    expect(r.widest, path).toBeLessThanOrEqual(r.heading);
+  }
+});

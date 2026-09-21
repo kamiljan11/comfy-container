@@ -36,9 +36,6 @@ type Step = { meta: string; title: string; body: string };
 
 type Copy = {
   ctaPrimary: string;
-  ctaSecondary: string;
-  proofsEyebrow: string;
-  caseStudies: string;
   processEyebrow: string;
   processTitle: string;
   processLead: string;
@@ -47,14 +44,12 @@ type Copy = {
   finalTitle: string;
   finalLead: string;
   finalNote: string;
+  casesLink: string;
 };
 
 const COPY: Record<Lang, Copy> = {
   pl: {
     ctaPrimary: "Umów bezpłatną konsultację",
-    ctaSecondary: "Zobacz typowe problemy",
-    proofsEyebrow: "DOWODY",
-    caseStudies: "Pełne opisy wdrożeń z decyzjami i odrzuconymi alternatywami",
     processEyebrow: "WSPÓŁPRACA",
     processTitle: "Jak wygląda współpraca",
     processLead:
@@ -86,12 +81,10 @@ const COPY: Record<Lang, Copy> = {
     finalLead:
       "Trzydzieści minut wystarczy, żeby powiedzieć, czy jest tu co automatyzować. Jeśli nie ma — usłyszysz to wprost, zanim powstanie jakakolwiek oferta.",
     finalNote: "Bez zobowiązań. Bez oferty, zanim zrozumiem proces.",
+    casesLink: "Zobacz, co już zbudowałem",
   },
   en: {
     ctaPrimary: "Book a free consultation",
-    ctaSecondary: "See the usual problems",
-    proofsEyebrow: "EVIDENCE",
-    caseStudies: "Full write-ups with the decisions and the rejected alternatives",
     processEyebrow: "WORKING TOGETHER",
     processTitle: "How we work together",
     processLead:
@@ -123,6 +116,7 @@ const COPY: Record<Lang, Copy> = {
     finalLead:
       "Thirty minutes is enough to tell you whether there is anything here worth automating. If there is not, you will hear it plainly, before any proposal exists.",
     finalNote: "No obligation. No proposal before I understand the process.",
+    casesLink: "See what I have built",
   },
 };
 
@@ -456,12 +450,17 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
 
       {/* section, not header: see the landmark note at the top of this file */}
       <section className="sl-hero" aria-labelledby="sl-hero-h">
+        {/* The heading spans the full width, above the two columns: squeezed
+            into the copy column (437 px at 1280) a long Polish word such as
+            "automatyzację," (558 px in Syne 800) had nowhere to go. */}
+        <div className="sl-wrap sl-hero-head">
+          <span className="sl-eyebrow">{s.eyebrow}</span>
+          <h1 className="sl-h1" id="sl-hero-h">
+            {s.h1}
+          </h1>
+        </div>
         <div className="sl-wrap sl-hero-grid">
           <div className="sl-hero-copy">
-            <span className="sl-eyebrow">{s.eyebrow}</span>
-            <h1 className="sl-h1" id="sl-hero-h">
-              {s.h1}
-            </h1>
             <p className="sl-lead">{s.lead}</p>
 
             <ul className="sl-chips">
@@ -480,9 +479,6 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
                   →
                 </span>
               </Link>
-              <a href="#sl-problems" className="sl-btn-ghost">
-                {t.ctaSecondary}
-              </a>
             </div>
           </div>
 
@@ -548,38 +544,6 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
             </ol>
           </div>
         </section>
-
-        {s.proofs.length > 0 && (
-          <section className="sl-sec" id="sl-proofs" aria-labelledby="sl-proofs-h">
-            <div className="sl-wrap">
-              <div className="sl-sec-head" data-sl-reveal>
-                <span className="sl-eyebrow">{t.proofsEyebrow}</span>
-                <h2 className="sl-h2" id="sl-proofs-h">
-                  {s.proofsTitle}
-                </h2>
-              </div>
-
-              <div className="sl-proofs">
-                {s.proofs.map((p, i) => (
-                  <article key={`${String(i)}-${p.sector}`} className="sl-proof" data-sl-reveal>
-                    <span className="sl-tag sl-tag-teal">{p.sector}</span>
-                    <h3 className="sl-proof-h3">{p.title}</h3>
-                    <p className="sl-metric">{p.metric}</p>
-                  </article>
-                ))}
-              </div>
-
-              <p className="sl-proof-link">
-                <Link to="/case-studies">
-                  {t.caseStudies}
-                  <span className="sl-arrow" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
-              </p>
-            </div>
-          </section>
-        )}
 
         <section className="sl-sec" id="sl-process" aria-labelledby="sl-process-h">
           <div className="sl-wrap">
@@ -651,6 +615,11 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
                 </span>
               </Link>
               <p className="sl-cta-note">{t.finalNote}</p>
+              {/* the page no longer ends in metric tiles; the evidence is one
+                  click away rather than gone */}
+              <Link to="/case-studies" className="sl-cta-cases">
+                {t.casesLink} →
+              </Link>
             </div>
           </div>
         </section>

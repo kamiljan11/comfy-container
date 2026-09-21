@@ -4,13 +4,14 @@ import { type Lang } from "../i18n";
  * Service pages under /uslugi, listed in the header's Usługi menu and fed to
  * the homepage offer block (pickHomePains) and ServicePageBody.
  *
- * Every proof line here maps to something that is actually running in
- * production. Nothing on these pages is a number I cannot point at.
+ * Every claim here maps to something that is actually running in production.
+ * The pages used to end in a tile row of production metrics; Kamil cut it
+ * (2026-09-21) because the tiles read as engineering shorthand. The evidence
+ * now lives in /case-studies, linked from each page's closing section.
  */
 
 export type ServiceProblem = { tag: string; title: string; body: string };
 export type ServicePoint = { title: string; body: string };
-export type ServiceProof = { sector: string; title: string; metric: string };
 export type ServiceFaq = { q: string; a: string };
 
 export type Service = {
@@ -30,8 +31,6 @@ export type Service = {
   answerTitle: string;
   answerLead: string;
   points: ServicePoint[];
-  proofsTitle: string;
-  proofs: ServiceProof[];
   faqTitle: string;
   faq: ServiceFaq[];
 };
@@ -44,9 +43,9 @@ const PL: Service[] = [
     metaDescription:
       "Aplikacje do codziennej pracy firmy: zamówienia, wyceny i zlecenia w jednym miejscu, obsługiwane z telefonu. Wdrożenia działające na produkcji.",
     eyebrow: "SYSTEMY DLA FIRM",
-    h1: "System, który zna Twój proces lepiej niż arkusz",
-    lead: "Buduję aplikacje do codziennej pracy firmy: zamówień, wycen, zleceń. Zamiast arkusza, maili i telefonów wszyscy widzą w jednym miejscu, na jakim etapie jest sprawa i kto ma ją teraz ruszyć. Przykład: platforma, która prowadzi zamówienia firmy dystrybucyjnej B2B przez 13 etapów.",
-    micro: ["Jedno źródło stanu", "Obsługa z telefonu", "Rośnie razem z firmą"],
+    h1: "Widzisz, na jakim etapie jest każda sprawa",
+    lead: "Buduję aplikacje do codziennej pracy firmy: zamówień, wycen, zleceń. Zamiast arkusza, maili i telefonów wszyscy widzą w jednym miejscu, na jakim etapie jest sprawa i kto ma ją teraz ruszyć.",
+    micro: ["Zamówienia, wyceny, zlecenia", "Obsługa z telefonu", "Rośnie razem z firmą"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć rzeczy, które psują się razem z firmą",
     problemsLead: "Czasem bolą już przy jednym zamówieniu, a z każdym kolejnym coraz bardziej.",
@@ -88,16 +87,16 @@ const PL: Service[] = [
       "Zaczynam od tego, co ludzie już robią. Dopiero potem decyduję, co z tego da się zapisać tak, żeby pilnowało się samo.",
     points: [
       {
-        title: "Stan jako maszyna, nie jako pole tekstowe",
-        body: "W platformie MAS Group zamówienie ma 13 nazwanych etapów i wyłącznie dozwolone przejścia między nimi. Nie da się przeskoczyć etapu ani wysłać tego samego SMS-a dwa razy, bo powiadomienie wychodzi z jednego konkretnego przejścia i znikąd indziej.",
+        title: "Żaden etap nie zostanie pominięty",
+        body: "Każde zamówienie przechodzi przez etapy w ustalonej kolejności. Nie da się pominąć kroku ani wysłać klientowi tej samej wiadomości dwa razy, bo powiadomienie wychodzi dokładnie w chwili, gdy sprawa przechodzi na następny etap.",
       },
       {
-        title: "Uprawnienia pilnowane przez bazę, nie przez ekran",
-        body: "Kto co widzi, rozstrzygają polityki Postgresa. Ukryty przycisk da się obejść, ale polityki bazy już nie. Kosztowało mnie to jedną awarię na produkcji: dwie polityki odwołały się do siebie nawzajem i zapętliły zapytania. Naprawione funkcją SECURITY DEFINER, a wnioskiem jest zestaw testów per rola, który dziś pisałbym od pierwszego dnia.",
+        title: "Każdy widzi tylko to, co powinien",
+        body: "Handlowiec widzi swoich klientów, klient swoje zamówienia, szef całość. Pilnuje tego sama baza danych, a nie ukryty przycisk, więc nie da się tego obejść. Raz dwie takie reguły zablokowały się nawzajem na produkcji; od tamtej pory każdą rolę sprawdzam osobnym testem od pierwszego dnia.",
       },
       {
         title: "Zbudowane pod telefon w terenie",
-        body: "Zespół handlowy MAS Group prowadzi cały proces z telefonu, między jednym klientem a drugim. System, który działa w takich warunkach, działa wszędzie.",
+        body: "Handlowcy prowadzą cały proces z telefonu, między jednym klientem a drugim. System, który działa w takich warunkach, działa wszędzie.",
       },
       {
         title: "Jeden proces naraz, nie plan na pół roku",
@@ -106,29 +105,6 @@ const PL: Service[] = [
       {
         title: "Zostaję po uruchomieniu",
         body: "System bez zespołu, który go używa, to koszt, nie inwestycja. Szkolę ludzi i jestem wtedy, gdy pojawia się pierwszy przypadek, którego nikt nie przewidział.",
-      },
-    ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Trzy branże, jeden proces od wyceny do dostawy",
-        metric: "13 etapów, obsługa z telefonu przez zespół nietechniczny",
-      },
-      {
-        sector: "Logistyka",
-        title: "Wpłaty na kontener, który może się nie zapełnić",
-        metric: "Ścieżka zwrotu jako jawna maszyna stanów w Postgresie",
-      },
-      {
-        sector: "Doradztwo",
-        title: "Pipeline dziewięciu etapów generujący umowy dotacyjne",
-        metric: "Dokumenty DOCX i PDF gotowe do podpisu",
-      },
-      {
-        sector: "Motoryzacja / handel",
-        title: "Katalog z pliku dostawcy, który warsztat prowadzi sam",
-        metric: "1932 pozycje w 229 kategoriach, panel po stronie klienta",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -161,7 +137,7 @@ const PL: Service[] = [
     eyebrow: "AUTOMATYZACJA PROCESÓW",
     h1: "Przestań płacić ludziom za przenoszenie danych",
     lead: "Automatyzuję powtarzalne zadania tam, gdzie zwracają się w czasie, który da się policzyć. Nie każdy proces warto automatyzować i mówię wprost, kiedy nie warto.",
-    micro: ["Zwrot policzony przed startem", "Wdrożenie etapami", "Zero ukrytych zależności"],
+    micro: ["Ręczne kroki znikają", "Wdrożenie etapami", "Zero ukrytych zależności"],
     problemsEyebrow: "CENA RĘCZNEJ ROBOTY",
     problemsTitle: "Sześć kosztów, których nie widać na fakturze",
     problemsLead: "Ręczna praca nie ma osobnej pozycji w księgach. Ma za to bardzo konkretną cenę.",
@@ -223,24 +199,6 @@ const PL: Service[] = [
         body: "Nie wielki projekt na kwartał, tylko kolejne kawałki wchodzące do użytku jeden po drugim. Po każdym widać, co się zmieniło w liczbach.",
       },
     ],
-    proofsTitle: "Przykłady z produkcji",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Logistyka od zamówienia po odprawę bez ręcznego pilnowania",
-        metric: "Powiadomienia wychodzą z przejść w maszynie stanów",
-      },
-      {
-        sector: "Motoryzacja",
-        title: "Wycena z historii czasów pracy warsztatu",
-        metric: "Liczby z własnych danych, nie z oszacowania",
-      },
-      {
-        sector: "Usługi cyfrowe",
-        title: "Od zapytania do umowy PDF bez przepisywania",
-        metric: "Dziesięć rynków, właściwy VAT w każdym",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -271,7 +229,7 @@ const PL: Service[] = [
     eyebrow: "SZTUCZNA INTELIGENCJA",
     h1: "Nie kolejny chatbot: AI, które liczy z Twoich danych",
     lead: "Model, który zgaduje, jest groźniejszy niż brak modelu, bo brzmi wiarygodnie. Buduję rozwiązania, w których AI pracuje na Twoich liczbach i Twoich regułach, a tam, gdzie odpowiedź musi być zawsze identyczna, w ogóle nie pyta modelu.",
-    micro: ["Odpowiedzi z Twoich danych", "Koszt pod kontrolą", "Granice powiedziane wprost"],
+    micro: ["Asystent na Twoich danych", "Koszt pod kontrolą", "Granice powiedziane wprost"],
     problemsEyebrow: "DLACZEGO PILOTAŻE UMIERAJĄ",
     problemsTitle: "Sześć powodów, dla których AI nie weszło do produkcji",
     problemsLead:
@@ -334,24 +292,6 @@ const PL: Service[] = [
         body: "Korzystam z modeli przez API. Nie trenuję ich ani nie dostrajam. Formalnego zestawu testów jakości modelu jeszcze nie mam i mówię to od razu, bo dowiedzenie się o tym później kosztowałoby Cię więcej.",
       },
     ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Motoryzacja",
-        title: "Wycena liczona z historii warsztatu, nie z oszacowania modelu",
-        metric: "12 857 kodów diagnostycznych z tabeli, zero tokenów",
-      },
-      {
-        sector: "Portfolio",
-        title: "Asystent odpowiadający wyłącznie z zapisanych faktów",
-        metric: "Nie potrafi wymyślić kwalifikacji, których nie ma",
-      },
-      {
-        sector: "Własna infrastruktura",
-        title: "Agenty na harmonogramie z audytem samego systemu",
-        metric: "Skan zależności bez udziału modelu, gdy nie ma znalezisk",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -382,7 +322,7 @@ const PL: Service[] = [
     eyebrow: "INTEGRACJE",
     h1: "Twoje narzędzia spina dziś człowiek. Niech spina je kod",
     lead: "Łączę systemy, które każdy z osobna działa dobrze, a razem wymagają osoby przenoszącej dane. Integracja to nie tylko połączenie: to też decyzja, co się dzieje, gdy druga strona przestaje odpowiadać.",
-    micro: ["Dane płyną same", "Awarie widoczne", "Odporne na aktualizacje"],
+    micro: ["Dane same między programami", "Awarie widoczne", "Odporne na aktualizacje"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć objawów systemów, które się nie znają",
     problemsLead:
@@ -445,24 +385,6 @@ const PL: Service[] = [
         body: "Klucze do integracji siedzą w vaulcie i trafiają do procesu jako zmienne środowiskowe. Skan przy commicie blokuje przypadkowe wrzucenie klucza do repozytorium.",
       },
     ],
-    proofsTitle: "Działa w produkcji",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Zamówienie, powiadomienia SMS i odprawa w jednym przepływie",
-        metric: "Zdarzenia wychodzą z przejść, nie z ręcznego kliknięcia",
-      },
-      {
-        sector: "Logistyka",
-        title: "Płatności i zwroty spięte ze stanem kampanii kontenerowej",
-        metric: "Stan rozstrzyga baza, nie zadanie cykliczne",
-      },
-      {
-        sector: "Usługi cyfrowe",
-        title: "Wycena, umowa i podpis w jednej ścieżce",
-        metric: "Dziesięć rynków, reguły VAT per kraj",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -493,7 +415,7 @@ const PL: Service[] = [
     eyebrow: "DORADZTWO",
     h1: "Zanim wydasz na automatyzację, sprawdź, czy się zwróci",
     lead: "Wskazuję miejsca, w których automatyzacja i AI zwrócą się najszybciej, oraz te, w których nie warto ich ruszać. To druga lista bywa cenniejsza, bo oszczędza budżet, który już miał być wydany.",
-    micro: ["Priorytety wg zwrotu", "Konkretny plan", "Bez zobowiązania do budowy"],
+    micro: ["Co automatyzować najpierw", "Konkretny plan", "Bez zobowiązania do budowy"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć powodów, dla których projekt stoi w miejscu",
     problemsLead:
@@ -556,24 +478,6 @@ const PL: Service[] = [
         body: "Dokument jest Twój i możesz go zrealizować z kimkolwiek. Doradztwo, którego jedynym celem jest sprzedaż własnego wdrożenia, nie jest doradztwem.",
       },
     ],
-    proofsTitle: "Skąd to wiem",
-    proofs: [
-      {
-        sector: "Własne firmy",
-        title: "Sam prowadzę operacje, które automatyzuję",
-        metric: "Handel B2B, warsztat, logistyka, agencja",
-      },
-      {
-        sector: "Wdrożenia",
-        title: "Systemy oddane zespołom, które prowadzą je beze mnie",
-        metric: "Zespół terenowy MAS Group na co dzień bez mojego udziału",
-      },
-      {
-        sector: "Warsztat",
-        title: "Zbudowane dla branży, w której nie byłem specjalistą",
-        metric: "Mechanik definiował, co znaczy poprawna odpowiedź",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -604,7 +508,7 @@ const PL: Service[] = [
     eyebrow: "WDROŻENIE I SZKOLENIE",
     h1: "System, którego zespół faktycznie zaczyna używać",
     lead: "Zbudowanie systemu to połowa roboty. Druga połowa to doprowadzenie do momentu, w którym ludzie używają go bez przypominania, a ta połowa decyduje, czy projekt był inwestycją czy kosztem.",
-    micro: ["Nauka na waszym procesie", "Materiały zostają u Was", "Wsparcie po starcie"],
+    micro: ["Zespół umie to prowadzić", "Materiały zostają u Was", "Wsparcie po starcie"],
     problemsEyebrow: "ZNASZ TO?",
     problemsTitle: "Sześć powodów, dla których gotowy system leży odłogiem",
     problemsLead: "Najdroższy system to ten, który działa poprawnie i z którego nikt nie korzysta.",
@@ -666,24 +570,6 @@ const PL: Service[] = [
         body: "Najwięcej uczy się w tygodniach po starcie, gdy pojawia się to, czego nikt nie przewidział. Zamykanie projektu w dniu uruchomienia to zostawianie klienta w najtrudniejszym momencie.",
       },
     ],
-    proofsTitle: "Robione w praktyce",
-    proofs: [
-      {
-        sector: "Handel B2B",
-        title: "Zespół terenowy prowadzi cały proces bez mojego udziału",
-        metric: "Osoby nietechniczne, praca z telefonu",
-      },
-      {
-        sector: "Motoryzacja",
-        title: "System oddany warsztatowi, w którym pracuje na co dzień",
-        metric: "Definicję poprawnej odpowiedzi ustalał mechanik",
-      },
-      {
-        sector: "Własna praktyka",
-        title: "Ta sama metoda zastosowana do siebie",
-        metric: "Codzienna praktyka czytania kodu prowadzona publicznie",
-      },
-    ],
     faqTitle: "Pytania, które padają najczęściej",
     faq: [
       {
@@ -714,9 +600,9 @@ const EN: Service[] = [
     metaDescription:
       "Apps a company runs its daily work on: orders, quotes and jobs in one place, operated from a phone. Running in production.",
     eyebrow: "INTERNAL SYSTEMS",
-    h1: "A system that knows your process better than the spreadsheet does",
-    lead: "I build the apps a company runs its daily work on: orders, quotes, jobs. Instead of a spreadsheet, emails and phone calls, everyone sees in one place what stage each case is at and who has to move it next. Example: a platform that takes a B2B distributor's orders through 13 stages.",
-    micro: ["One source of state", "Works from a phone", "Grows with the company"],
+    h1: "See where every job stands, and who moves it next",
+    lead: "I build the apps a company runs its daily work on: orders, quotes, jobs. Instead of a spreadsheet, emails and phone calls, everyone sees in one place what stage each case is at and who has to move it next.",
+    micro: ["Orders, quotes and jobs", "Works from a phone", "Grows with the company"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six things that break as the company grows",
     problemsLead:
@@ -759,16 +645,16 @@ const EN: Service[] = [
       "I start from what people already do. Only then do I decide what can be written down so that it enforces itself.",
     points: [
       {
-        title: "State as a machine, not as a text field",
-        body: "In the MAS Group platform an order has 13 named stages and only the transitions I declared legal. A stage can't be skipped and the same SMS can't fire twice, because the notification leaves from one specific transition and nowhere else.",
+        title: "No stage gets skipped",
+        body: "Every order moves through its stages in a set order. A step can't be skipped and the customer can't get the same message twice, because the notification goes out at the exact moment the order moves on.",
       },
       {
-        title: "Permissions enforced by the database, not by the screen",
-        body: "Who sees what is decided by Postgres policies. A hidden button can be bypassed; a database policy can't. This cost me one production outage: two policies referenced each other into infinite recursion. Fixed with a SECURITY DEFINER function, and the lesson is a per-role test suite I would now write from day one.",
+        title: "Everyone sees only what they should",
+        body: "A rep sees their own customers, a customer their own orders, the owner everything. The database itself enforces that, not a hidden button, so it can't be worked around. Once two of those rules locked each other up in production; since then every role gets its own test from day one.",
       },
       {
         title: "Built for a phone in the field",
-        body: "The MAS Group sales team runs the whole process from their phones, between customers. A system that survives that survives anywhere.",
+        body: "The sales team runs the whole process from their phones, between customers. A system that survives that survives anywhere.",
       },
       {
         title: "One process at a time, not a six-month plan",
@@ -777,29 +663,6 @@ const EN: Service[] = [
       {
         title: "I stay after launch",
         body: "A system without a team using it is a cost, not an investment. I train the people and I'm there when the first case nobody predicted shows up.",
-      },
-    ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "Three verticals, one quote-to-delivery process",
-        metric: "13 stages, run from phones by a non-technical team",
-      },
-      {
-        sector: "Logistics",
-        title: "Deposits toward a container that might never fill",
-        metric: "Refund path as an explicit state machine in Postgres",
-      },
-      {
-        sector: "Consulting",
-        title: "A nine-stage pipeline generating funding contracts",
-        metric: "DOCX and PDF ready for signature",
-      },
-      {
-        sector: "Automotive / trade",
-        title: "A supplier file turned into a catalogue the workshop runs itself",
-        metric: "1,932 items across 229 categories, admin on the client side",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -832,7 +695,7 @@ const EN: Service[] = [
     eyebrow: "PROCESS AUTOMATION",
     h1: "Stop paying people to move data between windows",
     lead: "I automate repetitive work where it pays back in time you can actually count. Not every process is worth automating, and I say so plainly when it isn't.",
-    micro: ["Payback counted first", "Shipped in stages", "No hidden coupling"],
+    micro: ["Manual steps disappear", "Shipped in stages", "No hidden coupling"],
     problemsEyebrow: "THE COST OF MANUAL WORK",
     problemsTitle: "Six costs that never appear on an invoice",
     problemsLead: "Manual work has no line in the accounts. It has a very specific price.",
@@ -894,24 +757,6 @@ const EN: Service[] = [
         body: "Not a quarter-long project, but pieces going into use one after another. After each one you can see what changed in the numbers.",
       },
     ],
-    proofsTitle: "Examples from production",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "Logistics from order to customs without manual chasing",
-        metric: "Notifications fire from state transitions",
-      },
-      {
-        sector: "Automotive",
-        title: "Quotes computed from the shop's own labour history",
-        metric: "Numbers from your data, not from an estimate",
-      },
-      {
-        sector: "Digital services",
-        title: "From enquiry to contract PDF with no retyping",
-        metric: "Ten markets, the right VAT in each",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -942,7 +787,7 @@ const EN: Service[] = [
     eyebrow: "ARTIFICIAL INTELLIGENCE",
     h1: "Not another chatbot: AI that computes from your data",
     lead: "A model that guesses is more dangerous than no model, because it sounds credible. I build systems where AI works from your numbers and your rules, and where the answer must be identical every time, it doesn't ask a model at all.",
-    micro: ["Grounded in your data", "Cost under control", "Limits stated up front"],
+    micro: ["An assistant on your data", "Cost under control", "Limits stated up front"],
     problemsEyebrow: "WHY PILOTS DIE",
     problemsTitle: "Six reasons AI never reached production",
     problemsLead:
@@ -1005,24 +850,6 @@ const EN: Service[] = [
         body: "I use foundation models via API. I don't train or fine-tune them. There is no formal eval harness yet, and I say so immediately, because finding that out later would cost you more.",
       },
     ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "Automotive",
-        title: "Quotes computed from shop history, not model estimation",
-        metric: "12,857 diagnostic codes from a table, zero tokens",
-      },
-      {
-        sector: "Portfolio",
-        title: "An assistant answering only from recorded facts",
-        metric: "Cannot invent a qualification that isn't there",
-      },
-      {
-        sector: "Own infrastructure",
-        title: "Scheduled agents auditing the system itself",
-        metric: "Deterministic dependency scan, no model when clean",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -1053,7 +880,7 @@ const EN: Service[] = [
     eyebrow: "INTEGRATIONS",
     h1: "A person is bridging your tools. Let code do it",
     lead: "I connect systems that each work fine alone and together need somebody to carry data across. Integration isn't only the connection: it's also deciding what happens when the other side stops answering.",
-    micro: ["Data moves itself", "Failures are visible", "Survives API changes"],
+    micro: ["Data between your tools", "Failures are visible", "Survives API changes"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six symptoms of systems that don't know each other",
     problemsLead:
@@ -1116,24 +943,6 @@ const EN: Service[] = [
         body: "Integration keys live in a vault and reach the process as environment variables. A commit-time scan blocks a key from accidentally entering the repository.",
       },
     ],
-    proofsTitle: "Running in production",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "Orders, SMS notifications and customs in one flow",
-        metric: "Events fire from transitions, not from a manual click",
-      },
-      {
-        sector: "Logistics",
-        title: "Payments and refunds tied to container campaign state",
-        metric: "State settled by the database, not by a cron job",
-      },
-      {
-        sector: "Digital services",
-        title: "Quote, contract and signature in one path",
-        metric: "Ten markets, per-country VAT rules",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -1164,7 +973,7 @@ const EN: Service[] = [
     eyebrow: "ADVISORY",
     h1: "Before you spend on automation, find out whether it pays back",
     lead: "I identify where automation and AI will pay back fastest, and where they aren't worth touching. That second list is often the more valuable one, because it saves a budget that was already being spent.",
-    micro: ["Priorities by payback", "A concrete plan", "No obligation to build"],
+    micro: ["What to automate first", "A concrete plan", "No obligation to build"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six reasons the project isn't moving",
     problemsLead:
@@ -1226,24 +1035,6 @@ const EN: Service[] = [
         body: "The document is yours and you can execute it with anyone. Advisory whose only purpose is selling the adviser's own build isn't advisory.",
       },
     ],
-    proofsTitle: "Where this comes from",
-    proofs: [
-      {
-        sector: "Own companies",
-        title: "I run the operations I automate",
-        metric: "B2B trade, a workshop, logistics, an agency",
-      },
-      {
-        sector: "Deployments",
-        title: "Systems handed to teams that run them without me",
-        metric: "MAS Group's field team, daily, unaided",
-      },
-      {
-        sector: "Workshop",
-        title: "Built for a trade I wasn't an expert in",
-        metric: "A working mechanic defined what a correct answer is",
-      },
-    ],
     faqTitle: "Questions I get asked",
     faq: [
       {
@@ -1274,7 +1065,7 @@ const EN: Service[] = [
     eyebrow: "ROLLOUT & TRAINING",
     h1: "A system the team actually starts using",
     lead: "Building the system is half the work. The other half is getting to the point where people use it without being reminded, and that half decides whether the project was an investment or a cost.",
-    micro: ["Learning on your own data", "Materials stay with you", "Support after launch"],
+    micro: ["Your team can run it", "Materials stay with you", "Support after launch"],
     problemsEyebrow: "SOUND FAMILIAR?",
     problemsTitle: "Six reasons a finished system sits unused",
     problemsLead: "The most expensive system is the one that works correctly and nobody opens.",
@@ -1334,24 +1125,6 @@ const EN: Service[] = [
       {
         title: "I'm there for the first unusual cases",
         body: "The most is learned in the weeks after launch, when the unpredicted shows up. Closing a project on go-live day leaves the client alone at the hardest moment.",
-      },
-    ],
-    proofsTitle: "Done in practice",
-    proofs: [
-      {
-        sector: "B2B trade",
-        title: "A field team running the whole process without me",
-        metric: "Non-technical people, working from phones",
-      },
-      {
-        sector: "Automotive",
-        title: "A system handed to the workshop that uses it daily",
-        metric: "A mechanic defined what a correct answer is",
-      },
-      {
-        sector: "Own practice",
-        title: "The same method applied to myself",
-        metric: "Daily code-reading practice kept in public",
       },
     ],
     faqTitle: "Questions I get asked",

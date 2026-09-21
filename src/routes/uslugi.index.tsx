@@ -8,7 +8,7 @@ const COPY = {
   en: {
     eyebrow: "SERVICES",
     h1: "What I build for companies",
-    lead: "Six kinds of work, all of them running in production somewhere. I also say plainly where the limits are, including the cases where I would tell you not to do it.",
+    lead: "Six kinds of work. Each one is running at a client right now, and each page says where it stops working, including when I would tell you not to build it.",
     cta: "Talk it through",
     button: "Book a free consultation",
     ctaLead:
@@ -17,7 +17,7 @@ const COPY = {
   pl: {
     eyebrow: "USŁUGI",
     h1: "Co buduję dla firm",
-    lead: "Sześć rodzajów pracy, każdy działający gdzieś w produkcji. Mówię też wprost, gdzie leżą granice, łącznie z przypadkami, w których odradzam robotę.",
+    lead: "Sześć rodzajów pracy. Każdy działa dziś u któregoś klienta, a na każdej stronie piszę, gdzie się kończy sens, łącznie z sytuacjami, w których odradzam wdrożenie.",
     cta: "Porozmawiajmy",
     button: "Umów bezpłatną konsultację",
     ctaLead: "Jedna rozmowa zwykle wystarcza, żeby zobaczyć, czy jest tu w ogóle co automatyzować.",
