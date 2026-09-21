@@ -21,6 +21,8 @@ test("the reader turns pages, switches books and loads only nearby pages", async
 
   await page.getByRole("button", { name: "Następna strona" }).click();
   await expect(count).not.toHaveText("Strona 1 / 99");
+  // desktop keeps the soft page curl; phones get hard pages (e2e/mobile.spec.ts)
+  expect(await page.locator('.bf-page[data-density="hard"]').count()).toBe(0);
 
   await page.locator(".bf-stage").focus();
   const before = await count.textContent();

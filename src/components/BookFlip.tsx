@@ -46,12 +46,12 @@ type FlipBookRef = { pageFlip: () => PageFlipApi | undefined };
 
 const LoadedPages = createContext<ReadonlySet<number>>(new Set());
 
-type PageProps = { book: BookKey; index: number; alt: string };
+type PageProps = { book: BookKey; index: number; alt: string; hard: boolean };
 
-const Page = forwardRef<HTMLDivElement, PageProps>(function Page({ book, index, alt }, ref) {
+const Page = forwardRef<HTMLDivElement, PageProps>(function Page({ book, index, alt, hard }, ref) {
   const load = useContext(LoadedPages);
   return (
-    <div className="bf-page" ref={ref}>
+    <div className="bf-page" ref={ref} data-density={hard ? "hard" : "soft"}>
       {load.has(index) ? (
         <img src={pageSrc(book, index + 1)} alt={alt} decoding="async" draggable={false} />
       ) : null}
@@ -66,6 +66,16 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+/**
+ * On a narrow screen the book shows one page, and page-flip's soft curl then
+ * draws the back of the turning page as clipped slivers that swing outside the
+ * page: on a phone (Galaxy S25 Ultra, Brave) the page looked like it shattered.
+ * Hard pages turn as one rigid sheet around the spine instead.
+ */
+function isNarrow(): boolean {
+  return window.matchMedia("(max-width: 767px)").matches;
+}
+
 type Props = { book: BookKey; title: string; lang: Lang; hintId?: string };
 
 export function BookFlip({ book, title, lang, hintId }: Props) {
@@ -74,6 +84,7 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
   const bookRef = useRef<FlipBookRef | null>(null);
   const [current, setCurrent] = useState(0);
   const [reduced] = useState(prefersReducedMotion);
+  const [hard] = useState(isNarrow);
 
   // a new book starts on its cover
   useEffect(() => setCurrent(0), [book]);
@@ -98,9 +109,15 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
   const pages = useMemo(
     () =>
       Array.from({ length: meta.pages }, (_, i) => (
-        <Page key={i} book={book} index={i} alt={`${title}, ${pageWord} ${String(i + 1)}`} />
+        <Page
+          key={i}
+          book={book}
+          index={i}
+          alt={`${title}, ${pageWord} ${String(i + 1)}`}
+          hard={hard}
+        />
       )),
-    [book, meta.pages, title, pageWord],
+    [book, meta.pages, title, pageWord, hard],
   );
 
   return (
