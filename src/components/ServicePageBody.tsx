@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { type Service } from "../data/services";
 import { Illustration } from "./illustrations";
+import { ConsultForm } from "./ConsultForm";
 import { normalizeText } from "../lib/text";
 import { hashToId, openStudy } from "../lib/caseStudyHash";
 
@@ -63,7 +64,7 @@ const COPY: Record<Lang, Copy> = {
       {
         meta: "Bez zobowiązania do budowy",
         title: "Mapa procesu i wycena",
-        body: "Dostajesz proces opisany z zaznaczonymi miejscami strat, proponowany zakres, widełki kosztu i szacowany czas — razem z listą rzeczy, których nie warto ruszać.",
+        body: "Dostajesz proces opisany z zaznaczonymi miejscami strat, proponowany zakres, widełki kosztu i szacowany czas, razem z listą rzeczy, których nie warto ruszać.",
       },
       {
         meta: "Korzyść po każdym etapie",
@@ -73,13 +74,13 @@ const COPY: Record<Lang, Copy> = {
       {
         meta: "Materiały zostają u Was",
         title: "Szkolenie, przekazanie i wsparcie",
-        body: "Zespół uczy się na Waszych danych, dokumentacja i dostępy zostają po Waszej stronie. Jestem przy pierwszych nietypowych przypadkach — te pojawiają się po starcie, nie w dniu uruchomienia.",
+        body: "Zespół uczy się na Waszych danych, dokumentacja i dostępy zostają po Waszej stronie. Jestem przy pierwszych nietypowych przypadkach, bo te pojawiają się po starcie, nie w dniu uruchomienia.",
       },
     ],
     faqEyebrow: "WĄTPLIWOŚCI",
     finalTitle: "Zacznijmy od jednego procesu",
     finalLead:
-      "Trzydzieści minut wystarczy, żeby powiedzieć, czy jest tu co automatyzować. Jeśli nie ma — usłyszysz to wprost, zanim powstanie jakakolwiek oferta.",
+      "Trzydzieści minut wystarczy, żeby powiedzieć, czy jest tu co automatyzować. Jeśli nie ma, usłyszysz to wprost, zanim powstanie jakakolwiek oferta.",
     finalNote: "Bez zobowiązań. Bez oferty, zanim zrozumiem proces.",
     casesLink: "Zobacz, co już zbudowałem",
   },
@@ -98,7 +99,7 @@ const COPY: Record<Lang, Copy> = {
       {
         meta: "No obligation to build",
         title: "Process map and a quote",
-        body: "You get the process written down with the losses marked, a proposed scope, a cost range and a time estimate — together with the list of things not worth touching.",
+        body: "You get the process written down with the losses marked, a proposed scope, a cost range and a time estimate, together with the list of things not worth touching.",
       },
       {
         meta: "A benefit after every stage",
@@ -108,7 +109,7 @@ const COPY: Record<Lang, Copy> = {
       {
         meta: "The materials stay with you",
         title: "Training, handover and support",
-        body: "Your team learns on your own data; documentation and access stay on your side. I am there for the first unusual cases — they show up after launch, not on launch day.",
+        body: "Your team learns on your own data; documentation and access stay on your side. I am there for the first unusual cases, because they show up after launch, not on launch day.",
       },
     ],
     faqEyebrow: "SECOND THOUGHTS",
@@ -473,12 +474,14 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
             </ul>
 
             <div className="sl-actions">
-              <Link to="/kontakt" className="sl-btn">
+              {/* the form is on this page now (#sl-cta), so the button scrolls to
+                  it instead of sending the reader away to /kontakt */}
+              <a href="#sl-cta" className="sl-btn">
                 {t.ctaPrimary}
                 <span className="sl-btn-arrow" aria-hidden="true">
                   →
                 </span>
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -603,23 +606,26 @@ export function ServicePageBody({ s, lang, others, othersTitle, othersTo }: Prop
 
         <section className="sl-sec sl-sec-last" id="sl-cta" aria-labelledby="sl-cta-h">
           <div className="sl-wrap">
-            <div className="sl-cta" data-sl-reveal>
-              <h2 className="sl-cta-h2" id="sl-cta-h">
-                {t.finalTitle}
-              </h2>
-              <p className="sl-cta-p">{t.finalLead}</p>
-              <Link to="/kontakt" className="sl-btn">
-                {t.ctaPrimary}
-                <span className="sl-btn-arrow" aria-hidden="true">
-                  →
-                </span>
-              </Link>
-              <p className="sl-cta-note">{t.finalNote}</p>
-              {/* the page no longer ends in metric tiles; the evidence is one
-                  click away rather than gone */}
-              <Link to="/case-studies" className="sl-cta-cases">
-                {t.casesLink} →
-              </Link>
+            <div className="sl-cta sl-cta-form" data-sl-reveal>
+              <div className="sl-cta-copy">
+                <h2 className="sl-cta-h2" id="sl-cta-h">
+                  {t.finalTitle}
+                </h2>
+                <p className="sl-cta-p">{t.finalLead}</p>
+                <p className="sl-cta-note">{t.finalNote}</p>
+                {/* the page no longer ends in metric tiles; the evidence is one
+                    click away rather than gone */}
+                <Link to="/case-studies" className="sl-cta-cases">
+                  {t.casesLink} →
+                </Link>
+              </div>
+              <div className="kontakt-card sl-cta-card">
+                <ConsultForm
+                  lang={lang}
+                  source={othersTo.replace("$slug", s.slug)}
+                  idPrefix={`consult-${s.slug}`}
+                />
+              </div>
             </div>
           </div>
         </section>

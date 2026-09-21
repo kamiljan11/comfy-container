@@ -5755,6 +5755,31 @@ header[id] {
   pointer-events: none;
   background: radial-gradient(50% 60% at 50% 34%, var(--teal-glow-2), transparent 70%);
 }
+/* The closing section carries the consultation form itself: copy on the
+   left, the form on the right, stacked on a phone. Reuses the /kontakt card
+   and form styles through ConsultForm, so both places look the same. */
+.sl-cta-form {
+  display: grid;
+  gap: 28px;
+  align-items: start;
+  text-align: left;
+}
+.sl-cta-form .sl-cta-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.sl-cta-card {
+  margin: 0;
+  width: 100%;
+}
+@media (min-width: 900px) {
+  .sl-cta-form {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 44px;
+    padding: 44px 40px;
+  }
+}
 .sl-cta-h2 {
   font-family: var(--font-head);
   font-size: clamp(1.5rem, 3.6vw, 2.05rem);

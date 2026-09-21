@@ -5,6 +5,9 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- Every service and area page carries the consultation form itself, at the end of the page, instead of sending the reader to /kontakt; the hero button scrolls to it. The form is one component (`src/components/ConsultForm.tsx`) shared with /kontakt, so both look and behave the same, and the email it sends names the page it came from (`consultMessage` takes a `source`, default `/kontakt`). Failures are logged with the page and reason and shown with the email address as a way out. `e2e/consult-form.spec.ts` checks the form is there, the hero button reaches it, and a failed send says so (the submit is intercepted, no real lead is sent).
+- CV summary rewritten in both languages: it switched from third person to "I" mid-sentence, said "when something breaks at 4pm on a Tuesday", and called Kamil a "top performer" with nothing behind it. Four dashes left in the service pages' process steps are gone.
+
 - Service and area pages, second pass from Kamil:
   - The internal-systems heading says what the reader gets: "Widzisz, na jakim etapie jest każda sprawa" / "See where every job stands, and who moves it next" (it was "a system that knows your process better than the spreadsheet").
   - The first two "how I build" points read like a database manual ("state as a machine", "Postgres policies", "SECURITY DEFINER"). They now say what that means for the business: no stage gets skipped and no customer gets the same message twice; everyone sees only what they should. The production incident stays, told plainly.
