@@ -21,10 +21,13 @@ const PAGES = [
   "/blog/claude-autoshutdown",
 ];
 
+// one literal pattern over all meta tags; a later tag with the same key wins,
+// as it does for crawlers that keep the last value
+const META_RE = /<meta[^>]+(?:property|name)="([^"]+)"[^>]+content="([^"]*)"/g;
 const meta = (html: string, key: string): string | undefined => {
-  const re = new RegExp(`<meta[^>]+(?:property|name)="${key}"[^>]+content="([^"]*)"`, "g");
-  const all = [...html.matchAll(re)].map((m) => m[1]);
-  return all.at(-1);
+  let value: string | undefined;
+  for (const m of html.matchAll(META_RE)) if (m[1] === key) value = m[2];
+  return value;
 };
 
 test("every page has its own og:title, matching its <title>, and its own og:url", async ({
