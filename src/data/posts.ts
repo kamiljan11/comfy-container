@@ -46,15 +46,15 @@ export const POSTS: Post[] = [
     repo: "https://github.com/kamiljan11/claude-autoshutdown",
     body: {
       pl: {
-        title: "Komputer gaśnie, kiedy Claude Code naprawdę skończy. Nie o trzeciej w nocy",
+        title: "Komputer gaśnie, kiedy Claude Code skończy pracę",
         description:
           "Małe narzędzie na Windows, które wyłącza, hibernuje albo usypia komputer dopiero wtedy, gdy każda sesja Claude Code i każdy jej subagent skończyły pracę. Jak rozpoznaje koniec pracy i dlaczego nie patrzy na CPU.",
-        lead: "Zostawiam wieczorem agentów z dłuższą robotą. Rano komputer albo chodził całą noc na pusto, albo zgasł w połowie edycji, bo wyłączył go zegar. Napisałem narzędzie, które czeka na koniec pracy, a nie na godzinę.",
+        lead: "Zostawiam wieczorem agentów z dłuższą robotą. Rano komputer albo chodził całą noc na pusto, albo zgasł w połowie edycji, bo wyłączył go zegar. Napisałem narzędzie, które czeka na koniec pracy.",
         blocks: [
           { t: "h2", id: "problem", text: "Problem: zegar nie wie, co robi agent" },
           {
             t: "p",
-            text: "Claude Code nie ma opcji „wyłącz komputer, jak skończysz”. Zostają dwa wyjścia i oba są złe. Można zostawić komputer włączony do rana i płacić za prąd, gdy nic się nie dzieje. Można też ustawić wyłączenie po czasie albo usypianie po bezczynności. Tylko że Windows liczy bezczynność po ruchach myszki i klawiatury, a agent nie rusza myszką. Timer tnie więc według zegara, nie według pracy.",
+            text: "Claude Code nie ma opcji „wyłącz komputer, jak skończysz”. Zostają dwa wyjścia i oba są złe. Można zostawić komputer włączony do rana i płacić za prąd, gdy nic się nie dzieje. Można też ustawić wyłączenie po czasie albo usypianie po bezczynności. Tylko że Windows liczy bezczynność po ruchach myszki i klawiatury, a agent nie rusza myszką. Timer tnie według zegara.",
           },
           {
             t: "p",
@@ -73,7 +73,7 @@ export const POSTS: Post[] = [
           },
           {
             t: "p",
-            text: "Z ostatnich wpisów transkryptu wynika stan tury. Odpowiedź modelu zakończona normalnie oznacza turę zamkniętą. Wywołanie narzędzia, wiadomość użytkownika albo podsumowanie po kompaktowaniu oznacza turę otwartą. Cokolwiek innego jest nieznane i też blokuje wyłączenie. Lista jest zamknięta: nowy typ wpisu, którego program nie zna, nigdy nie zostanie uznany za „skończone”.",
+            text: "Z ostatnich wpisów transkryptu wynika stan tury. Odpowiedź modelu zakończona normalnie zamyka turę; wywołanie narzędzia, wiadomość użytkownika albo podsumowanie po kompaktowaniu zostawia ją otwartą. Cokolwiek innego jest nieznane i też blokuje wyłączenie. Lista jest zamknięta: nowy typ wpisu, którego program nie zna, nigdy nie zostanie uznany za „skończone”.",
           },
           {
             t: "p",
@@ -105,7 +105,7 @@ export const POSTS: Post[] = [
           },
           {
             t: "p",
-            text: "Jedna uwaga z README: jeśli hibernacja jest w Windows włączona, uśpienie często i tak kończy się hibernacją. To zachowanie systemu, nie programu.",
+            text: "Jedna uwaga z README: jeśli hibernacja jest w Windows włączona, uśpienie często i tak kończy się hibernacją. Tak działa Windows.",
           },
           { t: "h2", id: "bezpieczniki", text: "Bezpieczniki" },
           {
@@ -155,15 +155,15 @@ export const POSTS: Post[] = [
         ],
       },
       en: {
-        title: "Shut the PC down when Claude Code is actually done, not at 3 a.m.",
+        title: "Shut the PC down when Claude Code is done with its work",
         description:
           "A small Windows tool that shuts down, hibernates or sleeps the computer only after every Claude Code session and every subagent has finished. How it tells work is over, and why it ignores CPU.",
-        lead: "I leave agents running longer jobs in the evening. In the morning the PC had either run idle all night, or a timer had killed it halfway through an edit. So I wrote a tool that waits for the work to end, not for a time.",
+        lead: "I leave agents running longer jobs in the evening. In the morning the PC had either run idle all night, or a timer had killed it halfway through an edit. So I wrote a tool that waits for the work to end.",
         blocks: [
           { t: "h2", id: "problem", text: "The problem: a timer can't see the agent" },
           {
             t: "p",
-            text: "Claude Code has no \"shut down when you're done\". That leaves two options, both bad. Leave the machine on until morning and pay for power while nothing happens. Or set a shutdown timer or idle sleep. But Windows measures idle time by mouse and keyboard, and an agent doesn't move the mouse. The timer cuts by the clock, not by the work.",
+            text: "Claude Code has no \"shut down when you're done\". That leaves two options, both bad. Leave the machine on until morning and pay for power while nothing happens. Or set a shutdown timer or idle sleep. But Windows measures idle time by mouse and keyboard, and an agent doesn't move the mouse. The timer cuts by the clock.",
           },
           {
             t: "p",
@@ -181,7 +181,7 @@ export const POSTS: Post[] = [
           },
           {
             t: "p",
-            text: 'The last records of a transcript give the state of the turn. A model reply that ended normally means the turn is closed. A tool call, a user message or a post-compaction summary means it is open. Anything else is unknown, and unknown blocks too. The list is closed: a record type the program has never seen can never count as "done".',
+            text: 'The last records of a transcript give the state of the turn. A model reply that ended normally closes the turn; a tool call, a user message or a post-compaction summary leaves it open. Anything else is unknown, and unknown blocks too. The list is closed: a record type the program has never seen can never count as "done".',
           },
           {
             t: "p",
@@ -210,7 +210,7 @@ export const POSTS: Post[] = [
           },
           {
             t: "p",
-            text: "One note from the README: with hibernation enabled in Windows, sleep often ends up as hibernation anyway. That's Windows, not the app.",
+            text: "One note from the README: with hibernation enabled in Windows, sleep often ends up as hibernation anyway. That's how Windows behaves.",
           },
           { t: "h2", id: "safety", text: "The brakes" },
           {
