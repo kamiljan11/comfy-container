@@ -29,8 +29,8 @@ quality 74: about 50 KB a page on average, about 15 MB for both books). A manife
 `react-pageflip` and `page-flip` are pinned to exact versions (`page-flip` too, because
 `react-pageflip` depends on it as `"latest"`). The flipbook is loaded client-only with
 `React.lazy`, so server rendering never touches the DOM-bound library, and the page stays
-usable without it: the PDF download buttons remain, and if the library fails to load the error
-is logged and the reader keeps those buttons.
+usable without it: the PDF download buttons remain, and if the library fails to load, or throws while
+rendering (caught by `BookErrorBoundary`), the error is logged and the reader keeps those buttons.
 
 We add what the library lacks: arrow-key navigation, and `prefers-reduced-motion` turning the
 flip animation off.

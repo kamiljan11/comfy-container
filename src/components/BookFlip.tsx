@@ -43,9 +43,9 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-type Props = { book: BookKey; title: string; lang: Lang };
+type Props = { book: BookKey; title: string; lang: Lang; hintId?: string };
 
-export function BookFlip({ book, title, lang }: Props) {
+export function BookFlip({ book, title, lang, hintId }: Props) {
   const c = COPY[lang];
   const meta = BOOK_PAGES[book];
   const bookRef = useRef<FlipBookRef | null>(null);
@@ -78,6 +78,7 @@ export function BookFlip({ book, title, lang }: Props) {
         tabIndex={0}
         role="region"
         aria-label={`${c.label}: ${title}`}
+        aria-describedby={hintId}
         onKeyDown={onKey}
       >
         <HTMLFlipBook

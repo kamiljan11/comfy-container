@@ -5176,7 +5176,7 @@ section {
   font-weight: 600;
   cursor: pointer;
 }
-.books-tab[aria-selected="true"] {
+.books-tab[aria-pressed="true"] {
   border-color: var(--teal-2);
   background: var(--teal-glow);
   color: var(--text);
@@ -5187,9 +5187,13 @@ section {
   color: var(--text-2);
 }
 .books-reader-wait {
+  display: grid;
+  place-items: center;
   height: min(738px, 70vh);
   border-radius: var(--r-lg);
   background: var(--surface);
+  color: var(--text-2);
+  font-size: 14px;
 }
 .books-reader-error {
   padding: 20px;

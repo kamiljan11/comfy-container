@@ -27,7 +27,7 @@ test("the reader turns pages, switches books and loads only nearby pages", async
   await page.keyboard.press("ArrowRight");
   await expect(count).not.toHaveText(before ?? "");
 
-  await page.getByRole("tab", { name: /Pełny/ }).click();
+  await page.getByRole("button", { name: /Pełny/ }).click();
   await expect(count).toHaveText("Strona 1 / 199");
 
   expect(errors).toEqual([]);
@@ -38,4 +38,26 @@ test("a card's read button brings the reader into view", async ({ page }) => {
   await page.waitForLoadState("networkidle");
   await page.getByRole("button", { name: "Czytaj na stronie" }).first().click();
   await expect(page.locator("#books-reader")).toBeInViewport();
+});
+
+test("a crash inside the flipbook shows the fallback and keeps the PDFs", async ({ page }) => {
+  // make the flipbook throw while rendering: its first call to matchMedia
+  // (the reduced-motion check) fails, and only when called from BookFlip
+  await page.addInitScript(() => {
+    const real = window.matchMedia.bind(window);
+    window.matchMedia = (q: string) => {
+      if (q.includes("reduced-motion") && /BookFlip/.test(new Error().stack ?? "")) {
+        throw new Error("test crash");
+      }
+      return real(q);
+    };
+  });
+  const logged: string[] = [];
+  page.on("console", (m) => {
+    if (m.type() === "error") logged.push(m.text());
+  });
+  await page.goto("/ksiazki?lang=pl");
+  await expect(page.locator(".books-reader-error")).toContainText("Czytnik nie wczytał się");
+  await expect(page.getByRole("link", { name: "Pobierz PDF" }).first()).toBeVisible();
+  expect(logged.some((t) => t.includes("[books] flipbook crashed"))).toBe(true);
 });

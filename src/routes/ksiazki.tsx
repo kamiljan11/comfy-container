@@ -4,10 +4,12 @@ import { useLang } from "../hooks/useLang";
 import { FlowWaves } from "../components/FlowWaves";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { type BookKey } from "../data/bookPages";
+import { BookErrorBoundary } from "../components/BookErrorBoundary";
 
 /* The flipbook is client-only (page-flip measures the DOM) and loaded lazily,
    so the page renders on the server without it. If the chunk fails to load,
-   the reader says so and the PDF buttons above still work. */
+   or the flipbook throws while rendering (BookErrorBoundary), the reader says
+   so and the PDF buttons above still work. */
 const BookFlip = lazy(() =>
   import("../components/BookFlip")
     .then((m) => ({ default: m.BookFlip }))
@@ -24,6 +26,14 @@ function BookFlipUnavailable({ lang }: { lang: Lang }) {
         ? "Czytnik nie wczytał się. Obie książki są do pobrania jako PDF powyżej."
         : "The reader did not load. Both books can be downloaded as PDFs above."}
     </p>
+  );
+}
+
+function ReaderWait({ text }: { text: string }) {
+  return (
+    <div className="books-reader-wait" role="status">
+      {text}
+    </div>
   );
 }
 
@@ -54,6 +64,8 @@ type Copy = {
   read: string;
   readerTitle: string;
   readerHint: string;
+  loading: string;
+  switchLabel: string;
 };
 
 const COPY: Record<Lang, Copy> = {
@@ -65,6 +77,8 @@ const COPY: Record<Lang, Copy> = {
     readerTitle: "Czytaj tutaj",
     readerHint:
       "Przewracaj strony kliknięciem, przesunięciem palca albo strzałkami na klawiaturze.",
+    loading: "Wczytuję książkę…",
+    switchLabel: "Wybierz książkę",
   },
   en: {
     eyebrow: "BOOKS",
@@ -73,6 +87,8 @@ const COPY: Record<Lang, Copy> = {
     read: "Read on the page",
     readerTitle: "Read here",
     readerHint: "Turn pages with a click, a swipe or the arrow keys.",
+    loading: "Loading the book…",
+    switchLabel: "Choose a book",
   },
 };
 
@@ -101,7 +117,10 @@ function BooksPage() {
 
   const openReader = (key: BookKey) => {
     setBook(key);
-    document.getElementById("books-reader")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document
+      .getElementById("books-reader")
+      ?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   };
 
   return (
@@ -140,13 +159,12 @@ function BooksPage() {
           <h2 className="books-reader-h" id="books-reader-h">
             {c.readerTitle}
           </h2>
-          <div className="books-tabs" role="tablist">
+          <div className="books-tabs" role="group" aria-label={c.switchLabel}>
             {BOOKS.map((x) => (
               <button
                 key={x.key}
                 type="button"
-                role="tab"
-                aria-selected={book === x.key}
+                aria-pressed={book === x.key}
                 className="books-tab"
                 onClick={() => setBook(x.key)}
               >
@@ -154,13 +172,21 @@ function BooksPage() {
               </button>
             ))}
           </div>
-          <p className="books-reader-hint">{c.readerHint}</p>
+          <p className="books-reader-hint" id="books-reader-hint">
+            {c.readerHint}
+          </p>
           {client ? (
-            <Suspense fallback={<div className="books-reader-wait" aria-hidden="true" />}>
-              <BookFlip book={book} title={b[book]} lang={lang} />
-            </Suspense>
+            <BookErrorBoundary
+              key={book}
+              book={book}
+              fallback={<BookFlipUnavailable lang={lang} />}
+            >
+              <Suspense fallback={<ReaderWait text={c.loading} />}>
+                <BookFlip book={book} title={b[book]} lang={lang} hintId="books-reader-hint" />
+              </Suspense>
+            </BookErrorBoundary>
           ) : (
-            <div className="books-reader-wait" aria-hidden="true" />
+            <ReaderWait text={c.loading} />
           )}
         </section>
       </div>
