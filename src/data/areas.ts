@@ -69,7 +69,7 @@ const PL: Service[] = [
     points: [
       {
         title: "Lead trafia do bazy razem ze źródłem",
-        body: "Źródło leada, czyli kampania i kraj, zapisuje się na samym rekordzie w chwili zgłoszenia, więc pytanie „która reklama to przyniosła” ma odpowiedź w danych, a nie w czyjejś pamięci. Leady lądują w jednym panelu, a powiadomienie daje zespołowi znać, gdy transakcja potrzebuje człowieka.",
+        body: "Źródło leada, czyli kampania i kraj, zapisuje się razem z samym zgłoszeniem w chwili, gdy przychodzi, więc pytanie „która reklama to przyniosła” ma odpowiedź w danych, a nie w czyjejś pamięci. Leady lądują w jednym panelu, a powiadomienie daje zespołowi znać, gdy transakcja potrzebuje człowieka.",
       },
       {
         title: "Jedna cena w rozmowie, ofercie i umowie",
@@ -84,7 +84,7 @@ const PL: Service[] = [
         body: "Wysyłka trzyma się twardych limitów: ograniczona liczba maili na domenę odbiorcy w całej historii, ograniczona liczba nowych firm dziennie, tylko w godzinach pracy i z pominięciem dni świątecznych. Każdy przebieg zaczyna się od sprawdzenia odbitych wiadomości z ostatnich dni. Gdy klient odpisze, automat kończy pracę, a rozmowę przejmuje człowiek.",
       },
       {
-        title: "Etapy sprzedaży zapisane jako zdarzenia w systemie",
+        title: "Każdy etap sprzedaży zapisany w systemie",
         body: "Każdy etap lejka sprzedażowego ma zapisane, co zrobić teraz i mniej więcej co powiedzieć klientowi, a każde przejście do kolejnego etapu zostawia ślad w historii. Przed ryzykownym skokiem, na przykład startem prac bez podpisanej umowy, system zatrzymuje się i prosi o potwierdzenie.",
       },
       {
@@ -172,7 +172,7 @@ const PL: Service[] = [
       "Nie zaczynam od chatbota. Zaczynam od tego, skąd bierze się odpowiedź na pytanie klienta, i dopiero potem decyduję, co może ją wysłać bez udziału człowieka.",
     points: [
       {
-        title: "Status wysyłany z przejścia, nie z pamięci",
+        title: "Status wychodzi sam przy zmianie etapu",
         body: "Zamówienie przechodzi przez nazwane etapy zapisane w systemie, a nie w niczyjej głowie. SMS o zmianie statusu wychodzi z jednego konkretnego etapu i znikąd indziej, więc nie może pójść dwa razy ani z etapu, którego zamówienie naprawdę nie osiągnęło. Gdy klient pyta, gdzie jest zamówienie, aktualizacje ma już w telefonie, a nikt nie musiał pamiętać o ich wysłaniu.",
       },
       {
@@ -272,11 +272,11 @@ const PL: Service[] = [
       "Przy każdym polu w dokumencie pytam, skąd ono się bierze. Jeśli ta informacja już gdzieś w firmie leży, nikt nie powinien wpisywać jej drugi raz.",
     points: [
       {
-        title: "Umowa składana z rekordu, nie z kopii wzoru",
-        body: "Dane z rekordu trafiają do szablonu z nazwanymi polami, a wychodzi gotowy dokument w Wordzie i w PDF-ie. Tak może powstawać każda umowa czy oferta: osoba w terenie generuje ją sama z telefonu, a brak wymaganego pola zatrzymuje generowanie, zamiast wypuścić dokument z dziurą. Szablon ma swoją historię zmian, więc każda poprawka klauzuli jest widoczna.",
+        title: "Umowa z danych klienta zamiast z kopii wzoru",
+        body: "Dane klienta i zamówienia trafiają do szablonu z nazwanymi polami, a wychodzi gotowy dokument w Wordzie i w PDF-ie. Tak może powstawać każda umowa czy oferta: osoba w terenie generuje ją sama z telefonu, a brak wymaganego pola zatrzymuje generowanie, zamiast wypuścić dokument z dziurą. Szablon ma swoją historię zmian, więc każda poprawka klauzuli jest widoczna.",
       },
       {
-        title: "Akceptacja jako zdarzenie w systemie",
+        title: "Akceptacja zapisana w systemie",
         body: "Zgoda nie powinna wynikać z wątku mailowego. Klient klika link w ofercie, a system zmienia status zamówienia i zapisuje godzinę: tak może działać akceptacja wyceny nawet wtedy, gdy zamówienia prowadzone są w arkuszu. Każde zlecenie może mieć swój nazwany etap, a powiadomienia wychodzą ze zmiany etapu, więc stan widać bez przeszukiwania skrzynek.",
       },
       {
@@ -377,7 +377,7 @@ const PL: Service[] = [
       },
       {
         title: "Przyjęcie i odejście jako etapy, nie lista w mailu",
-        body: "Onboarding i offboarding mają nazwane etapy i tylko dozwolone przejścia między nimi, tak jak dobrze zaprojektowany proces zamówień. Zadanie dla IT, prośba o podpis czy przypomnienie wychodzą z jednego konkretnego przejścia, więc etapu nie da się przeskoczyć, a to samo zadanie nie wyjdzie dwa razy. Przy odejściu lista kont do zamknięcia tworzy się sama.",
+        body: "Onboarding i offboarding mają nazwane etapy i tylko dozwolone kroki między nimi, tak jak dobrze zaprojektowany proces zamówień. Zadanie dla IT, prośba o podpis czy przypomnienie wychodzą z jednego konkretnego przejścia, więc etapu nie da się przeskoczyć, a to samo zadanie nie wyjdzie dwa razy. Przy odejściu lista kont do zamknięcia tworzy się sama.",
       },
       {
         title: "Dokumenty kadrowe z danych, nie z ręcznie wypełnianego szablonu",
@@ -416,7 +416,7 @@ const PL: Service[] = [
       },
       {
         q: "Co z danymi osobowymi kandydatów i pracowników?",
-        a: "Kod zostaje w Waszym repozytorium, a dane w Waszej bazie. O dostępie decydują uprawnienia w bazie, nie w interfejsie. Okresy przechowywania ustala Wasz inspektor ochrony danych albo prawnik; system pilnuje, żeby były dotrzymane. Klucze do integracji leżą w vaulcie, nie w kodzie.",
+        a: "Kod zostaje w Waszym repozytorium, a dane w Waszej bazie. O dostępie decydują uprawnienia w bazie, nie w interfejsie. Okresy przechowywania ustala Wasz inspektor ochrony danych albo prawnik; system pilnuje, żeby były dotrzymane. Klucze do integracji leżą w osobnym, szyfrowanym sejfie, nie w kodzie.",
       },
       {
         q: "A jeśli projekt jest większy niż jedna osoba?",
@@ -584,7 +584,7 @@ const PL: Service[] = [
         body: "Zanim powstanie pierwsza linijka kodu, warto przepuścić specyfikację przez kilka rund recenzji, z założeniem za każdym razem, że dokument jest błędny. Taka recenzja wyłapuje reguły, które inaczej ujawniłyby się dopiero na produkcji, na przykład rozliczenie, które obciążyłoby dostawcę za jego własny towar. Te reguły potem pilnują testy, nie pamięć jednej osoby.",
       },
       {
-        title: "Pieniądze idą za stanem, nie za zdarzeniem",
+        title: "Zwrot wychodzi sam, gdy zmienia się stan sprawy",
         body: "Gdy kupujący wpłacają depozyt za udział we wspólnym zamówieniu, a zamówienie może się nie zapełnić, zwrot powinien być automatycznym skutkiem zmiany stanu w systemie, a nie przelewem, o którym ktoś musi pamiętać. Nikt nie płaci dwa razy i żaden depozyt nie zostaje w zawieszeniu.",
       },
       {
@@ -699,7 +699,7 @@ const EN: Service[] = [
         body: "Sending runs on hard limits: a capped number of emails per recipient domain across the whole history, a capped number of new companies a day, business hours only, public holidays skipped. Every run starts by checking recent days for bounces. When a customer replies, the automation stops and a person takes over.",
       },
       {
-        title: "Sales stages recorded as events in the system",
+        title: "Every sales stage recorded in the system",
         body: "Every stage of the sales pipeline carries what to do now and roughly what to tell the client, and every move to the next stage leaves a record in the history. Before a risky jump, such as starting work without a signed contract, the system stops and asks for confirmation.",
       },
       {
@@ -788,7 +788,7 @@ const EN: Service[] = [
       "I don't start with a chatbot. I start with where the answer to a customer's question actually comes from, and only then decide what can send it without a human.",
     points: [
       {
-        title: "Status sent from a transition, not from memory",
+        title: "The status goes out on its own when the stage changes",
         body: "An order moves through named stages held in the system, not in anyone's head. The status SMS leaves from one specific stage and nowhere else, so it can't go out twice or from a stage the order never really reached. By the time a customer asks where their order is, the updates are already on their phone, and nobody had to remember to send them.",
       },
       {
@@ -888,11 +888,11 @@ const EN: Service[] = [
       "For every field in a document I ask where it comes from. If that information already sits somewhere in the company, nobody should be typing it a second time.",
     points: [
       {
-        title: "A contract built from the record, not from a copied template",
-        body: "Data from the record goes into a template with named fields, and a finished Word document and PDF come out. A contract or an offer can be generated this way from a phone by whoever is in the field, and a missing required field stops generation instead of shipping a document with a hole in it. The template keeps its own history, so every clause change is visible.",
+        title: "A contract built from the customer's data instead of a copied template",
+        body: "The customer and order details go into a template with named fields, and a finished Word document and PDF come out. A contract or an offer can be generated this way from a phone by whoever is in the field, and a missing required field stops generation instead of shipping a document with a hole in it. The template keeps its own history, so every clause change is visible.",
       },
       {
-        title: "Approval as an event in the system",
+        title: "Approval recorded in the system",
         body: "Consent shouldn't be inferred from an email thread. The customer clicks a link in the quote, and the system changes the order's status and records the time, even when orders are run out of a spreadsheet. Every job can sit in a named stage, and notifications fire from stage changes, so you can see where it stands without searching inboxes.",
       },
       {
@@ -1032,7 +1032,7 @@ const EN: Service[] = [
       },
       {
         q: "What about candidates' and employees' personal data?",
-        a: "The code stays in your repository and the data in your database. Access is decided by permissions in the database, not in the interface. Retention periods are set by your data protection officer or lawyer; the system makes sure they're kept. Integration keys live in a vault, not in the code.",
+        a: "The code stays in your repository and the data in your database. Access is decided by permissions in the database, not in the interface. Retention periods are set by your data protection officer or lawyer; the system makes sure they're kept. Integration keys live in a separate, encrypted store, not in the code.",
       },
       {
         q: "What if the project is bigger than one person?",
@@ -1200,7 +1200,7 @@ const EN: Service[] = [
         body: "Before the first line of code, a spec is worth running through several rounds of review, each time assuming the document is wrong. That kind of review catches rules that would otherwise only surface in production, such as a settlement that would invoice a supplier for their own goods. Tests hold those rules afterward, not one person's memory.",
       },
       {
-        title: "Money follows state, not events",
+        title: "Refunds go out on their own when the case changes state",
         body: "When buyers pay a deposit for a slot in a shared order that might not fill, the refund should be an automatic result of a state change in the system, not a transfer somebody has to remember. Nobody is charged twice and no deposit is left in limbo.",
       },
       {

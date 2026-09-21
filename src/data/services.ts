@@ -845,7 +845,7 @@ const EN: Service[] = [
       },
       {
         title: "Secrets the model never sees",
-        body: "Keys and passwords sit in a separate, encrypted vault and go straight into the target system. They never appear in chat, code or logs, and an automatic check keeps it that way.",
+        body: "Keys and passwords sit in a separate, encrypted store and go straight into the target system. They never appear in chat, code or logs, and an automatic check keeps it that way.",
       },
       {
         title: "Limits stated before you ask",
