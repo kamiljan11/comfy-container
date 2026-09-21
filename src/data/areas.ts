@@ -112,7 +112,7 @@ const PL: Service[] = [
       },
       {
         q: "Kto to zbuduje?",
-        a: "Kod piszą agenci AI, a ja odpowiadam za specyfikację, architekturę, przegląd kodu, wdrożenie i działanie na produkcji. Gdy projekt potrzebuje większego zespołu, dołącza CetusPro, software house z Rzeszowa, blisko 40 developerów.",
+        a: "Kod piszą agenci AI, a ja odpowiadam za specyfikację, architekturę, przegląd kodu, wdrożenie i działanie na produkcji. Gdy projekt potrzebuje większego zespołu, dołącza CetusPro, software house z Rzeszowa.",
       },
     ],
   },
@@ -208,7 +208,7 @@ const PL: Service[] = [
       },
       {
         q: "Ile to kosztuje?",
-        a: "Zależy od liczby kanałów, od tego, skąd płyną dane, i od tego, czy system pod spodem już wie, na jakim etapie jest sprawa klienta. Widełki podaję po obejrzeniu procesu. Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro: blisko 40 developerów dołącza, gdy projekt wymaga większego zespołu.",
+        a: "Zależy od liczby kanałów, od tego, skąd płyną dane, i od tego, czy system pod spodem już wie, na jakim etapie jest sprawa klienta. Widełki podaję po obejrzeniu procesu. Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro: jego developerzy dołączają, gdy projekt wymaga większego zespołu.",
       },
       {
         q: "Kto napisze kod?",
@@ -727,7 +727,7 @@ const EN: Service[] = [
       },
       {
         q: "Who builds it?",
-        a: "AI coding agents write the code; I own the spec, the architecture, the review, the deploy and how it runs in production. When a project needs a bigger team, CetusPro joins, a Rzeszów software house with close to 40 developers.",
+        a: "AI coding agents write the code; I own the spec, the architecture, the review, the deploy and how it runs in production. When a project needs a bigger team, CetusPro joins, a Rzeszów software house.",
       },
     ],
   },
@@ -824,7 +824,7 @@ const EN: Service[] = [
       },
       {
         q: "What does it cost?",
-        a: "It depends on how many channels are involved, where the data comes from, and whether the system underneath already knows what stage a customer's case is at. You get a range once I've seen the process. Bigger builds run with CetusPro, a Rzeszów software house with close to 40 developers who join when a project needs the headcount.",
+        a: "It depends on how many channels are involved, where the data comes from, and whether the system underneath already knows what stage a customer's case is at. You get a range once I've seen the process. Bigger builds run with CetusPro, a Rzeszów software house whose developers join when a project needs more people.",
       },
       {
         q: "Who writes the code?",
