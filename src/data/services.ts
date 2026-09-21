@@ -97,8 +97,8 @@ const PL: Service[] = [
         body: "Handlowiec widzi swoich klientów, klient swoje zamówienia, szef całość. Pilnuje tego sam system, a nie ukryty przycisk, więc nie da się tego obejść. Każdą rolę sprawdzam osobnym testem, zanim system trafi do Was.",
       },
       {
-        title: "Działa na komputerze w biurze i na telefonie wszędzie indziej",
-        body: "Zespół obsługuje cały proces z komputera w biurze albo z telefonu, gdziekolwiek akurat pracuje. System, który działa w takich warunkach, działa wszędzie.",
+        title: "Działa na komputerze i na telefonie",
+        body: "Zespół obsługuje cały proces z komputera w biurze albo z telefonu, gdziekolwiek akurat pracuje. To te same dane w obu miejscach, bez instalowania osobnej aplikacji.",
       },
       {
         title: "Jeden proces naraz, nie plan na pół roku",
@@ -279,7 +279,7 @@ const PL: Service[] = [
       },
       {
         title: "Gdzie wystarczy tabela, nie ma modelu",
-        body: "Jeśli pytanie ma jedną poprawną odpowiedź zapisaną w tabeli, wyszukiwarka odpowiada z bazy: natychmiast, zawsze tak samo i za zero tokenów. Model jest drogi i zmienny, więc trafia tylko tam, gdzie naprawdę wnosi wartość.",
+        body: "Jeśli pytanie ma jedną poprawną odpowiedź zapisaną w tabeli, wyszukiwarka odpowiada z bazy: natychmiast, zawsze tak samo i bez kosztu modelu. Model jest drogi i zmienny, więc trafia tylko tam, gdzie naprawdę wnosi wartość.",
       },
       {
         title: "Zamknięty świat faktów",
@@ -287,7 +287,7 @@ const PL: Service[] = [
       },
       {
         title: "Sekrety, których model nigdy nie widzi",
-        body: "Klucze i hasła są przechowywane bezpiecznie na moim własnym sprzęcie i trafiają prosto do docelowego systemu. Nie pojawiają się w czacie, w kodzie ani w logach, a automatyczna kontrola pilnuje, żeby tak zostało.",
+        body: "Klucze i hasła leżą w osobnym, szyfrowanym sejfie i trafiają prosto do docelowego systemu. Nie pojawiają się w czacie, w kodzie ani w logach, a automatyczna kontrola pilnuje, żeby tak zostało.",
       },
       {
         title: "Granice powiedziane, zanim zapytasz",
@@ -655,8 +655,8 @@ const EN: Service[] = [
         body: "A rep sees their own customers, a customer their own orders, the owner everything. The system enforces that on its own, not a hidden button, so it can't be worked around. Every role gets its own test before the system reaches you.",
       },
       {
-        title: "Works on a computer in the office and on a phone wherever the team works",
-        body: "The team runs the whole process from a computer in the office or from a phone, wherever they happen to be working. A system that works there works anywhere.",
+        title: "Works on a computer and on a phone",
+        body: "The team runs the whole process from a computer in the office or from a phone, wherever they happen to be working. It is the same data in both places, with no separate app to install.",
       },
       {
         title: "One process at a time, not a six-month plan",
@@ -837,7 +837,7 @@ const EN: Service[] = [
       },
       {
         title: "Where a table is enough, there is no model",
-        body: "If a question has one correct answer sitting in a table, a lookup answers from the database: instantly, identically, at zero tokens. Models are expensive and variable, so they go only where they genuinely add something.",
+        body: "If a question has one correct answer sitting in a table, a lookup answers from the database: instantly, identically, at no model cost. Models are expensive and variable, so they go only where they genuinely add something.",
       },
       {
         title: "A closed world of facts",
@@ -845,7 +845,7 @@ const EN: Service[] = [
       },
       {
         title: "Secrets the model never sees",
-        body: "Keys and passwords are stored securely on my own hardware and go straight into the target system. They never appear in chat, code or logs, and an automatic check keeps it that way.",
+        body: "Keys and passwords sit in a separate, encrypted vault and go straight into the target system. They never appear in chat, code or logs, and an automatic check keeps it that way.",
       },
       {
         title: "Limits stated before you ask",
