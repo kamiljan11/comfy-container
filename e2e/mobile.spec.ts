@@ -142,3 +142,13 @@ test("service headings keep every word on one line on a phone", async ({ page })
     expect(r.widest, path).toBeLessThanOrEqual(r.heading);
   }
 });
+
+test("footer links are 44 px tap targets", async ({ page }) => {
+  await load(page, "/uslugi");
+  const small = await page.evaluate(() =>
+    [...document.querySelectorAll<HTMLElement>(".sf-col a")]
+      .map((a) => ({ t: a.textContent, h: a.getBoundingClientRect().height }))
+      .filter((a) => a.h < 44),
+  );
+  expect(small).toEqual([]);
+});

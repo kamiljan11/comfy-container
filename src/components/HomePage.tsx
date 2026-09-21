@@ -648,25 +648,6 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
 
       {/* ── AI assistant (chat) ── */}
       <ChatBot lang={lang} />
-
-      {/* ── Footer ── */}
-      <footer className="footer">
-        <img
-          src="/signature.webp"
-          alt="Kamil Jan"
-          className="footer-sig"
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="footer-copy">
-          &copy; {new Date().getFullYear()} Kamil Jan &mdash; kamiljan.com
-        </div>
-        <div className="footer-links">
-          <a href="https://linkedin.com/in/kamiljan11" target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -546,12 +546,12 @@ section {
 
 /* Animated underline draw on link clusters (hover, desktop) */
 .nav-links a,
-.footer-links a,
+.sf-col a,
 .contact-alts a {
   position: relative;
 }
 .nav-links a::after,
-.footer-links a::after,
+.sf-col a::after,
 .contact-alts a::after {
   content: "";
   position: absolute;
@@ -565,7 +565,7 @@ section {
   transition: transform 0.3s var(--ease-expo);
 }
 .nav-links a:hover::after,
-.footer-links a:hover::after,
+.sf-col a:hover::after,
 .contact-alts a:hover::after {
   transform: scaleX(1);
 }
@@ -914,15 +914,102 @@ section {
 }
 
 /* ── Footer ── */
-.footer {
-  background: var(--bg-alt);
-  padding: 36px 40px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* ── Site footer (SiteFooter.tsx, every route) ── */
+.sf {
   position: relative;
   z-index: 1;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  padding: 56px 40px 28px;
+}
+.sf-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(4, minmax(0, 1fr));
+  gap: 40px;
+}
+.sf-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+/* signature.webp is a 520 px square with the ink in the middle half; the
+   negative margins trim that padding so the mark lines up with the text */
+.sf-sig {
+  display: block;
+  height: 104px;
+  width: auto;
+  margin: -28px 0 -24px -16px;
+  filter: brightness(0) invert(1) brightness(1.15);
+  opacity: 0.85;
+  transition: opacity 0.25s;
+}
+.sf-brand a:hover .sf-sig {
+  opacity: 1;
+}
+.sf-tag {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 32ch;
+}
+.sf-cta {
+  font-size: 14px;
+}
+.sf-h {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-2);
+  margin-bottom: 14px;
+}
+.sf-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.sf-col a {
+  font-size: 13.5px;
+  color: var(--text-2);
+  transition: color 0.2s;
+}
+.sf-col a:hover {
+  color: var(--text);
+}
+.sf-col .sf-all {
+  color: var(--teal-2);
+}
+.sf-bottom {
+  max-width: 1200px;
+  margin: 44px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+@media (max-width: 1024px) {
+  .sf-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sf-brand {
+    grid-column: 1 / -1;
+  }
+}
+@media print {
+  .sf {
+    display: none !important;
+  }
 }
 
 /* ── About internals ── */
@@ -1442,35 +1529,6 @@ section {
 }
 .contact-sig img:hover {
   opacity: 1;
-}
-
-/* ── Footer internals ── */
-.footer-sig {
-  height: 36px;
-  width: auto;
-  filter: brightness(0) invert(1) brightness(1.15);
-  opacity: 0.8;
-  transition: opacity 0.25s;
-}
-.footer-sig:hover {
-  opacity: 1;
-}
-.footer-copy {
-  font-size: 12px;
-  color: var(--text-2);
-}
-.footer-links {
-  display: flex;
-  gap: 28px;
-}
-.footer-links a {
-  font-size: 12px;
-  color: var(--text-2);
-  transition: color 0.2s;
-}
-.footer-links a:hover {
-  /* the resting colour is --text-2 now, so hover steps up to --text */
-  color: var(--text);
 }
 
 /* ── Cap card shimmer sweep ── */
@@ -2159,18 +2217,14 @@ section {
   }
 
   /* ── Footer ── */
-  .footer {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
-    padding: 24px 16px;
+  .sf {
+    padding: 40px 16px 24px;
   }
-  .footer-links {
-    justify-content: center;
-    gap: 20px;
+  .sf-grid {
+    gap: 28px 20px;
   }
-  .footer-sig {
-    height: 26px;
+  .sf-col ul {
+    gap: 0;
   }
 
   /* ── Misc ── */
@@ -2217,8 +2271,10 @@ section {
     min-height: 44px;
     min-width: 44px;
   }
-  .footer-links a {
-    padding: 14px 6px;
+  .sf-col a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
   .scroll-prog {
     height: 2px;
@@ -4069,7 +4125,6 @@ section {
 
 /* mobile-optimization: tap targets ≥44px + CLS space reservation */
 .nav-sig,
-.footer-sig,
 .contact-sig img {
   aspect-ratio: 1 / 1;
 }
