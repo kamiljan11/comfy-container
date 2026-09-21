@@ -5,6 +5,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /ksiazki now has the flowing waves (`src/components/FlowWaves.tsx`, still under prefers-reduced-motion), and the folded "Beyond work" books aside is gone from /o-mnie: the books have their own page, so the aside only repeated it. Its CSS (`.beyond*`, and the `.contact:has(+ .beyond)` padding fixes that existed only because of it) and the unused `label`/`open` copy are removed. `e2e/books.spec.ts` checks the waves sit behind the books and that /o-mnie has no aside.
 - Every service and area page carries the consultation form itself, at the end of the page, instead of sending the reader to /kontakt; the hero button scrolls to it. The form is one component (`src/components/ConsultForm.tsx`) shared with /kontakt, so both look and behave the same, and the email it sends names the page it came from (`consultMessage` takes a `source`, default `/kontakt`). Failures are logged with the page and reason and shown with the email address as a way out. `e2e/consult-form.spec.ts` checks the form is there, the hero button reaches it, and a failed send says so (the submit is intercepted, no real lead is sent).
 - CV summary rewritten in both languages: it switched from third person to "I" mid-sentence, said "when something breaks at 4pm on a Tuesday", and called Kamil a "top performer" with nothing behind it. Four dashes left in the service pages' process steps are gone.
 

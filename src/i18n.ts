@@ -28,9 +28,7 @@ interface SiteTranslation {
   capabilities: { label: string };
   engage: { label: string };
   beyond: {
-    label: string;
     title: string;
-    open: string;
     body: string;
     short: string;
     full: string;
@@ -103,9 +101,7 @@ export const T: Record<Lang, SiteTranslation> = {
     capabilities: { label: "Capabilities" },
     engage: { label: "Work With Me" },
     beyond: {
-      label: "Beyond Work",
       title: "Twelve years of practice, one guidebook",
-      open: "Two free books",
       body: 'Before I built AI systems, my long project was inner: twelve years of spiritual practice and study, and for the last six of them I was writing this book. It took two earlier books to learn how to write this one. The result is "Simplified Practical Spirituality," a practical, tradition-agnostic guidebook. Both editions are free and always will be. It\'s what I have to give back, and it stays that way. Start with the short one.',
       short: "Short version: 102 pages, about an hour",
       full: "Complete guidebook: 205 pages",
@@ -265,9 +261,7 @@ export const T: Record<Lang, SiteTranslation> = {
     capabilities: { label: "Kompetencje" },
     engage: { label: "Współpraca" },
     beyond: {
-      label: "Poza pracą",
       title: "Dwanaście lat praktyki, jeden przewodnik",
-      open: "Dwie darmowe książki",
       body: 'Zanim zacząłem budować systemy AI, moim długim projektem była praca wewnętrzna: dwanaście lat praktyki i poszukiwań, a przez ostatnie sześć z nich pisałem tę książkę. Zanim powstała wersja ostateczna, napisałem dwie wcześniejsze książki. Tak powstało „Simplified Practical Spirituality", praktyczny przewodnik ponad tradycjami (po angielsku). Obie wersje są darmowe i takie zostaną. To mój wkład od siebie i tak ma zostać. Zacznij od krótkiej.',
       short: "Wersja skrócona: 102 strony, około godziny",
       full: "Pełny przewodnik: 205 stron",

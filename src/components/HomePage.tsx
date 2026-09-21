@@ -646,54 +646,6 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
         </div>
       </section>
 
-      {!isOffer && (
-        <>
-          {/* ── Beyond work ── sits after the contact CTA on purpose: it is an
-          aside, not part of what the site is here to sell ── */}
-          <section className="beyond" id="beyond">
-            <div className="beyond-flow" aria-hidden="true">
-              <div className="beyond-wave beyond-wave-1" />
-              <div className="beyond-wave beyond-wave-2" />
-              <div className="beyond-wave beyond-wave-3" />
-            </div>
-            <div className="container">
-              <details className="beyond-fold">
-                <summary className="beyond-sum">
-                  <span className="section-label">{t.beyond.label}</span>
-                  <span className="beyond-title">{t.beyond.title}</span>
-                  <span className="beyond-open">
-                    {t.beyond.open}
-                    <span className="beyond-chev" aria-hidden="true">
-                      ▾
-                    </span>
-                  </span>
-                </summary>
-                <div className="beyond-inner">
-                  <p className="beyond-body">{t.beyond.body}</p>
-                  <div className="beyond-actions">
-                    <a
-                      className="btn-ghost beyond-btn"
-                      href="/books/Simplified-Practical-Spirituality-Short.pdf"
-                      download
-                    >
-                      {t.beyond.short}
-                    </a>
-                    <a
-                      className="btn-ghost beyond-btn"
-                      href="/books/Simplified-Practical-Spirituality.pdf"
-                      download
-                    >
-                      {t.beyond.full}
-                    </a>
-                  </div>
-                  <p className="beyond-hint">{t.beyond.hint}</p>
-                </div>
-              </details>
-            </div>
-          </section>
-        </>
-      )}
-
       {/* ── AI assistant (chat) ── */}
       <ChatBot lang={lang} />
 

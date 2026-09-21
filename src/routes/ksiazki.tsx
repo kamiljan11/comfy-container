@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { T, type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
+import { FlowWaves } from "../components/FlowWaves";
 
 /**
  * /ksiazki — the two free books on their own page, so the "Books" item in the
- * About menu lands on the books instead of the bottom of the whole /o-mnie
- * page. The copy is the same `beyond` block the About page folds away
- * (src/i18n.ts), so there is one text to edit, not two.
+ * About menu lands on the books. This is now the only place the books live:
+ * the folded "Beyond work" aside on /o-mnie was removed and its flowing waves
+ * moved here. Copy: the `beyond` block in src/i18n.ts.
  */
 
 const BOOKS = [
@@ -48,6 +49,7 @@ function BooksPage() {
   const c = COPY[lang];
   return (
     <div className="svc-page books-page">
+      <FlowWaves />
       <div className="container">
         <header className="svc-head">
           <span className="svc-eyebrow">{c.eyebrow}</span>
