@@ -29,7 +29,7 @@ for (const route of ROUTES) {
 }
 
 test("/o-mnie keeps the portrait below the contact text", async ({ page }) => {
-  // A desktop `.contact:has(+ .beyond)` rule used to outrank the phone padding here,
+  // A desktop `.contact:has(+ .beyond)` rule (removed with the aside) once outranked the phone padding here,
   // and the portrait slid 257 px up under the heading.
   await load(page, "/o-mnie");
   const gap = await page.evaluate(() => {
