@@ -5,7 +5,7 @@ import { test, expect } from "@playwright/test";
 test("an area page lists its uses and a mid-page link to the form", async ({ page }) => {
   await page.goto("/obszary/obsluga-klienta?lang=pl");
   await page.waitForLoadState("networkidle");
-  await expect(page.locator("#sl-uses .sl-use")).toHaveCount(8);
+  await expect(page.locator("#sl-uses .sl-use")).toHaveCount(10);
   const mid = page.locator(".sl-mid a");
   await expect(mid).toHaveAttribute("href", "#sl-cta");
   await mid.click();
