@@ -28,6 +28,8 @@ type FormCopy = {
   unconfigured: string;
   limited: string;
   or: string;
+  privacy: string;
+  privacyLink: string;
 };
 
 const COPY: Record<Lang, FormCopy> = {
@@ -46,6 +48,9 @@ const COPY: Record<Lang, FormCopy> = {
     unconfigured: "Formularz chwilowo nie działa. Napisz proszę bezpośrednio:",
     limited: "Za dużo zgłoszeń z tego adresu w krótkim czasie. Spróbuj za kilka minut albo napisz:",
     or: "albo napisz na",
+    privacy:
+      "Administratorem danych jest Kamil Jan Włodarczyk. Dane z formularza służą tylko do odpowiedzi na zgłoszenie.",
+    privacyLink: "Polityka prywatności",
   },
   en: {
     name: "Name",
@@ -63,6 +68,9 @@ const COPY: Record<Lang, FormCopy> = {
     limited:
       "Too many requests from this address in a short time. Try again in a few minutes or write to:",
     or: "or write to",
+    privacy:
+      "Your data is controlled by Kamil Jan Włodarczyk and used only to reply to your request.",
+    privacyLink: "Privacy policy",
   },
 };
 
@@ -167,6 +175,9 @@ export function ConsultForm({ lang, source, idPrefix }: Props) {
             <a href="mailto:hello@kamiljan.com">hello@kamiljan.com</a>
           </p>
         )}
+        <p className="kontakt-privacy">
+          {c.privacy} <a href="/polityka-prywatnosci">{c.privacyLink}</a>
+        </p>
         <button
           type="submit"
           className="btn-primary kontakt-send"

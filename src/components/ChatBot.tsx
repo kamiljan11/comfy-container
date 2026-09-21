@@ -23,6 +23,7 @@ type Copy = {
   greet: string;
   placeholder: string;
   human: string;
+  privacy: string;
   title: string;
   sub: string;
   fallback: string;
@@ -53,6 +54,7 @@ const COPY: Record<Lang, Copy> = {
       "Hi, I'm Kamil's AI assistant. Ask me about his work, skills, or whether he's a fit for your role.",
     placeholder: "Ask anything…",
     human: "Prefer a human?",
+    privacy: "Privacy",
     title: "Kamil's AI",
     sub: "trained on his work",
     fallback:
@@ -121,6 +123,7 @@ const COPY: Record<Lang, Copy> = {
       "Cześć, jestem AI asystentem Kamila. Pytaj o jego pracę, umiejętności albo czy pasuje do Twojej roli.",
     placeholder: "Zapytaj o cokolwiek…",
     human: "Wolisz człowieka?",
+    privacy: "Prywatność",
     title: "AI Kamila",
     sub: "wytrenowany na jego pracy",
     fallback:
@@ -740,6 +743,9 @@ export default function ChatBot({ lang }: { lang: Lang }) {
           </a>
           <span className="chatbot-foot-sep">·</span>
           <a href="mailto:hello@kamiljan.com">Email</a>
+          <span className="chatbot-foot-sep">·</span>
+          {/* messages go to an AI model; the policy says what happens to them */}
+          <a href="/polityka-prywatnosci">{t.privacy}</a>
         </div>
       </div>
 
