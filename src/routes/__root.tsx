@@ -9,6 +9,7 @@ import {
 import { Cursor } from "../components/Cursor";
 import { useLang, ssrLangFor } from "../hooks/useLang";
 import { SiteHeader } from "../components/SiteHeader";
+import { SiteFooter } from "../components/SiteFooter";
 import appCss from "../styles.css?url";
 import siteCss from "../site.css?url";
 
@@ -189,11 +190,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  // one header for every route; it used to live inside the homepage only
+  // one header and one footer for every route; both used to live inside the homepage only
   return (
     <>
       <SiteHeader />
       <Outlet />
+      <SiteFooter />
     </>
   );
 }
