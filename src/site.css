@@ -1132,6 +1132,23 @@ section {
 .work-row:last-child {
   border-bottom: none;
 }
+/* Kamil: rows slide in from alternating sides while scrolling. Odd rows come
+   from the left, even from the right; .visible (added by the observer in
+   HomePage.tsx) brings them to 0. Phones keep their carousel, where the
+   mobile block below switches the reveal off entirely. */
+.work-row:nth-child(odd):not(.visible) {
+  transform: translateX(-64px);
+}
+.work-row:nth-child(even):not(.visible) {
+  transform: translateX(64px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-row,
+  .work-row:not(.visible) {
+    transform: none;
+    transition: opacity 0.3s linear;
+  }
+}
 .work-row.visible {
   opacity: 1;
   transform: translateY(0);
