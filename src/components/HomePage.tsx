@@ -437,7 +437,9 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
                           <span className="work-tag">GitHub</span>
                         ) : null}
                       </div>
-                      <div className="work-year">{p.year}</div>
+                      <div className="work-year">
+                        {lang === "pl" ? p.year.replace("now", "obecnie") : p.year}
+                      </div>
                       {p.href ? (
                         <svg
                           className="work-arrow"
