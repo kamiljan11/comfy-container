@@ -96,13 +96,8 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
   const [reduced] = useState(prefersReducedMotion);
   const hard = useHardPages();
 
-  // a new book starts on its cover; reset during render (not in an effect) so
-  // the remount below already gets startPage 0, not the old book's page
-  const [shownBook, setShownBook] = useState(book);
-  if (shownBook !== book) {
-    setShownBook(book);
-    setCurrent(0);
-  }
+  // no reset on a book switch: the parent keys the reader by book, so a
+  // switch remounts it and startPage is 0 again
 
   const api = () => bookRef.current?.pageFlip();
   const next = useCallback(() => api()?.flipNext(), []);
