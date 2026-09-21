@@ -1,3 +1,4 @@
+import { pageMeta } from "../lib/seo";
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { hashToId, openStudy } from "../lib/caseStudyHash";
 import { useEffect } from "react";
@@ -39,12 +40,12 @@ const CS_SCHEMA = {
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
     meta: [
-      { title: "Kamil Jan Włodarczyk | Case Studies" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Kamil Jan Włodarczyk | Case Studies",
+        description:
           "Engineering case studies by Kamil Jan Włodarczyk, AI automation & implementation engineer. How real production systems were built: the problem, the decisions and rejected alternatives, how I knew it worked, and the honest trade-offs.",
-      },
+        url: "https://kamiljan.com/case-studies",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/case-studies" }],
   }),

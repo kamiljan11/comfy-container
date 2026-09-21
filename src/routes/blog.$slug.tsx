@@ -1,3 +1,4 @@
+import { pageMeta } from "../lib/seo";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
@@ -22,12 +23,13 @@ export const Route = createFileRoute("/blog/$slug")({
     const url = `https://kamiljan.com/blog/${params.slug}`;
     return {
       meta: [
-        { title: b ? `${b.title} | Kamil Jan` : "Blog | Kamil Jan" },
-        { name: "description", content: b?.description ?? "" },
+        ...pageMeta({
+          title: b ? `${b.title} | Kamil Jan` : "Blog | Kamil Jan",
+          description: b?.description ?? "",
+          url,
+          locale: "pl_PL",
+        }),
         { property: "og:type", content: "article" },
-        { property: "og:title", content: b?.title ?? "" },
-        { property: "og:description", content: b?.description ?? "" },
-        { property: "og:url", content: url },
       ],
       links: [{ rel: "canonical", href: url }],
       scripts: p

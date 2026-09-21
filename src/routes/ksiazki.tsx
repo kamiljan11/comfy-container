@@ -1,3 +1,4 @@
+import { pageMeta } from "../lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { T, type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
@@ -95,12 +96,13 @@ const COPY: Record<Lang, Copy> = {
 export const Route = createFileRoute("/ksiazki")({
   head: () => ({
     meta: [
-      { title: "Książki | Simplified Practical Spirituality | Kamil Jan" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Książki | Simplified Practical Spirituality | Kamil Jan",
+        description:
           "Dwie darmowe książki Kamila Jana: praktyczny przewodnik ponad tradycjami, w wersji skróconej (99 stron) i pełnej (199 stron). PDF po angielsku, bez zapisu na listę.",
-      },
+        url: "https://kamiljan.com/ksiazki",
+        locale: "pl_PL",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/ksiazki" }],
   }),

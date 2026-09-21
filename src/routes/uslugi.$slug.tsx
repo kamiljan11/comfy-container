@@ -1,3 +1,4 @@
+import { pageMeta } from "../lib/seo";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
 import { faqJsonLd } from "../lib/faqJsonLd";
@@ -26,8 +27,12 @@ export const Route = createFileRoute("/uslugi/$slug")({
     const s = getService("pl", params.slug);
     return {
       meta: [
-        { title: s?.metaTitle ?? "Usługi | Kamil Jan" },
-        { name: "description", content: s?.metaDescription ?? "" },
+        ...pageMeta({
+          title: s?.metaTitle ?? "Usługi | Kamil Jan",
+          description: s?.metaDescription ?? "",
+          url: `https://kamiljan.com/uslugi/${params.slug}`,
+          locale: "pl_PL",
+        }),
       ],
       links: [{ rel: "canonical", href: `https://kamiljan.com/uslugi/${params.slug}` }],
       // FAQPage for the FAQ this page shows (Polish, as rendered on the server)

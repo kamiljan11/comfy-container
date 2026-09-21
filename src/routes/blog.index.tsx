@@ -1,3 +1,4 @@
+import { pageMeta } from "../lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
@@ -12,12 +13,13 @@ import { formatDate } from "../lib/formatDate";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog: automatyzacja i AI w praktyce | Kamil Jan" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Blog: automatyzacja i AI w praktyce | Kamil Jan",
+        description:
           "Wpisy o tym, co buduję z AI: narzędzia, które sam napisałem, wdrożenia, którymi mogę się podzielić, i rzeczy, których się przy tym nauczyłem.",
-      },
+        url: "https://kamiljan.com/blog",
+        locale: "pl_PL",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/blog" }],
   }),

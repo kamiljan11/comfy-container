@@ -1,3 +1,4 @@
+import { pageMeta } from "../lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { type Lang } from "../i18n";
 import { useLang } from "../hooks/useLang";
@@ -12,12 +13,13 @@ import { ConsultForm } from "../components/ConsultForm";
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
-      { title: "Bezpłatna konsultacja 30 min | Kamil Jan" },
-      {
-        name: "description",
-        content:
+      ...pageMeta({
+        title: "Bezpłatna konsultacja 30 min | Kamil Jan",
+        description:
           "Umów bezpłatną, 30-minutową rozmowę o jednym procesie w Twojej firmie. Powiem wprost, co warto zautomatyzować, a czego nie ruszać.",
-      },
+        url: "https://kamiljan.com/kontakt",
+        locale: "pl_PL",
+      }),
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/kontakt" }],
   }),
