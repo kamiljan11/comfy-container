@@ -152,3 +152,17 @@ test("footer links are 44 px tap targets", async ({ page }) => {
   );
   expect(small).toEqual([]);
 });
+
+test("the /ksiazki book turns hard pages on a phone and still turns", async ({ page }) => {
+  // soft pages broke into slivers mid-turn on a Galaxy S25 Ultra (Brave);
+  // on a narrow screen every page must be hard and the arrow must still turn it
+  await page.goto("/ksiazki?lang=pl");
+  const count = page.locator(".bf-count");
+  await expect(count).toHaveText("Strona 1 / 99", { timeout: 20000 });
+  expect(await page.locator('.bf-page[data-density="soft"]').count()).toBe(0);
+  expect(await page.locator('.bf-page[data-density="hard"]').count()).toBe(99);
+  await page.getByRole("button", { name: "Następna strona" }).click();
+  await expect(count).toHaveText("Strona 2 / 99");
+  await page.getByRole("button", { name: "Następna strona" }).click();
+  await expect(count).toHaveText("Strona 3 / 99");
+});

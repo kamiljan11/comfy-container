@@ -1,4 +1,14 @@
-import { forwardRef, useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
+import {
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from "react";
 import HTMLFlipBook from "react-pageflip";
 import { type Lang } from "../i18n";
 import { BOOK_PAGES, pageSrc, type BookKey } from "../data/bookPages";
@@ -12,6 +22,12 @@ import { pagesToLoad } from "../lib/bookWindow";
  * pagesToLoad), so a phone does not download 199 pages to show one.
  * Arrow keys turn pages when the book has focus, and prefers-reduced-motion
  * turns the flip animation off; the library does neither on its own.
+ *
+ * The page elements handed to HTMLFlipBook must stay the same objects: the
+ * library rebuilds every page (updateFromHtml) whenever its children change,
+ * and doing that on each turn broke the flip mid-animation on phones. So the
+ * children are memoised per book, and which pages get an image travels through
+ * LoadedPages context instead of props.
  */
 
 type Copy = { prev: string; next: string; page: string; label: string };
@@ -28,19 +44,46 @@ type PageFlipApi = {
 };
 type FlipBookRef = { pageFlip: () => PageFlipApi | undefined };
 
-const Page = forwardRef<HTMLDivElement, { src: string | null; alt: string }>(function Page(
-  { src, alt },
-  ref,
-) {
+const LoadedPages = createContext<ReadonlySet<number>>(new Set());
+
+type PageProps = { book: BookKey; index: number; alt: string; hard: boolean };
+
+const Page = forwardRef<HTMLDivElement, PageProps>(function Page({ book, index, alt, hard }, ref) {
+  const load = useContext(LoadedPages);
   return (
-    <div className="bf-page" ref={ref}>
-      {src ? <img src={src} alt={alt} decoding="async" draggable={false} /> : null}
+    <div className="bf-page" ref={ref} data-density={hard ? "hard" : "soft"}>
+      {load.has(index) ? (
+        <img src={pageSrc(book, index + 1)} alt={alt} decoding="async" draggable={false} />
+      ) : null}
     </div>
   );
 });
 
+// a constant, so HTMLFlipBook's memo is not defeated by a new object each render
+const BOOK_STYLE = {};
+
 function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+/**
+ * On a narrow screen the book shows one page, and page-flip's soft curl then
+ * draws the back of the turning page as clipped slivers that swing outside the
+ * page: on a phone (Galaxy S25 Ultra, Brave) the page looked like it shattered.
+ * Hard pages turn as one rigid sheet around the spine instead.
+ */
+const NARROW = "(max-width: 767px)";
+
+/** Follows the viewport, so rotating a phone or a split screen switches too. */
+function useHardPages(): boolean {
+  const [hard, setHard] = useState(() => window.matchMedia(NARROW).matches);
+  useEffect(() => {
+    const mq = window.matchMedia(NARROW);
+    const sync = () => setHard(mq.matches);
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return hard;
 }
 
 type Props = { book: BookKey; title: string; lang: Lang; hintId?: string };
@@ -51,9 +94,10 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
   const bookRef = useRef<FlipBookRef | null>(null);
   const [current, setCurrent] = useState(0);
   const [reduced] = useState(prefersReducedMotion);
+  const hard = useHardPages();
 
-  // a new book starts on its cover
-  useEffect(() => setCurrent(0), [book]);
+  // no reset on a book switch: the parent keys the reader by book, so a
+  // switch remounts it and startPage is 0 again
 
   const api = () => bookRef.current?.pageFlip();
   const next = useCallback(() => api()?.flipNext(), []);
@@ -69,7 +113,22 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
     }
   };
 
-  const load = pagesToLoad(current, meta.pages);
+  const load = useMemo(() => pagesToLoad(current, meta.pages), [current, meta.pages]);
+  const onFlip = useCallback((e: { data: number }) => setCurrent(e.data), []);
+  const pageWord = c.page.toLowerCase();
+  const pages = useMemo(
+    () =>
+      Array.from({ length: meta.pages }, (_, i) => (
+        <Page
+          key={i}
+          book={book}
+          index={i}
+          alt={`${title}, ${pageWord} ${String(i + 1)}`}
+          hard={hard}
+        />
+      )),
+    [book, meta.pages, title, pageWord, hard],
+  );
 
   return (
     <div className="bf">
@@ -81,42 +140,39 @@ export function BookFlip({ book, title, lang, hintId }: Props) {
         aria-describedby={hintId}
         onKeyDown={onKey}
       >
-        <HTMLFlipBook
-          key={book}
-          ref={bookRef}
-          className="bf-book"
-          style={{}}
-          width={meta.width / 2}
-          height={meta.height / 2}
-          size="stretch"
-          minWidth={260}
-          maxWidth={520}
-          minHeight={369}
-          maxHeight={738}
-          startPage={0}
-          drawShadow={!reduced}
-          flippingTime={reduced ? 1 : 700}
-          usePortrait
-          startZIndex={0}
-          autoSize
-          maxShadowOpacity={0.35}
-          showCover
-          mobileScrollSupport
-          clickEventForward={false}
-          useMouseEvents
-          swipeDistance={30}
-          showPageCorners={!reduced}
-          disableFlipByClick={false}
-          onFlip={(e: { data: number }) => setCurrent(e.data)}
-        >
-          {Array.from({ length: meta.pages }, (_, i) => (
-            <Page
-              key={i}
-              src={load.has(i) ? pageSrc(book, i + 1) : null}
-              alt={`${title}, ${c.page.toLowerCase()} ${String(i + 1)}`}
-            />
-          ))}
-        </HTMLFlipBook>
+        <LoadedPages.Provider value={load}>
+          <HTMLFlipBook
+            // page-flip reads density once, so a switch remounts on the same page
+            key={`${book}-${hard ? "hard" : "soft"}`}
+            ref={bookRef}
+            className="bf-book"
+            style={BOOK_STYLE}
+            width={meta.width / 2}
+            height={meta.height / 2}
+            size="stretch"
+            minWidth={260}
+            maxWidth={520}
+            minHeight={369}
+            maxHeight={738}
+            startPage={current}
+            drawShadow={!reduced}
+            flippingTime={reduced ? 1 : 700}
+            usePortrait
+            startZIndex={0}
+            autoSize
+            maxShadowOpacity={0.35}
+            showCover
+            mobileScrollSupport
+            clickEventForward={false}
+            useMouseEvents
+            swipeDistance={30}
+            showPageCorners={!reduced}
+            disableFlipByClick={false}
+            onFlip={onFlip}
+          >
+            {pages}
+          </HTMLFlipBook>
+        </LoadedPages.Provider>
       </div>
       <div className="bf-controls">
         <button type="button" className="bf-btn" onClick={prev} aria-label={c.prev}>
