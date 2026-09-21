@@ -19,4 +19,15 @@ describe("consultMessage", () => {
       "Free consultation: /kontakt form\n\nHi",
     );
   });
+
+  it("names the service page the form was sent from", () => {
+    expect(
+      consultMessage({
+        company: "",
+        message: "Zamówienia w arkuszu",
+        lang: "pl",
+        source: "/uslugi/systemy-dla-firm",
+      }),
+    ).toBe("Bezpłatna konsultacja: formularz /uslugi/systemy-dla-firm\n\nZamówienia w arkuszu");
+  });
 });

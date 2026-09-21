@@ -57,11 +57,10 @@ const CONTENT: Record<Lang, CV> = {
     },
     summary:
       "AI automation & implementation engineer and builder-operator. Ships AI into production for SMEs, then trains " +
-      "the team to keep it running. Works the way 2026 actually works: AI coding agents write the code, and I own " +
-      "everything around them: the spec, the architecture call, the review, the deploy, and the customer on the " +
-      "other end when something breaks at 4pm on a Tuesday. Came up through sales and marketing in Poland; top " +
-      "performer, founded and ran a marketing agency. Rebuilt from the floor up after moving to Iceland in 2019, " +
-      "and now runs several ventures hands-on.",
+      "the team to keep it running. Works in a model where AI coding agents write the code and he owns everything " +
+      "around it: the spec, the architecture decisions, the review, the deployment and the client relationship when " +
+      "something stops working. Started in sales and marketing in Poland, where he founded and ran a marketing " +
+      "agency. Rebuilt from scratch after moving to Iceland in 2019 and now runs several ventures of his own.",
     skills: [
       {
         label: "AI & automation:",
@@ -229,12 +228,12 @@ const CONTENT: Record<Lang, CV> = {
       openTo: "Otwarty na",
     },
     summary:
-      "Inżynier automatyzacji i wdrożeń AI i builder-operator. Wdraża AI na produkcję w MŚP, a potem szkoli " +
-      "zespół, żeby sam to utrzymał. Pracuje tak, jak realnie wygląda 2026: kod piszą agenty AI, a ja odpowiadam za " +
-      "wszystko dookoła: specyfikację, decyzję architektoniczną, review, wdrożenie i za klienta po drugiej stronie, " +
-      "kiedy coś się sypie we wtorek po południu. Zaczynał od sprzedaży i marketingu w Polsce; najlepszy sprzedawca, " +
-      "założył i prowadził własną agencję. Po przeprowadzce na Islandię w 2019 odbudował się od zera i dziś sam " +
-      "prowadzi kilka biznesów.",
+      "Inżynier automatyzacji i wdrożeń AI oraz builder-operator. Wdraża AI na produkcję w MŚP, a potem szkoli " +
+      "zespół, żeby sam utrzymywał system. Pracuje w modelu, w którym kod piszą agenty AI, a on odpowiada za " +
+      "całą resztę: specyfikację, decyzje architektoniczne, review, wdrożenie i kontakt z klientem, gdy system " +
+      "przestaje działać. Zaczynał od sprzedaży i marketingu w Polsce, gdzie założył i prowadził agencję " +
+      "marketingową. Po przeprowadzce na Islandię w 2019 roku zbudował wszystko od nowa i dziś prowadzi kilka " +
+      "własnych biznesów.",
     skills: [
       {
         label: "AI i automatyzacja:",
