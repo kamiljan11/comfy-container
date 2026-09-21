@@ -9,10 +9,16 @@ async function firstRow(page: Page, lang: "pl" | "en") {
   await page.waitForLoadState("networkidle");
   const row = page.locator(".work-row-link").first();
   await row.scrollIntoViewIfNeeded();
-  // the row slides in on reveal; hovering a moving row loses the pointer
+  // the row slides in on reveal (up, and sideways since the alternating
+  // slide-in); hovering a moving row loses the pointer, so wait for both axes
   await expect(row).toHaveClass(/visible/);
   await expect
-    .poll(() => row.evaluate((e) => new DOMMatrixReadOnly(getComputedStyle(e).transform).m42))
+    .poll(() =>
+      row.evaluate((e) => {
+        const m = new DOMMatrixReadOnly(getComputedStyle(e).transform);
+        return Math.abs(m.m41) + Math.abs(m.m42);
+      }),
+    )
     .toBe(0);
   return row;
 }
