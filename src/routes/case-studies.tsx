@@ -123,7 +123,6 @@ const UI: Record<
 /** Whitelisted proof domains mentioned in study prose, mapped to a URL that actually resolves. */
 const PROOF_LINKS: Record<string, string> = {
   "journeyiceland.is": "https://www.journeyiceland.is",
-  "masgroup.is": "https://www.masgroup.is",
   "flyt.is": "https://flyt.is",
   "quickfix.is": "https://quickfix.is",
   "reykjawwwik.is": "https://reykjawwwik.is",

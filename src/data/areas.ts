@@ -17,7 +17,7 @@ const PL: Service[] = [
     navLabel: "Sprzedaż i marketing",
     metaTitle: "Automatyzacja sprzedaży i marketingu | Kamil Jan",
     metaDescription:
-      "Automatyzacja sprzedaży i marketingu: każdy lead z zapisanym źródłem, oferta i umowa z jednego cennika, wysyłka z limitami. Sprawdzone we własnych firmach.",
+      "Automatyzacja sprzedaży i marketingu: każdy lead z zapisanym źródłem, oferta i umowa z jednego cennika, wysyłka e-maili z bezpiecznymi limitami.",
     eyebrow: "SPRZEDAŻ I MARKETING",
     h1: "Od leada do podpisanej umowy bez przepisywania po drodze",
     lead: "Automatyzuję drogę od pierwszego kontaktu do podpisanej umowy: skąd przyszedł lead, kto i kiedy się do niego odzywa, skąd bierze się cena w ofercie i co dzieje się po podpisie. Handlowiec ma rozmawiać z klientem, a nie przepisywać dane między pocztą, arkuszem i CRM-em.",
@@ -65,27 +65,27 @@ const PL: Service[] = [
     answerEyebrow: "JAK TO ROBIĘ",
     answerTitle: "Automat pilnuje kolejności, człowiek prowadzi rozmowę",
     answerLead:
-      "Wszystko poniżej powstało najpierw w moich własnych firmach, przy prawdziwej sprzedaży. Część działa do dziś, a część była kampanią, którą świadomie zakończyłem.",
+      "Każdy mechanizm poniżej rozwiązuje jeden konkretny moment, w którym sprzedaż się rozjeżdża: od pierwszego kontaktu po podpis.",
     points: [
       {
         title: "Lead trafia do bazy razem ze źródłem",
-        body: "W Reykjawwwik UTM-y i kraj zapisują się na samym rekordzie leada, więc pytanie „która kampania to przyniosła” ma odpowiedź w danych, a nie w czyjejś pamięci. Leady lądują w panelu administracyjnym, a powiadomienie push daje zespołowi znać, gdy transakcja potrzebuje człowieka.",
+        body: "Źródło leada, czyli kampania i kraj, zapisuje się razem z samym zgłoszeniem w chwili, gdy przychodzi, więc pytanie „która reklama to przyniosła” ma odpowiedź w danych, a nie w czyjejś pamięci. Leady lądują w jednym panelu, a powiadomienie daje zespołowi znać, gdy transakcja potrzebuje człowieka.",
       },
       {
         title: "Jedna cena w rozmowie, ofercie i umowie",
-        body: "Cały cennik Reykjawwwik siedzi w jednym pliku, z którego czytają konfigurator, oferta, umowa i asystenci AI. Rozmowa kończy się wyceną na ekranie zamiast obietnicą wysłania czegoś później, a cena nie rozjedzie się między rozmową a fakturą. W innym wdrożeniu handlowcy wyceniają druk w aplikacji na własnym telefonie, czasem jeszcze przy kliencie.",
+        body: "Cały cennik siedzi w jednym miejscu, z którego czyta konfigurator, oferta, umowa i asystent AI. Rozmowa kończy się wyceną na ekranie zamiast obietnicą wysłania czegoś później, a cena nie rozjedzie się między rozmową a fakturą. Handlowiec może wycenić ofertę w aplikacji na własnym telefonie, czasem jeszcze przy kliencie.",
       },
       {
         title: "Umowa z danych, podpis i faktura spięte ze stanem",
-        body: "Kraj, pakiet i VAT na wejściu, poprawny dokument na wyjściu: bez szablonu przerabianego ręcznie. Podpis elektroniczny i fakturowanie zgłaszają się webhookami do jednej maszyny stanów w Postgresie, więc transakcja nie utknie po cichu jako podpisana, ale niezafakturowana.",
+        body: "Dane klienta i wybrany pakiet na wejściu, poprawna umowa na wyjściu: bez szablonu przerabianego ręcznie za każdym razem. Podpis elektroniczny i fakturowanie zgłaszają się automatycznie do jednego systemu, który pilnuje stanu transakcji, więc nie utknie ona po cichu jako podpisana, ale niezafakturowana.",
       },
       {
         title: "Wysyłka z hamulcami zamontowanymi przed silnikiem",
-        body: "W mojej kampanii obowiązywały twarde limity: najwyżej trzy maile na domenę odbiorcy łącznie, w całej historii, pięć nowych firm dziennie, tylko w godzinach pracy i z pominięciem dni świątecznych. Każdy przebieg zaczynał się od przejrzenia odbitych wiadomości z ostatnich siedmiu dni. Gdy odpisywał człowiek, automat kończył, a odpowiadałem osobiście.",
+        body: "Wysyłka trzyma się twardych limitów: ograniczona liczba maili na domenę odbiorcy w całej historii, ograniczona liczba nowych firm dziennie, tylko w godzinach pracy i z pominięciem dni świątecznych. Każdy przebieg zaczyna się od sprawdzenia odbitych wiadomości z ostatnich dni. Gdy klient odpisze, automat kończy pracę, a rozmowę przejmuje człowiek.",
       },
       {
-        title: "Etapy lejka jako zdarzenia, nie kolumny na tablicy",
-        body: "W Reykjawwwik każdy z 14 etapów ma zapisane, co zrobić teraz i mniej więcej co powiedzieć klientowi, a każde przejście zostawia wpis w tabeli zdarzeń. Przed ryzykownym skokiem, na przykład startem prac bez podpisanej umowy, system zatrzymuje się i prosi o potwierdzenie.",
+        title: "Każdy etap sprzedaży zapisany w systemie",
+        body: "Każdy etap lejka sprzedażowego ma zapisane, co zrobić teraz i mniej więcej co powiedzieć klientowi, a każde przejście do kolejnego etapu zostawia ślad w historii. Przed ryzykownym skokiem, na przykład startem prac bez podpisanej umowy, system zatrzymuje się i prosi o potwierdzenie.",
       },
       {
         title: "Kreacja reklamowa zaczyna się od researchu, nie od promptu",
@@ -100,19 +100,19 @@ const PL: Service[] = [
       },
       {
         q: "Czy automat będzie pisał do klientów w moim imieniu?",
-        a: "Pierwszy kontakt i przypomnienia: tak, w granicach, które ustalimy. Rozmowę z człowiekiem: nie. W mojej kampanii automatyzacja kończyła się w chwili, gdy ktoś odpisał. Uczciwie dodam, że raz wykrywanie odpowiedzi przeoczyło odmowę i firma, która powiedziała „nie”, dostała jeszcze dwa maile. Wniosek, który z tego wyciągnąłem: wykrywanie odpowiedzi trzeba zbudować przed pierwszą wysyłką, a nie po niej.",
+        a: "Pierwszy kontakt i przypomnienia: tak, w granicach, które ustalimy. Rozmowę z człowiekiem: nie, automatyzacja kończy się w chwili, gdy ktoś odpisze. Wykrywanie odpowiedzi i blokada kolejnych wiadomości muszą działać od pierwszego dnia wysyłki, żeby firma, która odmówiła, nie dostawała kolejnych maili.",
       },
       {
         q: "Mamy już CRM. Trzeba go wymieniać?",
-        a: "Zwykle nie. Jeśli CRM udostępnia API albo webhooki, podpinam do niego formularze, ofertę, podpis i fakturowanie. Wymianę proponuję dopiero wtedy, gdy narzędzie realnie blokuje sprzedaż, i mówię o tym przed wyceną.",
+        a: "Zwykle nie. Jeśli CRM da się połączyć z innymi systemami, podpinam do niego formularze, ofertę, podpis i fakturowanie. Wymianę proponuję dopiero wtedy, gdy narzędzie realnie blokuje sprzedaż, i mówię o tym przed wyceną.",
       },
       {
         q: "Czy AI napisze nam reklamy i maile?",
-        a: "Pomoże, jeśli dostanie brief. Moje pierwsze kreacje z generatora wyglądały sztucznie, a poprawiło je dopiero dodanie researchu przed promptem. Maile w mojej kampanii pisał agent według spisanych reguł i raz i tak napisał zdanie, którego nie mogłem potwierdzić. Jego własna kontrola wyłapała to dopiero po wysyłce. Danych o tym, jak te reklamy sprzedają, nie mam i nie będę udawał, że mam.",
+        a: "Pomoże, jeśli dostanie brief. Kreacja bez researchu marki i klienta wygląda sztucznie, dlatego research idzie przed promptem. Maile pisze się według spisanych reguł, a każda wiadomość przed wysyłką przechodzi kontrolę, bo model potrafi dopisać zdanie, którego nikt nie potwierdził. Danych o tym, jak konkretnie Twoje reklamy sprzedadzą, nie mam i nie będę udawał, że mam.",
       },
       {
         q: "Kto to zbuduje?",
-        a: "Kod piszą agenci AI, a ja odpowiadam za specyfikację, architekturę, przegląd kodu, wdrożenie i działanie na produkcji. Gdy projekt potrzebuje większego zespołu, dołącza CetusPro, software house z Rzeszowa, blisko 40 developerów.",
+        a: "Kod piszą agenci AI, a ja odpowiadam za specyfikację, architekturę, przegląd kodu, wdrożenie i działanie na produkcji. Gdy projekt potrzebuje większego zespołu, dołącza CetusPro, software house z Rzeszowa.",
       },
     ],
   },
@@ -172,16 +172,16 @@ const PL: Service[] = [
       "Nie zaczynam od chatbota. Zaczynam od tego, skąd bierze się odpowiedź na pytanie klienta, i dopiero potem decyduję, co może ją wysłać bez udziału człowieka.",
     points: [
       {
-        title: "Status wysyłany z przejścia, nie z pamięci",
-        body: "W platformie B2B, którą prowadzę, zamówienie przechodzi przez nazwane etapy zapisane w bazie danych. SMS o odprawie celnej wychodzi z jednego konkretnego przejścia i znikąd indziej, więc nie może pójść dwa razy ani z etapu, którego zamówienie naprawdę nie osiągnęło. Gdy klient pyta, gdzie jest zamówienie, SMS-y z aktualizacjami ma już w telefonie, a nikt nie musiał pamiętać o ich wysłaniu.",
+        title: "Status wychodzi sam przy zmianie etapu",
+        body: "Zamówienie przechodzi przez nazwane etapy zapisane w systemie, a nie w niczyjej głowie. SMS o zmianie statusu wychodzi z jednego konkretnego etapu i znikąd indziej, więc nie może pójść dwa razy ani z etapu, którego zamówienie naprawdę nie osiągnęło. Gdy klient pyta, gdzie jest zamówienie, aktualizacje ma już w telefonie, a nikt nie musiał pamiętać o ich wysłaniu.",
       },
       {
         title: "Powtarzalne rozmowy bez człowieka, ale z granicą",
-        body: "Połączenia i SMS-y o statusie działają bez nadzoru w firmie, którą prowadzę, po polsku i po angielsku. Połączenie o statusie to stały skrypt czytany przez syntezator mowy, bez modelu językowego. W dwukierunkowym agencie głosowym model tylko formułuje zdania i wybiera ścieżkę, a każdą zmianę zamówienia i każdą wysyłkę wykonuje zwykły, przewidywalny kod. Ten agent działa, ale wciąż go dopracowuję i nie nazywam go gotowym produktem.",
+        body: "Połączenia i SMS-y o statusie mogą działać bez nadzoru człowieka, po polsku i po angielsku. Połączenie o statusie to stały skrypt czytany przez syntezator mowy, bez udziału modelu językowego. W dwukierunkowym agencie głosowym model tylko formułuje zdania i wybiera ścieżkę, a każdą zmianę zamówienia i każdą wysyłkę wykonuje zwykły, przewidywalny kod. Ten rodzaj agenta wciąż wymaga dopracowania i nie nazywam go gotowym produktem.",
       },
       {
         title: "Akceptacja jednym kliknięciem, zapisana przez system",
-        body: "W kanale sprzedaży części klientom indywidualnym oferta idzie mailem z linkiem. Kliknięcie zmienia status zamówienia i zapisuje godzinę akceptacji, a dalej idą faktura i SMS do klienta. Decyzja klienta nie czeka, aż ktoś ręcznie przeniesie ją z maila do arkusza zamówień.",
+        body: "Oferta idzie mailem z linkiem. Kliknięcie zmienia status zamówienia i zapisuje godzinę akceptacji, a dalej idą faktura i SMS do klienta. Decyzja klienta nie czeka, aż ktoś ręcznie przeniesie ją z maila do arkusza zamówień.",
       },
       {
         title: "Asystent, który mówi „nie wiem”",
@@ -189,7 +189,7 @@ const PL: Service[] = [
       },
       {
         title: "Wykrywanie odpowiedzi przed pierwszą wysyłką",
-        body: "Tego nauczyłem się na własnym błędzie. W kampanii cold mailingowej dla własnej firmy wykrywanie odpowiedzi zbudowałem na końcu. Przez to ciepły kontakt, który prosił o próbkę i cenę, czekał dwanaście dni na odpowiedź, a firma, która odmówiła, dostała jeszcze dwa maile. Wniosek: sprawdzanie odpowiedzi i blokada kolejnych wysyłek po reakcji odbiorcy muszą działać, zanim wyjdzie pierwsza wiadomość.",
+        body: "Wykrywanie odpowiedzi i blokada kolejnych wiadomości po reakcji klienta muszą działać, zanim wyjdzie pierwsza wysyłka, a nie zostać dopisane później. Bez tego ciepły kontakt czeka na odpowiedź zbyt długo, a klient, który już odmówił, dostaje kolejne wiadomości.",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -208,7 +208,7 @@ const PL: Service[] = [
       },
       {
         q: "Ile to kosztuje?",
-        a: "Zależy od liczby kanałów, od tego, skąd płyną dane, i od tego, czy system pod spodem już wie, na jakim etapie jest sprawa klienta. Widełki podaję po obejrzeniu procesu. Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro: blisko 40 developerów dołącza, gdy projekt wymaga większego zespołu.",
+        a: "Zależy od liczby kanałów, od tego, skąd płyną dane, i od tego, czy system pod spodem już wie, na jakim etapie jest sprawa klienta. Widełki podaję po obejrzeniu procesu. Większe wdrożenia realizuję z rzeszowskim software house'em CetusPro: ich developerzy dołączają, gdy projekt wymaga większego zespołu.",
       },
       {
         q: "Kto napisze kod?",
@@ -272,24 +272,24 @@ const PL: Service[] = [
       "Przy każdym polu w dokumencie pytam, skąd ono się bierze. Jeśli ta informacja już gdzieś w firmie leży, nikt nie powinien wpisywać jej drugi raz.",
     points: [
       {
-        title: "Umowa składana z rekordu, nie z kopii wzoru",
-        body: "Dane z rekordu trafiają do szablonu z nazwanymi polami, a wychodzi gotowy dokument DOCX i PDF. Tak powstaje każda umowa dotacyjna w CRM dla zespołów audytu energetycznego: ludzie w terenie generują ją sami z telefonu, a brak wymaganego pola zatrzymuje generowanie, zamiast wypuścić dokument z dziurą. Szablon żyje w repozytorium, więc każda zmiana klauzuli ma swoją historię.",
+        title: "Umowa z danych klienta zamiast z kopii wzoru",
+        body: "Dane klienta i zamówienia trafiają do szablonu z nazwanymi polami, a wychodzi gotowy dokument w Wordzie i w PDF-ie. Tak może powstawać każda umowa czy oferta: osoba w terenie generuje ją sama z telefonu, a brak wymaganego pola zatrzymuje generowanie, zamiast wypuścić dokument z dziurą. Szablon ma swoją historię zmian, więc każda poprawka klauzuli jest widoczna.",
       },
       {
-        title: "Akceptacja jako zdarzenie w systemie",
-        body: "Zgoda nie powinna wynikać z wątku mailowego. Klient klika link w ofercie, a system zmienia status zamówienia i zapisuje godzinę: tak działa akceptacja wyceny w kanale zamówień części dla klientów indywidualnych, prowadzonym w całości w arkuszu Google. W CRM dla zespołów audytu każde zlecenie jest na jednym z dziewięciu nazwanych etapów, a powiadomienia wychodzą ze zmiany etapu, więc stan widać bez przeszukiwania skrzynek.",
+        title: "Akceptacja zapisana w systemie",
+        body: "Zgoda nie powinna wynikać z wątku mailowego. Klient klika link w ofercie, a system zmienia status zamówienia i zapisuje godzinę: tak może działać akceptacja wyceny nawet wtedy, gdy zamówienia prowadzone są w arkuszu. Każde zlecenie może mieć swój nazwany etap, a powiadomienia wychodzą ze zmiany etapu, więc stan widać bez przeszukiwania skrzynek.",
       },
       {
         title: "Wystawiony dokument się nie zmienia",
-        body: "Podpisana umowa to tekst, który podpisano, a nie to, co wygeneruje dzisiejszy wzór. W systemie wypożyczalni każda podpisana umowa przechowuje własną treść, więc gdy przepisałem warunki najmu, wcześniej podpisane dokumenty zostały nietknięte. W systemie warsztatowym numer faktury jest unikalny i po wystawieniu nie da się go zmienić. Pilnuje tego baza, a nie ekran, bo ekran to miejsce, w którym zmęczony człowiek klika dwa razy.",
+        body: "Podpisana umowa to tekst, który podpisano, a nie to, co wygeneruje dzisiejszy wzór. Każda podpisana umowa przechowuje własną treść, więc zmiana warunków w nowym szablonie nie rusza dokumentów podpisanych wcześniej. Numer faktury jest unikalny i po wystawieniu nie da się go zmienić. Pilnuje tego system, a nie ekran, bo ekran to miejsce, w którym zmęczony człowiek klika dwa razy.",
       },
       {
         title: "Terminy widoczne, zanim miną",
-        body: "Data końca ubezpieczenia czy przeglądu to pole w bazie, a nie wpis w czyimś kalendarzu. W systemie wypożyczalni panel pokazuje pojazdy, którym ubezpieczenie albo przegląd wygasa w ciągu 30 dni. Jedno zastrzeżenie mówię od razu: te daty wpisuje się tam ręcznie, a pobieranie ich z rejestru pojazdów wciąż nie jest zbudowane, więc alert jest tak dobry jak ostatnio wpisana data.",
+        body: "Data końca ubezpieczenia czy przeglądu to pole w systemie, a nie wpis w czyimś kalendarzu. Panel może pokazywać pojazdy albo umowy, którym termin mija w ciągu 30 dni. Jedno zastrzeżenie warto powiedzieć wprost: jeśli te daty wpisuje się ręcznie, alert jest tak dobry jak ostatnio wpisana data.",
       },
       {
         title: "Dane należą do firmy, nie do abonamentu",
-        body: "Wypożyczalnia trzymała klientów, rezerwacje i wzór umowy w płatnym programie bez eksportu i bez dostępnego API. Wyciągnąłem dane, zbudowałem zamiennik, a migrację sprawdziłem maszynowo, wiersz po wierszu. Pierwsze przejście, robione na oko, po cichu zgubiło 32 z 82 wpisów w kalendarzu. Porównanie znalazło je, zanim dwóch klientów zjawiło się po ten sam samochód. Dziś dane leżą w bazie firmy, a eksport to jedno zapytanie.",
+        body: "Gdy firma trzyma klientów, rezerwacje i wzory umów w płatnym programie bez eksportu i bez dostępu do własnych danych, odzyskanie ich wymaga osobnego projektu: wyciągnięcia danych, zbudowania zamiennika i sprawdzenia migracji wiersz po wierszu, nie na oko. Sprawdzanie na oko łatwo gubi pojedyncze wpisy, dlatego liczy się mechaniczne porównanie przed uznaniem migracji za skończoną. Dane powinny leżeć w bazie firmy, a eksport ma być jednym zapytaniem, nie osobnym projektem.",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -300,15 +300,15 @@ const PL: Service[] = [
       },
       {
         q: "Czy musimy zmieniać CRM albo program księgowy?",
-        a: "Zwykle nie. Jeśli narzędzie udostępnia API albo choćby eksport danych, dokumenty mogą brać dane stamtąd. Czasem najlepszym systemem jest arkusz, w którym ktoś już pracuje: w mojej firmie handlującej częściami kanał zamówień dla klientów indywidualnych działa w arkuszu Google, bez kosztów infrastruktury: wyceny, akceptacje, faktury z VAT i SMS-y.",
+        a: "Zwykle nie. Jeśli narzędzie udostępnia choćby eksport danych, dokumenty mogą brać dane stamtąd. Czasem najlepszym systemem jest arkusz, w którym ktoś już pracuje: przy kilkudziesięciu zamówieniach i jednej osobie obsługującej kanał sprzedaży arkusz Google bez dodatkowej infrastruktury radzi sobie z wycenami, akceptacjami, fakturami VAT i SMS-ami.",
       },
       {
         q: "Czy podpis elektroniczny i archiwum będą zgodne z przepisami?",
-        a: "Podpisu elektronicznego nie buduję sam. W platformie obsługującej dziesięć rynków wziąłem go od wyspecjalizowanego dostawcy, bo w tej dziedzinie taka firma jest lata przede mną. Które dokumenty wymagają podpisu kwalifikowanego i jak długo je przechowywać, ustalamy z Twoim prawnikiem albo księgową. Nie jestem prawnikiem i nie udaję, że nim jestem. Moja część to system, który te ustalenia wymusza: unikalna numeracja, brak edycji po wystawieniu, dostęp tylko dla uprawnionych.",
+        a: "Podpisu elektronicznego nie buduję sam, tylko podłączam wyspecjalizowanego dostawcę, bo w tej dziedzinie taka firma jest dalej niż ja. Które dokumenty wymagają podpisu kwalifikowanego i jak długo je przechowywać, ustalamy z Twoim prawnikiem albo księgową. Nie jestem prawnikiem i nie udaję, że nim jestem. Moja część to system, który te ustalenia wymusza: unikalna numeracja, brak edycji po wystawieniu, dostęp tylko dla uprawnionych.",
       },
       {
         q: "Kto będzie widział dane z dokumentów?",
-        a: "Tylko ci, którzy powinni, i pilnuje tego baza, a nie ukryty przycisk. W CRM dla zespołów audytu energetycznego handlowiec, audytor i administrator pracują na tych samych danych, ale każdy widzi tylko swoją część. Brakująca reguła oznacza brak dostępu, a nie pełny dostęp. Uprawnienia sprawdzam na działającej bazie, a nie w pliku, który ją opisuje, bo raz już plik i baza mówiły co innego.",
+        a: "Tylko ci, którzy powinni, i pilnuje tego system, a nie ukryty przycisk. Różne role, na przykład handlowiec, audytor i administrator, mogą pracować na tych samych danych, a mimo to każdy widzi tylko swoją część. Brakująca reguła oznacza brak dostępu, a nie pełny dostęp. Uprawnienia sprawdzam na działającym systemie, nie tylko w dokumentacji, która go opisuje.",
       },
       {
         q: "Kto to buduje i co, jeśli projekt jest większy?",
@@ -373,15 +373,15 @@ const PL: Service[] = [
     points: [
       {
         title: "Jedna baza kandydatów, zasilana automatycznie",
-        body: "Zgłoszenia z formularza na stronie, ze skrzynki rekrutacyjnej i z portali trafiają przez webhook albo import do jednego miejsca. System wyłapuje duplikaty po e-mailu i telefonie, kandydat od razu dostaje potwierdzenie, a propozycja terminu rozmowy wychodzi z kalendarza, nie z ręcznie pisanego maila.",
+        body: "Zgłoszenia z formularza na stronie, ze skrzynki rekrutacyjnej i z portali trafiają automatycznie do jednego miejsca. System wyłapuje duplikaty po e-mailu i telefonie, kandydat od razu dostaje potwierdzenie, a propozycja terminu rozmowy wychodzi z kalendarza, nie z ręcznie pisanego maila.",
       },
       {
         title: "Przyjęcie i odejście jako etapy, nie lista w mailu",
-        body: "Onboarding i offboarding mają nazwane etapy i tylko dozwolone przejścia między nimi, tak jak zamówienie w platformie B2B, którą prowadzę. Zadanie dla IT, prośba o podpis czy przypomnienie wychodzą z jednego konkretnego przejścia, więc etapu nie da się przeskoczyć, a to samo zadanie nie wyjdzie dwa razy. Przy odejściu lista kont do zamknięcia tworzy się sama.",
+        body: "Onboarding i offboarding mają nazwane etapy i tylko dozwolone kroki między nimi, tak jak dobrze zaprojektowany proces zamówień. Zadanie dla IT, prośba o podpis czy przypomnienie wychodzą z jednego konkretnego przejścia, więc etapu nie da się przeskoczyć, a to samo zadanie nie wyjdzie dwa razy. Przy odejściu lista kont do zamknięcia tworzy się sama.",
       },
       {
         title: "Dokumenty kadrowe z danych, nie z ręcznie wypełnianego szablonu",
-        body: "Umowy, aneksy i skierowania na badania generuje serwer z danych pracownika: szablon DOCX z nazwanymi polami, wynik w PDF. Brak wymaganego pola zatrzymuje generowanie, zamiast wypuścić dokument z luką. Na tej samej zasadzie działa generator umów dotacyjnych w CRM-ie, z którego zespoły sprzedażowe w terenie korzystają na co dzień.",
+        body: "Umowy, aneksy i skierowania na badania generuje system z danych pracownika: szablon Word z nazwanymi polami, wynik w PDF. Brak wymaganego pola zatrzymuje generowanie, zamiast wypuścić dokument z luką. Na tej samej zasadzie mogą działać inne dokumenty generowane z danych, na przykład oferty czy umowy, z których zespoły sprzedażowe korzystają na co dzień w terenie.",
       },
       {
         title: "Wnioski i akceptacje w jednym obiegu",
@@ -412,11 +412,11 @@ const PL: Service[] = [
       },
       {
         q: "Skąd wiesz, jak działa HR?",
-        a: "Nie jestem specjalistą od kadr i nie udaję, że znam prawo pracy: treść umów i regulaminów ustala Wasz dział kadr albo prawnik. Rekrutację znam od strony pracodawcy: we własnej firmie sam rekrutuję developerów i szkolę zespół sprzedaży. Resztę robię tak jak przy systemie warsztatowym, który zbudowałem, nie będąc mechanikiem: to osoba wykonująca pracę definiuje, co jest poprawnym wynikiem.",
+        a: "Nie jestem specjalistą od kadr i nie udaję, że znam prawo pracy: treść umów i regulaminów ustala Wasz dział kadr albo prawnik. Rekrutację znam od strony pracodawcy, który samodzielnie zatrudnia i buduje zespół. Poza tym pracuję na tej samej zasadzie co zawsze: to osoba, która wykonuje daną pracę, definiuje, co jest w niej poprawnym wynikiem, a ja zamieniam tę wiedzę w system.",
       },
       {
         q: "Co z danymi osobowymi kandydatów i pracowników?",
-        a: "Kod zostaje w Waszym repozytorium, a dane w Waszej bazie. O dostępie decydują uprawnienia w bazie, nie w interfejsie. Okresy przechowywania ustala Wasz inspektor ochrony danych albo prawnik; system pilnuje, żeby były dotrzymane. Klucze do integracji leżą w vaulcie, nie w kodzie.",
+        a: "Kod zostaje w Waszym repozytorium, a dane w Waszej bazie. O dostępie decydują uprawnienia w bazie, nie w interfejsie. Okresy przechowywania ustala Wasz inspektor ochrony danych albo prawnik; system pilnuje, żeby były dotrzymane. Klucze do integracji leżą w osobnym, szyfrowanym sejfie, nie w kodzie.",
       },
       {
         q: "A jeśli projekt jest większy niż jedna osoba?",
@@ -477,23 +477,23 @@ const PL: Service[] = [
     points: [
       {
         title: "Zdarzenie zapisane w chwili, gdy się dzieje",
-        body: "W kalkulatorze wycen, z którego handlowcy korzystają w terenie, każda zmiana statusu zamówienia trafia do historii: z jakiego etapu, na jaki, kiedy i kto ją zrobił. Prowizja jest przypięta do zamówienia, z którego wynika, więc na koniec miesiąca nikt nie musi jej odtwarzać.",
+        body: "Każda zmiana statusu zamówienia trafia do historii: z jakiego etapu, na jaki, kiedy i kto ją zrobił. Prowizja jest przypięta do zamówienia, z którego wynika, więc na koniec miesiąca nikt nie musi jej odtwarzać.",
       },
       {
         title: "Panel czyta ten sam stan, na którym działa proces",
-        body: "Na platformie Flyt kampanie wspólnego importu w jednym kontenerze i wpłacone na nie depozyty mają jawne stany w Postgresie, a panel administracyjny pokazuje je na żywo. Kampania w złym stanie jest widoczna od razu, a nie dopiero wtedy, gdy kupujący napisze z pytaniem, gdzie są jego pieniądze.",
+        body: "Stan każdej sprawy, na przykład zamówienia albo wpłaty, jest jawnie zapisany w systemie, a panel pokazuje go na żywo. Sprawa w złym stanie jest widoczna od razu, a nie dopiero wtedy, gdy klient napisze z pytaniem, gdzie są jego pieniądze.",
       },
       {
         title: "Dane poprawiane przy wpisaniu, nie przy użyciu",
-        body: "Kanał sprzedaży części dla klientów indywidualnych prowadzi osoba, która pracuje w arkuszu Google, więc tam go zbudowałem. Wyzwalacz uruchamiany przy edycji komórki od razu poprawia format numeru telefonu i uzupełnia dane stałego klienta po jego numerze identyfikacyjnym. Wiersz jest poprawny w chwili zapisu, więc SMS nie trafia na źle zapisany numer, a stałego klienta nikt nie wpisuje od nowa.",
+        body: "Gdy proces działa w arkuszu Google, poprawki mogą wskoczyć od razu przy edycji komórki: format numeru telefonu poprawia się sam, a dane stałego klienta uzupełniają się po jego numerze identyfikacyjnym. Wiersz jest poprawny w chwili zapisu, więc SMS nie trafia na źle zapisany numer, a stałego klienta nikt nie wpisuje od nowa.",
       },
       {
         title: "Stare liczby nie udają aktualnych",
-        body: "Dwa błędy z mojej własnej infrastruktury: panel pokazywał metryki, których dane źródłowe usunięto miesiąc wcześniej, a zadanie synchronizacji przez dwanaście dni zgłaszało sukces, nie zapisując niczego. Dziś liczby na moim panelu są przeliczane ze źródła, a żaden przebieg nie może ogłosić sukcesu, dopóki nie odczyta z powrotem tego, co zapisał.",
+        body: "Dwa typowe sposoby, w jakie panel kłamie: pokazuje metryki, których dane źródłowe dawno usunięto, albo zadanie synchronizacji zgłasza sukces, nie zapisując niczego. Dlatego liczby w panelu powinny być przeliczane ze źródła za każdym razem, a żaden przebieg nie powinien ogłaszać sukcesu, dopóki nie odczyta z powrotem tego, co zapisał.",
       },
       {
         title: "Uzgodnienie wiersz po wierszu, nie ocena na oko",
-        body: "Przy przenoszeniu danych wypożyczalni z płatnego systemu, który nie dawał eksportu, pierwsze podejście robione na oko zgubiło 32 z 82 wpisów w kalendarzu. Pięć z nich to przyszłe blokady pojazdów, które nowa aplikacja pokazywała jako wolne. Wyłapało to dopiero mechaniczne porównanie danych źródłowych z bazą. Od tamtej pory import jest dla mnie skończony wtedy, gdy takie porównanie się domyka, a nie wtedy, gdy ekran wygląda dobrze.",
+        body: "Przy przenoszeniu danych z płatnego systemu bez eksportu sprawdzanie na oko łatwo gubi pojedyncze wpisy, w tym takie, które później okazują się ważne, na przykład przyszłe rezerwacje pokazane jako wolne terminy. Wyłapuje to dopiero mechaniczne porównanie danych źródłowych z nową bazą. Import liczy się jako skończony wtedy, gdy takie porównanie się domyka, a nie wtedy, gdy ekran wygląda dobrze.",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -504,7 +504,7 @@ const PL: Service[] = [
       },
       {
         q: "Czy musimy porzucić arkusze?",
-        a: "Nie zawsze. Kanał sprzedaży części dla klientów indywidualnych, który zbudowałem, działa w całości w arkuszu Google, bo przy kilkudziesięciu zamówieniach i jednej osobie to właściwe narzędzie. Arkusz przestaje wystarczać, gdy jedna komórka zaczyna mieścić kilka informacji naraz. Moja własna kolejka kampanii mailowej, prowadzona jako tabela w notatkach, urosła do 930 wierszy. Automat źle ją odczytał, uznał, że nic nie czeka na wysyłkę, i pominął osiem zaległych maili przypominających. Od takiego momentu dane należą do bazy, a arkusz może zostać jako widok.",
+        a: "Nie zawsze. Przy kilkudziesięciu zamówieniach i jednej osobie obsługującej cały proces arkusz Google bywa właściwym narzędziem. Przestaje wystarczać, gdy jedna komórka zaczyna mieścić kilka informacji naraz, bo wtedy automat, który go czyta, zaczyna się mylić i pomijać wpisy, które powinien przetworzyć. Od tego momentu dane powinny należeć do bazy, a arkusz może zostać jako widok na nie.",
       },
       {
         q: "Czy do raportów potrzebne jest AI?",
@@ -512,11 +512,11 @@ const PL: Service[] = [
       },
       {
         q: "Co, jeśli nasze dane są w złym stanie?",
-        a: "To częsty punkt wyjścia i pierwsza część pracy, a nie przeszkoda. Zaczynam od mechanicznego porównania źródeł z tym, co trafia do raportu. Przy migracji wypożyczalni takie porównanie znalazło 32 brakujące wpisy, które umknęły sprawdzaniu na oko. Lepiej poznać skalę problemu przed zbudowaniem panelu niż po.",
+        a: "To częsty punkt wyjścia i pierwsza część pracy, a nie przeszkoda. Zaczynam od mechanicznego porównania źródeł z tym, co trafia do raportu, bo sprawdzanie na oko regularnie przepuszcza brakujące wpisy. Lepiej poznać skalę problemu przed zbudowaniem panelu niż po.",
       },
       {
         q: "Czy budujesz hurtownie danych i systemy BI dla dużych firm?",
-        a: "Nie, i nie będę udawał, że jest inaczej. Dobrze znam bazy operacyjne, na których firma pracuje na co dzień, czyli Postgres, uprawnienia i historię zdarzeń, oraz raporty liczone prosto z nich. Hurtownia danych dla dużej organizacji to pokrewna, ale osobna specjalizacja. Jeśli jej potrzebujesz, powiem to na pierwszej rozmowie, zamiast brać projekt, którego nie dowiozę.",
+        a: "Nie, i nie będę udawał, że jest inaczej. Dobrze znam bazy operacyjne, na których firma pracuje na co dzień: uprawnienia, historię zdarzeń i raporty liczone prosto z nich. Hurtownia danych dla dużej organizacji to pokrewna, ale osobna specjalizacja. Jeśli jej potrzebujesz, powiem to na pierwszej rozmowie, zamiast brać projekt, którego nie dowiozę.",
       },
       {
         q: "Kto napisze kod i co, jeśli projekt jest większy?",
@@ -581,27 +581,27 @@ const PL: Service[] = [
     points: [
       {
         title: "Wyjątki spisane, zanim powstanie schemat",
-        body: "Projekt komisowego punktu sprzedaży części przeszedł pięć rund recenzji; każdą prowadził nowy recenzent z poleceniem, żeby założyć, że dokument jest błędny. Recenzje wyłapały regułę rozliczeń, która wystawiłaby dostawcy fakturę za to, że przywiózł nam własny towar. Punkt jeszcze nie działa, ale tych reguł pilnuje już 30 testów bazy danych.",
+        body: "Zanim powstanie pierwsza linijka kodu, warto przepuścić specyfikację przez kilka rund recenzji, z założeniem za każdym razem, że dokument jest błędny. Taka recenzja wyłapuje reguły, które inaczej ujawniłyby się dopiero na produkcji, na przykład rozliczenie, które obciążyłoby dostawcę za jego własny towar. Te reguły potem pilnują testy, nie pamięć jednej osoby.",
       },
       {
-        title: "Pieniądze idą za stanem, nie za zdarzeniem",
-        body: "Na platformie Flyt kupujący wpłacają depozyt za miejsce we wspólnym kontenerze. Jeśli kampania się nie zapełni, zwrot jest przejściem w maszynie stanów w Postgresie, a nie przelewem, o którym ktoś musi pamiętać. Nikt nie płaci dwa razy i żaden depozyt nie zostaje w zawieszeniu.",
+        title: "Zwrot wychodzi sam, gdy zmienia się stan sprawy",
+        body: "Gdy kupujący wpłacają depozyt za udział we wspólnym zamówieniu, a zamówienie może się nie zapełnić, zwrot powinien być automatycznym skutkiem zmiany stanu w systemie, a nie przelewem, o którym ktoś musi pamiętać. Nikt nie płaci dwa razy i żaden depozyt nie zostaje w zawieszeniu.",
       },
       {
         title: "Dokument, którego system nie wygeneruje z dziurą",
-        body: "W CRM-ie dla zespołów terenowych prowadzących audyty energetyczne umowę o dofinansowanie składa serwer z danych zlecenia: szablon DOCX z jawnie przypisanymi polami, renderowany do PDF. Brak wymaganego pola zatrzymuje generowanie, zamiast wypuścić dokument, który tylko wygląda na kompletny.",
+        body: "Umowę o dofinansowanie albo inny dokument z licznymi warunkami może składać system z danych zlecenia: szablon Word z jawnie przypisanymi polami, zamieniany na PDF. Brak wymaganego pola zatrzymuje generowanie, zamiast wypuścić dokument, który tylko wygląda na kompletny.",
       },
       {
         title: "Model formułuje, kod wykonuje",
-        body: "W logistyce, którą prowadzę, automatyczne telefony o statusie zamówienia i SMS-y idą same z procesu zamówień, po polsku i po angielsku. Tam, gdzie w rozmowie pracuje model, może wyłącznie sformułować zdanie i wybrać ścieżkę: każdą zmianę zamówienia i każdą wysyłkę wykonuje deterministyczny kod. Dwukierunkowy agent głosowy jest jeszcze dopracowywany, ale ta granica nie zmienia się od pierwszej wersji.",
+        body: "Automatyczne telefony o statusie zamówienia i SMS-y mogą iść same z procesu zamówień, po polsku i po angielsku. Tam, gdzie w rozmowie pracuje model, może wyłącznie sformułować zdanie i wybrać ścieżkę: każdą zmianę zamówienia i każdą wysyłkę wykonuje deterministyczny kod. Dwukierunkowy agent głosowy wymaga więcej dopracowania niż skrypt czytany przez syntezator, ale ta granica nie zmienia się od pierwszej wersji.",
       },
       {
         title: "System tam, gdzie człowiek już pracuje",
-        body: "Kanał sprzedaży części dla klientów indywidualnych prowadzi osoba, której całym miejscem pracy jest arkusz Google. Dlatego całe zaplecze działa w arkuszu: wycena w panelu bocznym, akceptacja oferty jednym kliknięciem w linku z maila, faktura VAT w PDF na Dysku Google i SMS przez Twilio. Nietypowy proces nie zawsze potrzebuje nowej platformy.",
+        body: "Gdy proces prowadzi osoba, której całym miejscem pracy jest arkusz Google, całe zaplecze może działać właśnie tam: wycena w panelu bocznym, akceptacja oferty jednym kliknięciem w linku z maila, faktura VAT w PDF na dysku i SMS wysyłany automatycznie. Nietypowy proces nie zawsze potrzebuje nowej platformy.",
       },
       {
         title: "Poprawną odpowiedź ustala ktoś z branży",
-        body: "System warsztatowy zbudowałem, nie będąc mechanikiem, więc to pracujący mechanik definiował, co jest poprawną odpowiedzią. Czasy pracy w wycenie liczą się z zamkniętych zleceń tego warsztatu, nie z oszacowania modelu. Swoją branżę znasz Ty: moja robota to zamienić tę wiedzę w reguły.",
+        body: "Budując system dla branży, której nie znam od środka, nie zgaduję zasad: to osoba pracująca w tym fachu definiuje, co jest poprawną odpowiedzią. Liczby w wycenie powinny wynikać z rzeczywistych, zamkniętych spraw, nie z oszacowania modelu. Swoją branżę znasz Ty: moja robota to zamienić tę wiedzę w reguły.",
       },
     ],
     faqTitle: "Pytania, które padają najczęściej",
@@ -612,7 +612,7 @@ const PL: Service[] = [
       },
       {
         q: "Mój proces jest naprawdę nietypowy. Skąd będziesz wiedział, jak działa?",
-        a: "Nie zakładam, że wiem. Uczę się z prawdziwych przypadków, nie z opisu procesu: przy warsztacie oznaczało to siedzenie przy zleceniach, które akurat wpadały, i rozwiązywanie problemów obok mechanika, zamiast jednego wywiadu i zniknięcia do kodu. To on definiował, co jest poprawną odpowiedzią. Ja wnoszę metodę i odpowiedzialność za to, żeby działało w produkcji.",
+        a: "Nie zakładam, że wiem. Uczę się z prawdziwych przypadków, nie z opisu procesu: siedzę przy sprawach, które akurat się pojawiają, i rozwiązuję problemy razem z osobą, która na co dzień wykonuje tę pracę, zamiast przeprowadzić jeden wywiad i zniknąć do kodu. To ona definiuje, co jest poprawną odpowiedzią. Ja wnoszę metodę i odpowiedzialność za to, żeby działało w produkcji.",
       },
       {
         q: "Czy AI poradzi sobie tam, gdzie nie ma schematu?",
@@ -632,7 +632,7 @@ const EN: Service[] = [
     navLabel: "Sales and marketing",
     metaTitle: "Sales and marketing automation | Kamil Jan",
     metaDescription:
-      "Sales and marketing automation: every lead with its source, quote and contract from one price list, sending with hard limits. Tested in my own companies.",
+      "Sales and marketing automation: every lead with its source, quote and contract from one price list, and email sending that runs on hard limits.",
     eyebrow: "SALES AND MARKETING",
     h1: "From lead to signed contract without retyping anything on the way",
     lead: "I automate the path from first contact to signed contract: where the lead came from, who follows up and when, where the price in the quote comes from, and what happens after the signature. Salespeople should be talking to customers, not moving data between the inbox, a spreadsheet and the CRM.",
@@ -680,27 +680,27 @@ const EN: Service[] = [
     answerEyebrow: "HOW I BUILD",
     answerTitle: "The system keeps the order of steps, a person has the conversation",
     answerLead:
-      "Everything below was built first inside my own companies, on real sales. Some of it still runs; some of it was a campaign I deliberately ended.",
+      "Each mechanism below solves one specific moment where sales tends to slip: from first contact to signature.",
     points: [
       {
         title: "A lead lands in the database with its source",
-        body: 'In Reykjawwwik the UTM tags and the country are written onto the lead record itself, so "which campaign brought this" has an answer in the data rather than in somebody\'s memory. Leads land in an admin CRM, and a push notification tells the team when a deal needs a person.',
+        body: "A lead's source, the campaign and the country, is written onto the record the moment it comes in, so \"which ad brought this\" has an answer in the data rather than in somebody's memory. Leads land in one dashboard, and a notification tells the team when a deal needs a person.",
       },
       {
         title: "One price in the call, the quote and the contract",
-        body: "Reykjawwwik's whole catalogue sits in one file that the configurator, the offer, the contract and the AI assistants all read. A call ends with a priced offer on screen instead of a promise to send something over, and the price can't drift between the call and the invoice. In another build the reps price print jobs in an app on their own phones, sometimes with the customer standing there.",
+        body: "The whole price list sits in one place that the configurator, the offer, the contract and the AI assistant all read. A call ends with a priced offer on screen instead of a promise to send something over, and the price can't drift between the call and the invoice. A rep can price an offer on their own phone, sometimes with the customer standing there.",
       },
       {
         title: "Contracts from data, signature and billing tied to state",
-        body: "Country, package and VAT in, the correct document out, with no template edited by hand. E-signature and billing report back by webhook into one state machine in Postgres, so a deal can't quietly end up signed but never invoiced.",
+        body: "Customer details and the chosen package in, the correct contract out, with no template edited by hand each time. E-signature and billing report back automatically into one system that tracks the deal's status, so it can't quietly end up signed but never invoiced.",
       },
       {
         title: "Outreach with the brakes fitted before the engine",
-        body: "My campaign ran on hard limits: at most three emails per recipient domain ever, five new companies a day, business hours only, public holidays skipped. Every run started by checking the last seven days for bounces. When a human replied, the automation stopped and I answered personally.",
+        body: "Sending runs on hard limits: a capped number of emails per recipient domain across the whole history, a capped number of new companies a day, business hours only, public holidays skipped. Every run starts by checking recent days for bounces. When a customer replies, the automation stops and a person takes over.",
       },
       {
-        title: "Pipeline stages as events, not columns on a board",
-        body: "In Reykjawwwik each of the 14 stages carries what to do now and roughly what to tell the client, and every transition writes a row to an events table. Before a risky jump, such as starting work without a signed contract, the system stops and asks for confirmation.",
+        title: "Every sales stage recorded in the system",
+        body: "Every stage of the sales pipeline carries what to do now and roughly what to tell the client, and every move to the next stage leaves a record in the history. Before a risky jump, such as starting work without a signed contract, the system stops and asks for confirmation.",
       },
       {
         title: "Ad creative starts with research, not a prompt",
@@ -715,19 +715,19 @@ const EN: Service[] = [
       },
       {
         q: "Will the automation write to customers on my behalf?",
-        a: "First contact and reminders, yes, within limits we agree on. The conversation with a person, no: in my own campaign the automation stopped the moment someone replied. To be straight about it, once the reply detection missed a decline and a company that had said no got two more emails. The lesson I took from it: reply detection has to be built before the first send, not after.",
+        a: "First contact and reminders, yes, within limits we agree on. The conversation with a person, no: the automation stops the moment someone replies. Reply detection and a block on further sends have to work from day one, so a company that declined never gets another email.",
       },
       {
         q: "We already have a CRM. Do we need to replace it?",
-        a: "Usually not. If the CRM has an API or webhooks, I connect the forms, the quote, the signature and billing to it. I suggest replacing it only when the tool genuinely blocks the sales process, and I say so before quoting.",
+        a: "Usually not. If the CRM can connect to other tools, I connect the forms, the quote, the signature and billing to it. I suggest replacing it only when the tool genuinely blocks the sales process, and I say so before quoting.",
       },
       {
         q: "Can AI write our ads and emails?",
-        a: "It helps, given a brief. My first generated creatives looked fake, and what fixed them was adding research before the prompt. In my campaign an agent wrote the emails to written rules and still put in one line I couldn't back. Its own review caught that only after the send. What I don't have is data on how those ads sell, and I won't pretend otherwise.",
+        a: "It helps, given a brief. Creative built without research on the brand and the audience looks fake, which is why research comes before the prompt. Emails get written to fixed rules, and every message goes through a check before sending, because a model can add a line nobody confirmed. What I don't have is data on exactly how your ads will sell, and I won't pretend otherwise.",
       },
       {
         q: "Who builds it?",
-        a: "AI coding agents write the code; I own the spec, the architecture, the review, the deploy and how it runs in production. When a project needs a bigger team, CetusPro joins, a Rzeszów software house with close to 40 developers.",
+        a: "AI coding agents write the code; I own the spec, the architecture, the review, the deploy and how it runs in production. When a project needs a bigger team, CetusPro joins, a Rzeszów software house.",
       },
     ],
   },
@@ -788,16 +788,16 @@ const EN: Service[] = [
       "I don't start with a chatbot. I start with where the answer to a customer's question actually comes from, and only then decide what can send it without a human.",
     points: [
       {
-        title: "Status sent from a transition, not from memory",
-        body: "In a B2B order platform I run, an order moves through named stages held in the database. The customs SMS leaves from one specific transition and nowhere else, so it can't go out twice or from a stage the order never really reached. By the time a customer asks where their order is, the SMS updates are already on their phone, and nobody had to remember to send them.",
+        title: "The status goes out on its own when the stage changes",
+        body: "An order moves through named stages held in the system, not in anyone's head. The status SMS leaves from one specific stage and nowhere else, so it can't go out twice or from a stage the order never really reached. By the time a customer asks where their order is, the updates are already on their phone, and nobody had to remember to send them.",
       },
       {
         title: "Repetitive conversations without a person, but with a boundary",
-        body: "Status calls and SMS run unattended in a company I operate, in Polish and English. A status call is a fixed script read by text-to-speech, with no language model in it. In the two-way voice agent the model only phrases the sentence and picks the route; every order change and every send is done by ordinary, predictable code. That agent works, but it's still hardening and I don't call it finished.",
+        body: "Status calls and SMS can run unattended, in Polish and English. A status call is a fixed script read by text-to-speech, with no language model involved. In a two-way voice agent the model only phrases the sentence and picks the route; every order change and every send is done by ordinary, predictable code. This kind of agent still needs hardening, and I don't call it a finished product.",
       },
       {
         title: "Approval in one click, recorded by the system",
-        body: "On the consumer parts channel, the quote goes out by email with a link. The click changes the order's status and stamps the time of acceptance; the invoice and the SMS to the customer follow. The customer's decision doesn't wait for someone to copy it by hand from an email into the order sheet.",
+        body: "The quote goes out by email with a link. The click changes the order's status and stamps the time of acceptance; the invoice and the SMS to the customer follow. The customer's decision doesn't wait for someone to copy it by hand from an email into the order sheet.",
       },
       {
         title: 'An assistant that says "I don\'t know"',
@@ -805,7 +805,7 @@ const EN: Service[] = [
       },
       {
         title: "Reply detection before the first send",
-        body: "I learned this from my own mistake. In a cold email campaign for my own company I built reply detection last. Because of that, a warm lead who asked for a sample and a price waited twelve days for an answer, and a company that had declined got two more emails. The lesson: reply checking, and a block on further sends once someone responds, have to work before the first message goes out.",
+        body: "Reply detection and a block on further sends have to work before the first message goes out, not get added afterward. Without it a warm lead waits too long for an answer, and a customer who already declined gets more messages.",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -824,7 +824,7 @@ const EN: Service[] = [
       },
       {
         q: "What does it cost?",
-        a: "It depends on how many channels are involved, where the data comes from, and whether the system underneath already knows what stage a customer's case is at. You get a range once I've seen the process. Bigger builds run with CetusPro, a Rzeszów software house with close to 40 developers who join when a project needs the headcount.",
+        a: "It depends on how many channels are involved, where the data comes from, and whether the system underneath already knows what stage a customer's case is at. You get a range once I've seen the process. Bigger builds run with CetusPro, a Rzeszów software house whose developers join when a project needs the headcount.",
       },
       {
         q: "Who writes the code?",
@@ -888,24 +888,24 @@ const EN: Service[] = [
       "For every field in a document I ask where it comes from. If that information already sits somewhere in the company, nobody should be typing it a second time.",
     points: [
       {
-        title: "A contract built from the record, not from a copied template",
-        body: "Data from the record goes into a template with named fields, and a finished DOCX and PDF comes out. That's how every funding contract is made in the CRM for energy-audit field teams: people in the field generate it themselves from a phone, and a missing required field stops generation instead of shipping a document with a hole in it. The template lives in the repository, so every clause change has a history.",
+        title: "A contract built from the customer's data instead of a copied template",
+        body: "The customer and order details go into a template with named fields, and a finished Word document and PDF come out. A contract or an offer can be generated this way from a phone by whoever is in the field, and a missing required field stops generation instead of shipping a document with a hole in it. The template keeps its own history, so every clause change is visible.",
       },
       {
-        title: "Approval as an event in the system",
-        body: "Consent shouldn't be inferred from an email thread. The customer clicks a link in the quote and the system changes the order's status and records the time: that's how quotes are accepted in the consumer parts order desk, which runs entirely inside a Google spreadsheet. In the energy-audit CRM every job sits in one of nine named stages and notifications fire from stage changes, so you can see where it stands without searching inboxes.",
+        title: "Approval recorded in the system",
+        body: "Consent shouldn't be inferred from an email thread. The customer clicks a link in the quote, and the system changes the order's status and records the time, even when orders are run out of a spreadsheet. Every job can sit in a named stage, and notifications fire from stage changes, so you can see where it stands without searching inboxes.",
       },
       {
         title: "An issued document doesn't change",
-        body: "A signed contract is the text that was signed, not whatever today's template renders. In the rental system each signed contract stores its own wording, so when I rewrote the rental terms, documents already signed stayed untouched. In the workshop system an invoice number is unique and can't be changed once issued. The database enforces that, not the screen, because the screen is where a tired person clicks twice.",
+        body: "A signed contract is the text that was signed, not whatever today's template renders. Each signed contract stores its own wording, so a later change to the terms never touches documents already signed. An invoice number is unique and can't be changed once issued. The system enforces that, not the screen, because the screen is where a tired person clicks twice.",
       },
       {
         title: "Deadlines you see before they pass",
-        body: "An insurance or inspection expiry date is a field in the database, not an entry in someone's calendar. In the rental system a dashboard shows every vehicle whose insurance or inspection lapses within 30 days. One caveat I state upfront: those dates are typed in by hand, and pulling them from the vehicle registry still isn't built, so the alert is only as good as the last date someone entered.",
+        body: "An insurance or inspection expiry date is a field in the system, not an entry in someone's calendar. A dashboard can show every vehicle or contract whose term lapses within the next 30 days. One caveat worth stating upfront: if those dates are entered by hand, the alert is only as good as the last date someone typed in.",
       },
       {
         title: "The data belongs to the company, not the subscription",
-        body: "The rental kept its clients, bookings and contract template in a paid product with no export and no API we could reach. I pulled the data out, built the replacement and checked the migration mechanically, row by row. The first pass, done by eye, had quietly dropped 32 of 82 calendar entries. The comparison found them before two customers turned up for the same van. Today the data sits in the company's own database, and an export is one query away.",
+        body: "When clients, bookings and a contract template sit in a paid product with no export and no way to reach the data, getting them back takes a dedicated project: pulling the data out, building the replacement and checking the migration row by row, not by eye. A visual check alone easily drops individual entries, which is why a mechanical comparison has to close before a migration counts as finished. The data should end up in the company's own database, with export a single query away rather than a separate project.",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -916,15 +916,15 @@ const EN: Service[] = [
       },
       {
         q: "Do we have to replace our CRM or accounting software?",
-        a: "Usually not. If the tool offers an API or even a data export, documents can draw their data from it. Sometimes the best system is the spreadsheet someone already works in: in my parts business, the consumer order desk, covering quotes, acceptances, VAT invoices and SMS, runs in a Google spreadsheet at zero infrastructure cost.",
+        a: "Usually not. If the tool offers a way to reach its data, even just an export, documents can draw from it. Sometimes the best system is the spreadsheet someone already works in: at dozens of orders and one person running the desk, a Google spreadsheet handles quotes, acceptances, VAT invoices and texts at zero infrastructure cost.",
       },
       {
         q: "Will the e-signatures and the archive be legally compliant?",
-        a: "I don't build e-signature myself. In the platform serving ten markets I bought it from a specialised provider, because a vendor that does only this is years ahead. Which documents need a qualified signature and how long to keep them, we settle with your lawyer or accountant. I'm not a lawyer and don't pretend to be. My part is a system that enforces what you agree on: unique numbering, no edits after issue, access only for the people entitled to it.",
+        a: "I don't build e-signature myself. I connect a specialised provider, because a vendor that does only this is further ahead than I am. Which documents need a qualified signature and how long to keep them, we settle with your lawyer or accountant. I'm not a lawyer and don't pretend to be. My part is a system that enforces what you agree on: unique numbering, no edits after issue, access only for the people entitled to it.",
       },
       {
         q: "Who will see the data in these documents?",
-        a: "Only the people who should, and the database enforces it, not a hidden button. In the energy-audit CRM the salesperson, the auditor and the administrator work on the same data, but each sees only their slice. A missing rule means no access, not full access. I check permissions against the running database, not the file that is supposed to describe it, because I've already seen the two disagree.",
+        a: "Only the people who should, and the system enforces it, not a hidden button. Different roles, a salesperson, an auditor, an administrator, can work on the same data while each sees only their slice. A missing rule means no access, not full access. I check permissions against the running system, not only the document that describes it.",
       },
       {
         q: "Who builds it, and what if the project is bigger?",
@@ -989,15 +989,15 @@ const EN: Service[] = [
     points: [
       {
         title: "One candidate database, fed automatically",
-        body: "Applications from the website form, the recruitment inbox and job boards reach one place through a webhook or an import. The system flags duplicates by email and phone, the candidate gets an acknowledgement straight away, and the interview slot comes from the calendar rather than a hand-written email.",
+        body: "Applications from the website form, the recruitment inbox and job boards reach one place automatically. The system flags duplicates by email and phone, the candidate gets an acknowledgement straight away, and the interview slot comes from the calendar rather than a hand-written email.",
       },
       {
         title: "Joining and leaving as stages, not a list in an email",
-        body: "Onboarding and offboarding get named stages and only the transitions declared legal, the same way an order works in the B2B platform I run. A task for IT, a signature request or a reminder fires from one specific transition, so a stage can't be skipped and the same task can't go out twice. When someone leaves, the list of accounts to close builds itself.",
+        body: "Onboarding and offboarding get named stages and only the transitions declared legal, the same way a well-designed order process works. A task for IT, a signature request or a reminder fires from one specific transition, so a stage can't be skipped and the same task can't go out twice. When someone leaves, the list of accounts to close builds itself.",
       },
       {
         title: "HR documents built from data, not from a template filled by hand",
-        body: "Contracts, amendments and medical-check referrals are generated server-side from the employee record: a DOCX template with named fields, output as PDF. A missing required field stops generation instead of letting a document out with a gap. The funding-contract generator in the CRM that field sales teams use daily works on the same principle.",
+        body: "Contracts, amendments and medical-check referrals are generated from the employee record: a Word template with named fields, output as PDF. A missing required field stops generation instead of letting a document out with a gap. Other documents generated from data, such as offers or contracts field sales teams use daily, can work on the same principle.",
       },
       {
         title: "Requests and approvals in one flow",
@@ -1028,11 +1028,11 @@ const EN: Service[] = [
       },
       {
         q: "How would you know how HR works?",
-        a: "I'm not an HR specialist and I don't pretend to know employment law: the content of contracts and policies comes from your HR team or your lawyer. I know recruitment from the employer's side: in my own company I hire the developers and train the sales team myself. The rest works the way it did with the workshop system I built without being a mechanic: the person who does the work defines what a correct result is.",
+        a: "I'm not an HR specialist and I don't pretend to know employment law: the content of contracts and policies comes from your HR team or your lawyer. I know recruitment from the employer's side, from a company that hires and builds its own team. Beyond that I work the way I always do: the person who does a given job defines what a correct result looks like, and I turn that knowledge into a system.",
       },
       {
         q: "What about candidates' and employees' personal data?",
-        a: "The code stays in your repository and the data in your database. Access is decided by permissions in the database, not in the interface. Retention periods are set by your data protection officer or lawyer; the system makes sure they're kept. Integration keys live in a vault, not in the code.",
+        a: "The code stays in your repository and the data in your database. Access is decided by permissions in the database, not in the interface. Retention periods are set by your data protection officer or lawyer; the system makes sure they're kept. Integration keys live in a separate, encrypted store, not in the code.",
       },
       {
         q: "What if the project is bigger than one person?",
@@ -1093,23 +1093,23 @@ const EN: Service[] = [
     points: [
       {
         title: "An event recorded the moment it happens",
-        body: "In the pricing app the sales reps use in the field, every order status change goes into a history: from which stage, to which, when, and by whom. Commissions attach to the order that generated them, so nobody has to rebuild them at month-end.",
+        body: "Every order status change goes into a history: from which stage, to which, when, and by whom. Commissions attach to the order that generated them, so nobody has to rebuild them at month-end.",
       },
       {
         title: "The dashboard reads the same state the process runs on",
-        body: "On Flyt, pooled container campaigns and the deposits paid into them have explicit states in Postgres, and the admin dashboard shows them live. A campaign in the wrong state is visible straight away, not when a buyer writes to ask where their money went.",
+        body: "The state of every case, an order or a payment, is recorded explicitly in the system, and the dashboard shows it live. A case stuck in the wrong state is visible straight away, not when a customer writes to ask where their money went.",
       },
       {
         title: "Data fixed on entry, not at the point of use",
-        body: "The consumer parts channel is run by someone who works in Google Sheets, so that's where I built it. A trigger on cell edit fixes the phone number format straight away and fills in a returning customer's details from their ID number. The row is correct the moment it's saved, so texts don't go to a badly formatted number and nobody retypes a repeat customer.",
+        body: "When a process runs in Google Sheets, fixes can happen the moment a cell is edited: the phone number format corrects itself, and a returning customer's details fill in from their ID number. The row is correct the moment it's saved, so texts don't go to a badly formatted number and nobody retypes a repeat customer.",
       },
       {
         title: "Stale numbers don't pass as current",
-        body: "Two failures from my own infrastructure: a dashboard kept showing metrics whose source data had been deleted a month earlier, and a sync job reported success for twelve days while writing nothing. Now the numbers on my dashboard are recomputed from source, and no run can claim success until it reads back what it wrote.",
+        body: "Two common ways a dashboard lies: it keeps showing metrics whose source data was deleted long ago, or a sync job reports success while writing nothing. Numbers should be recomputed from source every time, and no run should claim success until it reads back what it wrote.",
       },
       {
         title: "Reconciled row by row, not judged by eye",
-        body: "When I moved the rental's data off a paid system that had no export, my first pass, done by eye, dropped 32 of 82 calendar entries. Five of them were future blocks on vehicles the new app showed as free. Only a mechanical comparison of the source data against the database caught it. Since then an import is finished for me when that comparison closes, not when the screen looks right.",
+        body: "When data moves off a paid system with no export, a visual check alone easily drops individual entries, including ones that turn out to matter, such as future bookings shown as free slots. Only a mechanical comparison of the source data against the new database catches that. An import counts as finished when that comparison closes, not when the screen looks right.",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -1120,7 +1120,7 @@ const EN: Service[] = [
       },
       {
         q: "Do we have to give up spreadsheets?",
-        a: "Not always. The consumer parts channel I built runs entirely in a Google Sheet, because at dozens of orders and one operator that's the right tool. A spreadsheet stops being enough when one cell starts holding several facts. My own email-campaign queue, kept as a table in my notes, grew to 930 lines. A run misread it, decided nothing was due, and missed a backlog of eight follow-up emails. Past that point the data belongs in a database, and the sheet can stay on as a view.",
+        a: "Not always. At dozens of orders and one person running the whole process, a Google Sheet can be the right tool. It stops being enough when one cell starts holding several facts, because that's when the automation reading it starts getting confused and skipping entries it should process. Past that point the data belongs in a database, and the sheet can stay on as a view.",
       },
       {
         q: "Do reports need AI?",
@@ -1128,11 +1128,11 @@ const EN: Service[] = [
       },
       {
         q: "What if our data is in bad shape?",
-        a: "That's a common starting point and the first part of the job, not an obstacle. I begin with a mechanical comparison of the sources against what reaches the report. In the rental migration, that comparison found 32 missing entries a visual check had passed. Better to learn the size of the problem before building a dashboard than after.",
+        a: "That's a common starting point and the first part of the job, not an obstacle. I begin with a mechanical comparison of the sources against what reaches the report, because a visual check regularly lets missing entries through. Better to learn the size of the problem before building a dashboard than after.",
       },
       {
         q: "Do you build data warehouses and BI for large companies?",
-        a: "No, and I won't pretend otherwise. I know operational databases well, the ones a company runs on every day: Postgres, permissions, event history, and reports computed straight from them. An enterprise data warehouse is an adjacent but separate specialism. If that's what you need, I'll say so on the first call rather than take on a project I can't deliver.",
+        a: "No, and I won't pretend otherwise. I know operational databases well, the ones a company runs on every day: permissions, event history, and reports computed straight from them. An enterprise data warehouse is an adjacent but separate specialism. If that's what you need, I'll say so on the first call rather than take on a project I can't deliver.",
       },
       {
         q: "Who writes the code, and what if the project is bigger?",
@@ -1197,27 +1197,27 @@ const EN: Service[] = [
     points: [
       {
         title: "Exceptions written down before the schema",
-        body: "The design for a consignment parts counter went through five review rounds, each run with a fresh reviewer told to assume the document was wrong. They caught a settlement rule that would have invoiced the supplier for delivering their own goods to us. The counter isn't open yet, but 30 database tests already hold those rules.",
+        body: "Before the first line of code, a spec is worth running through several rounds of review, each time assuming the document is wrong. That kind of review catches rules that would otherwise only surface in production, such as a settlement that would invoice a supplier for their own goods. Tests hold those rules afterward, not one person's memory.",
       },
       {
-        title: "Money follows state, not events",
-        body: "At Flyt, buyers pay a deposit for a slot in a shared container. If the campaign doesn't fill, the refund is a transition in a Postgres state machine, not a transfer somebody has to remember. Nobody is charged twice and no deposit is left in limbo.",
+        title: "Refunds go out on their own when the case changes state",
+        body: "When buyers pay a deposit for a slot in a shared order that might not fill, the refund should be an automatic result of a state change in the system, not a transfer somebody has to remember. Nobody is charged twice and no deposit is left in limbo.",
       },
       {
         title: "A document the system won't produce with a hole in it",
-        body: "In the CRM for energy-audit field teams, the funding contract is built server-side from the order data: a DOCX template with explicit field bindings, rendered to PDF. A missing required field stops generation instead of producing a document that only looks complete.",
+        body: "A funding contract, or any document with many conditions, can be built from the order data: a Word template with explicit field bindings, rendered to PDF. A missing required field stops generation instead of producing a document that only looks complete.",
       },
       {
         title: "The model phrases, code acts",
-        body: "In the logistics operation I run, automated status calls and SMS fire from the order flow on their own, in English and Polish. Where a model takes part in a call it can only phrase a sentence and pick a route: every order change and every send is done by deterministic code. The two-way voice agent is still hardening, but that boundary hasn't moved since the first version.",
+        body: "Automated status calls and texts can fire from the order flow on their own, in English and Polish. Where a model takes part in a call it can only phrase a sentence and pick a route: every order change and every send is done by deterministic code. A two-way voice agent needs more hardening than a script read by text-to-speech, but that boundary hasn't moved since the first version.",
       },
       {
         title: "The system goes where the person already works",
-        body: "The consumer parts channel is run by someone whose whole working world is a spreadsheet. So the whole back office is a spreadsheet: pricing in a sidebar, one-click offer acceptance from a link in the email, VAT invoices as PDFs in Google Drive and an SMS via Twilio. An unusual process doesn't always need a new platform.",
+        body: "When a process is run by someone whose whole working world is a spreadsheet, the whole back office can live there too: pricing in a sidebar, one-click offer acceptance from a link in the email, VAT invoices as PDFs in Drive and a text sent automatically. An unusual process doesn't always need a new platform.",
       },
       {
         title: "Someone from the trade defines the correct answer",
-        body: "I built the workshop system without being a mechanic, so a working mechanic defined what a correct answer is. Labour times in quotes come from that shop's own closed jobs, not from a model's estimate. You know your trade: my job is turning that knowledge into rules.",
+        body: "Building a system for a trade I don't know from the inside means not guessing the rules: the person who does that work defines what a correct answer is. Labour times in a quote should come from real, closed jobs, not a model's estimate. You know your trade: my job is turning that knowledge into rules.",
       },
     ],
     faqTitle: "Questions I get asked",
@@ -1228,7 +1228,7 @@ const EN: Service[] = [
       },
       {
         q: "My process really is unusual. How will you know how it works?",
-        a: "I don't assume I do. I learn from real cases, not from a description of the process: for the workshop that meant sitting with jobs as they came through and working the problems out next to the mechanic, instead of interviewing him once and disappearing to write code. He defined what a correct answer is. I bring the method and the responsibility for it working in production.",
+        a: "I don't assume I do. I learn from real cases, not from a description of the process: sitting with the work as it comes in and solving problems alongside the person who does it every day, instead of one interview and disappearing to write code. That person defines what a correct answer is. I bring the method and the responsibility for it working in production.",
       },
       {
         q: "Can AI handle work that has no pattern?",
