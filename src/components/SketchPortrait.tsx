@@ -74,17 +74,30 @@ export function SketchPortrait({ sectionRef }: Props) {
       return { x: x * scale, y: y * scale };
     };
 
+    // Pointer events can fire far more often than frames (high-rate mice,
+    // coalesced touch), so events only record the target and one frame paints
+    // the path from the last painted point to it.
+    let target: Point | null = null;
+    let moveRaf = 0;
+    const paintToTarget = () => {
+      moveRaf = 0;
+      if (!target) return;
+      for (const d of last ? dabsBetween(last, target, SPACING * scale) : [target]) dab(d);
+      last = target;
+    };
     const onMove = (e: PointerEvent) => {
       const p = toCanvas(e);
       if (!p) {
         last = null;
+        target = null;
         return;
       }
-      for (const d of last ? dabsBetween(last, p, SPACING * scale) : [p]) dab(d);
-      last = p;
+      target = p;
+      if (!moveRaf) moveRaf = requestAnimationFrame(paintToTarget);
     };
     const onLeave = () => {
       last = null;
+      target = null;
     };
 
     fit();
@@ -122,6 +135,7 @@ export function SketchPortrait({ sectionRef }: Props) {
       ro.disconnect();
       io.disconnect();
       cancelAnimationFrame(raf);
+      cancelAnimationFrame(moveRaf);
       section.removeEventListener("pointermove", onMove);
       section.removeEventListener("pointerdown", onMove);
       section.removeEventListener("pointerleave", onLeave);

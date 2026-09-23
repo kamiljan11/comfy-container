@@ -177,9 +177,34 @@ test("the contact sketch paints on a phone without blocking the scroll", async (
   const b = await wrap.boundingBox();
   if (!b) throw new Error("portrait has no box");
   await page.touchscreen.tap(b.x + b.width / 2, b.y + b.height * 0.4);
-  const before = await page.evaluate(() => scrollY);
-  await page.evaluate(() => {
-    scrollBy(0, 150);
-  });
-  await expect.poll(() => page.evaluate(() => scrollY)).not.toBe(before);
+  // Nothing under the finger may cancel a touch: a preventDefault() on
+  // pointermove/touchmove, or touch-action: none, is what stops the page from
+  // scrolling. (Synthesized swipe gestures do not scroll in headless Chromium,
+  // so this checks the cause instead of the effect.)
+  const blocked = await page.evaluate(
+    ([x, y]) => {
+      const el = document.elementFromPoint(x, y);
+      if (!el) return "no element under the finger";
+      const style = getComputedStyle(el).touchAction;
+      const pm = new PointerEvent("pointermove", {
+        bubbles: true,
+        cancelable: true,
+        clientX: x,
+        clientY: y,
+        pointerType: "touch",
+      });
+      el.dispatchEvent(pm);
+      const touch = new Touch({ identifier: 1, target: el, clientX: x, clientY: y });
+      const tm = new TouchEvent("touchmove", {
+        bubbles: true,
+        cancelable: true,
+        touches: [touch],
+        changedTouches: [touch],
+      });
+      el.dispatchEvent(tm);
+      return { touchAction: style, pointer: pm.defaultPrevented, touch: tm.defaultPrevented };
+    },
+    [Math.round(b.x + b.width / 2), Math.round(b.y + b.height / 2)] as const,
+  );
+  expect(blocked).toEqual({ touchAction: "auto", pointer: false, touch: false });
 });

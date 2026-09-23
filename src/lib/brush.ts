@@ -10,13 +10,17 @@
 export type Point = { x: number; y: number };
 export type Blob = { x: number; y: number; r: number; alpha: number; hue: number };
 
-/** Dabs from `from` to `to`, every `spacing` px, excluding `from` itself. */
-export function dabsBetween(from: Point, to: Point, spacing: number): Point[] {
+/**
+ * Dabs from `from` to `to`, every `spacing` px, excluding `from` itself. At
+ * most `max` dabs: a long jump (fast flick, pointer re-entering far away) gets
+ * wider spacing instead of hundreds of gradients in one frame.
+ */
+export function dabsBetween(from: Point, to: Point, spacing: number, max = 80): Point[] {
   const dx = to.x - from.x;
   const dy = to.y - from.y;
   const dist = Math.hypot(dx, dy);
   if (dist === 0 || spacing <= 0) return [];
-  const n = Math.max(1, Math.floor(dist / spacing));
+  const n = Math.min(max, Math.max(1, Math.floor(dist / spacing)));
   return Array.from({ length: n }, (_, i) => {
     const t = (i + 1) / n;
     return { x: from.x + dx * t, y: from.y + dy * t };
@@ -36,8 +40,10 @@ export function rng(seed: number): () => number {
 }
 
 /**
- * The blobs for one dab. `size` is the brush radius in px; hues stay in the
- * site's teal-to-sky range (180-205) so the wash matches --teal / --teal-2.
+ * The blobs for one dab. `size` is the brush radius in px. Hues stay in
+ * 180-205: --teal (#0891b2) is hue 189 and --teal-2 (#22d3ee) hue 187 in
+ * src/site.css, so the wash sits on the brand colour with a little drift
+ * toward cyan and sky. Change this range if those tokens change.
  */
 export function blobsForDab(p: Point, size: number, rand: () => number, count = 4): Blob[] {
   return Array.from({ length: count }, () => {

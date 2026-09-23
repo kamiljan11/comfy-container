@@ -13,6 +13,12 @@ describe("dabsBetween", () => {
     expect(dabsBetween({ x: 0, y: 0 }, { x: 3, y: 4 }, 10)).toEqual([{ x: 3, y: 4 }]);
   });
 
+  it("caps the dabs of a long jump and still ends on the target", () => {
+    const dabs = dabsBetween({ x: 0, y: 0 }, { x: 5000, y: 0 }, 5);
+    expect(dabs).toHaveLength(80);
+    expect(dabs.at(-1)).toEqual({ x: 5000, y: 0 });
+  });
+
   it("gives nothing for no movement or a bad spacing", () => {
     expect(dabsBetween({ x: 5, y: 5 }, { x: 5, y: 5 }, 10)).toEqual([]);
     expect(dabsBetween({ x: 0, y: 0 }, { x: 50, y: 0 }, 0)).toEqual([]);
