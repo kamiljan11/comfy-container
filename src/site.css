@@ -1476,6 +1476,36 @@ section {
   opacity: 0.8;
 }
 
+/* Sketch portrait (SketchPortrait.tsx): a div in the .contact-photo slot, so it
+   takes the photo's size and position; the canvas wash sits under the lines */
+.sketch-portrait {
+  aspect-ratio: 912 / 1168;
+  filter: none;
+  opacity: 1;
+}
+.sketch-portrait .sketch-wash,
+.sketch-portrait .sketch-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sketch-portrait .sketch-wash {
+  mix-blend-mode: screen;
+  /* caps how bright repeated strokes get: past this it reads as neon, not paint */
+  opacity: 0.55;
+  /* the wash stays inside the figure (silhouette from the sketch) */
+  mask-image: url("/kamil-sketch-mask.webp");
+  -webkit-mask-image: url("/kamil-sketch-mask.webp");
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+}
+.sketch-portrait .sketch-lines {
+  object-fit: contain;
+  object-position: bottom;
+  opacity: 0.9;
+}
+
 /* ── Contact internals ── */
 .contact-inner {
   max-width: 620px;
@@ -2236,6 +2266,11 @@ section {
     width: min(74vw, 280px);
     opacity: 0.92;
     filter: grayscale(22%) contrast(1.04) brightness(0.98);
+  }
+  .sketch-portrait {
+    height: auto;
+    filter: none;
+    opacity: 1;
   }
 
   /* ── Footer ── */
