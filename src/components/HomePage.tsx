@@ -6,6 +6,7 @@ import { useLang } from "../hooks/useLang";
 import { PainGrid, SolutionTabs } from "./OfferSections";
 import { T, type Lang } from "../i18n";
 import { localizeYears } from "../lib/years";
+import { SketchPortrait } from "./SketchPortrait";
 
 /* ── Rotating colored hero word ── */
 const HERO_ROT: Record<Lang, string[]> = {
@@ -218,6 +219,7 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
   const [lang] = useLang(isOffer ? "en" : "pl");
   const [openEngage, setOpenEngage] = useState<number | null>(0);
   const btnRef = useRef<HTMLAnchorElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
   const onBtnMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const b = btnRef.current;
@@ -592,17 +594,8 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
       )}
 
       {/* ── Contact ── */}
-      <section className="contact" id="contact">
-        <img
-          src="/kamil-cutout.webp"
-          alt=""
-          className="contact-photo"
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          width="853"
-          height="1100"
-        />
+      <section className="contact" id="contact" ref={contactRef}>
+        <SketchPortrait sectionRef={contactRef} />
         <div className="container">
           <div className="contact-inner">
             <h2 className="contact-h2">
