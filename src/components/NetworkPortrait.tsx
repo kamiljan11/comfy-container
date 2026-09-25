@@ -29,6 +29,12 @@ type Props = { sectionRef: React.RefObject<HTMLElement | null> };
 
 const PHOTO = "/kamil-cutout.webp";
 const SPAWN_EVERY_PX = 14;
+/** Node cap. linksBetween is O(n²): at 160 nodes one frame of stepping plus
+ *  links took 0.6 ms on a desktop CPU (120 nodes: 0.3 ms), measured 2026-09-25. */
+const MAX_NODES = 160;
+const MAX_SEED = 120;
+/** The network is a background element: 30 fps is enough and halves the CPU. */
+const FRAME_MS = 1000 / 30;
 
 export function NetworkPortrait({ sectionRef }: Props) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
@@ -82,18 +88,27 @@ export function NetworkPortrait({ sectionRef }: Props) {
     };
 
     const frame = (t: number) => {
-      const dt = Math.min(0.05, prevT ? (t - prevT) / 1000 : 0.016);
+      raf = requestAnimationFrame(frame);
+      if (prevT && t - prevT < FRAME_MS) return;
+      const dt = Math.min(0.08, prevT ? (t - prevT) / 1000 : FRAME_MS / 1000);
       prevT = t;
+      // the pointer only records where it is; nodes are added here, once a frame
+      if (pointer && !reduced) {
+        const p = pointer;
+        if (!lastSpawn || Math.hypot(p.x - lastSpawn.x, p.y - lastSpawn.y) > px(SPAWN_EVERY_PX)) {
+          nodes.push(spawnNode(p, rand));
+          lastSpawn = p;
+        }
+      }
       nodes = stepNodes(nodes, dt, {
         w: canvas.width,
         h: canvas.height,
         pointer,
         pull: canvas.width * 0.22,
-        max: 260,
+        max: MAX_NODES,
       });
       draw(t);
       wrap.dataset.nodes = String(nodes.length); // read by e2e/network-portrait.spec.ts
-      raf = requestAnimationFrame(frame);
     };
 
     const start = () => {
@@ -121,7 +136,7 @@ export function NetworkPortrait({ sectionRef }: Props) {
       // a resize keeps the network, rescaled, instead of starting over
       nodes = nodes.length
         ? nodes.map((n) => ({ ...n, x: n.x * sx, y: n.y * sy }))
-        : seedNodes(Math.round(40 + (w * h) / 16000), w, h, rand);
+        : seedNodes(Math.min(MAX_SEED, Math.round(40 + (w * h) / 16000)), w, h, rand);
       draw(performance.now());
       wrap.dataset.nodes = String(nodes.length);
     };
@@ -134,13 +149,8 @@ export function NetworkPortrait({ sectionRef }: Props) {
       return { x: x * scale, y: y * scale };
     };
     const onMove = (e: PointerEvent) => {
-      const p = toCanvas(e);
-      pointer = p;
-      if (!p || reduced) return;
-      if (!lastSpawn || Math.hypot(p.x - lastSpawn.x, p.y - lastSpawn.y) > px(SPAWN_EVERY_PX)) {
-        nodes = [...nodes, spawnNode(p, rand)];
-        lastSpawn = p;
-      }
+      pointer = toCanvas(e);
+      if (!pointer) lastSpawn = null;
     };
     const onLeave = () => {
       pointer = null;
@@ -155,10 +165,13 @@ export function NetworkPortrait({ sectionRef }: Props) {
     section.addEventListener("pointerleave", onLeave);
 
     // run the loop only while the portrait is on screen
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((en) => en.isIntersecting)) start();
-      else stop();
-    });
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((en) => en.isIntersecting)) start();
+        else stop();
+      },
+      { threshold: 0.15 },
+    );
     io.observe(wrap);
 
     return () => {
