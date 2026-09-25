@@ -208,3 +208,19 @@ test("the contact portrait network does not block scrolling on a phone", async (
   );
   expect(blocked).toEqual({ touchAction: "auto", pointer: false, touch: false });
 });
+
+test("a tap on the contact portrait adds nodes to the network", async ({ page }) => {
+  // a tap ends before the next animation frame, so the press itself must add
+  // nodes (found on production 2026-09-25: 65 -> 65 after a tap)
+  await page.goto("/o-mnie");
+  const wrap = page.locator(".net-portrait");
+  await wrap.scrollIntoViewIfNeeded();
+  await expect.poll(async () => Number(await wrap.getAttribute("data-nodes"))).toBeGreaterThan(0);
+  const before = Number(await wrap.getAttribute("data-nodes"));
+  const b = await wrap.boundingBox();
+  if (!b) throw new Error("portrait has no box");
+  await page.touchscreen.tap(b.x + b.width / 2, b.y + b.height * 0.4);
+  await expect
+    .poll(async () => Number(await wrap.getAttribute("data-nodes")))
+    .toBeGreaterThan(before);
+});
