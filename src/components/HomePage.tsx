@@ -6,7 +6,7 @@ import { useLang } from "../hooks/useLang";
 import { PainGrid, SolutionTabs } from "./OfferSections";
 import { T, type Lang } from "../i18n";
 import { localizeYears } from "../lib/years";
-import { SketchPortrait } from "./SketchPortrait";
+import { NetworkPortrait } from "./NetworkPortrait";
 
 /* ── Rotating colored hero word ── */
 const HERO_ROT: Record<Lang, string[]> = {
@@ -595,7 +595,7 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
 
       {/* ── Contact ── */}
       <section className="contact" id="contact" ref={contactRef}>
-        <SketchPortrait sectionRef={contactRef} />
+        <NetworkPortrait sectionRef={contactRef} />
         <div className="container">
           <div className="contact-inner">
             <h2 className="contact-h2">
