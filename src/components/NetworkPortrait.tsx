@@ -35,6 +35,7 @@ const MAX_NODES = 160;
 const MAX_SEED = 120;
 /** The network is a background element: 30 fps is enough and halves the CPU. */
 const FRAME_MS = 1000 / 30;
+const TAP_NODES = 3;
 
 export function NetworkPortrait({ sectionRef }: Props) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
@@ -152,6 +153,15 @@ export function NetworkPortrait({ sectionRef }: Props) {
       pointer = toCanvas(e);
       if (!pointer) lastSpawn = null;
     };
+    // A tap ends (pointerleave) before the next frame could add a node, so a
+    // press drops a small cluster right away; one tap = at most TAP_NODES nodes.
+    const onDown = (e: PointerEvent) => {
+      onMove(e);
+      const p = pointer;
+      if (!p || reduced) return;
+      for (let i = 0; i < TAP_NODES; i++) nodes.push(spawnNode(p, rand));
+      lastSpawn = p;
+    };
     const onLeave = () => {
       pointer = null;
       lastSpawn = null;
@@ -161,7 +171,7 @@ export function NetworkPortrait({ sectionRef }: Props) {
     const ro = new ResizeObserver(fit);
     ro.observe(wrap);
     section.addEventListener("pointermove", onMove);
-    section.addEventListener("pointerdown", onMove);
+    section.addEventListener("pointerdown", onDown);
     section.addEventListener("pointerleave", onLeave);
 
     // run the loop only while the portrait is on screen
@@ -179,7 +189,7 @@ export function NetworkPortrait({ sectionRef }: Props) {
       ro.disconnect();
       io.disconnect();
       section.removeEventListener("pointermove", onMove);
-      section.removeEventListener("pointerdown", onMove);
+      section.removeEventListener("pointerdown", onDown);
       section.removeEventListener("pointerleave", onLeave);
     };
   }, [sectionRef]);
