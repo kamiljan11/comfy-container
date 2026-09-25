@@ -33,3 +33,19 @@ the portrait, which traps a finger that lands on it on a phone.
   referenced by the page; it stays as the source for regenerating the sketch.
 - A new photo means a new sketch and mask (same fal.ai prompt, see CHANGELOG).
 - Rollback: revert the PR; nothing else depends on the component.
+
+## Revision 2026-09-25: photo in front, the hero's network over it
+
+Kamil saw the watercolour sketch on production and asked for his photo as the
+main front layer, with an effect that ties in with the hero instead. Replaced:
+
+- Front layer: the photo `public/kamil-cutout.webp` (as before the sketch).
+- Over it: the hero's network (`Hero3D.tsx` colours `#1fc9aa` hubs, `#1a9b84`
+  nodes and links) on a canvas, clipped to the figure by using the same photo
+  as the canvas mask (`mask-image`), blended with `screen`.
+- The cursor pulls nearby nodes and drops short-lived ones, so a stroke leaves a
+  trail of connections. Maths in `src/lib/portraitNet.ts` (unit-tested);
+  `src/components/NetworkPortrait.tsx` is the DOM shell. The animation loop runs
+  only while the portrait is on screen; reduced motion draws one still frame.
+- Removed: `SketchPortrait.tsx`, `src/lib/brush.ts`, `kamil-sketch.webp`,
+  `kamil-sketch-mask.webp`. The fal.ai sketch is no longer used.

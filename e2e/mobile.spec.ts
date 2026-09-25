@@ -167,11 +167,11 @@ test("the /ksiazki book turns hard pages on a phone and still turns", async ({ p
   await expect(count).toHaveText("Strona 3 / 99");
 });
 
-test("the contact sketch paints on a phone without blocking the scroll", async ({ page }) => {
+test("the contact portrait network does not block scrolling on a phone", async ({ page }) => {
   // cetuspro.com's version sets touch-action: none on the portrait, which traps
   // a finger that lands on it; ours must still scroll the page
   await page.goto("/o-mnie");
-  const wrap = page.locator(".sketch-portrait");
+  const wrap = page.locator(".net-portrait");
   await wrap.scrollIntoViewIfNeeded();
   expect(await wrap.evaluate((el) => getComputedStyle(el).touchAction)).not.toBe("none");
   const b = await wrap.boundingBox();
