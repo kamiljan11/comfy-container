@@ -1,0 +1,5 @@
+# Pliki pomijane przez job "Mutation (zmienione pliki)" (.github/workflows/mutation.yml).
+# Tylko pliki BEZ logiki do przetestowania: tresc strony, dane. Format: <sciezka> # <powod> — powod jest wymagany
+# (bez niego plik NIE jest pomijany) i trafia do notice w CI. Dopasowanie po dokladnej sciezce, bez globow.
+# Plik z logika bez testow NIE trafia tutaj — dopisz test (job wtedy sam powie, ktory plik nie ma testu).
+src/routes/claude.tsx # strona z trescia (obiekt CONTENT PL/EN) i dekoracyjnymi diagramami SVG; zaden test jej nie importuje — PR #37, #49, #69 konczyly sie bledem Strykera zamiast wyniku

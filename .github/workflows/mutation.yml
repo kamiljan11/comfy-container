@@ -63,6 +63,20 @@ jobs:
           changed=$(git diff --name-only --diff-filter=AM "origin/$BASE_REF...HEAD" -- 'src/**/*.ts' 'src/**/*.tsx' 'supabase/functions/**/*.ts' \
             | grep -v -E '\.(test|spec)\.|\.d\.ts$|(^|/)(types?|__tests__|test)/|vite-env' || true)
           if [ -z "$changed" ]; then echo "skip=brak zmienionych plikow zrodlowych" >> "$GITHUB_OUTPUT"; exit 0; fi
+          # Pliki bez logiki (tresc strony, dane) — jawna lista z powodem w .github/mutation-exclude.txt. Bez niej PR
+          # zmieniajacy tylko tekst strony konczyl sie "Stryker nie zapisal raportu" (dry run: 0 testow), a czerwony
+          # wynik ignorowano (PR #37, #49, #69). Dopasowanie po DOKLADNEJ sciezce, kazde pominiecie widac jako notice.
+          EXCL=.github/mutation-exclude.txt
+          if [ -f "$EXCL" ]; then
+            kept=""
+            while IFS= read -r f; do
+              [ -n "$f" ] || continue
+              reason=$(awk -v f="$f" '$1 == f && /#[[:space:]]*[^[:space:]]/ { sub(/^[^#]*#[[:space:]]*/, ""); print; exit }' "$EXCL")
+              if [ -n "$reason" ]; then echo "::notice::Mutation pomija $f (mutation-exclude.txt): $reason"; else kept="$kept$f"$'\n'; fi
+            done <<< "$changed"
+            changed=$(printf '%s' "$kept" | sed '/^$/d')
+          fi
+          if [ -z "$changed" ]; then echo "skip=zmienione pliki sa tylko na liscie .github/mutation-exclude.txt (tresc bez logiki)" >> "$GITHUB_OUTPUT"; exit 0; fi
           echo "files=$(echo "$changed" | paste -sd, -)" >> "$GITHUB_OUTPUT"
           echo "Zmienione pliki zrodlowe:"; echo "$changed"
 
@@ -113,11 +127,20 @@ jobs:
             console.log(JSON.stringify(cfg, null, 2));
           '
           rc=0
-          npx stryker run stryker.pr.config.json || rc=$?
+          npx stryker run stryker.pr.config.json 2>&1 | tee stryker.log || rc=$?
           # Straznik: "Survived" jest dowodem tylko wtedy, gdy testy naprawde sie wykonaly. Mutant pokryty testami
           # (coveredBy), a z testsCompleted 0 albo bez tego pola (w schemacie jest opcjonalne) = runner nie odpalil zadnego testu -> wynik niewazny, FAIL.
           REPORT=reports/mutation/mutation.json
-          if [ ! -f "$REPORT" ]; then echo "::error::Stryker nie zapisal $REPORT (exit $rc)"; exit 1; fi
+          if [ ! -f "$REPORT" ]; then
+            # Dry run bez testow = zaden test nie importuje zmienionego pliku (vitest-runner uruchamia testy powiazane).
+            # To realna luka (logika bez testu), nie awaria narzedzia — komunikat mowi, co zrobic.
+            if grep -q "No tests were executed" stryker.log; then
+              echo "::error::Zmienione pliki nie maja ZADNEGO testu, ktory je importuje (Stryker dry run: No tests were found): $FILES. Dopisz test. Plik bez logiki (tresc, dane) dodaj do .github/mutation-exclude.txt z powodem."
+            else
+              echo "::error::Stryker nie zapisal $REPORT (exit $rc) — log wyzej"
+            fi
+            exit 1
+          fi
           node -e '
             const report = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
             const unrun = Object.entries(report.files).flatMap(([file, { mutants }]) => mutants
