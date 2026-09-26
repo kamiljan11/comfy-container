@@ -157,14 +157,14 @@ const CONTENT: Record<Lang, Content> = {
       "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
-      { n: "1,873", label: "logged agent sessions" },
-      { n: "149", label: "past failures turned into automatic checks" },
+      { n: "2,853", label: "agent transcript files" },
+      { n: "160", label: "past failures turned into automatic checks" },
       { n: "23", label: "hard stops in the git gates" },
       { n: "9", label: "specialist AI reviewers" },
-      { n: "51", label: "zero-token tools" },
-      { n: "40", label: "routines (5 code · 35 desktop)" },
-      { n: "31", label: "repos under strict protection" },
-      { n: "95", label: "keys and passwords the AI never sees" },
+      { n: "52", label: "zero-token tools" },
+      { n: "40", label: "routines (8 code · 32 desktop)" },
+      { n: "33", label: "repos under strict protection" },
+      { n: "99", label: "keys and passwords the AI never sees" },
     ],
     mapTitle: "The whole machine on one map",
     arch: {
@@ -178,7 +178,7 @@ const CONTENT: Record<Lang, Content> = {
       coworkSub2: "outreach · design · ops",
       shared: "same rules · same memory",
       vault: "VAULT",
-      vaultSub: "95 secrets",
+      vaultSub: "99 secrets",
       vaultNote1: "keys go to the process,",
       vaultNote2: "never to the chat",
       memory: "MEMORY",
@@ -224,7 +224,7 @@ const CONTENT: Record<Lang, Content> = {
         },
         {
           title: "Doctrine",
-          leaves: ["design before code", "“done” per risk tier", "149 scars"],
+          leaves: ["design before code", "“done” per risk tier", "160 scars"],
         },
         {
           title: "Repo template",
@@ -254,7 +254,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Every failure becomes a check (scar → gate):",
-        body: "149 real failures across my projects are catalogued, each with a rule id. I call them scars. Every checklist item cites the scar it came from (a rule taken from Google SRE). A postmortem ends with a new gate or a new scar, never with “be more careful”.",
+        body: "160 real failures across my projects are catalogued, each with a rule id. I call them scars. Every checklist item cites the scar it came from (a rule taken from Google SRE). A postmortem ends with a new gate or a new scar, never with “be more careful”.",
       },
       {
         label: "Proof, not claims:",
@@ -304,7 +304,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "At every terminal command:",
-        body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging pull requests from a script, secrets typed into a command, and running a downloaded script straight in the shell (curl | sh). Since September it reads a command the way the shell does, not as plain text, so it also catches commands hidden inside sh -c, $(…), a heredoc piped into a shell, encoded PowerShell or tricks like rm${IFS}-rf. It also guards the guards: an agent cannot quietly edit the hooks, the settings or a linter config, and the AI reviewers are blocked from writing files by the tooling, not just asked nicely.",
+        body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging pull requests from a script, secrets typed into a command, and running a downloaded script straight in the shell (curl | sh). Since September it parses a command the way the shell would, so it also catches commands hidden inside sh -c, $(…), a heredoc piped into a shell, encoded PowerShell or tricks like rm${IFS}-rf. It guards the guards too: an agent can't quietly edit the hooks, the settings or a linter config, and a hook stops the AI reviewers from writing anywhere outside their own findings file.",
       },
       {
         label: "When a session ends:",
@@ -325,7 +325,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "On the build server (CI) and at merge:",
-        body: "the same checks run again, plus a secret scanner (gitleaks) and mutation testing on the changed files: the tool plants small bugs on purpose, and a test that catches none of them is theatre. 31 repositories have strict branch protection, generated from the names of the CI jobs. A merge script accepts a pull request only if its checks ran on the current merge result: once, green checks on an outdated base broke main in production.",
+        body: "the same checks run again, plus a secret scanner (gitleaks) and mutation testing on the changed files: the tool plants small bugs on purpose, and a test that catches none of them is theatre. 33 repositories have strict branch protection, generated from the names of the CI jobs. A merge script accepts a pull request only if its checks ran on the current merge result: once, green checks on an outdated base broke main in production.",
       },
     ],
     tierTitle: "Risk level (tier): measured from the change, never declared",
@@ -406,7 +406,7 @@ const CONTENT: Record<Lang, Content> = {
     loopItems: [
       {
         label: "An outdated base broke main:",
-        body: "two pull requests each passed their checks, but each was checked against its own older copy of the main branch. Merged together, they produced a broken workflow file on the main branch. Now: merge only when the checks ran on the current merge result, strict branch protection on 31 repositories, and a scar that records the exact mechanism.",
+        body: "two pull requests each passed their checks, but each was checked against its own older copy of the main branch. Merged together, they produced a broken workflow file on the main branch. Now: merge only when the checks ran on the current merge result, strict branch protection on 33 repositories, and a scar that records the exact mechanism.",
       },
       {
         label: "A check that never ran:",
@@ -424,7 +424,7 @@ const CONTENT: Record<Lang, Content> = {
     sections: [
       {
         title: "Update, 26 September 2026: PG next to 35 open-source projects",
-        lead: "I checked what everyone else is building. AI agents went through 35 public repositories with a similar idea (hooks, gates, AI reviewers) and compared them with PG layer by layer, each point backed by a file and a line number. The result was a list of 23 things other people did better. I shipped the important ones the same day.",
+        lead: "I checked what everyone else is building. AI agents went through 35 public repositories with a similar idea (hooks, gates, AI reviewers). They compared each one with PG layer by layer, and every point cites a file and a line number. The result was a list of 23 things other people did better. I shipped the important ones the same day.",
         items: [
           {
             label: "The design was reviewed before any code:",
@@ -432,11 +432,19 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Tested on real history:",
-            body: "every new rule in the command guard ran against 40,454 real commands from 2,837 agent transcript files (main sessions and sub-agents) before it was allowed to block anything. The false alarms this caught (for example, text inside a file being read as a command) were fixed before rollout. Checking one command takes at most 8 ms.",
+            body: "every new rule in the command guard ran against 40,824 real commands before it was allowed to block anything. They come from 2,853 agent transcript files, main sessions and sub-agents. The false alarms this caught were fixed before rollout. One example: text being written into a file was read as a command. Checking one command takes at most 16 ms.",
           },
           {
             label: "The checks are tested too:",
-            body: "a set of 73 cases (55 for the command guard) has to pass in full, and every rule needs one case it blocks and one it lets through. On top of that, mutation tests switch off each of the 21 rules in turn and check that the tests notice. They noticed 21 out of 21.",
+            body: "a set of 102 cases (84 for the command guard) has to pass in full, and every rule needs one case it blocks and one it lets through. On top of that, mutation tests switch off each of the 24 rules in turn and check that the tests notice. They noticed 24 out of 24.",
+          },
+          {
+            label: "Reviewed after it went live:",
+            body: "four AI review departments (code, security, data, operations) and a verifier went through the finished change. They found 26 problems; 17 are fixed and confirmed. The verifier keeps finding more elaborate variants of the same few bypasses, such as a drive letter mapped onto the settings folder. Text rules can't win that race against someone who is hunting for holes. That needs isolation at the operating-system level, and I've written it down as a known limit.",
+          },
+          {
+            label: "Context survives compaction:",
+            body: "when a long session gets compacted, a hook first saves a snapshot: my last instructions, the files edited and the last answer. After compaction it goes straight back into the context, so the agent doesn't have to rebuild the state from a summary.",
           },
           {
             label: "Exceptions come only from me:",
@@ -452,7 +460,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Not done yet:",
-            body: "a nightly check (a canary) that runs the agent on a pinned tool version and confirms the gates still block, checking CI status when a session ends, and testing skills under pressure. They are on the plan, not listed here as finished.",
+            body: "a nightly check (a canary) that runs the agent on a pinned tool version and confirms the gates still block, checking CI status when a session ends, and testing skills under pressure. The public repository below still has the version from before this update. All of it is planned, and I'll add it here once it runs.",
           },
         ],
       },
@@ -506,7 +514,7 @@ const CONTENT: Record<Lang, Content> = {
     vaultSectionTitle: "Passwords and keys the AI never sees",
     vaultFlow: {
       vault: "VAULT",
-      vaultSub: "95 secrets · self-hosted",
+      vaultSub: "99 secrets · self-hosted",
       bridge: "BRIDGE",
       bridgeSub: "passes to the process",
       target: "TARGET PROCESS",
@@ -517,7 +525,7 @@ const CONTENT: Record<Lang, Content> = {
     vaultItems: [
       {
         label: "A vault on my own hardware:",
-        body: "95 API keys, tokens and logins are stored in a vault on my own hardware. A bridge passes them straight into the process that needs them, as environment variables. The values never appear in the chat, the code or the logs. The command guard blocks a secret typed into a command, and the scans at commit time and in CI keep it that way.",
+        body: "99 API keys, tokens and logins are stored in a vault on my own hardware. A bridge passes them straight into the process that needs them, as environment variables. The values never appear in the chat, the code or the logs. The command guard blocks a secret typed into a command, and the scans at commit time and in CI keep it that way.",
       },
     ],
     schedTitle: "Routines: the part that runs while nobody is typing",
@@ -564,7 +572,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Telemetry, not feelings:",
-        body: "every skipped check is logged with a reason. Scripts mine 1,873 session transcripts and the git history of 39 repositories: corrections per session, repeated tool errors, fixes made within 24 hours of the previous commit to the same file, and the files that change most often (churn hotspots). The numbers decide what becomes a gate.",
+        body: "every skipped check is logged with a reason. Scripts mine 2,853 agent transcript files and the git history of 39 repositories: corrections per session, repeated tool errors, fixes made within 24 hours of the previous commit to the same file, and the files that change most often (churn hotspots). The numbers decide what becomes a gate.",
       },
       {
         label: "The retrospective that mattered:",
@@ -638,14 +646,14 @@ const CONTENT: Record<Lang, Content> = {
       "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
-      { n: "1873", label: "zapisanych sesji agentów" },
-      { n: "149", label: "awarii zamienionych w automatyczne kontrole" },
+      { n: "2853", label: "plików zapisów pracy agentów" },
+      { n: "160", label: "awarii zamienionych w automatyczne kontrole" },
       { n: "23", label: "twarde stopy w bramkach gita" },
       { n: "9", label: "wyspecjalizowanych recenzentów AI" },
-      { n: "51", label: "narzędzi 0-tokenowych" },
-      { n: "40", label: "rutyn (5 code · 35 desktop)" },
-      { n: "31", label: "repo pod ścisłą ochroną" },
-      { n: "95", label: "kluczy i haseł, których AI nigdy nie widzi" },
+      { n: "52", label: "narzędzia 0-tokenowe" },
+      { n: "40", label: "rutyn (8 code · 32 desktop)" },
+      { n: "33", label: "repo pod ścisłą ochroną" },
+      { n: "99", label: "kluczy i haseł, których AI nigdy nie widzi" },
     ],
     mapTitle: "Cała maszyna na jednej mapie",
     arch: {
@@ -659,7 +667,7 @@ const CONTENT: Record<Lang, Content> = {
       coworkSub2: "outreach · design · operacje",
       shared: "te same reguły · ta sama pamięć",
       vault: "SEJF",
-      vaultSub: "95 sekretów",
+      vaultSub: "99 sekretów",
       vaultNote1: "klucze trafiają do procesu,",
       vaultNote2: "nigdy do czatu",
       memory: "PAMIĘĆ",
@@ -706,7 +714,7 @@ const CONTENT: Record<Lang, Content> = {
         },
         {
           title: "Doktryna",
-          leaves: ["projekt przed kodem", "„gotowe” wg poziomu ryzyka", "149 blizny"],
+          leaves: ["projekt przed kodem", "„gotowe” wg poziomu ryzyka", "160 blizn"],
         },
         {
           title: "Szablon repo",
@@ -740,7 +748,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Każda awaria staje się kontrolą (blizna → bramka):",
-        body: "149 prawdziwych awarii z moich projektów jest skatalogowanych, każda z identyfikatorem reguły. Nazywam je bliznami. Każdy punkt listy kontrolnej wskazuje bliznę, z której powstał (zasada z Google SRE). Analiza po awarii kończy się nową bramką albo nową blizną, nigdy obietnicą „będziemy uważniejsi”.",
+        body: "160 prawdziwych awarii z moich projektów jest skatalogowanych, każda z identyfikatorem reguły. Nazywam je bliznami. Każdy punkt listy kontrolnej wskazuje bliznę, z której powstał (zasada z Google SRE). Analiza po awarii kończy się nową bramką albo nową blizną, nigdy obietnicą „będziemy uważniejsi”.",
       },
       {
         label: "Dowód, nie deklaracje:",
@@ -790,7 +798,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Przy każdej komendzie w terminalu:",
-        body: "strażnik blokuje groźne komendy: pomijanie kontroli (--no-verify), nadpisywanie lub kasowanie historii (force-push, twardy reset), rekurencyjne kasowanie poza katalogami buildu, scalanie pull requestów ze skryptu, sekrety wpisane w komendę i uruchamianie pobranego skryptu prosto w powłoce (curl | sh). Od września czyta komendę tak jak powłoka, a nie jak zwykły tekst, więc widzi też polecenia schowane w sh -c, w $(…), w heredocu przekazanym do powłoki, w zakodowanym PowerShellu albo w sztuczkach typu rm${IFS}-rf. Pilnuje też samych kontroli: agent nie zmieni po cichu hooków, ustawień ani konfiguracji lintera, a recenzentom AI zapis blokuje narzędzie, a nie tylko instrukcja.",
+        body: "strażnik blokuje groźne komendy: pomijanie kontroli (--no-verify), nadpisywanie lub kasowanie historii (force-push, twardy reset), rekurencyjne kasowanie poza katalogami buildu, scalanie pull requestów ze skryptu, sekrety wpisane w komendę i uruchamianie pobranego skryptu prosto w powłoce (curl | sh). Od września rozbiera komendę tak, jak zrobiłaby to powłoka, więc widzi też polecenia schowane w sh -c, w $(…), w heredocu przekazanym do powłoki, w zakodowanym PowerShellu albo w sztuczkach typu rm${IFS}-rf. Pilnuje też samych kontroli. Agent nie zmieni po cichu hooków, ustawień ani konfiguracji lintera, a recenzenci AI mogą zapisać tylko własny plik z uwagami, bo resztę blokuje im hook.",
       },
       {
         label: "Gdy sesja się kończy:",
@@ -812,7 +820,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Na serwerze budującym (CI) i przy scalaniu:",
-        body: "te same kontrole uruchamiają się jeszcze raz, a do tego skaner sekretów (gitleaks) i testy mutacyjne na zmienionych plikach: narzędzie celowo wprowadza drobne błędy, a test, który nie wyłapie żadnego, to teatr. 31 repozytoriów ma ścisłą ochronę gałęzi, generowaną z nazw zadań w CI. Skrypt scalający przyjmuje pull request tylko wtedy, gdy kontrole przeszły na aktualnym wyniku scalenia: bo kiedyś zielone kontrole na nieaktualnej bazie zepsuły gałąź główną na produkcji.",
+        body: "te same kontrole uruchamiają się jeszcze raz, a do tego skaner sekretów (gitleaks) i testy mutacyjne na zmienionych plikach: narzędzie celowo wprowadza drobne błędy, a test, który nie wyłapie żadnego, to teatr. 33 repozytoria mają ścisłą ochronę gałęzi, generowaną z nazw zadań w CI. Skrypt scalający przyjmuje pull request tylko wtedy, gdy kontrole przeszły na aktualnym wyniku scalenia: bo kiedyś zielone kontrole na nieaktualnej bazie zepsuły gałąź główną na produkcji.",
       },
     ],
     tierTitle: "Poziom ryzyka (tier): liczony ze zmiany, nigdy deklarowany",
@@ -893,7 +901,7 @@ const CONTENT: Record<Lang, Content> = {
     loopItems: [
       {
         label: "Nieaktualna baza zepsuła main:",
-        body: "dwa pull requesty przeszły kontrole, ale każdy był sprawdzany na własnej, starszej kopii gałęzi głównej. Scalone razem dały nieprawidłowy plik workflow na gałęzi głównej. Teraz: scalanie tylko wtedy, gdy kontrole przeszły na aktualnym wyniku scalenia, ścisła ochrona gałęzi w 31 repozytoriach i blizna opisująca dokładny mechanizm.",
+        body: "dwa pull requesty przeszły kontrole, ale każdy był sprawdzany na własnej, starszej kopii gałęzi głównej. Scalone razem dały nieprawidłowy plik workflow na gałęzi głównej. Teraz: scalanie tylko wtedy, gdy kontrole przeszły na aktualnym wyniku scalenia, ścisła ochrona gałęzi w 33 repozytoriach i blizna opisująca dokładny mechanizm.",
       },
       {
         label: "Kontrola, która nigdy nie ruszyła:",
@@ -919,11 +927,19 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Test na prawdziwej historii:",
-            body: "każda nowa reguła strażnika komend przeszła przez 40 454 prawdziwe komendy z 2837 plików zapisów pracy agentów (sesji głównych i podagentów), zanim mogła cokolwiek blokować. Fałszywe alarmy, które to wyłapało (na przykład tekst zapisywany do pliku brany za komendę), poprawiłem przed wdrożeniem. Sprawdzenie jednej komendy trwa najwyżej 8 ms.",
+            body: "każda nowa reguła strażnika komend przeszła przez 40 824 prawdziwe komendy z 2853 plików zapisów pracy agentów (sesji głównych i podagentów), zanim mogła cokolwiek blokować. Fałszywe alarmy, które to wyłapało, poprawiłem przed wdrożeniem. Jeden przykład: tekst zapisywany do pliku był brany za komendę. Sprawdzenie jednej komendy trwa najwyżej 16 ms.",
           },
           {
             label: "Same kontrole też mają testy:",
-            body: "zestaw 73 przypadków (55 dla strażnika komend) musi przejść w całości, a każda reguła musi mieć przypadek, który blokuje, i taki, który przepuszcza. Do tego testy mutacyjne: skrypt po kolei wyłącza każdą z 21 reguł i sprawdza, czy testy to zauważą. Zauważyły 21 z 21.",
+            body: "zestaw 102 przypadków (84 dla strażnika komend) musi przejść w całości, a każda reguła musi mieć przypadek, który blokuje, i taki, który przepuszcza. Do tego testy mutacyjne: skrypt po kolei wyłącza każdą z 24 reguł i sprawdza, czy testy to zauważą. Zauważyły 24 z 24.",
+          },
+          {
+            label: "Recenzja już po wdrożeniu:",
+            body: "gotową zmianę przejrzały cztery działy recenzentów AI (kod, bezpieczeństwo, dane, operacje) i weryfikator. Znalazły 26 problemów, 17 jest poprawionych i potwierdzonych. Weryfikator wciąż znajduje coraz bardziej wymyślne warianty tych samych kilku obejść, na przykład literę dysku podpiętą pod folder z ustawieniami. Regułami tekstowymi nie wygram tego wyścigu z kimś, kto celowo szuka dziur. Do tego potrzebna jest izolacja na poziomie systemu operacyjnego i zapisałem to jako znaną granicę.",
+          },
+          {
+            label: "Kontekst przeżywa kompakcję:",
+            body: "gdy długa sesja jest kompaktowana, hook najpierw zapisuje migawkę: moje ostatnie polecenia, edytowane pliki i ostatnią odpowiedź. Po kompakcji wraca ona prosto do kontekstu, więc agent nie odtwarza stanu ze streszczenia.",
           },
           {
             label: "Wyjątek tylko ode mnie:",
@@ -939,7 +955,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Czego jeszcze nie ma:",
-            body: "nocnego testu kontrolnego, który co noc uruchamia agenta na przypiętej wersji narzędzia i sprawdza, czy bramki nadal blokują (tzw. kanarek), sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Są w planie, nie opisuję ich tu jako gotowych.",
+            body: "nocnego testu kontrolnego, który co noc uruchamia agenta na przypiętej wersji narzędzia i sprawdza, czy bramki nadal blokują (tzw. kanarek), sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Publiczne repozytorium niżej ma jeszcze wersję sprzed tej aktualizacji. Wszystko to jest w planie i dopiszę to tutaj, gdy zacznie działać.",
           },
         ],
       },
@@ -993,7 +1009,7 @@ const CONTENT: Record<Lang, Content> = {
     vaultSectionTitle: "Hasła i klucze, których AI nigdy nie widzi",
     vaultFlow: {
       vault: "SEJF",
-      vaultSub: "95 sekretów · self-hosted",
+      vaultSub: "99 sekretów · self-hosted",
       bridge: "POŚREDNIK",
       bridgeSub: "przekazuje do procesu",
       target: "PROCES DOCELOWY",
@@ -1004,7 +1020,7 @@ const CONTENT: Record<Lang, Content> = {
     vaultItems: [
       {
         label: "Sejf na moim własnym sprzęcie:",
-        body: "95 kluczy API, tokenów i loginów leży w sejfie (vault) na moim własnym sprzęcie. Pośrednik przekazuje je prosto do procesu, który ich potrzebuje, jako zmienne środowiskowe. Wartości nigdy nie pojawiają się w czacie, kodzie ani logach. Strażnik komend blokuje sekret wpisany w komendę, a skany przy commicie i w CI pilnują, żeby tak zostało.",
+        body: "99 kluczy API, tokenów i loginów leży w sejfie (vault) na moim własnym sprzęcie. Pośrednik przekazuje je prosto do procesu, który ich potrzebuje, jako zmienne środowiskowe. Wartości nigdy nie pojawiają się w czacie, kodzie ani logach. Strażnik komend blokuje sekret wpisany w komendę, a skany przy commicie i w CI pilnują, żeby tak zostało.",
       },
     ],
     schedTitle: "Rutyny: część, która działa, gdy nikt nie pisze",
@@ -1051,7 +1067,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Telemetria, nie odczucia:",
-        body: "każde pominięcie kontroli jest logowane z powodem. Skrypty przekopują 1873 zapisy sesji i historię gita 39 repozytoriów: korekty na sesję, powtarzające się błędy narzędzi, poprawki w ciągu 24 godzin od poprzedniego commitu w tym samym pliku i pliki zmieniane najczęściej. To liczby decydują, co staje się bramką.",
+        body: "każde pominięcie kontroli jest logowane z powodem. Skrypty przekopują 2853 pliki zapisów pracy agentów i historię gita 39 repozytoriów: korekty na sesję, powtarzające się błędy narzędzi, poprawki w ciągu 24 godzin od poprzedniego commitu w tym samym pliku i pliki zmieniane najczęściej. To liczby decydują, co staje się bramką.",
       },
       {
         label: "Retrospektywa, która miała znaczenie:",
