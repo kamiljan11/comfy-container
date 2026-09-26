@@ -71,7 +71,8 @@ jobs:
             kept=""
             while IFS= read -r f; do
               [ -n "$f" ] || continue
-              reason=$(awk -v f="$f" '$1 == f && /#[[:space:]]*[^[:space:]]/ { sub(/^[^#]*#[[:space:]]*/, ""); print; exit }' "$EXCL")
+              # `sub(/\r$/...)`: plik zapisany z CRLF (Windows) nie moze po cichu wylaczyc dopasowania (claude-review #70).
+              reason=$(awk -v f="$f" '{ sub(/\r$/, "") } $1 == f && /#[[:space:]]*[^[:space:]]/ { sub(/^[^#]*#[[:space:]]*/, ""); print; exit }' "$EXCL")
               if [ -n "$reason" ]; then echo "::notice::Mutation pomija $f (mutation-exclude.txt): $reason"; else kept="$kept$f"$'\n'; fi
             done <<< "$changed"
             changed=$(printf '%s' "$kept" | sed '/^$/d')
