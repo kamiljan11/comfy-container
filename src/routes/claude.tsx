@@ -289,7 +289,7 @@ const CONTENT: Record<Lang, Content> = {
       ],
       live: "LIVE",
       blocked:
-        "each exception is a named switch (ALLOW_…=1), logged and shown in the weekly audit · skipping the checks is banned",
+        "an exception can only come from me: I type “allow ALLOW_…” in the chat, the agent cannot grant one to itself · every use is logged · skipping the checks is banned",
       caption:
         "Nine checkpoints on the path of a change. I make the decisions; the checks make sure nothing is forgotten.",
     },
@@ -304,11 +304,11 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "At every terminal command:",
-        body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging pull requests from a script, secrets typed into a command, and running a downloaded script straight in the shell (curl | sh).",
+        body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging pull requests from a script, secrets typed into a command, and running a downloaded script straight in the shell (curl | sh). Since September it reads a command the way the shell does, not as plain text, so it also catches commands hidden inside sh -c, $(…), a heredoc piped into a shell, encoded PowerShell or tricks like rm${IFS}-rf. It also guards the guards: an agent cannot quietly edit the hooks, the settings or a linter config, and the AI reviewers are blocked from writing files by the tooling, not just asked nicely.",
       },
       {
         label: "When a session ends:",
-        body: "the stop gate decides how risky the change is (the risk tier) from what actually changed: file paths and size, never from what the prompt says. It runs lint, types and tests on everything that changed. A session at tier T2 or higher cannot close until the required AI reviewers have checked it.",
+        body: "the stop gate decides how risky the change is (the risk tier) from what actually changed: file paths and size, never from what the prompt says. It runs lint, types and tests on everything that changed. A session at tier T2 or higher cannot close until the required AI reviewers have checked it. The test verdict comes from the exit code: an import error or zero tests run is red, not “skipped”. Committing before the session ends does not lower the tier, and a review the aggregation script marks as incomplete does not close the session.",
       },
       {
         label: "On every commit:",
@@ -422,6 +422,40 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title: "Update, 26 September 2026: PG next to 35 open-source projects",
+        lead: "I checked what everyone else is building. AI agents went through 35 public repositories with a similar idea (hooks, gates, AI reviewers) and compared them with PG layer by layer, each point backed by a file and a line number. The result was a list of 23 things other people did better. I shipped the important ones the same day.",
+        items: [
+          {
+            label: "The design was reviewed before any code:",
+            body: "before the first line was written, an independent security reviewer took the plan apart. It found 15 problems, 3 of which would have broken the review process itself. All of them were fixed in the design.",
+          },
+          {
+            label: "Tested on real history:",
+            body: "every new rule in the command guard ran against 40,454 real commands from 2,837 recorded sessions before it was allowed to block anything. The false alarms this caught (for example, text inside a file being read as a command) were fixed before rollout. Checking one command takes at most 8 ms.",
+          },
+          {
+            label: "The checks are tested too:",
+            body: "a set of 73 cases (55 for the command guard) has to pass in full, and every rule needs one case it blocks and one it lets through. On top of that, mutation tests switch off each of the 21 rules in turn and check that the tests notice. They noticed 21 out of 21.",
+          },
+          {
+            label: "Exceptions come only from me:",
+            body: "an agent used to be able to add an ALLOW_…=1 switch to a command and walk past a check. Now an exception exists only after I type “allow ALLOW_…” in the chat. It lasts 30 minutes and three uses, and every use goes into the log. The same phrase echoed in an agent’s reply or in a sub-agent’s report unlocks nothing.",
+          },
+          {
+            label: "Protecting the protection:",
+            body: "the hooks, git gates, settings and gate tools are sealed with checksums. A change outside a deliberate window shows up at the start of every session and in the weekly audit. The rule that denies access to SSH keys, AWS credentials and the secrets vault also holds in the mode that never asks for permission. I checked that in a live session.",
+          },
+          {
+            label: "A monthly look at the competition:",
+            body: "a routine compares those 35 repositories with the saved snapshot. The script runs without AI; a model only steps in when something changed in the code that does the checking, or a new, fast-growing project shows up.",
+          },
+          {
+            label: "Not done yet:",
+            body: "a nightly canary that runs the agent on a pinned tool version, checking CI status when a session ends, and testing skills under pressure. They are on the plan, not listed here as finished.",
+          },
+        ],
+      },
       {
         title: "Two AI tools, one system",
         items: [
@@ -741,7 +775,7 @@ const CONTENT: Record<Lang, Content> = {
       ],
       live: "LIVE",
       blocked:
-        "każdy wyjątek to nazwany przełącznik (ALLOW_…=1), logowany i widoczny w cotygodniowym audycie · omijanie kontroli jest zakazane",
+        "wyjątek może dać tylko człowiek: piszę w czacie „pozwól ALLOW_…”, agent sam go sobie nie włączy · każde użycie trafia do dziennika · omijanie kontroli jest zakazane",
       caption:
         "Dziewięć punktów kontroli na drodze zmiany. Decyzje podejmuję ja; kontrole pilnują, żeby nic nie umknęło.",
     },
@@ -756,11 +790,11 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Przy każdej komendzie w terminalu:",
-        body: "strażnik blokuje groźne komendy: pomijanie kontroli (--no-verify), nadpisywanie lub kasowanie historii (force-push, twardy reset), rekurencyjne kasowanie poza katalogami buildu, scalanie pull requestów ze skryptu, sekrety wpisane w komendę i uruchamianie pobranego skryptu prosto w powłoce (curl | sh).",
+        body: "strażnik blokuje groźne komendy: pomijanie kontroli (--no-verify), nadpisywanie lub kasowanie historii (force-push, twardy reset), rekurencyjne kasowanie poza katalogami buildu, scalanie pull requestów ze skryptu, sekrety wpisane w komendę i uruchamianie pobranego skryptu prosto w powłoce (curl | sh). Od września czyta komendę tak jak powłoka, a nie jak zwykły tekst, więc widzi też polecenia schowane w sh -c, w $(…), w heredocu przekazanym do powłoki, w zakodowanym PowerShellu albo w sztuczkach typu rm${IFS}-rf. Pilnuje też samych kontroli: agent nie zmieni po cichu hooków, ustawień ani konfiguracji lintera, a recenzentom AI zapis blokuje narzędzie, a nie tylko instrukcja.",
       },
       {
         label: "Gdy sesja się kończy:",
-        body: "bramka końcowa ocenia, jak ryzykowna jest zmiana (poziom ryzyka, tzw. tier), na podstawie tego, co faktycznie się zmieniło: ścieżek i rozmiaru, nigdy treści polecenia. Uruchamia lint, typy i testy na wszystkim, co się zmieniło. Sesji na poziomie T2 lub wyższym nie da się zamknąć, dopóki nie sprawdzą jej wymagani recenzenci AI.",
+        body: "bramka końcowa ocenia, jak ryzykowna jest zmiana (poziom ryzyka, tzw. tier), na podstawie tego, co faktycznie się zmieniło: ścieżek i rozmiaru, nigdy treści polecenia. Uruchamia lint, typy i testy na wszystkim, co się zmieniło. Sesji na poziomie T2 lub wyższym nie da się zamknąć, dopóki nie sprawdzą jej wymagani recenzenci AI. Wynik testów bierze się z kodu wyjścia: błąd importu albo zero uruchomionych testów to czerwony wynik, a nie „pominięte”. Commit zrobiony przed końcem sesji nie obniża poziomu ryzyka, a recenzja, którą skrypt agregujący uznał za niekompletną, nie zamyka sesji.",
       },
       {
         label: "Przy każdym commicie:",
@@ -875,6 +909,40 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title: "Aktualizacja z 26 września 2026: PG obok 35 projektów open source",
+        lead: "Sprawdziłem, co budują inni. Agenci AI przeszli przez 35 publicznych repozytoriów o podobnej idei (hooki, bramki, recenzenci AI) i porównali je z PG warstwa po warstwie, każdy punkt z plikiem i numerem linii. Wyszła lista 23 rzeczy, które inni zrobili lepiej. Najważniejsze wdrożyłem tego samego dnia.",
+        items: [
+          {
+            label: "Najpierw recenzja projektu, potem kod:",
+            body: "zanim powstała pierwsza linia, niezależny recenzent bezpieczeństwa rozebrał plan na części. Znalazł 15 problemów, w tym 3, które zepsułyby sam proces recenzji. Wszystkie poprawiłem jeszcze w projekcie.",
+          },
+          {
+            label: "Test na prawdziwej historii:",
+            body: "każda nowa reguła strażnika komend przeszła przez 40 454 prawdziwe komendy z 2837 zapisanych sesji, zanim mogła cokolwiek blokować. Fałszywe alarmy, które to wyłapało (na przykład tekst zapisywany do pliku brany za komendę), poprawiłem przed wdrożeniem. Sprawdzenie jednej komendy trwa najwyżej 8 ms.",
+          },
+          {
+            label: "Same kontrole też mają testy:",
+            body: "zestaw 73 przypadków (55 dla strażnika komend) musi przejść w całości, a każda reguła musi mieć przypadek, który blokuje, i taki, który przepuszcza. Do tego testy mutacyjne: skrypt po kolei wyłącza każdą z 21 reguł i sprawdza, czy testy to zauważą. Zauważyły 21 z 21.",
+          },
+          {
+            label: "Wyjątek tylko ode mnie:",
+            body: "wcześniej agent mógł dopisać do komendy przełącznik ALLOW_…=1 i przejść obok kontroli. Teraz wyjątek istnieje dopiero wtedy, gdy sam napiszę w czacie „pozwól ALLOW_…”. Działa 30 minut i najwyżej trzy razy, a każde użycie trafia do dziennika. Ta sama fraza powtórzona w odpowiedzi agenta albo w raporcie podagenta niczego nie odblokuje.",
+          },
+          {
+            label: "Ochrona samej ochrony:",
+            body: "hooki, bramki gita, ustawienia i narzędzia kontrolne są zapieczętowane sumami kontrolnymi. Zmiana poza świadomym oknem pokazuje się na starcie każdej sesji i w cotygodniowym audycie. Reguła, która odcina dostęp do kluczy SSH, danych AWS i sejfu z sekretami, działa także w trybie, w którym narzędzie o nic nie pyta. Sprawdziłem to w żywej sesji.",
+          },
+          {
+            label: "Co miesiąc patrzę na konkurencję:",
+            body: "rutyna porównuje te 35 repozytoriów z zapisanym stanem. Skrypt działa bez AI; model włącza się dopiero wtedy, gdy zmienił się kod, który czegoś pilnuje, albo pojawił się nowy, szybko rosnący projekt.",
+          },
+          {
+            label: "Czego jeszcze nie ma:",
+            body: "nocnego kanarka, który uruchamia agenta na przypiętej wersji narzędzia, sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Są w planie, nie opisuję ich tu jako gotowych.",
+          },
+        ],
+      },
       {
         title: "Dwa narzędzia AI, jeden system",
         items: [
