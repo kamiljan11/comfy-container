@@ -452,7 +452,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Not done yet:",
-            body: "a nightly canary that runs the agent on a pinned tool version, checking CI status when a session ends, and testing skills under pressure. They are on the plan, not listed here as finished.",
+            body: "a nightly check (a canary) that runs the agent on a pinned tool version and confirms the gates still block, checking CI status when a session ends, and testing skills under pressure. They are on the plan, not listed here as finished.",
           },
         ],
       },
@@ -939,7 +939,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Czego jeszcze nie ma:",
-            body: "nocnego kanarka, który uruchamia agenta na przypiętej wersji narzędzia, sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Są w planie, nie opisuję ich tu jako gotowych.",
+            body: "nocnego testu kontrolnego, który co noc uruchamia agenta na przypiętej wersji narzędzia i sprawdza, czy bramki nadal blokują (tzw. kanarek), sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Są w planie, nie opisuję ich tu jako gotowych.",
           },
         ],
       },
