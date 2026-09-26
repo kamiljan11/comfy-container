@@ -74,6 +74,10 @@ git revert <sha-zlego-commita> && git push   # -> redeploy automatyczny na Verce
 - Job "Mutation (zmienione pliki)" (wymagany): Stryker `@stryker-mutator/core` + `vitest-runner` 10.0.0 tylko na
   plikach `src/**/*.ts(x)` zmienionych w PR (bez testow/typow), `coverageAnalysis` perTest, `ignoreStatic`,
   prog `thresholds.break: 50`. Swiadome ominiecie = etykieta PR `allow-low-mutation`.
+- Pliki bez logiki (tresc strony, dane) = `.github/mutation-exclude.txt`, jedna linia `<sciezka> # <powod>` (powod
+  wymagany, dokladna sciezka). Krok „Zakres" pomija je z `::notice::`; PR zmieniajacy tylko takie pliki = job skipped.
+- Blad „Zmienione pliki nie maja ZADNEGO testu" = dry run Strykera nie znalazl testu importujacego plik (vitest-runner
+  odpala testy powiazane). To luka w testach, nie awaria narzedzia: dopisz test, a plik bez logiki dodaj do listy wyzej.
 - Stryker liczy na **vitest@4.1.11** (`npm install --no-save` tylko w jobie; `package.json` zostaje na Vitest 5).
   Powod: runner 10.0.0 na Vitest 5 filtruje testy mutanta wzorcem "describe it", a Vitest 5 dopasowuje
   "describe > it" -> 0 testow na mutanta, wszystko "Survived" (PR #38: 0/24 i 0/80). Upstream: stryker-js#6210.
