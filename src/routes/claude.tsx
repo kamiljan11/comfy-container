@@ -614,7 +614,7 @@ const CONTENT: Record<Lang, Content> = {
         body: "it never overwrites a file you changed (the other version lands next to yours). It merges your settings instead of replacing them. It adds its rules between markers, so an update replaces only that block. Git hooks are optional. It ends with a self-test: the green output is the proof, not the installer's word.",
       },
       {
-        label: "What you get:",
+        label: "What you get in the public version today:",
         body:
           "7 hooks, 3 git gates, 32 tools with 10 test suites, 9 reviewer departments, the doctrine with 149 scars, a repo " +
           "template with CI and parsed boundary blocks, 4 coding routines and 7 desktop routines, an uninstaller, and docs " +
@@ -646,7 +646,7 @@ const CONTENT: Record<Lang, Content> = {
       "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
-      { n: "2853", label: "plików zapisów pracy agentów" },
+      { n: "2 853", label: "plików zapisów pracy agentów" },
       { n: "160", label: "awarii zamienionych w automatyczne kontrole" },
       { n: "23", label: "twarde stopy w bramkach gita" },
       { n: "9", label: "wyspecjalizowanych recenzentów AI" },
@@ -927,7 +927,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Test na prawdziwej historii:",
-            body: "każda nowa reguła strażnika komend przeszła przez 40 824 prawdziwe komendy z 2853 plików zapisów pracy agentów (sesji głównych i podagentów), zanim mogła cokolwiek blokować. Fałszywe alarmy, które to wyłapało, poprawiłem przed wdrożeniem. Jeden przykład: tekst zapisywany do pliku był brany za komendę. Sprawdzenie jednej komendy trwa najwyżej 16 ms.",
+            body: "każda nowa reguła strażnika komend przeszła przez 40 824 prawdziwe komendy z 2 853 plików zapisów pracy agentów (sesji głównych i podagentów), zanim mogła cokolwiek blokować. Fałszywe alarmy, które to wyłapało, poprawiłem przed wdrożeniem. Jeden przykład: tekst zapisywany do pliku był brany za komendę. Sprawdzenie jednej komendy trwa najwyżej 16 ms.",
           },
           {
             label: "Same kontrole też mają testy:",
@@ -1067,7 +1067,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Telemetria, nie odczucia:",
-        body: "każde pominięcie kontroli jest logowane z powodem. Skrypty przekopują 2853 pliki zapisów pracy agentów i historię gita 39 repozytoriów: korekty na sesję, powtarzające się błędy narzędzi, poprawki w ciągu 24 godzin od poprzedniego commitu w tym samym pliku i pliki zmieniane najczęściej. To liczby decydują, co staje się bramką.",
+        body: "każde pominięcie kontroli jest logowane z powodem. Skrypty przekopują 2 853 pliki zapisów pracy agentów i historię gita 39 repozytoriów: korekty na sesję, powtarzające się błędy narzędzi, poprawki w ciągu 24 godzin od poprzedniego commitu w tym samym pliku i pliki zmieniane najczęściej. To liczby decydują, co staje się bramką.",
       },
       {
         label: "Retrospektywa, która miała znaczenie:",
@@ -1109,7 +1109,7 @@ const CONTENT: Record<Lang, Content> = {
         body: "nigdy nie nadpisuje pliku, który zmieniłeś (druga wersja ląduje obok Twojej). Scala Twoje ustawienia zamiast je podmieniać. Dokleja reguły między znacznikami, więc aktualizacja podmienia tylko ten blok. Hooki gita są opcjonalne. Na końcu uruchamia samotest: dowodem jest zielony wynik, a nie słowo instalatora.",
       },
       {
-        label: "Co dostajesz:",
+        label: "Co dostajesz w dzisiejszej wersji publicznej:",
         body:
           "7 hooków, 3 bramki gita, 32 narzędzia z 10 zestawami testów, 9 działów recenzentów, doktrynę ze 149 bliznami, " +
           "szablon repo z CI i parsowanymi blokami granic, 4 rutyny kodowe i 7 pulpitowych, deinstalator oraz dokumentację " +
