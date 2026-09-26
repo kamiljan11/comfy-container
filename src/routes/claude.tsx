@@ -432,7 +432,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Tested on real history:",
-            body: "every new rule in the command guard ran against 40,454 real commands from 2,837 recorded sessions before it was allowed to block anything. The false alarms this caught (for example, text inside a file being read as a command) were fixed before rollout. Checking one command takes at most 8 ms.",
+            body: "every new rule in the command guard ran against 40,454 real commands from 2,837 agent transcript files (main sessions and sub-agents) before it was allowed to block anything. The false alarms this caught (for example, text inside a file being read as a command) were fixed before rollout. Checking one command takes at most 8 ms.",
           },
           {
             label: "The checks are tested too:",
@@ -919,7 +919,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Test na prawdziwej historii:",
-            body: "każda nowa reguła strażnika komend przeszła przez 40 454 prawdziwe komendy z 2837 zapisanych sesji, zanim mogła cokolwiek blokować. Fałszywe alarmy, które to wyłapało (na przykład tekst zapisywany do pliku brany za komendę), poprawiłem przed wdrożeniem. Sprawdzenie jednej komendy trwa najwyżej 8 ms.",
+            body: "każda nowa reguła strażnika komend przeszła przez 40 454 prawdziwe komendy z 2837 plików zapisów pracy agentów (sesji głównych i podagentów), zanim mogła cokolwiek blokować. Fałszywe alarmy, które to wyłapało (na przykład tekst zapisywany do pliku brany za komendę), poprawiłem przed wdrożeniem. Sprawdzenie jednej komendy trwa najwyżej 8 ms.",
           },
           {
             label: "Same kontrole też mają testy:",
