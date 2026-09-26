@@ -616,7 +616,7 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "What you get in the public version today:",
         body:
-          "7 hooks, 3 git gates, 32 tools with 10 test suites, 9 reviewer departments, the doctrine with 149 scars, a repo " +
+          "7 hooks, 3 git gates, 32 tools with 10 test suites, 9 reviewer departments, the doctrine with 150 scars, a repo " +
           "template with CI and parsed boundary blocks, 4 coding routines and 7 desktop routines, an uninstaller, and docs " +
           "with the diagrams from this page.",
       },
@@ -1111,7 +1111,7 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "Co dostajesz w dzisiejszej wersji publicznej:",
         body:
-          "7 hooków, 3 bramki gita, 32 narzędzia z 10 zestawami testów, 9 działów recenzentów, doktrynę ze 149 bliznami, " +
+          "7 hooków, 3 bramki gita, 32 narzędzia z 10 zestawami testów, 9 działów recenzentów, doktrynę ze 150 bliznami, " +
           "szablon repo z CI i parsowanymi blokami granic, 4 rutyny kodowe i 7 pulpitowych, deinstalator oraz dokumentację " +
           "z diagramami z tej strony.",
       },
