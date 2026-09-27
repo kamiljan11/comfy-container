@@ -460,7 +460,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Not done yet:",
-            body: "a nightly check (a canary) that runs the agent on a pinned tool version and confirms the gates still block, checking CI status when a session ends, and testing skills under pressure. The public repository below still has the version from before this update. All of it is planned, and I'll add it here once it runs.",
+            body: "a nightly check (a canary) that runs the agent on a pinned tool version and confirms the gates still block, checking CI status when a session ends, and testing skills under pressure. All of it is planned, and I'll add it here once it runs.",
           },
         ],
       },
@@ -616,8 +616,8 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "What you get in the public version today:",
         body:
-          "7 hooks, 3 git gates, 32 tools with 10 test suites, 9 reviewer departments, the doctrine with 150 scars, a repo " +
-          "template with CI and parsed boundary blocks, 4 coding routines and 7 desktop routines, an uninstaller, and docs " +
+          "10 hooks, 3 git gates, 39 tools with 11 test suites, 9 reviewer departments, the doctrine with 160 scars, a repo " +
+          "template with CI and parsed boundary blocks, 7 coding routines and 7 desktop routines, an uninstaller, and docs " +
           "with the diagrams from this page.",
       },
       {
@@ -955,7 +955,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Czego jeszcze nie ma:",
-            body: "nocnego testu kontrolnego, który co noc uruchamia agenta na przypiętej wersji narzędzia i sprawdza, czy bramki nadal blokują (tzw. kanarek), sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Publiczne repozytorium niżej ma jeszcze wersję sprzed tej aktualizacji. Wszystko to jest w planie i dopiszę to tutaj, gdy zacznie działać.",
+            body: "nocnego testu kontrolnego, który co noc uruchamia agenta na przypiętej wersji narzędzia i sprawdza, czy bramki nadal blokują (tzw. kanarek), sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Wszystko to jest w planie i dopiszę to tutaj, gdy zacznie działać.",
           },
         ],
       },
@@ -1111,8 +1111,8 @@ const CONTENT: Record<Lang, Content> = {
       {
         label: "Co dostajesz w dzisiejszej wersji publicznej:",
         body:
-          "7 hooków, 3 bramki gita, 32 narzędzia z 10 zestawami testów, 9 działów recenzentów, doktrynę ze 150 bliznami, " +
-          "szablon repo z CI i parsowanymi blokami granic, 4 rutyny kodowe i 7 pulpitowych, deinstalator oraz dokumentację " +
+          "10 hooków, 3 bramki gita, 39 narzędzi z 11 zestawami testów, 9 działów recenzentów, doktrynę ze 160 bliznami, " +
+          "szablon repo z CI i parsowanymi blokami granic, 7 rutyn kodowych i 7 pulpitowych, deinstalator oraz dokumentację " +
           "z diagramami z tej strony.",
       },
       {
