@@ -15,9 +15,7 @@ export type PageMetaInput = {
 };
 
 export type MetaTag =
-  | { title: string }
-  | { name: string; content: string }
-  | { property: string; content: string };
+  { title: string } | { name: string; content: string } | { property: string; content: string };
 
 export function pageMeta({ title, description, url, locale }: PageMetaInput): MetaTag[] {
   const tags: MetaTag[] = [
