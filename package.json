@@ -99,7 +99,10 @@
   },
   "overrides": {
     "@ai-sdk/provider-utils": {
-      "undici": "^6.28.0"
+      "undici": "^6.29.0"
+    },
+    "miniflare": {
+      "undici": "^7.29.1"
     }
   }
 }
