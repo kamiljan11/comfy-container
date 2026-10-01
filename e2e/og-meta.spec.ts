@@ -19,6 +19,7 @@ const PAGES = [
   "/uslugi/integracje",
   "/blog",
   "/blog/claude-autoshutdown",
+  "/blog/oszusci-moga-podrobic-glos-wnuczka",
 ];
 
 // one literal pattern over all meta tags; a later tag with the same key wins,

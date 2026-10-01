@@ -32,4 +32,21 @@ describe("inlineSegments", () => {
   it("leaves an unclosed backtick alone", () => {
     expect(inlineSegments("a `b")).toEqual([{ kind: "text", text: "a `b" }]);
   });
+
+  it("splits out bold key facts", () => {
+    expect(inlineSegments("Straty: **3 252 247 zł**, głównie seniorów.")).toEqual([
+      { kind: "text", text: "Straty: " },
+      { kind: "bold", text: "3 252 247 zł" },
+      { kind: "text", text: ", głównie seniorów." },
+    ]);
+  });
+
+  it("leaves unclosed or empty bold markers as text", () => {
+    expect(inlineSegments("a **b")).toEqual([{ kind: "text", text: "a **b" }]);
+    expect(inlineSegments("a ****")).toEqual([{ kind: "text", text: "a ****" }]);
+  });
+
+  it("does not turn bold text inside code into bold", () => {
+    expect(inlineSegments("`**x**`")).toEqual([{ kind: "code", text: "**x**" }]);
+  });
 });

@@ -29,8 +29,17 @@ export type Post = {
   /** ISO date, shown as the publication date */
   date: string;
   repo?: string;
+  /**
+   * Set when the full text was published elsewhere (ADR 0007). The post is then
+   * a short teaser in our own words and links out; it never copies the article.
+   */
+  external?: { url: string; source: string };
+  /** Thumbnail on the /blog list; every post has one (ADR 0007, revision). */
+  cover: { src: string; width: number; height: number; alt: Record<Lang, string> };
   body: Record<Lang, PostBody>;
 };
+
+const GLOS_WNUCZKA = "https://torzeszow.pl/news/oszusci-moga-podrobic-glos-wnuczka";
 
 const MONITOR = {
   t: "img",
@@ -41,9 +50,88 @@ const MONITOR = {
 
 export const POSTS: Post[] = [
   {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-10-01 (checked against the live page, not the draft)
+    slug: "oszusci-moga-podrobic-glos-wnuczka",
+    date: "2026-10-01",
+    external: { url: GLOS_WNUCZKA, source: "toRzeszów.pl" },
+    // the article's own photo (Pexels 7544758, Pexels licence allows changes),
+    // taken from Pexels, not from torzeszow.pl, with the title on it
+    cover: {
+      src: "/blog/oszusci-moga-podrobic-glos-wnuczka/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Starsza kobieta z telefonem przy uchu i napis: Oszuści mogą podrobić głos wnuczka. Pomoże jedno rodzinne hasło.",
+        en: "An older woman with a phone at her ear and the Polish title: scammers can fake a grandchild's voice; one family password helps.",
+      },
+    },
+    body: {
+      pl: {
+        title: "Oszuści mogą podrobić głos wnuczka. Mój tekst na toRzeszów.pl",
+        description:
+          "Rzeszowscy seniorzy stracili w 2025 roku ponad 3,2 mln zł na oszustwach „na legendę”. Teraz oszuści mogą podrobić głos bliskiej osoby. Napisałem dla toRzeszów.pl, jak rodzina może się przed tym obronić.",
+        lead: "Napisałem dla toRzeszów.pl tekst o oszustwach „na wnuczka” w czasach, gdy program potrafi podrobić głos bliskiej osoby. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Komendant miejski policji w Rzeszowie relacjonował radnym, że w 2025 roku wszczęto **100 postępowań** w sprawach oszustw „na legendę”, czyli na wnuczka, na policjanta albo na pracownika banku. Straty, głównie seniorów, wyniosły **3 252 247 zł**.",
+          },
+          {
+            t: "p",
+            text: "Do tej pory oszust liczył na to, że zdenerwowana osoba nie rozpozna przez telefon obcego głosu. Teraz może użyć sztucznej inteligencji. W jednym z testów McAfee wystarczyły **trzy sekundy nagrania**, żeby podrobiony głos w 85 proc. zgadzał się z oryginałem.",
+          },
+          { t: "h2", id: "co-robic", text: "Co radzę w tekście" },
+          {
+            t: "list",
+            items: [
+              "**Rodzinne hasło.** Słowo albo pytanie, które znają tylko najbliżsi i które nigdy nie padło w nagraniu ani w internecie. Program podrabiający głos go nie zna.",
+              "**Rozłączyć się i samemu oddzwonić** na numer zapisany w telefonie. Tak radzą policja i banki.",
+              "**Zgłosić na 112** każdy telefon, w którym ktoś żąda pieniędzy albo danych.",
+              "**Porozmawiać z rodzicami i dziadkami jeszcze dziś.** Według CBOS z narzędzi generatywnej AI korzystało w ostatnich trzech miesiącach tylko 8 proc. seniorów.",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście są też sygnały, po których według NASK można rozpoznać podrobiony głos, i powód, dla którego sam nie opierałbym na nich obrony. Sama obrona nic nie kosztuje i wymaga jednej rozmowy z rodziną.",
+          },
+        ],
+      },
+      en: {
+        title: "Scammers can fake a grandchild's voice. My article on toRzeszów.pl",
+        description:
+          "Rzeszów police counted over 3.2 million zł lost in 2025 to phone scams where callers pose as a relative or a police officer. Now scammers can clone a relative's voice. I wrote about it for the local news site toRzeszów.pl. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, about phone scams at a time when software can copy a relative's voice. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "In 2025 Rzeszów police opened **100 cases** over scams where the caller poses as a grandchild, a police officer or a bank employee. Losses, mostly of older people, came to **3,252,247 zł**.",
+          },
+          {
+            t: "p",
+            text: "In one McAfee test, **three seconds of recording** were enough for a cloned voice to match the original by 85%.",
+          },
+          {
+            t: "p",
+            text: "The main advice: agree on a **family password** that has never been said in a recording or written online, hang up and call back on a number saved in your phone, and report to 112 every call that asks for money or personal data.",
+          },
+        ],
+      },
+    },
+  },
+  {
     slug: "claude-autoshutdown",
     date: "2026-09-21",
     repo: "https://github.com/kamiljan11/claude-autoshutdown",
+    cover: {
+      src: MONITOR.src,
+      width: MONITOR.width,
+      height: MONITOR.height,
+      alt: {
+        pl: "Okno Claude AutoShutdown: tabela sesji Claude i lista warunków wyłączenia komputera",
+        en: "The Claude AutoShutdown window: a table of Claude sessions and the list of shutdown conditions",
+      },
+    },
     body: {
       pl: {
         title: "Komputer gaśnie, kiedy Claude Code skończy pracę",
