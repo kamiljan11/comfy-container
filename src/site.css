@@ -4984,6 +4984,29 @@ section {
   font-weight: 600;
   color: var(--teal-2);
 }
+/* a post whose full text is on another site (ADR 0007) */
+.blog-source {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 9px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+  vertical-align: 1px;
+}
+.post-external {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin: 26px 0 0;
+}
+.post-external span {
+  font-size: 13px;
+  color: var(--text-2);
+}
 
 /* ── /blog/$slug: a reading column, serif body for long text ── */
 .post {

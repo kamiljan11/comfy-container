@@ -48,6 +48,7 @@ export const Route = createFileRoute("/blog/$slug")({
                   url: "https://kamiljan.com",
                 },
                 mainEntityOfPage: url,
+                ...(p.external ? { isBasedOn: p.external.url } : {}),
               }),
             },
           ]
@@ -57,20 +58,40 @@ export const Route = createFileRoute("/blog/$slug")({
   component: PostPage,
 });
 
-const COPY: Record<Lang, { back: string; repo: string; cta: string; ctaLink: string }> = {
+const COPY: Record<
+  Lang,
+  { back: string; repo: string; cta: string; ctaLink: string; readOn: string; readNote: string }
+> = {
   pl: {
     back: "Wszystkie wpisy",
     repo: "Kod na GitHubie",
     cta: "Chcesz coś podobnego u siebie w firmie?",
     ctaLink: "Bezpłatna konsultacja",
+    readOn: "Czytaj cały artykuł na",
+    readNote: "Otworzy się w nowej karcie.",
   },
   en: {
     back: "All posts",
     repo: "Code on GitHub",
     cta: "Want something like this in your company?",
     ctaLink: "Free consultation",
+    readOn: "Read the full article (in Polish) on",
+    readNote: "Opens in a new tab.",
   },
 };
+
+/** The way out to an article published elsewhere (ADR 0007): new tab, so this one stays. */
+function ExternalRead({ url, source, lang }: { url: string; source: string; lang: Lang }) {
+  const c = COPY[lang];
+  return (
+    <p className="post-external">
+      <a className="btn-primary" href={url} target="_blank" rel="noopener">
+        {c.readOn} {source} ↗
+      </a>
+      <span>{c.readNote}</span>
+    </p>
+  );
+}
 
 function Inline({ text }: { text: string }) {
   return (
@@ -78,6 +99,8 @@ function Inline({ text }: { text: string }) {
       {inlineSegments(text).map((s, i) =>
         s.kind === "code" ? (
           <code key={i}>{s.text}</code>
+        ) : s.kind === "bold" ? (
+          <strong key={i}>{s.text}</strong>
         ) : s.kind === "link" ? (
           <a
             key={i}
@@ -164,11 +187,13 @@ function PostPage() {
             {c.repo} ↗
           </a>
         )}
+        {post.external && <ExternalRead {...post.external} lang={lang} />}
         <div className="post-body">
           {b.blocks.map((x, i) => (
             <PostBlock key={i} b={x} />
           ))}
         </div>
+        {post.external && <ExternalRead {...post.external} lang={lang} />}
         <aside className="post-cta">
           <p>{c.cta}</p>
           <Link to="/kontakt" className="btn-primary">

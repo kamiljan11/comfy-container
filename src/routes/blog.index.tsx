@@ -26,18 +26,23 @@ export const Route = createFileRoute("/blog/")({
   component: BlogPage,
 });
 
-const COPY: Record<Lang, { eyebrow: string; h1: string; lead: string; read: string }> = {
+const COPY: Record<
+  Lang,
+  { eyebrow: string; h1: string; lead: string; read: string; source: string }
+> = {
   pl: {
     eyebrow: "BLOG",
     h1: "Dzielę się tym, co robię z AI",
     lead: "Czego się uczę, nad czym pracuję i wdrożenia, którymi mogę się podzielić publicznie.",
     read: "Czytaj",
+    source: "Opublikowane na",
   },
   en: {
     eyebrow: "BLOG",
     h1: "Sharing what I'm building with AI",
     lead: "What I'm learning, what I'm working on, and public implementations I can share.",
     read: "Read",
+    source: "Published on",
   },
 };
 
@@ -59,6 +64,13 @@ function BlogPage() {
             return (
               <li key={p.slug} className="blog-item">
                 <time dateTime={p.date}>{formatDate(p.date, lang)}</time>
+                {p.external && (
+                  // the full text lives on another site (ADR 0007); the card
+                  // still opens our teaser, which links out in a new tab
+                  <span className="blog-source">
+                    {c.source} {p.external.source}
+                  </span>
+                )}
                 <h2>
                   <Link to="/blog/$slug" params={{ slug: p.slug }}>
                     {b.title}

@@ -21,8 +21,19 @@ describe("posts", () => {
         expect(b.title.length).toBeGreaterThan(10);
         expect(b.description.length).toBeGreaterThan(50);
         expect(b.description.length).toBeLessThanOrEqual(300);
-        expect(b.blocks.length).toBeGreaterThan(5);
+        // a teaser for an article published elsewhere is short by design (ADR 0007)
+        expect(b.blocks.length).toBeGreaterThan(post.external ? 1 : 5);
       });
+
+      if (post.external) {
+        it(`${post.slug} (${lang}) stays a teaser, not a copy of the article`, () => {
+          // the portal's article is several thousand characters; a teaser that
+          // grows past this has started copying it
+          const chars = JSON.stringify(b.blocks).length;
+          expect(chars).toBeLessThan(2500);
+          expect(b.blocks.length).toBeLessThanOrEqual(8);
+        });
+      }
 
       it(`${post.slug} (${lang}) has unique heading ids`, () => {
         const ids = b.blocks.flatMap((x) => (x.t === "h2" ? [x.id] : []));
@@ -47,6 +58,20 @@ describe("posts", () => {
       });
     }
   }
+
+  it("external posts point to an https article and name the site", () => {
+    const external = POSTS.filter((p) => p.external);
+    expect(external.length).toBeGreaterThan(0);
+    for (const p of external) {
+      expect(p.external?.url).toMatch(/^https:\/\/[^\s]+$/);
+      expect(p.external?.source.length).toBeGreaterThan(2);
+      // the teaser must not hotlink the portal's images
+      expect(JSON.stringify(p.body)).not.toMatch(/torzeszow\.pl\/[^"\s]*\.(jpe?g|png|webp)/i);
+    }
+    expect(findPost("oszusci-moga-podrobic-glos-wnuczka")?.external?.url).toBe(
+      "https://torzeszow.pl/news/oszusci-moga-podrobic-glos-wnuczka",
+    );
+  });
 
   it("findPost returns undefined for an unknown slug", () => {
     expect(findPost("nie-ma")).toBeUndefined();
