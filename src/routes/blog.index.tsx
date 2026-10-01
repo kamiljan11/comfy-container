@@ -63,6 +63,22 @@ function BlogPage() {
             const b = p.body[lang];
             return (
               <li key={p.slug} className="blog-item">
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: p.slug }}
+                  className="blog-thumb"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                >
+                  <img
+                    src={p.cover.src}
+                    alt={p.cover.alt[lang]}
+                    width={p.cover.width}
+                    height={p.cover.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </Link>
                 <time dateTime={p.date}>{formatDate(p.date, lang)}</time>
                 {p.external && (
                   // the full text lives on another site (ADR 0007); the card

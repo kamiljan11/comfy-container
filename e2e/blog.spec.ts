@@ -10,6 +10,17 @@ test("/blog lists the posts newest first and links to them", async ({ page }) =>
   await expect(first).toHaveAttribute("href", "/blog/oszusci-moga-podrobic-glos-wnuczka");
   // it was noindex while empty; with a post it must be indexable
   await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
+  // every card opens with a thumbnail that actually loaded
+  const cards = page.locator(".blog-item");
+  const thumbs = page.locator(".blog-item .blog-thumb img");
+  await expect(thumbs).toHaveCount(await cards.count());
+  for (const img of await thumbs.all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect(img).toBeVisible();
+    await expect
+      .poll(() => img.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth))
+      .toBeGreaterThan(0);
+  }
   const link = page.locator('.blog-item h2 a[href="/blog/claude-autoshutdown"]');
   await link.click();
   await expect(page).toHaveURL(/\/blog\/claude-autoshutdown/);

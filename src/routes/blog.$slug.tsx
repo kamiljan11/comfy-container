@@ -85,6 +85,8 @@ function ExternalRead({ url, source, lang }: { url: string; source: string; lang
   const c = COPY[lang];
   return (
     <p className="post-external">
+      {/* noopener without noreferrer on purpose (unlike the repo's other
+          outbound links): the portal should see the visit came from here */}
       <a className="btn-primary" href={url} target="_blank" rel="noopener">
         {c.readOn} {source} ↗
       </a>

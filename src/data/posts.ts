@@ -34,6 +34,8 @@ export type Post = {
    * a short teaser in our own words and links out; it never copies the article.
    */
   external?: { url: string; source: string };
+  /** Thumbnail on the /blog list; every post has one (ADR 0007, revision). */
+  cover: { src: string; width: number; height: number; alt: Record<Lang, string> };
   body: Record<Lang, PostBody>;
 };
 
@@ -53,6 +55,17 @@ export const POSTS: Post[] = [
     slug: "oszusci-moga-podrobic-glos-wnuczka",
     date: "2026-10-01",
     external: { url: GLOS_WNUCZKA, source: "toRzeszów.pl" },
+    // the article's own photo (Pexels 7544758, Pexels licence allows changes),
+    // taken from Pexels, not from torzeszow.pl, with the title on it
+    cover: {
+      src: "/blog/oszusci-moga-podrobic-glos-wnuczka/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Starsza kobieta z telefonem przy uchu i napis: Oszuści mogą podrobić głos wnuczka. Pomoże jedno rodzinne hasło.",
+        en: "An older woman with a phone at her ear and the Polish title: scammers can fake a grandchild's voice; one family password helps.",
+      },
+    },
     body: {
       pl: {
         title: "Oszuści mogą podrobić głos wnuczka. Mój tekst na toRzeszów.pl",
@@ -110,6 +123,15 @@ export const POSTS: Post[] = [
     slug: "claude-autoshutdown",
     date: "2026-09-21",
     repo: "https://github.com/kamiljan11/claude-autoshutdown",
+    cover: {
+      src: MONITOR.src,
+      width: MONITOR.width,
+      height: MONITOR.height,
+      alt: {
+        pl: "Okno Claude AutoShutdown: tabela sesji Claude i lista warunków wyłączenia komputera",
+        en: "The Claude AutoShutdown window: a table of Claude sessions and the list of shutdown conditions",
+      },
+    },
     body: {
       pl: {
         title: "Komputer gaśnie, kiedy Claude Code skończy pracę",

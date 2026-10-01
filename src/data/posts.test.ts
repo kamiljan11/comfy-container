@@ -59,6 +59,18 @@ describe("posts", () => {
     }
   }
 
+  it("every post has a thumbnail on disk, described in both languages", () => {
+    for (const p of POSTS) {
+      expect(existsSync(join(process.cwd(), "public", p.cover.src)), p.cover.src).toBe(true);
+      expect(p.cover.width).toBeGreaterThan(0);
+      expect(p.cover.height).toBeGreaterThan(0);
+      for (const lang of ["pl", "en"] as const) {
+        expect(p.cover.alt[lang].length, `${p.slug} ${lang}`).toBeGreaterThan(20);
+        expect(p.cover.alt[lang]).not.toMatch(/[–—]/);
+      }
+    }
+  });
+
   it("external posts point to an https article and name the site", () => {
     const external = POSTS.filter((p) => p.external);
     expect(external.length).toBeGreaterThan(0);
