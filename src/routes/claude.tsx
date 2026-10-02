@@ -340,7 +340,7 @@ const CONTENT: Record<Lang, Content> = {
       ],
       live: "LIVE",
       blocked:
-        "quality gates: the agent decides and it is logged · risky steps: only after a review by sub-agents · irreversible steps and the gates themselves: only my “allow ALLOW_…” in the chat · skipping the checks is banned",
+        "no silent skipping: quality gates are passed only with a log entry · risky steps only after a sub-agent review · irreversible steps and the gates themselves only after my “allow ALLOW_…” in the chat",
       caption:
         "Nine checkpoints on the path of a change. I make the decisions; the checks make sure nothing is forgotten.",
     },
@@ -483,7 +483,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Level B, approval after review:",
-            body: "deleting files, a hard reset, cleaning the repository, a dependency missing from the registry and a new column with personal data. The agent asks sub-agents for a review (security and code, plus the data department for personal data), fixes what they find and only then grants itself an exception. It lasts 15 minutes, covers one command, only in that repository and only for the change that was reviewed.",
+            body: "deleting files, a hard reset, cleaning the repository, a dependency missing from the registry and a new column with personal data. The agent asks sub-agents for a review (security and code, plus the data department for personal data), fixes what they find and only then grants itself an exception. The agent only gets it when the code matches what was reviewed. It lasts 15 minutes and covers exactly one command, only in that repository.",
           },
           {
             label: "Level C, still only me:",
@@ -495,7 +495,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Four review rounds before shipping:",
-            body: "the code, security and operations departments went through the change, and the data department joined for the last two rounds. Every round found something new: a bypass through the ${HOME} variable, through sh -c, through cd.. without a space in PowerShell, deleting the kill switch with python -c. All of it is fixed and has a test. The gate test set now has 104 cases, and mutation tests noticed each of the 25 rules being switched off.",
+            body: "the code, security and operations departments went through the change, and the data department joined for the last two rounds. Every round found a new way around the rules: through a variable, through a shell wrapper, through a PowerShell quirk, through a one-line script. Each one is fixed and has its own test. The gate test set now has 104 cases, and mutation tests noticed each of the 25 rules being switched off.",
           },
           {
             label: "The clock slip:",
@@ -503,7 +503,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Kill switch and limits:",
-            body: "one file brings back the old mode, where every exception needs my phrase, and the agent can’t delete it. The limit is the same as before: text rules stop an agent taking shortcuts, not someone deliberately forging transcripts or gluing names together from pieces. It’s written down in the known limits.",
+            body: "one switch brings back the old mode, where every exception needs my phrase, and it is protected the same way as the gates themselves. The limit is the same as before: text rules stop an agent taking shortcuts, not someone deliberately forging transcripts or building names out of pieces. I’ve written it down as a known limit.",
           },
         ],
       },
@@ -532,7 +532,7 @@ const CONTENT: Record<Lang, Content> = {
             body: "when a long session gets compacted, a hook first saves a snapshot: my last instructions, the files edited and the last answer. After compaction it goes straight back into the context, so the agent doesn't have to rebuild the state from a summary.",
           },
           {
-            label: "Exceptions come only from me:",
+            label: "Exceptions come only from me (until 2 October, see the update above):",
             body: "an agent used to be able to add an ALLOW_…=1 switch to a command and walk past a check. Now an exception exists only after I type “allow ALLOW_…” in the chat. It lasts 30 minutes and three uses, and every use goes into the log. The same phrase echoed in an agent’s reply or in a sub-agent’s report unlocks nothing.",
           },
           {
@@ -868,7 +868,7 @@ const CONTENT: Record<Lang, Content> = {
       ],
       live: "LIVE",
       blocked:
-        "bramki jakości: agent decyduje sam, z wpisem w dzienniku · ryzykowne kroki: dopiero po recenzji podagentów · kroki nieodwracalne i same bramki: tylko moje „pozwól ALLOW_…” w czacie · omijanie kontroli jest zakazane",
+        "żadnego cichego omijania: bramkę jakości można przejść tylko z wpisem w dzienniku · ryzykowne kroki dopiero po recenzji podagentów · kroki nieodwracalne i same bramki dopiero po moim „pozwól ALLOW_…” w czacie",
       caption:
         "Dziewięć punktów kontroli na drodze zmiany. Decyzje podejmuję ja; kontrole pilnują, żeby nic nie umknęło.",
     },
@@ -1012,7 +1012,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Poziom B, zatwierdzenie po recenzji:",
-            body: "usuwanie plików, twardy reset, czyszczenie repozytorium, nowa zależność spoza rejestru i nowa kolumna z danymi osobowymi. Agent sam zleca recenzję podagentom (bezpieczeństwo i kod, przy danych osobowych także dział danych), poprawia znalezione problemy i dopiero wtedy wydaje sobie wyjątek. Działa 15 minut, na jedną komendę, tylko w tym repozytorium i tylko dla tej zmiany, której dotyczyła recenzja.",
+            body: "usuwanie plików, twardy reset, czyszczenie repozytorium, nowa zależność, której nie ma w rejestrze pakietów, i nowa kolumna z danymi osobowymi. Agent sam zleca recenzję podagentom (bezpieczeństwo i kod, przy danych osobowych także dział danych), poprawia znalezione problemy i dopiero wtedy wydaje sobie wyjątek. Agent dostaje go tylko wtedy, gdy kod zgadza się z tym, co przeszło recenzję. Działa 15 minut, na dokładnie jedną komendę, tylko w tym repozytorium.",
           },
           {
             label: "Poziom C, nadal tylko ja:",
@@ -1024,7 +1024,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Cztery rundy recenzji przed oddaniem:",
-            body: "zmianę przejrzały działy kodu, bezpieczeństwa, operacji, a w dwóch ostatnich rundach także danych. Każda runda znajdowała coś nowego: obejście przez zmienną ${HOME}, przez sh -c, przez cd.. bez spacji w PowerShell, kasowanie wyłącznika przez python -c. Wszystko jest poprawione i ma test. Zestaw testów kontroli ma teraz 104 przypadki, a testy mutacyjne zauważyły wyłączenie każdej z 25 reguł.",
+            body: "zmianę przejrzały działy kodu, bezpieczeństwa, operacji, a w dwóch ostatnich rundach także danych. Każda runda znajdowała nowy sposób na obejście reguł: przez zmienną, przez wrapper powłoki, przez osobliwość PowerShella, przez jednolinijkowy skrypt. Każdy jest poprawiony i ma własny test. Zestaw testów kontroli ma teraz 104 przypadki, a testy mutacyjne zauważyły wyłączenie każdej z 25 reguł.",
           },
           {
             label: "Wpadka z zegarem:",
@@ -1032,7 +1032,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Wyłącznik i granice:",
-            body: "jeden plik przywraca stary tryb, w którym każdy wyjątek wymaga mojej frazy, a agent nie może go skasować. Granica jest ta sama co wcześniej: reguły tekstowe zatrzymują agenta, który idzie na skróty, a nie kogoś, kto celowo podrabia zapisy pracy albo skleja nazwy z kawałków. Opisałem to w znanych ograniczeniach.",
+            body: "jeden przełącznik przywraca stary tryb, w którym każdy wyjątek wymaga mojej frazy, i jest chroniony tak samo jak same bramki. Granica jest ta sama co wcześniej: reguły tekstowe zatrzymują agenta, który idzie na skróty, a nie kogoś, kto celowo podrabia zapisy pracy albo skleja nazwy z kawałków. Zapisałem to jako znaną granicę.",
           },
         ],
       },
@@ -1061,7 +1061,7 @@ const CONTENT: Record<Lang, Content> = {
             body: "gdy długa sesja jest kompaktowana, hook najpierw zapisuje migawkę: moje ostatnie polecenia, edytowane pliki i ostatnią odpowiedź. Po kompakcji wraca ona prosto do kontekstu, więc agent nie odtwarza stanu ze streszczenia.",
           },
           {
-            label: "Wyjątek tylko ode mnie:",
+            label: "Wyjątek tylko ode mnie (do 2 października, zobacz aktualizację wyżej):",
             body: "wcześniej agent mógł dopisać do komendy przełącznik ALLOW_…=1 i przejść obok kontroli. Teraz wyjątek istnieje dopiero wtedy, gdy sam napiszę w czacie „pozwól ALLOW_…”. Działa 30 minut i najwyżej trzy razy, a każde użycie trafia do dziennika. Ta sama fraza powtórzona w odpowiedzi agenta albo w raporcie podagenta niczego nie odblokuje.",
           },
           {
