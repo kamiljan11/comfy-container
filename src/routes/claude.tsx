@@ -479,7 +479,7 @@ const CONTENT: Record<Lang, Content> = {
         items: [
           {
             label: "Level A, the agent decides:",
-            body: "ten quality gates (change size, TODO without an entry, commented-out code, repeated literals, module boundaries, commit format and similar). The gate still shows the problem. The agent fixes it or deliberately moves on, and every such pass goes into the log with the gate’s name.",
+            body: "ten quality gates (change size, TODO without an entry, commented-out code, repeated literals, module boundaries, commit format and similar). The gate still shows the problem. The agent fixes it or deliberately moves on, and every such pass goes into the log with the gate's name.",
           },
           {
             label: "Level B, approval after review:",
@@ -487,11 +487,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Level C, still only me:",
-            body: "changes to the gates themselves, merging and pushing to main, secrets in a commit, weakening CI or quality settings, force-push, deleting remote repositories. These can’t be undone or they switch off other checks. If the agent could approve changes to its own gates, levels A and B would stop meaning anything.",
+            body: "changes to the gates themselves, merging and pushing to main, secrets in a commit, weakening CI or quality settings, force-push, deleting remote repositories. These can't be undone or they switch off other checks. If the agent could approve changes to its own gates, levels A and B would stop meaning anything.",
           },
           {
             label: "Proof, not a claim:",
-            body: "the first review of the new mechanism showed that the proof of review could be faked with two empty files. Now what counts are the transcripts of real reviewer sub-agents. Every finding a reviewer recorded has to stay in the result, and one review never gives a second exception, even if the folder is copied. A command that tries to leave the repository (changing directory, a variable, a shell wrapper) doesn’t get the exception.",
+            body: "the first review of the new mechanism showed that the proof of review could be faked with two empty files. Now what counts are the transcripts of real reviewer sub-agents. Every finding a reviewer recorded has to stay in the result, and one review never gives a second exception, even if the folder is copied. A command that tries to leave the repository (changing directory, a variable, a shell wrapper) doesn't get the exception.",
           },
           {
             label: "Four review rounds before shipping:",
@@ -499,11 +499,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "The clock slip:",
-            body: "while I was working, the system clock briefly jumped to 2022. The file holding my exception got a date four years in the past, and the cleanup deleted it as old, even though it was valid for another half hour. The cleanup now reads validity from the file’s content, not from when it was written.",
+            body: "while I was working, the system clock briefly jumped to 2022. The file holding my exception got a date four years in the past, and the cleanup deleted it as old, even though it was valid for another half hour. The cleanup now reads validity from the file's content, not from when it was written.",
           },
           {
             label: "Kill switch and limits:",
-            body: "one switch brings back the old mode, where every exception needs my phrase, and it is protected the same way as the gates themselves. The limit is the same as before: text rules stop an agent taking shortcuts, not someone deliberately forging transcripts or building names out of pieces. I’ve written it down as a known limit.",
+            body: "one switch brings back the old mode, where every exception needs my phrase, and it is protected the same way as the gates themselves. The limit is the same as before: text rules stop an agent taking shortcuts, not someone deliberately forging transcripts or building names out of pieces. I've written it down as a known limit.",
           },
         ],
       },
@@ -1004,7 +1004,7 @@ const CONTENT: Record<Lang, Content> = {
     sections: [
       {
         title: "Aktualizacja z 2 października 2026: agent zatwierdza sam, ale tylko z dowodem",
-        lead: "Fraza „pozwól ALLOW_…” chroniła dobrze, ale zatrzymywała pracę. Agent kończył zmianę, bramka mówiła „za duży diff” albo „nowy TODO bez wpisu w backlogu” i wszystko stało, aż napisałem dwa słowa w czacie. Przebudowałem to na trzy poziomy. O tym, czy agent może iść dalej sam, decyduje teraz to, co da się cofnąć, a nie to, czy akurat siedzę przy komputerze.",
+        lead: "Fraza „pozwól ALLOW_…” chroniła dobrze, ale zatrzymywała pracę. Agent kończył zmianę, bramka mówiła „za duży diff” albo „nowy TODO bez wpisu w backlogu” i wszystko stało, aż napisałem dwa słowa w czacie. Przebudowałem to na trzy poziomy. Teraz agent może iść dalej sam wtedy, gdy krok da się cofnąć, a nie wtedy, gdy akurat siedzę przy komputerze.",
         items: [
           {
             label: "Poziom A, agent decyduje sam:",
