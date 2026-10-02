@@ -289,7 +289,7 @@ const CONTENT: Record<Lang, Content> = {
       ],
       live: "LIVE",
       blocked:
-        "an exception can only come from me: I type “allow ALLOW_…” in the chat, the agent cannot grant one to itself · every use is logged · skipping the checks is banned",
+        "no silent skipping: quality gates are passed only with a log entry · risky steps only after a sub-agent review · irreversible steps and the gates themselves only after my “allow ALLOW_…” in the chat",
       caption:
         "Nine checkpoints on the path of a change. I make the decisions; the checks make sure nothing is forgotten.",
     },
@@ -423,6 +423,40 @@ const CONTENT: Record<Lang, Content> = {
     ],
     sections: [
       {
+        title: "Update, 2 October 2026: the agent approves itself, but only with proof",
+        lead: "The “allow ALLOW_…” phrase protected things well, but it stopped the work. The agent would finish a change, a gate would say “diff too large” or “new TODO without a backlog entry”, and everything waited until I typed two words in the chat. I rebuilt it into three levels. Whether the agent can carry on alone now depends on whether the step can be undone, not on whether I happen to be at the computer.",
+        items: [
+          {
+            label: "Level A, the agent decides:",
+            body: "ten quality gates (change size, TODO without an entry, commented-out code, repeated literals, module boundaries, commit format and similar). The gate still shows the problem. The agent fixes it or deliberately moves on, and every such pass goes into the log with the gate's name.",
+          },
+          {
+            label: "Level B, approval after review:",
+            body: "deleting files, a hard reset, cleaning the repository, a dependency missing from the registry and a new column with personal data. The agent asks sub-agents for a review (security and code, plus the data department for personal data), fixes what they find and only then grants itself an exception. The agent only gets it when the code matches what was reviewed. It lasts 15 minutes and covers exactly one command, only in that repository.",
+          },
+          {
+            label: "Level C, still only me:",
+            body: "changes to the gates themselves, merging and pushing to main, secrets in a commit, weakening CI or quality settings, force-push, deleting remote repositories. These can't be undone or they switch off other checks. If the agent could approve changes to its own gates, levels A and B would stop meaning anything.",
+          },
+          {
+            label: "Proof, not a claim:",
+            body: "the first review of the new mechanism showed that the proof of review could be faked with two empty files. Now what counts are the transcripts of real reviewer sub-agents. Every finding a reviewer recorded has to stay in the result, and one review never gives a second exception, even if the folder is copied. A command that tries to leave the repository (changing directory, a variable, a shell wrapper) doesn't get the exception.",
+          },
+          {
+            label: "Four review rounds before shipping:",
+            body: "the code, security and operations departments went through the change, and the data department joined for the last two rounds. Every round found a new way around the rules: through a variable, through a shell wrapper, through a PowerShell quirk, through a one-line script. Each one is fixed and has its own test. The gate test set now has 104 cases, and mutation tests noticed each of the 25 rules being switched off.",
+          },
+          {
+            label: "The clock slip:",
+            body: "while I was working, the system clock briefly jumped to 2022. The file holding my exception got a date four years in the past, and the cleanup deleted it as old, even though it was valid for another half hour. The cleanup now reads validity from the file's content, not from when it was written.",
+          },
+          {
+            label: "Kill switch and limits:",
+            body: "one switch brings back the old mode, where every exception needs my phrase, and it is protected the same way as the gates themselves. The limit is the same as before: text rules stop an agent taking shortcuts, not someone deliberately forging transcripts or building names out of pieces. I've written it down as a known limit.",
+          },
+        ],
+      },
+      {
         title: "Update, 26 September 2026: PG next to 35 open-source projects",
         lead: "I checked what everyone else is building. AI agents went through 35 public repositories with a similar idea (hooks, gates, AI reviewers). They compared each one with PG layer by layer, and every point cites a file and a line number. The result was a list of 23 things other people did better. I shipped the important ones the same day.",
         items: [
@@ -447,7 +481,7 @@ const CONTENT: Record<Lang, Content> = {
             body: "when a long session gets compacted, a hook first saves a snapshot: my last instructions, the files edited and the last answer. After compaction it goes straight back into the context, so the agent doesn't have to rebuild the state from a summary.",
           },
           {
-            label: "Exceptions come only from me:",
+            label: "Exceptions come only from me (until 2 October, see the update above):",
             body: "an agent used to be able to add an ALLOW_…=1 switch to a command and walk past a check. Now an exception exists only after I type “allow ALLOW_…” in the chat. It lasts 30 minutes and three uses, and every use goes into the log. The same phrase echoed in an agent’s reply or in a sub-agent’s report unlocks nothing.",
           },
           {
@@ -783,7 +817,7 @@ const CONTENT: Record<Lang, Content> = {
       ],
       live: "LIVE",
       blocked:
-        "wyjątek może dać tylko człowiek: piszę w czacie „pozwól ALLOW_…”, agent sam go sobie nie włączy · każde użycie trafia do dziennika · omijanie kontroli jest zakazane",
+        "żadnego cichego omijania: bramkę jakości można przejść tylko z wpisem w dzienniku · ryzykowne kroki dopiero po recenzji podagentów · kroki nieodwracalne i same bramki dopiero po moim „pozwól ALLOW_…” w czacie",
       caption:
         "Dziewięć punktów kontroli na drodze zmiany. Decyzje podejmuję ja; kontrole pilnują, żeby nic nie umknęło.",
     },
@@ -918,6 +952,40 @@ const CONTENT: Record<Lang, Content> = {
     ],
     sections: [
       {
+        title: "Aktualizacja z 2 października 2026: agent zatwierdza sam, ale tylko z dowodem",
+        lead: "Fraza „pozwól ALLOW_…” chroniła dobrze, ale zatrzymywała pracę. Agent kończył zmianę, bramka mówiła „za duży diff” albo „nowy TODO bez wpisu w backlogu” i wszystko stało, aż napisałem dwa słowa w czacie. Przebudowałem to na trzy poziomy. Teraz agent może iść dalej sam wtedy, gdy krok da się cofnąć, a nie wtedy, gdy akurat siedzę przy komputerze.",
+        items: [
+          {
+            label: "Poziom A, agent decyduje sam:",
+            body: "dziesięć bramek jakości (rozmiar zmiany, TODO bez wpisu, zakomentowany kod, powtórzone literały, granice modułów, format commita i podobne). Bramka nadal pokazuje problem. Agent go poprawia albo świadomie idzie dalej, a każde takie przejście trafia do dziennika z nazwą bramki.",
+          },
+          {
+            label: "Poziom B, zatwierdzenie po recenzji:",
+            body: "usuwanie plików, twardy reset, czyszczenie repozytorium, nowa zależność, której nie ma w rejestrze pakietów, i nowa kolumna z danymi osobowymi. Agent sam zleca recenzję podagentom (bezpieczeństwo i kod, przy danych osobowych także dział danych), poprawia znalezione problemy i dopiero wtedy wydaje sobie wyjątek. Agent dostaje go tylko wtedy, gdy kod zgadza się z tym, co przeszło recenzję. Działa 15 minut, na dokładnie jedną komendę, tylko w tym repozytorium.",
+          },
+          {
+            label: "Poziom C, nadal tylko ja:",
+            body: "zmiany w samych bramkach, scalanie do main, push na main, sekrety w commicie, osłabianie CI i konfiguracji jakości, force-push, kasowanie zdalnych repozytoriów. Tego nie da się cofnąć albo to wyłącza inne kontrole. Gdyby agent mógł zatwierdzać zmiany we własnych bramkach, poziomy A i B przestałyby cokolwiek znaczyć.",
+          },
+          {
+            label: "Dowód, nie deklaracja:",
+            body: "pierwsza recenzja nowego mechanizmu pokazała, że dowód recenzji da się podrobić dwoma pustymi plikami. Teraz liczą się zapisy pracy prawdziwych podagentów-recenzentów. Każde zgłoszenie, które recenzent zapisał, musi zostać w wyniku, a ta sama recenzja nie daje drugiego wyjątku, nawet po skopiowaniu katalogu. Komenda, która próbuje wyjść poza repozytorium (zmiana katalogu, zmienna, wrapper powłoki), nie korzysta z wyjątku.",
+          },
+          {
+            label: "Cztery rundy recenzji przed oddaniem:",
+            body: "zmianę przejrzały działy kodu, bezpieczeństwa, operacji, a w dwóch ostatnich rundach także danych. Każda runda znajdowała nowy sposób na obejście reguł: przez zmienną, przez wrapper powłoki, przez osobliwość PowerShella, przez jednolinijkowy skrypt. Każdy jest poprawiony i ma własny test. Zestaw testów kontroli ma teraz 104 przypadki, a testy mutacyjne zauważyły wyłączenie każdej z 25 reguł.",
+          },
+          {
+            label: "Wpadka z zegarem:",
+            body: "w trakcie pracy zegar systemu na chwilę przeskoczył na 2022 rok. Plik z moim wyjątkiem dostał datę sprzed czterech lat i sprzątanie skasowało go jako stary, choć był ważny jeszcze przez pół godziny. Sprzątanie liczy teraz ważność z treści pliku, a nie z daty jego zapisu.",
+          },
+          {
+            label: "Wyłącznik i granice:",
+            body: "jeden przełącznik przywraca stary tryb, w którym każdy wyjątek wymaga mojej frazy, i jest chroniony tak samo jak same bramki. Granica jest ta sama co wcześniej: reguły tekstowe zatrzymują agenta, który idzie na skróty, a nie kogoś, kto celowo podrabia zapisy pracy albo skleja nazwy z kawałków. Zapisałem to jako znaną granicę.",
+          },
+        ],
+      },
+      {
         title: "Aktualizacja z 26 września 2026: PG obok 35 projektów open source",
         lead: "Sprawdziłem, co budują inni. Agenci AI przeszli przez 35 publicznych repozytoriów o podobnej idei (hooki, bramki, recenzenci AI) i porównali je z PG warstwa po warstwie, każdy punkt z plikiem i numerem linii. Wyszła lista 23 rzeczy, które inni zrobili lepiej. Najważniejsze wdrożyłem tego samego dnia.",
         items: [
@@ -942,7 +1010,7 @@ const CONTENT: Record<Lang, Content> = {
             body: "gdy długa sesja jest kompaktowana, hook najpierw zapisuje migawkę: moje ostatnie polecenia, edytowane pliki i ostatnią odpowiedź. Po kompakcji wraca ona prosto do kontekstu, więc agent nie odtwarza stanu ze streszczenia.",
           },
           {
-            label: "Wyjątek tylko ode mnie:",
+            label: "Wyjątek tylko ode mnie (do 2 października, zobacz aktualizację wyżej):",
             body: "wcześniej agent mógł dopisać do komendy przełącznik ALLOW_…=1 i przejść obok kontroli. Teraz wyjątek istnieje dopiero wtedy, gdy sam napiszę w czacie „pozwól ALLOW_…”. Działa 30 minut i najwyżej trzy razy, a każde użycie trafia do dziennika. Ta sama fraza powtórzona w odpowiedzi agenta albo w raporcie podagenta niczego nie odblokuje.",
           },
           {
