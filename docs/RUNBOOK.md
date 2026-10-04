@@ -61,6 +61,8 @@ git revert <sha-zlego-commita> && git push   # -> redeploy automatyczny na Verce
 
 ## Migawka skilli /claude?tab=skills
 
+Opisy kart w obu jezykach (`summary_pl` / `summary_en`) pochodza z `pg/public/skills-i18n.json` w repo PG i trafiaja do `skills.json` przy eksporcie; nowy skill bez tlumaczenia = test `every snapshot entry translated` jest czerwony -> dopisz tlumaczenie po stronie PG i odswiez migawke. Odswiezac dopiero po merge'u PR eksportu w coding-higher-mind (inaczej `main` nie ma tlumaczen).
+
 Dane zakladki to `src/data/higher-mind-skills.json`, kopia `skills.json` z publicznego repo `kamiljan11/coding-higher-mind` (generuje ja tam `bin/pg-export-public.py`). Odswiezenie po kazdym wydaniu tego repo:
 `curl -fsSL https://raw.githubusercontent.com/kamiljan11/coding-higher-mind/main/skills.json -o src/data/higher-mind-skills.json && npx vitest run src/lib/skillsCatalog.test.ts src/components/claude/SkillsTab.test.ts` -> PR. Test odrzuca zly ksztalt (schemat, puste pola, sciezki spoza `skills/` i `agents/`); przy zlym pliku na produkcji zakladka pokazuje komunikat z linkiem do repo, reszta /claude dziala. Cofniecie: `git checkout -- src/data/higher-mind-skills.json`.
 

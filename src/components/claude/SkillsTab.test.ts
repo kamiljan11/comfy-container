@@ -11,6 +11,9 @@ describe("SkillsTab", () => {
     expect(html).toContain("https://github.com/kamiljan11/coding-higher-mind/tree/main/skills/");
     expect(html).toContain("Otwórz SKILL.md na GitHubie");
     expect(html).toContain('lang="pl"');
+    expect(html).toContain("Debugowanie w czterech fazach");
+    const en = renderToString(createElement(SkillsTab, { lang: "en" }));
+    expect(en).toContain("Four-phase debugging down to the root cause");
   });
 
   it("shows a fallback instead of crashing the route when the snapshot is bad", async () => {

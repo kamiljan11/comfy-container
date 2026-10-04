@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  cardText,
   categoryLabel,
   detectLang,
   groupSkills,
@@ -65,6 +66,21 @@ describe("skillsCatalog", () => {
     expect(detectLang("Master architecture-decision skill: choose the right architecture")).toBe(
       "en",
     );
+  });
+
+  it("shows the translation for the page language, else the source text with its own lang", () => {
+    const e = {
+      summary: "Recenzja dzialowa i weryfikator",
+      summary_pl: "PL",
+      summary_en: "EN",
+    };
+    expect(cardText(e, "pl")).toEqual({ text: "PL", lang: "pl" });
+    expect(cardText(e, "en")).toEqual({ text: "EN", lang: "en" });
+    expect(cardText({ summary: e.summary }, "en")).toEqual({ text: e.summary, lang: "pl" });
+    for (const x of [...raw.skills, ...raw.agents]) {
+      expect(x.summary_pl, x.name).toBeTruthy();
+      expect(x.summary_en, x.name).toBeTruthy();
+    }
   });
 
   it("links into the public repository", () => {
