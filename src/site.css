@@ -6631,11 +6631,23 @@ header[id] {
   gap: 6px 10px;
   align-items: center;
 }
+.hm-link {
+  color: #0a7d8c;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.hm-link:hover,
+.hm-link:focus-visible {
+  color: #075f6b;
+}
 .hm-badge {
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #6a6f76;
+  color: #5a5f66;
   border: 1px solid #e3e3df;
   border-radius: 999px;
   padding: 2px 8px;
@@ -6645,7 +6657,9 @@ header[id] {
   border: 1px solid #e3e3df;
   border-radius: 8px;
   padding: 12px 14px;
-  overflow-x: auto;
+  /* wrap instead of a side scroll: the full command stays readable and selectable on a phone */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   font-size: 0.85rem;
   line-height: 1.5;
 }

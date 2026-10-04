@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SkillsTab } from "../components/claude/SkillsTab";
+import { REPO_URL } from "../lib/skillsCatalog";
 import { stackLines, wrapLabel } from "../lib/wrapLabel";
 import { useRef } from "react";
 import { useLang } from "../hooks/useLang";
@@ -19,9 +20,12 @@ export const Route = createFileRoute("/claude")({
     ],
     links: [{ rel: "canonical", href: "https://kamiljan.com/claude" }],
   }),
-  // ?tab=skills: the Skills and agents catalogue is a shareable link, not hidden state.
-  validateSearch: (s: Record<string, unknown>): { tab?: "skills" } =>
-    s.tab === "skills" ? { tab: "skills" } : {},
+  // ?tab=skills: the Skills and agents catalogue is a shareable link, not hidden state. `lang` is declared
+  // here too, so switching tabs keeps ?lang= in the address bar (a shared link opens in the sender's language).
+  validateSearch: (s: Record<string, unknown>): { tab?: "skills"; lang?: Lang } => ({
+    ...(s.tab === "skills" ? { tab: "skills" as const } : {}),
+    ...(s.lang === "en" || s.lang === "pl" ? { lang: s.lang } : {}),
+  }),
   component: ClaudePage,
 });
 
@@ -38,17 +42,37 @@ function ClaudeTabs({ lang }: { lang: Lang }) {
   const t = TABS[lang];
   return (
     <nav className="hm-tabs" aria-label={t.label}>
-      <Link to="/claude" search={{ tab: undefined }} activeOptions={TAB_ACTIVE} className="hm-tab">
+      <Link
+        to="/claude"
+        search={(prev) => ({ ...prev, tab: undefined })}
+        activeOptions={TAB_ACTIVE}
+        className="hm-tab"
+      >
         {t.system}
       </Link>
-      <Link to="/claude" search={{ tab: "skills" }} activeOptions={TAB_ACTIVE} className="hm-tab">
+      <Link
+        to="/claude"
+        search={(prev) => ({ ...prev, tab: "skills" as const })}
+        activeOptions={TAB_ACTIVE}
+        className="hm-tab"
+      >
         {t.skills}
       </Link>
     </nav>
   );
 }
 
-const REPO_URL = "https://github.com/kamiljan11/coding-higher-mind";
+function ClaudeHead({ title, role, lang }: { title: string; role: string; lang: Lang }) {
+  return (
+    <>
+      <header className="cv-head">
+        <h1>{title}</h1>
+        <p className="cv-role">{role}</p>
+      </header>
+      <ClaudeTabs lang={lang} />
+    </>
+  );
+}
 
 /* ── Flags (mirrors the homepage toggle) ── */
 
@@ -1783,11 +1807,7 @@ function ClaudePage() {
     return (
       <div className="cv-page">
         <article className="cv-paper">
-          <header className="cv-head">
-            <h1>{c.title}</h1>
-            <p className="cv-role">{c.role}</p>
-          </header>
-          <ClaudeTabs lang={lang} />
+          <ClaudeHead title={c.title} role={c.role} lang={lang} />
           <SkillsTab lang={lang} />
         </article>
       </div>
@@ -1798,11 +1818,7 @@ function ClaudePage() {
     <div className="cv-page">
       <div className="read-progress" aria-hidden="true" />
       <article className="cv-paper" ref={bodyRef}>
-        <header className="cv-head">
-          <h1>{c.title}</h1>
-          <p className="cv-role">{c.role}</p>
-        </header>
-        <ClaudeTabs lang={lang} />
+        <ClaudeHead title={c.title} role={c.role} lang={lang} />
 
         {/* sixteen screens on a phone: the reader gets a way to jump */}
         <PageToc bodyRef={bodyRef} label={c.tocLabel} lang={lang} />

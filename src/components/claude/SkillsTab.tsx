@@ -1,26 +1,31 @@
 import { type Lang } from "../../i18n";
-import { groupSkills, loadCatalog, REPO_URL, repoFileUrl } from "../../lib/skillsCatalog";
+import {
+  detectLang,
+  groupSkills,
+  loadCatalog,
+  REPO_URL,
+  repoFileUrl,
+} from "../../lib/skillsCatalog";
 
-const catalog = loadCatalog();
+type Copy = {
+  lead: string;
+  installTitle: string;
+  installPlugin: string;
+  installFull: string;
+  installNote: string;
+  skillsTitle: string;
+  agentsTitle: string;
+  agentsLead: string;
+  fullOnly: string;
+  source: string;
+  model: string;
+  unavailable: string;
+  repoLink: string;
+};
 
-const T: Record<
-  Lang,
-  {
-    lead: string;
-    installTitle: string;
-    installPlugin: string;
-    installFull: string;
-    installNote: string;
-    skillsTitle: string;
-    agentsTitle: string;
-    agentsLead: string;
-    fullOnly: string;
-    source: string;
-    model: string;
-  }
-> = {
+const T: Record<Lang, Copy> = {
   en: {
-    lead: "The skills I use every day, open source. Each one is a folder with a SKILL.md: Claude reads the description and loads it when a task matches. The list below is generated from the public repository, so it never drifts from the code.",
+    lead: "The skills I use every day, open source. Each one is a folder with a SKILL.md: Claude reads the description and loads it when a task matches. The cards are a snapshot of the public repository's skills.json, which is generated from the skill files, so no description here is written by hand. Descriptions stay in the language each skill was written in.",
     installTitle: "Install",
     installPlugin: "Just the skills, as a Claude Code plugin (no hooks, no settings changes):",
     installFull: "The whole system with hooks, gates and reviewer agents:",
@@ -30,11 +35,14 @@ const T: Record<
     agentsLead:
       "Read-only reviewers with a fresh context, one speciality each. They are part of the full install and run through the pg-review and pg-council skills.",
     fullOnly: "needs the full install",
-    source: "SKILL.md on GitHub",
+    source: "Open SKILL.md on GitHub",
     model: "model",
+    unavailable:
+      "The skills catalogue is temporarily unavailable. The full list is in the repository:",
+    repoLink: "github.com/kamiljan11/coding-higher-mind",
   },
   pl: {
-    lead: "Skille, których używam na co dzień, otwarte dla wszystkich. Każdy to folder z plikiem SKILL.md: Claude czyta opis i ładuje skill, gdy zadanie pasuje. Lista poniżej jest generowana z publicznego repozytorium, więc nie rozjeżdża się z kodem.",
+    lead: "Skille, których używam na co dzień, otwarte dla wszystkich. Każdy to folder z plikiem SKILL.md: Claude czyta opis i ładuje skill, gdy zadanie pasuje. Karty to migawka pliku skills.json z publicznego repozytorium, generowanego z samych plików skilli, więc żaden opis nie jest tu pisany ręcznie. Opisy są w języku, w którym powstał dany skill.",
     installTitle: "Instalacja",
     installPlugin: "Same skille jako plugin Claude Code (bez hooków i bez zmian w ustawieniach):",
     installFull: "Cały system z hookami, bramkami i agentami-recenzentami:",
@@ -44,20 +52,42 @@ const T: Record<
     agentsLead:
       "Recenzenci tylko do odczytu, ze świeżym kontekstem, każdy z jedną specjalnością. Należą do pełnej instalacji i działają przez skille pg-review i pg-council.",
     fullOnly: "wymaga pełnej instalacji",
-    source: "SKILL.md na GitHubie",
+    source: "Otwórz SKILL.md na GitHubie",
     model: "model",
+    unavailable: "Katalog skilli jest chwilowo niedostępny. Pełna lista jest w repozytorium:",
+    repoLink: "github.com/kamiljan11/coding-higher-mind",
   },
 };
 
+/** Shell commands joined with && in skills.json, one per line on the page (wraps on a phone, no side scroll). */
+const asLines = (cmd: string): string => cmd.split(" && ").join("\n");
+
 export function SkillsTab({ lang }: { lang: Lang }) {
   const t = T[lang];
+  let catalog: ReturnType<typeof loadCatalog>;
+  try {
+    catalog = loadCatalog();
+  } catch (e) {
+    // Bad snapshot: this tab shows a way out, the rest of /claude keeps working.
+    console.error("[claude/skills] catalogue rejected:", e instanceof Error ? e.message : e);
+    return (
+      <section className="cv-sec">
+        <p>
+          {t.unavailable}{" "}
+          <a className="hm-link" href={REPO_URL} target="_blank" rel="noopener noreferrer">
+            {t.repoLink}
+          </a>
+        </p>
+      </section>
+    );
+  }
   const groups = groupSkills(catalog.skills, lang);
 
   return (
     <>
       <section className="cv-sec">
         <p>{t.lead}</p>
-        <div className="ai-stats" aria-label={t.skillsTitle}>
+        <div className="ai-stats">
           <div className="ai-stat">
             <span className="ai-stat-n">{catalog.count}</span>
             <span className="ai-stat-l">{t.skillsTitle}</span>
@@ -73,11 +103,11 @@ export function SkillsTab({ lang }: { lang: Lang }) {
         <h2>{t.installTitle}</h2>
         <p>{t.installPlugin}</p>
         <pre className="hm-code">
-          <code>{catalog.install.plugin.replace(" && ", "\n")}</code>
+          <code>{asLines(catalog.install.plugin)}</code>
         </pre>
         <p>{t.installFull}</p>
         <pre className="hm-code">
-          <code>{catalog.install.full_pg.replace(/ && /g, "\n")}</code>
+          <code>{asLines(catalog.install.full_pg)}</code>
         </pre>
         <p className="ai-lead">{t.installNote}</p>
       </section>
@@ -89,9 +119,16 @@ export function SkillsTab({ lang }: { lang: Lang }) {
             {g.skills.map((s) => (
               <li className="hm-card" key={s.name}>
                 <h3 className="hm-name">{s.name}</h3>
-                <p className="hm-sum">{s.summary}</p>
+                <p className="hm-sum" lang={detectLang(s.summary)}>
+                  {s.summary}
+                </p>
                 <p className="hm-meta">
-                  <a href={repoFileUrl(s.path)} target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="hm-link"
+                    href={repoFileUrl(s.path)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {t.source}
                   </a>
                   {!s.plugin && <span className="hm-badge">{t.fullOnly}</span>}
@@ -109,9 +146,16 @@ export function SkillsTab({ lang }: { lang: Lang }) {
           {catalog.agents.map((a) => (
             <li className="hm-card" key={a.name}>
               <h3 className="hm-name">{a.name}</h3>
-              <p className="hm-sum">{a.summary}</p>
+              <p className="hm-sum" lang={detectLang(a.summary)}>
+                {a.summary}
+              </p>
               <p className="hm-meta">
-                <a href={repoFileUrl(a.path)} target="_blank" rel="noopener noreferrer">
+                <a
+                  className="hm-link"
+                  href={repoFileUrl(a.path)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {a.path}
                 </a>
                 {a.model && (
@@ -124,8 +168,8 @@ export function SkillsTab({ lang }: { lang: Lang }) {
           ))}
         </ul>
         <p>
-          <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-            github.com/kamiljan11/coding-higher-mind →
+          <a className="hm-link" href={REPO_URL} target="_blank" rel="noopener noreferrer">
+            {t.repoLink} →
           </a>
         </p>
       </section>

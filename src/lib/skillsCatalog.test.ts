@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { categoryLabel, groupSkills, loadCatalog, repoFileUrl, type Skill } from "./skillsCatalog";
+import {
+  categoryLabel,
+  detectLang,
+  groupSkills,
+  loadCatalog,
+  repoFileUrl,
+  type Skill,
+} from "./skillsCatalog";
+import raw from "../data/higher-mind-skills.json";
 
 const skill = (name: string, category: string): Skill => ({
   name,
@@ -36,6 +44,21 @@ describe("skillsCatalog", () => {
   it("labels categories per language with diacritics in Polish", () => {
     expect(categoryLabel("Review i jakosc", "pl")).toBe("Review i jakość");
     expect(categoryLabel("Review i jakosc", "en")).toBe("Review and quality");
+  });
+
+  it("rejects items the page would render as undefined", () => {
+    const noPath = { ...raw, skills: [{ ...raw.skills[0], path: "" }] };
+    expect(() => loadCatalog(noPath)).toThrow(/without name, summary or path/);
+    const noInstall = { ...raw, install: {} };
+    expect(() => loadCatalog(noInstall)).toThrow(/install/);
+  });
+
+  it("detects the description language for the lang attribute", () => {
+    expect(detectLang("Recenzja dzialowa diffu: finderzy rownolegle i weryfikator")).toBe("pl");
+    expect(detectLang("Systematyczny debugging zamiast zgadywania i latania objawow")).toBe("pl");
+    expect(detectLang("Master architecture-decision skill: choose the right architecture")).toBe(
+      "en",
+    );
   });
 
   it("links into the public repository", () => {
