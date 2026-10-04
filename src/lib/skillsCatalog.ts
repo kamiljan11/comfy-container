@@ -76,6 +76,10 @@ const hasStrings = (o: unknown, keys: string[]): boolean =>
   typeof o === "object" &&
   o !== null &&
   keys.every((k) => isStr((o as Record<string, unknown>)[k]));
+/** Card links go to `${REPO_URL}/tree/main/<path>`; the snapshot is refreshed by hand, so only known folders pass. */
+const SAFE_PATH = /^(skills|agents)\/[\w.-]+$/;
+const isEntry = (o: unknown): boolean =>
+  hasStrings(o, ["name", "summary", "path"]) && SAFE_PATH.test((o as { path: string }).path);
 
 /**
  * Checks the shape the page renders. Throws with the reason; the component catches it and shows a
@@ -87,11 +91,9 @@ export function loadCatalog(data: unknown = raw): Catalog {
   const problem =
     c.schema_version !== SUPPORTED_SCHEMA
       ? `unsupported schema ${String(c.schema_version)} (expected ${SUPPORTED_SCHEMA})`
-      : !Array.isArray(c.skills) ||
-          !c.skills.every((s) => hasStrings(s, ["name", "summary", "path"]))
+      : !Array.isArray(c.skills) || !c.skills.every(isEntry)
         ? "a skill without name, summary or path"
-        : !Array.isArray(c.agents) ||
-            !c.agents.every((a) => hasStrings(a, ["name", "summary", "path"]))
+        : !Array.isArray(c.agents) || !c.agents.every(isEntry)
           ? "an agent without name, summary or path"
           : !hasStrings(c.install, ["plugin", "full_pg"])
             ? "missing install commands"
@@ -100,13 +102,17 @@ export function loadCatalog(data: unknown = raw): Catalog {
   return c as Catalog;
 }
 
-const PL_HINT =
-  /[ąćęłńóśźż]|\b(i|oraz|nie|dla|przed|jako|zamiast|uzyj|dzial\w*|recenzj\w*|tylko|swiezy)\b/gi;
+const PL_LETTERS = /[ąćęłńóśźż]/gi;
+const PL_WORD = /\b(i|oraz|nie|dla|przed|jako|zamiast|uzyj|dzial\w*|recenzj\w*|tylko|swiezy)\b/gi;
 
 /**
  * Descriptions come from the skill files in whichever language the skill was written in. The card gets
  * the matching `lang` so a screen reader on an English page reads a Polish description as Polish.
+ * Polish letters by density (a lone "ó" in an English text naming toRzeszów is not Polish), or two
+ * common Polish words for skills written in ASCII Polish.
  */
 export function detectLang(text: string): Lang {
-  return (text.match(PL_HINT) ?? []).length >= 2 ? "pl" : "en";
+  const letters = (text.match(PL_LETTERS) ?? []).length;
+  const words = (text.match(PL_WORD) ?? []).length;
+  return letters * 150 >= text.length || words >= 2 ? "pl" : "en";
 }

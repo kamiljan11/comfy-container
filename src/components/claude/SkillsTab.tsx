@@ -89,11 +89,11 @@ export function SkillsTab({ lang }: { lang: Lang }) {
         <p>{t.lead}</p>
         <div className="ai-stats">
           <div className="ai-stat">
-            <span className="ai-stat-n">{catalog.count}</span>
+            <span className="ai-stat-n">{catalog.skills.length}</span>
             <span className="ai-stat-l">{t.skillsTitle}</span>
           </div>
           <div className="ai-stat">
-            <span className="ai-stat-n">{catalog.agents_count}</span>
+            <span className="ai-stat-n">{catalog.agents.length}</span>
             <span className="ai-stat-l">{t.agentsTitle}</span>
           </div>
         </div>

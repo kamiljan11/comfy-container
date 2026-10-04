@@ -49,6 +49,8 @@ describe("skillsCatalog", () => {
   it("rejects items the page would render as undefined", () => {
     const noPath = { ...raw, skills: [{ ...raw.skills[0], path: "" }] };
     expect(() => loadCatalog(noPath)).toThrow(/without name, summary or path/);
+    const badPath = { ...raw, skills: [{ ...raw.skills[0], path: "../../evil" }] };
+    expect(() => loadCatalog(badPath)).toThrow(/without name, summary or path/);
     const noInstall = { ...raw, install: {} };
     expect(() => loadCatalog(noInstall)).toThrow(/install/);
   });
@@ -56,6 +58,10 @@ describe("skillsCatalog", () => {
   it("detects the description language for the lang attribute", () => {
     expect(detectLang("Recenzja dzialowa diffu: finderzy rownolegle i weryfikator")).toBe("pl");
     expect(detectLang("Systematyczny debugging zamiast zgadywania i latania objawow")).toBe("pl");
+    // real snapshot entries: an English text naming toRzeszów stays English, a short Polish one is Polish
+    const summary = (name: string) => raw.skills.find((x) => x.name === name)?.summary ?? "";
+    expect(detectLang(summary("humanizer"))).toBe("en");
+    expect(detectLang(summary("ultra-loop"))).toBe("pl");
     expect(detectLang("Master architecture-decision skill: choose the right architecture")).toBe(
       "en",
     );

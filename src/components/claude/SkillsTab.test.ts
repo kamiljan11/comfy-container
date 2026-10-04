@@ -17,12 +17,15 @@ describe("SkillsTab", () => {
     vi.resetModules();
     vi.doMock("../../data/higher-mind-skills.json", () => ({ default: { schema_version: 99 } }));
     const errors = vi.spyOn(console, "error").mockImplementation(() => {});
-    const { SkillsTab } = await import("./SkillsTab");
-    const html = renderToString(createElement(SkillsTab, { lang: "en" }));
-    expect(html).toContain("temporarily unavailable");
-    expect(html).not.toContain('class="hm-card"');
-    expect(errors).toHaveBeenCalled();
-    vi.doUnmock("../../data/higher-mind-skills.json");
-    errors.mockRestore();
+    try {
+      const { SkillsTab } = await import("./SkillsTab");
+      const html = renderToString(createElement(SkillsTab, { lang: "en" }));
+      expect(html).toContain("temporarily unavailable");
+      expect(html).not.toContain('class="hm-card"');
+      expect(errors).toHaveBeenCalled();
+    } finally {
+      vi.doUnmock("../../data/higher-mind-skills.json");
+      errors.mockRestore();
+    }
   });
 });
