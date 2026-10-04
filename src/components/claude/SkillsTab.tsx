@@ -19,7 +19,7 @@ type Copy = {
 
 const T: Record<Lang, Copy> = {
   en: {
-    lead: "The skills I use every day, open source. Each one is a folder with a SKILL.md: Claude reads the description and loads it when a task matches. The cards are a snapshot of the public repository's skills.json, which is generated from the skill files, so no description here is written by hand.",
+    lead: "The skills I use every day, open source. Each one is a folder with a SKILL.md: Claude reads the description and loads it when a task matches. The cards are a snapshot of the public repository's skills.json: the list comes from the skill files themselves, and the short descriptions are written in both languages next to them.",
     installTitle: "Install",
     installPlugin: "Just the skills, as a Claude Code plugin (no hooks, no settings changes):",
     installFull: "The whole system with hooks, gates and reviewer agents:",
@@ -36,7 +36,7 @@ const T: Record<Lang, Copy> = {
     repoLink: "github.com/kamiljan11/coding-higher-mind",
   },
   pl: {
-    lead: "Skille, których używam na co dzień, otwarte dla wszystkich. Każdy to folder z plikiem SKILL.md: Claude czyta opis i ładuje skill, gdy zadanie pasuje. Karty to migawka pliku skills.json z publicznego repozytorium, generowanego z samych plików skilli, więc żaden opis nie jest tu pisany ręcznie.",
+    lead: "Skille, których używam na co dzień, otwarte dla wszystkich. Każdy to folder z plikiem SKILL.md: Claude czyta opis i ładuje skill, gdy zadanie pasuje. Karty to migawka pliku skills.json z publicznego repozytorium: lista pochodzi z samych plików skilli, a krótkie opisy są pisane w obu językach obok nich.",
     installTitle: "Instalacja",
     installPlugin: "Same skille jako plugin Claude Code (bez hooków i bez zmian w ustawieniach):",
     installFull: "Cały system z hookami, bramkami i agentami-recenzentami:",
