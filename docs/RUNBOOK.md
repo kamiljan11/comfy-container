@@ -59,6 +59,11 @@ git revert <sha-zlego-commita> && git push   # -> redeploy automatyczny na Verce
 # albo: Vercel dashboard -> Deployments -> poprzedni deploy -> "Promote to Production"
 ```
 
+## Migawka skilli /claude?tab=skills
+
+Dane zakladki to `src/data/higher-mind-skills.json`, kopia `skills.json` z publicznego repo `kamiljan11/coding-higher-mind` (generuje ja tam `bin/pg-export-public.py`). Odswiezenie po kazdym wydaniu tego repo:
+`curl -fsSL https://raw.githubusercontent.com/kamiljan11/coding-higher-mind/main/skills.json -o src/data/higher-mind-skills.json && npx vitest run src/lib/skillsCatalog.test.ts src/components/claude/SkillsTab.test.ts` -> PR. Test odrzuca zly ksztalt (schemat, puste pola, sciezki spoza `skills/` i `agents/`); przy zlym pliku na produkcji zakladka pokazuje komunikat z linkiem do repo, reszta /claude dziala. Cofniecie: `git checkout -- src/data/higher-mind-skills.json`.
+
 ## Monitoring
 
 - Bledy runtime: **brak APM/Sentry w tym repo** (Sentry pojawia sie w tresci case studies jako

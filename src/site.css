@@ -6566,3 +6566,100 @@ header[id] {
     font-size: 16px;
   }
 }
+
+/* ── /claude?tab=skills — catalogue of skills and reviewer agents (data: src/data/higher-mind-skills.json) ── */
+.hm-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 20px;
+  border-bottom: 1px solid #e3e3df;
+}
+.hm-tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: #6a6f76;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.hm-tab:hover,
+.hm-tab:focus-visible {
+  color: #0a7d8c;
+}
+.hm-tab[aria-current="page"] {
+  color: #0a7d8c;
+  border-bottom-color: #0a7d8c;
+}
+.hm-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+.hm-card {
+  border: 1px solid #e3e3df;
+  border-radius: 8px;
+  padding: 14px 14px 12px;
+  background: #fafaf8;
+  display: flex;
+  flex-direction: column;
+}
+.hm-name {
+  margin: 0 0 6px;
+  font-family: var(--font-head);
+  font-size: 1rem;
+  color: #0a7d8c;
+  overflow-wrap: anywhere;
+}
+.hm-sum {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  flex: 1;
+}
+.hm-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+}
+.hm-link {
+  color: #0a7d8c;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.hm-link:hover,
+.hm-link:focus-visible {
+  color: #075f6b;
+}
+.hm-badge {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #5a5f66;
+  border: 1px solid #e3e3df;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.hm-code {
+  background: #f1f1ee;
+  border: 1px solid #e3e3df;
+  border-radius: 8px;
+  padding: 12px 14px;
+  /* wrap instead of a side scroll: the full command stays readable and selectable on a phone */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
