@@ -13,6 +13,8 @@ export type Skill = {
   name: string;
   category: string;
   summary: string;
+  summary_pl?: string;
+  summary_en?: string;
   description: string;
   path: string;
   plugin: boolean;
@@ -23,6 +25,8 @@ export type Agent = {
   model: string;
   tools: string;
   summary: string;
+  summary_pl?: string;
+  summary_en?: string;
   path: string;
 };
 
@@ -115,4 +119,19 @@ export function detectLang(text: string): Lang {
   const letters = (text.match(PL_LETTERS) ?? []).length;
   const words = (text.match(PL_WORD) ?? []).length;
   return letters * 150 >= text.length || words >= 2 ? "pl" : "en";
+}
+
+/**
+ * Text and language for a card: the translation for the page language when the exporter provides one
+ * (summary_pl / summary_en from the repository's skills-i18n.json), otherwise the source description with its
+ * detected language.
+ */
+export function cardText(
+  entry: { summary: string; summary_pl?: string; summary_en?: string },
+  lang: Lang,
+): { text: string; lang: Lang } {
+  const translated = lang === "pl" ? entry.summary_pl : entry.summary_en;
+  return translated
+    ? { text: translated, lang }
+    : { text: entry.summary, lang: detectLang(entry.summary) };
 }
