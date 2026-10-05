@@ -42,6 +42,24 @@ test("desktop footer shows every column open", async ({ page }) => {
   await page.waitForLoadState("networkidle");
   await expect(page.locator("footer.sf .sf-fold[open]")).toHaveCount(3);
   await expect(page.locator('footer.sf a[href="/uslugi/integracje"]')).toBeVisible();
+  // a screen reader can still activate the summary; the column reopens
+  await page
+    .locator("footer.sf .sf-sum")
+    .first()
+    .evaluate((el) => (el as HTMLElement).click());
+  await expect(page.locator("footer.sf .sf-fold[open]")).toHaveCount(3);
+});
+
+test("the footer folds and unfolds when the viewport crosses 768 px", async ({ page }) => {
+  // rotating a tablet or resizing a window after hydration
+  await page.goto("/?lang=pl");
+  await page.waitForLoadState("networkidle");
+  const open = page.locator("footer.sf .sf-fold[open]");
+  await expect(open).toHaveCount(3);
+  await page.setViewportSize({ width: 400, height: 900 });
+  await expect(open).toHaveCount(0);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await expect(open).toHaveCount(3);
 });
 
 test.describe("desktop without JavaScript", () => {

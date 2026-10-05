@@ -96,7 +96,15 @@ function LinkColumn({
   const desktop = folded === false;
   return (
     <nav className="sf-col" aria-label={title}>
-      <details className="sf-fold" open={desktop}>
+      <details
+        className="sf-fold"
+        open={desktop}
+        // a screen reader can still activate the summary; on a desktop the
+        // column stays open, so its state keeps matching what is on screen
+        onToggle={(e) => {
+          if (desktop && !e.currentTarget.open) e.currentTarget.open = true;
+        }}
+      >
         {/* on a desktop the heading is not a control: no tab stop, no click */}
         <summary className="sf-sum" tabIndex={desktop ? -1 : undefined}>
           <h2 className="sf-h">{title}</h2>

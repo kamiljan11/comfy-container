@@ -994,16 +994,18 @@ section {
 .sf-sum::-webkit-details-marker {
   display: none;
 }
-@media (min-width: 769px) {
-  .sf-sum {
-    pointer-events: none;
-  }
-}
-/* own rule: a browser without ::details-content drops only this one, and the
-   columns open on hydration instead */
-@media (min-width: 769px) {
-  .sf-fold::details-content {
-    content-visibility: visible;
+/* width > 768px is the exact complement of the phone block's max-width:
+   768px (min-width: 769px left 768.x px, e.g. under zoom, in neither). Only
+   where ::details-content can show the closed content is the summary made
+   inert; elsewhere it stays clickable until hydration opens the columns. */
+@supports selector(::details-content) {
+  @media (width > 768px) {
+    .sf-fold::details-content {
+      content-visibility: visible;
+    }
+    .sf-sum {
+      pointer-events: none;
+    }
   }
 }
 .sf-bottom {
