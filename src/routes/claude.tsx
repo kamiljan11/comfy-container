@@ -147,6 +147,7 @@ type Content = {
   title: string;
   tocLabel: string;
   role: string;
+  versionLine: string;
   intro: string;
   repoCta: string;
   stats: { n: string; label: string }[];
@@ -204,6 +205,8 @@ const CONTENT: Record<Lang, Content> = {
     title: "Coding Higher Mind: the AI system behind the work",
     tocLabel: "On this page",
     role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
+    versionLine:
+      "PG v1.3.0 (as of October 5, 2026). This is a version that is still maturing, not a finished product: 10 public versions in under four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 on October 5). The counters in the table below were taken on September 26 and I have not recounted them since.",
     intro:
       "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -340,7 +343,7 @@ const CONTENT: Record<Lang, Content> = {
       ],
       live: "LIVE",
       blocked:
-        "no silent skipping: quality gates are passed only with a log entry · risky steps only after a sub-agent review · irreversible steps and the gates themselves only after my “allow ALLOW_…” in the chat",
+        "no silent skipping: quality gates are passed only with a log entry · risky steps only after a sub-agent review · irreversible steps and the gates themselves only after my “allow ALLOW_…” in the chat · a routine pull request merges without my phrase only with proof of review",
       caption:
         "Nine checkpoints on the path of a change. I make the decisions; the checks make sure nothing is forgotten.",
     },
@@ -355,7 +358,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "At every terminal command:",
-        body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging pull requests from a script, secrets typed into a command, and running a downloaded script straight in the shell (curl | sh). Since September it parses a command the way the shell would, so it also catches commands hidden inside sh -c, $(…), a heredoc piped into a shell, encoded PowerShell or tricks like rm${IFS}-rf. It guards the guards too: an agent can't quietly edit the hooks, the settings or a linter config, and a hook stops the AI reviewers from writing anywhere outside their own findings file.",
+        body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging pull requests from a script (the one exception is the merge script that demands proof of review), secrets typed into a command, and running a downloaded script straight in the shell (curl | sh). Since September it parses a command the way the shell would, so it also catches commands hidden inside sh -c, $(…), a heredoc piped into a shell, encoded PowerShell or tricks like rm${IFS}-rf. It guards the guards too: an agent can't quietly edit the hooks, the settings or a linter config, and a hook stops the AI reviewers from writing anywhere outside their own findings file.",
       },
       {
         label: "When a session ends:",
@@ -474,6 +477,37 @@ const CONTENT: Record<Lang, Content> = {
     ],
     sections: [
       {
+        title:
+          "Update, October 5, 2026: pull requests merge without my phrase, but only with proof of review",
+        lead: "Typing “allow ALLOW_MERGE” for every routine pull request had become the new bottleneck. So I rebuilt merging the same way as the exceptions: what decides is how risky the change is and whether there is proof, not whether I am at the computer. It has been switched on since October 4, and I accepted the remaining risk knowingly. A system like this needs time to mature. This is a version in the middle of that, not a finished product, and the limits are below.",
+        items: [
+          {
+            label: "What the merge script checks:",
+            body: "every check green (the newest run of each one), not a fork, aimed at the default branch, the full list of changed files known. Then by risk tier: documentation only (.md, .txt, .rst) merges with no review; a normal code change needs a code review of exactly this diff, and a change to shared logic needs code and operations reviews. The review has to name the diff by its checksum, the verdict is recomputed from the findings and from the reviewers' own transcripts instead of the summary, and it is valid for two hours. Anything touching logins, payments, migrations, dependencies, CI or the agent's own instructions, and anything at the highest risk tier (T3), still waits for my phrase.",
+          },
+          {
+            label: "A second proof the agent cannot reach:",
+            body: "the review kept on the agent's own machine could in principle be forged by that agent, and the security review found several ways. So a pull request can also get a review in CI: a clean runner, read-only tools, Claude's configuration taken from the base branch instead of from the pull request. The merge script reads that run through the GitHub API and accepts it only if the workflow, the PR number and every attempt on that commit are green. It keeps 90 days of verdict history, so rewording a change and rolling the dice again does not work on the same branch, and a deleted run shows up as a gap. It is set up in three repositories so far (I checked the workflow and the secret in each). In the pilot the reviewer stopped several changes with red runs and tends to be over-zealous, so I am watching it for a week before I trust its verdict more.",
+          },
+          {
+            label: "The stop gate no longer mixes up sessions:",
+            body: "when two agent sessions work in one repository, a commit from the other session used to raise the risk tier of mine, or was ignored. Now a commit counts for the session unless there is positive proof that it was made during another session's tool run; when in doubt it counts. A new architecture check at T2 and above asks for a short decision record (at least five added lines) when a change adds a dependency, a table or a piece of infrastructure.",
+          },
+          {
+            label: "Design knowledge built into the reviewers:",
+            body: "the architecture-advisor skill and the reviewer checklists now carry a set of decision cards for common building blocks (queue, cache, replica, CDN and so on): when it pays for itself, my default (usually “you don't need it yet”), what it costs and how it fails. Design before code now asks for a rough capacity estimate and a failure mode for every external dependency. The cards are my own distillation of system-design practice, and they ship in the public repository with version 1.3.0.",
+          },
+          {
+            label: "Automatic session notes, repaired:",
+            body: "at the end of each session a hook now writes a short note into my Obsidian vault. The old version had been silently broken since September 22, because it read a field that no longer existed. The new one replaces it and has its own test, and the guard audit checks that it is wired in.",
+          },
+          {
+            label: "Honest limits:",
+            body: "the CI review is one model, so it is a probabilistic proof that a crafted diff can try to talk around, and a reviewer can simply be wrong. A new branch with a new pull request and a cosmetically changed diff gets a fresh draw of the review. An agent with push rights can edit the workflow in an abandoned pull request and read the secret. No text rule in a command guard closes every way of swapping a reviewer. That is why the check must not be marked as required in branch protection (GitHub counts a skipped job as passed) and why there is a kill switch: one file turns phrase-only merging back on. Everything is written down in the repository's known-limits file.",
+          },
+        ],
+      },
+      {
         title: "Update, 2 October 2026: the agent approves itself, but only with proof",
         lead: "The “allow ALLOW_…” phrase protected things well, but it stopped the work. The agent would finish a change, a gate would say “diff too large” or “new TODO without a backlog entry”, and everything waited until I typed two words in the chat. I rebuilt it into three levels. Whether the agent can carry on alone now depends on whether the step can be undone, not on whether I happen to be at the computer.",
         items: [
@@ -487,7 +521,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Level C, still only me:",
-            body: "changes to the gates themselves, merging and pushing to main, secrets in a commit, weakening CI or quality settings, force-push, deleting remote repositories. These can't be undone or they switch off other checks. If the agent could approve changes to its own gates, levels A and B would stop meaning anything.",
+            body: "changes to the gates themselves, pushing to main, merging a pull request the merge script will not take on its own (see the update of 5 October above), secrets in a commit, weakening CI or quality settings, force-push, deleting remote repositories. These can't be undone or they switch off other checks. If the agent could approve changes to its own gates, levels A and B would stop meaning anything.",
           },
           {
             label: "Proof, not a claim:",
@@ -715,7 +749,7 @@ const CONTENT: Record<Lang, Content> = {
     limits:
       "Foundation models via API: I do not train or fine-tune them. Reliability is proven at SME scale (dozens of " +
       "repositories, one owner), not hyperscale. Reviewer departments cost tokens (roughly four times one review for T2 " +
-      "and eight to ten for T3), which is why zero-token gates run first. Some gates depend on the repository having what " +
+      "and eight to ten for T3), which is why zero-token gates run first. Merging without my phrase rests on one model's review (in CI or local), which is a probabilistic proof; see the update of October 5 and the known-limits file. Some gates depend on the repository having what " +
       "they check, and skip with a logged reason when it does not. The point of this page is not that the system is " +
       "finished: it is that the failure modes of working with AI are engineered against, in the open, instead of being " +
       "wished away.",
@@ -727,6 +761,8 @@ const CONTENT: Record<Lang, Content> = {
     title: "Coding Higher Mind: system AI, na którym stoi ta praca",
     tocLabel: "Spis treści",
     role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
+    versionLine:
+      "PG v1.3.0 (stan na 5 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 10 wersji publicznych w niecałe cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 z 5 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
     intro:
       "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -868,7 +904,7 @@ const CONTENT: Record<Lang, Content> = {
       ],
       live: "LIVE",
       blocked:
-        "żadnego cichego omijania: bramkę jakości można przejść tylko z wpisem w dzienniku · ryzykowne kroki dopiero po recenzji podagentów · kroki nieodwracalne i same bramki dopiero po moim „pozwól ALLOW_…” w czacie",
+        "żadnego cichego omijania: bramkę jakości można przejść tylko z wpisem w dzienniku · ryzykowne kroki dopiero po recenzji podagentów · kroki nieodwracalne i same bramki dopiero po moim „pozwól ALLOW_…” w czacie · rutynowy pull request scala się bez mojej frazy tylko z dowodem recenzji",
       caption:
         "Dziewięć punktów kontroli na drodze zmiany. Decyzje podejmuję ja; kontrole pilnują, żeby nic nie umknęło.",
     },
@@ -883,7 +919,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Przy każdej komendzie w terminalu:",
-        body: "strażnik blokuje groźne komendy: pomijanie kontroli (--no-verify), nadpisywanie lub kasowanie historii (force-push, twardy reset), rekurencyjne kasowanie poza katalogami buildu, scalanie pull requestów ze skryptu, sekrety wpisane w komendę i uruchamianie pobranego skryptu prosto w powłoce (curl | sh). Od września rozbiera komendę tak, jak zrobiłaby to powłoka, więc widzi też polecenia schowane w sh -c, w $(…), w heredocu przekazanym do powłoki, w zakodowanym PowerShellu albo w sztuczkach typu rm${IFS}-rf. Pilnuje też samych kontroli. Agent nie zmieni po cichu hooków, ustawień ani konfiguracji lintera, a recenzenci AI mogą zapisać tylko własny plik z uwagami, bo resztę blokuje im hook.",
+        body: "strażnik blokuje groźne komendy: pomijanie kontroli (--no-verify), nadpisywanie lub kasowanie historii (force-push, twardy reset), rekurencyjne kasowanie poza katalogami buildu, scalanie pull requestów ze skryptu (jedyny wyjątek to skrypt scalający, który wymaga dowodu recenzji), sekrety wpisane w komendę i uruchamianie pobranego skryptu prosto w powłoce (curl | sh). Od września rozbiera komendę tak, jak zrobiłaby to powłoka, więc widzi też polecenia schowane w sh -c, w $(…), w heredocu przekazanym do powłoki, w zakodowanym PowerShellu albo w sztuczkach typu rm${IFS}-rf. Pilnuje też samych kontroli. Agent nie zmieni po cichu hooków, ustawień ani konfiguracji lintera, a recenzenci AI mogą zapisać tylko własny plik z uwagami, bo resztę blokuje im hook.",
       },
       {
         label: "Gdy sesja się kończy:",
@@ -1003,6 +1039,37 @@ const CONTENT: Record<Lang, Content> = {
     ],
     sections: [
       {
+        title:
+          "Aktualizacja z 5 października 2026: pull requesty scalają się bez mojej frazy, ale tylko z dowodem recenzji",
+        lead: "Wpisywanie „pozwól ALLOW_MERGE” przy każdym rutynowym pull requeście stało się nowym wąskim gardłem. Przebudowałem więc scalanie tak samo jak wyjątki: liczy się ryzyko zmiany i to, czy jest dowód, a nie to, czy siedzę przy komputerze. Mechanizm działa od 4 października, a pozostałe ryzyko przyjąłem świadomie. Każdy taki system potrzebuje czasu, żeby dojrzeć. To wersja w trakcie tego dojrzewania, nie produkt skończony, a granice opisuję niżej.",
+        items: [
+          {
+            label: "Co sprawdza skrypt scalający:",
+            body: "wszystkie kontrole zielone (najnowszy przebieg każdej), to nie fork, cel to domyślna gałąź, pełna lista zmienionych plików jest znana. Potem według poziomu ryzyka: sama dokumentacja (.md, .txt, .rst) scala się bez recenzji; zwykła zmiana kodu wymaga recenzji kodu dokładnie tego diffu, a zmiana wspólnej logiki recenzji kodu i operacji. Recenzja musi wskazać diff jego sumą kontrolną, werdykt jest liczony od nowa ze zgłoszeń i z zapisów pracy samych recenzentów, a nie z podsumowania, i jest ważny dwie godziny. Wszystko, co dotyka logowania, płatności, migracji, zależności, CI albo instrukcji samego agenta, oraz wszystko z najwyższego poziomu ryzyka (T3), nadal czeka na moją frazę.",
+          },
+          {
+            label: "Drugi dowód, do którego agent nie sięga:",
+            body: "recenzję trzymaną na maszynie agenta mógłby on w teorii podrobić, a przegląd bezpieczeństwa znalazł na to kilka sposobów. Dlatego pull request może dostać też recenzję w CI: czysty runner, narzędzia tylko do odczytu, konfiguracja Claude'a z gałęzi bazowej, a nie z pull requestu. Skrypt scalający czyta ten przebieg przez API GitHuba i przyjmuje go tylko wtedy, gdy workflow, numer PR i każda próba dla tego commita są zielone. Trzyma 90 dni historii werdyktów, więc przeformułowanie zmiany i ponowne losowanie na tej samej gałęzi nie działa, a skasowany przebieg widać jako dziurę. Na razie działa to w trzech repozytoriach (sprawdziłem w każdym workflow i sekret). W pilocie recenzent zatrzymał kilka zmian czerwonymi przebiegami i bywa nadgorliwy, więc przez tydzień go obserwuję, zanim zacznę ufać jego werdyktowi bardziej.",
+          },
+          {
+            label: "Bramka końca sesji nie myli już sesji:",
+            body: "gdy dwie sesje agentów pracują w jednym repozytorium, commit z drugiej sesji podnosił poziom ryzyka mojej albo był pomijany. Teraz commit liczy się do sesji, chyba że jest pozytywny dowód, że powstał w trakcie pracy narzędzia innej sesji; w razie wątpliwości się liczy. Nowa kontrola architektury od T2 wymaga krótkiego zapisu decyzji (co najmniej pięć dodanych linii), gdy zmiana dodaje zależność, tabelę albo element infrastruktury.",
+          },
+          {
+            label: "Wiedza o projektowaniu systemów wbudowana w recenzentów:",
+            body: "skill architecture-advisor i listy kontrolne recenzentów mają teraz zestaw kart decyzyjnych dla typowych elementów architektury (kolejka, cache, replika, CDN i tak dalej): kiedy się opłaca, mój domyślny wybór (zwykle „jeszcze tego nie potrzebujesz”), ile kosztuje i jak pada. Projekt przed kodem wymaga teraz zgrubnego szacunku pojemności i trybu awarii każdej zewnętrznej zależności. Karty to moje własne opracowanie wiedzy o projektowaniu systemów i trafiają do publicznego repozytorium razem z wersją 1.3.0.",
+          },
+          {
+            label: "Automatyczne notatki z sesji, naprawione:",
+            body: "na końcu każdej sesji hook zapisuje teraz krótką notatkę w moim sejfie Obsidiana. Stara wersja po cichu nie działała od 22 września, bo czytała pole, którego już nie było. Nowa ją zastępuje, ma własny test, a audyt strażników sprawdza, czy jest podpięta.",
+          },
+          {
+            label: "Uczciwe granice:",
+            body: "recenzja w CI to jeden model, więc to dowód probabilistyczny, który spreparowany diff może próbować obejść, a recenzent po prostu może się mylić. Nowa gałąź z nowym pull requestem i kosmetycznie zmienionym diffem dostaje nowe losowanie recenzji. Agent z prawem push może zmienić workflow w porzuconym pull requeście i odczytać sekret. Żadna reguła tekstowa w straży komend nie zamknie każdego sposobu podmiany recenzenta. Dlatego ta kontrola nie może być oznaczona jako wymagana w ochronie gałęzi (GitHub liczy pominięte zadanie jako zaliczone) i dlatego jest wyłącznik: jeden plik przywraca scalanie wyłącznie z frazą. Całość jest zapisana w pliku znanych granic w repozytorium.",
+          },
+        ],
+      },
+      {
         title: "Aktualizacja z 2 października 2026: agent zatwierdza sam, ale tylko z dowodem",
         lead: "Fraza „pozwól ALLOW_…” chroniła dobrze, ale zatrzymywała pracę. Agent kończył zmianę, bramka mówiła „za duży diff” albo „nowy TODO bez wpisu w backlogu” i wszystko stało, aż napisałem dwa słowa w czacie. Przebudowałem to na trzy poziomy. Teraz agent może iść dalej sam wtedy, gdy krok da się cofnąć, a nie wtedy, gdy akurat siedzę przy komputerze.",
         items: [
@@ -1016,7 +1083,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Poziom C, nadal tylko ja:",
-            body: "zmiany w samych bramkach, scalanie do main, push na main, sekrety w commicie, osłabianie CI i konfiguracji jakości, force-push, kasowanie zdalnych repozytoriów. Tego nie da się cofnąć albo to wyłącza inne kontrole. Gdyby agent mógł zatwierdzać zmiany we własnych bramkach, poziomy A i B przestałyby cokolwiek znaczyć.",
+            body: "zmiany w samych bramkach, push na main, scalanie pull requestu, którego skrypt scalający nie przyjmie sam (zobacz aktualizację z 5 października wyżej), sekrety w commicie, osłabianie CI i konfiguracji jakości, force-push, kasowanie zdalnych repozytoriów. Tego nie da się cofnąć albo to wyłącza inne kontrole. Gdyby agent mógł zatwierdzać zmiany we własnych bramkach, poziomy A i B przestałyby cokolwiek znaczyć.",
           },
           {
             label: "Dowód, nie deklaracja:",
@@ -1244,7 +1311,7 @@ const CONTENT: Record<Lang, Content> = {
     limits:
       "Modele fundacyjne przez API: nie trenuję ich ani nie fine-tunuję. Niezawodność jest udowodniona w skali MŚP " +
       "(dziesiątki repozytoriów, jeden właściciel), nie hyperscale. Działy recenzentów kosztują tokeny (mniej więcej " +
-      "cztery recenzje dla T2 i osiem do dziesięciu dla T3), dlatego bramki 0-tokenowe idą pierwsze. Część bramek zależy " +
+      "cztery recenzje dla T2 i osiem do dziesięciu dla T3), dlatego bramki 0-tokenowe idą pierwsze. Scalanie bez mojej frazy opiera się na recenzji jednego modelu (w CI albo lokalnej), czyli na dowodzie probabilistycznym; zobacz aktualizację z 5 października i plik znanych granic. Część bramek zależy " +
       "od tego, czy repozytorium ma to, co sprawdzają, i pomija się z zalogowanym powodem, gdy nie ma. Sensem tej strony " +
       "nie jest to, że system jest skończony: tylko to, że tryby awarii pracy z AI są tu obudowane inżynierią, jawnie, " +
       "zamiast być zaklinane.",
@@ -1887,6 +1954,7 @@ function ClaudePage() {
       <div className="read-progress" aria-hidden="true" />
       <article className="cv-paper" ref={bodyRef}>
         <ClaudeHead title={c.title} role={c.role} lang={lang} />
+        <p className="ai-lead">{c.versionLine}</p>
 
         {/* sixteen screens on a phone: the reader gets a way to jump */}
         <PageToc bodyRef={bodyRef} label={c.tocLabel} lang={lang} />
