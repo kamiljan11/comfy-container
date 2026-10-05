@@ -206,7 +206,7 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "On this page",
     role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
     versionLine:
-      "PG v1.3.0 (as of October 5, 2026). This is a version that is still maturing, not a finished product: 10 public versions in under four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 on October 5). The counters in the table below were taken on September 26 and I have not recounted them since.",
+      "PG v1.4.0 (as of October 5, 2026). This is a version that is still maturing, not a finished product: 11 public versions in under four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5). The counters in the table below were taken on September 26 and I have not recounted them since.",
     intro:
       "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -476,6 +476,32 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title: "Update, October 5, 2026 (evening): the same rules for a much smaller context bill",
+        lead: "Version 1.4.0. I measured what PG costs before any work starts: about 26 thousand tokens of fixed context per session and about 1,300 more on every non-trivial prompt, most of it a repeat of rules the model had already seen. The goal of this release was to pay much less without the model following the rules any less. Four reviewers and a verifier went through it (17 findings, all fixed and re-checked).",
+        items: [
+          {
+            label: "The full protocol once per session:",
+            body: "the prompt guard now sends the whole protocol once, then a one-line reminder. After /compact or a new start it sends it in full again, and if anything is unclear (no session id, a broken marker) it falls back to the full text. A follow-up prompt about code went from about 4.9 KB to 0.9 KB.",
+          },
+          {
+            label: "Memory that is current and still complete:",
+            body: "the memory block at session start used to show checkpoints from a week ago, because it read the oldest end of the file. Now it shows the newest ones, lists open work from other sessions by title, and every clipped file keeps an index of its remaining sections, so nothing disappears from view. The block went from 35 KB to 25 KB, and a budget check turns red if it grows back.",
+          },
+          {
+            label: "A stricter gate against weakening CI:",
+            body: "the gate that blocks switching security checks off had a false alarm on a fresh repository template, which teaches an agent to bypass it. Fixing it opened four gaps that the security reviewer found (an unusual YAML step form, a job-level “continue on error”, a fake gate in a comment). All four are closed and covered by 16 tests.",
+          },
+          {
+            label: "Dependabot feeds the monthly vulnerability watch:",
+            body: "GitHub's dependency alerts are now on in 45 repositories (notifications only on GitHub, no e-mail), and the monthly watch reads them alongside npm audit. Live products get a fix through a pull request; the rest of the fleet gets one line in the log.",
+          },
+          {
+            label: "Honest limits:",
+            body: "the savings are measured in bytes. Whether the model follows the shortened protocol just as well I will only know after a week of real sessions, and a scheduled check on October 12 looks at exactly that.",
+          },
+        ],
+      },
       {
         title:
           "Update, October 5, 2026: pull requests merge without my phrase, but only with proof of review",
@@ -762,7 +788,7 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "Spis treści",
     role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
     versionLine:
-      "PG v1.3.0 (stan na 5 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 10 wersji publicznych w niecałe cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 z 5 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
+      "PG v1.4.0 (stan na 5 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 11 wersji publicznych w niecałe cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
     intro:
       "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -1038,6 +1064,33 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title:
+          "Aktualizacja z 5 października 2026 (wieczór): te same reguły za dużo mniejszy rachunek za kontekst",
+        lead: "Wersja 1.4.0. Zmierzyłem, ile PG kosztuje, zanim zacznie się jakakolwiek praca: około 26 tysięcy tokenów stałego kontekstu na sesję i około 1300 więcej przy każdym niebanalnym poleceniu, w większości powtórka reguł, które model już widział. Celem tego wydania było płacić dużo mniej bez tego, żeby model gorzej przestrzegał reguł. Przeszło przez czterech recenzentów i weryfikatora (17 uwag, wszystkie poprawione i sprawdzone ponownie).",
+        items: [
+          {
+            label: "Pełny protokół raz na sesję:",
+            body: "strażnik promptu wysyła teraz cały protokół raz, a potem jednolinijkowe przypomnienie. Po /compact albo nowym starcie wysyła go znowu w całości, a gdy coś jest niejasne (brak identyfikatora sesji, uszkodzony znacznik), wraca do pełnego tekstu. Kolejne polecenie dotyczące kodu spadło z około 4,9 KB do 0,9 KB.",
+          },
+          {
+            label: "Pamięć aktualna i nadal kompletna:",
+            body: "blok pamięci na starcie sesji pokazywał punkty kontrolne sprzed tygodnia, bo czytał najstarszy koniec pliku. Teraz pokazuje najnowsze, wypisuje tytuły otwartych prac z innych sesji, a każdy przycięty plik zostawia indeks pozostałych sekcji, więc nic nie znika z pola widzenia. Blok zszedł z 35 KB do 25 KB, a kontrola budżetu robi się czerwona, gdy znowu urośnie.",
+          },
+          {
+            label: "Ostrzejsza bramka przeciw osłabianiu CI:",
+            body: "bramka, która blokuje wyłączanie kontroli bezpieczeństwa, miała fałszywy alarm na świeżym szablonie repozytorium, a to uczy agenta jej obchodzenia. Poprawka otworzyła cztery luki, które znalazł recenzent bezpieczeństwa (nietypowy zapis kroku w YAML, „kontynuuj mimo błędu” na poziomie całego zadania, udawana bramka w komentarzu). Wszystkie cztery są zamknięte i pokryte 16 testami.",
+          },
+          {
+            label: "Dependabot zasila comiesięczny nadzór podatności:",
+            body: "alerty GitHuba o zależnościach są włączone w 45 repozytoriach (powiadomienia tylko na GitHubie, bez maili), a comiesięczny nadzór czyta je obok npm audit. Działające produkty dostają poprawkę przez pull request, reszta floty jedną linię w dzienniku.",
+          },
+          {
+            label: "Uczciwe granice:",
+            body: "oszczędność jest zmierzona w bajtach. Czy model przestrzega skróconego protokołu równie dobrze, będę wiedział dopiero po tygodniu prawdziwych sesji, a zaplanowana kontrola 12 października sprawdza właśnie to.",
+          },
+        ],
+      },
       {
         title:
           "Aktualizacja z 5 października 2026: pull requesty scalają się bez mojej frazy, ale tylko z dowodem recenzji",
