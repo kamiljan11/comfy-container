@@ -5,7 +5,7 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
-- /claude: new update section (PL/EN) for PG 1.4.0 (5 October 2026, evening): fewer tokens per session (full rules once per session, current memory notes with a section index, smaller start-up text), a stricter guard against switching off security checks (four gaps closed, 16 tests) and Dependabot alerts in the monthly vulnerability check; terms explained for a non-technical reader. The version line now says v1.4.0 and 11 public versions. Reviewed: code, ops and UX reviewers (all minor findings fixed).
+- /claude: new update section (PL/EN) for PG 1.4.0 (5 October 2026, evening): fewer tokens per session (full rules once per session, current memory notes with a section index, smaller start-up text), a stricter guard against switching off security checks (four gaps closed, 16 tests) and Dependabot alerts in the monthly vulnerability check; terms explained for a non-technical reader. The version line now says v1.4.0 and 11 public versions. This site change was reviewed by code, ops and UX reviewers; follow-up: the October 12 check is described as planned (no scheduled task backs it yet) and one technical phrase in the security item is replaced with plain wording.
 
 - /claude?tab=skills: card descriptions follow the page language. The repository's exporter now ships `summary_pl` / `summary_en` for all 18 skills and 10 reviewer agents (coding-higher-mind PR #17); `cardText()` picks the translation and falls back to the source text with its detected `lang`. Payment and eID provider names are generalised in the public data. Tests: `skillsCatalog.test.ts` (translation choice, every snapshot entry translated), `SkillsTab.test.ts` (PL and EN text rendered).
 

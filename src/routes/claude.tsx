@@ -490,7 +490,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "A stricter guard against switching off security checks:",
-            body: "one gate stops an agent from quietly disabling the automatic security checks that run on every change. It raised a false alarm on a fresh project template, and false alarms teach an agent to work around a gate. Fixing that opened four gaps, which the security reviewer found: an unusual way of writing a step in the settings file, a whole job marked “continue on error”, the word “true” written in quotes or as an expression, and a pretend check that only appears in a comment or a printed line. All four are closed and covered by 16 tests.",
+            body: "one gate stops an agent from quietly disabling the automatic security checks that run on every change. It raised a false alarm on a fresh project template, and false alarms teach an agent to work around a gate. Fixing that opened four gaps, which the security reviewer found: an unusual way of writing a step in the settings file, a whole job marked “continue on error”, the same switch written in a less common form, and a pretend check that only appears in a comment or a printed line. All four are closed and covered by 16 tests.",
           },
           {
             label: "GitHub's own vulnerability alerts feed the monthly check:",
@@ -498,7 +498,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Honest limits:",
-            body: "the savings are measured in kilobytes of text. Whether the model follows the shorter reminders just as well I will only know after a week of real sessions, and a scheduled check on October 12 looks at exactly that.",
+            body: "the savings are measured in kilobytes of text. Whether the model follows the shorter reminders just as well I will only know after a week of real sessions; I plan to check exactly that around October 12.",
           },
         ],
       },
@@ -1079,7 +1079,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Ostrzejsza ochrona przed wyłączaniem kontroli bezpieczeństwa:",
-            body: "jedna z bramek nie pozwala agentowi po cichu wyłączyć automatycznych kontroli bezpieczeństwa, które uruchamiają się przy każdej zmianie. Na świeżym szablonie projektu podnosiła fałszywy alarm, a fałszywe alarmy uczą agenta obchodzenia bramki. Poprawka otworzyła cztery luki, które znalazł recenzent bezpieczeństwa: nietypowy zapis kroku w pliku ustawień, całe zadanie oznaczone „kontynuuj mimo błędu”, słowo „true” zapisane w cudzysłowie albo jako wyrażenie oraz udawana kontrola, która jest tylko w komentarzu albo w wypisanym tekście. Wszystkie cztery są zamknięte i pokryte 16 testami.",
+            body: "jedna z bramek nie pozwala agentowi po cichu wyłączyć automatycznych kontroli bezpieczeństwa, które uruchamiają się przy każdej zmianie. Na świeżym szablonie projektu podnosiła fałszywy alarm, a fałszywe alarmy uczą agenta obchodzenia bramki. Poprawka otworzyła cztery luki, które znalazł recenzent bezpieczeństwa: nietypowy zapis kroku w pliku ustawień, całe zadanie oznaczone „kontynuuj mimo błędu”, ten sam przełącznik zapisany w rzadziej spotykanej formie oraz udawana kontrola, która jest tylko w komentarzu albo w wypisanym tekście. Wszystkie cztery są zamknięte i pokryte 16 testami.",
           },
           {
             label: "Alerty bezpieczeństwa GitHuba zasilają comiesięczną kontrolę:",
@@ -1087,7 +1087,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Uczciwe granice:",
-            body: "oszczędność jest zmierzona w kilobajtach tekstu. Czy model przestrzega krótszych przypomnień równie dobrze, będę wiedział dopiero po tygodniu prawdziwych sesji, a zaplanowana kontrola 12 października sprawdza właśnie to.",
+            body: "oszczędność jest zmierzona w kilobajtach tekstu. Czy model przestrzega krótszych przypomnień równie dobrze, będę wiedział dopiero po tygodniu prawdziwych sesji; planuję sprawdzić to około 12 października.",
           },
         ],
       },
