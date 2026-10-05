@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { T, type Lang } from "../i18n";
 import { SERVICES } from "../data/services";
 import { AREAS } from "../data/areas";
 import { ABOUT_ITEMS } from "../data/siteMap";
 import { useLang, ssrLangFor } from "../hooks/useLang";
+import { useIsMobile } from "../hooks/use-mobile";
 
 /**
  * One footer for every route, rendered by __root next to SiteHeader. It used
@@ -12,6 +14,12 @@ import { useLang, ssrLangFor } from "../hooks/useLang";
  * The link lists come from the same data as the header menu (SERVICES, AREAS,
  * ABOUT_ITEMS), so a page added there shows up here without a second edit.
  * The tagline is the homepage hero line, for the same reason.
+ *
+ * On a phone the three link columns fold into a closed accordion: open, they
+ * stacked 27 links of 44 px each into a footer longer than the screen. Contact
+ * stays open, it is what a visitor scrolls down for. The server renders the
+ * desktop layout and the fold switches on after hydration; the footer is below
+ * the fold, so nobody sees the swap.
  */
 
 type Copy = {
@@ -57,10 +65,40 @@ const COPY: Record<Lang, Copy> = {
   },
 };
 
+function LinkColumn({
+  title,
+  folded,
+  children,
+}: {
+  title: string;
+  folded: boolean;
+  children: ReactNode;
+}) {
+  const list = <ul>{children}</ul>;
+  return (
+    <nav className="sf-col" aria-label={title}>
+      {folded ? (
+        <details className="sf-fold">
+          <summary className="sf-sum">
+            <h2 className="sf-h">{title}</h2>
+          </summary>
+          {list}
+        </details>
+      ) : (
+        <>
+          <h2 className="sf-h">{title}</h2>
+          {list}
+        </>
+      )}
+    </nav>
+  );
+}
+
 export function SiteFooter() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [lang] = useLang(ssrLangFor(pathname));
   const t = COPY[lang];
+  const folded = useIsMobile();
   // the "About" menu also has #anchors into /o-mnie; the footer lists pages only
   const aboutPages = ABOUT_ITEMS[lang].filter((a) => !a.hash);
 
@@ -77,60 +115,51 @@ export function SiteFooter() {
           </Link>
         </div>
 
-        <nav className="sf-col" aria-label={t.services}>
-          <h2 className="sf-h">{t.services}</h2>
-          <ul>
-            {SERVICES[lang].map((s) => (
-              <li key={s.slug}>
-                <Link to="/uslugi/$slug" params={{ slug: s.slug }}>
-                  {s.navLabel}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link to="/uslugi" className="sf-all">
-                {t.allServices} →
+        <LinkColumn title={t.services} folded={folded}>
+          {SERVICES[lang].map((s) => (
+            <li key={s.slug}>
+              <Link to="/uslugi/$slug" params={{ slug: s.slug }}>
+                {s.navLabel}
               </Link>
             </li>
-          </ul>
-        </nav>
+          ))}
+          <li>
+            <Link to="/uslugi" className="sf-all">
+              {t.allServices} →
+            </Link>
+          </li>
+        </LinkColumn>
 
-        <nav className="sf-col" aria-label={t.areas}>
-          <h2 className="sf-h">{t.areas}</h2>
-          <ul>
-            {AREAS[lang].map((a) => (
-              <li key={a.slug}>
-                <Link to="/obszary/$slug" params={{ slug: a.slug }}>
-                  {a.navLabel}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link to="/obszary" className="sf-all">
-                {t.allAreas} →
+        <LinkColumn title={t.areas} folded={folded}>
+          {AREAS[lang].map((a) => (
+            <li key={a.slug}>
+              <Link to="/obszary/$slug" params={{ slug: a.slug }}>
+                {a.navLabel}
               </Link>
             </li>
-          </ul>
-        </nav>
+          ))}
+          <li>
+            <Link to="/obszary" className="sf-all">
+              {t.allAreas} →
+            </Link>
+          </li>
+        </LinkColumn>
 
-        <nav className="sf-col" aria-label={t.about}>
-          <h2 className="sf-h">{t.about}</h2>
-          <ul>
-            {aboutPages.map((a) => (
-              <li key={a.to}>
-                <Link to={a.to}>{a.label}</Link>
-              </li>
-            ))}
-            <li>
-              <Link to="/case-studies">{t.cases}</Link>
+        <LinkColumn title={t.about} folded={folded}>
+          {aboutPages.map((a) => (
+            <li key={a.to}>
+              <Link to={a.to}>{a.label}</Link>
             </li>
-            <li>
-              <Link to="/blog">{t.blog}</Link>
-            </li>
-          </ul>
-        </nav>
+          ))}
+          <li>
+            <Link to="/case-studies">{t.cases}</Link>
+          </li>
+          <li>
+            <Link to="/blog">{t.blog}</Link>
+          </li>
+        </LinkColumn>
 
-        <div className="sf-col">
+        <div className="sf-col sf-contact">
           <h2 className="sf-h">{t.contact}</h2>
           <ul>
             <li>

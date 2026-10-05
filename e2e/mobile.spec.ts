@@ -145,12 +145,31 @@ test("service headings keep every word on one line on a phone", async ({ page })
 
 test("footer links are 44 px tap targets", async ({ page }) => {
   await load(page, "/uslugi");
+  // open the folded columns first: a closed <details> reports its links as 0 px
+  for (const sum of await page.locator(".sf-sum").all()) await sum.click();
   const small = await page.evaluate(() =>
-    [...document.querySelectorAll<HTMLElement>(".sf-col a")]
+    [...document.querySelectorAll<HTMLElement>(".sf-col a, .sf-sum")]
       .map((a) => ({ t: a.textContent, h: a.getBoundingClientRect().height }))
       .filter((a) => a.h < 44),
   );
   expect(small).toEqual([]);
+});
+
+test("the footer is shorter than the screen and folds its link columns", async ({ page }) => {
+  // Kamil: on a phone the footer was "ultra long" (1053 px at 375 px wide,
+  // 27 links stacked); the link columns now start closed
+  await load(page, "/?lang=pl");
+  const footer = page.locator("footer.sf");
+  const height = await footer.evaluate((f) => f.getBoundingClientRect().height);
+  expect(height).toBeLessThan(page.viewportSize()!.height);
+  await expect(page.locator(".sf-fold")).toHaveCount(3);
+  await expect(page.locator(".sf-fold[open]")).toHaveCount(0);
+  const services = footer.getByRole("navigation", { name: "Usługi" });
+  await expect(services.locator('a[href="/uslugi/integracje"]')).toBeHidden();
+  await services.locator(".sf-sum").click();
+  await expect(services.locator('a[href="/uslugi/integracje"]')).toBeVisible();
+  // contact never folds
+  await expect(footer.locator('a[href="mailto:hello@kamiljan.com"]')).toBeVisible();
 });
 
 test("the /ksiazki book turns hard pages on a phone and still turns", async ({ page }) => {

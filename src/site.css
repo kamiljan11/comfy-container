@@ -2273,14 +2273,64 @@ section {
   }
 
   /* ── Footer ── */
+  /* link columns fold into an accordion (SiteFooter.tsx): one column, a row
+     per section, Contact open below them */
   .sf {
-    padding: 40px 16px 24px;
+    /* bottom room for the fixed chat bubble, which covered the privacy link */
+    padding: 40px 16px 96px;
   }
   .sf-grid {
-    gap: 28px 20px;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .sf-brand {
+    margin-bottom: 28px;
+  }
+  .sf-col {
+    border-top: 1px solid var(--border);
   }
   .sf-col ul {
     gap: 0;
+  }
+  .sf-sum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 52px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .sf-sum::-webkit-details-marker {
+    display: none;
+  }
+  .sf-sum::after {
+    content: "+";
+    font-size: 20px;
+    line-height: 1;
+    color: var(--teal-2);
+  }
+  .sf-fold[open] .sf-sum::after {
+    content: "−";
+  }
+  .sf-sum .sf-h {
+    margin: 0;
+  }
+  .sf-fold ul {
+    padding-bottom: 12px;
+  }
+  .sf-contact {
+    padding-top: 16px;
+  }
+  .sf-contact .sf-h {
+    margin-bottom: 0;
+  }
+  .sf-contact ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 20px;
+  }
+  .sf-bottom {
+    margin-top: 28px;
   }
 
   /* ── Misc ── */

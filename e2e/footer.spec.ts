@@ -37,6 +37,13 @@ for (const path of PAGES) {
   });
 }
 
+test("desktop footer shows every column open, with no accordion", async ({ page }) => {
+  await page.goto("/?lang=pl");
+  await page.waitForLoadState("networkidle");
+  await expect(page.locator("footer.sf .sf-fold")).toHaveCount(0);
+  await expect(page.locator('footer.sf a[href="/uslugi/integracje"]')).toBeVisible();
+});
+
 test("the CV prints without the footer", async ({ page }) => {
   await page.goto("/cv?lang=pl");
   await page.emulateMedia({ media: "print" });
