@@ -6,6 +6,11 @@
 
 /* ── Tokens ── */
 :root {
+  /* chat bubble (.chatbot-fab): size and distance from the viewport corner;
+     the footer reserves room below its last line from the same numbers */
+  --fab-size: 56px;
+  --fab-gap: 24px;
+  --fab-clear: calc(var(--fab-gap) + var(--fab-size) + 16px + env(safe-area-inset-bottom, 0px));
   --bg: #06101a;
   --bg-alt: #09161f;
   --bg-deep: #040c14;
@@ -1021,6 +1026,10 @@ section {
   color: var(--text-2);
 }
 @media (max-width: 1024px) {
+  /* the footer spans the width here, so the chat bubble sits over its last line */
+  .sf {
+    padding-bottom: var(--fab-clear);
+  }
   .sf-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2299,7 +2308,7 @@ section {
      per section, Contact open below them */
   .sf {
     /* bottom room for the fixed chat bubble, which covered the privacy link */
-    padding: 40px 16px calc(96px + env(safe-area-inset-bottom, 0px));
+    padding: 40px 16px var(--fab-clear);
   }
   .sf-grid {
     grid-template-columns: 1fr;
@@ -2418,11 +2427,11 @@ section {
 /* ════════════════ AI chat assistant ════════════════ */
 .chatbot-fab {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: var(--fab-gap);
+  right: var(--fab-gap);
   z-index: 95;
-  width: 56px;
-  height: 56px;
+  width: var(--fab-size);
+  height: var(--fab-size);
   border-radius: 50%;
   background: var(--teal);
   color: #fff;
@@ -2956,9 +2965,8 @@ section {
 }
 
 @media (max-width: 768px) {
-  .chatbot-fab {
-    bottom: 20px;
-    right: 20px;
+  :root {
+    --fab-gap: 20px;
   }
   .chatbot-panel {
     bottom: 84px;

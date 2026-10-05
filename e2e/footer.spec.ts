@@ -94,6 +94,25 @@ for (const [width, open] of [
   });
 }
 
+test("on a tablet the chat bubble does not cover the footer's last line", async ({ page }) => {
+  await page.setViewportSize({ width: 900, height: 1000 });
+  await page.goto("/?lang=pl");
+  await page.waitForLoadState("networkidle");
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  const fab = (await page.locator(".chatbot-fab").boundingBox())!;
+  const lines = await page
+    .locator(".sf-bottom > *")
+    .evaluateAll((els) => els.map((e) => e.getBoundingClientRect().toJSON() as DOMRect));
+  for (const r of lines) {
+    const overlaps =
+      r.right > fab.x &&
+      r.left < fab.x + fab.width &&
+      r.bottom > fab.y &&
+      r.top < fab.y + fab.height;
+    expect(overlaps, JSON.stringify(r)).toBe(false);
+  }
+});
+
 test("the CV prints without the footer", async ({ page }) => {
   await page.goto("/cv?lang=pl");
   await page.emulateMedia({ media: "print" });

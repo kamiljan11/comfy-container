@@ -172,6 +172,27 @@ test("the footer is shorter than the screen and folds its link columns", async (
   await expect(footer.locator('a[href="mailto:hello@kamiljan.com"]')).toBeVisible();
 });
 
+test("the chat bubble does not cover the footer's last line", async ({ page }) => {
+  await load(page, "/?lang=pl");
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  const fab = await page.locator(".chatbot-fab").boundingBox();
+  const lines = await page
+    .locator(".sf-bottom > *")
+    .evaluateAll((els) =>
+      els
+        .map((e) => e.getBoundingClientRect())
+        .map((r) => ({ top: r.top, bottom: r.bottom, left: r.left, right: r.right })),
+    );
+  for (const r of lines) {
+    const overlaps =
+      r.right > fab!.x &&
+      r.left < fab!.x + fab!.width &&
+      r.bottom > fab!.y &&
+      r.top < fab!.y + fab!.height;
+    expect(overlaps, JSON.stringify(r)).toBe(false);
+  }
+});
+
 test.describe("without JavaScript", () => {
   test.use({ javaScriptEnabled: false });
   test("the footer is short and its columns still open", async ({ page }) => {
