@@ -1025,11 +1025,14 @@ section {
   font-size: 12px;
   color: var(--text-2);
 }
-@media (max-width: 1024px) {
-  /* the footer spans the width here, so the chat bubble sits over its last line */
+/* the chat bubble sits over the footer's last line until the 1200 px content
+   column, centred, ends left of it: (w + 1200) / 2 < w - 80 from 1360 px on */
+@media (max-width: 1359px) {
   .sf {
     padding-bottom: var(--fab-clear);
   }
+}
+@media (max-width: 1024px) {
   .sf-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
