@@ -16,9 +16,11 @@ import { useLang, ssrLangFor } from "../hooks/useLang";
  *
  * On a phone the three link columns fold into a closed accordion: open, they
  * stacked 27 links of 44 px each into a footer longer than the screen. Contact
- * stays open, it is what a visitor scrolls down for. The server renders the
- * desktop markup; on a phone site.css hides those open lists until hydration
- * swaps in the <details>, so the footer never shows up long and then jumps.
+ * stays open, it is what a visitor scrolls down for. The columns are
+ * <details> already in the server HTML, so a phone gets a short footer that
+ * opens without JavaScript and nothing swaps on hydration. On a desktop
+ * site.css shows the closed content and, once hydrated, the columns are set
+ * open so their state matches what is on screen.
  */
 
 // the same query as the site.css block that styles the folded footer (it
@@ -26,8 +28,9 @@ import { useLang, ssrLangFor } from "../hooks/useLang";
 // at exactly 768 px
 const FOLD_QUERY = "(max-width: 768px)";
 
-function useFolded(): boolean {
-  const [folded, setFolded] = useState(false);
+// null until hydrated: the server cannot know the viewport
+function useFolded(): boolean | null {
+  const [folded, setFolded] = useState<boolean | null>(null);
   useEffect(() => {
     const mq = window.matchMedia(FOLD_QUERY);
     const sync = () => setFolded(mq.matches);
@@ -87,25 +90,19 @@ function LinkColumn({
   children,
 }: {
   title: string;
-  folded: boolean;
+  folded: boolean | null;
   children: ReactNode;
 }) {
-  const list = <ul>{children}</ul>;
+  const desktop = folded === false;
   return (
     <nav className="sf-col" aria-label={title}>
-      {folded ? (
-        <details className="sf-fold">
-          <summary className="sf-sum">
-            <h2 className="sf-h">{title}</h2>
-          </summary>
-          {list}
-        </details>
-      ) : (
-        <>
+      <details className="sf-fold" open={desktop}>
+        {/* on a desktop the heading is not a control: no tab stop, no click */}
+        <summary className="sf-sum" tabIndex={desktop ? -1 : undefined}>
           <h2 className="sf-h">{title}</h2>
-          {list}
-        </>
-      )}
+        </summary>
+        <ul>{children}</ul>
+      </details>
     </nav>
   );
 }

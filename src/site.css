@@ -986,6 +986,26 @@ section {
 .sf-col .sf-all {
   color: var(--teal-2);
 }
+/* the link columns are <details> (folded on a phone, see the 768 px block);
+   on a desktop the summary is just the heading */
+.sf-sum {
+  list-style: none;
+}
+.sf-sum::-webkit-details-marker {
+  display: none;
+}
+@media (min-width: 769px) {
+  .sf-sum {
+    pointer-events: none;
+  }
+}
+/* own rule: a browser without ::details-content drops only this one, and the
+   columns open on hydration instead */
+@media (min-width: 769px) {
+  .sf-fold::details-content {
+    content-visibility: visible;
+  }
+}
 .sf-bottom {
   max-width: 1200px;
   margin: 44px auto 0;
@@ -2292,30 +2312,24 @@ section {
   .sf-col ul {
     gap: 0;
   }
-  /* before hydration the server's open lists would make the footer long and
-     then jump when it folds; hide them so only the headings show until then */
-  .sf-col:not(.sf-contact) > ul {
-    display: none;
-  }
   .sf-sum {
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-height: 52px;
     cursor: pointer;
-    list-style: none;
-  }
-  .sf-sum::-webkit-details-marker {
-    display: none;
   }
   .sf-sum::after {
     content: "+";
+    /* empty alt text: the summary already announces expanded/collapsed */
+    content: "+" / "";
     font-size: 20px;
     line-height: 1;
     color: var(--teal-2);
   }
   .sf-fold[open] .sf-sum::after {
     content: "−";
+    content: "−" / "";
   }
   .sf-sum .sf-h {
     margin: 0;

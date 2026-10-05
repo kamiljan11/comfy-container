@@ -172,17 +172,30 @@ test("the footer is shorter than the screen and folds its link columns", async (
   await expect(footer.locator('a[href="mailto:hello@kamiljan.com"]')).toBeVisible();
 });
 
-test.describe("before the footer folds", () => {
+test.describe("without JavaScript", () => {
   test.use({ javaScriptEnabled: false });
-  test("the server-rendered footer is already short", async ({ page }) => {
-    // the server renders open columns; site.css hides them on a phone so the
-    // footer does not show up long and jump when hydration folds it
-    // ("load" never fires here with scripts off, so wait for the DOM only)
+  test("the footer is short and its columns still open", async ({ page }) => {
+    // the columns are <details> in the server HTML, so they fold and open
+    // natively, before hydration or without it
     await page.goto("/?lang=pl", { waitUntil: "domcontentloaded" });
     const footer = page.locator("footer.sf");
+    // ?lang= is applied on the client, so without scripts the page stays English
+    const services = footer.getByRole("navigation", { name: /^(Services|Usługi)$/ });
+    await expect(footer.locator(".sf-fold")).toHaveCount(3);
+    await expect(services.locator('a[href="/uslugi/integracje"]')).toBeHidden();
+    // measured once the stylesheet applies (the one-column grid comes from it)
+    await expect
+      .poll(() =>
+        footer.evaluate(
+          (f) =>
+            getComputedStyle(f.querySelector(".sf-grid")!).gridTemplateColumns.split(" ").length,
+        ),
+      )
+      .toBe(1);
     const height = await footer.evaluate((f) => f.getBoundingClientRect().height);
     expect(height).toBeLessThan(page.viewportSize()!.height);
-    await expect(footer.locator('a[href="mailto:hello@kamiljan.com"]')).toBeVisible();
+    await services.locator(".sf-sum").click();
+    await expect(services.locator('a[href="/uslugi/integracje"]')).toBeVisible();
   });
 });
 
