@@ -5,8 +5,9 @@ import raw from "../data/higher-mind-skills.json";
  * Catalogue behind the Skills tab on /claude. The data file is a SNAPSHOT of `skills.json`, which the
  * public repository's exporter (`bin/pg-export-public.py`) generates from the skill files themselves,
  * so no description here is written by hand. Refresh (manual, after a release of coding-higher-mind):
- *   curl -fsSL https://raw.githubusercontent.com/kamiljan11/coding-higher-mind/main/skills.json \
- *     -o src/data/higher-mind-skills.json && npx vitest run src/lib/skillsCatalog.test.ts
+ *   curl -fsSL --max-time 30 https://raw.githubusercontent.com/kamiljan11/coding-higher-mind/main/skills.json \
+ *     | jq 'del(.skills[].description, .agents[].description)' > src/data/higher-mind-skills.json \
+ *     && npx vitest run src/lib/skillsCatalog.test.ts
  */
 
 export type Skill = {
@@ -15,7 +16,8 @@ export type Skill = {
   summary: string;
   summary_pl?: string;
   summary_en?: string;
-  description: string;
+  /** Full SKILL.md description — dropped from the bundled snapshot (never rendered, ~17 KB); see refresh below. */
+  description?: string;
   path: string;
   plugin: boolean;
 };
