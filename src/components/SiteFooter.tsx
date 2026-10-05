@@ -1,3 +1,4 @@
+import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { T, type Lang } from "../i18n";
 import { SERVICES } from "../data/services";
@@ -12,7 +13,33 @@ import { useLang, ssrLangFor } from "../hooks/useLang";
  * The link lists come from the same data as the header menu (SERVICES, AREAS,
  * ABOUT_ITEMS), so a page added there shows up here without a second edit.
  * The tagline is the homepage hero line, for the same reason.
+ *
+ * On a phone the three link columns fold into a closed accordion: open, they
+ * stacked 27 links of 44 px each into a footer longer than the screen. Contact
+ * stays open, it is what a visitor scrolls down for. The columns are
+ * <details> already in the server HTML, so a phone gets a short footer that
+ * opens without JavaScript and nothing swaps on hydration. On a desktop
+ * site.css shows the closed content and, once hydrated, the columns are set
+ * open so their state matches what is on screen.
  */
+
+// the same query as the site.css block that styles the folded footer (it
+// includes 768 px); a different threshold left a one-column, unfolded footer
+// at exactly 768 px
+const FOLD_QUERY = "(max-width: 768px)";
+
+// null until hydrated: the server cannot know the viewport
+function useFolded(): boolean | null {
+  const [folded, setFolded] = useState<boolean | null>(null);
+  useEffect(() => {
+    const mq = window.matchMedia(FOLD_QUERY);
+    const sync = () => setFolded(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return folded;
+}
 
 type Copy = {
   services: string;
@@ -57,10 +84,42 @@ const COPY: Record<Lang, Copy> = {
   },
 };
 
+function LinkColumn({
+  title,
+  folded,
+  children,
+}: {
+  title: string;
+  folded: boolean | null;
+  children: ReactNode;
+}) {
+  const desktop = folded === false;
+  return (
+    <nav className="sf-col" aria-label={title}>
+      <details
+        className="sf-fold"
+        open={desktop}
+        // a screen reader can still activate the summary; on a desktop the
+        // column stays open, so its state keeps matching what is on screen
+        onToggle={(e) => {
+          if (desktop && !e.currentTarget.open) e.currentTarget.open = true;
+        }}
+      >
+        {/* on a desktop the heading is not a control: no tab stop, no click */}
+        <summary className="sf-sum" tabIndex={desktop ? -1 : undefined}>
+          <h2 className="sf-h">{title}</h2>
+        </summary>
+        <ul>{children}</ul>
+      </details>
+    </nav>
+  );
+}
+
 export function SiteFooter() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [lang] = useLang(ssrLangFor(pathname));
   const t = COPY[lang];
+  const folded = useFolded();
   // the "About" menu also has #anchors into /o-mnie; the footer lists pages only
   const aboutPages = ABOUT_ITEMS[lang].filter((a) => !a.hash);
 
@@ -77,60 +136,51 @@ export function SiteFooter() {
           </Link>
         </div>
 
-        <nav className="sf-col" aria-label={t.services}>
-          <h2 className="sf-h">{t.services}</h2>
-          <ul>
-            {SERVICES[lang].map((s) => (
-              <li key={s.slug}>
-                <Link to="/uslugi/$slug" params={{ slug: s.slug }}>
-                  {s.navLabel}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link to="/uslugi" className="sf-all">
-                {t.allServices} →
+        <LinkColumn title={t.services} folded={folded}>
+          {SERVICES[lang].map((s) => (
+            <li key={s.slug}>
+              <Link to="/uslugi/$slug" params={{ slug: s.slug }}>
+                {s.navLabel}
               </Link>
             </li>
-          </ul>
-        </nav>
+          ))}
+          <li>
+            <Link to="/uslugi" className="sf-all">
+              {t.allServices} →
+            </Link>
+          </li>
+        </LinkColumn>
 
-        <nav className="sf-col" aria-label={t.areas}>
-          <h2 className="sf-h">{t.areas}</h2>
-          <ul>
-            {AREAS[lang].map((a) => (
-              <li key={a.slug}>
-                <Link to="/obszary/$slug" params={{ slug: a.slug }}>
-                  {a.navLabel}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link to="/obszary" className="sf-all">
-                {t.allAreas} →
+        <LinkColumn title={t.areas} folded={folded}>
+          {AREAS[lang].map((a) => (
+            <li key={a.slug}>
+              <Link to="/obszary/$slug" params={{ slug: a.slug }}>
+                {a.navLabel}
               </Link>
             </li>
-          </ul>
-        </nav>
+          ))}
+          <li>
+            <Link to="/obszary" className="sf-all">
+              {t.allAreas} →
+            </Link>
+          </li>
+        </LinkColumn>
 
-        <nav className="sf-col" aria-label={t.about}>
-          <h2 className="sf-h">{t.about}</h2>
-          <ul>
-            {aboutPages.map((a) => (
-              <li key={a.to}>
-                <Link to={a.to}>{a.label}</Link>
-              </li>
-            ))}
-            <li>
-              <Link to="/case-studies">{t.cases}</Link>
+        <LinkColumn title={t.about} folded={folded}>
+          {aboutPages.map((a) => (
+            <li key={a.to}>
+              <Link to={a.to}>{a.label}</Link>
             </li>
-            <li>
-              <Link to="/blog">{t.blog}</Link>
-            </li>
-          </ul>
-        </nav>
+          ))}
+          <li>
+            <Link to="/case-studies">{t.cases}</Link>
+          </li>
+          <li>
+            <Link to="/blog">{t.blog}</Link>
+          </li>
+        </LinkColumn>
 
-        <div className="sf-col">
+        <div className="sf-col sf-contact">
           <h2 className="sf-h">{t.contact}</h2>
           <ul>
             <li>

@@ -6,6 +6,11 @@
 
 /* ── Tokens ── */
 :root {
+  /* chat bubble (.chatbot-fab): size and distance from the viewport corner;
+     the footer reserves room below its last line from the same numbers */
+  --fab-size: 56px;
+  --fab-gap: 24px;
+  --fab-clear: calc(var(--fab-gap) + var(--fab-size) + 16px + env(safe-area-inset-bottom, 0px));
   --bg: #06101a;
   --bg-alt: #09161f;
   --bg-deep: #040c14;
@@ -986,6 +991,28 @@ section {
 .sf-col .sf-all {
   color: var(--teal-2);
 }
+/* the link columns are <details> (folded on a phone, see the 768 px block);
+   on a desktop the summary is just the heading */
+.sf-sum {
+  list-style: none;
+}
+.sf-sum::-webkit-details-marker {
+  display: none;
+}
+/* width > 768px is the exact complement of the phone block's max-width:
+   768px (min-width: 769px left 768.x px, e.g. under zoom, in neither). Only
+   where ::details-content can show the closed content is the summary made
+   inert; elsewhere it stays clickable until hydration opens the columns. */
+@supports selector(::details-content) {
+  @media (width > 768px) {
+    .sf-fold::details-content {
+      content-visibility: visible;
+    }
+    .sf-sum {
+      pointer-events: none;
+    }
+  }
+}
 .sf-bottom {
   max-width: 1200px;
   margin: 44px auto 0;
@@ -997,6 +1024,15 @@ section {
   gap: 8px 24px;
   font-size: 12px;
   color: var(--text-2);
+}
+/* on pages with the chat bubble (ChatBot, rendered by HomePage only) it sits
+   over the footer's last line until the 1200 px content column, centred, ends
+   left of it: (w + 1200) / 2 < w - 80 from 1360 px on, plus up to ~20 px for
+   a classic scrollbar, which the media query counts and the bubble does not */
+@media (max-width: 1399px) {
+  body:has(.chatbot-fab) .sf {
+    padding-bottom: var(--fab-clear);
+  }
 }
 @media (max-width: 1024px) {
   .sf-grid {
@@ -2273,14 +2309,63 @@ section {
   }
 
   /* ── Footer ── */
+  /* link columns fold into an accordion (SiteFooter.tsx): one column, a row
+     per section, Contact open below them */
   .sf {
+    /* pages with the chat bubble get more bottom room, see max-width: 1399px */
     padding: 40px 16px 24px;
   }
   .sf-grid {
-    gap: 28px 20px;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .sf-brand {
+    margin-bottom: 28px;
+  }
+  .sf-col {
+    border-top: 1px solid var(--border);
   }
   .sf-col ul {
     gap: 0;
+  }
+  .sf-sum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 52px;
+    cursor: pointer;
+  }
+  .sf-sum::after {
+    content: "+";
+    /* empty alt text: the summary already announces expanded/collapsed */
+    content: "+" / "";
+    font-size: 20px;
+    line-height: 1;
+    color: var(--teal-2);
+  }
+  .sf-fold[open] .sf-sum::after {
+    content: "−";
+    content: "−" / "";
+  }
+  .sf-sum .sf-h {
+    margin: 0;
+  }
+  .sf-fold ul {
+    padding-bottom: 12px;
+  }
+  .sf-contact {
+    padding-top: 16px;
+  }
+  .sf-contact .sf-h {
+    margin-bottom: 0;
+  }
+  .sf-contact ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 20px;
+  }
+  .sf-bottom {
+    margin-top: 28px;
   }
 
   /* ── Misc ── */
@@ -2347,11 +2432,11 @@ section {
 /* ════════════════ AI chat assistant ════════════════ */
 .chatbot-fab {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: var(--fab-gap);
+  right: var(--fab-gap);
   z-index: 95;
-  width: 56px;
-  height: 56px;
+  width: var(--fab-size);
+  height: var(--fab-size);
   border-radius: 50%;
   background: var(--teal);
   color: #fff;
@@ -2405,7 +2490,7 @@ section {
 
 .chatbot-panel {
   position: fixed;
-  bottom: 92px;
+  bottom: calc(var(--fab-gap) + var(--fab-size) + 12px);
   right: 24px;
   z-index: 96;
   width: 370px;
@@ -2885,12 +2970,11 @@ section {
 }
 
 @media (max-width: 768px) {
-  .chatbot-fab {
-    bottom: 20px;
-    right: 20px;
+  :root {
+    --fab-gap: 20px;
   }
   .chatbot-panel {
-    bottom: 84px;
+    bottom: calc(var(--fab-gap) + var(--fab-size) + 8px);
     right: 12px;
     left: 12px;
     width: auto;

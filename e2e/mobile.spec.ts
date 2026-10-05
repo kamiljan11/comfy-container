@@ -145,12 +145,91 @@ test("service headings keep every word on one line on a phone", async ({ page })
 
 test("footer links are 44 px tap targets", async ({ page }) => {
   await load(page, "/uslugi");
+  // open the folded columns first: a closed <details> reports its links as 0 px
+  for (const sum of await page.locator(".sf-sum").all()) await sum.click();
   const small = await page.evaluate(() =>
-    [...document.querySelectorAll<HTMLElement>(".sf-col a")]
+    [...document.querySelectorAll<HTMLElement>(".sf-col a, .sf-sum")]
       .map((a) => ({ t: a.textContent, h: a.getBoundingClientRect().height }))
       .filter((a) => a.h < 44),
   );
   expect(small).toEqual([]);
+});
+
+test("the footer is shorter than the screen and folds its link columns", async ({ page }) => {
+  // Kamil: on a phone the footer was "ultra long" (1053 px at 375 px wide,
+  // 27 links stacked); the link columns now start closed
+  await load(page, "/?lang=pl");
+  const footer = page.locator("footer.sf");
+  const height = await footer.evaluate((f) => f.getBoundingClientRect().height);
+  expect(height).toBeLessThan(page.viewportSize()!.height);
+  await expect(page.locator(".sf-fold")).toHaveCount(3);
+  await expect(page.locator(".sf-fold[open]")).toHaveCount(0);
+  const services = footer.getByRole("navigation", { name: "Usługi" });
+  await expect(services.locator('a[href="/uslugi/integracje"]')).toBeHidden();
+  await services.locator(".sf-sum").click();
+  await expect(services.locator('a[href="/uslugi/integracje"]')).toBeVisible();
+  // contact never folds
+  await expect(footer.locator('a[href="mailto:hello@kamiljan.com"]')).toBeVisible();
+});
+
+test("only pages with the chat bubble reserve room for it below the footer", async ({ page }) => {
+  // ChatBot is rendered by HomePage (/ and /o-mnie); other pages have no bubble
+  const pad = () =>
+    page.locator("footer.sf").evaluate((f) => parseFloat(getComputedStyle(f).paddingBottom));
+  await load(page, "/uslugi");
+  await expect(page.locator(".chatbot-fab")).toHaveCount(0);
+  expect(await pad()).toBe(24);
+  await load(page, "/?lang=pl");
+  await expect(page.locator(".chatbot-fab")).toHaveCount(1);
+  expect(await pad()).toBeGreaterThan(24);
+});
+
+test("the chat bubble does not cover the footer's last line", async ({ page }) => {
+  await load(page, "/?lang=pl");
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  const fab = await page.locator(".chatbot-fab").boundingBox();
+  const lines = await page
+    .locator(".sf-bottom > *")
+    .evaluateAll((els) =>
+      els
+        .map((e) => e.getBoundingClientRect())
+        .map((r) => ({ top: r.top, bottom: r.bottom, left: r.left, right: r.right })),
+    );
+  for (const r of lines) {
+    const overlaps =
+      r.right > fab!.x &&
+      r.left < fab!.x + fab!.width &&
+      r.bottom > fab!.y &&
+      r.top < fab!.y + fab!.height;
+    expect(overlaps, JSON.stringify(r)).toBe(false);
+  }
+});
+
+test.describe("without JavaScript", () => {
+  test.use({ javaScriptEnabled: false });
+  test("the footer is short and its columns still open", async ({ page }) => {
+    // the columns are <details> in the server HTML, so they fold and open
+    // natively, before hydration or without it
+    await page.goto("/?lang=pl", { waitUntil: "domcontentloaded" });
+    const footer = page.locator("footer.sf");
+    // ?lang= is applied on the client, so without scripts the page stays English
+    const services = footer.getByRole("navigation", { name: /^(Services|Usługi)$/ });
+    await expect(footer.locator(".sf-fold")).toHaveCount(3);
+    await expect(services.locator('a[href="/uslugi/integracje"]')).toBeHidden();
+    // measured once the stylesheet applies (the one-column grid comes from it)
+    await expect
+      .poll(() =>
+        footer.evaluate(
+          (f) =>
+            getComputedStyle(f.querySelector(".sf-grid")!).gridTemplateColumns.split(" ").length,
+        ),
+      )
+      .toBe(1);
+    const height = await footer.evaluate((f) => f.getBoundingClientRect().height);
+    expect(height).toBeLessThan(page.viewportSize()!.height);
+    await services.locator(".sf-sum").click();
+    await expect(services.locator('a[href="/uslugi/integracje"]')).toBeVisible();
+  });
 });
 
 test("the /ksiazki book turns hard pages on a phone and still turns", async ({ page }) => {
