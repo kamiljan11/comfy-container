@@ -52,6 +52,8 @@ describe("skillsCatalog", () => {
     expect(() => loadCatalog(noPath)).toThrow(/without name, summary or path/);
     const badPath = { ...raw, skills: [{ ...raw.skills[0], path: "../../evil" }] };
     expect(() => loadCatalog(badPath)).toThrow(/without name, summary or path/);
+    const badTranslation = { ...raw, skills: [{ ...raw.skills[0], summary_pl: 42 }] };
+    expect(() => loadCatalog(badTranslation)).toThrow(/without name, summary or path/);
     const noInstall = { ...raw, install: {} };
     expect(() => loadCatalog(noInstall)).toThrow(/install/);
   });
