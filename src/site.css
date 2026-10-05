@@ -1025,10 +1025,12 @@ section {
   font-size: 12px;
   color: var(--text-2);
 }
-/* the chat bubble sits over the footer's last line until the 1200 px content
-   column, centred, ends left of it: (w + 1200) / 2 < w - 80 from 1360 px on */
-@media (max-width: 1359px) {
-  .sf {
+/* on pages with the chat bubble (ChatBot, rendered by HomePage only) it sits
+   over the footer's last line until the 1200 px content column, centred, ends
+   left of it: (w + 1200) / 2 < w - 80 from 1360 px on, plus up to ~20 px for
+   a classic scrollbar, which the media query counts and the bubble does not */
+@media (max-width: 1399px) {
+  body:has(.chatbot-fab) .sf {
     padding-bottom: var(--fab-clear);
   }
 }
@@ -2310,8 +2312,8 @@ section {
   /* link columns fold into an accordion (SiteFooter.tsx): one column, a row
      per section, Contact open below them */
   .sf {
-    /* bottom room for the fixed chat bubble, which covered the privacy link */
-    padding: 40px 16px var(--fab-clear);
+    /* pages with the chat bubble get more bottom room, see max-width: 1399px */
+    padding: 40px 16px 24px;
   }
   .sf-grid {
     grid-template-columns: 1fr;
@@ -2488,7 +2490,7 @@ section {
 
 .chatbot-panel {
   position: fixed;
-  bottom: 92px;
+  bottom: calc(var(--fab-gap) + var(--fab-size) + 12px);
   right: 24px;
   z-index: 96;
   width: 370px;
@@ -2972,7 +2974,7 @@ section {
     --fab-gap: 20px;
   }
   .chatbot-panel {
-    bottom: 84px;
+    bottom: calc(var(--fab-gap) + var(--fab-size) + 8px);
     right: 12px;
     left: 12px;
     width: auto;

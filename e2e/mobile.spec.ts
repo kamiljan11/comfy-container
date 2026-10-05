@@ -172,6 +172,18 @@ test("the footer is shorter than the screen and folds its link columns", async (
   await expect(footer.locator('a[href="mailto:hello@kamiljan.com"]')).toBeVisible();
 });
 
+test("only pages with the chat bubble reserve room for it below the footer", async ({ page }) => {
+  // ChatBot is rendered by HomePage (/ and /o-mnie); other pages have no bubble
+  const pad = () =>
+    page.locator("footer.sf").evaluate((f) => parseFloat(getComputedStyle(f).paddingBottom));
+  await load(page, "/uslugi");
+  await expect(page.locator(".chatbot-fab")).toHaveCount(0);
+  expect(await pad()).toBe(24);
+  await load(page, "/?lang=pl");
+  await expect(page.locator(".chatbot-fab")).toHaveCount(1);
+  expect(await pad()).toBeGreaterThan(24);
+});
+
 test("the chat bubble does not cover the footer's last line", async ({ page }) => {
   await load(page, "/?lang=pl");
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
