@@ -478,27 +478,27 @@ const CONTENT: Record<Lang, Content> = {
     sections: [
       {
         title: "Update, October 5, 2026 (evening): the same rules for a much smaller context bill",
-        lead: "Version 1.4.0. I measured what PG costs before any work starts: about 26 thousand tokens of fixed context per session and about 1,300 more on every non-trivial prompt, most of it a repeat of rules the model had already seen. The goal of this release was to pay much less without the model following the rules any less. Four reviewers and a verifier went through it (17 findings, all fixed and re-checked).",
+        lead: "Version 1.4.0. Every message to an AI model carries background text the model reads first (the rules, the memory notes), and it is paid for in tokens, roughly pieces of words. I measured that background for PG: about 26 thousand tokens before any work starts and about 1,300 more on every larger request, most of it rules the model had already read. The goal was to send much less while the model keeps following the rules just as well. Four reviewers and a verifier checked the release (17 findings, all fixed and re-checked).",
         items: [
           {
-            label: "The full protocol once per session:",
-            body: "the prompt guard now sends the whole protocol once, then a one-line reminder. After /compact or a new start it sends it in full again, and if anything is unclear (no session id, a broken marker) it falls back to the full text. A follow-up prompt about code went from about 4.9 KB to 0.9 KB.",
+            label: "The full rules once per session:",
+            body: "Prompt-Guard, the part that adds the rules to my messages, now sends them in full once per session and afterwards only a one-line reminder. When the conversation is compressed or a new session starts, it sends them in full again, and whenever it is unsure what was already sent, it sends everything. A follow-up request about code went from about 4.9 KB of added text to 0.9 KB.",
           },
           {
             label: "Memory that is current and still complete:",
-            body: "the memory block at session start used to show checkpoints from a week ago, because it read the oldest end of the file. Now it shows the newest ones, lists open work from other sessions by title, and every clipped file keeps an index of its remaining sections, so nothing disappears from view. The block went from 35 KB to 25 KB, and a budget check turns red if it grows back.",
+            body: "the memory notes loaded at the start of a session used to show checkpoints from a week ago, because they were read from the oldest end of the file. Now the newest ones come first, unfinished work from other sessions is listed by title, and every shortened file keeps a list of its remaining sections, so nothing disappears from view. The start-up text went from 35 KB to 25 KB, and a budget check turns red if it grows back.",
           },
           {
-            label: "A stricter gate against weakening CI:",
-            body: "the gate that blocks switching security checks off had a false alarm on a fresh repository template, which teaches an agent to bypass it. Fixing it opened four gaps that the security reviewer found (an unusual YAML step form, a job-level “continue on error”, a fake gate in a comment). All four are closed and covered by 16 tests.",
+            label: "A stricter guard against switching off security checks:",
+            body: "one gate stops an agent from quietly disabling the automatic security checks that run on every change. It raised a false alarm on a fresh project template, and false alarms teach an agent to work around a gate. Fixing that opened four gaps, which the security reviewer found: an unusual way of writing a step in the settings file, a whole job marked “continue on error”, the word “true” written in quotes or as an expression, and a pretend check that only appears in a comment or a printed line. All four are closed and covered by 16 tests.",
           },
           {
-            label: "Dependabot feeds the monthly vulnerability watch:",
-            body: "GitHub's dependency alerts are now on in 45 repositories (notifications only on GitHub, no e-mail), and the monthly watch reads them alongside npm audit. Live products get a fix through a pull request; the rest of the fleet gets one line in the log.",
+            label: "GitHub's own vulnerability alerts feed the monthly check:",
+            body: "Dependabot, GitHub's service that warns when a library a project uses has a known security hole, is now on in 45 of my repositories, with notices only on GitHub and no e-mail. The monthly vulnerability check reads these alerts alongside its own scan. Products in use get a fix through a pull request; the other repositories get one summary line in the log.",
           },
           {
             label: "Honest limits:",
-            body: "the savings are measured in bytes. Whether the model follows the shortened protocol just as well I will only know after a week of real sessions, and a scheduled check on October 12 looks at exactly that.",
+            body: "the savings are measured in kilobytes of text. Whether the model follows the shorter reminders just as well I will only know after a week of real sessions, and a scheduled check on October 12 looks at exactly that.",
           },
         ],
       },
@@ -1067,27 +1067,27 @@ const CONTENT: Record<Lang, Content> = {
       {
         title:
           "Aktualizacja z 5 października 2026 (wieczór): te same reguły za dużo mniejszy rachunek za kontekst",
-        lead: "Wersja 1.4.0. Zmierzyłem, ile PG kosztuje, zanim zacznie się jakakolwiek praca: około 26 tysięcy tokenów stałego kontekstu na sesję i około 1300 więcej przy każdym niebanalnym poleceniu, w większości powtórka reguł, które model już widział. Celem tego wydania było płacić dużo mniej bez tego, żeby model gorzej przestrzegał reguł. Przeszło przez czterech recenzentów i weryfikatora (17 uwag, wszystkie poprawione i sprawdzone ponownie).",
+        lead: "Wersja 1.4.0. Każda wiadomość do modelu AI niesie tekst w tle, który model czyta najpierw (reguły, notatki z pamięci), a płaci się za niego w tokenach, czyli mniej więcej kawałkach słów. Zmierzyłem ten tekst w PG: około 26 tysięcy tokenów, zanim zacznie się jakakolwiek praca, i około 1300 więcej przy każdym większym poleceniu, w większości reguły, które model już przeczytał. Cel: wysyłać dużo mniej, a model ma przestrzegać reguł tak samo dobrze. Wydanie sprawdziło czterech recenzentów i weryfikator (17 uwag, wszystkie poprawione i sprawdzone ponownie).",
         items: [
           {
-            label: "Pełny protokół raz na sesję:",
-            body: "strażnik promptu wysyła teraz cały protokół raz, a potem jednolinijkowe przypomnienie. Po /compact albo nowym starcie wysyła go znowu w całości, a gdy coś jest niejasne (brak identyfikatora sesji, uszkodzony znacznik), wraca do pełnego tekstu. Kolejne polecenie dotyczące kodu spadło z około 4,9 KB do 0,9 KB.",
+            label: "Pełne reguły raz na sesję:",
+            body: "Prompt-Guard, czyli część dokładająca reguły do moich wiadomości, wysyła je teraz w całości raz na sesję, a potem tylko jednolinijkowe przypomnienie. Gdy rozmowa zostanie skompresowana albo zacznie się nowa sesja, wysyła je w całości ponownie, a gdy nie ma pewności, co już poszło, wysyła wszystko. Kolejne polecenie dotyczące kodu spadło z około 4,9 KB dodanego tekstu do 0,9 KB.",
           },
           {
             label: "Pamięć aktualna i nadal kompletna:",
-            body: "blok pamięci na starcie sesji pokazywał punkty kontrolne sprzed tygodnia, bo czytał najstarszy koniec pliku. Teraz pokazuje najnowsze, wypisuje tytuły otwartych prac z innych sesji, a każdy przycięty plik zostawia indeks pozostałych sekcji, więc nic nie znika z pola widzenia. Blok zszedł z 35 KB do 25 KB, a kontrola budżetu robi się czerwona, gdy znowu urośnie.",
+            body: "notatki z pamięci wczytywane na starcie sesji pokazywały punkty kontrolne sprzed tygodnia, bo czytały najstarszy koniec pliku. Teraz najnowsze są pierwsze, niedokończone prace z innych sesji są wypisane z tytułu, a każdy skrócony plik zostawia listę pozostałych sekcji, więc nic nie znika z pola widzenia. Tekst startowy zszedł z 35 KB do 25 KB, a kontrola budżetu robi się czerwona, gdy znowu urośnie.",
           },
           {
-            label: "Ostrzejsza bramka przeciw osłabianiu CI:",
-            body: "bramka, która blokuje wyłączanie kontroli bezpieczeństwa, miała fałszywy alarm na świeżym szablonie repozytorium, a to uczy agenta jej obchodzenia. Poprawka otworzyła cztery luki, które znalazł recenzent bezpieczeństwa (nietypowy zapis kroku w YAML, „kontynuuj mimo błędu” na poziomie całego zadania, udawana bramka w komentarzu). Wszystkie cztery są zamknięte i pokryte 16 testami.",
+            label: "Ostrzejsza ochrona przed wyłączaniem kontroli bezpieczeństwa:",
+            body: "jedna z bramek nie pozwala agentowi po cichu wyłączyć automatycznych kontroli bezpieczeństwa, które uruchamiają się przy każdej zmianie. Na świeżym szablonie projektu podnosiła fałszywy alarm, a fałszywe alarmy uczą agenta obchodzenia bramki. Poprawka otworzyła cztery luki, które znalazł recenzent bezpieczeństwa: nietypowy zapis kroku w pliku ustawień, całe zadanie oznaczone „kontynuuj mimo błędu”, słowo „true” zapisane w cudzysłowie albo jako wyrażenie oraz udawana kontrola, która jest tylko w komentarzu albo w wypisanym tekście. Wszystkie cztery są zamknięte i pokryte 16 testami.",
           },
           {
-            label: "Dependabot zasila comiesięczny nadzór podatności:",
-            body: "alerty GitHuba o zależnościach są włączone w 45 repozytoriach (powiadomienia tylko na GitHubie, bez maili), a comiesięczny nadzór czyta je obok npm audit. Działające produkty dostają poprawkę przez pull request, reszta floty jedną linię w dzienniku.",
+            label: "Alerty bezpieczeństwa GitHuba zasilają comiesięczną kontrolę:",
+            body: "Dependabot, usługa GitHuba ostrzegająca, gdy biblioteka używana przez projekt ma znaną lukę, jest włączony w 45 moich repozytoriach, z powiadomieniami tylko na GitHubie, bez maili. Comiesięczna kontrola podatności czyta te alerty obok własnego skanu. Używane produkty dostają poprawkę przez pull request, pozostałe repozytoria jedną linię podsumowania w dzienniku.",
           },
           {
             label: "Uczciwe granice:",
-            body: "oszczędność jest zmierzona w bajtach. Czy model przestrzega skróconego protokołu równie dobrze, będę wiedział dopiero po tygodniu prawdziwych sesji, a zaplanowana kontrola 12 października sprawdza właśnie to.",
+            body: "oszczędność jest zmierzona w kilobajtach tekstu. Czy model przestrzega krótszych przypomnień równie dobrze, będę wiedział dopiero po tygodniu prawdziwych sesji, a zaplanowana kontrola 12 października sprawdza właśnie to.",
           },
         ],
       },
