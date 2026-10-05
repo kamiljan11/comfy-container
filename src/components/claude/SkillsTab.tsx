@@ -12,6 +12,7 @@ type Copy = {
   agentsLead: string;
   fullOnly: string;
   source: string;
+  newTab: string;
   model: string;
   unavailable: string;
   repoLink: string;
@@ -30,6 +31,7 @@ const T: Record<Lang, Copy> = {
       "Read-only reviewers with a fresh context, one speciality each. They are part of the full install and run through the pg-review and pg-council skills.",
     fullOnly: "needs the full install",
     source: "Open SKILL.md on GitHub",
+    newTab: "(opens in a new tab)",
     model: "model",
     unavailable:
       "The skills catalogue is temporarily unavailable. The full list is in the repository:",
@@ -47,6 +49,7 @@ const T: Record<Lang, Copy> = {
       "Recenzenci tylko do odczytu, ze świeżym kontekstem, każdy z jedną specjalnością. Należą do pełnej instalacji i działają przez skille pg-review i pg-council.",
     fullOnly: "wymaga pełnej instalacji",
     source: "Otwórz SKILL.md na GitHubie",
+    newTab: "(otwiera się w nowej karcie)",
     model: "model",
     unavailable: "Katalog skilli jest chwilowo niedostępny. Pełna lista jest w repozytorium:",
     repoLink: "github.com/kamiljan11/coding-higher-mind",
@@ -122,6 +125,7 @@ export function SkillsTab({ lang }: { lang: Lang }) {
                     href={repoFileUrl(s.path)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`${t.source}: ${s.name} ${t.newTab}`}
                   >
                     {t.source}
                   </a>
@@ -149,6 +153,7 @@ export function SkillsTab({ lang }: { lang: Lang }) {
                   href={repoFileUrl(a.path)}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${a.path} ${t.newTab}`}
                 >
                   {a.path}
                 </a>
