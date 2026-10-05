@@ -2277,7 +2277,7 @@ section {
      per section, Contact open below them */
   .sf {
     /* bottom room for the fixed chat bubble, which covered the privacy link */
-    padding: 40px 16px 96px;
+    padding: 40px 16px calc(96px + env(safe-area-inset-bottom, 0px));
   }
   .sf-grid {
     grid-template-columns: 1fr;
@@ -2291,6 +2291,11 @@ section {
   }
   .sf-col ul {
     gap: 0;
+  }
+  /* before hydration the server's open lists would make the footer long and
+     then jump when it folds; hide them so only the headings show until then */
+  .sf-col:not(.sf-contact) > ul {
+    display: none;
   }
   .sf-sum {
     display: flex;

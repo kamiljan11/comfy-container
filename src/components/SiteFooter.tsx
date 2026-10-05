@@ -1,11 +1,10 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { T, type Lang } from "../i18n";
 import { SERVICES } from "../data/services";
 import { AREAS } from "../data/areas";
 import { ABOUT_ITEMS } from "../data/siteMap";
 import { useLang, ssrLangFor } from "../hooks/useLang";
-import { useIsMobile } from "../hooks/use-mobile";
 
 /**
  * One footer for every route, rendered by __root next to SiteHeader. It used
@@ -18,9 +17,26 @@ import { useIsMobile } from "../hooks/use-mobile";
  * On a phone the three link columns fold into a closed accordion: open, they
  * stacked 27 links of 44 px each into a footer longer than the screen. Contact
  * stays open, it is what a visitor scrolls down for. The server renders the
- * desktop layout and the fold switches on after hydration; the footer is below
- * the fold, so nobody sees the swap.
+ * desktop markup; on a phone site.css hides those open lists until hydration
+ * swaps in the <details>, so the footer never shows up long and then jumps.
  */
+
+// the same query as the site.css block that styles the folded footer (it
+// includes 768 px); a different threshold left a one-column, unfolded footer
+// at exactly 768 px
+const FOLD_QUERY = "(max-width: 768px)";
+
+function useFolded(): boolean {
+  const [folded, setFolded] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(FOLD_QUERY);
+    const sync = () => setFolded(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return folded;
+}
 
 type Copy = {
   services: string;
@@ -98,7 +114,7 @@ export function SiteFooter() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [lang] = useLang(ssrLangFor(pathname));
   const t = COPY[lang];
-  const folded = useIsMobile();
+  const folded = useFolded();
   // the "About" menu also has #anchors into /o-mnie; the footer lists pages only
   const aboutPages = ABOUT_ITEMS[lang].filter((a) => !a.hash);
 

@@ -172,6 +172,20 @@ test("the footer is shorter than the screen and folds its link columns", async (
   await expect(footer.locator('a[href="mailto:hello@kamiljan.com"]')).toBeVisible();
 });
 
+test.describe("before the footer folds", () => {
+  test.use({ javaScriptEnabled: false });
+  test("the server-rendered footer is already short", async ({ page }) => {
+    // the server renders open columns; site.css hides them on a phone so the
+    // footer does not show up long and jump when hydration folds it
+    // ("load" never fires here with scripts off, so wait for the DOM only)
+    await page.goto("/?lang=pl", { waitUntil: "domcontentloaded" });
+    const footer = page.locator("footer.sf");
+    const height = await footer.evaluate((f) => f.getBoundingClientRect().height);
+    expect(height).toBeLessThan(page.viewportSize()!.height);
+    await expect(footer.locator('a[href="mailto:hello@kamiljan.com"]')).toBeVisible();
+  });
+});
+
 test("the /ksiazki book turns hard pages on a phone and still turns", async ({ page }) => {
   // soft pages broke into slivers mid-turn on a Galaxy S25 Ultra (Brave);
   // on a narrow screen every page must be hard and the arrow must still turn it

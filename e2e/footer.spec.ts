@@ -44,6 +44,27 @@ test("desktop footer shows every column open, with no accordion", async ({ page 
   await expect(page.locator('footer.sf a[href="/uslugi/integracje"]')).toBeVisible();
 });
 
+// the fold and its one-column CSS share one threshold: at 768 px the CSS
+// stacked the columns while the fold (then < 768) left them open, 1479 px tall
+for (const [width, folds] of [
+  [767, 3],
+  [768, 3],
+  [769, 0],
+] as const) {
+  test(`at ${width} px the footer has ${folds} folded columns`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/?lang=pl");
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator("footer.sf .sf-fold")).toHaveCount(folds);
+    if (folds) {
+      const height = await page
+        .locator("footer.sf")
+        .evaluate((f) => f.getBoundingClientRect().height);
+      expect(height).toBeLessThan(1000);
+    }
+  });
+}
+
 test("the CV prints without the footer", async ({ page }) => {
   await page.goto("/cv?lang=pl");
   await page.emulateMedia({ media: "print" });
