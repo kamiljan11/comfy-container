@@ -206,7 +206,7 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "On this page",
     role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
     versionLine:
-      "PG v1.4.0 (as of October 5, 2026). This is a version that is still maturing, not a finished product: 11 public versions in under four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5). The counters in the table below were taken on September 26 and I have not recounted them since.",
+      "PG v1.5.0 (as of October 6, 2026). This is a version that is still maturing, not a finished product: 12 public versions in under four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6). The counters in the table below were taken on September 26 and I have not recounted them since.",
     intro:
       "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -476,6 +476,40 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title: "Update, October 6, 2026: a row for every area of system design",
+        lead: "Version 1.5.0. A system design course covers 37 areas. Among them are queues (waiting lines for tasks), caching (keeping a ready copy of data for speed), scaling, databases and API design. Others are rate limiting (capping how many requests one user can send), real-time updates and search. I asked a question about PG, my set of rules and agents for writing code with AI. Does its architect, the agent that plans a project before any code is written, know these areas and walk through each one in every design? The October 6 audit showed that it knew 72% of the named options by name but could choose between only 46% of them. Nothing made it go through all the areas either. A second audit showed that the reviewers, the agents that check each code change, were overloaded too. This release changes both, and I tested it the same day on a real client application.",
+        items: [
+          {
+            label: "What the audit found:",
+            body: "it counted 437 named options across the 37 areas. 46% came with a rule for when to choose them, 26% had only a name and 28% were not there at all. By area, 14 were covered, 21 partly and 2 not at all. The two missing ones were distributed consensus (how several servers agree on one answer) and probabilistic data structures (compact structures that give approximate answers to save memory). The design process forced a decision in 15 areas, partly in 11 and not at all in 11.",
+          },
+          {
+            label: "A row for every area:",
+            body: "PG now has a list of the 37 areas in 12 groups. The first six are state and topology, data, identifiers, files and CDN (servers that deliver files from close to the user), consistency and asynchronous work (things done later, in the background). The other six are API contracts (the agreed way programs talk to each other), identity and access, resilience, observability (seeing what the system is doing), releases and disaster recovery, and cost and region. Every design ends with a matrix, a table with one row per area. Each row is marked DECISION, NOT APPLICABLE or NOT NOW and carries evidence. A NOT NOW row also needs a measurable signal that says when to come back to it. A script called sd-matrix-lint checks that the table is complete. The end-of-session gate (an automatic check before a session can finish) can block when a repository requires it.",
+          },
+          {
+            label: "Twelve agents instead of one architect:",
+            body: "instead of one architect handling everything, there is now a council: one agent per group, twelve in total. Groups whose decisions are hard to undo or involve security get a stronger model. The decision cards, short notes the agents choose from, now list options with a rule for when to pick them, their cost and how they fail. Examples include caching strategies, rate limiting algorithms and backpressure (slowing the sender when the receiver cannot keep up). Others are SLOs (the promised level of service) and RPO and RTO (how much data and how much time you can afford to lose after a failure). The list ends with real-time features, RAG (answering from your own documents) and deployments.",
+          },
+          {
+            label: "Each reviewer reads its own slice:",
+            body: "the second audit looked at one review round where every reviewer got the whole diff (the list of all changes in the code), 9,799 lines. In practice each one read about 10 to 30% of it. A CSS bug (CSS is the code that controls how a page looks) went past three reviewers. After two branches (separate lines of work on the code) were merged, two @media blocks (style rules for a given screen size) were left unclosed. As a result, part of the styling did not work on desktop computers. Only the tester (the step that clicks through the app like a user would) caught it. Now a script cuts the diff by department (security, data and so on), so each reviewer gets the part that concerns it. On a 2,400-line diff, security got 33% and data 14%. A second script runs 21 mechanical search rules and hands the hits to the reviewer to judge.",
+          },
+          {
+            label: "New checks that cost no tokens:",
+            body: "tokens are the pieces of text a model is paid for, and these three checks use none. After every edit, one check makes sure every opening bracket in the CSS has its closing one. After a merge, every line from both branches has to survive. And the tester now warns about test paths that never click anything, because a green result there proves nothing.",
+          },
+          {
+            label: "Tested on a real client app:",
+            body: "on October 6 I ran it on a client application built with Next.js and Supabase (a popular web framework and database service). The 12 agents filled all 37 rows (31 decisions, 5 not applicable, 1 not now) and listed 66 gaps with evidence. One of them: a scheduled daily data download had never run, because the schedule file was not on the main branch. I checked it, and it will start once the open pull request (a proposed change waiting to be merged) is merged. At least one gap was a false alarm. The sd-matrix-lint script returned 0 (pass) on the full matrix and 1 (fail) after one row was removed. The same app also went through a review round with slices and got 11 remarks. The verifier (an agent that checks whether a finding holds up) confirmed 2 more serious ones. The first was untested keyboard focus logic (focus is where your typing goes). The second: after adding a task, the focus landed on an empty page. Both were fixed the same day.",
+          },
+          {
+            label: "Honest limits:",
+            body: "the matrix makes sure every area gets considered, but it does not guarantee that the decision written in it is a good one. The gaps the council lists have to be reviewed by a person, since at least one was wrong. The counters in the README (the project's description file), apart from the file count of 365, were not recalculated for 1.5.0. The public 1.5.0 release is in coding-higher-mind, the public repository of PG, merged on October 6 after the checks passed.",
+          },
+        ],
+      },
       {
         title: "Update, October 5, 2026 (evening): the same rules for a much smaller context bill",
         lead: "Version 1.4.0. Every message to an AI model carries background text the model reads first (the rules, the memory notes), and it is paid for in tokens, roughly pieces of words. I measured that background for PG: about 26 thousand tokens before any work starts and about 1,300 more on every larger request, most of it rules the model had already read. The goal was to send much less while the model keeps following the rules just as well. Four reviewers and a verifier checked the release (17 findings, all fixed and re-checked).",
@@ -788,7 +822,7 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "Spis treści",
     role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
     versionLine:
-      "PG v1.4.0 (stan na 5 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 11 wersji publicznych w niecałe cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
+      "PG v1.5.0 (stan na 6 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 12 wersji publicznych w niecałe cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
     intro:
       "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -1064,6 +1098,41 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title:
+          "Aktualizacja z 6 października 2026: wiersz dla każdego obszaru projektowania systemów",
+        lead: "Wersja 1.5.0. Kurs projektowania systemów (system design) obejmuje 37 obszarów. Są wśród nich kolejki (poczekalnie dla zadań), cache (podręczna kopia danych dla szybkości), skalowanie, bazy danych i projekt API. Dalej rate limiting (limit zapytań od jednego użytkownika), aktualizacje na żywo i wyszukiwanie. Zapytałem o PG, mój zestaw zasad i agentów do pisania kodu z AI. Czy jego architekt, czyli agent, który planuje projekt, zanim powstanie kod, zna te obszary i przechodzi przez każdy z nich w każdym projekcie? Audyt z 6 października pokazał, że znał z nazwy 72% wariantów, a umiał wybrać między zaledwie 46%. Nic go też nie zmuszało do przejścia przez wszystkie obszary. Drugi audyt pokazał, że przeciążeni byli też recenzenci, czyli agenci sprawdzający każdą zmianę w kodzie. To wydanie zmienia jedno i drugie, a tego samego dnia sprawdziłem je na prawdziwej aplikacji klienta.",
+        items: [
+          {
+            label: "Co pokazał audyt:",
+            body: "policzył 437 nazwanych wariantów w 37 obszarach. 46% miało kryterium wyboru (kiedy po dany wariant sięgnąć), 26% tylko nazwę, a 28% nie było wcale. Obszarowo: 14 pokrytych, 21 częściowo, 2 wcale. Te dwa to rozproszony konsensus (jak kilka serwerów uzgadnia jedną odpowiedź) i probabilistyczne struktury danych (zwarte struktury, które dla oszczędności pamięci dają wynik przybliżony). Proces projektowania wymuszał decyzję w 15 obszarach, częściowo w 11, a w 11 wcale.",
+          },
+          {
+            label: "Wiersz dla każdego obszaru:",
+            body: "PG ma teraz listę 37 obszarów w 12 grupach. Pierwsze sześć to stan i topologia, dane, identyfikatory, pliki i CDN (serwery dostarczające pliki z miejsca blisko użytkownika), spójność oraz asynchroniczność (praca wykonywana później, w tle). Pozostałe sześć to kontrakty API (umówiony sposób, w jaki programy ze sobą rozmawiają), tożsamość i dostęp, odporność, obserwowalność (wgląd w to, co system robi), wydania i odtwarzanie po awarii oraz koszt i region. Każdy projekt kończy się macierzą, czyli tabelą z wierszem na każdy obszar. Każdy wiersz ma status DECYZJA, NIE DOTYCZY albo NIE TERAZ i dowód. Wiersz NIE TERAZ ma dodatkowo mierzalny sygnał, kiedy do tematu wrócić. Skrypt sd-matrix-lint sprawdza, czy tabela jest kompletna. Bramka końca sesji (automatyczna kontrola, zanim sesja może się zakończyć) może blokować, gdy repozytorium tego wymaga.",
+          },
+          {
+            label: "Dwunastu agentów zamiast jednego architekta:",
+            body: "zamiast jednego architekta od wszystkiego jest teraz narada: jeden agent na grupę, razem dwunastu. Grupy z decyzjami trudnymi do odwrócenia albo dotyczącymi bezpieczeństwa dostają mocniejszy model. Karty decyzyjne, czyli krótkie ściągi, z których agenci wybierają, dostały warianty z kryterium wyboru, kosztem i trybem awarii (tym, jak dany wariant się psuje). Przykłady to strategie cache, algorytmy rate limitingu i backpressure (zwalnianie nadawcy, gdy odbiorca nie nadąża). Dalej SLO (obiecany poziom usługi) oraz RPO i RTO (ile danych i ile czasu można stracić po awarii). Na końcu aktualizacje na żywo (real-time), RAG (odpowiadanie na podstawie własnych dokumentów) i wdrożenia.",
+          },
+          {
+            label: "Każdy recenzent czyta swój wycinek:",
+            body: "drugi audyt dotyczył rundy recenzji, w której każdy recenzent dostał cały diff (zestawienie wszystkich zmian w kodzie), 9 799 linii. Realnie czytał mniej więcej od 10 do 30% z tego. Błąd w CSS (kodzie, który odpowiada za wygląd strony) przeszedł przez trzech recenzentów. Po scaleniu dwóch gałęzi (osobnych linii pracy nad kodem) dwa bloki @media (reguły wyglądu dla danej wielkości ekranu) zostały niezamknięte. Przez to część stylów nie działała na komputerach. Złapał go dopiero tester (etap, który klika w aplikację jak użytkownik). Teraz skrypt tnie diff na działy (bezpieczeństwo, dane itd.) i każdy recenzent dostaje to, co go dotyczy. Przy diffie na 2 400 linii bezpieczeństwo dostało 33%, a dane 14%. Drugi skrypt odpala 21 mechanicznych reguł wyszukiwania i podaje recenzentowi trafienia do oceny.",
+          },
+          {
+            label: "Nowe bramki bez kosztu tokenów:",
+            body: "tokeny to kawałki tekstu, za które płaci się przy pracy modelu, a te trzy kontrole ich nie zużywają. Po każdej edycji jedna z nich sprawdza, czy każdy nawias otwierający w CSS ma swój zamykający. Po scaleniu gałęzi każda linia z obu gałęzi musi przetrwać. Tester ostrzega też o ścieżkach testowych, które niczego nie klikają, bo zielony wynik niczego tam nie dowodzi.",
+          },
+          {
+            label: "Test na prawdziwej aplikacji klienta:",
+            body: "6 października puściłem to na aplikacji klienta (Next.js + Supabase, popularny framework stron i usługa bazy danych). Dwunastu agentów wypełniło wszystkie 37 wierszy (31 decyzji, 5 „nie dotyczy”, 1 „nie teraz”) i wypisało 66 luk z dowodami. Jedna z nich: zaplanowane codzienne pobieranie danych nigdy nie ruszyło, bo plik harmonogramu nie był na głównej gałęzi. Sprawdziłem to; ruszy po scaleniu otwartego pull requesta (propozycji zmiany czekającej na scalenie). Co najmniej jedna luka okazała się fałszywym alarmem. Skrypt sd-matrix-lint zwrócił 0 (zaliczone) na pełnej macierzy i 1 (niezaliczone) po usunięciu jednego wiersza. Ta sama aplikacja przeszła też rundę recenzji z wycinkami i dostała 11 uwag. Weryfikator (agent sprawdzający, czy uwaga się broni) potwierdził 2 ważniejsze. Pierwsza to nieprzetestowana logika fokusu klawiatury (fokus to miejsce, do którego trafia to, co wpisujesz). Druga: po dodaniu zadania fokus spadał na pustą stronę. Obie zostały poprawione tego samego dnia.",
+          },
+          {
+            label: "Uczciwe granice:",
+            body: "macierz wymusza, że każdy obszar zostanie rozważony, ale nie gwarantuje, że zapisana w nim decyzja jest dobra. Luki wypisane przez naradę trzeba przejrzeć ręcznie, bo przynajmniej jedna była błędna. Liczniki w README (pliku z opisem projektu), poza liczbą plików (365), nie zostały przeliczone dla 1.5.0. Publiczne wydanie 1.5.0 jest w coding-higher-mind, publicznym repozytorium PG, scalone 6 października po zielonych testach.",
+          },
+        ],
+      },
       {
         title:
           "Aktualizacja z 5 października 2026 (wieczór): te same reguły za dużo mniejszy rachunek za kontekst",
