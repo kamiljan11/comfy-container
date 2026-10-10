@@ -69,7 +69,7 @@
       "summary": "Master architecture-decision skill: choose the right architecture for a new project, audit an existing one, and propose changes — through trade-offs and real context, not hype.",
       "plugin": true,
       "path": "skills/architecture-advisor",
-      "files": 7,
+      "files": 21,
       "summary_pl": "Decyzje architektoniczne przez kompromisy i realny kontekst, a nie modę: wybór architektury nowego projektu, audyt istniejącej i propozycje zmian.",
       "summary_en": "Architecture decisions through trade-offs and real context, not hype: choosing an architecture for a new project, auditing an existing one and proposing changes."
     },
