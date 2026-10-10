@@ -206,7 +206,7 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "On this page",
     role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
     versionLine:
-      "PG v1.5.0 (as of October 6, 2026). This is a version that is still maturing, not a finished product: 12 public versions in under four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6). The counters in the table below were taken on September 26 and I have not recounted them since.",
+      "PG v1.6.0 (as of October 10, 2026). This is a version that is still maturing, not a finished product: 13 public versions in four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6, 1.6.0 on October 10). The counters in the table below were taken on September 26 and I have not recounted them since.",
     intro:
       "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -476,6 +476,41 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title:
+          "Update, October 10, 2026: extensions under guard, every layer of the stack, and a shell guard with written-down limits",
+        lead: "Version 1.6.0. Three things drove it. Claude Code got mods: extensions that run inside the tool itself and skip the hooks (the automatic checks PG relies on). A security checklist became new rules for the security reviewer. And a security review kept finding ways around one of my new rules until I rebuilt it from scratch. This release also makes the stack, the set of tools a project is built on, a required step of designing a system, with every layer decided one by one.",
+        items: [
+          {
+            label: "Extensions under the same guard as the rules:",
+            body: "a mod runs inside Claude Code, so it does not pass through the hooks that check every command. PG now protects mod source code the same way it protects its own hooks: installing, turning on or updating an extension needs my explicit consent, typed in the chat as a fixed phrase. Turning an extension off or removing it is always allowed, because taking something away never needs permission.",
+          },
+          {
+            label: "No dropping a production table by accident:",
+            body: "a new rule reads every command that talks to a database (psql, supabase, prisma, dropdb, pg_restore) and works out where it points: the server address, connection links, environment variables set earlier in the same command, and wrappers such as docker exec or ssh. Destructive statements, such as DROP (delete a table), TRUNCATE (empty it) or DELETE without a filter, are blocked unless the target is provably on my own machine. SQL the rule cannot see, for example inside a file, counts as destructive. A local test database stays free.",
+          },
+          {
+            label: "Every layer of the stack, decided one by one:",
+            body: "the system-design matrix from 1.5.0 gained 25 rows for the tool layers, from the frontend to payments, invoicing and parcel shipping, so it now has 62 rows. Each layer must be marked as a decision, not now (with a measurable signal to come back) or not applicable. The rows come from a Stack Picker page: nothing is chosen in advance, you pick the target market (global, Poland, the EU or Iceland) and go through each layer. It lists 199 tools, including all 131 from Arjay McCandless's public Stack Picker under their original names, plus local options such as Polish payment gateways, the national e-invoicing system, parcel lockers and e-ID. A test fails if the page, the catalog and the matrix stop matching. A new project gets an empty matrix on day one. Without extra configuration the end-of-session gate does not block; it only reminds you about the decisions that are hard to undo later (data model, identifiers, files, identity, region and disaster recovery).",
+          },
+          {
+            label: "A rule rebuilt after review:",
+            body: "I closed a gap where a patch (a file describing changes to apply) could rewrite PG's own rules without my consent. The first version read the patch to see which files it touched. The first security review found three ways around it, from option values mistaken for file names to a patch piped in from a parent folder. So I turned the rule around: patching, unpacking an archive and editors driven by a script are blocked in PG's folder and every folder above it, whatever the patch says, and when the guard cannot tell which folder a command runs in, it blocks. Two more review rounds found eight further gaps (four blocking, four serious); all were fixed and checked again. A test in a sandbox (a throwaway copy where nothing real can break) showed something worse, in every project: the standard patch tool will rewrite .git/config, the settings file of a git repository, where one line can switch off all git checks, and a project's .claude/settings.json, which can run code in the next session. Such patches are now blocked in any repository, with a hint to use git apply, git's own way of applying a patch, which refuses to touch those files.",
+          },
+          {
+            label: "Security checklist and secret scanning:",
+            body: "the security reviewer got new checks taken from a security checklist: reading another user's data by changing an ID in the request (IDOR), a form that lets a user set fields they should not (mass assignment), keys left in git history or in public front-end variables, and missing request limits. The CI template (the automatic checks every pull request runs on GitHub) now scans every new commit and the current files for leaked keys, including ones pasted in while resolving a merge conflict. A marker that tells the scanner to ignore a line can hide a real key from every check, so merging a pull request that adds one now needs my phrase.",
+          },
+          {
+            label: "The right model for the job:",
+            body: "the main session plans and checks; helper agents get a model sized to the task: the smallest for looking things up, the middle one for writing and reviewing against a checklist, the strongest for hard reasoning and security on risky changes. Separately, the memory notes loaded at the start of a session now fit within Claude Code's 10,000-character limit for hook output; above it, the tool shows only a 2,000-character preview.",
+          },
+          {
+            label: "Honest limits:",
+            body: "the shell guard catches mistakes and instructions smuggled in from outside (for example from a web page an agent reads). It does not stop an agent set on getting around it: running any script can do anything. I wrote this down in the project's known-limits file. The net for the rest is a seal that flags any change to PG's rules at the start of the next session, the git history, and system-level settings only an administrator can change. The tool descriptions in the stack catalog are orientation, not prices or benchmarks. The README counters, apart from the file count (371), were not recounted. The public 1.6.0 release is in coding-higher-mind, the public repository of PG.",
+          },
+        ],
+      },
       {
         title: "Update, October 6, 2026: a row for every area of system design",
         lead: "Version 1.5.0. A system design course covers 37 areas. Among them are queues (waiting lines for tasks), caching (keeping a ready copy of data for speed), scaling, databases and API design. Others are rate limiting (capping how many requests one user can send), real-time updates and search. I asked a question about PG, my set of rules and agents for writing code with AI. Does its architect, the agent that plans a project before any code is written, know these areas and walk through each one in every design? The October 6 audit showed that it knew 72% of the named options by name but could choose between only 46% of them. Nothing made it go through all the areas either. A second audit showed that the reviewers, the agents that check each code change, were overloaded too. This release changes both, and I tested it the same day on a real client application.",
@@ -822,7 +857,7 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "Spis treści",
     role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
     versionLine:
-      "PG v1.5.0 (stan na 6 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 12 wersji publicznych w niecałe cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
+      "PG v1.6.0 (stan na 10 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 13 wersji publicznych w cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października, 1.6.0 z 10 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
     intro:
       "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -1098,6 +1133,41 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title:
+          "Aktualizacja z 10 października 2026: rozszerzenia pod nadzorem, każda warstwa stacku i strażnik z zapisanymi granicami",
+        lead: "Wersja 1.6.0. Złożyły się na nią trzy rzeczy. Claude Code dostał mody: rozszerzenia, które działają wewnątrz samego narzędzia i omijają hooki (automatyczne kontrole, na których opiera się PG). Lista kontrolna bezpieczeństwa zamieniła się w nowe reguły dla recenzenta bezpieczeństwa. A recenzja bezpieczeństwa tak długo znajdowała obejścia jednej z moich nowych reguł, aż przebudowałem ją od zera. To wydanie robi też ze stacku, czyli zestawu narzędzi, na którym stoi projekt, obowiązkowy krok projektowania systemu: każdą warstwę rozstrzyga się po kolei.",
+        items: [
+          {
+            label: "Rozszerzenia pod tym samym nadzorem co reguły:",
+            body: "mod działa wewnątrz Claude Code, więc nie przechodzi przez hooki, które sprawdzają każdą komendę. PG chroni teraz kod modów tak samo jak własne hooki: instalacja, włączenie albo aktualizacja rozszerzenia wymaga mojej wyraźnej zgody, wpisanej w czacie stałą frazą. Wyłączenie albo usunięcie rozszerzenia jest zawsze dozwolone, bo odebranie czegoś nigdy nie wymaga zgody.",
+          },
+          {
+            label: "Bez przypadkowego kasowania tabeli na produkcji:",
+            body: "nowa reguła czyta każdą komendę, która rozmawia z bazą danych (psql, supabase, prisma, dropdb, pg_restore), i ustala, dokąd celuje: adres serwera, linki połączenia, zmienne środowiskowe ustawione wcześniej w tej samej komendzie oraz nakładki takie jak docker exec czy ssh. Polecenia niszczące, na przykład DROP (usunięcie tabeli), TRUNCATE (wyczyszczenie jej) albo DELETE bez filtra, są blokowane, chyba że cel na pewno jest na moim komputerze. SQL, którego reguła nie widzi, na przykład schowany w pliku, liczy się jako niszczący. Lokalna baza testowa zostaje wolna.",
+          },
+          {
+            label: "Każda warstwa stacku rozstrzygana po kolei:",
+            body: "macierz projektowania systemów z wersji 1.5.0 dostała 25 wierszy na warstwy narzędzi, od frontendu po płatności, faktury i wysyłkę paczek, więc ma teraz 62 wiersze. Każdą warstwę trzeba oznaczyć jako decyzję, „nie teraz” (z mierzalnym sygnałem, kiedy wrócić) albo „nie dotyczy”. Wiersze pochodzą ze strony Stack Picker: nic nie jest wybrane z góry, wybierasz rynek docelowy (globalny, Polska, UE albo Islandia) i przechodzisz po kolei każdą warstwę. Strona zawiera 199 narzędzi, w tym wszystkie 131 z publicznego Stack Pickera Arjaya McCandlessa pod oryginalnymi nazwami, oraz opcje lokalne, takie jak polskie bramki płatności, KSeF (krajowy system e-faktur), paczkomaty i e-ID. Test się wysypie, jeśli strona, katalog i macierz przestaną się zgadzać. Nowy projekt dostaje pustą macierz pierwszego dnia. Bez dodatkowej konfiguracji bramka końca sesji nie blokuje, tylko przypomina o decyzjach, których później nie da się łatwo cofnąć (model danych, identyfikatory, pliki, tożsamość, region i odtwarzanie po awarii).",
+          },
+          {
+            label: "Reguła przebudowana po recenzji:",
+            body: "zamknąłem lukę, przez którą łatka (plik z opisem zmian do nałożenia) mogła przepisać własne reguły PG bez mojej zgody. Pierwsza wersja czytała łatkę, żeby zobaczyć, których plików dotyka. Pierwsza recenzja bezpieczeństwa znalazła trzy sposoby, żeby ją obejść, od wartości opcji branej za nazwę pliku po łatkę podaną z folderu wyżej. Odwróciłem więc logikę: nakładanie łatek, rozpakowywanie archiwów i edytory sterowane skryptem są blokowane w folderze PG i w każdym folderze nad nim, bez względu na treść łatki, a gdy strażnik nie potrafi ustalić, w którym folderze komenda działa, blokuje. Dwie kolejne rundy recenzji znalazły osiem dalszych luk (cztery blokujące, cztery poważne); wszystkie zostały poprawione i sprawdzone ponownie. Test w piaskownicy (jednorazowej kopii, w której nic prawdziwego nie może się zepsuć) pokazał coś gorszego, w każdym projekcie: standardowe narzędzie patch przepisze .git/config, plik ustawień repozytorium gita, w którym jedna linia potrafi wyłączyć wszystkie kontrole gita, oraz projektowy .claude/settings.json, który może uruchomić kod w następnej sesji. Takie łatki są teraz blokowane w każdym repozytorium, z podpowiedzią, żeby użyć git apply, czyli wbudowanego w gita sposobu nakładania łatek, który tych plików nie ruszy.",
+          },
+          {
+            label: "Lista kontrolna bezpieczeństwa i skanowanie sekretów:",
+            body: "recenzent bezpieczeństwa dostał nowe kontrole wzięte z listy kontrolnej bezpieczeństwa: odczyt cudzych danych przez podmianę identyfikatora w zapytaniu (IDOR), formularz, który pozwala ustawić pola, których użytkownik nie powinien zmieniać (mass assignment), klucze zostawione w historii gita albo w publicznych zmiennych frontendu oraz brak limitów zapytań. Szablon CI (automatyczne kontrole, które GitHub uruchamia przy każdym pull requeście) skanuje teraz każdy nowy commit i bieżące pliki w poszukiwaniu wycieków kluczy, także takich wklejonych przy rozwiązywaniu konfliktu scalania. Znacznik, który każe skanerowi pominąć linię, potrafi ukryć prawdziwy klucz przed każdą kontrolą, więc scalenie pull requesta, który go dodaje, wymaga teraz mojej frazy.",
+          },
+          {
+            label: "Właściwy model do zadania:",
+            body: "główna sesja planuje i sprawdza, a agenci pomocniczy dostają model dobrany do trudności zadania: najmniejszy do wyszukiwania, średni do pisania i recenzji według listy kontrolnej, najmocniejszy do trudnego rozumowania i bezpieczeństwa przy ryzykownych zmianach. Osobno: notatki pamięci ładowane na starcie sesji mieszczą się teraz w limicie 10 000 znaków, jaki Claude Code stawia wynikom hooków. Powyżej niego narzędzie pokazuje tylko 2000-znakowy podgląd.",
+          },
+          {
+            label: "Uczciwe granice:",
+            body: "strażnik komend łapie pomyłki i polecenia przemycone z zewnątrz (na przykład ze strony, którą czyta agent). Nie zatrzyma agenta, który uprze się, żeby go obejść: uruchomienie dowolnego skryptu może zrobić wszystko. Zapisałem to w pliku znanych granic projektu. Siatką na resztę są pieczęć, która przy starcie następnej sesji zgłasza każdą zmianę reguł PG, historia gita oraz ustawienia systemowe, które może zmienić tylko administrator. Opisy narzędzi w katalogu stacku to orientacja, nie cennik ani benchmark. Liczniki w README, poza liczbą plików (371), nie zostały przeliczone. Publiczne wydanie 1.6.0 jest w coding-higher-mind, publicznym repozytorium PG.",
+          },
+        ],
+      },
       {
         title:
           "Aktualizacja z 6 października 2026: wiersz dla każdego obszaru projektowania systemów",
