@@ -66,6 +66,14 @@ Opisy kart w obu jezykach (`summary_pl` / `summary_en`) pochodza z `pg/public/sk
 Dane zakladki to `src/data/higher-mind-skills.json`, kopia `skills.json` z publicznego repo `kamiljan11/coding-higher-mind` (generuje ja tam `bin/pg-export-public.py`). Odswiezenie po kazdym wydaniu tego repo:
 `curl -fsSL --max-time 30 https://raw.githubusercontent.com/kamiljan11/coding-higher-mind/main/skills.json | jq 'del(.skills[].description, .agents[].description)' > src/data/higher-mind-skills.json && npx vitest run src/lib/skillsCatalog.test.ts src/components/claude/SkillsTab.test.ts` -> PR. Test odrzuca zly ksztalt (schemat, puste pola, sciezki spoza `skills/` i `agents/`); przy zlym pliku na produkcji zakladka pokazuje komunikat z linkiem do repo, reszta /claude dziala. Cofniecie: `git checkout -- src/data/higher-mind-skills.json`.
 
+## Sekcja aktualizacji PG na /claude (po kazdym wydaniu coding-higher-mind)
+
+1. Zrodlo prawdy: wpis wersji w `CHANGELOG.md` publicznego repo `kamiljan11/coding-higher-mind` (scalony PR eksportu). Kazda liczba w sekcji musi miec pokrycie tam albo w pliku PG, z ktorego pochodzi.
+2. `src/routes/claude.tsx`: nowa sekcja na POCZATKU `sections` w obu jezykach (EN i PL, ten sam uklad: `title`, `lead`, `items`), terminy techniczne objasnione w nawiasie; `versionLine` w obu jezykach (wersja, data, liczba wydan publicznych).
+3. `CHANGELOG.md` strony: wpis w `[Unreleased]`.
+4. Gdy wydanie zmienilo skille lub agentow: odswiez migawke (sekcja wyzej) w tym samym PR, po merge'u PR eksportu.
+5. Bramki: `npm run lint`, `npx tsc --noEmit`, `npm test`, `npm run build`, podglad PL i EN (`npx vite dev`), pg-review (code, ops, ux, product), merge przez `pg-merge-bezpieczny.py`.
+
 ## Monitoring
 
 - Bledy runtime: **brak APM/Sentry w tym repo** (Sentry pojawia sie w tresci case studies jako
