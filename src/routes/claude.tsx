@@ -490,7 +490,7 @@ const CONTENT: Record<Lang, Content> = {
             body: "if a working session adds something that contradicts the agreed architecture, it cannot finish until it either undoes the change or updates the decision (with a short written decision record when the decision itself changes). This is a hard stop in new projects and only a hint in old ones. Older issues land on a list with a ready proposal and wait for my “fix it”, because I do not want agents rewriting old projects on their own.",
           },
           {
-            label: "A release pipeline in four gates:",
+            label: "A release pipeline in four steps (preview, wait, watch, way back):",
             body: "after the existing build and test checks, every preview (a temporary copy of the site built for a proposed change) gets automated test requests on the paths that must never break. A preview behind Vercel's password protection is not probed, because the key that opens it is never handed to unreviewed code; the real check comes next. The production build then waits outside live traffic for 10 minutes while synthetic requests (automated visits) test it, and a Vercel setting called Deployment Checks keeps the domain on the old version until that check is green. After the switch, the live site is watched for 15 minutes.",
           },
           {
@@ -507,7 +507,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Every review round, counted:",
-            body: "round one used three AI reviewers (code, security, operations) and rounds two to six four (plus data); the two final checks used code and operations. Findings come in two weights: blocking (must be fixed before release) and major (serious, fixed in the same round). Round one found 1 blocking and 11 major issues, round two 1 blocking and 13 major, rounds three to six no blocking issues and 11, 8, 9 and 8 major. The two blocking issues were security holes I had not seen: the test script and its list of allowed addresses were read from the change that triggered the run, so an attacker could supply their own; and the AI on duty could read a token (a key that lets a program act on my behalf) from the code repository's settings file and paste it into a public comment. Two smaller checks of the final fixes found one more blocking issue (a safety rule without a test) and 2 major issues. All were fixed before release.",
+            body: "round one used three AI reviewers (code, security, operations), and rounds two to six added a fourth one for data; the two final checks used code and operations. Findings come in two weights: blocking (must be fixed before release) and major (serious, fixed in the same round). Round one found 1 blocking and 11 major issues, round two 1 blocking and 13 major, rounds three to six no blocking issues and 11, 8, 9 and 8 major. The two blocking issues were security holes I had not seen: the test script and its list of allowed addresses were read from the change that triggered the run, so an attacker could supply their own; and the AI on duty could read a token (a key that lets a program act on my behalf) from the code repository's settings file and paste it into a comment on the incident. Two smaller checks of the final fixes found one more blocking issue (a safety rule without a test) and 2 major issues. All were fixed before release.",
           },
           {
             label: "Honest limits:",
@@ -745,7 +745,7 @@ const CONTENT: Record<Lang, Content> = {
         items: [
           {
             label: "Machines check what machines can check:",
-            body: "building, type checks, tests, dependency licences, scanning for leaked passwords and automated test requests against the running site are plain scripts with no AI and no cost per run. They are fast and give the same answer every time.",
+            body: "building, type checks, tests, dependency licences, scanning for leaked passwords and automated test requests against the running site are plain scripts with no AI, so they use no AI tokens (only ordinary build minutes). They are fast and give the same answer every time.",
           },
           {
             label: "AI reviews what needs judgment:",
@@ -753,11 +753,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "A human decides what cannot be undone:",
-            body: "merging risky changes, spending money, touching passwords and keys, and switching the pipeline off all need my explicit consent. The automatic way back is limited on purpose: once, then it waits for a person.",
+            body: "merging risky changes, spending money, and touching passwords and keys need my explicit consent, and switching the pipeline off is a setting only I can change. The automatic way back is limited on purpose: once, then it waits for a person.",
           },
           {
             label: "Why it pays off:",
-            body: "by design, a bad release is caught before customers see it (the 10-minute wait) or the way back starts about a minute after the first failed check on the live site. Every failure that slips through becomes a new automatic check, so the same mistake does not happen twice. That is the whole idea of this system.",
+            body: "by design, a bad release is caught before customers see it (the 10-minute wait) or the way back starts about a minute after the first failed check on the live site. Every failure that slips through becomes a new automatic check, so the same mistake is much less likely to happen again. That is the whole idea of this system.",
           },
         ],
       },
@@ -1230,7 +1230,7 @@ const CONTENT: Record<Lang, Content> = {
             body: "jeśli sesja pracy doda coś sprzecznego z ustaloną architekturą, nie może się zakończyć, dopóki nie cofnie zmiany albo nie zaktualizuje decyzji (z krótkim zapisem decyzji, gdy zmienia się sama decyzja). W nowych projektach to twarda blokada, w starych tylko podpowiedź. Starsze problemy trafiają na listę z gotową propozycją i czekają na moje „napraw”, bo nie chcę, żeby agenci sami przerabiali stare projekty.",
           },
           {
-            label: "Potok wydań w czterech bramkach:",
+            label: "Potok wydań w czterech krokach (podgląd, czekanie, obserwacja, powrót):",
             body: "po dotychczasowym buildzie i testach każdy podgląd (tymczasowa kopia strony zbudowana dla proponowanej zmiany) dostaje automatyczne zapytania testowe na ścieżkach, które nie mogą się zepsuć. Podgląd chroniony hasłem Vercela nie jest sprawdzany, bo klucza do niego nigdy nie dostaje niezrecenzowany kod; prawdziwa kontrola przychodzi w następnym kroku. Build produkcyjny czeka potem 10 minut poza ruchem użytkowników, a syntetyczne zapytania (automatyczne wizyty) go testują. Ustawienie Vercela o nazwie Deployment Checks trzyma domenę na starej wersji, dopóki ta kontrola nie jest zielona. Po przełączeniu działająca strona jest obserwowana przez 15 minut.",
           },
           {
@@ -1247,7 +1247,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Każda runda recenzji, policzona:",
-            body: "w pierwszej rundzie pracowało trzech recenzentów AI (od kodu, bezpieczeństwa i operacji), w rundach od drugiej do szóstej czterech (doszedł recenzent danych), a dwie końcowe kontrole robili recenzenci kodu i operacji. Zgłoszenia mają dwie wagi: blokujące (do naprawy przed wydaniem) i poważne (naprawiane w tej samej rundzie). Pierwsza runda znalazła 1 problem blokujący i 11 poważnych, druga 1 blokujący i 13 poważnych, rundy od trzeciej do szóstej żadnego blokującego i kolejno 11, 8, 9 i 8 poważnych. Te dwa problemy blokujące to dziury bezpieczeństwa, których sam nie zauważyłem. Skrypt testowy i jego lista dozwolonych adresów były czytane ze zmiany, która uruchomiła proces, więc atakujący mógł podsunąć własne. A AI na dyżurze mogło przeczytać token (klucz, który pozwala programowi działać w moim imieniu) z pliku ustawień repozytorium kodu i wkleić go do publicznego komentarza. Dwie mniejsze kontrole ostatnich poprawek znalazły jeszcze jeden problem blokujący (regułę bezpieczeństwa bez testu) i 2 poważne. Wszystko zostało naprawione przed wydaniem.",
+            body: "w pierwszej rundzie pracowało trzech recenzentów AI (od kodu, bezpieczeństwa i operacji), w rundach od drugiej do szóstej czterech (doszedł recenzent danych), a dwie końcowe kontrole robili recenzenci kodu i operacji. Zgłoszenia mają dwie wagi: blokujące (do naprawy przed wydaniem) i poważne (naprawiane w tej samej rundzie). Pierwsza runda znalazła 1 problem blokujący i 11 poważnych, druga 1 blokujący i 13 poważnych, rundy od trzeciej do szóstej żadnego blokującego i kolejno 11, 8, 9 i 8 poważnych. Te dwa problemy blokujące to dziury bezpieczeństwa, których sam nie zauważyłem. Skrypt testowy i jego lista dozwolonych adresów były czytane ze zmiany, która uruchomiła proces, więc atakujący mógł podsunąć własne. A AI na dyżurze mogło przeczytać token (klucz, który pozwala programowi działać w moim imieniu) z pliku ustawień repozytorium kodu i wkleić go do komentarza w zgłoszeniu. Dwie mniejsze kontrole ostatnich poprawek znalazły jeszcze jeden problem blokujący (regułę bezpieczeństwa bez testu) i 2 poważne. Wszystko zostało naprawione przed wydaniem.",
           },
           {
             label: "Uczciwe granice:",
@@ -1465,7 +1465,7 @@ const CONTENT: Record<Lang, Content> = {
         items: [
           {
             label: "Jeden wiersz na obszar:",
-            body: "62 wiersze: 37 obszarów projektowania systemów (jak przechowywać dane, jak system rośnie, kolejki (poczekalnie dla zadań w tle), cache (gotowa kopia danych pod ręką), logowanie, limity tego, jak często ktoś może wołać system, wdrożenia i inne) oraz 25 warstw narzędzi (strona, hosting, baza, płatności, faktury, e-mail i inne). Każdy wiersz ma status: decyzja z dowodem, nie dotyczy z uzasadnieniem albo nie teraz z mierzalnym sygnałem powrotu, na przykład „ponad 50 zapytań na sekundę” albo „10 tysięcy wierszy w zamówieniach”.",
+            body: "62 wiersze: 37 obszarów projektowania systemów (jak przechowywać dane, jak system rośnie, kolejki (poczekalnie dla zadań w tle), cache (gotowa kopia danych pod ręką), logowanie, limity tego, jak często ktoś może wywoływać system, wdrożenia i inne) oraz 25 warstw narzędzi (strona, hosting, baza, płatności, faktury, e-mail i inne). Każdy wiersz ma status: decyzja z dowodem, nie dotyczy z uzasadnieniem albo nie teraz z mierzalnym sygnałem powrotu, na przykład „ponad 50 zapytań na sekundę” albo „10 tysięcy wierszy w zamówieniach”.",
           },
           {
             label: "Narada zamiast jednego architekta:",
@@ -1487,7 +1487,7 @@ const CONTENT: Record<Lang, Content> = {
         items: [
           {
             label: "Maszyny sprawdzają to, co maszyny umieją sprawdzić:",
-            body: "budowanie, sprawdzanie typów, testy, licencje zależności, szukanie wyciekłych haseł i automatyczne zapytania testowe do działającej strony to zwykłe skrypty, bez AI i bez kosztu za uruchomienie. Są szybkie i za każdym razem dają tę samą odpowiedź.",
+            body: "budowanie, sprawdzanie typów, testy, licencje zależności, szukanie wyciekłych haseł i automatyczne zapytania testowe do działającej strony to zwykłe skrypty bez AI, więc nie zużywają tokenów AI (tylko zwykłe minuty budowania). Są szybkie i za każdym razem dają tę samą odpowiedź.",
           },
           {
             label: "AI ocenia to, co wymaga oceny:",
@@ -1495,11 +1495,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Człowiek decyduje o tym, czego nie da się cofnąć:",
-            body: "scalanie ryzykownych zmian, wydawanie pieniędzy, hasła i klucze oraz wyłączenie potoku wymagają mojej wyraźnej zgody. Automatyczna droga powrotu jest celowo ograniczona: raz, potem czeka na człowieka.",
+            body: "scalanie ryzykownych zmian, wydawanie pieniędzy oraz hasła i klucze wymagają mojej wyraźnej zgody, a wyłączenie potoku to ustawienie, które mogę zmienić tylko ja. Automatyczna droga powrotu jest celowo ograniczona: raz, potem czeka na człowieka.",
           },
           {
             label: "Dlaczego to się opłaca:",
-            body: "z założenia złe wydanie zostaje złapane, zanim zobaczą je klienci (10 minut czekania), albo powrót zaczyna się około minuty po pierwszej nieudanej kontroli działającej strony. Każda awaria, która się prześlizgnie, staje się nową automatyczną kontrolą, więc ten sam błąd nie zdarza się dwa razy. Na tym polega cały ten system.",
+            body: "z założenia złe wydanie zostaje złapane, zanim zobaczą je klienci (10 minut czekania), albo powrót zaczyna się około minuty po pierwszej nieudanej kontroli działającej strony. Każda awaria, która się prześlizgnie, staje się nową automatyczną kontrolą, więc ten sam błąd ma dużo mniejszą szansę się powtórzyć. Na tym polega cały ten system.",
           },
         ],
       },
