@@ -208,7 +208,7 @@ const CONTENT: Record<Lang, Content> = {
     versionLine:
       "PG v1.7.0 (as of October 11, 2026). This is a version that is still maturing, not a finished product: 14 public versions in four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6, 1.6.0 on October 10, 1.7.0 on October 11). The counters in the table below were taken on September 26 and I have not recounted them since.",
     intro:
-      "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
+      "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today, unless a section says otherwise (the 1.7.0 release pipeline is waiting for its first drill on a test project). Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
       { n: "2,853", label: "agent transcript files" },
@@ -479,7 +479,7 @@ const CONTENT: Record<Lang, Content> = {
       {
         title:
           "Update, October 11, 2026: architecture that stays decided, and a release pipeline modeled on big companies",
-        lead: "Version 1.7.0. Two things drove it. First, I wanted the architecture to stay decided for the whole life of a project, not only at the start. Second, my release process had the first half of what large companies do (a change that does not build or pass its tests cannot be merged) but not the second half: a waiting period before release, watching the live site afterwards, and an automatic way back. The release pipeline went through six full rounds of AI review and two smaller checks of the final fixes before I let it out; the architecture check went through one round.",
+        lead: "Version 1.7.0. Two things drove it. First, I wanted the architecture to stay decided for the whole life of a project, not only at the start. Second, my release process had the first half of what large companies do (a change that does not build or pass its tests cannot be merged) but not the second half: a waiting period before release, watching the live site afterwards, and an automatic way back. The release pipeline went through six full rounds of AI review and two smaller checks of the final fixes before I let it out.",
         items: [
           {
             label: "Architecture is checked every time a project opens:",
@@ -495,11 +495,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "A way back, by design:",
-            body: "the live site is checked every 30 seconds. If three checks in a row fail, the pipeline brings back the last version that passed, so the target is about a minute from the third failure to the way back. That is the design; it has not yet been rehearsed on a live project.",
+            body: "the live site is checked every 30 seconds. If three checks in a row fail (which takes about a minute), the pipeline starts bringing back the last version that passed, and the domain stays on it until a person releases again. That is the design; it has not yet been rehearsed on a live project.",
           },
           {
             label: "Knowing when not to go back:",
-            body: "a database outage, a firewall (network filter) blocking the test machine or a redirect (the site sending visitors to another address) are not mistakes in the new version, so they raise an alarm instead. If the release changed the database structure (a migration) or the backend functions, going back would run old code against the new structure, so the pipeline stops and asks a human. After one automatic return, nothing else goes back on its own until a person closes the incident.",
+            body: "a database outage, a firewall (network filter) blocking the test machine or a redirect (the site sending visitors to another address) are not mistakes in the new version, so they raise an alarm instead. If the release changed the database structure (a migration) or the backend functions (code that runs on the server), going back would run old code against the new structure, so the pipeline stops and asks a human. After one automatic return, nothing else goes back on its own until a person closes the incident.",
           },
           {
             label: "AI on duty, with no keys to the building:",
@@ -507,7 +507,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Every review round, counted:",
-            body: "each round used four AI reviewers: code, security, operations and data. Round one found 1 blocker and 11 major issues, round two 1 blocker and 13 major, rounds three to six 0 blockers and 11, 8, 9 and 8 major. The two blockers were security holes I had not seen: the test script and its list of allowed addresses were read from the change that triggered the run, so an attacker could supply their own; and the AI on duty could read a token (a key that lets a program act on my behalf) from the code repository's settings file and paste it into a public comment. Two smaller checks of the final fixes found one more blocker (a safety rule without a test) and 2 major issues. All were fixed before release.",
+            body: "round one used three AI reviewers (code, security, operations) and rounds two to six four (plus data); the two final checks used code and operations. Findings come in two weights: blocking (must be fixed before release) and major (serious, fixed in the same round). Round one found 1 blocking and 11 major issues, round two 1 blocking and 13 major, rounds three to six no blocking issues and 11, 8, 9 and 8 major. The two blocking issues were security holes I had not seen: the test script and its list of allowed addresses were read from the change that triggered the run, so an attacker could supply their own; and the AI on duty could read a token (a key that lets a program act on my behalf) from the code repository's settings file and paste it into a public comment. Two smaller checks of the final fixes found one more blocking issue (a safety rule without a test) and 2 major issues. All were fixed before release.",
           },
           {
             label: "Honest limits:",
@@ -731,11 +731,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Scaling only when the numbers say so:",
-            body: "the not-now rows keep their thresholds, and the reference notes have a seven-step ladder for our stack, from one server, through queues and caching, to read-only copies of the database. The script can list those thresholds at any time, so the decision to scale comes from data and not from fear.",
+            body: "the not-now rows keep their thresholds, and the reference notes have a seven-step ladder for my stack, from one server, through queues and caching, to read-only copies of the database. The script can list those thresholds at any time, so the decision to scale comes from data and not from fear.",
           },
           {
             label: "Kept honest by the code:",
-            body: "the check described above runs whenever a working session starts and blocks a session from finishing if it left drift behind. Agents follow the architecture, and when the architecture has to change, the change is written down where the next person will look.",
+            body: "the check described above runs whenever a working session starts and blocks a session from finishing if it left drift behind (in new projects; in older ones it is a hint). Agents follow the architecture, and when the architecture has to change, the change is written down where the next person will look.",
           },
         ],
       },
@@ -749,7 +749,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "AI reviews what needs judgment:",
-            body: "every risky change gets separate AI reviewers for code, security, operations and data, each starting fresh with its own checklist. They are not allowed to edit anything, and every finding needs evidence and a command that reproduces it. This release is a good example: the reviewers found two security holes I had missed. After the second round there were no more security holes; later findings were edge cases (a single refused request, a redirect, a database outage) and one more blocker, a safety rule shipped without a test.",
+            body: "every risky change gets separate AI reviewers for code, security, operations and data, each starting fresh with its own checklist. They are not allowed to edit anything, and every finding needs evidence and a command that reproduces it. This release is a good example: the reviewers found two blocking security holes I had missed, both in the first two rounds. The security reviewer kept finding serious, non-blocking issues in every later round (4, 3, 2 and 1), and the other reviewers found edge cases such as a single refused request, a redirect or a database outage. One more blocking issue came at the very end: a safety rule shipped without a test.",
           },
           {
             label: "A human decides what cannot be undone:",
@@ -757,7 +757,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Why it pays off:",
-            body: "by design, a bad release is caught before customers see it (the 10-minute wait) or rolled back about a minute after the third failed check on the live site. Every failure that slips through becomes a new automatic check, so the same mistake does not happen twice. That is the whole idea of this system.",
+            body: "by design, a bad release is caught before customers see it (the 10-minute wait) or the way back starts about a minute after the first failed check on the live site. Every failure that slips through becomes a new automatic check, so the same mistake does not happen twice. That is the whole idea of this system.",
           },
         ],
       },
@@ -942,7 +942,7 @@ const CONTENT: Record<Lang, Content> = {
     versionLine:
       "PG v1.7.0 (stan na 11 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 14 wersji publicznych w cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października, 1.6.0 z 10 października, 1.7.0 z 11 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
     intro:
-      "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
+      "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś, chyba że sekcja mówi inaczej (potok wydań z wersji 1.7.0 czeka na pierwsze ćwiczenie na testowym projekcie). Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
       { n: "2 853", label: "plików zapisów pracy agentów" },
@@ -1219,7 +1219,7 @@ const CONTENT: Record<Lang, Content> = {
       {
         title:
           "Aktualizacja z 11 października 2026: architektura, która zostaje ustalona, i potok wydań jak w dużych firmach",
-        lead: "Wersja 1.7.0. Złożyły się na nią dwie rzeczy. Po pierwsze chciałem, żeby architektura była pilnowana przez cały czas życia projektu, a nie tylko na starcie. Po drugie mój proces wydań miał pierwszą połowę tego, co robią duże firmy (zmiany, która się nie buduje albo nie przechodzi testów, nie da się scalić), ale brakowało drugiej: odczekania przed wydaniem, obserwacji działającej strony i automatycznej drogi powrotu. Potok wydań przeszedł sześć pełnych rund recenzji AI i dwie mniejsze kontrole ostatnich poprawek, zanim go wypuściłem; kontrola architektury przeszła jedną rundę.",
+        lead: "Wersja 1.7.0. Złożyły się na nią dwie rzeczy. Po pierwsze chciałem, żeby architektura była pilnowana przez cały czas życia projektu, a nie tylko na starcie. Po drugie mój proces wydań miał pierwszą połowę tego, co robią duże firmy (zmiany, która się nie buduje albo nie przechodzi testów, nie da się scalić), ale brakowało drugiej: odczekania przed wydaniem, obserwacji działającej strony i automatycznej drogi powrotu. Potok wydań przeszedł sześć pełnych rund recenzji AI i dwie mniejsze kontrole ostatnich poprawek, zanim go wypuściłem.",
         items: [
           {
             label: "Architektura sprawdzana przy każdym otwarciu projektu:",
@@ -1235,11 +1235,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Droga powrotu, z założenia:",
-            body: "działająca strona jest sprawdzana co 30 sekund. Jeśli trzy kontrole z rzędu się nie udadzą, potok przywraca ostatnią wersję, która przeszła bramki, więc celem jest około minuta od trzeciej porażki do powrotu. Tak to zaprojektowałem; na żywym projekcie nie było jeszcze ćwiczenia.",
+            body: "działająca strona jest sprawdzana co 30 sekund. Jeśli trzy kontrole z rzędu się nie udadzą (zajmuje to około minuty), potok zaczyna przywracać ostatnią wersję, która przeszła bramki, a domena zostaje na niej, dopóki człowiek nie wyda nowej. Tak to zaprojektowałem; na żywym projekcie nie było jeszcze ćwiczenia.",
           },
           {
             label: "Wiedzieć, kiedy nie wracać:",
-            body: "awaria bazy, zapora sieciowa blokująca maszynę testową albo przekierowanie (strona odsyła odwiedzających pod inny adres) to nie błąd nowej wersji, więc kończą się alarmem. Jeśli wydanie zmieniło strukturę bazy (migracja) albo funkcje backendu, powrót uruchomiłby stary kod na nowej strukturze, więc potok zatrzymuje się i pyta człowieka. Po jednym automatycznym powrocie nic więcej się samo nie cofa, dopóki ktoś nie zamknie zgłoszenia.",
+            body: "awaria bazy, zapora sieciowa blokująca maszynę testową albo przekierowanie (strona odsyła odwiedzających pod inny adres) to nie błąd nowej wersji, więc kończą się alarmem. Jeśli wydanie zmieniło strukturę bazy (migracja) albo funkcje backendu (kod działający na serwerze), powrót uruchomiłby stary kod na nowej strukturze, więc potok zatrzymuje się i pyta człowieka. Po jednym automatycznym powrocie nic więcej się samo nie cofa, dopóki ktoś nie zamknie zgłoszenia.",
           },
           {
             label: "AI na dyżurze, bez kluczy do budynku:",
@@ -1247,7 +1247,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Każda runda recenzji, policzona:",
-            body: "w każdej rundzie pracowało czterech recenzentów AI: od kodu, bezpieczeństwa, operacji i danych. Pierwsza runda znalazła 1 blokadę i 11 poważnych problemów, druga 1 blokadę i 13 poważnych, rundy od trzeciej do szóstej 0 blokad i kolejno 11, 8, 9 i 8 poważnych. Te dwie blokady to dziury bezpieczeństwa, których sam nie zauważyłem. Skrypt testowy i jego lista dozwolonych adresów były czytane ze zmiany, która uruchomiła proces, więc atakujący mógł podsunąć własne. A AI na dyżurze mogło przeczytać token (klucz, który pozwala programowi działać w moim imieniu) z pliku ustawień repozytorium kodu i wkleić go do publicznego komentarza. Dwie mniejsze kontrole ostatnich poprawek znalazły jeszcze jedną blokadę (regułę bezpieczeństwa bez testu) i 2 poważne problemy. Wszystko zostało naprawione przed wydaniem.",
+            body: "w pierwszej rundzie pracowało trzech recenzentów AI (od kodu, bezpieczeństwa i operacji), w rundach od drugiej do szóstej czterech (doszedł recenzent danych), a dwie końcowe kontrole robili recenzenci kodu i operacji. Zgłoszenia mają dwie wagi: blokujące (do naprawy przed wydaniem) i poważne (naprawiane w tej samej rundzie). Pierwsza runda znalazła 1 problem blokujący i 11 poważnych, druga 1 blokujący i 13 poważnych, rundy od trzeciej do szóstej żadnego blokującego i kolejno 11, 8, 9 i 8 poważnych. Te dwa problemy blokujące to dziury bezpieczeństwa, których sam nie zauważyłem. Skrypt testowy i jego lista dozwolonych adresów były czytane ze zmiany, która uruchomiła proces, więc atakujący mógł podsunąć własne. A AI na dyżurze mogło przeczytać token (klucz, który pozwala programowi działać w moim imieniu) z pliku ustawień repozytorium kodu i wkleić go do publicznego komentarza. Dwie mniejsze kontrole ostatnich poprawek znalazły jeszcze jeden problem blokujący (regułę bezpieczeństwa bez testu) i 2 poważne. Wszystko zostało naprawione przed wydaniem.",
           },
           {
             label: "Uczciwe granice:",
@@ -1473,11 +1473,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Skalowanie wtedy, gdy mówią to liczby:",
-            body: "wiersze „nie teraz” trzymają swoje progi, a notatki wiedzy mają siedmiostopniową drabinę dla naszego stosu: od jednego serwera, przez kolejki i cache, po kopie bazy tylko do odczytu. Skrypt w każdej chwili wypisze te progi, więc decyzja o skalowaniu wynika z danych, nie ze strachu.",
+            body: "wiersze „nie teraz” trzymają swoje progi, a notatki wiedzy mają siedmiostopniową drabinę dla mojego stacku: od jednego serwera, przez kolejki i cache, po kopie bazy tylko do odczytu. Skrypt w każdej chwili wypisze te progi, więc decyzja o skalowaniu wynika z danych, nie ze strachu.",
           },
           {
             label: "Trzymane w ryzach przez kod:",
-            body: "opisana wyżej kontrola działa przy starcie każdej sesji pracy i blokuje zakończenie sesji, która zostawiła odstępstwo. Agenci trzymają się architektury, a gdy architektura musi się zmienić, zmiana jest zapisana tam, gdzie następna osoba jej poszuka.",
+            body: "opisana wyżej kontrola działa przy starcie każdej sesji pracy i blokuje zakończenie sesji, która zostawiła odstępstwo (w nowych projektach; w starszych jest podpowiedzią). Agenci trzymają się architektury, a gdy architektura musi się zmienić, zmiana jest zapisana tam, gdzie następna osoba jej poszuka.",
           },
         ],
       },
@@ -1491,7 +1491,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "AI ocenia to, co wymaga oceny:",
-            body: "każda ryzykowna zmiana dostaje osobnych recenzentów AI od kodu, bezpieczeństwa, operacji i danych, każdy startuje od zera z własną listą kontrolną. Nie mogą niczego edytować, a każde zgłoszenie wymaga dowodu i komendy, która go odtwarza. To wydanie jest dobrym przykładem: recenzenci znaleźli dwie dziury bezpieczeństwa, które przeoczyłem. Po drugiej rundzie dziur bezpieczeństwa już nie było; dalsze znaleziska to przypadki brzegowe (pojedyncze odrzucone zapytanie, przekierowanie, awaria bazy) i jeszcze jedna blokada: reguła bezpieczeństwa bez testu.",
+            body: "każda ryzykowna zmiana dostaje osobnych recenzentów AI od kodu, bezpieczeństwa, operacji i danych, każdy startuje od zera z własną listą kontrolną. Nie mogą niczego edytować, a każde zgłoszenie wymaga dowodu i komendy, która go odtwarza. To wydanie jest dobrym przykładem: recenzenci znaleźli dwie blokujące dziury bezpieczeństwa, które przeoczyłem, obie w dwóch pierwszych rundach. Recenzent bezpieczeństwa znajdował poważne, ale nieblokujące problemy w każdej kolejnej rundzie (4, 3, 2 i 1), a pozostali recenzenci przypadki brzegowe, takie jak pojedyncze odrzucone zapytanie, przekierowanie albo awaria bazy. Jeszcze jeden problem blokujący pojawił się na samym końcu: reguła bezpieczeństwa bez testu.",
           },
           {
             label: "Człowiek decyduje o tym, czego nie da się cofnąć:",
@@ -1499,7 +1499,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Dlaczego to się opłaca:",
-            body: "z założenia złe wydanie zostaje złapane, zanim zobaczą je klienci (10 minut czekania), albo cofnięte około minuty po trzeciej nieudanej kontroli działającej strony. Każda awaria, która się prześlizgnie, staje się nową automatyczną kontrolą, więc ten sam błąd nie zdarza się dwa razy. Na tym polega cały ten system.",
+            body: "z założenia złe wydanie zostaje złapane, zanim zobaczą je klienci (10 minut czekania), albo powrót zaczyna się około minuty po pierwszej nieudanej kontroli działającej strony. Każda awaria, która się prześlizgnie, staje się nową automatyczną kontrolą, więc ten sam błąd nie zdarza się dwa razy. Na tym polega cały ten system.",
           },
         ],
       },
