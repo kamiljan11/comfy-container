@@ -206,7 +206,7 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "On this page",
     role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
     versionLine:
-      "PG v1.6.0 (as of October 10, 2026). This is a version that is still maturing, not a finished product: 13 public versions in four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6, 1.6.0 on October 10). The counters in the table below were taken on September 26 and I have not recounted them since.",
+      "PG v1.7.0 (as of October 11, 2026). This is a version that is still maturing, not a finished product: 14 public versions in four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6, 1.6.0 on October 10, 1.7.0 on October 11). The counters in the table below were taken on September 26 and I have not recounted them since.",
     intro:
       "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today. Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -478,6 +478,41 @@ const CONTENT: Record<Lang, Content> = {
     sections: [
       {
         title:
+          "Update, October 11, 2026: architecture that stays decided, and a release pipeline modeled on big companies",
+        lead: "Version 1.7.0. Two things drove it. First, I wanted architecture to stay decided after the first week, not only at the start of a project. Second, the release process had the first half of what large companies do (build and tests block a merge) but not the second half (a wait before release, watching production, an automatic rollback). Both are now built, and both went through six full rounds of AI review before I let them out.",
+        items: [
+          {
+            label: "Architecture is checked every time a project opens:",
+            body: "a script that costs no AI tokens compares the project with its architecture decisions and prints one to three lines only when something is off. It catches three things: an area with no decision, technology in the code that the decisions do not mention (for example Redis added while the caching row says “not now”), and evidence that points at a file or line that no longer exists. I ran it on six live repos of one client project: zero false alarms, and the only finding in each was real (25 tool-layer rows missing, because the matrix predates them).",
+          },
+          {
+            label: "Drift made today gets fixed today:",
+            body: "if a session adds something that contradicts the agreed architecture, it cannot finish until it either undoes the change or updates the decision (with a short decision record when the decision itself changes). This is hard in new repos and only a hint in old ones. Older issues land on a list with a ready proposal and wait for my “fix it”, because I do not want agents rewriting old projects on their own.",
+          },
+          {
+            label: "A release pipeline in four gates:",
+            body: "after the existing build and test checks, every pull request preview is probed on its critical paths. The production build then waits outside live traffic for 10 minutes while synthetic requests hit it, and Vercel will not switch the domain until that check is green. After the switch, production is watched for 15 minutes. If the last three rounds in a row fail, the previous good version comes back automatically, in about a minute and a half.",
+          },
+          {
+            label: "Rollback that knows when not to roll back:",
+            body: "a database outage, a firewall blocking the test runner or a redirect are not regressions, so they raise an alarm instead. If the release carried a database migration or a change to backend functions, rolling back the app would put old code on a new schema, so the pipeline stops and asks a human. After one automatic rollback, nothing else rolls back until a person closes the incident.",
+          },
+          {
+            label: "AI on duty, with no keys to the building:",
+            body: "when a gate turns red, a fresh Claude instance (on my subscription, not a paid API) reads the probe results and the changes in that release and writes a diagnosis into the incident. It can only read files. It cannot run commands, push, merge or deploy, and a separate trusted step posts its comment.",
+          },
+          {
+            label: "Every review round, counted:",
+            body: "round one found 1 blocker and 11 major issues, round two 1 blocker and 13 major, round three 0 blockers and 11 major, round four 0 blockers and 8 major, round five 0 blockers and 9 major. Round six found 0 blockers and 8 major issues. Two smaller checks of the last fixes found one more blocker (a safety rule without a test) and 2 major issues, all fixed the same afternoon. Both blockers were security holes I did not see myself: the test script and its list of allowed hosts were read from the commit that triggered the run, so an attacker could supply their own; and the AI on duty could read a write-capable token from the git config and paste it into a public comment.",
+          },
+          {
+            label: "Honest limits:",
+            body: "the pipeline has not yet run on a live project. The checklist says staging first, with a drill in both directions: a green build must reach the domain, and a red one must not. Anyone with write access to a repo could still set the check status by hand. I accept that, because those people can already change the code.",
+          },
+        ],
+      },
+      {
+        title:
           "Update, October 10, 2026: extensions under guard, every layer of the stack, and a shell guard with written-down limits",
         lead: "Version 1.6.0. Three things drove it. Claude Code got mods: extensions that run inside the tool itself and skip the hooks (the automatic checks PG relies on). A security checklist became new rules for the security reviewer. And a security review kept finding ways around one of my new rules until I rebuilt it from scratch. This release also makes the stack, the set of tools a project is built on, a required step of designing a system, with every layer decided one by one.",
         items: [
@@ -679,6 +714,50 @@ const CONTENT: Record<Lang, Content> = {
         ],
       },
       {
+        title: "How architecture gets decided, and how it stays decided",
+        lead: "Most projects decide their architecture once, in a document nobody opens again. Here every decision is a row with evidence, and a script checks the code against those rows every time a project opens.",
+        items: [
+          {
+            label: "One row per area:",
+            body: "62 rows: 37 system design areas (data, scaling, queues, caching, authentication, rate limiting, deployments and more) and 25 tool layers (frontend, hosting, database, payments, invoicing, e-mail and others). Each row is marked as a decision with evidence, not applicable with a reason, or not now with a measurable signal for when to come back, for example “more than 50 requests per second” or “10,000 rows in orders”.",
+          },
+          {
+            label: "A council instead of one architect:",
+            body: "when a project starts, agents work in parallel, one per group of areas, and each sees only its own areas and reference cards. Groups whose decisions are hard to undo (the data model, identifiers, file storage, identity, region, disaster recovery) get the strongest model and must be decided even in small projects.",
+          },
+          {
+            label: "Scaling only when the numbers say so:",
+            body: "the not-now rows keep their thresholds, and the reference card has a seven-step scaling ladder for our stack (from one database to read replicas, queues and caching). The script can list those thresholds at any time, so the decision to scale comes from data and not from fear.",
+          },
+          {
+            label: "Kept honest by the code:",
+            body: "the check described above runs at the start of every session and at the end of every change. Agents follow the architecture, and when the architecture has to change, the change is written down where the next person will look.",
+          },
+        ],
+      },
+      {
+        title: "Why a release pipeline with AI in the loop makes sense for a one-person company",
+        lead: "Big companies can afford a release team, an on-call rotation and a second engineer reviewing every change. I cannot, so the pipeline does that work, and AI does the parts that need judgment.",
+        items: [
+          {
+            label: "Machines check what machines can check:",
+            body: "build, types, tests, dependency licences, secret scanning and probes against the running site are plain scripts with no AI and no tokens. They are cheap, fast and give the same answer every time.",
+          },
+          {
+            label: "AI reviews what needs judgment:",
+            body: "every risky change gets separate AI reviewers for code, security, operations and data, each with a fresh context and its own checklist. They are not allowed to edit anything, and every finding needs evidence and a command that reproduces it. This release is a good example: the reviewers found two security holes I had missed. The blocking issues stopped after the second round, and what came after were edge cases (a single rate-limited request, a redirect, a database outage) rather than holes.",
+          },
+          {
+            label: "A human decides what cannot be undone:",
+            body: "merging risky changes, spending money, touching secrets and switching the pipeline off all need my explicit consent. Automatic rollback is limited on purpose: once, then it waits for a person.",
+          },
+          {
+            label: "Why it pays off:",
+            body: "a bad release is caught before customers see it (the 10-minute wait) or reverted in about 90 seconds (the watch). Every failure that slips through becomes a new automatic check, so the same mistake does not happen twice. That is the whole idea of this system.",
+          },
+        ],
+      },
+      {
         title: "Two AI tools, one system",
         items: [
           {
@@ -857,7 +936,7 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "Spis treści",
     role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
     versionLine:
-      "PG v1.6.0 (stan na 10 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 13 wersji publicznych w cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października, 1.6.0 z 10 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
+      "PG v1.7.0 (stan na 11 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 14 wersji publicznych w cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października, 1.6.0 z 10 października, 1.7.0 z 11 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
     intro:
       "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś. Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
@@ -1135,6 +1214,41 @@ const CONTENT: Record<Lang, Content> = {
     sections: [
       {
         title:
+          "Aktualizacja z 11 października 2026: architektura, która zostaje ustalona, i potok wydań jak w dużych firmach",
+        lead: "Wersja 1.7.0. Złożyły się na nią dwie rzeczy. Po pierwsze chciałem, żeby architektura była pilnowana przez cały czas życia projektu, a nie tylko na starcie. Po drugie proces wydań miał pierwszą połowę tego, co robią duże firmy (build i testy blokują scalenie zmian), ale brakowało drugiej: odczekania przed wydaniem, obserwacji produkcji i automatycznego cofnięcia. Obie rzeczy są zbudowane i obie przeszły sześć pełnych rund recenzji AI, zanim je wypuściłem.",
+        items: [
+          {
+            label: "Architektura sprawdzana przy każdym otwarciu projektu:",
+            body: "skrypt, który nie zużywa tokenów AI, porównuje projekt z jego decyzjami architektonicznymi i wypisuje od jednej do trzech linii, tylko gdy coś się nie zgadza. Łapie trzy rzeczy: obszar bez decyzji, technologię w kodzie, o której decyzje milczą (na przykład dodany Redis, gdy wiersz o cache mówi „nie teraz”), oraz dowód wskazujący plik albo linię, których już nie ma. Uruchomiłem go na sześciu żywych repozytoriach jednego projektu klienta: zero fałszywych alarmów, a jedyne znalezisko w każdym było prawdziwe (brak 25 wierszy warstw narzędzi, bo macierz powstała przed ich dodaniem).",
+          },
+          {
+            label: "Odstępstwo z dziś naprawiane dziś:",
+            body: "jeśli sesja doda coś sprzecznego z ustaloną architekturą, nie może się zakończyć, dopóki nie cofnie zmiany albo nie zaktualizuje decyzji (z krótkim zapisem decyzji, gdy zmienia się sama decyzja). W nowych repozytoriach to twarda blokada, w starych tylko podpowiedź. Starsze problemy trafiają na listę z gotową propozycją i czekają na moje „napraw”, bo nie chcę, żeby agenci sami przerabiali stare projekty.",
+          },
+          {
+            label: "Potok wydań w czterech bramkach:",
+            body: "po dotychczasowym buildzie i testach każdy podgląd zmiany jest sprawdzany na ścieżkach krytycznych. Build produkcyjny czeka potem 10 minut poza ruchem użytkowników, a syntetyczne zapytania go sprawdzają. Vercel nie przełączy domeny, dopóki ta kontrola nie jest zielona. Po przełączeniu produkcja jest obserwowana przez 15 minut. Jeśli trzy ostatnie rundy z rzędu są czerwone, wraca poprzednia dobra wersja, automatycznie, w około półtorej minuty.",
+          },
+          {
+            label: "Cofanie, które wie, kiedy nie cofać:",
+            body: "awaria bazy, zapora blokująca maszynę testową albo przekierowanie to nie regresja, więc kończą się alarmem. Jeśli wydanie niosło migrację bazy albo zmianę funkcji backendu, cofnięcie aplikacji postawiłoby stary kod na nowym schemacie, więc potok zatrzymuje się i pyta człowieka. Po jednym automatycznym cofnięciu nic więcej się samo nie cofa, dopóki ktoś nie zamknie zgłoszenia.",
+          },
+          {
+            label: "AI na dyżurze, bez kluczy do budynku:",
+            body: "gdy bramka zrobi się czerwona, świeża instancja Claude (na mojej subskrypcji, nie na płatnym API) czyta wyniki sond i zmiany z tego wydania, a potem wpisuje diagnozę do zgłoszenia. Może tylko czytać pliki. Nie uruchamia komend, nie wypycha kodu, nie scala i nie wdraża, a jej komentarz publikuje osobny, zaufany krok.",
+          },
+          {
+            label: "Każda runda recenzji, policzona:",
+            body: "pierwsza runda znalazła 1 blokadę i 11 poważnych problemów, druga 1 blokadę i 13 poważnych, trzecia 0 blokad i 11 poważnych, czwarta 0 blokad i 8 poważnych, piąta 0 blokad i 9 poważnych. Szósta znalazła 0 blokad i 8 poważnych. Dwie mniejsze kontrole ostatnich poprawek znalazły jeszcze jedną blokadę (regułę bezpieczeństwa bez testu) i 2 poważne problemy, wszystkie naprawione tego samego popołudnia. Obie blokady to dziury bezpieczeństwa, których sam nie zauważyłem. Skrypt testowy i jego lista dozwolonych hostów były czytane z commita, który uruchomił proces, więc atakujący mógł podsunąć własne. A AI na dyżurze mogło przeczytać token z prawem zapisu z konfiguracji gita i wkleić go do publicznego komentarza.",
+          },
+          {
+            label: "Uczciwe granice:",
+            body: "potok nie działał jeszcze na żywym projekcie. Lista kontrolna każe zacząć od środowiska testowego, z ćwiczeniem w obie strony: zielony build ma trafić na domenę, a czerwony nie. Osoba z prawem zapisu do repozytorium nadal może ręcznie ustawić status kontroli. Akceptuję to, bo te same osoby i tak mogą zmienić kod.",
+          },
+        ],
+      },
+      {
+        title:
           "Aktualizacja z 10 października 2026: rozszerzenia pod nadzorem, każda warstwa stacku i strażnik z zapisanymi granicami",
         lead: "Wersja 1.6.0. Złożyły się na nią trzy rzeczy. Claude Code dostał mody: rozszerzenia, które działają wewnątrz samego narzędzia i omijają hooki (automatyczne kontrole, na których opiera się PG). Lista kontrolna bezpieczeństwa zamieniła się w nowe reguły dla recenzenta bezpieczeństwa. A recenzja bezpieczeństwa tak długo znajdowała obejścia jednej z moich nowych reguł, aż przebudowałem ją od zera. To wydanie robi też ze stacku, czyli zestawu narzędzi, na którym stoi projekt, obowiązkowy krok projektowania systemu: każdą warstwę rozstrzyga się po kolei.",
         items: [
@@ -1334,6 +1448,50 @@ const CONTENT: Record<Lang, Content> = {
           {
             label: "Czego jeszcze nie ma:",
             body: "nocnego testu kontrolnego, który co noc uruchamia agenta na przypiętej wersji narzędzia i sprawdza, czy bramki nadal blokują (tzw. kanarek), sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Wszystko to jest w planie i dopiszę to tutaj, gdy zacznie działać.",
+          },
+        ],
+      },
+      {
+        title: "Jak decydujemy o architekturze i jak ona zostaje ustalona",
+        lead: "Większość projektów ustala architekturę raz, w dokumencie, którego nikt potem nie otwiera. Tutaj każda decyzja to wiersz z dowodem, a skrypt porównuje z tymi wierszami kod przy każdym otwarciu projektu.",
+        items: [
+          {
+            label: "Jeden wiersz na obszar:",
+            body: "62 wiersze: 37 obszarów projektowania systemów (dane, skalowanie, kolejki, cache, uwierzytelnianie, limity zapytań, wdrożenia i inne) oraz 25 warstw narzędzi (frontend, hosting, baza, płatności, faktury, e-mail i inne). Każdy wiersz ma status: decyzja z dowodem, nie dotyczy z uzasadnieniem albo nie teraz z mierzalnym sygnałem powrotu, na przykład „ponad 50 zapytań na sekundę” albo „10 tysięcy wierszy w zamówieniach”.",
+          },
+          {
+            label: "Narada zamiast jednego architekta:",
+            body: "na starcie projektu agenci pracują równolegle, po jednym na grupę obszarów, i każdy widzi tylko swoje obszary i karty wiedzy. Grupy, których decyzji trudno potem cofnąć (model danych, identyfikatory, przechowywanie plików, tożsamość, region, odtwarzanie po awarii), dostają najmocniejszy model i muszą być rozstrzygnięte nawet w małych projektach.",
+          },
+          {
+            label: "Skalowanie wtedy, gdy mówią to liczby:",
+            body: "wiersze „nie teraz” trzymają swoje progi, a karta wiedzy ma siedmiostopniową drabinę skalowania dla naszego stosu (od jednej bazy, przez repliki do odczytu, po kolejki i cache). Skrypt w każdej chwili wypisze te progi, więc decyzja o skalowaniu wynika z danych, nie ze strachu.",
+          },
+          {
+            label: "Trzymane w ryzach przez kod:",
+            body: "opisana wyżej kontrola działa na początku każdej sesji i na końcu każdej zmiany. Agenci trzymają się architektury, a gdy architektura musi się zmienić, zmiana jest zapisana tam, gdzie następna osoba jej poszuka.",
+          },
+        ],
+      },
+      {
+        title: "Dlaczego potok wydań z AI w pętli ma sens w jednoosobowej firmie",
+        lead: "Duże firmy stać na zespół wydań, dyżury i drugiego inżyniera, który przegląda każdą zmianę. Mnie nie, więc tę pracę robi potok, a AI robi te części, które wymagają oceny.",
+        items: [
+          {
+            label: "Maszyny sprawdzają to, co maszyny umieją sprawdzić:",
+            body: "build, typy, testy, licencje zależności, skan sekretów i sondy na działającej stronie to zwykłe skrypty, bez AI i bez tokenów. Są tanie, szybkie i za każdym razem dają tę samą odpowiedź.",
+          },
+          {
+            label: "AI ocenia to, co wymaga oceny:",
+            body: "każda ryzykowna zmiana dostaje osobnych recenzentów AI od kodu, bezpieczeństwa, operacji i danych, każdy ze świeżym kontekstem i własną listą kontrolną. Nie mogą niczego edytować, a każde zgłoszenie wymaga dowodu i komendy, która go odtwarza. To wydanie jest dobrym przykładem: recenzenci znaleźli dwie dziury bezpieczeństwa, które przeoczyłem. Blokady skończyły się po drugiej rundzie, a dalsze znaleziska to były przypadki brzegowe (pojedyncze odrzucone zapytanie, przekierowanie, awaria bazy), nie dziury.",
+          },
+          {
+            label: "Człowiek decyduje o tym, czego nie da się cofnąć:",
+            body: "scalanie ryzykownych zmian, wydawanie pieniędzy, sekrety i wyłączenie potoku wymagają mojej wyraźnej zgody. Automatyczne cofanie jest celowo ograniczone: raz, potem czeka na człowieka.",
+          },
+          {
+            label: "Dlaczego to się opłaca:",
+            body: "złe wydanie zostaje złapane, zanim zobaczą je klienci (10 minut czekania), albo cofnięte w około 90 sekund (obserwacja). Każda awaria, która się prześlizgnie, staje się nową automatyczną kontrolą, więc ten sam błąd nie zdarza się dwa razy. Na tym polega cały ten system.",
           },
         ],
       },
