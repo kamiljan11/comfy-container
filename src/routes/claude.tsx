@@ -491,7 +491,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "A release pipeline in four steps (preview, wait, watch, way back):",
-            body: "after the existing build and test checks, every preview (a temporary copy of the site built for a proposed change) gets automated test requests on the paths that must never break. A preview behind Vercel's password protection is not probed, because the key that opens it is never handed to unreviewed code; the real check comes next. The production build then waits outside live traffic for 10 minutes while synthetic requests (automated visits) test it, and a Vercel setting called Deployment Checks keeps the domain on the old version until that check is green. After the switch, the live site is watched for 15 minutes.",
+            body: "after the existing build and test checks, every preview (a temporary copy of the site built for a proposed change) gets automated test requests on the paths that must never break. A preview behind Vercel's password protection is not probed, because the key that opens it is never handed to unreviewed code; the real check comes next. The production build then waits outside live traffic for 10 minutes while synthetic requests (automated visits) test it, and a Vercel setting called Deployment Checks is meant to keep the domain on the old version until that check is green (to be confirmed in the first drill). After the switch, the live site is watched for 15 minutes.",
           },
           {
             label: "A way back, by design:",
@@ -749,11 +749,11 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "AI reviews what needs judgment:",
-            body: "every risky change gets separate AI reviewers for code, security, operations and data, each starting fresh with its own checklist. They are not allowed to edit anything, and every finding needs evidence and a command that reproduces it. This release is a good example: the reviewers found two blocking security holes I had missed, both in the first two rounds. The security reviewer kept finding serious, non-blocking issues in every later round (4, 3, 2 and 1), and the other reviewers found edge cases such as a single refused request, a redirect or a database outage. One more blocking issue came at the very end: a safety rule shipped without a test.",
+            body: "every risky change gets separate AI reviewers for code, security, operations and data, each starting fresh with its own checklist. They are not allowed to edit anything, and every finding needs evidence and a command that reproduces it. This release is a good example: the reviewers found two blocking security holes I had missed, both in the first two rounds. The security reviewer kept finding serious, non-blocking issues in every later round (4, 3, 2 and 1), and the other reviewers found edge cases such as a single refused request, a redirect or a database outage. One more blocking issue came at the very end: a safety rule added without a test, caught before release.",
           },
           {
             label: "A human decides what cannot be undone:",
-            body: "merging risky changes, spending money, and touching passwords and keys need my explicit consent, and switching the pipeline off is a setting only I can change. The automatic way back is limited on purpose: once, then it waits for a person.",
+            body: "merging risky changes, spending money, and touching passwords and keys need my explicit consent, and switching the pipeline off is a repository setting, not something an agent decides. The automatic way back is limited on purpose: once, then it waits for a person.",
           },
           {
             label: "Why it pays off:",
@@ -1231,7 +1231,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Potok wydań w czterech krokach (podgląd, czekanie, obserwacja, powrót):",
-            body: "po dotychczasowym buildzie i testach każdy podgląd (tymczasowa kopia strony zbudowana dla proponowanej zmiany) dostaje automatyczne zapytania testowe na ścieżkach, które nie mogą się zepsuć. Podgląd chroniony hasłem Vercela nie jest sprawdzany, bo klucza do niego nigdy nie dostaje niezrecenzowany kod; prawdziwa kontrola przychodzi w następnym kroku. Build produkcyjny czeka potem 10 minut poza ruchem użytkowników, a syntetyczne zapytania (automatyczne wizyty) go testują. Ustawienie Vercela o nazwie Deployment Checks trzyma domenę na starej wersji, dopóki ta kontrola nie jest zielona. Po przełączeniu działająca strona jest obserwowana przez 15 minut.",
+            body: "po dotychczasowym buildzie i testach każdy podgląd (tymczasowa kopia strony zbudowana dla proponowanej zmiany) dostaje automatyczne zapytania testowe na ścieżkach, które nie mogą się zepsuć. Podgląd chroniony hasłem Vercela nie jest sprawdzany, bo klucza do niego nigdy nie dostaje niezrecenzowany kod; prawdziwa kontrola przychodzi w następnym kroku. Build produkcyjny czeka potem 10 minut poza ruchem użytkowników, a syntetyczne zapytania (automatyczne wizyty) go testują. Ustawienie Vercela o nazwie Deployment Checks ma trzymać domenę na starej wersji, dopóki ta kontrola nie jest zielona (do potwierdzenia w pierwszym ćwiczeniu). Po przełączeniu działająca strona jest obserwowana przez 15 minut.",
           },
           {
             label: "Droga powrotu, z założenia:",
@@ -1495,7 +1495,7 @@ const CONTENT: Record<Lang, Content> = {
           },
           {
             label: "Człowiek decyduje o tym, czego nie da się cofnąć:",
-            body: "scalanie ryzykownych zmian, wydawanie pieniędzy oraz hasła i klucze wymagają mojej wyraźnej zgody, a wyłączenie potoku to ustawienie, które mogę zmienić tylko ja. Automatyczna droga powrotu jest celowo ograniczona: raz, potem czeka na człowieka.",
+            body: "scalanie ryzykownych zmian, wydawanie pieniędzy oraz hasła i klucze wymagają mojej wyraźnej zgody, a wyłączenie potoku to ustawienie repozytorium, a nie decyzja agenta. Automatyczna droga powrotu jest celowo ograniczona: raz, potem czeka na człowieka.",
           },
           {
             label: "Dlaczego to się opłaca:",
