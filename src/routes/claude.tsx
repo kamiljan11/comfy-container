@@ -206,9 +206,9 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "On this page",
     role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
     versionLine:
-      "PG v1.7.0 (as of October 11, 2026). This is a version that is still maturing, not a finished product: 14 public versions in four weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6, 1.6.0 on October 10, 1.7.0 on October 11). The counters in the table below were taken on September 26 and I have not recounted them since.",
+      "PG v1.8.0 (as of October 14, 2026). This is a version that is still maturing, not a finished product: 15 public versions in five weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6, 1.6.0 on October 10, 1.7.0 on October 11, 1.8.0 on October 14). The counters in the table below were taken on September 26 and I have not recounted them since.",
     intro:
-      "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today, unless a section says otherwise (the 1.7.0 release pipeline is waiting for its first drill on a test project). Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
+      "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today, unless a section says otherwise (the 1.7.0 release pipeline is waiting for its first drill on a test project, and the scheduled routines are paused until I fix their setup after a computer move). Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
       { n: "2,853", label: "agent transcript files" },
@@ -375,7 +375,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "At every push:",
-        body: "nothing goes straight to the main branch. A change of more than 400 source lines is split into smaller ones. A new circular import (import cycle), or an import that breaks the layers declared in the architecture document, is blocked. If someone else committed to the same branch in the last 24 hours, you get a warning.",
+        body: "nothing goes straight to the main branch. A change of more than 1,500 source lines is split into smaller ones (one topic, like a database migration, stays together). A new circular import (import cycle), or an import that breaks the layers declared in the architecture document, is blocked. If someone else committed to the same branch in the last 24 hours, you get a warning.",
       },
       {
         label: "On the build server (CI) and at merge:",
@@ -468,7 +468,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "45 copies of a company identity:",
-        body: "spread across 11 files, and every one of them passed lint, types, tests and review. Now a duplicate check runs on added lines: the same text three times in two files is blocked. An escape hatch exists, and every use of it is logged.",
+        body: "spread across 11 files, and every one of them passed lint, types, tests and review. Now a duplicate check runs on added lines: the same text six times in at least three files is blocked (it started at three times in two; version 1.8.0 recalibrated it from the log). An escape hatch exists, and every use of it is logged.",
       },
       {
         label: "An invoice that silently changed the seller:",
@@ -476,6 +476,45 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title:
+          "Update, October 14, 2026: proportionality, with fewer blocks and fewer checks for the same safety",
+        lead: "Version 1.8.0. Until now, every time I saw a risk, I added a gate. After a few weeks the gate log showed the cost: some gates stopped my own normal work far more often than they caught a real mistake. So this release puts one rule above the others: no incident, no new block. A new check starts by only observing, and it may block only after a real incident. I counted the friction from the log, with test runs filtered out, and recalibrated four gates. Before release, independent AI reviewers checked the changes in four rounds: code, operations and product in every round, security and data in the last one. Among other things they caught that a single GitHub hiccup could silently cost a month of vulnerability checks, and that an empty answer from GitHub would look like a quiet month; both now end as a visible failure.",
+        items: [
+          {
+            label: "Change size:",
+            body: "the limit went from 400 to 1,500 source lines. The log showed that the old limit was mostly bypassed on purpose, for changes that belong together, like a database migration or generated code. Independent topics are still split into separate changes.",
+          },
+          {
+            label: "Duplicated text:",
+            body: "a piece of text is blocked when it repeats six times in at least three files (it used to be three times in two). Seed data (sample records loaded into a database) no longer counts. A typo in the threshold settings now stops the check with an error instead of silently letting everything through.",
+          },
+          {
+            label: "Small frictions removed:",
+            body: "deleting a build cache (for example .next/cache) is allowed, while a path that climbs up with .. or goes through a link stays blocked. Throwaway scripts in the temporary folder, outside any project, are no longer linted after every edit; a project copied into that folder still is.",
+          },
+          {
+            label: "The changelog is written at release time:",
+            body: "every pull request (a proposed change) used to add a line to one shared file, and parallel pull requests kept colliding on it. Now the pull request title, written in a fixed format (Conventional Commits), is the record, and the changelog is collected from those titles when a version is released. The reviewers no longer flag a pull request without a changelog line.",
+          },
+          {
+            label: "Routines check only what I am working on:",
+            body: "a daily review of open pull requests and a monthly vulnerability check used to go through every repository, but most of my projects are finished and I rarely return to them. A script now reads GitHub history and keeps only repositories with real work in the last 30 days. It ignores days when PG itself swept the whole fleet (on those days 10 or 14 repositories changed at once, against 1 to 6 on a normal day), the same change rolled out to many repositories, and bots that update dependencies. First measurement: 12 active repositories out of 47. The list is data, not code: a time window, projects to always check, and one project that is never checked.",
+          },
+          {
+            label: "Cleaner numbers:",
+            body: "test runs used to write into the same log as real work, which inflated the counters I calibrate with. Tests now write to their own temporary log, and the weekly health check counts their traces separately.",
+          },
+          {
+            label: "A context window chosen on purpose:",
+            body: "Claude can hold a conversation of up to a million tokens, but every message sends all of it again. In my transcripts a 1M window used about 2.3 times more of the weekly limit than a 400k one, so the window stays at 400k. A 600k trial starts on October 17 with a rule decided in advance: it stays if the week ends under 90% of the limit and nothing gets blocked.",
+          },
+          {
+            label: "Honest limits:",
+            body: "the routine scope was calibrated on one month of history, and it has not run yet. While preparing this release I found that none of the scheduled routines has done any work since I moved to a new computer in early October: most were set to start in a folder the system no longer trusts, so the session never began, and the rest stopped at a permission prompt nobody was there to answer. The routines are switched off until I fix that setup. Three of them will come back (the vulnerability check, the pull request review and the weekly health check); three that only work on PG itself stay off, in line with the rule above.",
+          },
+        ],
+      },
       {
         title:
           "Update, October 11, 2026: architecture that stays decided, and a release pipeline modeled on big companies",
@@ -827,7 +866,7 @@ const CONTENT: Record<Lang, Content> = {
     ],
     schedTitle: "Routines: the part that runs while nobody is typing",
     schedLead:
-      "Five routines in the coding runtime, 35 defined on the desktop, 10 of them enabled. Deterministic script first, model only on findings; anything that could “find itself work” is off by design.",
+      "Five routines in the coding runtime, 35 defined on the desktop, 10 of them enabled (all paused since October 14 until I fix their setup; see the 1.8.0 update). Deterministic script first, model only on findings; anything that could “find itself work” is off by design.",
     cadence: [
       { name: "PR reviewer", dots: 5, freq: "weekday mornings" },
       { name: "Watchdog", dots: 5, freq: "every 2 hours" },
@@ -940,9 +979,9 @@ const CONTENT: Record<Lang, Content> = {
     tocLabel: "Spis treści",
     role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
     versionLine:
-      "PG v1.7.0 (stan na 11 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 14 wersji publicznych w cztery tygodnie (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października, 1.6.0 z 10 października, 1.7.0 z 11 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
+      "PG v1.8.0 (stan na 14 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 15 wersji publicznych w pięć tygodni (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października, 1.6.0 z 10 października, 1.7.0 z 11 października, 1.8.0 z 14 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
     intro:
-      "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś, chyba że sekcja mówi inaczej (potok wydań z wersji 1.7.0 czeka na pierwsze ćwiczenie na testowym projekcie). Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
+      "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś, chyba że sekcja mówi inaczej (potok wydań z wersji 1.7.0 czeka na pierwsze ćwiczenie na testowym projekcie, a zaplanowane rutyny są wstrzymane, dopóki nie naprawię ich ustawień po przeprowadzce na nowy komputer). Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
     repoCta: "github.com/kamiljan11/coding-higher-mind →",
     stats: [
       { n: "2 853", label: "plików zapisów pracy agentów" },
@@ -1115,7 +1154,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "Przy każdym wysłaniu zmian (push):",
-        body: "nic nie trafia prosto na gałąź główną (main). Zmiana powyżej 400 linii kodu źródłowego jest dzielona na mniejsze. Nowy cykl importów albo import łamiący warstwy opisane w dokumencie architektury jest blokowany. Gdy na tej samej gałęzi ktoś inny commitował w ciągu ostatnich 24 godzin, pojawia się ostrzeżenie.",
+        body: "nic nie trafia prosto na gałąź główną (main). Zmiana powyżej 1500 linii kodu źródłowego jest dzielona na mniejsze (jeden temat, jak migracja bazy danych, zostaje razem). Nowy cykl importów albo import łamiący warstwy opisane w dokumencie architektury jest blokowany. Gdy na tej samej gałęzi ktoś inny commitował w ciągu ostatnich 24 godzin, pojawia się ostrzeżenie.",
       },
       {
         label: "Na serwerze budującym (CI) i przy scalaniu:",
@@ -1208,7 +1247,7 @@ const CONTENT: Record<Lang, Content> = {
       },
       {
         label: "45 kopii tożsamości firmy:",
-        body: "rozsianych po 11 plikach, a każdy z nich przeszedł lint, typy, testy i recenzję. Teraz nowe linie przechodzą kontrolę duplikatów: ten sam tekst trzy razy w dwóch plikach jest blokowany. Wyjątek jest możliwy, ale każde jego użycie jest logowane.",
+        body: "rozsianych po 11 plikach, a każdy z nich przeszedł lint, typy, testy i recenzję. Teraz nowe linie przechodzą kontrolę duplikatów: ten sam tekst sześć razy w co najmniej trzech plikach jest blokowany (na początku trzy razy w dwóch; wersja 1.8.0 przestroiła próg według logu). Wyjątek jest możliwy, ale każde jego użycie jest logowane.",
       },
       {
         label: "Faktura, która po cichu zmieniła sprzedawcę:",
@@ -1216,6 +1255,45 @@ const CONTENT: Record<Lang, Content> = {
       },
     ],
     sections: [
+      {
+        title:
+          "Aktualizacja z 14 października 2026: proporcjonalność, czyli mniej blokad i mniej kontroli przy tym samym bezpieczeństwie",
+        lead: "Wersja 1.8.0. Do tej pory na każde zauważone ryzyko dokładałem bramkę. Po kilku tygodniach log bramek pokazał koszt: część z nich zatrzymywała moją zwykłą pracę dużo częściej, niż łapała prawdziwy błąd. Dlatego to wydanie stawia jedną zasadę ponad innymi: bez incydentu nie ma nowej blokady. Nowa kontrola zaczyna od samej obserwacji, a blokować może dopiero po prawdziwym incydencie. Tarcie policzyłem z logu, z odsianymi przebiegami testów, i na tej podstawie przestroiłem cztery bramki. Przed wydaniem niezależni recenzenci AI sprawdzili zmiany w czterech rundach: kod, operacje i produkt w każdej, bezpieczeństwo i dane w ostatniej. Wyłapali między innymi, że jedna chwilowa awaria GitHuba mogła po cichu kosztować miesiąc kontroli podatności, a pusta odpowiedź GitHuba wyglądałaby jak spokojny miesiąc; oba przypadki kończą się teraz widocznym błędem.",
+        items: [
+          {
+            label: "Rozmiar zmiany:",
+            body: "limit wzrósł z 400 do 1500 linii kodu źródłowego. Log pokazał, że stary limit był głównie świadomie omijany przy zmianach, które powinny zostać razem, jak migracja bazy danych albo wygenerowany kod. Niezależne tematy nadal trafiają do osobnych zmian.",
+          },
+          {
+            label: "Powtórzony tekst:",
+            body: "tekst jest blokowany, gdy powtarza się sześć razy w co najmniej trzech plikach (wcześniej trzy razy w dwóch). Dane startowe (przykładowe rekordy wgrywane do bazy) przestały się liczyć. Literówka w ustawieniach progu zatrzymuje teraz kontrolę błędem, zamiast po cichu przepuszczać wszystko.",
+          },
+          {
+            label: "Drobne tarcia usunięte:",
+            body: "usuwanie pamięci podręcznej buildu (na przykład .next/cache) jest dozwolone, a ścieżka, która wychodzi wyżej przez .. albo prowadzi przez dowiązanie, nadal jest blokowana. Jednorazowe skrypty w folderze tymczasowym, poza jakimkolwiek projektem, nie są już lintowane po każdej edycji; projekt skopiowany do tego folderu nadal jest.",
+          },
+          {
+            label: "Dziennik zmian powstaje przy wydaniu:",
+            body: "każdy pull request (propozycja zmiany) dopisywał linię do jednego wspólnego pliku, więc równoległe pull requesty ciągle się na nim zderzały. Teraz zapisem jest tytuł pull requesta w stałym formacie (Conventional Commits), a dziennik zmian zbiera się z tych tytułów przy wydaniu wersji. Recenzenci nie zgłaszają już pull requesta bez linii w dzienniku zmian.",
+          },
+          {
+            label: "Rutyny sprawdzają tylko to, nad czym pracuję:",
+            body: "codzienna recenzja otwartych pull requestów i comiesięczna kontrola podatności przechodziły przez wszystkie repozytoria, a większość moich projektów jest skończona i rzadko do nich wracam. Teraz skrypt czyta historię GitHuba i zostawia tylko repozytoria z prawdziwą pracą w ostatnich 30 dniach. Pomija dni, w których PG sam przechodził po całej flocie (wtedy naraz zmieniało się 10 albo 14 repozytoriów, przy 1 do 6 w zwykły dzień), tę samą zmianę rozesłaną do wielu repozytoriów i boty aktualizujące zależności. Pierwszy pomiar: 12 aktywnych repozytoriów z 47. Lista to dane, nie kod: okno czasu, projekty sprawdzane zawsze i jeden projekt, którego nie sprawdzamy nigdy.",
+          },
+          {
+            label: "Czystsze liczby:",
+            body: "przebiegi testów zapisywały się do tego samego logu co prawdziwa praca, co zawyżało liczniki, na których stroję bramki. Testy piszą teraz do własnego tymczasowego logu, a cotygodniowy przegląd stanu liczy ich ślady osobno.",
+          },
+          {
+            label: "Okno kontekstu wybrane świadomie:",
+            body: "Claude może trzymać rozmowę do miliona tokenów, ale każda wiadomość wysyła ją całą od nowa. W moich transkryptach okno 1M zużywało około 2,3 razy więcej limitu tygodniowego niż okno 400k, więc zostaje 400k. Od 17 października ruszy próba 600k z regułą ustaloną z góry: zostaje, jeśli tydzień kończy się poniżej 90% limitu i nic nie zostaje zablokowane.",
+          },
+          {
+            label: "Uczciwe granice:",
+            body: "zakres rutyn skalibrowałem na jednym miesiącu historii i jeszcze się nie uruchomił. Przy tym wydaniu wyszło, że od przeprowadzki na nowy komputer na początku października żadna zaplanowana rutyna nie wykonała pracy: większość miała startować w folderze, któremu system już nie ufa, więc sesja w ogóle nie ruszała, a reszta stawała na pytaniu o uprawnienia, na które nikt nie odpowiadał. Rutyny są wyłączone, dopóki tego nie naprawię. Wrócą trzy (kontrola podatności, recenzja pull requestów i cotygodniowy przegląd stanu); trzy, które pracują tylko nad samym PG, zostają wyłączone, zgodnie z zasadą opisaną wyżej.",
+          },
+        ],
+      },
       {
         title:
           "Aktualizacja z 11 października 2026: architektura, która zostaje ustalona, i potok wydań jak w dużych firmach",
@@ -1569,7 +1647,7 @@ const CONTENT: Record<Lang, Content> = {
     ],
     schedTitle: "Rutyny: część, która działa, gdy nikt nie pisze",
     schedLead:
-      "Pięć rutyn w runtime kodowym, 35 zdefiniowanych na pulpicie, 10 z nich włączonych. Najpierw deterministyczny skrypt, model tylko przy znaleziskach; wszystko, co mogłoby „znajdować sobie robotę”, jest wyłączone z założenia.",
+      "Pięć rutyn w runtime kodowym, 35 zdefiniowanych na pulpicie, 10 z nich włączonych (od 14 października wszystkie wstrzymane do naprawy ustawień; zobacz aktualizację 1.8.0). Najpierw deterministyczny skrypt, model tylko przy znaleziskach; wszystko, co mogłoby „znajdować sobie robotę”, jest wyłączone z założenia.",
     cadence: [
       { name: "Recenzent PR", dots: 5, freq: "dni robocze rano" },
       { name: "Watchdog", dots: 5, freq: "co 2 godziny" },
