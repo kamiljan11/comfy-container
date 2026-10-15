@@ -86,6 +86,9 @@ describe("posts", () => {
     expect(findPost("czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem")?.external?.url).toBe(
       "https://torzeszow.pl/news/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem-od-28-pazdziernika-mozna-zlozyc-skarge",
     );
+    expect(findPost("lekarz-sprawdzal-diagnoze-w-chatgpt")?.external?.url).toBe(
+      "https://torzeszow.pl/news/lekarz-rodzinny-sprawdzal-diagnoze-w-chatgpt-przepisy-czy-tak-wolno",
+    );
   });
 
   it("findPost returns undefined for an unknown slug", () => {

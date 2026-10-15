@@ -21,6 +21,7 @@ const PAGES = [
   "/blog/claude-autoshutdown",
   "/blog/oszusci-moga-podrobic-glos-wnuczka",
   "/blog/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem",
+  "/blog/lekarz-sprawdzal-diagnoze-w-chatgpt",
 ];
 
 // one literal pattern over all meta tags; a later tag with the same key wins,
