@@ -86,17 +86,33 @@ describe("/claude content", () => {
       });
 
       it("keeps the numbers that appear twice on the page in step with each other", () => {
-        const stat = (i: number) => c.stats[i].n;
+        // found by shape, not position, so reordering the stats cannot pair the wrong numbers
+        const only = (re: RegExp) => {
+          const hit = c.stats.filter((s) => re.test(s.n) || re.test(s.label));
+          expect(hit, String(re)).toHaveLength(1);
+          return hit[0];
+        };
+        const int = (s: string) => {
+          expect(s, "a whole number").toMatch(/^\d+$/);
+          return Number(s);
+        };
         // "31 / 47" in the stats = the waffle's repositories
-        const fleet = Number(stat(6).split("/")[1]);
+        const fleet = int(
+          only(/^\d+ \/ \d+$/)
+            .n.split("/")[1]
+            .trim(),
+        );
         expect(c.figures.waffle.groups.reduce((a, g) => a + g.count, 0)).toBe(fleet);
-        // "15" public versions = the releases on the timeline, patch bundles counted one by one
+        // "15" public versions in 33 days = the releases on the timeline, patch bundles counted one by one
+        const span = c.figures.versions.ticks.at(-1)?.day ?? 0;
         const releases = c.figures.versions.points.reduce((a, p) => a + (p.patches ?? 1), 0);
-        expect(releases).toBe(Number(stat(5)));
-        // before/after bars print the same values they draw
+        expect(int(only(new RegExp(`\\b${String(span + 1)}\\b`)).n)).toBe(releases);
+        // before/after bars print exactly the values they draw (a number token, not a substring)
+        const tokens = (s: string) =>
+          (s.match(/\d+(?:[.,]\d+)?/g) ?? []).map((t) => Number(t.replace(",", ".")));
         for (const r of c.figures.context.rows) {
-          expect(r.beforeText.replace(",", ".")).toContain(String(r.before));
-          expect(r.afterText.replace(",", ".")).toContain(String(r.after));
+          expect(tokens(r.beforeText), r.beforeText).toContain(r.before);
+          expect(tokens(r.afterText), r.afterText).toContain(r.after);
         }
       });
 

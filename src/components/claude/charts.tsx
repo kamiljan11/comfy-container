@@ -170,7 +170,12 @@ export function RoundsChart({ t }: { t: RoundsLabels }) {
           viewBox={`0 0 ${String(W)} ${String(H)}`}
           className="aid"
           role="img"
-          aria-label={t.caption}
+          aria-label={`${t.caption} ${t.rounds
+            .map(
+              (r) =>
+                `${r.label}: ${String(r.blocking)} ${t.blockingLabel}, ${String(r.major)} ${t.majorLabel}`,
+            )
+            .join("; ")}.`}
         >
           <line x1="60" x2={W - 40} y1={base} y2={base} className="aid-ln" />
           {t.rounds.map((r, i) => {

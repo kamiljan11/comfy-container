@@ -5,7 +5,7 @@ import type { Content } from "../../components/claude/types";
 
 export const en: Content = {
   title: "Coding Higher Mind: the AI system behind the work",
-  role: "A meta layer under every project I build with AI: hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that turns failures into checks. Counted, not estimated. Open source.",
+  role: "A meta layer under every project I build with AI: hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that turns failures into checks. Counted where it can be; estimates are marked as estimates. Open source.",
   tocLabel: "On this page",
   mapTitle: "How this page is laid out",
   mapLead:
@@ -70,8 +70,8 @@ export const en: Content = {
           body: "the tool for operations: mail, documents, research, outreach and design. It has no hooks, so the working rules travel as text inside every prompt, and the status word at the end of each report is the main protection.",
         },
         {
-          label: "114 skills:",
-          body: "versioned instruction packages that tasks are routed to, 56 in the coding tool and 58 on the desktop. A router matches each task by fixed rules and announces which steps it will run before the work starts.",
+          label: "73 skills:",
+          body: "versioned instruction packages that tasks are routed to, 56 in the coding tool and 58 on the desktop, 41 of them installed in both. A router matches each task by fixed rules and announces which steps it will run before the work starts.",
         },
         {
           label: "The right model for the job:",
@@ -220,7 +220,7 @@ export const en: Content = {
       items: [
         {
           label: "Nine specialist reviewers:",
-          body: "code, security, data, operations, UX, product, QA, a verifier and a devil's advocate. Each works from a checklist of at most eight numbered rules, and every rule has a command to run, a severity policy, a fixed output format and a worked example of a false alarm it must reject. Reviewers only read; the main session makes the fixes.",
+          body: "code, security, data, operations, UX, product, QA, a verifier and a devil's advocate. Each works from a short checklist of numbered rules, and every rule has a command to run, a severity policy, a fixed output format and a worked example of a false alarm it must reject. Reviewers only read; the main session makes the fixes.",
         },
         {
           label: "Each reviewer reads its own slice:",
@@ -312,7 +312,7 @@ export const en: Content = {
         },
         {
           label: "Why the matrix exists:",
-          body: "the October 6 audit counted 437 named options in a system-design course: PG could choose between 46 % of them, knew another 26 % only by name and missed 28 %. Nothing made the architect walk through every area. On a client app the same day the council filled all 37 rows and listed 66 gaps with evidence; at least one was a false alarm, so a person still reviews them.",
+          body: "the October 6 audit counted 437 named options in a system-design course: PG could choose between 46 % of them, knew another 26 % only by name and missed 28 %. Nothing made the architect walk through every area. On a client app the same day the council filled all 37 rows and listed about 60 gaps with evidence; at least one was a false alarm, so a person still reviews them.",
         },
         {
           label: "Kept honest by the code:",

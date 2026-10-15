@@ -41,8 +41,12 @@ sentence by sentence, with many more charts, so a reader can navigate without re
 
 - To change a sentence or a number: edit both content files, run the tests. The parity test fails when
   only one language changed a number.
-- To add a chart: a type and key in `types.ts`, a component, a `case` in `Figure`, CSS in `site.css`.
+- To add a chart: a type and key in `types.ts`, a component, a `case` in `src/components/claude/Figure.tsx`,
+  CSS in `site.css`. `Figure.test.ts` renders every figure in both languages.
 - Recurring cost: two content files of about 1,000 lines each to keep in step (the test checks the
-  numbers, a person checks the wording) and about 1,100 lines of chart CSS. No runtime cost and no new
+  numbers, a person checks the wording) and about 750 lines of chart CSS. No runtime cost and no new
   dependency.
 - Rollback: revert the commit; the old route is self-contained.
+- How we know it worked: the site has no analytics, so success is measured on the content itself. Every
+  number on the page has a row in `docs/CLAUDE-PAGE-NUMBERS.md`, the parity test stays green, and the
+  next PG release changes sentences in place instead of adding an "update X.Y.Z" section.

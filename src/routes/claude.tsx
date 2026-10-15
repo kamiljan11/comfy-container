@@ -1,29 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Fragment, type ReactNode } from "react";
+import { Fragment } from "react";
 import { SkillsTab } from "../components/claude/SkillsTab";
-import {
-  AiArch,
-  AiCadence,
-  AiLoop,
-  AiMindMap,
-  AiPipeline,
-  AiReview,
-  AiVaultFlow,
-} from "../components/claude/diagrams";
-import {
-  BeforeAfter,
-  CalibTable,
-  ExceptionCards,
-  LimitsBoard,
-  MergeFlow,
-  ReleaseSteps,
-  RoundsChart,
-  StackBars,
-  TierLadder,
-  VersionTimeline,
-  Waffle,
-} from "../components/claude/charts";
-import type { Content, FigureKey, Figures, Item, Section } from "../components/claude/types";
+import { Figure } from "../components/claude/Figure";
+import type { Content, Figures, Item, Section } from "../components/claude/types";
 import { en } from "../content/claude/en";
 import { pl } from "../content/claude/pl";
 import { REPO_URL } from "../lib/skillsCatalog";
@@ -129,55 +108,6 @@ function ClaudeHead({ title, role, lang }: { title: string; role: string; lang: 
   );
 }
 
-/**
- * One switch from a figure key to its component. Exhaustive over `FigureKey`: a key added to the
- * content types without a component here fails the type check instead of rendering nothing.
- */
-function Figure({ k, f }: { k: FigureKey; f: Figures }): ReactNode {
-  switch (k) {
-    case "arch":
-      return <AiArch t={f.arch} />;
-    case "mind":
-      return <AiMindMap t={f.mind} />;
-    case "pipe":
-      return <AiPipeline t={f.pipe} />;
-    case "tiers":
-      return <TierLadder t={f.tiers} />;
-    case "exceptions":
-      return <ExceptionCards t={f.exceptions} />;
-    case "merge":
-      return <MergeFlow t={f.merge} />;
-    case "review":
-      return <AiReview t={f.review} />;
-    case "rounds":
-      return <RoundsChart t={f.rounds} />;
-    case "loop":
-      return <AiLoop t={f.loop} />;
-    case "matrix":
-      return <StackBars t={f.matrix} />;
-    case "release":
-      return <ReleaseSteps t={f.release} />;
-    case "context":
-      return <BeforeAfter t={f.context} />;
-    case "calib":
-      return <CalibTable t={f.calib} />;
-    case "limits":
-      return <LimitsBoard t={f.limits} />;
-    case "vault":
-      return <AiVaultFlow t={f.vault} />;
-    case "cadence":
-      return <AiCadence t={f.cadence} />;
-    case "waffle":
-      return <Waffle t={f.waffle} />;
-    case "versions":
-      return <VersionTimeline t={f.versions} />;
-    default: {
-      const never: never = k;
-      return never;
-    }
-  }
-}
-
 function ItemList({ items }: { items: Item[] }) {
   return (
     <ul className="cv-list">
@@ -240,7 +170,7 @@ function PartDivider({ c, i, lang }: { c: Content; i: number; lang: Lang }) {
       <span className="pm-divider-n">
         {t.part} {i + 1} / {c.parts.length}
       </span>
-      <span className="pm-divider-t">{c.parts[i].title}</span>
+      <h2 className="pm-divider-t">{c.parts[i].title}</h2>
       <a className="pm-divider-up" href="#page-map" aria-label={t.toMap}>
         ↑
       </a>

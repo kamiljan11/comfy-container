@@ -5,7 +5,7 @@ import type { Content } from "../../components/claude/types";
 
 export const pl: Content = {
   title: "Coding Higher Mind: system AI, na którym stoi ta praca",
-  role: "Warstwa meta pod każdym projektem, który buduję z AI: wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która zamienia błędy w kontrole. Policzone, nie szacowane. Open source.",
+  role: "Warstwa meta pod każdym projektem, który buduję z AI: wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która zamienia błędy w kontrole. Policzone tam, gdzie się da; szacunki są oznaczone jako szacunki. Open source.",
   tocLabel: "Spis treści",
   mapTitle: "Jak ułożona jest ta strona",
   mapLead:
@@ -66,8 +66,8 @@ export const pl: Content = {
           body: "narzędzie do operacji: poczta, dokumenty, research, outreach i projektowanie. Nie ma hooków, więc zasady pracy jadą jako tekst w każdym poleceniu, a słowo statusu na końcu raportu jest główną ochroną.",
         },
         {
-          label: "114 skilli:",
-          body: "wersjonowane pakiety instrukcji, do których trafiają zadania: 56 w narzędziu do kodu i 58 na pulpicie. Router dopasowuje zadanie według stałych reguł i przed startem ogłasza, jakie kroki uruchomi.",
+          label: "73 skille:",
+          body: "wersjonowane pakiety instrukcji, do których trafiają zadania: 56 w narzędziu do kodu i 58 na pulpicie, z czego 41 zainstalowanych w obu. Router dopasowuje zadanie według stałych reguł i przed startem ogłasza, jakie kroki uruchomi.",
         },
         {
           label: "Właściwy model do zadania:",
@@ -216,7 +216,7 @@ export const pl: Content = {
       items: [
         {
           label: "Dziewięciu wyspecjalizowanych recenzentów:",
-          body: "kod, bezpieczeństwo, dane, operacje, UX, produkt, QA, weryfikator i adwokat diabła. Każdy pracuje z listy najwyżej ośmiu ponumerowanych reguł, a każda reguła ma komendę do uruchomienia, zasady wagi, stały format wyniku i rozpisany przykład fałszywego alarmu, który trzeba odrzucić. Recenzenci tylko czytają; poprawki robi główna sesja.",
+          body: "kod, bezpieczeństwo, dane, operacje, UX, produkt, QA, weryfikator i adwokat diabła. Każdy pracuje z krótkiej listy ponumerowanych reguł, a każda reguła ma komendę do uruchomienia, zasady wagi, stały format wyniku i rozpisany przykład fałszywego alarmu, który trzeba odrzucić. Recenzenci tylko czytają; poprawki robi główna sesja.",
         },
         {
           label: "Każdy recenzent czyta swój wycinek:",
@@ -308,7 +308,7 @@ export const pl: Content = {
         },
         {
           label: "Skąd macierz:",
-          body: "audyt z 6 października policzył 437 nazwanych opcji z kursu projektowania systemów: PG umiał wybrać spośród 46% z nich, kolejne 26% znał tylko z nazwy, a 28% nie znał wcale. Nic też nie zmuszało architekta do przejścia przez wszystkie obszary. Tego samego dnia na aplikacji klienta rada wypełniła wszystkie 37 wierszy i wypisała 66 luk z dowodami; przynajmniej jedna okazała się fałszywym alarmem, więc luki dalej przegląda człowiek.",
+          body: "audyt z 6 października policzył 437 nazwanych opcji z kursu projektowania systemów: PG umiał wybrać spośród 46% z nich, kolejne 26% znał tylko z nazwy, a 28% nie znał wcale. Nic też nie zmuszało architekta do przejścia przez wszystkie obszary. Tego samego dnia na aplikacji klienta rada wypełniła wszystkie 37 wierszy i wypisała około 60 luk z dowodami; przynajmniej jedna okazała się fałszywym alarmem, więc luki dalej przegląda człowiek.",
         },
         {
           label: "Kod pilnuje uczciwości:",

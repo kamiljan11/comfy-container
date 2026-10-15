@@ -17,3 +17,10 @@ concept. The terms below are the ones that actually recur in this codebase.
 | `SYSTEM` prompt | The single string constant in `bot.server.ts` that is the chat bot's entire knowledge base. Closed-world by design: if a fact isn't in it, the bot says so rather than inferring. |
 | `ssrDefault` | The language (`en`/`pl`) the server renders before the client can resolve the visitor's real preference from `?lang=`/`localStorage`/browser locale. See `useLang.ts`. |
 | stub / dead-letter route | Anything wired to log to the console instead of a real provider — currently the default for mail (no `RESEND_API_KEY`) and for newsletter subscriber storage (always in-memory, KV is commented out). |
+| `PG` | Coding Higher Mind (from the Polish "Prompt Guard"): Kamil's quality system for AI-assisted work, described on `/claude`. Its source is the public repo `kamiljan11/coding-higher-mind`. |
+| `part` | One of the six chapters of the `/claude` article (`Section.part`, 0-5). Each part opens with a divider (`#part-N`) and has a card on the page map. |
+| `figure` / `FigureKey` | A chart or diagram placed in one `/claude` section, picked by key in `src/components/claude/Figure.tsx`. Its data lives in `Content.figures`. |
+| page map | The overview at the top of `/claude` (`#page-map`): a card per part with a link to every section. It replaced the old collapsed table of contents. |
+| scar | In PG: a past failure written down in `pg/cases.md` together with the check that now catches it. |
+| gate | In PG: an automatic check that can stop a step (a hook, a pre-commit check, CI). |
+| tier (T0-T3) | In PG: the risk level of a change, taken from its diff. It sets how many AI reviewers look at it (`pg.tier_floor` in `CLAUDE.md`). |
