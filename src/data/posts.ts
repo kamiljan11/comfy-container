@@ -40,6 +40,8 @@ export type Post = {
 };
 
 const GLOS_WNUCZKA = "https://torzeszow.pl/news/oszusci-moga-podrobic-glos-wnuczka";
+const CZATBOT =
+  "https://torzeszow.pl/news/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem-od-28-pazdziernika-mozna-zlozyc-skarge";
 
 const MONITOR = {
   t: "img",
@@ -49,6 +51,74 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-10-10 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-10-15, not the draft)
+    slug: "czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem",
+    date: "2026-10-10",
+    external: { url: CZATBOT, source: "toRzeszów.pl" },
+    // the article's main picture is our own AI illustration (vault file
+    // czatbot-v6-miniatura-czlowiek-robot-AI.jpg), not a portal or agency
+    // photo, with the title on it
+    cover: {
+      src: "/blog/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Mężczyzna z telefonem przy uchu i robot ze słuchawkami przy biurku infolinii, z napisem: Czatbot musi powiedzieć, że nie jest człowiekiem.",
+        en: "A man on the phone and a robot with a headset at a call centre desk, with the Polish title: a chatbot must say it is not human.",
+      },
+    },
+    body: {
+      pl: {
+        title: "Czatbot musi powiedzieć, że nie jest człowiekiem. Mój tekst na toRzeszów.pl",
+        description:
+          "Od 2 sierpnia 2026 roku czatbot i automat w słuchawce mają informować, że rozmawiamy ze sztuczną inteligencją. Od 28 października firmę, której bot tego nie robi, można zgłosić do nowej komisji. Napisałem o tym dla toRzeszów.pl.",
+        lead: "Napisałem dla toRzeszów.pl tekst o tym, jak sprawdzić, czy po drugiej stronie czatu albo infolinii siedzi człowiek. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Od **2 sierpnia 2026 roku** unijny AI Act każe tak projektować systemy rozmawiające z ludźmi, żeby człowiek był informowany, że rozmawia z AI. Chodzi o okienko czatu na stronie sklepu, banku, przychodni czy urzędu i o voicebota, który odbiera telefon albo sam dzwoni. Informacja ma paść **najpóźniej przy pierwszym kontakcie**.",
+          },
+          {
+            t: "p",
+            text: "Polska ustawa o systemach sztucznej inteligencji tworzy nowy organ nadzoru, Komisję Rozwoju i Bezpieczeństwa Sztucznej Inteligencji (KRiBSI). **Od 28 października** skargę do niej może złożyć każdy: osoba prywatna, firma albo inna organizacja.",
+          },
+          { t: "h2", id: "co-robic", text: "Co radzę w tekście" },
+          {
+            t: "list",
+            items: [
+              "**Zapytaj na początku rozmowy:** „Czy rozmawiam z człowiekiem, czy z automatem?”. Uczciwie ustawiony bot od razu odpowie, że jest programem.",
+              "**Zanotuj szczegóły**, jeśli odpowiedź jest wymijająca: datę, godzinę, numer telefonu albo adres strony i nazwę firmy.",
+              "**Dopiero wtedy rozważ skargę do KRiBSI.** Zasadą jest forma elektroniczna, a komisja dopiero rusza, więc sprawdź, gdzie przyjmuje zgłoszenia.",
+              "**Jeśli prowadzisz firmę, przeczytaj powitanie swojego czatbota** i zadzwoń na własną infolinię.",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście piszę też, ile grozi firmie za bota, który nie mówi, że jest programem, i dlaczego jedno uczciwe zdanie na powitanie kosztuje przy tym grosze.",
+          },
+        ],
+      },
+      en: {
+        title: "A chatbot must say it is not human. My article on toRzeszów.pl",
+        description:
+          "Since 2 August 2026 EU rules say a chatbot or a phone bot must tell people they are talking to AI. From 28 October anyone in Poland can complain to a new commission. I wrote about it for toRzeszów.pl. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, on how to tell whether a person or a program is on the other end of a chat or a hotline. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "Under the EU AI Act, systems that talk with people must be designed so that people are told they are talking to AI, **at the latest at the first interaction**. That covers chat windows on shop, bank, clinic and public office websites, and voicebots that answer or make phone calls.",
+          },
+          {
+            t: "p",
+            text: "Poland's new AI act creates a supervisory body, the Commission for the Development and Safety of AI (KRiBSI). **From 28 October 2026** anyone can file a complaint with it. The main advice: ask at the very start whether you are talking to a person, and if the answer dodges the question, note the date, time, phone number or website and the company name.",
+          },
+        ],
+      },
+    },
+  },
   {
     // every fact below is from the article as published on toRzeszów.pl on
     // 2026-10-01 (checked against the live page, not the draft)

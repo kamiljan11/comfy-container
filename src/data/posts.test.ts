@@ -83,6 +83,9 @@ describe("posts", () => {
     expect(findPost("oszusci-moga-podrobic-glos-wnuczka")?.external?.url).toBe(
       "https://torzeszow.pl/news/oszusci-moga-podrobic-glos-wnuczka",
     );
+    expect(findPost("czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem")?.external?.url).toBe(
+      "https://torzeszow.pl/news/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem-od-28-pazdziernika-mozna-zlozyc-skarge",
+    );
   });
 
   it("findPost returns undefined for an unknown slug", () => {
