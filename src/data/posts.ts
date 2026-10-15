@@ -42,6 +42,8 @@ export type Post = {
 const GLOS_WNUCZKA = "https://torzeszow.pl/news/oszusci-moga-podrobic-glos-wnuczka";
 const CZATBOT =
   "https://torzeszow.pl/news/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem-od-28-pazdziernika-mozna-zlozyc-skarge";
+const LEKARZ =
+  "https://torzeszow.pl/news/lekarz-rodzinny-sprawdzal-diagnoze-w-chatgpt-przepisy-czy-tak-wolno";
 
 const MONITOR = {
   t: "img",
@@ -51,6 +53,73 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-10-13 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-10-15, not the draft)
+    slug: "lekarz-sprawdzal-diagnoze-w-chatgpt",
+    date: "2026-10-13",
+    external: { url: LEKARZ, source: "toRzeszów.pl" },
+    // the article's own photo (Pexels 39192328, Vitaly Gariev, Pexels licence
+    // allows changes), taken from Pexels, not from torzeszow.pl, with the title on it
+    cover: {
+      src: "/blog/lekarz-sprawdzal-diagnoze-w-chatgpt/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Starszy lekarz w białym fartuchu ze stetoskopem pisze na klawiaturze, z napisem: Lekarz rodzinny sprawdzał diagnozę w ChatGPT.",
+        en: "An older doctor in a white coat with a stethoscope typing on a keyboard, with the Polish title: a family doctor checked a diagnosis in ChatGPT.",
+      },
+    },
+    body: {
+      pl: {
+        title: "Lekarz rodzinny sprawdzał diagnozę w ChatGPT. Mój tekst na toRzeszów.pl",
+        description:
+          "Podczas wizyty lekarz rodzinny wpisał moje objawy do ChatGPT, żeby sprawdzić swoją diagnozę. Sprawdziłem przepisy i napisałem o tym dla toRzeszów.pl: Kodeks Etyki Lekarskiej pozwala na AI, ale o ogólnodostępnych czatach nie mówi ani słowa.",
+        lead: "Napisałem dla toRzeszów.pl tekst o wizycie, na której lekarz sprawdzał moją diagnozę w czacie, i o tym, co mówią na to przepisy. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Było to mniej więcej pół roku temu. Lekarz wpisał moje objawy do czatu, a potem sprawdzał, czy ten potwierdzi jego diagnozę. **Mojego imienia ani numeru PESEL przy tym nie podał.**",
+          },
+          {
+            t: "p",
+            text: "Od 1 stycznia 2025 roku **art. 12 Kodeksu Etyki Lekarskiej** pozwala lekarzom korzystać z AI pod kilkoma warunkami, a ostateczną decyzję zawsze podejmuje lekarz. O ogólnodostępnych czatach, takich jak ChatGPT, **nie wspominają ani Kodeks, ani komentarz** Komisji Etyki Lekarskiej NRL. Moim zdaniem to luka.",
+          },
+          { t: "h2", id: "co-robic", text: "Co możesz zrobić jako pacjent" },
+          {
+            t: "list",
+            items: [
+              "**Zapytaj lekarza.** Masz prawo do informacji o rozpoznaniu i metodach diagnostycznych.",
+              "**Wyraź zgodę albo odmów, gdy o wyniku decyduje algorytm.** Zgoda jest potrzebna, gdy algorytm ma główną rolę albo podaje wynik bez udziału lekarza lub przy jego minimalnym udziale.",
+              "**Pilnuj swoich danych.** Jeśli do czatu trafia twoje imię, PESEL albo wyniki badań, zapytaj, z jakiego narzędzia lekarz korzysta i czy przychodnia ma z dostawcą umowę o przetwarzaniu danych.",
+              "**Złóż skargę, jeśli lekarz nie dochował tajemnicy.** Rozpatruje ją okręgowy rzecznik odpowiedzialności zawodowej przy Okręgowej Izbie Lekarskiej w Rzeszowie.",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście są też zasady, które Ministerstwo Cyfryzacji dało urzędnikom, i badanie, w którym lekarzy przyznających się do AI oceniano gorzej.",
+          },
+        ],
+      },
+      en: {
+        title: "My family doctor checked a diagnosis in ChatGPT. My article on toRzeszów.pl",
+        description:
+          "During a visit my family doctor typed my symptoms into ChatGPT to check his diagnosis. I looked at what the Polish rules say and wrote about it for toRzeszów.pl. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, about a visit where my doctor checked his diagnosis in a chatbot, and what the rules say about it. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "About six months ago my family doctor typed my symptoms into a chatbot to see whether it confirmed his diagnosis. **He did not enter my name or my national ID number.**",
+          },
+          {
+            t: "p",
+            text: "Since 1 January 2025 **article 12 of the Polish Code of Medical Ethics** lets doctors use AI under some conditions, and the final decision always stays with the doctor. Neither the Code nor its official commentary mentions **general-purpose chatbots** like ChatGPT. My advice to patients: ask your doctor whether they use AI and what they type into it.",
+          },
+        ],
+      },
+    },
+  },
   {
     // every fact below is from the article as published on toRzeszów.pl on
     // 2026-10-10 (published blocks via the read-only panel client, checked
