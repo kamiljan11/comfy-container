@@ -7328,3 +7328,18 @@ header[id] {
     padding: 6px 6px;
   }
 }
+
+/* The /claude charts draw their marks as backgrounds; keep them when the page is printed. */
+@media print {
+  .ch-bar,
+  .ch-key,
+  .sb-seg,
+  .wf-cell,
+  .vt-day,
+  .pm-n,
+  .pm-divider,
+  .pm-fig {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

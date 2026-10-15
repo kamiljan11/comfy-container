@@ -17,7 +17,7 @@ sentence by sentence, with many more charts, so a reader can navigate without re
   (`Content`, `Section`, `Figures`). A section has a stable English `id` (the same anchor in both
   languages), a `part` (one of six) and an optional `figure` key.
 - Figures are components in `src/components/claude/` (`diagrams.tsx` for the SVG diagrams,
-  `charts.tsx` for the HTML/SVG charts). The route maps a key to a component in one exhaustive
+  `charts.tsx` for the HTML/SVG charts). `src/components/claude/Figure.tsx` maps a key to a component in one exhaustive
   `switch`, so a key without a component fails `tsc`.
 - Chart arithmetic lives in `src/lib/chartMath.ts` (pure, tested). It throws on data it cannot draw
   honestly instead of drawing a wrong shape.
@@ -46,7 +46,7 @@ sentence by sentence, with many more charts, so a reader can navigate without re
 - Recurring cost: two content files of about 1,000 lines each to keep in step (the test checks the
   numbers, a person checks the wording) and about 750 lines of chart CSS. No runtime cost and no new
   dependency.
-- Rollback: revert the commit; the old route is self-contained.
+- Rollback: revert the PR (both commits, or the one squash commit); the old route is self-contained.
 - How we know it worked: the site has no analytics, so success is measured on the content itself. Every
   number on the page has a row in `docs/CLAUDE-PAGE-NUMBERS.md`, the parity test stays green, and the
   next PG release changes sentences in place instead of adding an "update X.Y.Z" section.

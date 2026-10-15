@@ -239,7 +239,7 @@ function ClaudePage() {
               {c.repoCta}
             </a>
           </p>
-          <div className="ai-stats ai-stats-8" aria-label={TABS[lang].counts}>
+          <div className="ai-stats ai-stats-8" role="group" aria-label={TABS[lang].counts}>
             {c.stats.map((s) => (
               <div key={s.label} className="ai-stat">
                 <span className="ai-stat-n">{s.n}</span>

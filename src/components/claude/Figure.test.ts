@@ -6,6 +6,15 @@ import { pl } from "../../content/claude/pl";
 import { Figure } from "./Figure";
 import type { FigureKey } from "./types";
 
+// the same escaping React applies to text and attributes in renderToString
+const escapeHtml = (s: string) =>
+  s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+
 // Every figure the article places must render from its content in both languages. The content test
 // checks the numbers; this one catches a chart that throws or draws nothing for the data it is given.
 
@@ -42,12 +51,20 @@ describe("/claude figures", () => {
       });
 
       for (const k of KEYS) {
-        it(`renders "${k}" with a label for screen readers`, () => {
+        it(`renders "${k}" as its own figure, with its caption`, () => {
           const html = renderToString(createElement(Figure, { k, f: c.figures }));
-          expect(html.length).toBeGreaterThan(200);
-          expect(html).toMatch(/aria-label="[^"]{10,}"|<figcaption|<table/);
+          // the caption is unique per figure, so a key that renders another figure fails here
+          expect(html).toContain(escapeHtml(c.figures[k].caption));
+          // every SVG on the page is a labelled image, never an unnamed drawing
+          const svgs = html.match(/<svg[^>]*>/g) ?? [];
+          for (const svg of svgs) expect(svg, k).toMatch(/role="img"[^>]*aria-label="[^"]{10,}"/);
         });
       }
+
+      it("gives every figure a caption of its own", () => {
+        const captions = KEYS.map((k) => c.figures[k].caption);
+        expect(new Set(captions).size).toBe(KEYS.length);
+      });
 
       // The SVG diagrams lay out a fixed number of slots; more or fewer items overlap or leave gaps.
       it("gives the fixed-layout diagrams the number of items they are drawn for", () => {

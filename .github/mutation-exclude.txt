@@ -2,4 +2,8 @@
 # Tylko pliki BEZ logiki do przetestowania: tresc strony, dane. Format: <sciezka> # <powod> — powod jest wymagany
 # (bez niego plik NIE jest pomijany) i trafia do notice w CI. Dopasowanie po dokladnej sciezce, bez globow.
 # Plik z logika bez testow NIE trafia tutaj — dopisz test (job wtedy sam powie, ktory plik nie ma testu).
-src/routes/claude.tsx # strona z trescia (obiekt CONTENT PL/EN) i dekoracyjnymi diagramami SVG; zaden test jej nie importuje — PR #37, #49, #69 konczyly sie bledem Strykera zamiast wyniku
+src/routes/claude.tsx # strona /claude: uklad i nawigacja (mapa strony, separatory czesci); zachowanie sprawdzaja e2e/page-map.spec.ts i e2e/mobile.spec.ts, nie unit testy — PR #37, #49, #69 konczyly sie bledem Strykera zamiast wyniku
+src/content/claude/en.ts # tresc artykulu /claude jako dane (EN), bez logiki; liczby pilnuje src/content/claude/content.test.ts
+src/content/claude/pl.ts # tresc artykulu /claude jako dane (PL), bez logiki; liczby pilnuje src/content/claude/content.test.ts
+src/components/claude/diagrams.tsx # dekoracyjne diagramy SVG /claude (wspolrzedne, nie logika); render kazdego sprawdza Figure.test.ts — PR #91: 185 mutantow geometrii, 8,9 %
+src/components/claude/charts.tsx # wykresy HTML/SVG /claude (uklad i wspolrzedne); arytmetyka jest w src/lib/chartMath.ts (mutowana, z testem), render sprawdza Figure.test.ts — PR #91: 12,2 %
