@@ -61,6 +61,15 @@ describe("/claude figures", () => {
         });
       }
 
+      // Geometry (bar widths, coordinates, wrapped labels) is checked by a snapshot of the rendered markup:
+      // a change in a chart's arithmetic shows up here as a diff to review, not silently on the page.
+      // After an intended change to content or layout: `npx vitest run -u` and review the .snap diff.
+      it("draws every figure exactly as last reviewed", () => {
+        for (const k of KEYS) {
+          expect(renderToString(createElement(Figure, { k, f: c.figures }))).toMatchSnapshot(k);
+        }
+      });
+
       it("gives every figure a caption of its own", () => {
         const captions = KEYS.map((k) => c.figures[k].caption);
         expect(new Set(captions).size).toBe(KEYS.length);

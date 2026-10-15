@@ -14,7 +14,7 @@ import type {
 /* ══ Diagram: the whole machine ══ */
 export function AiArch({ t }: { t: ArchLabels }) {
   return (
-    <div className="aid-scroll">
+    <div className="aid-scroll" tabIndex={0}>
       <svg viewBox="0 0 760 392" className="aid" role="img" aria-label={t.caption}>
         <defs>
           <marker
@@ -153,7 +153,7 @@ export function AiMindMap({ t }: { t: MindLabels }) {
   // Branch anchors: two columns of four, connected to the centre by curves.
   const pos = [...rowY.map((y) => ({ x: 30, y })), ...rowY.map((y) => ({ x: 550, y }))];
   return (
-    <div className="aid-scroll">
+    <div className="aid-scroll" tabIndex={0}>
       <svg
         viewBox={`0 0 760 ${String(bottom + 44)}`}
         className="aid"
@@ -231,7 +231,7 @@ export function AiPipeline({ t }: { t: PipeLabels }) {
   const blockedY = rowY[1] + chipH + 26;
   const captionY = blockedY + 14 * (blocked.length - 1) + 24;
   return (
-    <div className="aid-scroll">
+    <div className="aid-scroll" tabIndex={0}>
       <svg
         viewBox={`0 0 760 ${String(captionY + 12)}`}
         className="aid"
@@ -326,7 +326,7 @@ export function AiReview({ t }: { t: ReviewLabels }) {
   const aggH = 42 + 14 * aggLines.length;
   const aggY = 94 - aggH / 2;
   return (
-    <div className="aid-scroll">
+    <div className="aid-scroll" tabIndex={0}>
       <svg viewBox="0 0 760 236" className="aid" role="img" aria-label={t.caption}>
         <defs>
           <marker
@@ -446,7 +446,7 @@ export function AiLoop({ t }: { t: LoopLabels }) {
     return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a) };
   });
   return (
-    <div className="aid-scroll">
+    <div className="aid-scroll" tabIndex={0}>
       <svg viewBox="0 0 760 290" className="aid" role="img" aria-label={t.caption}>
         <defs>
           <marker
@@ -515,7 +515,7 @@ export function AiLoop({ t }: { t: LoopLabels }) {
 /* ══ Diagram: a secret's journey ══ */
 export function AiVaultFlow({ t }: { t: VaultLabels }) {
   return (
-    <div className="aid-scroll">
+    <div className="aid-scroll" tabIndex={0}>
       <svg viewBox="0 0 760 148" className="aid" role="img" aria-label={t.caption}>
         <defs>
           <marker

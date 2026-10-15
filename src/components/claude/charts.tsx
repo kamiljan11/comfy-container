@@ -165,7 +165,7 @@ export function RoundsChart({ t }: { t: RoundsLabels }) {
           <i className="ch-key ch-tone-a" /> {t.majorLabel}
         </span>
       </div>
-      <div className="aid-scroll">
+      <div className="aid-scroll" tabIndex={0}>
         <svg
           viewBox={`0 0 ${String(W)} ${String(H)}`}
           className="aid"
@@ -310,14 +310,18 @@ export function BeforeAfter({ t }: { t: BeforeAfterLabels }) {
                   style={{ width: `${String(barPercent(r.before, max))}%` }}
                 />
               </span>
-              <span className="ba-val">{r.beforeText}</span>
+              <span className="ba-val">
+                <span className="ba-tag">{t.beforeLabel}</span> {r.beforeText}
+              </span>
               <span className="ch-track">
                 <span
                   className="ch-bar ch-tone-a"
                   style={{ width: `${String(barPercent(r.after, max))}%` }}
                 />
               </span>
-              <span className="ba-val ba-after">{r.afterText}</span>
+              <span className="ba-val ba-after">
+                <span className="ba-tag">{t.afterLabel}</span> {r.afterText}
+              </span>
             </div>
           </div>
         );
@@ -331,7 +335,7 @@ export function BeforeAfter({ t }: { t: BeforeAfterLabels }) {
 export function CalibTable({ t }: { t: CalibLabels }) {
   return (
     <figure className="ch-fig">
-      <div className="ct-wrap">
+      <div className="ct-wrap" tabIndex={0}>
         <table className="ct">
           <thead>
             <tr>

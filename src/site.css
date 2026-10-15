@@ -7154,6 +7154,11 @@ header[id] {
   color: #6a6f76;
   text-align: right;
 }
+.ba-tag {
+  font-weight: 400;
+  font-size: 11px;
+  color: #6a6f76;
+}
 .ba-after {
   font-weight: 700;
   color: #0a7d8c;

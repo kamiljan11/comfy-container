@@ -53,6 +53,8 @@ describe("/claude content", () => {
         expect(new Set(ids).size).toBe(ids.length);
         for (const id of ids) expect(id).toMatch(/^[a-z][a-z0-9-]*$/);
         expect(ids).not.toContain("page-map");
+        // the part dividers own #part-1 ... #part-N
+        for (const id of ids) expect(id).not.toMatch(/^part-\d+$/);
       });
 
       it("keeps every part non-empty and every section in a real part, in order", () => {

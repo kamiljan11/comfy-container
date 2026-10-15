@@ -35,7 +35,7 @@ sentence by sentence, with many more charts, so a reader can navigate without re
 - Markdown/MDX per section: easier prose editing, but the charts take structured data (counts, tones,
   days), and the parity test needs the numbers as values, not as text inside prose.
 - A headless CMS: a paid service and a network dependency for one page that changes a few times a year.
-- Keep `PageToc` next to the map: two lists of the same 26 sections on one screen.
+- Keep `PageToc` next to the map: two lists of the same 25 sections on one screen.
 
 ## Consequences
 
@@ -47,6 +47,9 @@ sentence by sentence, with many more charts, so a reader can navigate without re
   numbers, a person checks the wording) and about 750 lines of chart CSS. No runtime cost and no new
   dependency.
 - Rollback: revert the PR (both commits, or the one squash commit); the old route is self-contained.
+- Disclosure: the page keeps publishing the fleet's protection counts (repositories under branch protection,
+  number of secrets kept out of the AI's reach) as the previous version did. They are counts, never names or
+  values, and they are part of what the article demonstrates.
 - How we know it worked: the site has no analytics, so success is measured on the content itself. Every
   number on the page has a row in `docs/CLAUDE-PAGE-NUMBERS.md`, the parity test stays green, and the
   next PG release changes sentences in place instead of adding an "update X.Y.Z" section.
