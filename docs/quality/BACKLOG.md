@@ -11,7 +11,7 @@ why deferred, and the risk of leaving it.
   It points at `https://kamiljan.com/spirituality`, which doesn't exist as a route (see the
   orphaned-content item below) — the real files are served at
   `/books/Simplified-Practical-Spirituality.pdf` (used correctly elsewhere: `src/routes/index.tsx`,
-  `src/routes/__root.tsx`). `welcomeSequence[0]` sends immediately (only *additional* future
+  `src/routes/__root.tsx`). `welcomeSequence[0]` sends immediately (only _additional_ future
   messages need the not-yet-built scheduler, per this file's own comment) and IS wired: every
   newsletter signup (`src/lib/newsletter.functions.ts` `subscribeToNewsletter` ->
   `startWelcomeSequence`) sends it to the real subscriber address, via whichever transport is
@@ -54,11 +54,11 @@ why deferred, and the risk of leaving it.
 
 ## Structure (files over the size guideline — not split in this PR, per the "don't split >1000-line files here" rule in `~/.claude/pg/github-ready.md`)
 
-| File | LOC | Why not split now |
-|---|---|---|
-| `src/data/caseStudies.ts` | ~1540 | Content (case-study copy as data), not logic density |
-| `src/data/services.ts` | ~1389 | Same — service-page copy as data |
-| `src/routes/claude.tsx` | ~1055 | Single content-heavy page component |
+| File                                | LOC        | Why not split now                                                               |
+| ----------------------------------- | ---------- | ------------------------------------------------------------------------------- |
+| `src/data/caseStudies.ts`           | ~1540      | Content (case-study copy as data), not logic density                            |
+| `src/data/services.ts`              | ~1389      | Same — service-page copy as data                                                |
+| `src/content/claude/en.ts`, `pl.ts` | ~1000 each | Content (the /claude article as data, ADR 0008); the route itself is ~330 lines |
 
 `src/routes/index.tsx`'s `HomePage` component is ~585 lines (over the 60-line-function
 guideline) — same reasoning: a single marketing page, not control-flow complexity. Splitting any
@@ -76,7 +76,7 @@ copy; do it as its own PR with a diff a reviewer can actually read, not folded i
   dev tooling (not touched here — could be intentional if Kamil uses bun locally).
 - **`npm install`/`npm ci` silently overrides the global MAS git hooks for this repo.** The tracked
   `prepare` script (`scripts/setup-hooks.mjs`) runs `git config core.hooksPath scripts/git-hooks`
-  on every install, which is a *local* (repo-scoped) override that wins over the global
+  on every install, which is a _local_ (repo-scoped) override that wins over the global
   `core.hooksPath` (`~/.claude/git-hooks/`) set up for the Senior Quality Pipeline. Confirmed on
   this worktree: `git config core.hooksPath` reads `scripts/git-hooks` after `npm ci`, not the
   global path. The local `scripts/git-hooks/pre-commit` only checks for smart-quote/encoding

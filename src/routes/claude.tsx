@@ -1,10 +1,33 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Fragment, type ReactNode } from "react";
 import { SkillsTab } from "../components/claude/SkillsTab";
+import {
+  AiArch,
+  AiCadence,
+  AiLoop,
+  AiMindMap,
+  AiPipeline,
+  AiReview,
+  AiVaultFlow,
+} from "../components/claude/diagrams";
+import {
+  BeforeAfter,
+  CalibTable,
+  ExceptionCards,
+  LimitsBoard,
+  MergeFlow,
+  ReleaseSteps,
+  RoundsChart,
+  StackBars,
+  TierLadder,
+  VersionTimeline,
+  Waffle,
+} from "../components/claude/charts";
+import type { Content, FigureKey, Figures, Item, Section } from "../components/claude/types";
+import { en } from "../content/claude/en";
+import { pl } from "../content/claude/pl";
 import { REPO_URL } from "../lib/skillsCatalog";
-import { stackLines, wrapLabel } from "../lib/wrapLabel";
-import { useRef } from "react";
 import { useLang } from "../hooks/useLang";
-import { PageToc } from "../components/PageToc";
 import { type Lang } from "../i18n";
 import { pageMeta } from "../lib/seo";
 
@@ -14,7 +37,7 @@ export const Route = createFileRoute("/claude")({
       ...pageMeta({
         title: "Kamil Jan | Coding Higher Mind: the AI system behind the work",
         description:
-          "How Kamil Jan actually works with AI, in depth: two agent runtimes, prompt hardening, event-driven quality gates, reviewer departments with fresh context, a scar-to-gate learning loop, routines, and the VERIFIED / UNVERIFIED / FAILED protocol. Open source.",
+          "The meta layer under every project Kamil Jan builds with AI: hardened prompts, automatic checks at every step, reviewer departments with fresh context, and a loop that turns failures into checks. PG 1.8.0, counted rather than estimated, with charts. Open source.",
         url: "https://kamiljan.com/claude",
       }),
     ],
@@ -29,9 +52,41 @@ export const Route = createFileRoute("/claude")({
   component: ClaudePage,
 });
 
-const TABS: Record<Lang, { system: string; skills: string; label: string }> = {
-  en: { system: "The system", skills: "Skills and agents", label: "Page sections" },
-  pl: { system: "System", skills: "Skille i agenci", label: "Sekcje strony" },
+const CONTENT: Record<Lang, Content> = { en, pl };
+
+// Interface words of the page itself; the article lives in src/content/claude.
+type Ui = {
+  system: string;
+  skills: string;
+  label: string;
+  part: string;
+  toMap: string;
+  withChart: string;
+  chartSr: string;
+  counts: string;
+};
+
+const TABS: Record<Lang, Ui> = {
+  en: {
+    system: "The system",
+    skills: "Skills and agents",
+    label: "Page sections",
+    part: "Part",
+    toMap: "Back to the page map",
+    withChart: "with a chart",
+    chartSr: " (chart)",
+    counts: "System counts",
+  },
+  pl: {
+    system: "System",
+    skills: "Skille i agenci",
+    label: "Sekcje strony",
+    part: "Część",
+    toMap: "Wróć do mapy strony",
+    withChart: "z wykresem",
+    chartSr: " (wykres)",
+    counts: "Liczby systemu",
+  },
 };
 
 // The router marks the active tab (aria-current="page"). `tab: undefined` plus explicitUndefined makes
@@ -74,2292 +129,60 @@ function ClaudeHead({ title, role, lang }: { title: string; role: string; lang: 
   );
 }
 
-/* ── Flags (mirrors the homepage toggle) ── */
-
-type Item = { label: string; body: string };
-type Section = { title: string; lead?: string; items: Item[] };
-
-type ArchLabels = {
-  kamil: string;
-  kamilSub: string;
-  code: string;
-  codeSub1: string;
-  codeSub2: string;
-  cowork: string;
-  coworkSub1: string;
-  coworkSub2: string;
-  shared: string;
-  vault: string;
-  vaultSub: string;
-  vaultNote1: string;
-  vaultNote2: string;
-  memory: string;
-  memorySub: string;
-  memoryNote1: string;
-  memoryNote2: string;
-  gates: string;
-  gatesList: string;
-  prod: string[];
-  caption: string;
-};
-
-type MindBranch = { title: string; leaves: string[] };
-type MindLabels = { center: string; centerSub: string; branches: MindBranch[]; caption: string }; // 8 branches
-
-type PipeLabels = {
-  stages: string[]; // 8
-  gates: string[]; // 8
-  live: string;
-  blocked: string;
-  caption: string;
-};
-
-type ReviewLabels = {
-  orchestrator: string;
-  gates: string;
-  gatesSub: string;
-  finders: string[]; // 4 boxes
-  aggregate: string;
-  aggregateSub: string;
-  verifier: string;
-  verifierSub: string;
-  fixer: string;
-  rule: string;
-  caption: string;
-};
-
-type LoopLabels = { steps: string[]; caption: string }; // 6 steps
-
-type VaultLabels = {
-  vault: string;
-  vaultSub: string;
-  bridge: string;
-  bridgeSub: string;
-  target: string;
-  targetSub: string;
-  never: string[]; // 3
-  caption: string;
-};
-
-type CadenceRow = { name: string; dots: number; freq: string; manual?: boolean };
-
-type Content = {
-  title: string;
-  tocLabel: string;
-  role: string;
-  versionLine: string;
-  intro: string;
-  repoCta: string;
-  stats: { n: string; label: string }[];
-  mapTitle: string;
-  arch: ArchLabels;
-  mindTitle: string;
-  mindLead: string;
-  mind: MindLabels;
-  ideasTitle: string;
-  ideas: Item[];
-  pipeTitle: string;
-  pipeLead: string;
-  pipe: PipeLabels;
-  gatesItems: Item[];
-  tierTitle: string;
-  tierLead: string;
-  tiers: Item[];
-  reviewTitle: string;
-  reviewLead: string;
-  review: ReviewLabels;
-  reviewItems: Item[];
-  loopTitle: string;
-  loopLead: string;
-  loop: LoopLabels;
-  loopItems: Item[];
-  sections: Section[];
-  statusTitle: string;
-  statusLead: string;
-  statusItems: Item[];
-  statusCoworkLabel: string;
-  statusCowork: string;
-  vaultSectionTitle: string;
-  vaultFlow: VaultLabels;
-  vaultItems: Item[];
-  schedTitle: string;
-  schedLead: string;
-  cadence: CadenceRow[];
-  schedItems: Item[];
-  memTitle: string;
-  memItems: Item[];
-  scaleTitle: string;
-  scaleItems: Item[];
-  installTitle: string;
-  installLead: string;
-  installSteps: string[];
-  installItems: Item[];
-  installLink: string;
-  limitsTitle: string;
-  limits: string;
-  colophon: string;
-};
-
-const CONTENT: Record<Lang, Content> = {
-  en: {
-    title: "Coding Higher Mind: the AI system behind the work",
-    tocLabel: "On this page",
-    role: "Two AI tools, hardened prompts, automatic checks at every step, AI reviewers split by speciality, and a loop that learns from failures. Counted, not estimated. Now open source.",
-    versionLine:
-      "PG v1.8.0 (as of October 14, 2026). This is a version that is still maturing, not a finished product: 15 public versions in five weeks (1.0.0 on September 12, 1.1.0 on the 13th, 1.2.0 on the 27th, six patch releases 1.2.1 to 1.2.6 on the 28th, 1.3.0 and 1.4.0 on October 5, 1.5.0 on October 6, 1.6.0 on October 10, 1.7.0 on October 11, 1.8.0 on October 14). The counters in the table below were taken on September 26 and I have not recounted them since.",
-    intro:
-      "My CV says AI coding agents write the code, while I own the spec, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where its limits are. In short: a change written by AI cannot reach a product without passing automatic checks, the AI has to show proof before it says “done”, and it can use passwords and keys without ever seeing them. Everything below runs today, unless a section says otherwise (the 1.7.0 release pipeline is waiting for its first drill on a test project, and the scheduled routines are paused until I fix their setup after a computer move). Every number came from a command run on the day this page shipped: counted, not estimated. The whole system is a public repository you can install on your own machine in five minutes.",
-    repoCta: "github.com/kamiljan11/coding-higher-mind →",
-    stats: [
-      { n: "2,853", label: "agent transcript files" },
-      { n: "160", label: "past failures turned into automatic checks" },
-      { n: "23", label: "hard stops in the git gates" },
-      { n: "9", label: "specialist AI reviewers" },
-      { n: "52", label: "zero-token tools" },
-      { n: "40", label: "routines (8 code · 32 desktop)" },
-      { n: "33", label: "repos under strict protection" },
-      { n: "99", label: "keys and passwords the AI never sees" },
-    ],
-    mapTitle: "The whole machine on one map",
-    arch: {
-      kamil: "KAMIL",
-      kamilSub: "spec · architecture · review · deploy",
-      code: "Claude Code",
-      codeSub1: "repos · CI · production apps",
-      codeSub2: "GitHub · browser · mail via MCP",
-      cowork: "Claude Desktop (Cowork)",
-      coworkSub1: "mail · documents · research",
-      coworkSub2: "outreach · design · ops",
-      shared: "same rules · same memory",
-      vault: "VAULT",
-      vaultSub: "99 secrets",
-      vaultNote1: "keys go to the process,",
-      vaultNote2: "never to the chat",
-      memory: "MEMORY",
-      memorySub: "1,900+ notes",
-      memoryNote1: "loaded at session start,",
-      memoryNote2: "sessions self-document",
-      gates: "GATES",
-      gatesList: "prompt · edit · command · stop · commit · push · CI · review · production proof",
-      prod: ["MAS Group", "Workshop 3.0", "Flyt", "kamiljan.com", "client sites"],
-      caption:
-        "I set the direction. Every change passes the automatic checks (gates) before it reaches a product. Proof comes back up.",
-    },
-    mindTitle: "Mind map: what „higher mind” is made of",
-    mindLead:
-      "The system that watches over every coding session is called PG (Prompt-Guard). “Higher mind” comes from my other long project, a free guidebook on practical spirituality, whose rule is practice over belief. Here that means: a rule you intend to follow is a belief; a check that runs on its own is a practice.",
-    mind: {
-      center: "HIGHER MIND",
-      centerSub: "PG · PROMPT-GUARD",
-      branches: [
-        {
-          title: "Prompt layer",
-          leaves: ["protocol on every prompt", "compressed reports", "skill router"],
-        },
-        {
-          title: "Event hooks",
-          leaves: ["edit → lint + types", "command guard", "stop gate: tier from diff"],
-        },
-        {
-          title: "Git gates",
-          leaves: [
-            "secrets · base freshness",
-            "deps · duplicates · TODOs",
-            "SQL lint · boundaries",
-          ],
-        },
-        {
-          title: "Reviewer departments",
-          leaves: [
-            "code · security · data · ops",
-            "ux · product · qa",
-            "verifier · devil's advocate",
-          ],
-        },
-        {
-          title: "Doctrine",
-          leaves: ["design before code", "“done” per risk tier", "160 scars"],
-        },
-        {
-          title: "Repo template",
-          leaves: ["CI + mutation testing", "parsed boundaries", "QA matrix · privacy · runbook"],
-        },
-        {
-          title: "Routines",
-          leaves: [
-            "PR reviewer · guard health",
-            "CVE watch · calibration",
-            "watchdog · backup · reports",
-          ],
-        },
-        {
-          title: "Self-tests",
-          leaves: ["every gate has a test", "rule → gate coverage", "weekly audit"],
-        },
-      ],
-      caption:
-        "Eight parts, one rule: nothing important exists only as written text. Every rule has an automatic check.",
-    },
-    ideasTitle: "Three ideas the whole thing rests on",
-    ideas: [
-      {
-        label: "Checks, not written rules:",
-        body: "the audit that started all this found that every rule written only as text was broken at scale: 6 of 7 repositories had 0 architecture decision records, the changelog was 105 commits behind, code review ran in only 2.5 % of sessions, and 79 % of commits went straight to the main branch. An AI agent can forget a rule, so a written rule is not enough. Everything that matters now runs by itself when something happens (that is a gate), and every gate has a test proving it blocks what it should. A script checks that every written rule has a gate.",
-      },
-      {
-        label: "Every failure becomes a check (scar → gate):",
-        body: "160 real failures across my projects are catalogued, each with a rule id. I call them scars. Every checklist item cites the scar it came from (a rule taken from Google SRE). A postmortem ends with a new gate or a new scar, never with “be more careful”.",
-      },
-      {
-        label: "Proof, not claims:",
-        body: "“done” means a command was run, it returned a result (exit code), and the state afterwards was checked. Every report ends with one word: VERIFIED, UNVERIFIED or FAILED. AI agents measurably overstate success (in one benchmark 75.8 % of reported successes had no evidence) and they give in when pushed back. The status word is the counterweight.",
-      },
-    ],
-    pipeTitle: "The life of one change",
-    pipeLead:
-      "Nine checkpoints run by themselves at fixed moments: when I send a prompt, when the agent edits a file, and so on up to production. Nobody has to remember to check. Any red result stops the change on the spot.",
-    pipe: {
-      stages: [
-        "prompt",
-        "edit",
-        "command",
-        "session end",
-        "commit",
-        "push",
-        "CI",
-        "merge",
-        "production",
-      ],
-      gates: [
-        "protocol injected",
-        "lint + typecheck",
-        "guard + no-verify",
-        "tier + tests + reviewers",
-        "18 checks + secrets",
-        "no main + size + cycles",
-        "mutation + secrets",
-        "current merge-ref only",
-        "200 from real domain",
-      ],
-      live: "LIVE",
-      blocked:
-        "no silent skipping: quality gates are passed only with a log entry · risky steps only after a sub-agent review · irreversible steps and the gates themselves only after my “allow ALLOW_…” in the chat · a routine pull request merges without my phrase only with proof of review",
-      caption:
-        "Nine checkpoints on the path of a change. I make the decisions; the checks make sure nothing is forgotten.",
-    },
-    gatesItems: [
-      {
-        label: "When I send a prompt:",
-        body: "a hook (a script that runs when something happens) adds the working rules (the protocol) to the prompt. If the task is unclear, the agent asks questions instead of guessing. A fact needs an opened source first. Anything blocking the work goes in the first line of the report. And “how is it going?” never gets the answer “fine”: it gets the goal, the budget, the risks and the decisions that belong to the sponsor.",
-      },
-      {
-        label: "After every file edit, including edits made in the terminal:",
-        body: "the changed file is checked for style and type errors (lint and typecheck). Errors go straight back to the agent that made the edit, in the same session.",
-      },
-      {
-        label: "At every terminal command:",
-        body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging pull requests from a script (the one exception is the merge script that demands proof of review), secrets typed into a command, and running a downloaded script straight in the shell (curl | sh). Since September it parses a command the way the shell would, so it also catches commands hidden inside sh -c, $(…), a heredoc piped into a shell, encoded PowerShell or tricks like rm${IFS}-rf. It guards the guards too: an agent can't quietly edit the hooks, the settings or a linter config, and a hook stops the AI reviewers from writing anywhere outside their own findings file.",
-      },
-      {
-        label: "When a session ends:",
-        body: "the stop gate decides how risky the change is (the risk tier) from what actually changed: file paths and size, never from what the prompt says. It runs lint, types and tests on everything that changed. A session at tier T2 or higher cannot close until the required AI reviewers have checked it. The test verdict comes from the exit code: an import error or zero tests run is red, not “skipped”. Committing before the session ends does not lower the tier, and a review the aggregation script marks as incomplete does not close the session.",
-      },
-      {
-        label: "On every commit:",
-        body:
-          "18 hard stops: conventional message; secret scan; base freshness (a clone on an unrelated history is blocked); " +
-          "duplicate literals in new code; a new dependency must exist on npm or PyPI and not be one typo away from a " +
-          "popular package; commented-out code; a new TODO without a ledger row; a personal-data column without a privacy " +
-          "inventory row; SQL migration lint (row-level security with both USING and WITH CHECK, definer hygiene, tenant " +
-          "foreign keys); GitHub’s own workflow parser on workflow files; a removed security step in CI.",
-      },
-      {
-        label: "At every push:",
-        body: "nothing goes straight to the main branch. A change of more than 1,500 source lines is split into smaller ones (one topic, like a database migration, stays together). A new circular import (import cycle), or an import that breaks the layers declared in the architecture document, is blocked. If someone else committed to the same branch in the last 24 hours, you get a warning.",
-      },
-      {
-        label: "On the build server (CI) and at merge:",
-        body: "the same checks run again, plus a secret scanner (gitleaks) and mutation testing on the changed files: the tool plants small bugs on purpose, and a test that catches none of them is theatre. 33 repositories have strict branch protection, generated from the names of the CI jobs. A merge script accepts a pull request only if its checks ran on the current merge result: once, green checks on an outdated base broke main in production.",
-      },
-    ],
-    tierTitle: "Risk level (tier): measured from the change, never declared",
-    tierLead:
-      "The amount of checking is proportional, and that is enforced too. A prototype isn't nagged for architecture records. A change to payments cannot close without a security review.",
-    tiers: [
-      {
-        label: "T0:",
-        body: "docs, copy, styles, assets: script checks only, with no AI tokens used.",
-      },
-      {
-        label: "T1:",
-        body: "a single, isolated component or helper: code review is recommended.",
-      },
-      {
-        label: "T2:",
-        body: "shared logic, API routes, edge functions, dependencies, CI or build configuration, or more than 150 lines. Required: code and operations review, plus UX review when the interface changes and data review when the schema changes.",
-      },
-      {
-        label: "T3:",
-        body: "login and permissions (auth, row-level security, multi-tenancy), payments, secrets, SQL migrations, scheduled jobs, admin, or more than 600 lines. Required: code, security, data and operations review, then a verifier. The security, data and verifier roles run on the strongest model.",
-      },
-      {
-        label: "For each repository:",
-        body: "a minimum tier, a lifecycle stage (prototype · poc · mvp · production) and an optional QA address. Moving to production requires a written production-readiness review in the same commit. With a QA address set, the QA reviewer becomes mandatory for T3 changes that touch a user interface.",
-      },
-    ],
-    reviewTitle: "Review like a software house, not like a chat",
-    reviewLead:
-      "Each AI reviewer covers one speciality and starts with a clean slate (fresh context). A script, not a model, combines their findings: an issue blocks the change only if enough reviewers report it independently or the verifier reproduces it, and an issue without proof is dropped (the k-of-n rule). The verifier's only job is to disprove.",
-    review: {
-      orchestrator: "ORCHESTRATOR",
-      gates: "SCRIPTS",
-      gatesSub: "lint · types · tests · SQL",
-      finders: ["code", "security", "data · ops", "ux · product · qa"],
-      aggregate: "AGGREGATE",
-      aggregateSub: "k-of-n · needs proof",
-      verifier: "VERIFIER",
-      verifierSub: "reproduce or refute",
-      fixer: "FIX + RE-GATE",
-      rule: "no chat between agents · a finding without an executed command does not count",
-      caption:
-        "Reviewers get only code that passed the scripts. A script merges findings. The verifier hunts for bugs, not confirmations.",
-    },
-    reviewItems: [
-      {
-        label: "Nine specialist reviewers:",
-        body: "code, security, data, operations, UX, product, QA, a verifier and a devil's advocate (catfish). Each works from a checklist of at most eight numbered rules. Every rule has a command to run, a severity policy, a fixed output format (JSON schema) and a worked example of a false alarm it must reject. Reviewers only read; the main session makes the fixes.",
-      },
-      {
-        label: "Why a clean slate:",
-        body: "whoever wrote the code, a human or a model, doesn't see its own mistakes. Reviewers start empty, get only the change and the task, and never see each other's findings. Agents that discuss drift toward the majority, even when the minority was right.",
-      },
-      {
-        label: "Decision councils with a devil's advocate:",
-        body: "architecture decisions go through fixed steps: facts → positions → a mandatory dissenter → aggregation → a written decision record. Injected dissent is the one intervention shown to cut failures caused by quiet agreement in groups of agents.",
-      },
-      {
-        label: "Calibrated monthly:",
-        body: "once a month the same bug is packaged two ways: a bare change, and the same change with a persuasive description. Six fresh reviewers then check it in random order. If they disagree, length or description is biasing them, and a human adjusts the checklist. The auditor never adjusts the instrument it measures.",
-      },
-    ],
-    loopTitle: "Every failure becomes a check: how the system learns",
-    loopLead:
-      "A failure isn't closed when it's fixed. It's closed when it can't happen again without a script noticing. Each catalogued failure is called a scar.",
-    loop: {
-      steps: [
-        "incident or repeated correction",
-        "root cause: five whys",
-        "scar + rule id",
-        "gate + test that it blocks",
-        "every rule has a gate",
-        "weekly audit",
-      ],
-      caption:
-        "The loop feeds itself: the weekly audit finds checks that stopped working, and each one becomes a new scar.",
-    },
-    loopItems: [
-      {
-        label: "An outdated base broke main:",
-        body: "two pull requests each passed their checks, but each was checked against its own older copy of the main branch. Merged together, they produced a broken workflow file on the main branch. Now: merge only when the checks ran on the current merge result, strict branch protection on 33 repositories, and a scar that records the exact mechanism.",
-      },
-      {
-        label: "A check that never ran:",
-        body: "the push gate read its input twice and, for six days, silently did nothing. Now every git hook has a test that runs the whole script with real input, and the weekly audit checks that every gate still blocks what it should.",
-      },
-      {
-        label: "45 copies of a company identity:",
-        body: "spread across 11 files, and every one of them passed lint, types, tests and review. Now a duplicate check runs on added lines: the same text six times in at least three files is blocked (it started at three times in two; version 1.8.0 recalibrated it from the log). An escape hatch exists, and every use of it is logged.",
-      },
-      {
-        label: "An invoice that silently changed the seller:",
-        body: "a default value (“?? default”) quietly swapped the seller after a profile was deleted. Now a silent fallback (SILENT-FALLBACK) on any field with consequences is a blocker in the code review checklist: when no match is found, the code must stop with a named error.",
-      },
-    ],
-    sections: [
-      {
-        title:
-          "Update, October 14, 2026: proportionality, with fewer blocks and fewer checks for the same safety",
-        lead: "Version 1.8.0. Until now, every time I saw a risk, I added a gate. After a few weeks the gate log showed the cost: some gates stopped my own normal work far more often than they caught a real mistake. So this release puts one rule above the others: no incident, no new block. A new check starts by only observing, and it may block only after a real incident. I counted the friction from the log, with test runs filtered out, and recalibrated four gates. Before release, independent AI reviewers checked the changes in four rounds: code, operations and product in every round, security and data in the last one. Among other things they caught that a single GitHub hiccup could silently cost a month of vulnerability checks, and that an empty answer from GitHub would look like a quiet month; both now end as a visible failure.",
-        items: [
-          {
-            label: "Change size:",
-            body: "the limit went from 400 to 1,500 source lines. The log showed that the old limit was mostly bypassed on purpose, for changes that belong together, like a database migration or generated code. Independent topics are still split into separate changes.",
-          },
-          {
-            label: "Duplicated text:",
-            body: "a piece of text is blocked when it repeats six times in at least three files (it used to be three times in two). Seed data (sample records loaded into a database) no longer counts. A typo in the threshold settings now stops the check with an error instead of silently letting everything through.",
-          },
-          {
-            label: "Small frictions removed:",
-            body: "deleting a build cache (for example .next/cache) is allowed, while a path that climbs up with .. or goes through a link stays blocked. Throwaway scripts in the temporary folder, outside any project, are no longer linted after every edit; a project copied into that folder still is.",
-          },
-          {
-            label: "The changelog is written at release time:",
-            body: "every pull request (a proposed change) used to add a line to one shared file, and parallel pull requests kept colliding on it. Now the pull request title, written in a fixed format (Conventional Commits), is the record, and the changelog is collected from those titles when a version is released. The reviewers no longer flag a pull request without a changelog line.",
-          },
-          {
-            label: "Routines check only what I am working on:",
-            body: "a daily review of open pull requests and a monthly vulnerability check used to go through every repository, but most of my projects are finished and I rarely return to them. A script now reads GitHub history and keeps only repositories with real work in the last 30 days. It ignores days when PG itself swept the whole fleet (on those days 10 or 14 repositories changed at once, against 1 to 6 on a normal day), the same change rolled out to many repositories, and bots that update dependencies. First measurement: 12 active repositories out of 47. The list is data, not code: a time window, projects to always check, and one project that is never checked.",
-          },
-          {
-            label: "Cleaner numbers:",
-            body: "test runs used to write into the same log as real work, which inflated the counters I calibrate with. Tests now write to their own temporary log, and the weekly health check counts their traces separately.",
-          },
-          {
-            label: "A context window chosen on purpose:",
-            body: "Claude can hold a conversation of up to a million tokens, but every message sends all of it again. In my transcripts a 1M window used about 2.3 times more of the weekly limit than a 400k one, so the window stays at 400k. A 600k trial starts on October 17 with a rule decided in advance: it stays if the week ends under 90% of the limit and nothing gets blocked.",
-          },
-          {
-            label: "Honest limits:",
-            body: "the routine scope was calibrated on one month of history, and it has not run yet. While preparing this release I found that none of the scheduled routines has done any work since I moved to a new computer in early October: most were set to start in a folder the system no longer trusts, so the session never began, and the rest stopped at a permission prompt nobody was there to answer. The routines are switched off until I fix that setup. Three of them will come back (the vulnerability check, the pull request review and the weekly health check); three that only work on PG itself stay off, in line with the rule above.",
-          },
-        ],
-      },
-      {
-        title:
-          "Update, October 11, 2026: architecture that stays decided, and a release pipeline modeled on big companies",
-        lead: "Version 1.7.0. Two things drove it. First, I wanted the architecture to stay decided for the whole life of a project, not only at the start. Second, my release process had the first half of what large companies do (a change that does not build or pass its tests cannot be merged) but not the second half: a waiting period before release, watching the live site afterwards, and an automatic way back. The release pipeline went through six full rounds of AI review and two smaller checks of the final fixes before I let it out.",
-        items: [
-          {
-            label: "Architecture is checked every time a project opens:",
-            body: "a script that uses no AI (so it costs nothing to run) compares the project with its recorded architecture decisions and prints one to three lines only when something is off. It catches three things: an area with no decision; technology in the code that the decisions do not mention (for example Redis, a fast in-memory store, added while the caching row says “not now”); and evidence that points at a file or line that no longer exists.",
-          },
-          {
-            label: "Drift is fixed in the same session:",
-            body: "if a working session adds something that contradicts the agreed architecture, it cannot finish until it either undoes the change or updates the decision (with a short written decision record when the decision itself changes). This is a hard stop in new projects and only a hint in old ones. Older issues land on a list with a ready proposal and wait for my “fix it”, because I do not want agents rewriting old projects on their own.",
-          },
-          {
-            label: "A release pipeline in four steps (preview, wait, watch, way back):",
-            body: "after the existing build and test checks, every preview (a temporary copy of the site built for a proposed change) gets automated test requests on the paths that must never break. A preview behind Vercel's password protection is not probed, because the key that opens it is never handed to unreviewed code; the real check comes next. The production build then waits outside live traffic for 10 minutes while synthetic requests (automated visits) test it, and a Vercel setting called Deployment Checks is meant to keep the domain on the old version until that check is green (to be confirmed in the first drill). After the switch, the live site is watched for 15 minutes.",
-          },
-          {
-            label: "A way back, by design:",
-            body: "the live site is checked every 30 seconds. If three checks in a row fail (which takes about a minute), the pipeline starts bringing back the last version that passed, and the domain stays on it until a person releases again. That is the design; it has not yet been rehearsed on a live project.",
-          },
-          {
-            label: "Knowing when not to go back:",
-            body: "a database outage, a firewall (network filter) blocking the test machine or a redirect (the site sending visitors to another address) are not mistakes in the new version, so they raise an alarm instead. If the release changed the database structure (a migration) or the backend functions (code that runs on the server), going back would run old code against the new structure, so the pipeline stops and asks a human. After one automatic return, nothing else goes back on its own until a person closes the incident.",
-          },
-          {
-            label: "AI on duty, with no keys to the building:",
-            body: "when a gate turns red, a fresh Claude instance (on my subscription, not a paid API) reads the test results and the changes in that release and writes a diagnosis into the incident. It can only read files. It cannot run commands, change code, merge or release, and a separate trusted step posts its comment.",
-          },
-          {
-            label: "Every review round, counted:",
-            body: "round one used three AI reviewers (code, security, operations), and rounds two to six added a fourth one for data; the two final checks used code and operations. Findings come in two weights: blocking (must be fixed before release) and major (serious, fixed in the same round). Round one found 1 blocking and 11 major issues, round two 1 blocking and 13 major, rounds three to six no blocking issues and 11, 8, 9 and 8 major. The two blocking issues were security holes I had not seen: the test script and its list of allowed addresses were read from the change that triggered the run, so an attacker could supply their own; and the AI on duty could read a token (a key that lets a program act on my behalf) from the code repository's settings file and paste it into a comment on the incident. Two smaller checks of the final fixes found one more blocking issue (a safety rule without a test) and 2 major issues. All were fixed before release.",
-          },
-          {
-            label: "Honest limits:",
-            body: "the pipeline has not yet run on a live project. The checklist says to start on a test copy of a project, with a drill in both directions: a green build must reach the domain, and a red one must not. Anyone with write access to a repository could still set the check result by hand. I accept that, because those people can already change the code.",
-          },
-        ],
-      },
-      {
-        title:
-          "Update, October 10, 2026: extensions under guard, every layer of the stack, and a shell guard with written-down limits",
-        lead: "Version 1.6.0. Three things drove it. Claude Code got mods: extensions that run inside the tool itself and skip the hooks (the automatic checks PG relies on). A security checklist became new rules for the security reviewer. And a security review kept finding ways around one of my new rules until I rebuilt it from scratch. This release also makes the stack, the set of tools a project is built on, a required step of designing a system, with every layer decided one by one.",
-        items: [
-          {
-            label: "Extensions under the same guard as the rules:",
-            body: "a mod runs inside Claude Code, so it does not pass through the hooks that check every command. PG now protects mod source code the same way it protects its own hooks: installing, turning on or updating an extension needs my explicit consent, typed in the chat as a fixed phrase. Turning an extension off or removing it is always allowed, because taking something away never needs permission.",
-          },
-          {
-            label: "No dropping a production table by accident:",
-            body: "a new rule reads every command that talks to a database (psql, supabase, prisma, dropdb, pg_restore) and works out where it points: the server address, connection links, environment variables set earlier in the same command, and wrappers such as docker exec or ssh. Destructive statements, such as DROP (delete a table), TRUNCATE (empty it) or DELETE without a filter, are blocked unless the target is provably on my own machine. SQL the rule cannot see, for example inside a file, counts as destructive. A local test database stays free.",
-          },
-          {
-            label: "Every layer of the stack, decided one by one:",
-            body: "the system-design matrix from 1.5.0 gained 25 rows for the tool layers, from the frontend to payments, invoicing and parcel shipping, so it now has 62 rows. Each layer must be marked as a decision, not now (with a measurable signal to come back) or not applicable. The rows come from a Stack Picker page: nothing is chosen in advance, you pick the target market (global, Poland, the EU or Iceland) and go through each layer. It lists 199 tools, including all 131 from Arjay McCandless's public Stack Picker under their original names, plus local options such as Polish payment gateways, the national e-invoicing system, parcel lockers and e-ID. A test fails if the page, the catalog and the matrix stop matching. A new project gets an empty matrix on day one. Without extra configuration the end-of-session gate does not block; it only reminds you about the decisions that are hard to undo later (data model, identifiers, files, identity, region and disaster recovery).",
-          },
-          {
-            label: "A rule rebuilt after review:",
-            body: "I closed a gap where a patch (a file describing changes to apply) could rewrite PG's own rules without my consent. The first version read the patch to see which files it touched. The first security review found three ways around it, from option values mistaken for file names to a patch piped in from a parent folder. So I turned the rule around: patching, unpacking an archive and editors driven by a script are blocked in PG's folder and every folder above it, whatever the patch says, and when the guard cannot tell which folder a command runs in, it blocks. Two more review rounds found eight further gaps (four blocking, four serious); all were fixed and checked again. A test in a sandbox (a throwaway copy where nothing real can break) showed something worse, in every project: the standard patch tool will rewrite .git/config, the settings file of a git repository, where one line can switch off all git checks, and a project's .claude/settings.json, which can run code in the next session. Such patches are now blocked in any repository, with a hint to use git apply, git's own way of applying a patch, which refuses to touch those files.",
-          },
-          {
-            label: "Security checklist and secret scanning:",
-            body: "the security reviewer got new checks taken from a security checklist: reading another user's data by changing an ID in the request (IDOR), a form that lets a user set fields they should not (mass assignment), keys left in git history or in public front-end variables, and missing request limits. The CI template (the automatic checks every pull request runs on GitHub) now scans every new commit and the current files for leaked keys, including ones pasted in while resolving a merge conflict. A marker that tells the scanner to ignore a line can hide a real key from every check, so merging a pull request that adds one now needs my phrase.",
-          },
-          {
-            label: "The right model for the job:",
-            body: "the main session plans and checks; helper agents get a model sized to the task: the smallest for looking things up, the middle one for writing and reviewing against a checklist, the strongest for hard reasoning and security on risky changes. Separately, the memory notes loaded at the start of a session now fit within Claude Code's 10,000-character limit for hook output; above it, the tool shows only a 2,000-character preview.",
-          },
-          {
-            label: "Honest limits:",
-            body: "the shell guard catches mistakes and instructions smuggled in from outside (for example from a web page an agent reads). It does not stop an agent set on getting around it: running any script can do anything. I wrote this down in the project's known-limits file. The net for the rest is a seal that flags any change to PG's rules at the start of the next session, the git history, and system-level settings only an administrator can change. The tool descriptions in the stack catalog are orientation, not prices or benchmarks. The README counters, apart from the file count (371), were not recounted. The public 1.6.0 release is in coding-higher-mind, the public repository of PG.",
-          },
-        ],
-      },
-      {
-        title: "Update, October 6, 2026: a row for every area of system design",
-        lead: "Version 1.5.0. A system design course covers 37 areas. Among them are queues (waiting lines for tasks), caching (keeping a ready copy of data for speed), scaling, databases and API design. Others are rate limiting (capping how many requests one user can send), real-time updates and search. I asked a question about PG, my set of rules and agents for writing code with AI. Does its architect, the agent that plans a project before any code is written, know these areas and walk through each one in every design? The October 6 audit showed that it knew 72% of the named options by name but could choose between only 46% of them. Nothing made it go through all the areas either. A second audit showed that the reviewers, the agents that check each code change, were overloaded too. This release changes both, and I tested it the same day on a real client application.",
-        items: [
-          {
-            label: "What the audit found:",
-            body: "it counted 437 named options across the 37 areas. 46% came with a rule for when to choose them, 26% had only a name and 28% were not there at all. By area, 14 were covered, 21 partly and 2 not at all. The two missing ones were distributed consensus (how several servers agree on one answer) and probabilistic data structures (compact structures that give approximate answers to save memory). The design process forced a decision in 15 areas, partly in 11 and not at all in 11.",
-          },
-          {
-            label: "A row for every area:",
-            body: "PG now has a list of the 37 areas in 12 groups. The first six are state and topology, data, identifiers, files and CDN (servers that deliver files from close to the user), consistency and asynchronous work (things done later, in the background). The other six are API contracts (the agreed way programs talk to each other), identity and access, resilience, observability (seeing what the system is doing), releases and disaster recovery, and cost and region. Every design ends with a matrix, a table with one row per area. Each row is marked DECISION, NOT APPLICABLE or NOT NOW and carries evidence. A NOT NOW row also needs a measurable signal that says when to come back to it. A script called sd-matrix-lint checks that the table is complete. The end-of-session gate (an automatic check before a session can finish) can block when a repository requires it.",
-          },
-          {
-            label: "Twelve agents instead of one architect:",
-            body: "instead of one architect handling everything, there is now a council: one agent per group, twelve in total. Groups whose decisions are hard to undo or involve security get a stronger model. The decision cards, short notes the agents choose from, now list options with a rule for when to pick them, their cost and how they fail. Examples include caching strategies, rate limiting algorithms and backpressure (slowing the sender when the receiver cannot keep up). Others are SLOs (the promised level of service) and RPO and RTO (how much data and how much time you can afford to lose after a failure). The list ends with real-time features, RAG (answering from your own documents) and deployments.",
-          },
-          {
-            label: "Each reviewer reads its own slice:",
-            body: "the second audit looked at one review round where every reviewer got the whole diff (the list of all changes in the code), 9,799 lines. In practice each one read about 10 to 30% of it. A CSS bug (CSS is the code that controls how a page looks) went past three reviewers. After two branches (separate lines of work on the code) were merged, two @media blocks (style rules for a given screen size) were left unclosed. As a result, part of the styling did not work on desktop computers. Only the tester (the step that clicks through the app like a user would) caught it. Now a script cuts the diff by department (security, data and so on), so each reviewer gets the part that concerns it. On a 2,400-line diff, security got 33% and data 14%. A second script runs 21 mechanical search rules and hands the hits to the reviewer to judge.",
-          },
-          {
-            label: "New checks that cost no tokens:",
-            body: "tokens are the pieces of text a model is paid for, and these three checks use none. After every edit, one check makes sure every opening bracket in the CSS has its closing one. After a merge, every line from both branches has to survive. And the tester now warns about test paths that never click anything, because a green result there proves nothing.",
-          },
-          {
-            label: "Tested on a real client app:",
-            body: "on October 6 I ran it on a client application built with Next.js and Supabase (a popular web framework and database service). The 12 agents filled all 37 rows (31 decisions, 5 not applicable, 1 not now) and listed 66 gaps with evidence. One of them: a scheduled daily data download had never run, because the schedule file was not on the main branch. I checked it, and it will start once the open pull request (a proposed change waiting to be merged) is merged. At least one gap was a false alarm. The sd-matrix-lint script returned 0 (pass) on the full matrix and 1 (fail) after one row was removed. The same app also went through a review round with slices and got 11 remarks. The verifier (an agent that checks whether a finding holds up) confirmed 2 more serious ones. The first was untested keyboard focus logic (focus is where your typing goes). The second: after adding a task, the focus landed on an empty page. Both were fixed the same day.",
-          },
-          {
-            label: "Honest limits:",
-            body: "the matrix makes sure every area gets considered, but it does not guarantee that the decision written in it is a good one. The gaps the council lists have to be reviewed by a person, since at least one was wrong. The counters in the README (the project's description file), apart from the file count of 365, were not recalculated for 1.5.0. The public 1.5.0 release is in coding-higher-mind, the public repository of PG, merged on October 6 after the checks passed.",
-          },
-        ],
-      },
-      {
-        title: "Update, October 5, 2026 (evening): the same rules for a much smaller context bill",
-        lead: "Version 1.4.0. Every message to an AI model carries background text the model reads first (the rules, the memory notes), and it is paid for in tokens, roughly pieces of words. I measured that background for PG: about 26 thousand tokens before any work starts and about 1,300 more on every larger request, most of it rules the model had already read. The goal was to send much less while the model keeps following the rules just as well. Four reviewers and a verifier checked the release (17 findings, all fixed and re-checked).",
-        items: [
-          {
-            label: "The full rules once per session:",
-            body: "Prompt-Guard, the part that adds the rules to my messages, now sends them in full once per session and afterwards only a one-line reminder. When the conversation is compressed or a new session starts, it sends them in full again, and whenever it is unsure what was already sent, it sends everything. A follow-up request about code went from about 4.9 KB of added text to 0.9 KB.",
-          },
-          {
-            label: "Memory that is current and still complete:",
-            body: "the memory notes loaded at the start of a session used to show checkpoints from a week ago, because they were read from the oldest end of the file. Now the newest ones come first, unfinished work from other sessions is listed by title, and every shortened file keeps a list of its remaining sections, so nothing disappears from view. The start-up text went from 35 KB to 25 KB, and a budget check turns red if it grows back.",
-          },
-          {
-            label: "A stricter guard against switching off security checks:",
-            body: "one gate stops an agent from quietly disabling the automatic security checks that run on every change. It raised a false alarm on a fresh project template, and false alarms teach an agent to work around a gate. Fixing that opened four gaps, which the security reviewer found: an unusual way of writing a step in the settings file, a whole job marked “continue on error”, the word “true” written in quotes or as an expression, and a pretend check that only appears in a comment or a printed line. All four are closed and covered by 16 tests.",
-          },
-          {
-            label: "GitHub's own vulnerability alerts feed the monthly check:",
-            body: "Dependabot, GitHub's service that warns when a library a project uses has a known security hole, is now on in 45 of my repositories, with notices only on GitHub and no e-mail. The monthly vulnerability check reads these alerts alongside its own scan. Products in use get a fix through a pull request; the other repositories get one summary line in the log.",
-          },
-          {
-            label: "Honest limits:",
-            body: "the savings are measured in kilobytes of text. Whether the model follows the shorter reminders just as well I will only know after a week of real sessions, and a scheduled check on October 12 looks at exactly that.",
-          },
-        ],
-      },
-      {
-        title:
-          "Update, October 5, 2026: pull requests merge without my phrase, but only with proof of review",
-        lead: "Typing “allow ALLOW_MERGE” for every routine pull request had become the new bottleneck. So I rebuilt merging the same way as the exceptions: what decides is how risky the change is and whether there is proof, not whether I am at the computer. It has been switched on since October 4, and I accepted the remaining risk knowingly. A system like this needs time to mature. This is a version in the middle of that, not a finished product, and the limits are below.",
-        items: [
-          {
-            label: "What the merge script checks:",
-            body: "every check green (the newest run of each one), not a fork, aimed at the default branch, the full list of changed files known. Then by risk tier: documentation only (.md, .txt, .rst) merges with no review; a normal code change needs a code review of exactly this diff, and a change to shared logic needs code and operations reviews. The review has to name the diff by its checksum, the verdict is recomputed from the findings and from the reviewers' own transcripts instead of the summary, and it is valid for two hours. Anything touching logins, payments, migrations, dependencies, CI or the agent's own instructions, and anything at the highest risk tier (T3), still waits for my phrase.",
-          },
-          {
-            label: "A second proof the agent cannot reach:",
-            body: "the review kept on the agent's own machine could in principle be forged by that agent, and the security review found several ways. So a pull request can also get a review in CI: a clean runner, read-only tools, Claude's configuration taken from the base branch instead of from the pull request. The merge script reads that run through the GitHub API and accepts it only if the workflow, the PR number and every attempt on that commit are green. It keeps 90 days of verdict history, so rewording a change and rolling the dice again does not work on the same branch, and a deleted run shows up as a gap. It is set up in three repositories so far (I checked the workflow and the secret in each). In the pilot the reviewer stopped several changes with red runs and tends to be over-zealous, so I am watching it for a week before I trust its verdict more.",
-          },
-          {
-            label: "The stop gate no longer mixes up sessions:",
-            body: "when two agent sessions work in one repository, a commit from the other session used to raise the risk tier of mine, or was ignored. Now a commit counts for the session unless there is positive proof that it was made during another session's tool run; when in doubt it counts. A new architecture check at T2 and above asks for a short decision record (at least five added lines) when a change adds a dependency, a table or a piece of infrastructure.",
-          },
-          {
-            label: "Design knowledge built into the reviewers:",
-            body: "the architecture-advisor skill and the reviewer checklists now carry a set of decision cards for common building blocks (queue, cache, replica, CDN and so on): when it pays for itself, my default (usually “you don't need it yet”), what it costs and how it fails. Design before code now asks for a rough capacity estimate and a failure mode for every external dependency. The cards are my own distillation of system-design practice, and they ship in the public repository with version 1.3.0.",
-          },
-          {
-            label: "Automatic session notes, repaired:",
-            body: "at the end of each session a hook now writes a short note into my Obsidian vault. The old version had been silently broken since September 22, because it read a field that no longer existed. The new one replaces it and has its own test, and the guard audit checks that it is wired in.",
-          },
-          {
-            label: "Honest limits:",
-            body: "the CI review is one model, so it is a probabilistic proof that a crafted diff can try to talk around, and a reviewer can simply be wrong. A new branch with a new pull request and a cosmetically changed diff gets a fresh draw of the review. An agent with push rights can edit the workflow in an abandoned pull request and read the secret. No text rule in a command guard closes every way of swapping a reviewer. That is why the check must not be marked as required in branch protection (GitHub counts a skipped job as passed) and why there is a kill switch: one file turns phrase-only merging back on. Everything is written down in the repository's known-limits file.",
-          },
-        ],
-      },
-      {
-        title: "Update, 2 October 2026: the agent approves itself, but only with proof",
-        lead: "The “allow ALLOW_…” phrase protected things well, but it stopped the work. The agent would finish a change, a gate would say “diff too large” or “new TODO without a backlog entry”, and everything waited until I typed two words in the chat. I rebuilt it into three levels. Whether the agent can carry on alone now depends on whether the step can be undone, not on whether I happen to be at the computer.",
-        items: [
-          {
-            label: "Level A, the agent decides:",
-            body: "ten quality gates (change size, TODO without an entry, commented-out code, repeated literals, module boundaries, commit format and similar). The gate still shows the problem. The agent fixes it or deliberately moves on, and every such pass goes into the log with the gate's name.",
-          },
-          {
-            label: "Level B, approval after review:",
-            body: "deleting files, a hard reset, cleaning the repository, a dependency missing from the registry and a new column with personal data. The agent asks sub-agents for a review (security and code, plus the data department for personal data), fixes what they find and only then grants itself an exception. The agent only gets it when the code matches what was reviewed. It lasts 15 minutes and covers exactly one command, only in that repository.",
-          },
-          {
-            label: "Level C, still only me:",
-            body: "changes to the gates themselves, pushing to main, merging a pull request the merge script will not take on its own (see the update of 5 October above), secrets in a commit, weakening CI or quality settings, force-push, deleting remote repositories. These can't be undone or they switch off other checks. If the agent could approve changes to its own gates, levels A and B would stop meaning anything.",
-          },
-          {
-            label: "Proof, not a claim:",
-            body: "the first review of the new mechanism showed that the proof of review could be faked with two empty files. Now what counts are the transcripts of real reviewer sub-agents. Every finding a reviewer recorded has to stay in the result, and one review never gives a second exception, even if the folder is copied. A command that tries to leave the repository (changing directory, a variable, a shell wrapper) doesn't get the exception.",
-          },
-          {
-            label: "Four review rounds before shipping:",
-            body: "the code, security and operations departments went through the change, and the data department joined for the last two rounds. Every round found a new way around the rules: through a variable, through a shell wrapper, through a PowerShell quirk, through a one-line script. Each one is fixed and has its own test. The gate test set now has 104 cases, and mutation tests noticed each of the 25 rules being switched off.",
-          },
-          {
-            label: "The clock slip:",
-            body: "while I was working, the system clock briefly jumped to 2022. The file holding my exception got a date four years in the past, and the cleanup deleted it as old, even though it was valid for another half hour. The cleanup now reads validity from the file's content, not from when it was written.",
-          },
-          {
-            label: "Kill switch and limits:",
-            body: "one switch brings back the old mode, where every exception needs my phrase, and it is protected the same way as the gates themselves. The limit is the same as before: text rules stop an agent taking shortcuts, not someone deliberately forging transcripts or building names out of pieces. I've written it down as a known limit.",
-          },
-        ],
-      },
-      {
-        title: "Update, 26 September 2026: PG next to 35 open-source projects",
-        lead: "I checked what everyone else is building. AI agents went through 35 public repositories with a similar idea (hooks, gates, AI reviewers). They compared each one with PG layer by layer, and every point cites a file and a line number. The result was a list of 23 things other people did better. I shipped the important ones the same day.",
-        items: [
-          {
-            label: "The design was reviewed before any code:",
-            body: "before the first line was written, an independent security reviewer took the plan apart. It found 15 problems, 3 of which would have broken the review process itself. All of them were fixed in the design.",
-          },
-          {
-            label: "Tested on real history:",
-            body: "every new rule in the command guard ran against 40,824 real commands before it was allowed to block anything. They come from 2,853 agent transcript files, main sessions and sub-agents. The false alarms this caught were fixed before rollout. One example: text being written into a file was read as a command. Checking one command takes at most 16 ms.",
-          },
-          {
-            label: "The checks are tested too:",
-            body: "a set of 102 cases (84 for the command guard) has to pass in full, and every rule needs one case it blocks and one it lets through. On top of that, mutation tests switch off each of the 24 rules in turn and check that the tests notice. They noticed 24 out of 24.",
-          },
-          {
-            label: "Reviewed after it went live:",
-            body: "four AI review departments (code, security, data, operations) and a verifier went through the finished change. They found 26 problems; 17 are fixed and confirmed. The verifier keeps finding more elaborate variants of the same few bypasses, such as a drive letter mapped onto the settings folder. Text rules can't win that race against someone who is hunting for holes. That needs isolation at the operating-system level, and I've written it down as a known limit.",
-          },
-          {
-            label: "Context survives compaction:",
-            body: "when a long session gets compacted, a hook first saves a snapshot: my last instructions, the files edited and the last answer. After compaction it goes straight back into the context, so the agent doesn't have to rebuild the state from a summary.",
-          },
-          {
-            label: "Exceptions come only from me (until 2 October, see the update above):",
-            body: "an agent used to be able to add an ALLOW_…=1 switch to a command and walk past a check. Now an exception exists only after I type “allow ALLOW_…” in the chat. It lasts 30 minutes and three uses, and every use goes into the log. The same phrase echoed in an agent’s reply or in a sub-agent’s report unlocks nothing.",
-          },
-          {
-            label: "Protecting the protection:",
-            body: "the hooks, git gates, settings and gate tools are sealed with checksums. A change outside a deliberate window shows up at the start of every session and in the weekly audit. The rule that denies access to SSH keys, AWS credentials and the secrets vault also holds in the mode that never asks for permission. I checked that in a live session.",
-          },
-          {
-            label: "A monthly look at the competition:",
-            body: "a routine compares those 35 repositories with the saved snapshot. The script runs without AI; a model only steps in when something changed in the code that does the checking, or a new, fast-growing project shows up.",
-          },
-          {
-            label: "Not done yet:",
-            body: "a nightly check (a canary) that runs the agent on a pinned tool version and confirms the gates still block, checking CI status when a session ends, and testing skills under pressure. All of it is planned, and I'll add it here once it runs.",
-          },
-        ],
-      },
-      {
-        title: "How architecture gets decided, and how it stays decided",
-        lead: "Most projects decide their architecture once, in a document nobody opens again. Here every decision is a row with evidence, and a script checks the code against those rows at the start of every working session and before a session can finish.",
-        items: [
-          {
-            label: "One row per area:",
-            body: "62 rows: 37 system design areas (how data is stored, how the system grows, queues (waiting lines for background tasks), caching (keeping a ready copy of data), login, limits on how often someone can call the system, releases and more) and 25 tool layers (website, hosting, database, payments, invoicing, e-mail and others). Each row is marked as a decision with evidence, not applicable with a reason, or not now with a measurable signal for when to come back, for example “more than 50 requests per second” or “10,000 rows in orders”.",
-          },
-          {
-            label: "A council instead of one architect:",
-            body: "when a project starts, AI agents work in parallel, one per group of areas, and each sees only its own areas and reference notes. Groups whose decisions are hard to undo (how the data is shaped, identifiers, file storage, user identity, data location, recovery after a disaster) get the strongest model and must be decided even in small projects.",
-          },
-          {
-            label: "Scaling only when the numbers say so:",
-            body: "the not-now rows keep their thresholds, and the reference notes have a seven-step ladder for my stack, from one server, through queues and caching, to read-only copies of the database. The script can list those thresholds at any time, so the decision to scale comes from data and not from fear.",
-          },
-          {
-            label: "Kept honest by the code:",
-            body: "the check described above runs whenever a working session starts and blocks a session from finishing if it left drift behind (in new projects; in older ones it is a hint). Agents follow the architecture, and when the architecture has to change, the change is written down where the next person will look.",
-          },
-        ],
-      },
-      {
-        title: "Why a release pipeline with AI in the loop makes sense for a one-person company",
-        lead: "Big companies can afford a release team, people on call and a second engineer reviewing every change. I cannot, so the pipeline does that work, and AI does the parts that need judgment.",
-        items: [
-          {
-            label: "Machines check what machines can check:",
-            body: "building, type checks, tests, dependency licences, scanning for leaked passwords and automated test requests against the running site are plain scripts with no AI, so they use no AI tokens (only ordinary build minutes). They are fast and give the same answer every time.",
-          },
-          {
-            label: "AI reviews what needs judgment:",
-            body: "every risky change gets separate AI reviewers for code, security, operations and data, each starting fresh with its own checklist. They are not allowed to edit anything, and every finding needs evidence and a command that reproduces it. This release is a good example: the reviewers found two blocking security holes I had missed, both in the first two rounds. The security reviewer kept finding serious, non-blocking issues in every later round (4, 3, 2 and 1), and the other reviewers found edge cases such as a single refused request, a redirect or a database outage. One more blocking issue came at the very end: a safety rule added without a test, caught before release.",
-          },
-          {
-            label: "A human decides what cannot be undone:",
-            body: "merging risky changes, spending money, and touching passwords and keys need my explicit consent, and switching the pipeline off is a repository setting, not something an agent decides. The automatic way back is limited on purpose: once, then it waits for a person.",
-          },
-          {
-            label: "Why it pays off:",
-            body: "by design, a bad release is caught before customers see it (the 10-minute wait) or the way back starts about a minute after the first failed check on the live site. Every failure that slips through becomes a new automatic check, so the same mistake is much less likely to happen again. That is the whole idea of this system.",
-          },
-        ],
-      },
-      {
-        title: "Two AI tools, one system",
-        items: [
-          {
-            label: "Claude Code:",
-            body: "the terminal tool for work on code: this site, the production apps behind MAS Group, Flyt and the garage system, and their CI. It connects to GitHub, mail, the browser and the desktop through MCP servers (connectors). This is where the hooks and git gates apply.",
-          },
-          {
-            label: "Claude Desktop (Cowork):",
-            body: "the tool for operations: mail triage, documents, research, outreach, design, and the routines that keep the system itself running. It has no hooks, so the working rules travel as text inside every prompt.",
-          },
-          {
-            label: "105 skills:",
-            body: "versioned instruction packages that tasks are routed to: 50 in the coding tool, 55 on the desktop. A router matches each task by fixed rules (deterministically) and announces which steps it will run before work starts.",
-          },
-          {
-            label: "Choosing the model:",
-            body: "the strongest model is kept for hard reasoning and for the security, data and verification reviews at T3. Routine tool work and lookups go to cheaper models. Computing capacity is a budget, and the system spends it on purpose.",
-          },
-        ],
-      },
-    ],
-    statusTitle:
-      "VERIFIED · UNVERIFIED · FAILED: the status word that stops the AI telling you what you want to hear",
-    statusLead:
-      "Every substantive report ends with one of three words. It's the smallest part of the system and the easiest to take elsewhere, especially to Claude Desktop (Cowork), which has no hooks, so the prompt is the only protection.",
-    statusItems: [
-      {
-        label: "VERIFIED:",
-        body: "the claim comes with its proof, quoted rather than described: the command and its exit code, the HTTP status, the line from the test output, the diff, the path to a screenshot.",
-      },
-      {
-        label: "UNVERIFIED:",
-        body: "the work is done but the proof is missing. The report says exactly what is missing, how to check it, and what would change the conclusion. A report with no status word counts as UNVERIFIED.",
-      },
-      {
-        label: "FAILED / BLOCKED:",
-        body: "what happened, word for word, without softening. Anything blocking the work (missing access, a decision, data or a secret, or a broken tool) goes in the first line of the report, never at the end.",
-      },
-      {
-        label: "Why it exists:",
-        body: "when a user pushes back with a wrong claim, models agree in about 58 % of cases. They predict 61–77 % success and achieve 22–35 %. The longer a conversation runs, the more the model mirrors your framing and your confidence. The status word forces every claim to show evidence or admit it has none. And “are you sure?” makes the model re-check the evidence instead of politely changing its answer.",
-      },
-    ],
-    statusCoworkLabel: "In Claude Desktop and scheduled tasks:",
-    statusCowork:
-      "every background prompt gets a seven-line verification block: don't assume the prompt is true; you may refuse and report failure; restate claims as neutral questions; no success without evidence; attack your own result before reporting; re-check when challenged; end with the status word. The block is in the repository, ready to paste.",
-    vaultSectionTitle: "Passwords and keys the AI never sees",
-    vaultFlow: {
-      vault: "VAULT",
-      vaultSub: "99 secrets · self-hosted",
-      bridge: "BRIDGE",
-      bridgeSub: "passes to the process",
-      target: "TARGET PROCESS",
-      targetSub: "deploy · API call · CI",
-      never: ["chat ✕", "code ✕", "logs ✕"],
-      caption: "The agent can use a password or key it can never read.",
-    },
-    vaultItems: [
-      {
-        label: "A vault on my own hardware:",
-        body: "99 API keys, tokens and logins are stored in a vault on my own hardware. A bridge passes them straight into the process that needs them, as environment variables. The values never appear in the chat, the code or the logs. The command guard blocks a secret typed into a command, and the scans at commit time and in CI keep it that way.",
-      },
-    ],
-    schedTitle: "Routines: the part that runs while nobody is typing",
-    schedLead:
-      "Five routines in the coding runtime, 35 defined on the desktop, 10 of them enabled (all paused since October 14 until I fix their setup; see the 1.8.0 update). Deterministic script first, model only on findings; anything that could “find itself work” is off by design.",
-    cadence: [
-      { name: "PR reviewer", dots: 5, freq: "weekday mornings" },
-      { name: "Watchdog", dots: 5, freq: "every 2 hours" },
-      { name: "Config backup + restore script", dots: 5, freq: "daily" },
-      { name: "Sessions → memory notes", dots: 4, freq: "daily / Mon + Thu" },
-      { name: "Safeguard status", dots: 1, freq: "weekly" },
-      { name: "Weekly system report", dots: 1, freq: "Sunday" },
-      { name: "CVE watch", dots: 1, freq: "monthly" },
-      { name: "Reviewer calibration", dots: 1, freq: "monthly" },
-      { name: "Repo cleaner", dots: 0, freq: "manual only", manual: true },
-    ],
-    schedItems: [
-      {
-        label: "PR reviewer (weekdays):",
-        body: "reviews open pull requests across all my repositories, the way a senior engineer would. Mechanical fixes land as separate commits with proof attached. Design and security findings stay as comments for me to decide.",
-      },
-      {
-        label: "Safeguard status (weekly):",
-        body: "33 script checks that the quality system itself is still connected: hooks are registered, gates still block what they should, which escape hatches were used and why, and which routine started but never finished.",
-      },
-      {
-        label: "Vulnerability watch (CVE, monthly):",
-        body: "first a script scans the dependencies of the live products: no AI tokens used when nothing is found. Fixes are limited to patch and minor updates, and always arrive as pull requests with evidence, never as direct pushes.",
-      },
-      {
-        label: "Watchdog (every two hours, Claude Desktop):",
-        body: "finds routines that are overdue or crashed mid-run, retries them and fixes what it can. It sends a phone notification only when it can't. If a usage limit interrupted work, it resumes from a saved checkpoint.",
-      },
-      {
-        label: "Backup with a restore script (daily, Claude Desktop):",
-        body: "a full copy of the agent configuration plus a generated script that restores it on a new machine in one click. A backup that was never restored is not a backup, so the restore script is part of the backup.",
-      },
-    ],
-    memTitle: "Memory, measurement and the retrospective that rebuilt the system",
-    memItems: [
-      {
-        label: "Persistent memory:",
-        body: "a local base of 1,900+ notes is loaded at the start of every session. Each session writes its own notes when it ends, so the next one starts from a saved checkpoint instead of from scratch.",
-      },
-      {
-        label: "Telemetry, not feelings:",
-        body: "every skipped check is logged with a reason. Scripts mine 2,853 agent transcript files and the git history of 39 repositories: corrections per session, repeated tool errors, fixes made within 24 hours of the previous commit to the same file, and the files that change most often (churn hotspots). The numbers decide what becomes a gate.",
-      },
-      {
-        label: "The retrospective that mattered:",
-        body: "twelve repair loops in one session were traced to their causes. Three had the same defect: the system claimed a check it didn't physically have. The answer was structural: every gate got a test proving it blocks, and checking that every rule has a gate became a script.",
-      },
-      {
-        label: "The same method, applied to me:",
-        body:
-          "my code-reading practice is built like the rest of the system, daily, verified, public: " +
-          "github.com/kamiljan11/code-reading-quest.",
-      },
-    ],
-    scaleTitle: "Does it hold at scale?",
-    scaleItems: [
-      {
-        label: "The honest answer:",
-        body: "one function is easy. A 200,000-line system, with dependencies between files and unwritten assumptions about its architecture, is where consistency drifts. So the assumptions are written where a script can read them: every repository's architecture document has a machine-readable block of layers and forbidden imports, and the push gate blocks a new import cycle or an import that breaks the layers. Old cycles only warn. Historical debt is never cleaned up automatically.",
-      },
-      {
-        label: "Checking the impact before an edit:",
-        body: "a changed file that more than 40 other files import is flagged. The design step before any code asks: who calls this, what else reads this data, and which risk tier the change falls into.",
-      },
-      {
-        label: "Readable by a person, not only by a machine:",
-        body: "the tool index and the system map are generated from each tool's own header; a tool without a description shows up as debt. Every style decision is judged by one question: can a senior engineer who has never seen the repository run it in 15 minutes, find the place to change in 15 minutes, and understand why, without reading my transcripts?",
-      },
-    ],
-    installTitle: "Install it yourself",
-    installLead:
-      "The whole system is a public repository, cleaned of private data and portable. You only need Node 20+, git and Claude Code.",
-    installSteps: [
-      "git clone " + REPO_URL + ".git",
-      "node install.mjs --dry-run   # shows the plan, touches nothing",
-      "node install.mjs --yes       # copies into ~/.claude, merges hooks, appends the CLAUDE.md block, wires git hooks",
-    ],
-    installItems: [
-      {
-        label: "What the installer promises:",
-        body: "it never overwrites a file you changed (the other version lands next to yours). It merges your settings instead of replacing them. It adds its rules between markers, so an update replaces only that block. Git hooks are optional. It ends with a self-test: the green output is the proof, not the installer's word.",
-      },
-      {
-        label: "What you get in the public version today:",
-        body:
-          "10 hooks, 3 git gates, 39 tools with 11 test suites, 9 reviewer departments, the doctrine with 160 scars, a repo " +
-          "template with CI and parsed boundary blocks, 7 coding routines and 7 desktop routines, an uninstaller, and docs " +
-          "with the diagrams from this page.",
-      },
-      {
-        label: "One honest note:",
-        body: "the working rules have a full English version (PG_LANG=en, which the installer sets from your system language), and every block message includes an English BLOCKED line with its escape hatch. The doctrine and the reviewer checklists are still in Polish (the model reads them fine), and the README is in both languages.",
-      },
-    ],
-    installLink: "Open the repository →",
-    limitsTitle: "Honest limits",
-    limits:
-      "Foundation models via API: I do not train or fine-tune them. Reliability is proven at SME scale (dozens of " +
-      "repositories, one owner), not hyperscale. Reviewer departments cost tokens (roughly four times one review for T2 " +
-      "and eight to ten for T3), which is why zero-token gates run first. Merging without my phrase rests on one model's review (in CI or local), which is a probabilistic proof; see the update of October 5 and the known-limits file. Some gates depend on the repository having what " +
-      "they check, and skip with a logged reason when it does not. The point of this page is not that the system is " +
-      "finished: it is that the failure modes of working with AI are engineered against, in the open, instead of being " +
-      "wished away.",
-    colophon:
-      "This page went through the process it describes: an agent drafted it, it passed the gates above, and I reviewed and published it. The numbers came from commands run on the day it shipped, not from memory.",
-  },
-
-  pl: {
-    title: "Coding Higher Mind: system AI, na którym stoi ta praca",
-    tocLabel: "Spis treści",
-    role: "Dwa narzędzia AI, wzmocnione polecenia, automatyczne kontrole na każdym kroku, recenzenci AI podzieleni na specjalizacje i pętla, która uczy się na błędach. Policzone, nie szacowane. Teraz jako open source.",
-    versionLine:
-      "PG v1.8.0 (stan na 14 października 2026). To wersja w trakcie dojrzewania, nie produkt skończony: 15 wersji publicznych w pięć tygodni (1.0.0 z 12 września, 1.1.0 z 13., 1.2.0 z 27., sześć wydań poprawkowych 1.2.1 do 1.2.6 z 28., 1.3.0 i 1.4.0 z 5 października, 1.5.0 z 6 października, 1.6.0 z 10 października, 1.7.0 z 11 października, 1.8.0 z 14 października). Liczniki w tabeli poniżej policzyłem 26 września i od tego czasu ich nie przeliczałem.",
-    intro:
-      "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie są jego granice. W skrócie: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI musi pokazać dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś, chyba że sekcja mówi inaczej (potok wydań z wersji 1.7.0 czeka na pierwsze ćwiczenie na testowym projekcie, a zaplanowane rutyny są wstrzymane, dopóki nie naprawię ich ustawień po przeprowadzce na nowy komputer). Każdą liczbę policzyła komenda uruchomiona w dniu publikacji: policzone, nie szacowane. Cały system to publiczne repozytorium, które zainstalujesz u siebie w pięć minut.",
-    repoCta: "github.com/kamiljan11/coding-higher-mind →",
-    stats: [
-      { n: "2 853", label: "plików zapisów pracy agentów" },
-      { n: "160", label: "awarii zamienionych w automatyczne kontrole" },
-      { n: "23", label: "twarde stopy w bramkach gita" },
-      { n: "9", label: "wyspecjalizowanych recenzentów AI" },
-      { n: "52", label: "narzędzia 0-tokenowe" },
-      { n: "40", label: "rutyn (8 code · 32 desktop)" },
-      { n: "33", label: "repo pod ścisłą ochroną" },
-      { n: "99", label: "kluczy i haseł, których AI nigdy nie widzi" },
-    ],
-    mapTitle: "Cała maszyna na jednej mapie",
-    arch: {
-      kamil: "KAMIL",
-      kamilSub: "spec · architektura · review · wdrożenie",
-      code: "Claude Code",
-      codeSub1: "repozytoria · CI · produkcja",
-      codeSub2: "GitHub · przeglądarka · mail (MCP)",
-      cowork: "Claude Desktop (Cowork)",
-      coworkSub1: "poczta · dokumenty · research",
-      coworkSub2: "outreach · design · operacje",
-      shared: "te same reguły · ta sama pamięć",
-      vault: "SEJF",
-      vaultSub: "99 sekretów",
-      vaultNote1: "klucze trafiają do procesu,",
-      vaultNote2: "nigdy do czatu",
-      memory: "PAMIĘĆ",
-      memorySub: "1900+ notatek",
-      memoryNote1: "ładowana na starcie sesji,",
-      memoryNote2: "sesje same się opisują",
-      gates: "BRAMKI",
-      gatesList:
-        "prompt · edycja · komenda · stop · commit · push · CI · review · dowód z produkcji",
-      prod: ["MAS Group", "Workshop 3.0", "Flyt", "kamiljan.com", "strony klientów"],
-      caption:
-        "Ja wyznaczam kierunek. Każda zmiana przechodzi automatyczne kontrole (bramki), zanim trafi do produktu. Dowody wracają w górę.",
-    },
-    mindTitle: "Mapa myśli: z czego składa się „wyższy umysł”",
-    mindLead:
-      "System, który czuwa nad każdą sesją kodowania, nazywa się PG (Prompt-Guard). „Wyższy umysł” to nazwa z mojego drugiego długiego projektu, darmowego przewodnika po praktycznej duchowości, którego zasadą jest praktyka ponad przekonanie. Tutaj znaczy to tyle: reguła, której zamierzasz przestrzegać, to przekonanie; kontrola, która uruchamia się sama, to praktyka.",
-    mind: {
-      center: "WYŻSZY UMYSŁ",
-      centerSub: "PG · PROMPT-GUARD",
-      branches: [
-        {
-          title: "Warstwa promptu",
-          leaves: ["protokół w każdym prompcie", "skompresowane raporty", "router skilli"],
-        },
-        {
-          title: "Hooki na zdarzeniach",
-          leaves: ["edycja → lint + typy", "strażnik komend", "bramka stop: tier z diffu"],
-        },
-        {
-          title: "Bramki gita",
-          leaves: [
-            "sekrety · świeżość bazy",
-            "zależności · duplikaty · TODO",
-            "lint SQL · granice",
-          ],
-        },
-        {
-          title: "Działy recenzentów",
-          leaves: [
-            "kod · bezpieczeństwo · dane · ops",
-            "ux · produkt · qa",
-            "weryfikator · adwokat diabła",
-          ],
-        },
-        {
-          title: "Doktryna",
-          leaves: ["projekt przed kodem", "„gotowe” wg poziomu ryzyka", "160 blizn"],
-        },
-        {
-          title: "Szablon repo",
-          leaves: [
-            "CI + testy mutacyjne",
-            "parsowane granice",
-            "matryca QA · prywatność · runbook",
-          ],
-        },
-        {
-          title: "Rutyny",
-          leaves: [
-            "recenzent PR · stan zabezpieczeń",
-            "nadzór CVE · kalibracja",
-            "watchdog · backup · raporty",
-          ],
-        },
-        {
-          title: "Samotesty",
-          leaves: ["każda bramka ma test", "pokrycie reguła → bramka", "cotygodniowy audyt"],
-        },
-      ],
-      caption:
-        "Osiem części, jedna zasada: nic ważnego nie istnieje tylko jako tekst. Każda reguła ma automatyczną kontrolę.",
-    },
-    ideasTitle: "Trzy idee, na których stoi całość",
-    ideas: [
-      {
-        label: "Kontrole, nie spisane reguły:",
-        body: "audyt, od którego wszystko się zaczęło, wykazał, że każda reguła zapisana tylko jako tekst była masowo łamana: 6 z 7 repozytoriów miało 0 spisanych decyzji architektonicznych, dziennik zmian był 105 commitów w tyle, recenzja kodu odbyła się tylko w 2,5 % sesji, a 79 % commitów trafiało prosto na gałąź główną. Agent AI może o regule zapomnieć, więc sama spisana reguła nie wystarczy. Wszystko, co ważne, uruchamia się teraz samo przy określonym zdarzeniu (to jest bramka), a każda bramka ma test, który dowodzi, że blokuje to, co powinna. Skrypt sprawdza, czy każda spisana reguła ma swoją bramkę.",
-      },
-      {
-        label: "Każda awaria staje się kontrolą (blizna → bramka):",
-        body: "160 prawdziwych awarii z moich projektów jest skatalogowanych, każda z identyfikatorem reguły. Nazywam je bliznami. Każdy punkt listy kontrolnej wskazuje bliznę, z której powstał (zasada z Google SRE). Analiza po awarii kończy się nową bramką albo nową blizną, nigdy obietnicą „będziemy uważniejsi”.",
-      },
-      {
-        label: "Dowód, nie deklaracje:",
-        body: "„gotowe” oznacza, że komenda została uruchomiona, zwróciła wynik (exit code), a stan po niej został sprawdzony. Każdy raport kończy się jednym słowem: VERIFIED, UNVERIFIED albo FAILED. Agenci AI mierzalnie zawyżają sukces (w jednym benchmarku 75,8 % zgłoszonych sukcesów nie miało dowodu) i ustępują, gdy się na nich naciska. Słowo statusu jest przeciwwagą.",
-      },
-    ],
-    pipeTitle: "Życie jednej zmiany",
-    pipeLead:
-      "Dziewięć punktów kontrolnych uruchamia się samo w stałych momentach: gdy wysyłam polecenie, gdy agent edytuje plik, i tak dalej aż do produkcji. Nikt nie musi pamiętać o sprawdzaniu. Każdy czerwony wynik zatrzymuje zmianę w miejscu.",
-    pipe: {
-      stages: [
-        "prompt",
-        "edycja",
-        "komenda",
-        "koniec sesji",
-        "commit",
-        "push",
-        "CI",
-        "merge",
-        "produkcja",
-      ],
-      gates: [
-        "protokół w prompt",
-        "lint + typy",
-        "strażnik + no-verify",
-        "tier + testy + recenzenci",
-        "18 kontroli + sekrety",
-        "bez main + rozmiar + cykle",
-        "mutacje + sekrety",
-        "tylko aktualny merge-ref",
-        "200 z prawdziwej domeny",
-      ],
-      live: "LIVE",
-      blocked:
-        "żadnego cichego omijania: bramkę jakości można przejść tylko z wpisem w dzienniku · ryzykowne kroki dopiero po recenzji podagentów · kroki nieodwracalne i same bramki dopiero po moim „pozwól ALLOW_…” w czacie · rutynowy pull request scala się bez mojej frazy tylko z dowodem recenzji",
-      caption:
-        "Dziewięć punktów kontroli na drodze zmiany. Decyzje podejmuję ja; kontrole pilnują, żeby nic nie umknęło.",
-    },
-    gatesItems: [
-      {
-        label: "Gdy wysyłam polecenie:",
-        body: "hook (skrypt uruchamiany przy zdarzeniu) dokleja do polecenia zasady pracy (protokół). Gdy zadanie jest niejasne, agent zadaje pytania zamiast zgadywać. Fakt wymaga najpierw otwarcia źródła. Przeszkoda, która blokuje pracę, trafia do pierwszej linii raportu. A na pytanie „jak idzie?” nie ma odpowiedzi „dobrze”: jest cel, budżet, ryzyka i decyzje, które należą do sponsora projektu.",
-      },
-      {
-        label: "Po każdej edycji pliku, także tej zrobionej w terminalu:",
-        body: "zmieniony plik jest sprawdzany pod kątem stylu i błędów typów (lint i typecheck). Błędy wracają od razu do agenta, który go edytował, w tej samej sesji.",
-      },
-      {
-        label: "Przy każdej komendzie w terminalu:",
-        body: "strażnik blokuje groźne komendy: pomijanie kontroli (--no-verify), nadpisywanie lub kasowanie historii (force-push, twardy reset), rekurencyjne kasowanie poza katalogami buildu, scalanie pull requestów ze skryptu (jedyny wyjątek to skrypt scalający, który wymaga dowodu recenzji), sekrety wpisane w komendę i uruchamianie pobranego skryptu prosto w powłoce (curl | sh). Od września rozbiera komendę tak, jak zrobiłaby to powłoka, więc widzi też polecenia schowane w sh -c, w $(…), w heredocu przekazanym do powłoki, w zakodowanym PowerShellu albo w sztuczkach typu rm${IFS}-rf. Pilnuje też samych kontroli. Agent nie zmieni po cichu hooków, ustawień ani konfiguracji lintera, a recenzenci AI mogą zapisać tylko własny plik z uwagami, bo resztę blokuje im hook.",
-      },
-      {
-        label: "Gdy sesja się kończy:",
-        body: "bramka końcowa ocenia, jak ryzykowna jest zmiana (poziom ryzyka, tzw. tier), na podstawie tego, co faktycznie się zmieniło: ścieżek i rozmiaru, nigdy treści polecenia. Uruchamia lint, typy i testy na wszystkim, co się zmieniło. Sesji na poziomie T2 lub wyższym nie da się zamknąć, dopóki nie sprawdzą jej wymagani recenzenci AI. Wynik testów bierze się z kodu wyjścia: błąd importu albo zero uruchomionych testów to czerwony wynik, a nie „pominięte”. Commit zrobiony przed końcem sesji nie obniża poziomu ryzyka, a recenzja, którą skrypt agregujący uznał za niekompletną, nie zamyka sesji.",
-      },
-      {
-        label: "Przy każdym commicie:",
-        body:
-          "18 twardych stopów: konwencjonalny opis; skan sekretów; świeżość bazy (klon o niepowiązanej historii jest " +
-          "blokowany); powtórzone literały w nowym kodzie; nowa zależność musi istnieć w npm lub PyPI i nie być o jedną " +
-          "literówkę od popularnej paczki; zakomentowany kod; nowe TODO bez wiersza w rejestrze; kolumna z danymi " +
-          "osobowymi bez wiersza w inwentarzu prywatności; lint migracji SQL (row-level security z USING i WITH CHECK, " +
-          "higiena definera, klucze obce tenantów); parser workflowów GitHuba na plikach workflow; usunięty krok " +
-          "bezpieczeństwa w CI.",
-      },
-      {
-        label: "Przy każdym wysłaniu zmian (push):",
-        body: "nic nie trafia prosto na gałąź główną (main). Zmiana powyżej 1500 linii kodu źródłowego jest dzielona na mniejsze (jeden temat, jak migracja bazy danych, zostaje razem). Nowy cykl importów albo import łamiący warstwy opisane w dokumencie architektury jest blokowany. Gdy na tej samej gałęzi ktoś inny commitował w ciągu ostatnich 24 godzin, pojawia się ostrzeżenie.",
-      },
-      {
-        label: "Na serwerze budującym (CI) i przy scalaniu:",
-        body: "te same kontrole uruchamiają się jeszcze raz, a do tego skaner sekretów (gitleaks) i testy mutacyjne na zmienionych plikach: narzędzie celowo wprowadza drobne błędy, a test, który nie wyłapie żadnego, to teatr. 33 repozytoria mają ścisłą ochronę gałęzi, generowaną z nazw zadań w CI. Skrypt scalający przyjmuje pull request tylko wtedy, gdy kontrole przeszły na aktualnym wyniku scalenia: bo kiedyś zielone kontrole na nieaktualnej bazie zepsuły gałąź główną na produkcji.",
-      },
-    ],
-    tierTitle: "Poziom ryzyka (tier): liczony ze zmiany, nigdy deklarowany",
-    tierLead:
-      "Liczba kontroli jest proporcjonalna, i to też jest pilnowane. Prototyp nie jest zmuszany do spisywania decyzji architektonicznych. Zmiana w płatnościach nie zamknie się bez przeglądu bezpieczeństwa.",
-    tiers: [
-      {
-        label: "T0:",
-        body: "dokumentacja, teksty, style, grafiki: tylko kontrole skryptowe, bez zużycia tokenów AI.",
-      },
-      {
-        label: "T1:",
-        body: "pojedynczy, odizolowany komponent albo funkcja pomocnicza: recenzja kodu jest zalecana.",
-      },
-      {
-        label: "T2:",
-        body: "wspólna logika, endpointy API, funkcje brzegowe (edge functions), zależności, konfiguracja CI lub buildu albo ponad 150 linii. Wymagana recenzja kodu i operacji; do tego UX, gdy zmienia się interfejs, i danych, gdy zmienia się schemat bazy.",
-      },
-      {
-        label: "T3:",
-        body: "logowanie i uprawnienia (auth, row-level security, multi-tenancy), płatności, sekrety, migracje SQL, zadania cykliczne, panel admina albo ponad 600 linii. Wymagana recenzja kodu, bezpieczeństwa, danych i operacji, a potem weryfikator. Role bezpieczeństwa, danych i weryfikatora działają na najmocniejszym modelu.",
-      },
-      {
-        label: "Dla każdego repozytorium:",
-        body: "minimalny poziom ryzyka, etap życia projektu (prototype · poc · mvp · production) i opcjonalny adres do testów QA. Przejście na produkcję wymaga spisanego przeglądu gotowości produkcyjnej w tym samym commicie. Gdy adres QA jest ustawiony, recenzent QA staje się obowiązkowy przy zmianach T3 dotykających interfejsu.",
-      },
-    ],
-    reviewTitle: "Review jak w software housie, nie jak na czacie",
-    reviewLead:
-      "Każdy recenzent AI odpowiada za jedną specjalizację i zaczyna od zera (świeży kontekst). Ich uwagi łączy skrypt, nie model: problem blokuje zmianę tylko wtedy, gdy niezależnie zgłosi go wystarczająco wielu recenzentów albo odtworzy go weryfikator, a problem bez dowodu odpada (reguła k-z-n). Jedynym zadaniem weryfikatora jest obalanie.",
-    review: {
-      orchestrator: "ORKIESTRATOR",
-      gates: "SKRYPTY",
-      gatesSub: "lint · typy · testy · SQL",
-      finders: ["kod", "bezpieczeństwo", "dane · operacje", "ux · produkt · qa"],
-      aggregate: "AGREGACJA",
-      aggregateSub: "k-z-n · z dowodem",
-      verifier: "WERYFIKATOR",
-      verifierSub: "odtwórz albo obal",
-      fixer: "FIX + BRAMKI",
-      rule: "zero czatu między agentami · uwaga bez wykonanej komendy się nie liczy",
-      caption:
-        "Recenzenci dostają tylko kod po kontrolach skryptowych. Uwagi łączy skrypt. Weryfikator szuka błędów, a nie potwierdzeń.",
-    },
-    reviewItems: [
-      {
-        label: "Dziewięciu recenzentów:",
-        body: "kod, bezpieczeństwo, dane, operacje, UX, produkt, QA, weryfikator i adwokat diabła (catfish). Każdy pracuje według listy najwyżej ośmiu ponumerowanych reguł. Każda reguła ma komendę do uruchomienia, zasady oceny wagi błędu, stały format wyniku (schemat JSON) i przykład fałszywego alarmu, który trzeba odrzucić. Recenzenci tylko czytają; poprawki robi główna sesja.",
-      },
-      {
-        label: "Dlaczego od zera:",
-        body: "autor kodu, człowiek czy model, nie widzi własnych błędów. Recenzenci zaczynają od zera, dostają tylko zmianę i zadanie i nigdy nie widzą uwag pozostałych. Agenci, którzy ze sobą dyskutują, dryfują ku większości, nawet gdy rację miała mniejszość.",
-      },
-      {
-        label: "Narady z adwokatem diabła:",
-        body: "decyzje architektoniczne przechodzą stałe kroki: fakty → stanowiska → obowiązkowy głos sprzeciwu → agregacja → spisana decyzja. Wstrzyknięty sprzeciw to jedyna interwencja, co do której wykazano, że ogranicza porażki wynikające z „cichej zgody” w grupach agentów.",
-      },
-      {
-        label: "Kalibrowane co miesiąc:",
-        body: "raz w miesiącu ten sam błąd jest podany na dwa sposoby: sama zmiana oraz ta sama zmiana z przekonującym opisem. Sprawdza go sześciu świeżych recenzentów w losowej kolejności. Rozbieżność oznacza, że na ocenę wpływa długość albo opis, a listę reguł poprawia człowiek. Audytor nigdy nie poprawia narzędzia, którym mierzy.",
-      },
-    ],
-    loopTitle: "Każda awaria staje się kontrolą: jak system się uczy",
-    loopLead:
-      "Awaria nie jest zamknięta, gdy zostanie naprawiona. Jest zamknięta dopiero wtedy, gdy nie może się powtórzyć bez tego, żeby zauważył to skrypt. Każdą skatalogowaną awarię nazywam blizną.",
-    loop: {
-      steps: [
-        "incydent albo powtórzona korekta",
-        "analiza przyczyn: pięć „dlaczego”",
-        "blizna + numer reguły",
-        "bramka + test, że blokuje",
-        "każda reguła ma bramkę",
-        "cotygodniowy audyt",
-      ],
-      caption:
-        "Pętla napędza się sama: cotygodniowy audyt wyłapuje kontrole, które przestały działać, i każda z nich staje się nową blizną.",
-    },
-    loopItems: [
-      {
-        label: "Nieaktualna baza zepsuła main:",
-        body: "dwa pull requesty przeszły kontrole, ale każdy był sprawdzany na własnej, starszej kopii gałęzi głównej. Scalone razem dały nieprawidłowy plik workflow na gałęzi głównej. Teraz: scalanie tylko wtedy, gdy kontrole przeszły na aktualnym wyniku scalenia, ścisła ochrona gałęzi w 33 repozytoriach i blizna opisująca dokładny mechanizm.",
-      },
-      {
-        label: "Kontrola, która nigdy nie ruszyła:",
-        body: "bramka przy pushu czytała dane wejściowe dwa razy i przez sześć dni po cichu nic nie robiła. Teraz każdy hook gita ma test, który uruchamia cały skrypt na prawdziwych danych, a cotygodniowy audyt sprawdza, czy bramki nadal blokują to, co powinny.",
-      },
-      {
-        label: "45 kopii tożsamości firmy:",
-        body: "rozsianych po 11 plikach, a każdy z nich przeszedł lint, typy, testy i recenzję. Teraz nowe linie przechodzą kontrolę duplikatów: ten sam tekst sześć razy w co najmniej trzech plikach jest blokowany (na początku trzy razy w dwóch; wersja 1.8.0 przestroiła próg według logu). Wyjątek jest możliwy, ale każde jego użycie jest logowane.",
-      },
-      {
-        label: "Faktura, która po cichu zmieniła sprzedawcę:",
-        body: "wartość domyślna („?? domyślny”) po cichu podmieniła sprzedawcę po usunięciu profilu. Teraz cicha wartość zastępcza (SILENT-FALLBACK) na każdym polu, które ma skutki, blokuje zmianę w recenzji kodu: gdy brak dopasowania, kod ma przerwać z nazwanym błędem.",
-      },
-    ],
-    sections: [
-      {
-        title:
-          "Aktualizacja z 14 października 2026: proporcjonalność, czyli mniej blokad i mniej kontroli przy tym samym bezpieczeństwie",
-        lead: "Wersja 1.8.0. Do tej pory na każde zauważone ryzyko dokładałem bramkę. Po kilku tygodniach log bramek pokazał koszt: część z nich zatrzymywała moją zwykłą pracę dużo częściej, niż łapała prawdziwy błąd. Dlatego to wydanie stawia jedną zasadę ponad innymi: bez incydentu nie ma nowej blokady. Nowa kontrola zaczyna od samej obserwacji, a blokować może dopiero po prawdziwym incydencie. Tarcie policzyłem z logu, z odsianymi przebiegami testów, i na tej podstawie przestroiłem cztery bramki. Przed wydaniem niezależni recenzenci AI sprawdzili zmiany w czterech rundach: kod, operacje i produkt w każdej, bezpieczeństwo i dane w ostatniej. Wyłapali między innymi, że jedna chwilowa awaria GitHuba mogła po cichu kosztować miesiąc kontroli podatności, a pusta odpowiedź GitHuba wyglądałaby jak spokojny miesiąc; oba przypadki kończą się teraz widocznym błędem.",
-        items: [
-          {
-            label: "Rozmiar zmiany:",
-            body: "limit wzrósł z 400 do 1500 linii kodu źródłowego. Log pokazał, że stary limit był głównie świadomie omijany przy zmianach, które powinny zostać razem, jak migracja bazy danych albo wygenerowany kod. Niezależne tematy nadal trafiają do osobnych zmian.",
-          },
-          {
-            label: "Powtórzony tekst:",
-            body: "tekst jest blokowany, gdy powtarza się sześć razy w co najmniej trzech plikach (wcześniej trzy razy w dwóch). Dane startowe (przykładowe rekordy wgrywane do bazy) przestały się liczyć. Literówka w ustawieniach progu zatrzymuje teraz kontrolę błędem, zamiast po cichu przepuszczać wszystko.",
-          },
-          {
-            label: "Drobne tarcia usunięte:",
-            body: "usuwanie pamięci podręcznej buildu (na przykład .next/cache) jest dozwolone, a ścieżka, która wychodzi wyżej przez .. albo prowadzi przez dowiązanie, nadal jest blokowana. Jednorazowe skrypty w folderze tymczasowym, poza jakimkolwiek projektem, nie są już lintowane po każdej edycji; projekt skopiowany do tego folderu nadal jest.",
-          },
-          {
-            label: "Dziennik zmian powstaje przy wydaniu:",
-            body: "każdy pull request (propozycja zmiany) dopisywał linię do jednego wspólnego pliku, więc równoległe pull requesty ciągle się na nim zderzały. Teraz zapisem jest tytuł pull requesta w stałym formacie (Conventional Commits), a dziennik zmian zbiera się z tych tytułów przy wydaniu wersji. Recenzenci nie zgłaszają już pull requesta bez linii w dzienniku zmian.",
-          },
-          {
-            label: "Rutyny sprawdzają tylko to, nad czym pracuję:",
-            body: "codzienna recenzja otwartych pull requestów i comiesięczna kontrola podatności przechodziły przez wszystkie repozytoria, a większość moich projektów jest skończona i rzadko do nich wracam. Teraz skrypt czyta historię GitHuba i zostawia tylko repozytoria z prawdziwą pracą w ostatnich 30 dniach. Pomija dni, w których PG sam przechodził po całej flocie (wtedy naraz zmieniało się 10 albo 14 repozytoriów, przy 1 do 6 w zwykły dzień), tę samą zmianę rozesłaną do wielu repozytoriów i boty aktualizujące zależności. Pierwszy pomiar: 12 aktywnych repozytoriów z 47. Lista to dane, nie kod: okno czasu, projekty sprawdzane zawsze i jeden projekt, którego nie sprawdzamy nigdy.",
-          },
-          {
-            label: "Czystsze liczby:",
-            body: "przebiegi testów zapisywały się do tego samego logu co prawdziwa praca, co zawyżało liczniki, na których stroję bramki. Testy piszą teraz do własnego tymczasowego logu, a cotygodniowy przegląd stanu liczy ich ślady osobno.",
-          },
-          {
-            label: "Okno kontekstu wybrane świadomie:",
-            body: "Claude może trzymać rozmowę do miliona tokenów, ale każda wiadomość wysyła ją całą od nowa. W moich transkryptach okno 1M zużywało około 2,3 razy więcej limitu tygodniowego niż okno 400k, więc zostaje 400k. Od 17 października ruszy próba 600k z regułą ustaloną z góry: zostaje, jeśli tydzień kończy się poniżej 90% limitu i nic nie zostaje zablokowane.",
-          },
-          {
-            label: "Uczciwe granice:",
-            body: "zakres rutyn skalibrowałem na jednym miesiącu historii i jeszcze się nie uruchomił. Przy tym wydaniu wyszło, że od przeprowadzki na nowy komputer na początku października żadna zaplanowana rutyna nie wykonała pracy: większość miała startować w folderze, któremu system już nie ufa, więc sesja w ogóle nie ruszała, a reszta stawała na pytaniu o uprawnienia, na które nikt nie odpowiadał. Rutyny są wyłączone, dopóki tego nie naprawię. Wrócą trzy (kontrola podatności, recenzja pull requestów i cotygodniowy przegląd stanu); trzy, które pracują tylko nad samym PG, zostają wyłączone, zgodnie z zasadą opisaną wyżej.",
-          },
-        ],
-      },
-      {
-        title:
-          "Aktualizacja z 11 października 2026: architektura, która zostaje ustalona, i potok wydań jak w dużych firmach",
-        lead: "Wersja 1.7.0. Złożyły się na nią dwie rzeczy. Po pierwsze chciałem, żeby architektura była pilnowana przez cały czas życia projektu, a nie tylko na starcie. Po drugie mój proces wydań miał pierwszą połowę tego, co robią duże firmy (zmiany, która się nie buduje albo nie przechodzi testów, nie da się scalić), ale brakowało drugiej: odczekania przed wydaniem, obserwacji działającej strony i automatycznej drogi powrotu. Potok wydań przeszedł sześć pełnych rund recenzji AI i dwie mniejsze kontrole ostatnich poprawek, zanim go wypuściłem.",
-        items: [
-          {
-            label: "Architektura sprawdzana przy każdym otwarciu projektu:",
-            body: "skrypt, który nie używa AI (więc jego uruchomienie nic nie kosztuje), porównuje projekt z zapisanymi decyzjami architektonicznymi i wypisuje od jednej do trzech linii, tylko gdy coś się nie zgadza. Łapie trzy rzeczy: obszar bez decyzji; technologię w kodzie, o której decyzje milczą (na przykład Redis, szybki magazyn danych w pamięci, dodany, gdy wiersz o cache mówi „nie teraz”); oraz dowód wskazujący plik albo linię, których już nie ma.",
-          },
-          {
-            label: "Odstępstwo od architektury naprawiane w tej samej sesji:",
-            body: "jeśli sesja pracy doda coś sprzecznego z ustaloną architekturą, nie może się zakończyć, dopóki nie cofnie zmiany albo nie zaktualizuje decyzji (z krótkim zapisem decyzji, gdy zmienia się sama decyzja). W nowych projektach to twarda blokada, w starych tylko podpowiedź. Starsze problemy trafiają na listę z gotową propozycją i czekają na moje „napraw”, bo nie chcę, żeby agenci sami przerabiali stare projekty.",
-          },
-          {
-            label: "Potok wydań w czterech krokach (podgląd, czekanie, obserwacja, powrót):",
-            body: "po dotychczasowym buildzie i testach każdy podgląd (tymczasowa kopia strony zbudowana dla proponowanej zmiany) dostaje automatyczne zapytania testowe na ścieżkach, które nie mogą się zepsuć. Podgląd chroniony hasłem Vercela nie jest sprawdzany, bo klucza do niego nigdy nie dostaje niezrecenzowany kod; prawdziwa kontrola przychodzi w następnym kroku. Build produkcyjny czeka potem 10 minut poza ruchem użytkowników, a syntetyczne zapytania (automatyczne wizyty) go testują. Ustawienie Vercela o nazwie Deployment Checks ma trzymać domenę na starej wersji, dopóki ta kontrola nie jest zielona (do potwierdzenia w pierwszym ćwiczeniu). Po przełączeniu działająca strona jest obserwowana przez 15 minut.",
-          },
-          {
-            label: "Droga powrotu, z założenia:",
-            body: "działająca strona jest sprawdzana co 30 sekund. Jeśli trzy kontrole z rzędu się nie udadzą (zajmuje to około minuty), potok zaczyna przywracać ostatnią wersję, która przeszła bramki, a domena zostaje na niej, dopóki człowiek nie wyda nowej. Tak to zaprojektowałem; na żywym projekcie nie było jeszcze ćwiczenia.",
-          },
-          {
-            label: "Wiedzieć, kiedy nie wracać:",
-            body: "awaria bazy, zapora sieciowa blokująca maszynę testową albo przekierowanie (strona odsyła odwiedzających pod inny adres) to nie błąd nowej wersji, więc kończą się alarmem. Jeśli wydanie zmieniło strukturę bazy (migracja) albo funkcje backendu (kod działający na serwerze), powrót uruchomiłby stary kod na nowej strukturze, więc potok zatrzymuje się i pyta człowieka. Po jednym automatycznym powrocie nic więcej się samo nie cofa, dopóki ktoś nie zamknie zgłoszenia.",
-          },
-          {
-            label: "AI na dyżurze, bez kluczy do budynku:",
-            body: "gdy bramka zrobi się czerwona, świeża instancja Claude (na mojej subskrypcji, nie na płatnym API) czyta wyniki testów i zmiany z tego wydania, a potem wpisuje diagnozę do zgłoszenia. Może tylko czytać pliki. Nie uruchamia komend, nie zmienia kodu, nie scala i nie wydaje, a jej komentarz publikuje osobny, zaufany krok.",
-          },
-          {
-            label: "Każda runda recenzji, policzona:",
-            body: "w pierwszej rundzie pracowało trzech recenzentów AI (od kodu, bezpieczeństwa i operacji), w rundach od drugiej do szóstej czterech (doszedł recenzent danych), a dwie końcowe kontrole robili recenzenci kodu i operacji. Zgłoszenia mają dwie wagi: blokujące (do naprawy przed wydaniem) i poważne (naprawiane w tej samej rundzie). Pierwsza runda znalazła 1 problem blokujący i 11 poważnych, druga 1 blokujący i 13 poważnych, rundy od trzeciej do szóstej żadnego blokującego i kolejno 11, 8, 9 i 8 poważnych. Te dwa problemy blokujące to dziury bezpieczeństwa, których sam nie zauważyłem. Skrypt testowy i jego lista dozwolonych adresów były czytane ze zmiany, która uruchomiła proces, więc atakujący mógł podsunąć własne. A AI na dyżurze mogło przeczytać token (klucz, który pozwala programowi działać w moim imieniu) z pliku ustawień repozytorium kodu i wkleić go do komentarza w zgłoszeniu. Dwie mniejsze kontrole ostatnich poprawek znalazły jeszcze jeden problem blokujący (regułę bezpieczeństwa bez testu) i 2 poważne. Wszystko zostało naprawione przed wydaniem.",
-          },
-          {
-            label: "Uczciwe granice:",
-            body: "potok nie działał jeszcze na żywym projekcie. Lista kontrolna każe zacząć od testowej kopii projektu, z ćwiczeniem w obie strony: zielony build ma trafić na domenę, a czerwony nie. Osoba z prawem zapisu do repozytorium nadal może ręcznie ustawić wynik kontroli. Akceptuję to, bo te same osoby i tak mogą zmienić kod.",
-          },
-        ],
-      },
-      {
-        title:
-          "Aktualizacja z 10 października 2026: rozszerzenia pod nadzorem, każda warstwa stacku i strażnik z zapisanymi granicami",
-        lead: "Wersja 1.6.0. Złożyły się na nią trzy rzeczy. Claude Code dostał mody: rozszerzenia, które działają wewnątrz samego narzędzia i omijają hooki (automatyczne kontrole, na których opiera się PG). Lista kontrolna bezpieczeństwa zamieniła się w nowe reguły dla recenzenta bezpieczeństwa. A recenzja bezpieczeństwa tak długo znajdowała obejścia jednej z moich nowych reguł, aż przebudowałem ją od zera. To wydanie robi też ze stacku, czyli zestawu narzędzi, na którym stoi projekt, obowiązkowy krok projektowania systemu: każdą warstwę rozstrzyga się po kolei.",
-        items: [
-          {
-            label: "Rozszerzenia pod tym samym nadzorem co reguły:",
-            body: "mod działa wewnątrz Claude Code, więc nie przechodzi przez hooki, które sprawdzają każdą komendę. PG chroni teraz kod modów tak samo jak własne hooki: instalacja, włączenie albo aktualizacja rozszerzenia wymaga mojej wyraźnej zgody, wpisanej w czacie stałą frazą. Wyłączenie albo usunięcie rozszerzenia jest zawsze dozwolone, bo odebranie czegoś nigdy nie wymaga zgody.",
-          },
-          {
-            label: "Bez przypadkowego kasowania tabeli na produkcji:",
-            body: "nowa reguła czyta każdą komendę, która rozmawia z bazą danych (psql, supabase, prisma, dropdb, pg_restore), i ustala, dokąd celuje: adres serwera, linki połączenia, zmienne środowiskowe ustawione wcześniej w tej samej komendzie oraz nakładki takie jak docker exec czy ssh. Polecenia niszczące, na przykład DROP (usunięcie tabeli), TRUNCATE (wyczyszczenie jej) albo DELETE bez filtra, są blokowane, chyba że cel na pewno jest na moim komputerze. SQL, którego reguła nie widzi, na przykład schowany w pliku, liczy się jako niszczący. Lokalna baza testowa zostaje wolna.",
-          },
-          {
-            label: "Każda warstwa stacku rozstrzygana po kolei:",
-            body: "macierz projektowania systemów z wersji 1.5.0 dostała 25 wierszy na warstwy narzędzi, od frontendu po płatności, faktury i wysyłkę paczek, więc ma teraz 62 wiersze. Każdą warstwę trzeba oznaczyć jako decyzję, „nie teraz” (z mierzalnym sygnałem, kiedy wrócić) albo „nie dotyczy”. Wiersze pochodzą ze strony Stack Picker: nic nie jest wybrane z góry, wybierasz rynek docelowy (globalny, Polska, UE albo Islandia) i przechodzisz po kolei każdą warstwę. Strona zawiera 199 narzędzi, w tym wszystkie 131 z publicznego Stack Pickera Arjaya McCandlessa pod oryginalnymi nazwami, oraz opcje lokalne, takie jak polskie bramki płatności, KSeF (krajowy system e-faktur), paczkomaty i e-ID. Test się wysypie, jeśli strona, katalog i macierz przestaną się zgadzać. Nowy projekt dostaje pustą macierz pierwszego dnia. Bez dodatkowej konfiguracji bramka końca sesji nie blokuje, tylko przypomina o decyzjach, których później nie da się łatwo cofnąć (model danych, identyfikatory, pliki, tożsamość, region i odtwarzanie po awarii).",
-          },
-          {
-            label: "Reguła przebudowana po recenzji:",
-            body: "zamknąłem lukę, przez którą łatka (plik z opisem zmian do nałożenia) mogła przepisać własne reguły PG bez mojej zgody. Pierwsza wersja czytała łatkę, żeby zobaczyć, których plików dotyka. Pierwsza recenzja bezpieczeństwa znalazła trzy sposoby, żeby ją obejść, od wartości opcji branej za nazwę pliku po łatkę podaną z folderu wyżej. Odwróciłem więc logikę: nakładanie łatek, rozpakowywanie archiwów i edytory sterowane skryptem są blokowane w folderze PG i w każdym folderze nad nim, bez względu na treść łatki, a gdy strażnik nie potrafi ustalić, w którym folderze komenda działa, blokuje. Dwie kolejne rundy recenzji znalazły osiem dalszych luk (cztery blokujące, cztery poważne); wszystkie zostały poprawione i sprawdzone ponownie. Test w piaskownicy (jednorazowej kopii, w której nic prawdziwego nie może się zepsuć) pokazał coś gorszego, w każdym projekcie: standardowe narzędzie patch przepisze .git/config, plik ustawień repozytorium gita, w którym jedna linia potrafi wyłączyć wszystkie kontrole gita, oraz projektowy .claude/settings.json, który może uruchomić kod w następnej sesji. Takie łatki są teraz blokowane w każdym repozytorium, z podpowiedzią, żeby użyć git apply, czyli wbudowanego w gita sposobu nakładania łatek, który tych plików nie ruszy.",
-          },
-          {
-            label: "Lista kontrolna bezpieczeństwa i skanowanie sekretów:",
-            body: "recenzent bezpieczeństwa dostał nowe kontrole wzięte z listy kontrolnej bezpieczeństwa: odczyt cudzych danych przez podmianę identyfikatora w zapytaniu (IDOR), formularz, który pozwala ustawić pola, których użytkownik nie powinien zmieniać (mass assignment), klucze zostawione w historii gita albo w publicznych zmiennych frontendu oraz brak limitów zapytań. Szablon CI (automatyczne kontrole, które GitHub uruchamia przy każdym pull requeście) skanuje teraz każdy nowy commit i bieżące pliki w poszukiwaniu wycieków kluczy, także takich wklejonych przy rozwiązywaniu konfliktu scalania. Znacznik, który każe skanerowi pominąć linię, potrafi ukryć prawdziwy klucz przed każdą kontrolą, więc scalenie pull requesta, który go dodaje, wymaga teraz mojej frazy.",
-          },
-          {
-            label: "Właściwy model do zadania:",
-            body: "główna sesja planuje i sprawdza, a agenci pomocniczy dostają model dobrany do trudności zadania: najmniejszy do wyszukiwania, średni do pisania i recenzji według listy kontrolnej, najmocniejszy do trudnego rozumowania i bezpieczeństwa przy ryzykownych zmianach. Osobno: notatki pamięci ładowane na starcie sesji mieszczą się teraz w limicie 10 000 znaków, jaki Claude Code stawia wynikom hooków. Powyżej niego narzędzie pokazuje tylko 2000-znakowy podgląd.",
-          },
-          {
-            label: "Uczciwe granice:",
-            body: "strażnik komend łapie pomyłki i polecenia przemycone z zewnątrz (na przykład ze strony, którą czyta agent). Nie zatrzyma agenta, który uprze się, żeby go obejść: uruchomienie dowolnego skryptu może zrobić wszystko. Zapisałem to w pliku znanych granic projektu. Siatką na resztę są pieczęć, która przy starcie następnej sesji zgłasza każdą zmianę reguł PG, historia gita oraz ustawienia systemowe, które może zmienić tylko administrator. Opisy narzędzi w katalogu stacku to orientacja, nie cennik ani benchmark. Liczniki w README, poza liczbą plików (371), nie zostały przeliczone. Publiczne wydanie 1.6.0 jest w coding-higher-mind, publicznym repozytorium PG.",
-          },
-        ],
-      },
-      {
-        title:
-          "Aktualizacja z 6 października 2026: wiersz dla każdego obszaru projektowania systemów",
-        lead: "Wersja 1.5.0. Kurs projektowania systemów (system design) obejmuje 37 obszarów. Są wśród nich kolejki (poczekalnie dla zadań), cache (podręczna kopia danych dla szybkości), skalowanie, bazy danych i projekt API. Dalej rate limiting (limit zapytań od jednego użytkownika), aktualizacje na żywo i wyszukiwanie. Zapytałem o PG, mój zestaw zasad i agentów do pisania kodu z AI. Czy jego architekt, czyli agent, który planuje projekt, zanim powstanie kod, zna te obszary i przechodzi przez każdy z nich w każdym projekcie? Audyt z 6 października pokazał, że znał z nazwy 72% wariantów, a umiał wybrać między zaledwie 46%. Nic go też nie zmuszało do przejścia przez wszystkie obszary. Drugi audyt pokazał, że przeciążeni byli też recenzenci, czyli agenci sprawdzający każdą zmianę w kodzie. To wydanie zmienia jedno i drugie, a tego samego dnia sprawdziłem je na prawdziwej aplikacji klienta.",
-        items: [
-          {
-            label: "Co pokazał audyt:",
-            body: "policzył 437 nazwanych wariantów w 37 obszarach. 46% miało kryterium wyboru (kiedy po dany wariant sięgnąć), 26% tylko nazwę, a 28% nie było wcale. Obszarowo: 14 pokrytych, 21 częściowo, 2 wcale. Te dwa to rozproszony konsensus (jak kilka serwerów uzgadnia jedną odpowiedź) i probabilistyczne struktury danych (zwarte struktury, które dla oszczędności pamięci dają wynik przybliżony). Proces projektowania wymuszał decyzję w 15 obszarach, częściowo w 11, a w 11 wcale.",
-          },
-          {
-            label: "Wiersz dla każdego obszaru:",
-            body: "PG ma teraz listę 37 obszarów w 12 grupach. Pierwsze sześć to stan i topologia, dane, identyfikatory, pliki i CDN (serwery dostarczające pliki z miejsca blisko użytkownika), spójność oraz asynchroniczność (praca wykonywana później, w tle). Pozostałe sześć to kontrakty API (umówiony sposób, w jaki programy ze sobą rozmawiają), tożsamość i dostęp, odporność, obserwowalność (wgląd w to, co system robi), wydania i odtwarzanie po awarii oraz koszt i region. Każdy projekt kończy się macierzą, czyli tabelą z wierszem na każdy obszar. Każdy wiersz ma status DECYZJA, NIE DOTYCZY albo NIE TERAZ i dowód. Wiersz NIE TERAZ ma dodatkowo mierzalny sygnał, kiedy do tematu wrócić. Skrypt sd-matrix-lint sprawdza, czy tabela jest kompletna. Bramka końca sesji (automatyczna kontrola, zanim sesja może się zakończyć) może blokować, gdy repozytorium tego wymaga.",
-          },
-          {
-            label: "Dwunastu agentów zamiast jednego architekta:",
-            body: "zamiast jednego architekta od wszystkiego jest teraz narada: jeden agent na grupę, razem dwunastu. Grupy z decyzjami trudnymi do odwrócenia albo dotyczącymi bezpieczeństwa dostają mocniejszy model. Karty decyzyjne, czyli krótkie ściągi, z których agenci wybierają, dostały warianty z kryterium wyboru, kosztem i trybem awarii (tym, jak dany wariant się psuje). Przykłady to strategie cache, algorytmy rate limitingu i backpressure (zwalnianie nadawcy, gdy odbiorca nie nadąża). Dalej SLO (obiecany poziom usługi) oraz RPO i RTO (ile danych i ile czasu można stracić po awarii). Na końcu aktualizacje na żywo (real-time), RAG (odpowiadanie na podstawie własnych dokumentów) i wdrożenia.",
-          },
-          {
-            label: "Każdy recenzent czyta swój wycinek:",
-            body: "drugi audyt dotyczył rundy recenzji, w której każdy recenzent dostał cały diff (zestawienie wszystkich zmian w kodzie), 9 799 linii. Realnie czytał mniej więcej od 10 do 30% z tego. Błąd w CSS (kodzie, który odpowiada za wygląd strony) przeszedł przez trzech recenzentów. Po scaleniu dwóch gałęzi (osobnych linii pracy nad kodem) dwa bloki @media (reguły wyglądu dla danej wielkości ekranu) zostały niezamknięte. Przez to część stylów nie działała na komputerach. Złapał go dopiero tester (etap, który klika w aplikację jak użytkownik). Teraz skrypt tnie diff na działy (bezpieczeństwo, dane itd.) i każdy recenzent dostaje to, co go dotyczy. Przy diffie na 2 400 linii bezpieczeństwo dostało 33%, a dane 14%. Drugi skrypt odpala 21 mechanicznych reguł wyszukiwania i podaje recenzentowi trafienia do oceny.",
-          },
-          {
-            label: "Nowe bramki bez kosztu tokenów:",
-            body: "tokeny to kawałki tekstu, za które płaci się przy pracy modelu, a te trzy kontrole ich nie zużywają. Po każdej edycji jedna z nich sprawdza, czy każdy nawias otwierający w CSS ma swój zamykający. Po scaleniu gałęzi każda linia z obu gałęzi musi przetrwać. Tester ostrzega też o ścieżkach testowych, które niczego nie klikają, bo zielony wynik niczego tam nie dowodzi.",
-          },
-          {
-            label: "Test na prawdziwej aplikacji klienta:",
-            body: "6 października puściłem to na aplikacji klienta (Next.js + Supabase, popularny framework stron i usługa bazy danych). Dwunastu agentów wypełniło wszystkie 37 wierszy (31 decyzji, 5 „nie dotyczy”, 1 „nie teraz”) i wypisało 66 luk z dowodami. Jedna z nich: zaplanowane codzienne pobieranie danych nigdy nie ruszyło, bo plik harmonogramu nie był na głównej gałęzi. Sprawdziłem to; ruszy po scaleniu otwartego pull requesta (propozycji zmiany czekającej na scalenie). Co najmniej jedna luka okazała się fałszywym alarmem. Skrypt sd-matrix-lint zwrócił 0 (zaliczone) na pełnej macierzy i 1 (niezaliczone) po usunięciu jednego wiersza. Ta sama aplikacja przeszła też rundę recenzji z wycinkami i dostała 11 uwag. Weryfikator (agent sprawdzający, czy uwaga się broni) potwierdził 2 ważniejsze. Pierwsza to nieprzetestowana logika fokusu klawiatury (fokus to miejsce, do którego trafia to, co wpisujesz). Druga: po dodaniu zadania fokus spadał na pustą stronę. Obie zostały poprawione tego samego dnia.",
-          },
-          {
-            label: "Uczciwe granice:",
-            body: "macierz wymusza, że każdy obszar zostanie rozważony, ale nie gwarantuje, że zapisana w nim decyzja jest dobra. Luki wypisane przez naradę trzeba przejrzeć ręcznie, bo przynajmniej jedna była błędna. Liczniki w README (pliku z opisem projektu), poza liczbą plików (365), nie zostały przeliczone dla 1.5.0. Publiczne wydanie 1.5.0 jest w coding-higher-mind, publicznym repozytorium PG, scalone 6 października po zielonych testach.",
-          },
-        ],
-      },
-      {
-        title:
-          "Aktualizacja z 5 października 2026 (wieczór): te same reguły za dużo mniejszy rachunek za kontekst",
-        lead: "Wersja 1.4.0. Każda wiadomość do modelu AI niesie tekst w tle, który model czyta najpierw (reguły, notatki z pamięci), a płaci się za niego w tokenach, czyli mniej więcej kawałkach słów. Zmierzyłem ten tekst w PG: około 26 tysięcy tokenów, zanim zacznie się jakakolwiek praca, i około 1300 więcej przy każdym większym poleceniu, w większości reguły, które model już przeczytał. Cel: wysyłać dużo mniej, a model ma przestrzegać reguł tak samo dobrze. Wydanie sprawdziło czterech recenzentów i weryfikator (17 uwag, wszystkie poprawione i sprawdzone ponownie).",
-        items: [
-          {
-            label: "Pełne reguły raz na sesję:",
-            body: "Prompt-Guard, czyli część dokładająca reguły do moich wiadomości, wysyła je teraz w całości raz na sesję, a potem tylko jednolinijkowe przypomnienie. Gdy rozmowa zostanie skompresowana albo zacznie się nowa sesja, wysyła je w całości ponownie, a gdy nie ma pewności, co już poszło, wysyła wszystko. Kolejne polecenie dotyczące kodu spadło z około 4,9 KB dodanego tekstu do 0,9 KB.",
-          },
-          {
-            label: "Pamięć aktualna i nadal kompletna:",
-            body: "notatki z pamięci wczytywane na starcie sesji pokazywały punkty kontrolne sprzed tygodnia, bo czytały najstarszy koniec pliku. Teraz najnowsze są pierwsze, niedokończone prace z innych sesji są wypisane z tytułu, a każdy skrócony plik zostawia listę pozostałych sekcji, więc nic nie znika z pola widzenia. Tekst startowy zszedł z 35 KB do 25 KB, a kontrola budżetu robi się czerwona, gdy znowu urośnie.",
-          },
-          {
-            label: "Ostrzejsza ochrona przed wyłączaniem kontroli bezpieczeństwa:",
-            body: "jedna z bramek nie pozwala agentowi po cichu wyłączyć automatycznych kontroli bezpieczeństwa, które uruchamiają się przy każdej zmianie. Na świeżym szablonie projektu podnosiła fałszywy alarm, a fałszywe alarmy uczą agenta obchodzenia bramki. Poprawka otworzyła cztery luki, które znalazł recenzent bezpieczeństwa: nietypowy zapis kroku w pliku ustawień, całe zadanie oznaczone „kontynuuj mimo błędu”, słowo „true” zapisane w cudzysłowie albo jako wyrażenie oraz udawana kontrola, która jest tylko w komentarzu albo w wypisanym tekście. Wszystkie cztery są zamknięte i pokryte 16 testami.",
-          },
-          {
-            label: "Alerty bezpieczeństwa GitHuba zasilają comiesięczną kontrolę:",
-            body: "Dependabot, usługa GitHuba ostrzegająca, gdy biblioteka używana przez projekt ma znaną lukę, jest włączony w 45 moich repozytoriach, z powiadomieniami tylko na GitHubie, bez maili. Comiesięczna kontrola podatności czyta te alerty obok własnego skanu. Używane produkty dostają poprawkę przez pull request, pozostałe repozytoria jedną linię podsumowania w dzienniku.",
-          },
-          {
-            label: "Uczciwe granice:",
-            body: "oszczędność jest zmierzona w kilobajtach tekstu. Czy model przestrzega krótszych przypomnień równie dobrze, będę wiedział dopiero po tygodniu prawdziwych sesji, a zaplanowana kontrola 12 października sprawdza właśnie to.",
-          },
-        ],
-      },
-      {
-        title:
-          "Aktualizacja z 5 października 2026: pull requesty scalają się bez mojej frazy, ale tylko z dowodem recenzji",
-        lead: "Wpisywanie „pozwól ALLOW_MERGE” przy każdym rutynowym pull requeście stało się nowym wąskim gardłem. Przebudowałem więc scalanie tak samo jak wyjątki: liczy się ryzyko zmiany i to, czy jest dowód, a nie to, czy siedzę przy komputerze. Mechanizm działa od 4 października, a pozostałe ryzyko przyjąłem świadomie. Każdy taki system potrzebuje czasu, żeby dojrzeć. To wersja w trakcie tego dojrzewania, nie produkt skończony, a granice opisuję niżej.",
-        items: [
-          {
-            label: "Co sprawdza skrypt scalający:",
-            body: "wszystkie kontrole zielone (najnowszy przebieg każdej), to nie fork, cel to domyślna gałąź, pełna lista zmienionych plików jest znana. Potem według poziomu ryzyka: sama dokumentacja (.md, .txt, .rst) scala się bez recenzji; zwykła zmiana kodu wymaga recenzji kodu dokładnie tego diffu, a zmiana wspólnej logiki recenzji kodu i operacji. Recenzja musi wskazać diff jego sumą kontrolną, werdykt jest liczony od nowa ze zgłoszeń i z zapisów pracy samych recenzentów, a nie z podsumowania, i jest ważny dwie godziny. Wszystko, co dotyka logowania, płatności, migracji, zależności, CI albo instrukcji samego agenta, oraz wszystko z najwyższego poziomu ryzyka (T3), nadal czeka na moją frazę.",
-          },
-          {
-            label: "Drugi dowód, do którego agent nie sięga:",
-            body: "recenzję trzymaną na maszynie agenta mógłby on w teorii podrobić, a przegląd bezpieczeństwa znalazł na to kilka sposobów. Dlatego pull request może dostać też recenzję w CI: czysty runner, narzędzia tylko do odczytu, konfiguracja Claude'a z gałęzi bazowej, a nie z pull requestu. Skrypt scalający czyta ten przebieg przez API GitHuba i przyjmuje go tylko wtedy, gdy workflow, numer PR i każda próba dla tego commita są zielone. Trzyma 90 dni historii werdyktów, więc przeformułowanie zmiany i ponowne losowanie na tej samej gałęzi nie działa, a skasowany przebieg widać jako dziurę. Na razie działa to w trzech repozytoriach (sprawdziłem w każdym workflow i sekret). W pilocie recenzent zatrzymał kilka zmian czerwonymi przebiegami i bywa nadgorliwy, więc przez tydzień go obserwuję, zanim zacznę ufać jego werdyktowi bardziej.",
-          },
-          {
-            label: "Bramka końca sesji nie myli już sesji:",
-            body: "gdy dwie sesje agentów pracują w jednym repozytorium, commit z drugiej sesji podnosił poziom ryzyka mojej albo był pomijany. Teraz commit liczy się do sesji, chyba że jest pozytywny dowód, że powstał w trakcie pracy narzędzia innej sesji; w razie wątpliwości się liczy. Nowa kontrola architektury od T2 wymaga krótkiego zapisu decyzji (co najmniej pięć dodanych linii), gdy zmiana dodaje zależność, tabelę albo element infrastruktury.",
-          },
-          {
-            label: "Wiedza o projektowaniu systemów wbudowana w recenzentów:",
-            body: "skill architecture-advisor i listy kontrolne recenzentów mają teraz zestaw kart decyzyjnych dla typowych elementów architektury (kolejka, cache, replika, CDN i tak dalej): kiedy się opłaca, mój domyślny wybór (zwykle „jeszcze tego nie potrzebujesz”), ile kosztuje i jak pada. Projekt przed kodem wymaga teraz zgrubnego szacunku pojemności i trybu awarii każdej zewnętrznej zależności. Karty to moje własne opracowanie wiedzy o projektowaniu systemów i trafiają do publicznego repozytorium razem z wersją 1.3.0.",
-          },
-          {
-            label: "Automatyczne notatki z sesji, naprawione:",
-            body: "na końcu każdej sesji hook zapisuje teraz krótką notatkę w moim sejfie Obsidiana. Stara wersja po cichu nie działała od 22 września, bo czytała pole, którego już nie było. Nowa ją zastępuje, ma własny test, a audyt strażników sprawdza, czy jest podpięta.",
-          },
-          {
-            label: "Uczciwe granice:",
-            body: "recenzja w CI to jeden model, więc to dowód probabilistyczny, który spreparowany diff może próbować obejść, a recenzent po prostu może się mylić. Nowa gałąź z nowym pull requestem i kosmetycznie zmienionym diffem dostaje nowe losowanie recenzji. Agent z prawem push może zmienić workflow w porzuconym pull requeście i odczytać sekret. Żadna reguła tekstowa w straży komend nie zamknie każdego sposobu podmiany recenzenta. Dlatego ta kontrola nie może być oznaczona jako wymagana w ochronie gałęzi (GitHub liczy pominięte zadanie jako zaliczone) i dlatego jest wyłącznik: jeden plik przywraca scalanie wyłącznie z frazą. Całość jest zapisana w pliku znanych granic w repozytorium.",
-          },
-        ],
-      },
-      {
-        title: "Aktualizacja z 2 października 2026: agent zatwierdza sam, ale tylko z dowodem",
-        lead: "Fraza „pozwól ALLOW_…” chroniła dobrze, ale zatrzymywała pracę. Agent kończył zmianę, bramka mówiła „za duży diff” albo „nowy TODO bez wpisu w backlogu” i wszystko stało, aż napisałem dwa słowa w czacie. Przebudowałem to na trzy poziomy. Teraz agent może iść dalej sam wtedy, gdy krok da się cofnąć, a nie wtedy, gdy akurat siedzę przy komputerze.",
-        items: [
-          {
-            label: "Poziom A, agent decyduje sam:",
-            body: "dziesięć bramek jakości (rozmiar zmiany, TODO bez wpisu, zakomentowany kod, powtórzone literały, granice modułów, format commita i podobne). Bramka nadal pokazuje problem. Agent go poprawia albo świadomie idzie dalej, a każde takie przejście trafia do dziennika z nazwą bramki.",
-          },
-          {
-            label: "Poziom B, zatwierdzenie po recenzji:",
-            body: "usuwanie plików, twardy reset, czyszczenie repozytorium, nowa zależność, której nie ma w rejestrze pakietów, i nowa kolumna z danymi osobowymi. Agent sam zleca recenzję podagentom (bezpieczeństwo i kod, przy danych osobowych także dział danych), poprawia znalezione problemy i dopiero wtedy wydaje sobie wyjątek. Agent dostaje go tylko wtedy, gdy kod zgadza się z tym, co przeszło recenzję. Działa 15 minut, na dokładnie jedną komendę, tylko w tym repozytorium.",
-          },
-          {
-            label: "Poziom C, nadal tylko ja:",
-            body: "zmiany w samych bramkach, push na main, scalanie pull requestu, którego skrypt scalający nie przyjmie sam (zobacz aktualizację z 5 października wyżej), sekrety w commicie, osłabianie CI i konfiguracji jakości, force-push, kasowanie zdalnych repozytoriów. Tego nie da się cofnąć albo to wyłącza inne kontrole. Gdyby agent mógł zatwierdzać zmiany we własnych bramkach, poziomy A i B przestałyby cokolwiek znaczyć.",
-          },
-          {
-            label: "Dowód, nie deklaracja:",
-            body: "pierwsza recenzja nowego mechanizmu pokazała, że dowód recenzji da się podrobić dwoma pustymi plikami. Teraz liczą się zapisy pracy prawdziwych podagentów-recenzentów. Każde zgłoszenie, które recenzent zapisał, musi zostać w wyniku, a ta sama recenzja nie daje drugiego wyjątku, nawet po skopiowaniu katalogu. Komenda, która próbuje wyjść poza repozytorium (zmiana katalogu, zmienna, wrapper powłoki), nie korzysta z wyjątku.",
-          },
-          {
-            label: "Cztery rundy recenzji przed oddaniem:",
-            body: "zmianę przejrzały działy kodu, bezpieczeństwa, operacji, a w dwóch ostatnich rundach także danych. Każda runda znajdowała nowy sposób na obejście reguł: przez zmienną, przez wrapper powłoki, przez osobliwość PowerShella, przez jednolinijkowy skrypt. Każdy jest poprawiony i ma własny test. Zestaw testów kontroli ma teraz 104 przypadki, a testy mutacyjne zauważyły wyłączenie każdej z 25 reguł.",
-          },
-          {
-            label: "Wpadka z zegarem:",
-            body: "w trakcie pracy zegar systemu na chwilę przeskoczył na 2022 rok. Plik z moim wyjątkiem dostał datę sprzed czterech lat i sprzątanie skasowało go jako stary, choć był ważny jeszcze przez pół godziny. Sprzątanie liczy teraz ważność z treści pliku, a nie z daty jego zapisu.",
-          },
-          {
-            label: "Wyłącznik i granice:",
-            body: "jeden przełącznik przywraca stary tryb, w którym każdy wyjątek wymaga mojej frazy, i jest chroniony tak samo jak same bramki. Granica jest ta sama co wcześniej: reguły tekstowe zatrzymują agenta, który idzie na skróty, a nie kogoś, kto celowo podrabia zapisy pracy albo skleja nazwy z kawałków. Zapisałem to jako znaną granicę.",
-          },
-        ],
-      },
-      {
-        title: "Aktualizacja z 26 września 2026: PG obok 35 projektów open source",
-        lead: "Sprawdziłem, co budują inni. Agenci AI przeszli przez 35 publicznych repozytoriów o podobnej idei (hooki, bramki, recenzenci AI) i porównali je z PG warstwa po warstwie, każdy punkt z plikiem i numerem linii. Wyszła lista 23 rzeczy, które inni zrobili lepiej. Najważniejsze wdrożyłem tego samego dnia.",
-        items: [
-          {
-            label: "Najpierw recenzja projektu, potem kod:",
-            body: "zanim powstała pierwsza linia, niezależny recenzent bezpieczeństwa rozebrał plan na części. Znalazł 15 problemów, w tym 3, które zepsułyby sam proces recenzji. Wszystkie poprawiłem jeszcze w projekcie.",
-          },
-          {
-            label: "Test na prawdziwej historii:",
-            body: "każda nowa reguła strażnika komend przeszła przez 40 824 prawdziwe komendy z 2 853 plików zapisów pracy agentów (sesji głównych i podagentów), zanim mogła cokolwiek blokować. Fałszywe alarmy, które to wyłapało, poprawiłem przed wdrożeniem. Jeden przykład: tekst zapisywany do pliku był brany za komendę. Sprawdzenie jednej komendy trwa najwyżej 16 ms.",
-          },
-          {
-            label: "Same kontrole też mają testy:",
-            body: "zestaw 102 przypadków (84 dla strażnika komend) musi przejść w całości, a każda reguła musi mieć przypadek, który blokuje, i taki, który przepuszcza. Do tego testy mutacyjne: skrypt po kolei wyłącza każdą z 24 reguł i sprawdza, czy testy to zauważą. Zauważyły 24 z 24.",
-          },
-          {
-            label: "Recenzja już po wdrożeniu:",
-            body: "gotową zmianę przejrzały cztery działy recenzentów AI (kod, bezpieczeństwo, dane, operacje) i weryfikator. Znalazły 26 problemów, 17 jest poprawionych i potwierdzonych. Weryfikator wciąż znajduje coraz bardziej wymyślne warianty tych samych kilku obejść, na przykład literę dysku podpiętą pod folder z ustawieniami. Regułami tekstowymi nie wygram tego wyścigu z kimś, kto celowo szuka dziur. Do tego potrzebna jest izolacja na poziomie systemu operacyjnego i zapisałem to jako znaną granicę.",
-          },
-          {
-            label: "Kontekst przeżywa kompakcję:",
-            body: "gdy długa sesja jest kompaktowana, hook najpierw zapisuje migawkę: moje ostatnie polecenia, edytowane pliki i ostatnią odpowiedź. Po kompakcji wraca ona prosto do kontekstu, więc agent nie odtwarza stanu ze streszczenia.",
-          },
-          {
-            label: "Wyjątek tylko ode mnie (do 2 października, zobacz aktualizację wyżej):",
-            body: "wcześniej agent mógł dopisać do komendy przełącznik ALLOW_…=1 i przejść obok kontroli. Teraz wyjątek istnieje dopiero wtedy, gdy sam napiszę w czacie „pozwól ALLOW_…”. Działa 30 minut i najwyżej trzy razy, a każde użycie trafia do dziennika. Ta sama fraza powtórzona w odpowiedzi agenta albo w raporcie podagenta niczego nie odblokuje.",
-          },
-          {
-            label: "Ochrona samej ochrony:",
-            body: "hooki, bramki gita, ustawienia i narzędzia kontrolne są zapieczętowane sumami kontrolnymi. Zmiana poza świadomym oknem pokazuje się na starcie każdej sesji i w cotygodniowym audycie. Reguła, która odcina dostęp do kluczy SSH, danych AWS i sejfu z sekretami, działa także w trybie, w którym narzędzie o nic nie pyta. Sprawdziłem to w żywej sesji.",
-          },
-          {
-            label: "Co miesiąc patrzę na konkurencję:",
-            body: "rutyna porównuje te 35 repozytoriów z zapisanym stanem. Skrypt działa bez AI; model włącza się dopiero wtedy, gdy zmienił się kod, który czegoś pilnuje, albo pojawił się nowy, szybko rosnący projekt.",
-          },
-          {
-            label: "Czego jeszcze nie ma:",
-            body: "nocnego testu kontrolnego, który co noc uruchamia agenta na przypiętej wersji narzędzia i sprawdza, czy bramki nadal blokują (tzw. kanarek), sprawdzania statusu CI na koniec sesji i testów skilli pod presją. Wszystko to jest w planie i dopiszę to tutaj, gdy zacznie działać.",
-          },
-        ],
-      },
-      {
-        title: "Jak decydujemy o architekturze i jak ona zostaje ustalona",
-        lead: "Większość projektów ustala architekturę raz, w dokumencie, którego nikt potem nie otwiera. Tutaj każda decyzja to wiersz z dowodem, a skrypt porównuje z tymi wierszami kod na początku każdej sesji pracy i zanim sesja może się zakończyć.",
-        items: [
-          {
-            label: "Jeden wiersz na obszar:",
-            body: "62 wiersze: 37 obszarów projektowania systemów (jak przechowywać dane, jak system rośnie, kolejki (poczekalnie dla zadań w tle), cache (gotowa kopia danych pod ręką), logowanie, limity tego, jak często ktoś może wywoływać system, wdrożenia i inne) oraz 25 warstw narzędzi (strona, hosting, baza, płatności, faktury, e-mail i inne). Każdy wiersz ma status: decyzja z dowodem, nie dotyczy z uzasadnieniem albo nie teraz z mierzalnym sygnałem powrotu, na przykład „ponad 50 zapytań na sekundę” albo „10 tysięcy wierszy w zamówieniach”.",
-          },
-          {
-            label: "Narada zamiast jednego architekta:",
-            body: "na starcie projektu agenci AI pracują równolegle, po jednym na grupę obszarów, i każdy widzi tylko swoje obszary i notatki wiedzy. Grupy, których decyzji trudno potem cofnąć (kształt danych, identyfikatory, przechowywanie plików, tożsamość użytkowników, miejsce przechowywania danych, odtwarzanie po awarii), dostają najmocniejszy model i muszą być rozstrzygnięte nawet w małych projektach.",
-          },
-          {
-            label: "Skalowanie wtedy, gdy mówią to liczby:",
-            body: "wiersze „nie teraz” trzymają swoje progi, a notatki wiedzy mają siedmiostopniową drabinę dla mojego stacku: od jednego serwera, przez kolejki i cache, po kopie bazy tylko do odczytu. Skrypt w każdej chwili wypisze te progi, więc decyzja o skalowaniu wynika z danych, nie ze strachu.",
-          },
-          {
-            label: "Trzymane w ryzach przez kod:",
-            body: "opisana wyżej kontrola działa przy starcie każdej sesji pracy i blokuje zakończenie sesji, która zostawiła odstępstwo (w nowych projektach; w starszych jest podpowiedzią). Agenci trzymają się architektury, a gdy architektura musi się zmienić, zmiana jest zapisana tam, gdzie następna osoba jej poszuka.",
-          },
-        ],
-      },
-      {
-        title: "Dlaczego potok wydań z AI w pętli ma sens w jednoosobowej firmie",
-        lead: "Duże firmy stać na zespół wydań, dyżury i drugiego inżyniera, który przegląda każdą zmianę. Mnie nie, więc tę pracę robi potok, a AI robi te części, które wymagają oceny.",
-        items: [
-          {
-            label: "Maszyny sprawdzają to, co maszyny umieją sprawdzić:",
-            body: "budowanie, sprawdzanie typów, testy, licencje zależności, szukanie wyciekłych haseł i automatyczne zapytania testowe do działającej strony to zwykłe skrypty bez AI, więc nie zużywają tokenów AI (tylko zwykłe minuty budowania). Są szybkie i za każdym razem dają tę samą odpowiedź.",
-          },
-          {
-            label: "AI ocenia to, co wymaga oceny:",
-            body: "każda ryzykowna zmiana dostaje osobnych recenzentów AI od kodu, bezpieczeństwa, operacji i danych, każdy startuje od zera z własną listą kontrolną. Nie mogą niczego edytować, a każde zgłoszenie wymaga dowodu i komendy, która go odtwarza. To wydanie jest dobrym przykładem: recenzenci znaleźli dwie blokujące dziury bezpieczeństwa, które przeoczyłem, obie w dwóch pierwszych rundach. Recenzent bezpieczeństwa znajdował poważne, ale nieblokujące problemy w każdej kolejnej rundzie (4, 3, 2 i 1), a pozostali recenzenci przypadki brzegowe, takie jak pojedyncze odrzucone zapytanie, przekierowanie albo awaria bazy. Jeszcze jeden problem blokujący pojawił się na samym końcu: reguła bezpieczeństwa bez testu.",
-          },
-          {
-            label: "Człowiek decyduje o tym, czego nie da się cofnąć:",
-            body: "scalanie ryzykownych zmian, wydawanie pieniędzy oraz hasła i klucze wymagają mojej wyraźnej zgody, a wyłączenie potoku to ustawienie repozytorium, a nie decyzja agenta. Automatyczna droga powrotu jest celowo ograniczona: raz, potem czeka na człowieka.",
-          },
-          {
-            label: "Dlaczego to się opłaca:",
-            body: "z założenia złe wydanie zostaje złapane, zanim zobaczą je klienci (10 minut czekania), albo powrót zaczyna się około minuty po pierwszej nieudanej kontroli działającej strony. Każda awaria, która się prześlizgnie, staje się nową automatyczną kontrolą, więc ten sam błąd ma dużo mniejszą szansę się powtórzyć. Na tym polega cały ten system.",
-          },
-        ],
-      },
-      {
-        title: "Dwa narzędzia AI, jeden system",
-        items: [
-          {
-            label: "Claude Code:",
-            body: "narzędzie terminalowe do pracy z kodem: ta strona, produkcyjne aplikacje MAS Group, Flyt i systemu warsztatowego oraz ich CI. Z GitHubem, pocztą, przeglądarką i pulpitem łączy się przez serwery MCP (konektory). To tu działają hooki i bramki gita.",
-          },
-          {
-            label: "Claude Desktop (Cowork):",
-            body: "narzędzie do operacji: porządkowanie poczty, dokumenty, wyszukiwanie informacji, kontakt z klientami (outreach), projektowanie i rutyny, które utrzymują przy życiu sam system. Nie ma tam hooków, więc zasady pracy jadą jako tekst w każdym poleceniu.",
-          },
-          {
-            label: "105 skilli:",
-            body: "wersjonowane pakiety instrukcji, do których trafiają zadania: 50 w narzędziu do kodu, 55 na pulpicie. Router dopasowuje zadanie według stałych reguł (deterministycznie) i przed startem ogłasza, jakie kroki wykona.",
-          },
-          {
-            label: "Dobór modelu:",
-            body: "najmocniejszy model jest zarezerwowany na trudne rozumowanie oraz na recenzje bezpieczeństwa, danych i weryfikację przy T3. Rutynowa praca z narzędziami i wyszukiwanie idą do tańszych modeli. Moc obliczeniowa to budżet, a system wydaje go świadomie.",
-          },
-        ],
-      },
-    ],
-    statusTitle:
-      "VERIFIED · UNVERIFIED · FAILED: słowo statusu, które nie pozwala AI mówić tego, co chcesz usłyszeć",
-    statusLead:
-      "Każdy istotny raport kończy się jednym z trzech słów. To najmniejsza część systemu i najłatwiejsza do przeniesienia gdzie indziej, zwłaszcza do Claude Desktop (Cowork), gdzie nie ma hooków i jedyną ochroną jest samo polecenie.",
-    statusItems: [
-      {
-        label: "VERIFIED:",
-        body: "twierdzenie ma dołączony dowód, zacytowany, nie opisany: komendę i jej kod wyjścia, status HTTP, linię z wyniku testów, diff, ścieżkę do zrzutu ekranu.",
-      },
-      {
-        label: "UNVERIFIED:",
-        body: "praca jest zrobiona, ale brakuje dowodu. Raport mówi dokładnie, czego brakuje, jak to sprawdzić i co zmieniłoby wniosek. Raport bez słowa statusu liczy się jako UNVERIFIED.",
-      },
-      {
-        label: "FAILED / BLOCKED:",
-        body: "co się stało, dosłownie, bez łagodzenia. Przeszkoda (brak dostępu, decyzji, danych albo sekretu, zepsute narzędzie) trafia do pierwszej linii raportu, nigdy na koniec.",
-      },
-      {
-        label: "Dlaczego to istnieje:",
-        body: "gdy użytkownik naciska błędnym twierdzeniem, modele przyznają mu rację w około 58 % przypadków. Przewidują 61–77 % sukcesu, a osiągają 22–35 %. Im dłużej trwa rozmowa, tym bardziej model przejmuje Twój sposób myślenia i Twoją pewność. Słowo statusu zmusza każde twierdzenie, by pokazało dowód albo przyznało, że go nie ma. A pytanie „jesteś pewien?” sprawia, że model sprawdza dowody od nowa, zamiast grzecznie zmienić zdanie.",
-      },
-    ],
-    statusCoworkLabel: "W Claude Desktop i zadaniach cyklicznych:",
-    statusCowork:
-      "do każdego polecenia w tle dołączany jest siedmioliniowy blok weryfikacji: nie zakładaj, że polecenie jest prawdziwe; możesz odmówić i zgłosić porażkę; przeformułuj twierdzenia na neutralne pytania; zero sukcesu bez dowodu; zaatakuj własny wynik przed raportem; sprawdź od nowa, gdy ktoś podważa; zakończ słowem statusu. Blok jest w repozytorium, gotowy do wklejenia.",
-    vaultSectionTitle: "Hasła i klucze, których AI nigdy nie widzi",
-    vaultFlow: {
-      vault: "SEJF",
-      vaultSub: "99 sekretów · self-hosted",
-      bridge: "POŚREDNIK",
-      bridgeSub: "przekazuje do procesu",
-      target: "PROCES DOCELOWY",
-      targetSub: "deploy · wywołanie API · CI",
-      never: ["czat ✕", "kod ✕", "logi ✕"],
-      caption: "Agent może użyć hasła lub klucza, którego nigdy nie zobaczy.",
-    },
-    vaultItems: [
-      {
-        label: "Sejf na moim własnym sprzęcie:",
-        body: "99 kluczy API, tokenów i loginów leży w sejfie (vault) na moim własnym sprzęcie. Pośrednik przekazuje je prosto do procesu, który ich potrzebuje, jako zmienne środowiskowe. Wartości nigdy nie pojawiają się w czacie, kodzie ani logach. Strażnik komend blokuje sekret wpisany w komendę, a skany przy commicie i w CI pilnują, żeby tak zostało.",
-      },
-    ],
-    schedTitle: "Rutyny: część, która działa, gdy nikt nie pisze",
-    schedLead:
-      "Pięć rutyn w runtime kodowym, 35 zdefiniowanych na pulpicie, 10 z nich włączonych (od 14 października wszystkie wstrzymane do naprawy ustawień; zobacz aktualizację 1.8.0). Najpierw deterministyczny skrypt, model tylko przy znaleziskach; wszystko, co mogłoby „znajdować sobie robotę”, jest wyłączone z założenia.",
-    cadence: [
-      { name: "Recenzent PR", dots: 5, freq: "dni robocze rano" },
-      { name: "Watchdog", dots: 5, freq: "co 2 godziny" },
-      { name: "Backup konfiguracji + skrypt restore", dots: 5, freq: "codziennie" },
-      { name: "Sesje → notatki pamięci", dots: 4, freq: "codziennie / pn + czw" },
-      { name: "Stan zabezpieczeń", dots: 1, freq: "co tydzień" },
-      { name: "Tygodniowy raport systemu", dots: 1, freq: "niedziela" },
-      { name: "Nadzór CVE", dots: 1, freq: "co miesiąc" },
-      { name: "Kalibracja recenzentów", dots: 1, freq: "co miesiąc" },
-      { name: "Sprzątacz repo", dots: 0, freq: "tylko ręcznie", manual: true },
-    ],
-    schedItems: [
-      {
-        label: "Recenzent PR (dni robocze):",
-        body: "przegląda otwarte pull requesty we wszystkich moich repozytoriach tak, jak zrobiłby to senior. Poprawki mechaniczne trafiają jako osobne commity z dowodem. Uwagi o projekcie i bezpieczeństwie zostają komentarzami: decyzja należy do mnie.",
-      },
-      {
-        label: "Stan zabezpieczeń (co tydzień):",
-        body: "33 kontrole skryptowe tego, czy system jakości nadal jest podłączony: czy hooki są zarejestrowane, czy bramki nadal blokują to, co powinny, które wyjątki zostały użyte i dlaczego, która rutyna wystartowała i nie skończyła.",
-      },
-      {
-        label: "Nadzór podatności (CVE, co miesiąc):",
-        body: "najpierw skrypt skanuje zależności działających produktów: bez zużycia tokenów AI, gdy nic nie znajdzie. Poprawki to wyłącznie aktualizacje patch/minor i zawsze jako pull requesty z dowodem, nigdy prosto na main.",
-      },
-      {
-        label: "Watchdog (co dwie godziny, Claude Desktop):",
-        body: "wyłapuje rutyny spóźnione albo przerwane w trakcie, ponawia je i naprawia, co się da. Powiadomienie na telefon wysyła tylko wtedy, gdy sam nie da rady. Pracę przerwaną przez limit użycia wznawia od zapisanego punktu (checkpointu).",
-      },
-      {
-        label: "Kopia zapasowa ze skryptem przywracania (codziennie, Claude Desktop):",
-        body: "pełna kopia konfiguracji agenta i wygenerowany skrypt, który jednym kliknięciem odtwarza ją na nowej maszynie. Kopia, której nigdy nie odtworzono, nie jest kopią zapasową. Dlatego skrypt przywracania jest jej częścią.",
-      },
-    ],
-    memTitle: "Pamięć, pomiary i retrospektywa, która przebudowała system",
-    memItems: [
-      {
-        label: "Pamięć trwała:",
-        body: "lokalna baza 1900+ notatek ładuje się na starcie każdej sesji. Każda sesja przy zamknięciu sama zapisuje notatki, więc następna startuje od zapisanego punktu, a nie od zera.",
-      },
-      {
-        label: "Telemetria, nie odczucia:",
-        body: "każde pominięcie kontroli jest logowane z powodem. Skrypty przekopują 2 853 pliki zapisów pracy agentów i historię gita 39 repozytoriów: korekty na sesję, powtarzające się błędy narzędzi, poprawki w ciągu 24 godzin od poprzedniego commitu w tym samym pliku i pliki zmieniane najczęściej. To liczby decydują, co staje się bramką.",
-      },
-      {
-        label: "Retrospektywa, która miała znaczenie:",
-        body: "dwanaście pętli naprawczych z jednej sesji prześledzono do przyczyn. Trzy miały ten sam defekt: system deklarował kontrolę, której fizycznie nie miał. Odpowiedź była strukturalna: każda bramka dostała test dowodzący, że blokuje, a sprawdzanie, czy każda reguła ma bramkę, stało się skryptem.",
-      },
-      {
-        label: "Ta sama metoda, zastosowana do mnie:",
-        body:
-          "moja praktyka czytania kodu jest zbudowana jak reszta systemu, codziennie, weryfikowalnie, publicznie: " +
-          "github.com/kamiljan11/code-reading-quest.",
-      },
-    ],
-    scaleTitle: "Czy to się sprawdza przy dużej skali?",
-    scaleItems: [
-      {
-        label: "Uczciwa odpowiedź:",
-        body: "jedna funkcja to nic trudnego. System na 200 tysięcy linii, z zależnościami między plikami i niespisanymi założeniami architektonicznymi, to miejsce, gdzie spójność się rozjeżdża. Dlatego założenia są zapisane tam, gdzie skrypt je przeczyta: dokument architektury każdego repozytorium ma czytelny dla maszyny blok warstw i zakazanych importów, a bramka przy pushu blokuje nowy cykl importów albo import łamiący warstwy. Stare cykle tylko ostrzegają. Długu historycznego nigdy nie sprząta się automatycznie.",
-      },
-      {
-        label: "Zasięg zmiany przed edycją:",
-        body: "zmieniany plik, który importuje ponad 40 innych plików, jest oznaczany. Krok projektowy przed kodem pyta: kto to wywołuje, co jeszcze czyta te dane i na jaki poziom ryzyka trafia zmiana.",
-      },
-      {
-        label: "Czytelne dla człowieka, nie tylko dla maszyny:",
-        body: "indeks narzędzi i mapa systemu są generowane z nagłówków samych narzędzi; narzędzie bez opisu pokazuje się jako dług. Każdą decyzję o stylu ocenia jedno pytanie: czy doświadczony programista, który nigdy nie widział repozytorium, uruchomi je w 15 minut, w 15 minut znajdzie miejsce do zmiany i zrozumie dlaczego, bez czytania zapisów moich sesji?",
-      },
-    ],
-    installTitle: "Zainstaluj to u siebie",
-    installLead:
-      "Cały system to publiczne repozytorium, oczyszczone z prywatnych danych i przenośne. Potrzebujesz tylko Node 20+, gita i Claude Code.",
-    installSteps: [
-      "git clone " + REPO_URL + ".git",
-      "node install.mjs --dry-run   # pokazuje plan, niczego nie dotyka",
-      "node install.mjs --yes       # kopiuje do ~/.claude, dokleja hooki, blok CLAUDE.md, włącza hooki gita",
-    ],
-    installItems: [
-      {
-        label: "Co obiecuje instalator:",
-        body: "nigdy nie nadpisuje pliku, który zmieniłeś (druga wersja ląduje obok Twojej). Scala Twoje ustawienia zamiast je podmieniać. Dokleja reguły między znacznikami, więc aktualizacja podmienia tylko ten blok. Hooki gita są opcjonalne. Na końcu uruchamia samotest: dowodem jest zielony wynik, a nie słowo instalatora.",
-      },
-      {
-        label: "Co dostajesz w dzisiejszej wersji publicznej:",
-        body:
-          "10 hooków, 3 bramki gita, 39 narzędzi z 11 zestawami testów, 9 działów recenzentów, doktrynę ze 160 bliznami, " +
-          "szablon repo z CI i parsowanymi blokami granic, 7 rutyn kodowych i 7 pulpitowych, deinstalator oraz dokumentację " +
-          "z diagramami z tej strony.",
-      },
-      {
-        label: "Jedna uczciwa uwaga:",
-        body: "zasady pracy mają pełną wersję angielską (PG_LANG=en, instalator ustawia ją według języka systemu), a każdy komunikat blokady ma angielską linię BLOCKED z opisem wyjątku. Doktryna i listy reguł recenzentów są na razie po polsku (model czyta je bez problemu), a README jest w obu językach.",
-      },
-    ],
-    installLink: "Otwórz repozytorium →",
-    limitsTitle: "Uczciwe granice",
-    limits:
-      "Modele fundacyjne przez API: nie trenuję ich ani nie fine-tunuję. Niezawodność jest udowodniona w skali MŚP " +
-      "(dziesiątki repozytoriów, jeden właściciel), nie hyperscale. Działy recenzentów kosztują tokeny (mniej więcej " +
-      "cztery recenzje dla T2 i osiem do dziesięciu dla T3), dlatego bramki 0-tokenowe idą pierwsze. Scalanie bez mojej frazy opiera się na recenzji jednego modelu (w CI albo lokalnej), czyli na dowodzie probabilistycznym; zobacz aktualizację z 5 października i plik znanych granic. Część bramek zależy " +
-      "od tego, czy repozytorium ma to, co sprawdzają, i pomija się z zalogowanym powodem, gdy nie ma. Sensem tej strony " +
-      "nie jest to, że system jest skończony: tylko to, że tryby awarii pracy z AI są tu obudowane inżynierią, jawnie, " +
-      "zamiast być zaklinane.",
-    colophon:
-      "Ta strona przeszła przez proces, który opisuje: szkic napisał agent, tekst przeszedł przez opisane wyżej bramki, a ja go zrecenzowałem i opublikowałem. Liczby pochodzą z komend uruchomionych w dniu publikacji, nie z pamięci.",
-  },
-};
-
-/* ══ Diagram: the whole machine ══ */
-function AiArch({ t }: { t: ArchLabels }) {
-  const prodW = 128;
-  const prodGap = 10;
-  const prodX0 = (760 - (t.prod.length * prodW + (t.prod.length - 1) * prodGap)) / 2;
-  return (
-    <div className="aid-scroll">
-      <svg viewBox="0 0 760 392" className="aid" role="img" aria-label={t.caption}>
-        <defs>
-          <marker
-            id="aiar"
-            viewBox="0 0 8 8"
-            refX="7"
-            refY="4"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto-start-reverse"
-          >
-            <path d="M0 0 L8 4 L0 8 Z" className="aid-arrowhead" />
-          </marker>
-        </defs>
-
-        <rect x="270" y="10" width="220" height="48" rx="9" className="aid-box aid-strong" />
-        <text x="380" y="31" textAnchor="middle" className="aid-t">
-          {t.kamil}
-        </text>
-        <text x="380" y="47" textAnchor="middle" className="aid-s">
-          {t.kamilSub}
-        </text>
-
-        <path d="M340 58 L275 92" className="aid-ln" markerEnd="url(#aiar)" />
-        <path d="M420 58 L485 92" className="aid-ln" markerEnd="url(#aiar)" />
-
-        <rect x="150" y="96" width="210" height="76" rx="9" className="aid-box" />
-        <text x="255" y="119" textAnchor="middle" className="aid-t">
-          {t.code}
-        </text>
-        <text x="255" y="138" textAnchor="middle" className="aid-s">
-          {t.codeSub1}
-        </text>
-        <text x="255" y="154" textAnchor="middle" className="aid-s">
-          {t.codeSub2}
-        </text>
-
-        <rect x="400" y="96" width="210" height="76" rx="9" className="aid-box" />
-        <text x="505" y="119" textAnchor="middle" className="aid-t">
-          {t.cowork}
-        </text>
-        <text x="505" y="138" textAnchor="middle" className="aid-s">
-          {t.coworkSub1}
-        </text>
-        <text x="505" y="154" textAnchor="middle" className="aid-s">
-          {t.coworkSub2}
-        </text>
-
-        <path
-          d="M362 134 L398 134"
-          className="aid-ln"
-          markerEnd="url(#aiar)"
-          markerStart="url(#aiar)"
-        />
-        <text x="380" y="188" textAnchor="middle" className="aid-xs">
-          {t.shared}
-        </text>
-
-        <rect x="16" y="96" width="108" height="56" rx="9" className="aid-box aid-side" />
-        <text x="70" y="119" textAnchor="middle" className="aid-t">
-          {t.vault}
-        </text>
-        <text x="70" y="136" textAnchor="middle" className="aid-s">
-          {t.vaultSub}
-        </text>
-        <path d="M124 124 L148 124" className="aid-ln" markerEnd="url(#aiar)" />
-        <text x="70" y="168" textAnchor="middle" className="aid-xs">
-          {t.vaultNote1}
-        </text>
-        <text x="70" y="181" textAnchor="middle" className="aid-xs">
-          {t.vaultNote2}
-        </text>
-
-        <rect x="636" y="96" width="108" height="56" rx="9" className="aid-box aid-side" />
-        <text x="690" y="119" textAnchor="middle" className="aid-t">
-          {t.memory}
-        </text>
-        <text x="690" y="136" textAnchor="middle" className="aid-s">
-          {t.memorySub}
-        </text>
-        <path
-          d="M612 124 L634 124"
-          className="aid-ln"
-          markerEnd="url(#aiar)"
-          markerStart="url(#aiar)"
-        />
-        <text x="690" y="168" textAnchor="middle" className="aid-xs">
-          {t.memoryNote1}
-        </text>
-        <text x="690" y="181" textAnchor="middle" className="aid-xs">
-          {t.memoryNote2}
-        </text>
-
-        <path d="M255 172 L255 208" className="aid-ln" markerEnd="url(#aiar)" />
-        <path d="M505 172 L505 208" className="aid-ln" markerEnd="url(#aiar)" />
-        <rect x="150" y="212" width="460" height="42" rx="9" className="aid-band" />
-        <text x="380" y="230" textAnchor="middle" className="aid-t aid-accent">
-          {t.gates}
-        </text>
-        <text x="380" y="246" textAnchor="middle" className="aid-s">
-          {t.gatesList}
-        </text>
-
-        <path d="M380 254 L380 290" className="aid-ln" markerEnd="url(#aiar)" />
-        {t.prod.map((p, i) => (
-          <g key={p}>
-            <rect
-              x={prodX0 + i * (prodW + prodGap)}
-              y="294"
-              width={prodW}
-              height="36"
-              rx="8"
-              className="aid-box aid-prod"
-            />
-            <text
-              x={prodX0 + i * (prodW + prodGap) + prodW / 2}
-              y="316"
-              textAnchor="middle"
-              className="aid-s aid-prod-t"
-            >
-              {p}
-            </text>
-          </g>
-        ))}
-
-        <text x="380" y="368" textAnchor="middle" className="aid-xs">
-          {t.caption}
-        </text>
-      </svg>
-    </div>
-  );
-}
-
-/* ══ Diagram: mind map (8 branches around the centre) ══ */
-function AiMindMap({ t }: { t: MindLabels }) {
-  const bw = 180;
-  // Leaves wrap to the box width (10px italic ≈ 30 chars here). A wrapped
-  // leaf's second line sits closer than the next leaf, so a two-line item
-  // still reads as one item; boxes and rows grow with the tallest branch.
-  const leafGroups = t.branches.map((b) => b.leaves.map((l) => wrapLabel(l, 30)));
-  const leafY = leafGroups.map((groups) => stackLines(groups, 38, 12, 18));
-  const bh = Math.max(38, ...leafY.flat(2)) + 16;
-  const gap = 32;
-  const rowY = [0, 1, 2, 3].map((r) => 36 + r * (bh + gap));
-  const bottom = rowY[3] + bh;
-  const cx = 380;
-  const cy = (36 + bottom) / 2;
-  // Branch anchors: two columns of four, connected to the centre by curves.
-  const pos = [...rowY.map((y) => ({ x: 30, y })), ...rowY.map((y) => ({ x: 550, y }))];
-  return (
-    <div className="aid-scroll">
-      <svg
-        viewBox={`0 0 760 ${String(bottom + 44)}`}
-        className="aid"
-        role="img"
-        aria-label={t.caption}
-      >
-        {t.branches.map((b, i) => {
-          const p = pos[i];
-          const left = i < 4;
-          const ax = left ? p.x + bw : p.x;
-          const ay = p.y + bh / 2;
-          const c1x = left ? ax + 70 : ax - 70;
-          const c2x = left ? cx - 90 : cx + 90;
-          return (
-            <g key={b.title}>
-              <path
-                d={`M${ax} ${ay} C ${c1x} ${ay}, ${c2x} ${cy}, ${cx} ${cy}`}
-                className="aid-ln aid-thin"
-              />
-              <rect x={p.x} y={p.y} width={bw} height={bh} rx="9" className="aid-box aid-side" />
-              <text x={p.x + bw / 2} y={p.y + 20} textAnchor="middle" className="aid-t">
-                {b.title}
-              </text>
-              {leafGroups[i].map((lines, k) =>
-                lines.map((l, j) => (
-                  <text
-                    key={`${String(k)}-${String(j)}`}
-                    x={p.x + bw / 2}
-                    y={p.y + leafY[i][k][j]}
-                    textAnchor="middle"
-                    className="aid-xs"
-                  >
-                    {l}
-                  </text>
-                )),
-              )}
-            </g>
-          );
-        })}
-        <circle cx={cx} cy={cy} r="64" className="aid-box aid-strong" />
-        <text x={cx} y={cy - 4} textAnchor="middle" className="aid-t aid-accent">
-          {t.center}
-        </text>
-        <text x={cx} y={cy + 14} textAnchor="middle" className="aid-xs">
-          {t.centerSub}
-        </text>
-        <text x={cx} y={bottom + 30} textAnchor="middle" className="aid-xs">
-          {t.caption}
-        </text>
-      </svg>
-    </div>
-  );
-}
-
-/* ══ Diagram: the life of a change (N stages) ══ */
-/* Chips alternate between two rows, so a chip may be almost two steps wide
-   without touching its same-row neighbours; the rows are stacked with a gap,
-   so neighbours in the other row never overlap either. Labels are wrapped to
-   CHIP_CHARS per line (wrapLabel), and the heights follow the longest label —
-   the copy can change without anything spilling out of its box. */
-const CHIP_CHARS = 20;
-const CHIP_LINE = 13;
-
-function AiPipeline({ t }: { t: PipeLabels }) {
-  const n = t.stages.length;
-  const x0 = 78;
-  const x1 = 652;
-  const step = (x1 - x0) / (n - 1);
-  const xs = Array.from({ length: n }, (_, i) => x0 + i * step);
-  const chipW = Math.min(128, 2 * step - 16);
-  const chips = t.gates.map((g) => wrapLabel(g, CHIP_CHARS));
-  const chipH = 10 + CHIP_LINE * Math.max(...chips.map((c) => c.length));
-  const rowY = [94, 94 + chipH + 16];
-  const blocked = wrapLabel(`✕ ${t.blocked}`, 110);
-  const blockedY = rowY[1] + chipH + 26;
-  const captionY = blockedY + 14 * (blocked.length - 1) + 24;
-  return (
-    <div className="aid-scroll">
-      <svg
-        viewBox={`0 0 760 ${String(captionY + 12)}`}
-        className="aid"
-        role="img"
-        aria-label={t.caption}
-      >
-        <defs>
-          <marker
-            id="aipr"
-            viewBox="0 0 8 8"
-            refX="7"
-            refY="4"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto-start-reverse"
-          >
-            <path d="M0 0 L8 4 L0 8 Z" className="aid-arrowhead" />
-          </marker>
-        </defs>
-        <path d={`M${x0 - 20} 62 L${x1 + 20} 62`} className="aid-ln" markerEnd="url(#aipr)" />
-        <rect x="690" y="45" width="60" height="34" rx="8" className="aid-box aid-strong" />
-        <text x="720" y="66" textAnchor="middle" className="aid-t aid-accent">
-          {t.live}
-        </text>
-
-        {xs.map((x, i) => {
-          const y = rowY[i % 2];
-          const lines = chips[i];
-          // vertically centre however many lines this chip has
-          const firstLine = y + chipH / 2 - ((lines.length - 1) * CHIP_LINE) / 2 + 3.5;
-          return (
-            <g key={i}>
-              <circle cx={x} cy="62" r="5" className="aid-node" />
-              <text x={x} y={i % 2 === 0 ? 42 : 28} textAnchor="middle" className="aid-s aid-stage">
-                {t.stages[i]}
-              </text>
-              <path
-                d={`M${String(x)} 70 L${String(x)} ${String(y - 2)}`}
-                className="aid-ln aid-thin"
-              />
-              <rect
-                x={x - chipW / 2}
-                y={y}
-                width={chipW}
-                height={chipH}
-                rx="7"
-                className="aid-chip"
-              />
-              {lines.map((line, j) => (
-                <text
-                  key={j}
-                  x={x}
-                  y={firstLine + j * CHIP_LINE}
-                  textAnchor="middle"
-                  className="aid-xs aid-chip-t"
-                >
-                  {line}
-                </text>
-              ))}
-            </g>
-          );
-        })}
-
-        {blocked.map((line, j) => (
-          <text
-            key={j}
-            x="380"
-            y={blockedY + j * 14}
-            textAnchor="middle"
-            className="aid-xs aid-red"
-          >
-            {line}
-          </text>
-        ))}
-        <text x="380" y={captionY} textAnchor="middle" className="aid-xs">
-          {t.caption}
-        </text>
-      </svg>
-    </div>
-  );
-}
-
-/* ══ Diagram: review pipeline ══ */
-function AiReview({ t }: { t: ReviewLabels }) {
-  // Both boxes stay centred on y=94 (where the arrows meet) and grow with
-  // their wrapped labels: bold 13px fits ~13 chars in the 130px band, 10px
-  // italic ~18 chars in the 112px aggregate box.
-  const gateLines = wrapLabel(t.gates, 13);
-  const bandH = 46 + 16 * gateLines.length;
-  const bandY = 94 - bandH / 2;
-  const aggLines = wrapLabel(t.aggregateSub, 18);
-  const aggH = 42 + 14 * aggLines.length;
-  const aggY = 94 - aggH / 2;
-  return (
-    <div className="aid-scroll">
-      <svg viewBox="0 0 760 236" className="aid" role="img" aria-label={t.caption}>
-        <defs>
-          <marker
-            id="airv"
-            viewBox="0 0 8 8"
-            refX="7"
-            refY="4"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto-start-reverse"
-          >
-            <path d="M0 0 L8 4 L0 8 Z" className="aid-arrowhead" />
-          </marker>
-        </defs>
-        <rect x="16" y="70" width="128" height="48" rx="9" className="aid-box aid-strong" />
-        <text x="80" y="98" textAnchor="middle" className="aid-t">
-          {t.orchestrator}
-        </text>
-
-        <path d="M144 94 L176 94" className="aid-ln" markerEnd="url(#airv)" />
-        <rect x="180" y={bandY} width="130" height={bandH} rx="9" className="aid-band" />
-        {gateLines.map((line, j) => (
-          <text
-            key={j}
-            x="245"
-            y={bandY + 22 + 16 * j}
-            textAnchor="middle"
-            className="aid-t aid-accent"
-          >
-            {line}
-          </text>
-        ))}
-        <text
-          x="245"
-          y={bandY + 40 + 16 * (gateLines.length - 1)}
-          textAnchor="middle"
-          className="aid-xs"
-        >
-          {t.gatesSub}
-        </text>
-
-        {t.finders.map((f, i) => (
-          <g key={f}>
-            <path
-              d={`M310 94 L346 ${34 + i * 40}`}
-              className="aid-ln aid-thin"
-              markerEnd="url(#airv)"
-            />
-            <rect
-              x="350"
-              y={18 + i * 40}
-              width="118"
-              height="32"
-              rx="7"
-              className="aid-box aid-side"
-            />
-            <text x="409" y={39 + i * 40} textAnchor="middle" className="aid-s">
-              {f}
-            </text>
-            <path
-              d={`M468 ${34 + i * 40} L504 94`}
-              className="aid-ln aid-thin"
-              markerEnd="url(#airv)"
-            />
-          </g>
-        ))}
-
-        <rect x="508" y={aggY} width="112" height={aggH} rx="9" className="aid-box" />
-        <text x="564" y={aggY + 22} textAnchor="middle" className="aid-t">
-          {t.aggregate}
-        </text>
-        {aggLines.map((line, j) => (
-          <text key={j} x="564" y={aggY + 40 + 14 * j} textAnchor="middle" className="aid-xs">
-            {line}
-          </text>
-        ))}
-
-        <path
-          d={`M564 ${String(aggY + aggH)} L564 148`}
-          className="aid-ln"
-          markerEnd="url(#airv)"
-        />
-        <rect x="508" y="152" width="112" height="48" rx="9" className="aid-box aid-strong" />
-        <text x="564" y="172" textAnchor="middle" className="aid-t">
-          {t.verifier}
-        </text>
-        <text x="564" y="189" textAnchor="middle" className="aid-xs">
-          {t.verifierSub}
-        </text>
-
-        <path d="M620 94 L654 94" className="aid-ln" markerEnd="url(#airv)" />
-        <rect x="658" y="70" width="92" height="48" rx="9" className="aid-box aid-prod" />
-        <text x="704" y="98" textAnchor="middle" className="aid-s aid-prod-t">
-          {t.fixer}
-        </text>
-
-        <text x="380" y="216" textAnchor="middle" className="aid-xs aid-red">
-          ✕ {t.rule}
-        </text>
-        <text x="380" y="231" textAnchor="middle" className="aid-xs">
-          {t.caption}
-        </text>
-      </svg>
-    </div>
-  );
-}
-
-/* ══ Diagram: scar → gate loop (6 steps in a ring) ══ */
-function AiLoop({ t }: { t: LoopLabels }) {
-  const cx = 380;
-  const cy = 128;
-  const rx = 300;
-  const ry = 88;
-  const n = t.steps.length;
-  const pts = t.steps.map((_, i) => {
-    const a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
-    return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a) };
-  });
-  return (
-    <div className="aid-scroll">
-      <svg viewBox="0 0 760 290" className="aid" role="img" aria-label={t.caption}>
-        <defs>
-          <marker
-            id="ailp"
-            viewBox="0 0 8 8"
-            refX="7"
-            refY="4"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto-start-reverse"
-          >
-            <path d="M0 0 L8 4 L0 8 Z" className="aid-arrowhead" />
-          </marker>
-        </defs>
-        {pts.map((p, i) => {
-          const q = pts[(i + 1) % n];
-          const dx = q.x - p.x;
-          const dy = q.y - p.y;
-          const len = Math.hypot(dx, dy) || 1;
-          const pad = 66;
-          const sx = p.x + (dx / len) * pad;
-          const sy = p.y + (dy / len) * (pad * 0.42);
-          const ex = q.x - (dx / len) * pad;
-          const ey = q.y - (dy / len) * (pad * 0.42);
-          return (
-            <path
-              key={i}
-              d={`M${sx} ${sy} L${ex} ${ey}`}
-              className="aid-ln"
-              markerEnd="url(#ailp)"
-            />
-          );
-        })}
-        {pts.map((p, i) => {
-          const words = t.steps[i].split(" ");
-          const mid = Math.ceil(words.length / 2);
-          const l1 = words.slice(0, mid).join(" ");
-          const l2 = words.slice(mid).join(" ");
-          return (
-            <g key={i}>
-              <rect
-                x={p.x - 64}
-                y={p.y - 20}
-                width="128"
-                height="40"
-                rx="8"
-                className={i === 3 ? "aid-box aid-strong" : "aid-box aid-side"}
-              />
-              <text x={p.x} y={p.y - 3} textAnchor="middle" className="aid-xs">
-                {l1}
-              </text>
-              <text x={p.x} y={p.y + 11} textAnchor="middle" className="aid-xs">
-                {l2}
-              </text>
-            </g>
-          );
-        })}
-        <text x="380" y="280" textAnchor="middle" className="aid-xs">
-          {t.caption}
-        </text>
-      </svg>
-    </div>
-  );
-}
-
-/* ══ Diagram: a secret's journey ══ */
-function AiVaultFlow({ t }: { t: VaultLabels }) {
-  return (
-    <div className="aid-scroll">
-      <svg viewBox="0 0 760 148" className="aid" role="img" aria-label={t.caption}>
-        <defs>
-          <marker
-            id="aivr"
-            viewBox="0 0 8 8"
-            refX="7"
-            refY="4"
-            markerWidth="7"
-            markerHeight="7"
-            orient="auto-start-reverse"
-          >
-            <path d="M0 0 L8 4 L0 8 Z" className="aid-arrowhead" />
-          </marker>
-        </defs>
-        <rect x="40" y="24" width="160" height="52" rx="9" className="aid-box aid-strong" />
-        <text x="120" y="46" textAnchor="middle" className="aid-t">
-          {t.vault}
-        </text>
-        <text x="120" y="63" textAnchor="middle" className="aid-s">
-          {t.vaultSub}
-        </text>
-        <path d="M200 50 L296 50" className="aid-ln" markerEnd="url(#aivr)" />
-        <rect x="300" y="24" width="150" height="52" rx="9" className="aid-box" />
-        <text x="375" y="46" textAnchor="middle" className="aid-t">
-          {t.bridge}
-        </text>
-        <text x="375" y="63" textAnchor="middle" className="aid-s">
-          {t.bridgeSub}
-        </text>
-        <path d="M450 50 L546 50" className="aid-ln" markerEnd="url(#aivr)" />
-        <rect x="550" y="24" width="172" height="52" rx="9" className="aid-box" />
-        <text x="636" y="46" textAnchor="middle" className="aid-t">
-          {t.target}
-        </text>
-        <text x="636" y="63" textAnchor="middle" className="aid-s">
-          {t.targetSub}
-        </text>
-        {t.never.map((n, i) => (
-          <text
-            key={n}
-            x={380 + (i - 1) * 110}
-            y="106"
-            textAnchor="middle"
-            className="aid-s aid-red"
-          >
-            {n}
-          </text>
-        ))}
-        <text x="380" y="134" textAnchor="middle" className="aid-xs">
-          {t.caption}
-        </text>
-      </svg>
-    </div>
-  );
-}
-
-/* ══ Cadence strip ══ */
-function AiCadence({ rows }: { rows: CadenceRow[] }) {
-  return (
-    <div className="cad-grid" role="table" aria-label="Routine cadence">
-      {rows.map((r) => (
-        <div className="cad-row" role="row" key={r.name}>
-          <span className="cad-name">{r.name}</span>
-          <span className="cad-dots" aria-hidden="true">
-            {r.manual ? (
-              <span className="cad-manual">⊘</span>
-            ) : (
-              Array.from({ length: 5 }, (_, i) => (
-                <span key={i} className={i < r.dots ? "cad-dot" : "cad-dot off"} />
-              ))
-            )}
-          </span>
-          <span className="cad-freq">{r.freq}</span>
-        </div>
-      ))}
-    </div>
-  );
+/**
+ * One switch from a figure key to its component. Exhaustive over `FigureKey`: a key added to the
+ * content types without a component here fails the type check instead of rendering nothing.
+ */
+function Figure({ k, f }: { k: FigureKey; f: Figures }): ReactNode {
+  switch (k) {
+    case "arch":
+      return <AiArch t={f.arch} />;
+    case "mind":
+      return <AiMindMap t={f.mind} />;
+    case "pipe":
+      return <AiPipeline t={f.pipe} />;
+    case "tiers":
+      return <TierLadder t={f.tiers} />;
+    case "exceptions":
+      return <ExceptionCards t={f.exceptions} />;
+    case "merge":
+      return <MergeFlow t={f.merge} />;
+    case "review":
+      return <AiReview t={f.review} />;
+    case "rounds":
+      return <RoundsChart t={f.rounds} />;
+    case "loop":
+      return <AiLoop t={f.loop} />;
+    case "matrix":
+      return <StackBars t={f.matrix} />;
+    case "release":
+      return <ReleaseSteps t={f.release} />;
+    case "context":
+      return <BeforeAfter t={f.context} />;
+    case "calib":
+      return <CalibTable t={f.calib} />;
+    case "limits":
+      return <LimitsBoard t={f.limits} />;
+    case "vault":
+      return <AiVaultFlow t={f.vault} />;
+    case "cadence":
+      return <AiCadence t={f.cadence} />;
+    case "waffle":
+      return <Waffle t={f.waffle} />;
+    case "versions":
+      return <VersionTimeline t={f.versions} />;
+    default: {
+      const never: never = k;
+      return never;
+    }
+  }
 }
 
 function ItemList({ items }: { items: Item[] }) {
   return (
     <ul className="cv-list">
-      {items.map((it, i) => (
-        <li key={i}>
+      {items.map((it) => (
+        <li key={it.label}>
           <b>{it.label}</b> {it.body}
         </li>
       ))}
@@ -2367,12 +190,99 @@ function ItemList({ items }: { items: Item[] }) {
   );
 }
 
+/**
+ * The page map: every part as a card, every section in it as a link. It is the table of contents
+ * and the overview in one, so a reader on a phone sees the whole shape before the first long section.
+ */
+function PageMap({ c, lang }: { c: Content; lang: Lang }) {
+  return (
+    <section className="cv-sec" aria-labelledby="page-map">
+      <h2 id="page-map">{c.mapTitle}</h2>
+      <p className="ai-lead">{c.mapLead}</p>
+      <nav aria-label={c.tocLabel}>
+        <ol className="pm-grid">
+          {c.parts.map((p, i) => {
+            const secs = c.sections.filter((s) => s.part === i);
+            return (
+              <li key={p.title} className="pm-card">
+                <a className="pm-head" href={`#part-${i + 1}`}>
+                  <span className="pm-n" aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  <span className="pm-title">{p.title}</span>
+                </a>
+                <p className="pm-blurb">{p.blurb}</p>
+                <ol className="pm-links">
+                  {secs.map((s) => (
+                    <li key={s.id}>
+                      <a href={`#${s.id}`}>{s.title}</a>
+                      {s.figure && (
+                        <span className="pm-fig" title={TABS[lang].withChart}>
+                          <span className="sr-only">{TABS[lang].chartSr}</span>
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </li>
+            );
+          })}
+        </ol>
+      </nav>
+    </section>
+  );
+}
+
+function PartDivider({ c, i, lang }: { c: Content; i: number; lang: Lang }) {
+  const t = TABS[lang];
+  return (
+    <div className="pm-divider" id={`part-${i + 1}`}>
+      <span className="pm-divider-n">
+        {t.part} {i + 1} / {c.parts.length}
+      </span>
+      <span className="pm-divider-t">{c.parts[i].title}</span>
+      <a className="pm-divider-up" href="#page-map" aria-label={t.toMap}>
+        ↑
+      </a>
+    </div>
+  );
+}
+
+function SectionBlock({ s, f }: { s: Section; f: Figures }) {
+  return (
+    <section className="cv-sec ai-sec" aria-labelledby={s.id}>
+      <h2 id={s.id}>{s.title}</h2>
+      {s.lead && <p className="ai-lead">{s.lead}</p>}
+      {s.figure && <Figure k={s.figure} f={f} />}
+      {s.paragraphs?.map((p, i) => (
+        // static copy, never reordered: the position is a stable key
+        <p key={`${s.id}-${String(i)}`}>{p}</p>
+      ))}
+      {s.code && (
+        <ul className="cv-list">
+          {s.code.map((line) => (
+            <li key={line}>
+              <code>{line}</code>
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.items && <ItemList items={s.items} />}
+      {s.link && (
+        <p>
+          <a href={s.link.href} target="_blank" rel="noopener noreferrer">
+            {s.link.text}
+          </a>
+        </p>
+      )}
+    </section>
+  );
+}
+
 function ClaudePage() {
   const [lang] = useLang("en");
   const { tab } = Route.useSearch();
-
   const c = CONTENT[lang];
-  const bodyRef = useRef<HTMLElement>(null);
 
   if (tab === "skills") {
     return (
@@ -2388,21 +298,18 @@ function ClaudePage() {
   return (
     <div className="cv-page">
       <div className="read-progress" aria-hidden="true" />
-      <article className="cv-paper" ref={bodyRef}>
+      <article className="cv-paper">
         <ClaudeHead title={c.title} role={c.role} lang={lang} />
         <p className="ai-lead">{c.versionLine}</p>
 
-        {/* sixteen screens on a phone: the reader gets a way to jump */}
-        <PageToc bodyRef={bodyRef} label={c.tocLabel} lang={lang} />
-
-        <section className="cv-sec">
+        <section className="cv-sec ai-sec">
           <p>{c.intro}</p>
           <p>
             <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
               {c.repoCta}
             </a>
           </p>
-          <div className="ai-stats ai-stats-8" aria-label="System counts">
+          <div className="ai-stats ai-stats-8" aria-label={TABS[lang].counts}>
             {c.stats.map((s) => (
               <div key={s.label} className="ai-stat">
                 <span className="ai-stat-n">{s.n}</span>
@@ -2410,115 +317,19 @@ function ClaudePage() {
               </div>
             ))}
           </div>
+          <p className="ai-stats-note">{c.statsNote}</p>
         </section>
 
-        <section className="cv-sec">
-          <h2>{c.mapTitle}</h2>
-          <AiArch t={c.arch} />
-        </section>
+        <PageMap c={c} lang={lang} />
 
-        <section className="cv-sec">
-          <h2>{c.mindTitle}</h2>
-          <p className="ai-lead">{c.mindLead}</p>
-          <AiMindMap t={c.mind} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.ideasTitle}</h2>
-          <ItemList items={c.ideas} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.pipeTitle}</h2>
-          <p className="ai-lead">{c.pipeLead}</p>
-          <AiPipeline t={c.pipe} />
-          <ItemList items={c.gatesItems} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.tierTitle}</h2>
-          <p className="ai-lead">{c.tierLead}</p>
-          <ItemList items={c.tiers} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.reviewTitle}</h2>
-          <p className="ai-lead">{c.reviewLead}</p>
-          <AiReview t={c.review} />
-          <ItemList items={c.reviewItems} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.loopTitle}</h2>
-          <p className="ai-lead">{c.loopLead}</p>
-          <AiLoop t={c.loop} />
-          <ItemList items={c.loopItems} />
-        </section>
-
-        {c.sections.map((sec) => (
-          <section className="cv-sec" key={sec.title}>
-            <h2>{sec.title}</h2>
-            {sec.lead && <p className="ai-lead">{sec.lead}</p>}
-            <ItemList items={sec.items} />
-          </section>
+        {c.sections.map((s, idx) => (
+          <Fragment key={s.id}>
+            {(idx === 0 || c.sections[idx - 1].part !== s.part) && (
+              <PartDivider c={c} i={s.part} lang={lang} />
+            )}
+            <SectionBlock s={s} f={c.figures} />
+          </Fragment>
         ))}
-
-        <section className="cv-sec">
-          <h2>{c.statusTitle}</h2>
-          <p className="ai-lead">{c.statusLead}</p>
-          <ItemList items={c.statusItems} />
-          <ul className="cv-list">
-            <li>
-              <b>{c.statusCoworkLabel}</b> {c.statusCowork}
-            </li>
-          </ul>
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.vaultSectionTitle}</h2>
-          <AiVaultFlow t={c.vaultFlow} />
-          <ItemList items={c.vaultItems} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.schedTitle}</h2>
-          <p className="ai-lead">{c.schedLead}</p>
-          <AiCadence rows={c.cadence} />
-          <ItemList items={c.schedItems} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.memTitle}</h2>
-          <ItemList items={c.memItems} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.scaleTitle}</h2>
-          <ItemList items={c.scaleItems} />
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.installTitle}</h2>
-          <p className="ai-lead">{c.installLead}</p>
-          <ul className="cv-list">
-            {c.installSteps.map((s) => (
-              <li key={s}>
-                <code>{s}</code>
-              </li>
-            ))}
-          </ul>
-          <ItemList items={c.installItems} />
-          <p>
-            <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-              {c.installLink}
-            </a>
-          </p>
-        </section>
-
-        <section className="cv-sec">
-          <h2>{c.limitsTitle}</h2>
-          <p>{c.limits}</p>
-        </section>
 
         <p className="ai-colophon">{c.colophon}</p>
       </article>
