@@ -66,13 +66,16 @@ Opisy kart w obu jezykach (`summary_pl` / `summary_en`) pochodza z `pg/public/sk
 Dane zakladki to `src/data/higher-mind-skills.json`, kopia `skills.json` z publicznego repo `kamiljan11/coding-higher-mind` (generuje ja tam `bin/pg-export-public.py`). Odswiezenie po kazdym wydaniu tego repo:
 `curl -fsSL --max-time 30 https://raw.githubusercontent.com/kamiljan11/coding-higher-mind/main/skills.json | jq 'del(.skills[].description, .agents[].description)' > src/data/higher-mind-skills.json && npx vitest run src/lib/skillsCatalog.test.ts src/components/claude/SkillsTab.test.ts` -> PR. Test odrzuca zly ksztalt (schemat, puste pola, sciezki spoza `skills/` i `agents/`); przy zlym pliku na produkcji zakladka pokazuje komunikat z linkiem do repo, reszta /claude dziala. Cofniecie: `git checkout -- src/data/higher-mind-skills.json`.
 
-## Sekcja aktualizacji PG na /claude (po kazdym wydaniu coding-higher-mind)
+## Tresc /claude (po wydaniu coding-higher-mind albo zmianie liczb)
 
-1. Zrodlo prawdy: wpis wersji w `CHANGELOG.md` publicznego repo `kamiljan11/coding-higher-mind` (scalony PR eksportu). Kazda liczba w sekcji musi miec pokrycie tam albo w pliku PG, z ktorego pochodzi.
-2. `src/routes/claude.tsx`: nowa sekcja na POCZATKU `sections` w obu jezykach (EN i PL, ten sam uklad: `title`, `lead`, `items`), terminy techniczne objasnione w nawiasie; `versionLine` w obu jezykach (wersja, data, liczba wydan publicznych).
-3. `CHANGELOG.md` strony: wpis w `[Unreleased]`.
-4. Gdy wydanie zmienilo skille lub agentow: odswiez migawke (sekcja wyzej) w tym samym PR, po merge'u PR eksportu.
-5. Bramki: `npm run lint`, `npx tsc --noEmit`, `npm test`, `npm run build`, podglad PL i EN (`npx vite dev`), pg-review (code, ops, ux, product), merge przez `pg-merge-bezpieczny.py`.
+PG jest w trybie utrzymania od 2026-10-14 (ADR 0008), wiec artykul nie dostaje juz sekcji "aktualizacja X.Y.Z" — zmieniamy zdania tam, gdzie fakt sie zmienil.
+
+1. Zrodla i komendy liczace kazdej liczby: `docs/CLAUDE-PAGE-NUMBERS.md` (publiczne repo `kamiljan11/coding-higher-mind`, laptop, GitHub, audyty). Po przeliczeniu zaktualizuj tam kolumne z wynikiem i date.
+2. Tekst: `src/content/claude/en.ts` i `pl.ts` (ten sam uklad: `sections` z `id`, `part`, `figure`), dane wykresow w `figures` obu plikow. Liczby w wykresach musza byc identyczne w obu jezykach — pilnuje tego `src/content/claude/content.test.ts`. `versionLine` w obu jezykach.
+3. Nowy wykres: komponent w `src/components/claude/charts.tsx`, typ i klucz w `types.ts` (`Figures`), galaz w `Figure` w `src/components/claude/Figure.tsx` (switch jest wyczerpujacy — brak galezi = blad tsc; `Figure.test.ts` renderuje kazdy wykres w obu jezykach), style w `src/site.css` (sekcja "/claude — page map"). Arytmetyke trzymaj w `src/lib/chartMath.ts` z testem. Zmiana tresci albo ukladu wykresu zmienia snapshot w `src/components/claude/__snapshots__/`: `npx vitest run -u`, przejrzyj diff `.snap` i commituj razem ze zmiana. Do `.github/mutation-exclude.txt` trafia tylko plik bez logiki (sama tresc), z powodem.
+4. `CHANGELOG.md` strony: wpis w `[Unreleased]`.
+5. Gdy wydanie zmienilo skille lub agentow: odswiez migawke (sekcja wyzej) w tym samym PR, po merge'u PR eksportu.
+6. Bramki: `npm run lint`, `npx tsc --noEmit`, `npm test`, `npm run build`, `npx playwright test e2e/page-map.spec.ts e2e/mobile.spec.ts`, podglad PL i EN na desktopie i telefonie (`npx vite dev`), pg-review (code, ops, ux, product), merge przez `pg-merge-bezpieczny.py`.
 
 ## Monitoring
 

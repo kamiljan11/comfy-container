@@ -58,7 +58,7 @@ why deferred, and the risk of leaving it.
 |---|---|---|
 | `src/data/caseStudies.ts` | ~1540 | Content (case-study copy as data), not logic density |
 | `src/data/services.ts` | ~1389 | Same — service-page copy as data |
-| `src/routes/claude.tsx` | ~1055 | Single content-heavy page component |
+| `src/content/claude/en.ts`, `pl.ts` | ~1000 each | Content (the /claude article as data, ADR 0008); the route itself is ~270 lines |
 
 `src/routes/index.tsx`'s `HomePage` component is ~585 lines (over the 60-line-function
 guideline) — same reasoning: a single marketing page, not control-flow complexity. Splitting any
