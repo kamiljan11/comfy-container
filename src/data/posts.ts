@@ -40,6 +40,10 @@ export type Post = {
 };
 
 const GLOS_WNUCZKA = "https://torzeszow.pl/news/oszusci-moga-podrobic-glos-wnuczka";
+const CZATBOT =
+  "https://torzeszow.pl/news/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem-od-28-pazdziernika-mozna-zlozyc-skarge";
+const LEKARZ =
+  "https://torzeszow.pl/news/lekarz-rodzinny-sprawdzal-diagnoze-w-chatgpt-przepisy-czy-tak-wolno";
 
 const MONITOR = {
   t: "img",
@@ -49,6 +53,141 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-10-13 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-10-15, not the draft)
+    slug: "lekarz-sprawdzal-diagnoze-w-chatgpt",
+    date: "2026-10-13",
+    external: { url: LEKARZ, source: "toRzeszów.pl" },
+    // the article's own photo (Pexels 39192328, Vitaly Gariev, Pexels licence
+    // allows changes), taken from Pexels, not from torzeszow.pl, with the title on it
+    cover: {
+      src: "/blog/lekarz-sprawdzal-diagnoze-w-chatgpt/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Starszy lekarz w białym fartuchu ze stetoskopem pisze na klawiaturze, z napisem: Lekarz rodzinny sprawdzał diagnozę w ChatGPT.",
+        en: "An older doctor in a white coat with a stethoscope typing on a keyboard, with the Polish title: a family doctor checked a diagnosis in ChatGPT.",
+      },
+    },
+    body: {
+      pl: {
+        title: "Lekarz rodzinny sprawdzał diagnozę w ChatGPT. Mój tekst na toRzeszów.pl",
+        description:
+          "Podczas wizyty lekarz rodzinny wpisał moje objawy do ChatGPT, żeby sprawdzić swoją diagnozę. Sprawdziłem przepisy i napisałem o tym dla toRzeszów.pl: Kodeks Etyki Lekarskiej pozwala na AI, ale o ogólnodostępnych czatach nie mówi ani słowa.",
+        lead: "Napisałem dla toRzeszów.pl tekst o wizycie, na której lekarz sprawdzał moją diagnozę w czacie, i o tym, co mówią na to przepisy. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Było to mniej więcej pół roku temu. Lekarz wpisał moje objawy do czatu, a potem sprawdzał, czy ten potwierdzi jego diagnozę. **Mojego imienia ani numeru PESEL przy tym nie podał.**",
+          },
+          {
+            t: "p",
+            text: "Od 1 stycznia 2025 roku **art. 12 Kodeksu Etyki Lekarskiej** pozwala lekarzom korzystać z AI pod kilkoma warunkami, a ostateczną decyzję zawsze podejmuje lekarz. O ogólnodostępnych czatach, takich jak ChatGPT, **nie wspominają ani Kodeks, ani komentarz** Komisji Etyki Lekarskiej NRL. Moim zdaniem to luka.",
+          },
+          { t: "h2", id: "co-robic", text: "Co możesz zrobić jako pacjent" },
+          {
+            t: "list",
+            items: [
+              "**Zapytaj lekarza.** Masz prawo do informacji o rozpoznaniu i metodach diagnostycznych.",
+              "**Wyraź zgodę albo odmów, gdy o wyniku decyduje algorytm.** Zgoda jest potrzebna, gdy algorytm ma główną rolę albo podaje wynik bez udziału lekarza lub przy jego minimalnym udziale.",
+              "**Pilnuj swoich danych.** Jeśli do czatu trafia twoje imię, PESEL albo wyniki badań, zapytaj, z jakiego narzędzia lekarz korzysta i czy przychodnia ma z dostawcą umowę o przetwarzaniu danych.",
+              "**Złóż skargę, jeśli lekarz nie dochował tajemnicy.** Rozpatruje ją okręgowy rzecznik odpowiedzialności zawodowej przy Okręgowej Izbie Lekarskiej w Rzeszowie.",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście są też zasady, które Ministerstwo Cyfryzacji dało urzędnikom, i badanie, w którym lekarzy przyznających się do AI oceniano gorzej.",
+          },
+        ],
+      },
+      en: {
+        title: "My family doctor checked a diagnosis in ChatGPT. My article on toRzeszów.pl",
+        description:
+          "During a visit my family doctor typed my symptoms into ChatGPT to check his diagnosis. I looked at what the Polish rules say and wrote about it for toRzeszów.pl. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, about a visit where my doctor checked his diagnosis in a chatbot, and what the rules say about it. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "About six months ago my family doctor typed my symptoms into a chatbot to see whether it confirmed his diagnosis. **He did not enter my name or my national ID number.**",
+          },
+          {
+            t: "p",
+            text: "Since 1 January 2025 **article 12 of the Polish Code of Medical Ethics** lets doctors use AI under some conditions, and the final decision always stays with the doctor. Neither the Code nor its official commentary mentions **general-purpose chatbots** like ChatGPT. My advice to patients: ask your doctor whether they use AI and what they type into it.",
+          },
+        ],
+      },
+    },
+  },
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-10-10 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-10-15, not the draft)
+    slug: "czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem",
+    date: "2026-10-10",
+    external: { url: CZATBOT, source: "toRzeszów.pl" },
+    // the article's main picture is our own AI illustration (vault file
+    // czatbot-v6-miniatura-czlowiek-robot-AI.jpg), not a portal or agency
+    // photo, with the title on it
+    cover: {
+      src: "/blog/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Mężczyzna z telefonem przy uchu i robot ze słuchawkami przy biurku infolinii, z napisem: Czatbot musi powiedzieć, że nie jest człowiekiem.",
+        en: "A man on the phone and a robot with a headset at a call centre desk, with the Polish title: a chatbot must say it is not human.",
+      },
+    },
+    body: {
+      pl: {
+        title: "Czatbot musi powiedzieć, że nie jest człowiekiem. Mój tekst na toRzeszów.pl",
+        description:
+          "Od 2 sierpnia 2026 roku czatbot i automat w słuchawce mają informować, że rozmawiamy ze sztuczną inteligencją. Od 28 października firmę, której bot tego nie robi, można zgłosić do nowej komisji. Napisałem o tym dla toRzeszów.pl.",
+        lead: "Napisałem dla toRzeszów.pl tekst o tym, jak sprawdzić, czy po drugiej stronie czatu albo infolinii siedzi człowiek. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Od **2 sierpnia 2026 roku** unijny AI Act każe tak projektować systemy rozmawiające z ludźmi, żeby człowiek był informowany, że rozmawia z AI. Chodzi o okienko czatu na stronie sklepu, banku, przychodni czy urzędu i o voicebota, który odbiera telefon albo sam dzwoni. Informacja ma paść **najpóźniej przy pierwszym kontakcie**.",
+          },
+          {
+            t: "p",
+            text: "Polska ustawa o systemach sztucznej inteligencji tworzy nowy organ nadzoru, Komisję Rozwoju i Bezpieczeństwa Sztucznej Inteligencji (KRiBSI). **Od 28 października** skargę do niej może złożyć każdy: osoba prywatna, firma albo inna organizacja.",
+          },
+          { t: "h2", id: "co-robic", text: "Co radzę w tekście" },
+          {
+            t: "list",
+            items: [
+              "**Zapytaj na początku rozmowy:** „Czy rozmawiam z człowiekiem, czy z automatem?”. Uczciwie ustawiony bot od razu odpowie, że jest programem.",
+              "**Zanotuj szczegóły**, jeśli odpowiedź jest wymijająca: datę, godzinę, numer telefonu albo adres strony i nazwę firmy.",
+              "**Dopiero wtedy rozważ skargę do KRiBSI.** Zasadą jest forma elektroniczna, a komisja dopiero rusza, więc sprawdź, gdzie przyjmuje zgłoszenia.",
+              "**Jeśli prowadzisz firmę, przeczytaj powitanie swojego czatbota** i zadzwoń na własną infolinię.",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście piszę też, ile grozi firmie za bota, który nie mówi, że jest programem, i dlaczego jedno uczciwe zdanie na powitanie kosztuje przy tym grosze.",
+          },
+        ],
+      },
+      en: {
+        title: "A chatbot must say it is not human. My article on toRzeszów.pl",
+        description:
+          "Since 2 August 2026 EU rules say a chatbot or a phone bot must tell people they are talking to AI. From 28 October anyone in Poland can complain to a new commission. I wrote about it for toRzeszów.pl. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, on how to tell whether a person or a program is on the other end of a chat or a hotline. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "Under the EU AI Act, systems that talk with people must be designed so that people are told they are talking to AI, **at the latest at the first interaction**. That covers chat windows on shop, bank, clinic and public office websites, and voicebots that answer or make phone calls.",
+          },
+          {
+            t: "p",
+            text: "Poland's new AI act creates a supervisory body, the Commission for the Development and Safety of AI (KRiBSI). **From 28 October 2026** anyone can file a complaint with it. The main advice: ask at the very start whether you are talking to a person, and if the answer dodges the question, note the date, time, phone number or website and the company name.",
+          },
+        ],
+      },
+    },
+  },
   {
     // every fact below is from the article as published on toRzeszów.pl on
     // 2026-10-01 (checked against the live page, not the draft)

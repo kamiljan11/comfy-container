@@ -7,7 +7,7 @@ test("/blog lists the posts newest first and links to them", async ({ page }) =>
   await page.goto("/blog?lang=pl");
   await page.waitForLoadState("networkidle");
   const first = page.locator(".blog-item h2 a").first();
-  await expect(first).toHaveAttribute("href", "/blog/oszusci-moga-podrobic-glos-wnuczka");
+  await expect(first).toHaveAttribute("href", "/blog/lekarz-sprawdzal-diagnoze-w-chatgpt");
   // it was noindex while empty; with a post it must be indexable
   await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
   // every card opens with a thumbnail that actually loaded
@@ -36,8 +36,8 @@ test("a post published elsewhere is labelled on the list and opens out in a new 
     has: page.locator('a[href="/blog/oszusci-moga-podrobic-glos-wnuczka"]'),
   });
   await expect(card.locator(".blog-source")).toContainText("toRzeszów.pl");
-  // only the external post carries the label
-  await expect(page.locator(".blog-source")).toHaveCount(1);
+  // only the external posts carry the label
+  await expect(page.locator(".blog-source")).toHaveCount(3);
 
   await card.locator("h2 a").click();
   await expect(page).toHaveURL(/\/blog\/oszusci-moga-podrobic-glos-wnuczka/);
