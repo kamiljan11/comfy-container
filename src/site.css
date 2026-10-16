@@ -7155,6 +7155,8 @@ header[id] {
   text-align: right;
 }
 .ba-tag {
+  /* own line: "before 4.9 KB" does not fit the 64px value column at 375px, so every row wraps the same way */
+  display: block;
   font-weight: 400;
   font-size: 11px;
   color: #6a6f76;
