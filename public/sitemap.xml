@@ -140,8 +140,14 @@
   </url>
   <url>
     <loc>https://kamiljan.com/blog</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kamiljan.com/blog/anna-z-116-117-to-automat</loc>
+    <lastmod>2026-10-18</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>

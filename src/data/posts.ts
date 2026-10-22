@@ -44,6 +44,8 @@ const CZATBOT =
   "https://torzeszow.pl/news/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem-od-28-pazdziernika-mozna-zlozyc-skarge";
 const LEKARZ =
   "https://torzeszow.pl/news/lekarz-rodzinny-sprawdzal-diagnoze-w-chatgpt-przepisy-czy-tak-wolno";
+const ANNA =
+  "https://torzeszow.pl/news/przed-wizyta-u-kardiologa-dzwoni-anna-z-116-117-to-automat-ktory-nie-zapyta-o-pesel";
 
 const MONITOR = {
   t: "img",
@@ -53,6 +55,74 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-10-18 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-10-22, not the draft)
+    slug: "anna-z-116-117-to-automat",
+    date: "2026-10-18",
+    external: { url: ANNA, source: "toRzeszów.pl" },
+    // the article's main picture is our own AI illustration (laptop file
+    // foto/anna/anna_a.png, pixel-matched to the portal image), not a portal
+    // or agency photo, with the title on it
+    cover: {
+      src: "/blog/anna-z-116-117-to-automat/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Starsza kobieta w swetrze rozmawia przez telefon stacjonarny w przedpokoju, z napisem: Przed wizytą dzwoni Anna z 116 117. To automat.",
+        en: "An older woman in a cardigan talking on a landline phone in a hallway, with the Polish title: before a visit, Anna calls from 116 117, and it is a bot.",
+      },
+    },
+    body: {
+      pl: {
+        title: "Przed wizytą u kardiologa dzwoni Anna z 116 117. Mój tekst na toRzeszów.pl",
+        description:
+          "Od 1 października 2026 roku wirtualna asystentka Anna z Ministerstwa Zdrowia dzwoni z numeru 116 117 i przypomina o wizytach z centralnej e-rejestracji. Napisałem dla toRzeszów.pl, jak odróżnić ją od oszusta.",
+        lead: "Napisałem dla toRzeszów.pl tekst o automacie, który dzwoni do pacjentów przed wizytą, i o tym, jak go odróżnić od oszusta. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Anna to program Ministerstwa Zdrowia. Dzwoni **7 dni i 1 dzień przed wizytą** z numeru **116 117** do pacjentów, którym wizytę umówiła placówka, na przykład do kardiologa albo na mammografię. Chodzi o osoby bez smartfona i internetu, które podały w przychodni telefon stacjonarny. W rozmowie można wizytę potwierdzić albo odwołać.",
+          },
+          {
+            t: "p",
+            text: "Sam buduję automatyczne telefony i SMS-y, więc patrzę też na to, czego automatowi nie wolno. **Anna nie umawia nowych wizyt i nie zmienia terminów.** Uważam to za dobrą decyzję: gdy program źle usłyszy odpowiedź, nikt nie trafi na wizytę w innym terminie.",
+          },
+          { t: "h2", id: "co-radze", text: "Co radzę w tekście" },
+          {
+            t: "list",
+            items: [
+              "**Podaj przychodni aktualny numer telefonu**, także stacjonarnego, jeśli z niego korzystasz.",
+              "**Zapamiętaj numer 116 117.** Z niego dzwoni prawdziwa asystentka.",
+              "**Nie podawaj przez telefon PESEL-u ani danych z dowodu i nie płać.** Anna nigdy o to nie prosi, a sam numer na wyświetlaczu można podrobić.",
+              "**Odwołaj wizytę, jeśli nie przyjdziesz**: w rozmowie z Anną, przez IKP, w aplikacji mojeIKP albo dzwoniąc do placówki.",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście są też liczby NFZ o nieodwołanych wizytach i koszt umowy na tego asystenta. Najlepiej pokazać te rady rodzicom albo dziadkom przed ich najbliższą wizytą.",
+          },
+        ],
+      },
+      en: {
+        title: "Before a cardiology visit, Anna calls from 116 117. My article on toRzeszów.pl",
+        description:
+          "Since 1 October 2026 a virtual assistant called Anna, run by the Polish Ministry of Health, calls patients from 116 117 to remind them of visits. I wrote for toRzeszów.pl how to tell her from a scammer. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, about a phone bot that reminds patients of their visits, and how to tell it from a scammer. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "Anna calls **7 days and 1 day before a visit** from **116 117** to patients without a smartphone or internet whose clinic booked the visit and who gave a landline number. The patient can confirm or cancel the visit. She cannot book or move appointments.",
+          },
+          {
+            t: "p",
+            text: "The real Anna **never asks for a national ID number, ID card details or a payment**. If a caller does, it is not Anna, even when the screen shows 116 117.",
+          },
+        ],
+      },
+    },
+  },
   {
     // every fact below is from the article as published on toRzeszów.pl on
     // 2026-10-13 (published blocks via the read-only panel client, checked
