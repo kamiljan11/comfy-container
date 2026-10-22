@@ -89,6 +89,9 @@ describe("posts", () => {
     expect(findPost("lekarz-sprawdzal-diagnoze-w-chatgpt")?.external?.url).toBe(
       "https://torzeszow.pl/news/lekarz-rodzinny-sprawdzal-diagnoze-w-chatgpt-przepisy-czy-tak-wolno",
     );
+    expect(findPost("anna-z-116-117-to-automat")?.external?.url).toBe(
+      "https://torzeszow.pl/news/przed-wizyta-u-kardiologa-dzwoni-anna-z-116-117-to-automat-ktory-nie-zapyta-o-pesel",
+    );
   });
 
   it("findPost returns undefined for an unknown slug", () => {
