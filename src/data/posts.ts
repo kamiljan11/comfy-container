@@ -137,7 +137,7 @@ export const POSTS: Post[] = [
           },
           {
             t: "p",
-            text: "Film zmontował AI (Claude Code) na moim laptopie z Linuxem, na darmowych narzędziach open source. Narzędzie jest na GitHubie: [video-pipeline](https://github.com/kamiljan11/video-pipeline).",
+            text: "Film zmontował AI (Claude Code) na moim laptopie z Linuxem, na darmowych narzędziach open source. Narzędzie jest na GitHubie: [video-pipeline](https://github.com/kamiljan11/video-pipeline). Wdrożenia robię razem z [Cetus Automation](https://automation.cetuspro.com), stąd ich logo na miniaturze.",
           },
         ],
       },
@@ -179,7 +179,7 @@ export const POSTS: Post[] = [
           },
           {
             t: "p",
-            text: `If you cannot answer one of them, it is not time to build yet. Source: MIT NANDA, "The GenAI Divide: State of AI in Business 2025" (July 2025), via the [project page](${MIT_NANDA}); coverage in [Fortune](${FORTUNE}). The findings are preliminary, which I say in the video.`,
+            text: `If you cannot answer one of them, it is not time to build yet. Source: MIT NANDA, "The GenAI Divide: State of AI in Business 2025" (July 2025), via the [project page](${MIT_NANDA}); coverage in [Fortune](${FORTUNE}). The findings are preliminary, which I say in the video. I do these rollouts together with [Cetus Automation](https://automation.cetuspro.com), hence their logo on the thumbnail.`,
           },
         ],
       },

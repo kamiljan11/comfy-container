@@ -15,16 +15,13 @@ export function isVideoId(id: string): boolean {
  * they asked for). youtube-nocookie.com is YouTube's privacy-enhanced mode;
  * rel=0 keeps suggestions to the same channel.
  */
-export function embedUrl(id: string, start = 0): string {
+export function embedUrl(id: string): string {
   if (!isVideoId(id)) throw new Error(`not a YouTube video id: ${id}`);
-  const q = new URLSearchParams({ autoplay: "1", rel: "0" });
-  if (start > 0) q.set("start", String(Math.floor(start)));
-  return `https://www.youtube-nocookie.com/embed/${id}?${q.toString()}`;
+  return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
 }
 
 /** The ordinary watch page, for the "open on YouTube" link. */
-export function watchUrl(id: string, start = 0): string {
+export function watchUrl(id: string): string {
   if (!isVideoId(id)) throw new Error(`not a YouTube video id: ${id}`);
-  const t = start > 0 ? `&t=${Math.floor(start)}s` : "";
-  return `https://www.youtube.com/watch?v=${id}${t}`;
+  return `https://www.youtube.com/watch?v=${id}`;
 }

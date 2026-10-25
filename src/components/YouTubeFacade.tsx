@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { type Lang } from "../i18n";
 import { embedUrl, watchUrl } from "../lib/youtube";
 
@@ -6,7 +6,8 @@ import { embedUrl, watchUrl } from "../lib/youtube";
  * A YouTube video in a blog post (ADR 0009). Until the reader clicks, this is
  * our own poster image and a button: the browser makes no request to YouTube,
  * so the page keeps its "no third-party cookies" promise. The click swaps in
- * the youtube-nocookie player, which then starts playing.
+ * the youtube-nocookie player, which then starts playing; focus moves into it
+ * so a keyboard or screen reader user is not thrown back to the top of the page.
  */
 
 const COPY: Record<Lang, { play: string; note: string; open: string }> = {
@@ -34,12 +35,17 @@ export function YouTubeFacade({
   lang: Lang;
 }) {
   const [playing, setPlaying] = useState(false);
+  const frame = useRef<HTMLIFrameElement>(null);
+  useEffect(() => {
+    if (playing) frame.current?.focus();
+  }, [playing]);
   const c = COPY[lang];
   return (
     <figure className="post-video">
       <div className="post-video-frame">
         {playing ? (
           <iframe
+            ref={frame}
             src={embedUrl(id)}
             title={title}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"

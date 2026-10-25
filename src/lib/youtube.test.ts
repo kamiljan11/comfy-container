@@ -15,14 +15,10 @@ describe("youtube", () => {
     expect(embedUrl("DogPvuwTPBI")).toBe(
       "https://www.youtube-nocookie.com/embed/DogPvuwTPBI?autoplay=1&rel=0",
     );
-    expect(embedUrl("DogPvuwTPBI", 574.9)).toBe(
-      "https://www.youtube-nocookie.com/embed/DogPvuwTPBI?autoplay=1&rel=0&start=574",
-    );
   });
 
-  it("builds the watch page URL with an optional start", () => {
+  it("builds the watch page URL", () => {
     expect(watchUrl("DogPvuwTPBI")).toBe("https://www.youtube.com/watch?v=DogPvuwTPBI");
-    expect(watchUrl("DogPvuwTPBI", 999)).toBe("https://www.youtube.com/watch?v=DogPvuwTPBI&t=999s");
   });
 
   it("refuses anything that is not a video id instead of building a URL from it", () => {

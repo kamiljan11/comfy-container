@@ -91,6 +91,8 @@ test("a video post contacts YouTube only after the reader clicks play", async ({
   expect(youtube).toEqual([]);
   await play.click();
   const frame = page.locator(".post-video iframe");
+  // keyboard and screen reader users land in the player, not back at the top
+  await expect(frame).toBeFocused();
   await expect(frame).toHaveAttribute(
     "src",
     "https://www.youtube-nocookie.com/embed/DogPvuwTPBI?autoplay=1&rel=0",
