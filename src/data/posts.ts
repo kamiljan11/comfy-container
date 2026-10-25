@@ -15,7 +15,9 @@ export type Block =
   | { t: "h2"; id: string; text: string }
   | { t: "list"; items: string[] }
   | { t: "code"; code: string }
-  | { t: "img"; src: string; alt: string; caption: string; width: number; height: number };
+  | { t: "img"; src: string; alt: string; caption: string; width: number; height: number }
+  /** one of Kamil's own videos; `poster` is a local copy of its thumbnail (ADR 0009) */
+  | { t: "youtube"; id: string; title: string; poster: string };
 
 export type PostBody = {
   title: string;
@@ -46,6 +48,14 @@ const LEKARZ =
   "https://torzeszow.pl/news/lekarz-rodzinny-sprawdzal-diagnoze-w-chatgpt-przepisy-czy-tak-wolno";
 const ANNA =
   "https://torzeszow.pl/news/przed-wizyta-u-kardiologa-dzwoni-anna-z-116-117-to-automat-ktory-nie-zapyta-o-pesel";
+const MIT_NANDA = "https://www.media.mit.edu/groups/nanda/overview/";
+const FORTUNE =
+  "https://fortune.com/2025/08/19/shadow-ai-economy-mit-study-genai-divide-llm-chatbots/";
+const VIDEO_95 = {
+  t: "youtube",
+  id: "DogPvuwTPBI",
+  poster: "/blog/95-procent-firm-bez-zwrotu-z-ai/cover.webp",
+} as const;
 
 const MONITOR = {
   t: "img",
@@ -55,6 +65,126 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the video as published on YouTube on 2026-10-25
+    // (its description and the Polish captions, checked on 2026-10-25)
+    slug: "95-procent-firm-bez-zwrotu-z-ai",
+    date: "2026-10-25",
+    // the video's own thumbnail (our design), copied locally, never hotlinked
+    cover: {
+      src: "/blog/95-procent-firm-bez-zwrotu-z-ai/cover.webp",
+      width: 1280,
+      height: 720,
+      alt: {
+        pl: "Kamil Jan mówi do kamery, obok napis: 95% firm bez zwrotu z AI, 3 zasady, które działają.",
+        en: "Kamil Jan talking to the camera next to the Polish caption: 95% of companies with no return from AI, 3 rules that work.",
+      },
+    },
+    body: {
+      pl: {
+        title: "95% firm nie widzi zysku z AI. Byłem w tych 95%",
+        description:
+          "Nowy film: trzy zasady, których trzymam się przy wdrożeniach AI w firmach, historia aplikacji z 64 ekranami i jednym zleceniem oraz 5 pytań, które zadaję, zanim cokolwiek zbuduję.",
+        lead: "Według badania MIT 95% firm, które inwestują w AI, nie widzi z tego zwrotu. Przez długi czas sam byłem w tych 95%: budowałem narzędzia, które nie zarobiły ani złotówki. Nagrałem o tym film.",
+        blocks: [
+          { ...VIDEO_95, title: "95% firm nie widzi zysku z AI. Byłem w tych 95%" },
+          {
+            t: "p",
+            text: "To 95% nie znaczy, że AI nie działa. W tym samym badaniu w ponad 90% firm pracownicy używają AI na własną rękę, z prywatnych kont. Kłopot zaczyna się wtedy, gdy AI ma obsługiwać codzienne procesy całej firmy: zamówienia, faktury, obieg dokumentów. Tym kawałkiem się zajmuję.",
+          },
+          { t: "h2", id: "trzy-zasady", text: "Trzy zasady" },
+          {
+            t: "list",
+            items: [
+              "**Buduję tylko tam, gdzie coś mocno boli.** Firma zapłaci za rozwiązanie, gdy umie policzyć, ile dziś kosztuje ją problem. Głośne nie znaczy drogie, a prawdziwy ból bywa cichy: ktoś od lat robi nudną rzecz i przestał ją zauważać.",
+              "**Wdrażam tak, żeby po miesiącu ludzie dalej z tego korzystali.** Większość projektów nie umiera przy budowaniu, tylko między próbnym wdrożeniem a zwykłym poniedziałkiem.",
+              "**Biorę jeden proces na raz, a nie całą firmę.** Wpadkę przy jednym procesie i jednej osobie poprawia się w dzień albo dwa. Wpadka w całej firmie dotyka wszystkich i projekt ląduje w szufladzie.",
+            ],
+          },
+          { t: "h2", id: "64-ekrany", text: "Aplikacja z 64 ekranami i jednym zleceniem" },
+          {
+            t: "p",
+            text: "W filmie opowiadam o własnej wpadce. Aplikacja do prowadzenia warsztatu samochodowego miała około 64 ekranów. Kiedy zajrzałem do niej po jakimś czasie, było w niej jedno zlecenie. Funkcji nie brakowało. Brakowało zmiany sposobu pracy, bo ludzie dalej robili wszystko po staremu. Ta aplikacja przeszła od tamtej pory dużą zmianę, opisałem ją w [case studies](/case-studies#ai-native-workshop-management).",
+          },
+          { t: "h2", id: "po-oddaniu", text: "Co robię po oddaniu narzędzia" },
+          {
+            t: "p",
+            text: "Siadam z ludźmi, którzy będą z niego korzystać, i patrzę, gdzie się potykają. W aplikacji buduję panel wdrożeniowca: kto w tym tygodniu się logował, ile zamówień przeszło przez system w porównaniu ze zwykłym tygodniem firmy i na którym kroku ludzie najczęściej przerywają. Dzięki temu ciche wracanie do starego sposobu widać po kilku dniach, a nie po kilku miesiącach.",
+          },
+          {
+            t: "p",
+            text: "Jeśli ktoś sprzedaje Ci wdrożenie, zapytaj, co robi w drugim tygodniu po oddaniu.",
+          },
+          { t: "h2", id: "5-pytan", text: "5 pytań przed wdrożeniem AI" },
+          {
+            t: "list",
+            items: [
+              "Kto dziś robi to ręcznie i ile godzin tygodniowo na to idzie?",
+              "Ile kosztuje jeden błąd w tym procesie?",
+              "Kto będzie z tego korzystał w poniedziałek o 8 rano?",
+              "Kto w firmie będzie tego pilnował na co dzień?",
+              "Po jakiej jednej liczbie poznamy za 30 dni, że to działa?",
+            ],
+          },
+          {
+            t: "p",
+            text: "Jeśli na któreś nie umiesz odpowiedzieć, jeszcze nie czas na budowanie. Każde z tych pytań dotyczy jednego procesu, a nie całej firmy.",
+          },
+          { t: "h2", id: "zrodla", text: "Źródła i kulisy" },
+          {
+            t: "p",
+            text: `Badanie: MIT NANDA, „The GenAI Divide: State of AI in Business 2025” (lipiec 2025), dostęp przez [stronę projektu](${MIT_NANDA}); omówienie w [Fortune](${FORTUNE}). Wyniki są wstępne i badanie ma swoje słabe strony, mówię o tym w filmie. Sprawdź je sam, zanim komuś je zacytujesz.`,
+          },
+          {
+            t: "p",
+            text: "Film zmontował AI (Claude Code) na moim laptopie z Linuxem, na darmowych narzędziach open source. Narzędzie jest na GitHubie: [video-pipeline](https://github.com/kamiljan11/video-pipeline). Wdrożenia robię razem z [Cetus Automation](https://automation.cetuspro.com), ich logo jest na miniaturze.",
+          },
+        ],
+      },
+      en: {
+        title: "95% of companies see no return from AI. I was one of them",
+        description:
+          "A new video (in Polish): the three rules I follow when bringing AI into a company, the story of an app with 64 screens and one job order, and the 5 questions I ask before I build anything.",
+        lead: "According to an MIT study, 95% of companies investing in AI see no return from it. For a long time I was one of them: I built tools that never earned a single złoty. I made a video about it. It is in Polish, so here is the short version.",
+        blocks: [
+          { ...VIDEO_95, title: "95% of companies see no return from AI. I was one of them" },
+          {
+            t: "p",
+            text: "The 95% does not mean AI does not work. In the same study, employees in over 90% of companies use AI on their own, from private accounts. The trouble starts when AI has to run a whole company's daily processes: orders, invoices, document flow. That is the part I work on.",
+          },
+          { t: "h2", id: "three-rules", text: "Three rules" },
+          {
+            t: "list",
+            items: [
+              "**Build only where it really hurts.** A company pays for a solution when it can count what the problem costs today. Loud is not the same as expensive, and the real pain is often quiet.",
+              "**Roll out so people still use it a month later.** Most projects do not die while being built. They die between the pilot and an ordinary Monday.",
+              "**One process at a time, not the whole company.** A slip in one process for one person takes a day or two to fix. A slip across the company hits everyone and the project ends up in a drawer.",
+            ],
+          },
+          { t: "h2", id: "64-screens", text: "An app with 64 screens and one job order" },
+          {
+            t: "p",
+            text: "My own failure: a car workshop app with about 64 screens. When I looked at it some time after handing it over, it held one job order. No feature was missing. What was missing was a change in how people worked. The app has changed a lot since, see the [case studies](/case-studies#ai-native-workshop-management).",
+          },
+          { t: "h2", id: "five-questions", text: "5 questions before an AI rollout" },
+          {
+            t: "list",
+            items: [
+              "Who does this by hand today, and how many hours a week does it take?",
+              "What does one mistake in this process cost?",
+              "Who will use it on Monday at 8 a.m.?",
+              "Who in the company will look after it day to day?",
+              "Which one number will tell us in 30 days that it works?",
+            ],
+          },
+          {
+            t: "p",
+            text: `If you cannot answer one of them, it is not time to build yet. Source: MIT NANDA, "The GenAI Divide: State of AI in Business 2025" (July 2025), via the [project page](${MIT_NANDA}); coverage in [Fortune](${FORTUNE}). The findings are preliminary, which I say in the video. I do these rollouts together with [Cetus Automation](https://automation.cetuspro.com), whose logo is on the thumbnail.`,
+          },
+        ],
+      },
+    },
+  },
   {
     // every fact below is from the article as published on toRzeszów.pl on
     // 2026-10-18 (published blocks via the read-only panel client, checked

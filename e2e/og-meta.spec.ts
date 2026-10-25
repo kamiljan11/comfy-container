@@ -22,6 +22,7 @@ const PAGES = [
   "/blog/oszusci-moga-podrobic-glos-wnuczka",
   "/blog/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem",
   "/blog/lekarz-sprawdzal-diagnoze-w-chatgpt",
+  "/blog/95-procent-firm-bez-zwrotu-z-ai",
   "/blog/anna-z-116-117-to-automat",
 ];
 
