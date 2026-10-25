@@ -3,7 +3,8 @@ import { type Lang } from "../i18n";
 /**
  * The privacy policy (/polityka-prywatnosci), as data.
  *
- * Written from what the code actually does, checked on 2026-09-21:
+ * Written from what the code actually does, checked on 2026-09-21 (YouTube
+ * player after a click added 2026-10-25, ADR 0009):
  * - the consultation form and the chat's lead step send name, email, company
  *   and message to the server, which asks Anthropic for a short summary and
  *   emails both to Kamil through Resend (src/server/lead.server.ts); nothing
@@ -31,7 +32,7 @@ export type PrivacyDoc = {
 };
 
 /** The one place the policy date lives; the page formats it per language. */
-export const PRIVACY_UPDATED = "2026-09-21";
+export const PRIVACY_UPDATED = "2026-10-25";
 
 export const PRIVACY: Record<Lang, PrivacyDoc> = {
   pl: {
@@ -66,13 +67,14 @@ export const PRIVACY: Record<Lang, PrivacyDoc> = {
         p: [
           "Żeby chronić formularz przed automatycznym zalewaniem, serwer pamięta adres IP przez 10 minut, tylko w pamięci, bez zapisu na dysk. Serwery hostingu (Vercel) prowadzą standardowe logi techniczne.",
           "Czcionki ładują się z Google Fonts, więc Twoja przeglądarka łączy się z serwerami Google, które widzą adres IP.",
+          "Niektóre wpisy na blogu pokazują moje filmy z YouTube. Dopóki nie klikniesz w film, strona nie łączy się z YouTube. Po kliknięciu odtwarzacz ładuje się z youtube-nocookie.com (tryb rozszerzonej prywatności YouTube, usługa Google), który może zapisać w przeglądarce własne dane i widzi adres IP.",
           "W przeglądarce zapisuję jedną rzecz: wybrany język strony (localStorage). Strona nie używa narzędzi analitycznych ani ciasteczek reklamowych.",
         ],
       },
       {
         h: "Komu przekazuję dane",
         p: [
-          "Dane przetwarzają w moim imieniu dostawcy usług: Vercel (hosting), Resend (wysyłka e-maili), Anthropic (model AI) i Google (czcionki). Mają siedziby w USA. Przekazanie danych poza Europejski Obszar Gospodarczy odbywa się na podstawie mechanizmów przewidzianych w RODO, czyli decyzji Komisji Europejskiej o adekwatności (EU-US Data Privacy Framework) albo standardowych klauzul umownych.",
+          "Dane przetwarzają w moim imieniu dostawcy usług: Vercel (hosting), Resend (wysyłka e-maili), Anthropic (model AI) i Google (czcionki, filmy z YouTube po kliknięciu). Mają siedziby w USA. Przekazanie danych poza Europejski Obszar Gospodarczy odbywa się na podstawie mechanizmów przewidzianych w RODO, czyli decyzji Komisji Europejskiej o adekwatności (EU-US Data Privacy Framework) albo standardowych klauzul umownych.",
           "Nie sprzedaję danych i nie przekazuję ich nikomu w celach marketingowych.",
         ],
       },
@@ -124,13 +126,14 @@ export const PRIVACY: Record<Lang, PrivacyDoc> = {
         p: [
           "To protect the form from automated floods, the server remembers the IP address for 10 minutes, in memory only, never written to disk. The hosting servers (Vercel) keep standard technical logs.",
           "Fonts load from Google Fonts, so your browser connects to Google's servers, which see your IP address.",
+          "Some blog posts show my YouTube videos. Until you click a video, the page does not connect to YouTube. After the click the player loads from youtube-nocookie.com (YouTube's privacy-enhanced mode, a Google service), which may store its own data in your browser and sees your IP address.",
           "The site saves one thing in your browser: the language you picked (localStorage). It uses no analytics tools and no advertising cookies.",
         ],
       },
       {
         h: "Who else processes the data",
         p: [
-          "Service providers process data on my behalf: Vercel (hosting), Resend (email delivery), Anthropic (AI model) and Google (fonts). They are based in the USA. Transfers outside the European Economic Area rely on the mechanisms the GDPR provides: the European Commission's adequacy decision (EU-US Data Privacy Framework) or standard contractual clauses.",
+          "Service providers process data on my behalf: Vercel (hosting), Resend (email delivery), Anthropic (AI model) and Google (fonts, YouTube videos after a click). They are based in the USA. Transfers outside the European Economic Area rely on the mechanisms the GDPR provides: the European Commission's adequacy decision (EU-US Data Privacy Framework) or standard contractual clauses.",
           "I don't sell data and don't pass it to anyone for marketing.",
         ],
       },

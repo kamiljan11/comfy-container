@@ -7,7 +7,7 @@ test("/blog lists the posts newest first and links to them", async ({ page }) =>
   await page.goto("/blog?lang=pl");
   await page.waitForLoadState("networkidle");
   const first = page.locator(".blog-item h2 a").first();
-  await expect(first).toHaveAttribute("href", "/blog/anna-z-116-117-to-automat");
+  await expect(first).toHaveAttribute("href", "/blog/95-procent-firm-bez-zwrotu-z-ai");
   // it was noindex while empty; with a post it must be indexable
   await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
   // every card opens with a thumbnail that actually loaded
@@ -76,4 +76,27 @@ test("a post renders headings, screenshot, code and the repo link", async ({ pag
 test("an unknown post is a 404, not an empty page", async ({ page }) => {
   const res = await page.goto("/blog/nie-ma-takiego-wpisu");
   expect(res?.status()).toBe(404);
+});
+
+test("a video post contacts YouTube only after the reader clicks play", async ({ page }) => {
+  const youtube: string[] = [];
+  page.on("request", (r) => {
+    if (/youtube|ytimg|googlevideo/.test(r.url())) youtube.push(r.url());
+  });
+  await page.goto("/blog/95-procent-firm-bez-zwrotu-z-ai?lang=pl");
+  await page.waitForLoadState("networkidle");
+  const play = page.getByRole("button", { name: /Odtwórz film/ });
+  await play.scrollIntoViewIfNeeded();
+  await expect(play.locator("img")).toBeVisible();
+  expect(youtube).toEqual([]);
+  await play.click();
+  const frame = page.locator(".post-video iframe");
+  await expect(frame).toHaveAttribute(
+    "src",
+    "https://www.youtube-nocookie.com/embed/DogPvuwTPBI?autoplay=1&rel=0",
+  );
+  await expect(page.locator(".post-video figcaption a")).toHaveAttribute(
+    "href",
+    "https://www.youtube.com/watch?v=DogPvuwTPBI",
+  );
 });

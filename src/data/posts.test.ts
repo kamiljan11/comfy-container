@@ -4,6 +4,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { isVideoId } from "../lib/youtube";
 import { POSTS, findPost } from "./posts";
 
 describe("posts", () => {
@@ -45,6 +46,17 @@ describe("posts", () => {
           if (x.t !== "img") continue;
           expect(existsSync(join(process.cwd(), "public", x.src)), x.src).toBe(true);
           expect(x.alt.length).toBeGreaterThan(20);
+        }
+      });
+
+      it(`${post.slug} (${lang}) videos have a valid id, a title and a local poster`, () => {
+        for (const x of b.blocks) {
+          if (x.t !== "youtube") continue;
+          expect(isVideoId(x.id), x.id).toBe(true);
+          expect(x.title.length).toBeGreaterThan(10);
+          // a local copy, so the page makes no request to YouTube before the click
+          expect(x.poster.startsWith("/blog/"), x.poster).toBe(true);
+          expect(existsSync(join(process.cwd(), "public", x.poster)), x.poster).toBe(true);
         }
       });
 
@@ -92,6 +104,14 @@ describe("posts", () => {
     expect(findPost("anna-z-116-117-to-automat")?.external?.url).toBe(
       "https://torzeszow.pl/news/przed-wizyta-u-kardiologa-dzwoni-anna-z-116-117-to-automat-ktory-nie-zapyta-o-pesel",
     );
+  });
+
+  it("the video post embeds its video in both languages", () => {
+    const p = findPost("95-procent-firm-bez-zwrotu-z-ai");
+    for (const lang of ["pl", "en"] as const) {
+      const videos = p?.body[lang].blocks.filter((x) => x.t === "youtube") ?? [];
+      expect(videos.map((v) => (v.t === "youtube" ? v.id : ""))).toEqual(["DogPvuwTPBI"]);
+    }
   });
 
   it("findPost returns undefined for an unknown slug", () => {
