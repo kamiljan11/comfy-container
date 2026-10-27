@@ -7453,16 +7453,82 @@ header[id] {
   background: none;
   border: none;
   padding: 4px 0;
+  min-width: 44px; /* a tap target, not only a word wide */
+  text-align: left;
   color: #075a65; /* #0a7d8c on the panel grey is 4.4:1, under AA for 12 px text */
   text-decoration: underline;
   cursor: pointer;
 }
 
-/* paper has no pointer: drop the buttons and the "point at a part" hint, keep an opened explanation */
+/* paper has no pointer: drop the buttons and the "point at a part" hint, keep an opened explanation.
+   :has() sits in its own rule: a browser without it drops only that rule, not the whole list. */
 @media print {
   .ax-chips,
   .ax-close,
+  .ax-hint {
+    display: none !important;
+  }
   .ax-panel:not(:has(.ax-term)) {
     display: none !important;
+  }
+}
+
+/* ── /claude: questions and answers (Faq.tsx) ── */
+.faq {
+  margin-top: 4px; /* the section heading already draws the line above the first question */
+}
+.faq-item {
+  border-bottom: 1px solid #d9d9d4;
+  break-inside: avoid; /* on paper a question stays with its answer */
+}
+.faq-q {
+  cursor: pointer;
+  padding: 12px 28px 12px 0;
+  min-height: 44px;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: #111;
+  list-style: none;
+  position: relative;
+}
+.faq-q-text {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+.faq-q::after {
+  content: "+"; /* fallback for browsers without alt text in content */
+  content: "+" / ""; /* decoration: <details> already tells a screen reader open or closed */
+  position: absolute;
+  right: 4px;
+  top: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #075a65;
+}
+.faq-item[open] > .faq-q::after {
+  content: "−";
+  content: "−" / "";
+}
+.faq-q:focus-visible {
+  outline: 2px solid #0a7d8c;
+  outline-offset: 2px;
+}
+.faq-a {
+  /* the same size and colour as the article's paragraphs (.cv-sec > p) */
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2a2e34;
+  margin: 0 0 14px;
+  padding-left: 14px;
+  border-left: 3px solid #0a7d8c;
+}
+@media print {
+  .faq-q::after {
+    content: none;
   }
 }

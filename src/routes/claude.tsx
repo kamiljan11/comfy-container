@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Fragment } from "react";
 import { SkillsTab } from "../components/claude/SkillsTab";
 import { ExplainedFigure } from "../components/claude/Explain";
+import { Faq } from "../components/claude/Faq";
 import { Figure } from "../components/claude/Figure";
 import type { Content, Item, Section } from "../components/claude/types";
 import { en } from "../content/claude/en";
@@ -207,6 +208,7 @@ function SectionBlock({ s, c }: { s: Section; c: Content }) {
         </ul>
       )}
       {s.items && <ItemList items={s.items} />}
+      {s.faq && <Faq items={s.faq} />}
       {s.link && (
         <p>
           <a href={s.link.href} target="_blank" rel="noopener noreferrer">

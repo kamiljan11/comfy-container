@@ -18,7 +18,8 @@ concept. The terms below are the ones that actually recur in this codebase.
 | `ssrDefault` | The language (`en`/`pl`) the server renders before the client can resolve the visitor's real preference from `?lang=`/`localStorage`/browser locale. See `useLang.ts`. |
 | stub / dead-letter route | Anything wired to log to the console instead of a real provider — currently the default for mail (no `RESEND_API_KEY`) and for newsletter subscriber storage (always in-memory, KV is commented out). |
 | `PG` | Coding Higher Mind (from the Polish "Prompt Guard"): Kamil's quality system for AI-assisted work, described on `/claude`. Its source is the public repo `kamiljan11/coding-higher-mind`. |
-| `part` | One of the six chapters of the `/claude` article (`Section.part`, 0-5). Each part opens with a divider (`#part-N`) and has a card on the page map. |
+| `part` | One of the seven chapters of the `/claude` article (`Section.part`, 0-6). Each part opens with a divider (`#part-N`) and has a card on the page map. |
+| `faq` | Questions and answers in a `/claude` section (`Section.faq`: question = `label`, answer = `body`), shown folded by `Faq.tsx`. Only the last part, "In short, and questions" (`tell.en.ts`, `tell.pl.ts`), uses it. |
 | `figure` / `FigureKey` | A chart or diagram placed in one `/claude` section, picked by key in `src/components/claude/Figure.tsx`. Its data lives in `Content.figures`. |
 | `explain panel` | Panel under a `/claude` figure (`src/components/claude/Explain.tsx`) that explains the element marked `data-explain` the reader points at or taps; texts in `src/content/claude/explain.{en,pl}.ts`. Not a `part` (chapter). |
 | page map | The overview at the top of `/claude` (`#page-map`): a card per part with a link to every section. It replaced the old collapsed table of contents. |
