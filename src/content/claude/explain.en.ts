@@ -403,4 +403,237 @@ export const explainEn: Explains = {
       body: "The guard is built against mistakes and against instructions smuggled in from outside, for example from a web page an agent reads. An agent set on getting around it can run any script; only the operating system's sandbox and permissions stop that.",
     },
   ],
+  matrix: [
+    {
+      id: "row-0",
+      term: "The design matrix",
+      body: "Every project gets a table of 62 rows: 37 system-design areas such as data, queues or login, and 25 tool layers from the frontend to payments. Each row must hold a decision with evidence, a reason it does not apply, or a measurable signal for when to come back.",
+    },
+    {
+      id: "row-1",
+      term: "Options from the course",
+      body: "An audit on October 6 took 437 named options from a system-design course. PG could choose between 46 % of them, knew 26 % only by name and missed 28 %. This bar is that gap, measured before version 1.5.0 added the matrix.",
+    },
+    {
+      id: "row-2",
+      term: "Areas decided, before",
+      body: "Of the 37 areas, the old design step made the AI decide in 15, partly in 11 and not at all in 11. Nothing made it walk through every area.",
+    },
+    {
+      id: "row-3",
+      term: "The first real run",
+      body: "The same day the matrix ran on a client app: 31 rows got a decision, 5 did not apply and 1 waits for a measurable signal. All 37 rows were filled, and about 60 gaps were listed with evidence for a person to review.",
+    },
+  ],
+  release: [
+    {
+      id: "step-0",
+      term: "Build and tests",
+      body: "The same automatic checks every change already passes: the code builds, the types match and the tests are green. The whole pipeline is designed and reviewed, but it has not run on a live project yet.",
+    },
+    {
+      id: "step-1",
+      term: "Probe the preview",
+      body: "The new version first runs as a preview, before the real address points at it. A script opens the pages that must never break and checks that each one answers correctly; a red result must keep the new version off the domain.",
+    },
+    {
+      id: "step-2",
+      term: "Wait 10 minutes",
+      body: "The new build is tested for ten minutes away from live visitors before the domain points at it, so a problem shows up while no visitor is using it yet.",
+    },
+    {
+      id: "step-3",
+      term: "Watch 15 minutes",
+      body: "After the switch, a script checks the live site every 30 seconds for 15 minutes. It does the job of the engineer on call that a one-person company does not have.",
+    },
+    {
+      id: "back",
+      term: "The way back",
+      body: "Three failed checks in a row, about a minute of errors, bring back the last good version by itself, once. If the release changed the database structure or server functions, it stops and asks me instead: old code on a new structure would make things worse.",
+    },
+  ],
+  rounds: [
+    {
+      id: "blocking",
+      term: "Blocking finding",
+      body: "A problem serious enough to stop the release. It must be fixed before anything ships. The full rounds found two security holes, such as a secret access key (a token) the AI on duty could have pasted into a comment; the final checks found a safety rule without a test.",
+    },
+    {
+      id: "major",
+      term: "Major finding",
+      body: "A real defect that does not stop the release by itself but is fixed in the same round, before the next one starts. Each teal bar shows how many such findings one round produced.",
+    },
+    {
+      id: "round",
+      term: "A review round",
+      body: "One full pass over release 1.7.0: three or four AI reviewers, each with its own checklist, read the whole change on their own. A script merges their findings, they are fixed, and the next round starts on the fixed code.",
+    },
+    {
+      id: "final",
+      term: "Final checks",
+      body: "Two smaller passes with two reviewers, which only read the last fixes. They still found a blocking problem: a safety rule without a test. It was fixed before release, like the others.",
+    },
+  ],
+  context: [
+    {
+      id: "row-0",
+      term: "Rules in a follow-up",
+      body: "Every message to the model carries background text it reads first, and that text is paid for. A follow-up about code used to carry 4.9 KB of rules; now the full protocol goes once per session and later messages get a one-line reminder, 0.9 KB.",
+    },
+    {
+      id: "row-1",
+      term: "Memory at start",
+      body: "The notes loaded when a session starts went from 35 KB to 25 KB. The newest checkpoints come first, every shortened file keeps a list of what it left out, and a budget check turns red if the start-up text grows back.",
+    },
+    {
+      id: "row-2",
+      term: "Context window",
+      body: "The window is how much text the model holds at once. A million tokens sounds better, but every message resends all of it: in my transcripts a 1M window used about 2.3 times more of the weekly limit than 400k, so the window stays at 400k.",
+    },
+  ],
+  calib: [
+    {
+      id: "row-0",
+      term: "Change size",
+      body: "A change too big to review well has to be split. The limit was recalibrated from the gate log: 400 lines became 1,500, and a change that covers one topic may stay in one piece.",
+    },
+    {
+      id: "row-1",
+      term: "Duplicated text",
+      body: "The gate looks for the same text pasted again and again instead of written once. It used to fire at 3 copies in 2 files; now at 6 copies in 3 files, and seed data, which repeats on purpose, is ignored.",
+    },
+    {
+      id: "row-2",
+      term: "Deleting a build cache",
+      body: "A build cache is a folder of files a tool can rebuild at any time. Deleting it used to be blocked like any other deletion; now it is allowed, while paths with .. and links stay blocked, because they can point outside the folder.",
+    },
+    {
+      id: "row-3",
+      term: "Lint after an edit",
+      body: "Lint is an automatic check for style and common errors that runs after every edit. Throwaway scripts outside a project are now skipped, because they never ship.",
+    },
+    {
+      id: "row-4",
+      term: "Changelog",
+      body: "The changelog is the list of what changed in each release. Instead of a line written in every pull request, the list is now collected from the pull request titles when a release is made.",
+    },
+    {
+      id: "row-5",
+      term: "Routines' scope",
+      body: "Routines are checks that run on a schedule. When they run, they look only at the 12 of 47 repositories with real work in the last 30 days. Right now they are switched off until their setup is fixed.",
+    },
+  ],
+  limits: [
+    {
+      id: "trigger-0",
+      term: "An incident",
+      body: "A real failure that a gate should have caught and did not. That is a measured gap, so fixing it is worth what it costs; a risk that only might happen is not enough.",
+    },
+    {
+      id: "trigger-1",
+      term: "A tool or model update",
+      body: "When Claude Code or the model changes, a hook (a check wired into the tool) can break or the agent can start behaving differently. Then PG is adjusted to the new tool; it does not grow a new mechanism because of it.",
+    },
+    {
+      id: "trigger-2",
+      term: "A deliberate request",
+      body: "I decide that something should change. What no longer counts is a routine finding new work for itself: for weeks every risk I noticed got a new gate, and that is what this rule ended.",
+    },
+    {
+      id: "wall-0",
+      term: "A determined attacker",
+      body: "The guard reads commands as text. Someone who wants to get past it can write a script to a file and run it, and no text rule sees inside. Stopping that is the job of the operating system: its sandbox, a fenced-off space for programs, and its permissions.",
+    },
+    {
+      id: "wall-1",
+      term: "The meaning of code",
+      body: "A pattern check sees what code looks like, not whether its logic is right: two lines can look alike and do opposite things. That is why there are reviewers who read the change and tests that run it.",
+    },
+    {
+      id: "wall-2",
+      term: "A target that becomes the goal",
+      body: "When a number becomes the goal, it stops measuring what it was meant to (Goodhart's law). More gates or more green runs do not mean better work by themselves; the work has to be good.",
+    },
+    {
+      id: "signal",
+      term: "Stop signal",
+      body: "The point where more effort stops buying protection: two rounds in a row that find only edge cases never seen in real work. The rewrite of the part of the guard that reads commands reached it after nine rounds, and it was closed.",
+    },
+  ],
+  waffle: [
+    {
+      id: "group-0",
+      term: "Active",
+      body: "12 repositories had real work in the last 30 days. When the routines run, they spend their time only on these; days when PG swept every repository at once or the same change was rolled out everywhere do not count as work.",
+    },
+    {
+      id: "group-1",
+      term: "Finished or resting",
+      body: "Most projects are done or paused. PG still guards all of them, but the routines spend their time only where work is happening.",
+    },
+    {
+      id: "group-2",
+      term: "Never checked by routines",
+      body: "One repository is never part of the routines' runs. It is still counted here, so the total stays 47.",
+    },
+    {
+      id: "fact-0",
+      term: "Branch protection",
+      body: "A GitHub setting that stops a change from reaching the main branch without passing its checks. 33 repositories have it, 31 of them strict: the checks must pass on the latest code, not on an older copy.",
+    },
+    {
+      id: "fact-1",
+      term: "Vulnerability alerts",
+      body: "GitHub warns when a library a project uses has a known security hole. 44 repositories have these alerts switched on.",
+    },
+  ],
+  versions: [
+    {
+      id: "strip",
+      term: "The calendar strip",
+      body: "One cell per day, from September 12 to October 14. A filled cell is a day with a release, and a number in it means several releases that day; the gaps between them are true to scale.",
+    },
+    {
+      id: "number",
+      term: "Version number",
+      body: "Three numbers: the first changes when something stops working the old way, the middle one when something new is added, the last one for a fix. So 1.2.6 is the sixth fix after 1.2.0.",
+    },
+    {
+      id: "compare",
+      term: "Compared with others",
+      body: "Agents went through 35 public projects with a similar idea and listed 23 things they did better, each with a file and line. The design of the changes was reviewed for security before any code was written.",
+    },
+    {
+      id: "patches",
+      term: "Six fixes in one day",
+      body: "The stop gate believed what the tests printed instead of their exit code, the number a program returns when it ends, so a broken test setup could pass as skipped. Six patch releases later, a verdict comes only from the exit code.",
+    },
+  ],
+  install: [
+    {
+      id: "step-0",
+      term: "Copy the repository",
+      body: "git clone downloads the public repository to your computer. It needs Node 20 or newer, git and Claude Code; nothing is installed at this step.",
+    },
+    {
+      id: "step-1",
+      term: "Dry run",
+      body: "The installer prints what it would copy, merge and add, and changes nothing. You read the plan first, like a quote before the work starts.",
+    },
+    {
+      id: "step-2",
+      term: "Install",
+      body: "Files go into ~/.claude, the folder Claude Code reads its settings from. A file you changed is never overwritten: the new version lands next to yours, settings are merged, and the rules sit between markers so an update replaces only that block.",
+    },
+    {
+      id: "step-3",
+      term: "Self-test",
+      body: "The installer ends by running the system's own tests on your computer. The green output is the proof that the checks work there, not the installer's word that everything went fine.",
+    },
+    {
+      id: "back",
+      term: "Uninstaller",
+      body: "The same repository has an uninstaller, so trying the system does not lock you in. The public 1.8.0 has 409 files, cleaned of private data.",
+    },
+  ],
 };

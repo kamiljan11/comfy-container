@@ -25,8 +25,9 @@ describe.each([
 ] as const)("explanations (%s)", (_lang, c) => {
   const keys = Object.keys(c.explain) as FigureKey[];
 
-  it("covers the ten key figures", () => {
-    expect(keys.length).toBeGreaterThanOrEqual(10);
+  // every figure, so a new one cannot ship as the only figure a reader cannot ask about
+  it("covers every figure on the page", () => {
+    expect([...keys].sort()).toEqual(Object.keys(c.figures).sort());
   });
 
   it.each(keys)("%s: every explanation has an element and every element an explanation", (k) => {

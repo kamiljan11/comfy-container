@@ -33,7 +33,7 @@ export function ExplainedFigure({
     const root = wrap.current;
     if (!root) return;
     // The figure is an opaque child (SVG or HTML drawn by diagrams.tsx/charts.tsx), so the highlight is a class
-    // toggled from outside instead of a prop threaded into eighteen components. Safe because their classNames are static.
+    // toggled from outside instead of a prop threaded into every figure component. Safe because their classNames are static.
     for (const el of root.querySelectorAll("[data-explain]")) {
       el.classList.toggle("ax-on", el.getAttribute("data-explain") === active);
     }

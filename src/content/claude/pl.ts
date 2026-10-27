@@ -828,7 +828,7 @@ export const pl: Content = {
         { label: "runda 4", blocking: 0, major: 8 },
         { label: "runda 5", blocking: 0, major: 9 },
         { label: "runda 6", blocking: 0, major: 8 },
-        { label: "kontrole końcowe", blocking: 1, major: 2 },
+        { label: "kontrole końcowe", blocking: 1, major: 2, final: true },
       ],
       caption:
         "Wydanie 1.7.0: uwagi w każdej rundzie recenzji. Rundy 1–6 prowadziło trzech albo czterech recenzentów; dwie kontrole końcowe poprawek dwóch.",
@@ -1063,12 +1063,14 @@ export const pl: Content = {
           date: "27 wrz",
           day: 15,
           theme: "przebudowa po porównaniu z 35 projektami open source",
+          explainId: "compare",
         },
         {
           v: "1.2.1–1.2.6",
           date: "28 wrz",
           day: 16,
           patches: 6,
+          explainId: "patches",
           theme: "sześć poprawek: werdykt testów tylko z kodu wyjścia",
         },
         { v: "1.3.0", date: "5 paź", day: 23, theme: "pull requesty scalane z dowodem recenzji" },
