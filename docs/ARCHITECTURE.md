@@ -38,7 +38,7 @@ _result_, not which adapter produced it.
 | `src/routeTree.gen.ts`                                                | **Generated** by the TanStack router plugin on every build/dev run. Never hand-edit; that's why it carries `as any` and a file-level `eslint-disable` — those are not hand-written debt                                            | —                                                                    | generated |
 | `src/data/caseStudies.ts`, `src/data/services.ts`                     | All case-study and service copy, as data (not hardcoded in JSX) — this is what Kamil edits when a case study changes                                                                                                               | typed arrays                                                         | T1        |
 | `src/content/claude/en.ts`, `pl.ts`                                   | The /claude article as typed data: six parts, sections with stable ids, and the data of every chart. Both languages are kept in step by `content.test.ts` (ADR 0008); sources of every number in `docs/CLAUDE-PAGE-NUMBERS.md`     | `en`, `pl` (`Content`)                                               | T1        |
-| `src/components/claude/`, `src/lib/chartMath.ts`                      | The /claude diagrams (SVG) and charts (HTML/SVG), the content types and the figure registry; chart arithmetic is pure and tested                                                                                                   | `Figure` in `src/components/claude/Figure.tsx`                      | T1        |
+| `src/components/claude/`, `src/lib/chartMath.ts`                      | The /claude diagrams (SVG) and charts (HTML/SVG), the content types and the figure registry; chart arithmetic is pure and tested                                                                                                   | `Figure` in `src/components/claude/Figure.tsx`                       | T1        |
 | `src/i18n.ts`                                                         | EN/PL copy dictionary for the site chrome (nav, hero, footer)                                                                                                                                                                      | `type SiteTranslation`                                               | T1        |
 | `src/data/siteMap.ts`                                                 | The About menu's items: one list read by the header menus and the command palette                                                                                                                                                  | `ABOUT_ITEMS[lang]`                                                  | T1        |
 | `src/lib/palette.ts`                                                  | The command palette as pure data and logic. It builds every destination (pages, services, areas, case studies) from the data files, and holds the diacritics-insensitive matcher and the Ctrl/⌘K rule. Tested in `palette.test.ts` | `paletteItems()`, `paletteScore()`, `isPaletteShortcut()`            | T1        |
@@ -52,6 +52,17 @@ _result_, not which adapter produced it.
 | `src/server/email.server.ts`                                          | Pluggable mail transport (`stub` console-log vs `resend`); contact form + newsletter both route through here                                                                                                                       | `sendEmail()`                                                        | T1        |
 | `src/server/subscribers.server.ts`                                    | Newsletter subscriber storage — in-memory stub today; a commented-out Cloudflare KV transport is ready to uncomment                                                                                                                | `saveSubscriber()`                                                   | T1        |
 | `src/content/spirituality/*.md`                                       | **Orphaned.** Source content for a `/spirituality/*` section that was built, then removed (see `docs/quality/BACKLOG.md`)                                                                                                          | —                                                                    | dead      |
+
+### /claude: explaining a figure in plain words
+
+Each key figure on `/claude` can explain its elements. To add one: give the element a stable
+`data-explain="<id>"` in `src/components/claude/diagrams.tsx` or `charts.tsx` (on the SVG `rect`/`g` or the
+HTML card), then add `{ id, term, body }` for that id under the figure's key in **both**
+`src/content/claude/explain.en.ts` and `explain.pl.ts`. `Explain.test.ts` fails until every marked element has
+a text, every text has an element, the two languages list the same ids, and every number in a text also appears
+in that language's article. `src/routes/claude.tsx` wraps a figure in `ExplainedFigure` only when it has entries,
+so a figure without them renders exactly as before. Texts that describe state (a routine "is off", "due to
+return") must change together with the figure when that state changes.
 
 ## Data flow — a chat message that becomes a lead
 

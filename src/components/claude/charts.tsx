@@ -70,8 +70,8 @@ export function TierLadder({ t }: { t: TierLabels }) {
   return (
     <figure className="ch-fig">
       <ol className="tl-list">
-        {t.rungs.map((r) => (
-          <li key={r.tier} className="tl-rung">
+        {t.rungs.map((r, i) => (
+          <li key={r.tier} className="tl-rung" data-explain={`rung-${String(i)}`}>
             <span className="tl-tier">{r.tier}</span>
             <span className="tl-trigger">{r.trigger}</span>
             <span className="tl-rev">{r.reviewers}</span>
@@ -98,8 +98,12 @@ export function ExceptionCards({ t }: { t: ExceptionLabels }) {
   return (
     <figure className="ch-fig">
       <div className="ex-grid">
-        {t.levels.map((l) => (
-          <div key={l.level} className={`ex-card ${toneClass(l.tone)}`}>
+        {t.levels.map((l, i) => (
+          <div
+            key={l.level}
+            className={`ex-card ${toneClass(l.tone)}`}
+            data-explain={`level-${String(i)}`}
+          >
             <p className="ex-level">{l.level}</p>
             <dl>
               <dt>{t.whoLabel}</dt>
@@ -122,15 +126,23 @@ export function MergeFlow({ t }: { t: MergeLabels }) {
   return (
     <figure className="ch-fig">
       <div className="mf-head">
-        <span className="mf-pill">{t.start}</span>
+        <span className="mf-pill" data-explain="start">
+          {t.start}
+        </span>
         <span className="mf-arrow" aria-hidden="true">
           →
         </span>
-        <span className="mf-pill mf-strong">{t.checks}</span>
+        <span className="mf-pill mf-strong" data-explain="checks">
+          {t.checks}
+        </span>
       </div>
       <ul className="mf-grid">
-        {t.branches.map((b) => (
-          <li key={b.when} className={b.auto ? "mf-card" : "mf-card mf-human"}>
+        {t.branches.map((b, i) => (
+          <li
+            key={b.when}
+            className={b.auto ? "mf-card" : "mf-card mf-human"}
+            data-explain={`branch-${String(i)}`}
+          >
             <span className="mf-when">{b.when}</span>
             <span className="mf-needs">{b.needs}</span>
             <span className={b.auto ? "mf-chip ch-tone-a" : "mf-chip ch-tone-b"}>

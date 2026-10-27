@@ -20,6 +20,7 @@ concept. The terms below are the ones that actually recur in this codebase.
 | `PG` | Coding Higher Mind (from the Polish "Prompt Guard"): Kamil's quality system for AI-assisted work, described on `/claude`. Its source is the public repo `kamiljan11/coding-higher-mind`. |
 | `part` | One of the six chapters of the `/claude` article (`Section.part`, 0-5). Each part opens with a divider (`#part-N`) and has a card on the page map. |
 | `figure` / `FigureKey` | A chart or diagram placed in one `/claude` section, picked by key in `src/components/claude/Figure.tsx`. Its data lives in `Content.figures`. |
+| `explain panel` | Panel under a `/claude` figure (`src/components/claude/Explain.tsx`) that explains the element marked `data-explain` the reader points at or taps; texts in `src/content/claude/explain.{en,pl}.ts`. Not a `part` (chapter). |
 | page map | The overview at the top of `/claude` (`#page-map`): a card per part with a link to every section. It replaced the old collapsed table of contents. |
 | scar | In PG: a past failure written down in `pg/cases.md` together with the check that now catches it. |
 | gate | In PG: an automatic check that can stop a step (a hook, a pre-commit check, CI). |

@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Fragment } from "react";
 import { SkillsTab } from "../components/claude/SkillsTab";
+import { ExplainedFigure } from "../components/claude/Explain";
 import { Figure } from "../components/claude/Figure";
-import type { Content, Figures, Item, Section } from "../components/claude/types";
+import type { Content, Item, Section } from "../components/claude/types";
 import { en } from "../content/claude/en";
 import { pl } from "../content/claude/pl";
 import { REPO_URL } from "../lib/skillsCatalog";
@@ -178,12 +179,20 @@ function PartDivider({ c, i, lang }: { c: Content; i: number; lang: Lang }) {
   );
 }
 
-function SectionBlock({ s, f }: { s: Section; f: Figures }) {
+function SectionBlock({ s, c }: { s: Section; c: Content }) {
+  const explained = s.figure ? c.explain[s.figure] : undefined;
   return (
     <section className="cv-sec ai-sec" aria-labelledby={s.id}>
       <h2 id={s.id}>{s.title}</h2>
       {s.lead && <p className="ai-lead">{s.lead}</p>}
-      {s.figure && <Figure k={s.figure} f={f} />}
+      {s.figure &&
+        (explained?.length ? (
+          <ExplainedFigure items={explained} ui={c.explainUi}>
+            <Figure k={s.figure} f={c.figures} />
+          </ExplainedFigure>
+        ) : (
+          <Figure k={s.figure} f={c.figures} />
+        ))}
       {s.paragraphs?.map((p, i) => (
         // static copy, never reordered: the position is a stable key
         <p key={`${s.id}-${String(i)}`}>{p}</p>
@@ -257,7 +266,7 @@ function ClaudePage() {
             {(idx === 0 || c.sections[idx - 1].part !== s.part) && (
               <PartDivider c={c} i={s.part} lang={lang} />
             )}
-            <SectionBlock s={s} f={c.figures} />
+            <SectionBlock s={s} c={c} />
           </Fragment>
         ))}
 

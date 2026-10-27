@@ -208,6 +208,16 @@ export type Figures = {
 export type FigureKey = keyof Figures;
 
 /**
+ * Plain-language explanation of one element of a figure. `id` matches a `data-explain` attribute the figure
+ * draws, so pointing at (or tapping) that element shows `body`. Written for a reader who has never heard of
+ * PG: what the thing does, when it acts, and one real example.
+ */
+export type Explain = { id: string; term: string; body: string };
+/** Explanations per figure. Partial: a figure without an entry renders exactly as before. */
+export type Explains = Partial<Record<FigureKey, Explain[]>>;
+export type ExplainUi = { hint: string; pick: string; close: string };
+
+/**
  * One section of the article. `id` is the same in both languages (an English slug), so a shared link like
  * /claude#review lands on the same section whichever language the reader picks. `part` groups sections
  * for the page map at the top.
@@ -240,5 +250,7 @@ export type Content = {
   parts: Part[];
   sections: Section[];
   figures: Figures;
+  explain: Explains;
+  explainUi: ExplainUi;
   colophon: string;
 };
