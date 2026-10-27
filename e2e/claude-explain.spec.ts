@@ -34,8 +34,10 @@ test("keyboard: focusing a button explains it, Esc hides it", async ({ page }) =
   await expect(panelOf(page).locator(".ax-term")).toHaveText((await chip.textContent()) ?? "");
   await page.keyboard.press("Escape");
   await expect(panelOf(page).locator(".ax-hint")).toBeVisible();
-  // "Hide" keeps keyboard focus in the panel instead of dropping it to <body>
-  await chip.click();
+  // "Hide" keeps keyboard focus in the panel instead of dropping it to <body>. Keys only: a mouse left on the
+  // chip would sit over a chart part once focusing "Hide" scrolls the page, and hovering it picks that part.
+  await chip.focus();
+  await page.keyboard.press("Enter");
   await panelOf(page).locator(".ax-close").focus();
   await page.keyboard.press("Enter");
   await expect(panelOf(page)).toBeFocused();
