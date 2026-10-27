@@ -4,6 +4,8 @@ Kazda liczba na kamiljan.com/claude (pliki `src/content/claude/en.ts` i `pl.ts`)
 Objasnienia elementow rysunkow (`explain.en.ts` / `explain.pl.ts`) nie wprowadzaja wlasnych liczb: kazda liczba z nich
 musi juz stac w artykule w tym samym jezyku (pilnuje `src/components/claude/Explain.test.ts`). To samo dla ostatniej
 czesci (`tell.en.ts` / `tell.pl.ts`: wersje skrocone i pytania; pilnuje `src/content/claude/content.test.ts`). Test widzi tylko liczby zapisane cyframi; slowne ("piec minut", "osiem do dziesieciu") sprawdzasz recznie. Przeliczasz artykul -> sprawdz tez je.
+Rysunki `ideas`, `guards` i `install` tez nie maja wlasnych liczb (79 %, 170, 75.8 %, Node 20+, 409 plikow, 1.8.0 pochodza z
+sekcji obok; pilnuje `content.test.ts`).
 Stan: 14 pazdziernika 2026, PG 1.8.0. Liczby w obu jezykach musza byc identyczne — pilnuje tego
 `src/content/claude/content.test.ts`. Kiedy przeliczasz: po wydaniu `kamiljan11/coding-higher-mind`
 albo gdy zdanie w artykule przestaje byc prawda (PG jest w trybie utrzymania, wiec rzadko).

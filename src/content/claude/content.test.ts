@@ -32,7 +32,16 @@ const numbers = (c: Content) => ({
   mind: c.figures.mind.branches.map((b) => b.leaves.length),
   loop: c.figures.loop.steps.length,
   review: c.figures.review.finders.length,
+  ideas: c.figures.ideas.rows.length,
+  guards: c.figures.guards.guards.length,
+  install: c.figures.install.steps.map((s) => s.tone),
 });
+
+// The page map's lead names the number of parts in words; this keeps the word in step with `parts`.
+const PART_WORDS = {
+  en: { 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine" },
+  pl: { 6: "Sześć", 7: "Siedem", 8: "Osiem", 9: "Dziewięć" },
+} as const;
 
 describe("/claude content", () => {
   it("has the same sections, in the same order and parts, in both languages", () => {
@@ -70,6 +79,22 @@ describe("/claude content", () => {
         expect([...parts].sort((a, b) => a - b)).toEqual(parts);
         for (let i = 0; i < c.parts.length; i++) expect(parts).toContain(i);
         for (const p of parts) expect(p).toBeLessThan(c.parts.length);
+      });
+
+      it("names the number of parts in the page map's lead", () => {
+        const words: Record<number, string> = PART_WORDS[name];
+        expect(words[c.parts.length], `no word for ${String(c.parts.length)} parts`).toBeDefined();
+        expect(c.mapLead.startsWith(`${words[c.parts.length]} `), c.mapLead).toBe(true);
+      });
+
+      it("draws the idea, guard and install figures only with numbers the article states", () => {
+        // these three retell a section in a picture; a number found only in the picture has no source
+        const { figures, explain: _e, explainUi: _u, ...rest } = c;
+        const article = stringsIn(rest);
+        const drawn = stringsIn([figures.ideas, figures.guards, figures.install]);
+        const found = numbersIn(drawn);
+        expect(found.length).toBeGreaterThan(0);
+        for (const n of found) expect(hasWholeNumber(article, n), n).toBe(true);
       });
 
       it("places every figure exactly once", () => {
@@ -155,7 +180,7 @@ describe("/claude content", () => {
 
       it("keeps every question unique and every answer short enough to read on a phone", () => {
         const faq = c.sections.flatMap((s) => s.faq ?? []);
-        expect(faq.length).toBeGreaterThanOrEqual(20);
+        expect(faq.length).toBe(25);
         expect(new Set(faq.map((q) => q.label)).size).toBe(faq.length);
         for (const q of faq) {
           expect(q.label.trim().endsWith("?"), q.label).toBe(true);

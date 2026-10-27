@@ -8,6 +8,8 @@ import type {
   BeforeAfterLabels,
   CalibLabels,
   ExceptionLabels,
+  GuardLabels,
+  IdeaLabels,
   LimitsLabels,
   MergeLabels,
   ReleaseLabels,
@@ -433,6 +435,65 @@ export function Waffle({ t }: { t: WaffleLabels }) {
             <b>{f.n}</b> {f.label}
           </span>
         ))}
+      </div>
+      <Caption text={t.caption} />
+    </figure>
+  );
+}
+
+/* ── Three ideas: each one as the habit it replaces, with the measured reason ── */
+export function IdeaShifts({ t }: { t: IdeaLabels }) {
+  return (
+    <figure className="ch-fig">
+      <ol className="is-list">
+        {t.rows.map((r, i) => (
+          <li key={r.idea} className="is-row" data-explain={`idea-${String(i)}`}>
+            <p className="is-idea">{r.idea}</p>
+            <div className="is-shift">
+              <p className="is-box is-before">
+                <span className="is-tag">{t.beforeLabel}</span> {r.before}
+              </p>
+              <span className="is-arrow" aria-hidden="true">
+                →
+              </span>
+              <p className="is-box is-after">
+                <span className="is-tag">{t.afterLabel}</span> {r.after}
+              </p>
+            </div>
+            <p className="is-why">
+              <span className="is-tag">{t.whyLabel}</span> {r.why}
+            </p>
+          </li>
+        ))}
+      </ol>
+      <Caption text={t.caption} />
+    </figure>
+  );
+}
+
+/* ── Guarding the guards: the rules in the middle, four guards around, the sandbox as the outer line ── */
+export function GuardRing({ t }: { t: GuardLabels }) {
+  return (
+    <figure className="ch-fig">
+      <div className="gr-outer">
+        {/* only the heading explains the outer line; on the wrapper every gap between guards would point at it */}
+        <p className="gr-outer-h" data-explain="outer">
+          <b>{t.outer}</b> {t.outerSub}
+        </p>
+        <div className="gr-ring">
+          <p className="gr-ring-h">{t.guardsTitle}</p>
+          <div className="gr-grid">
+            <div className="gr-core" data-explain="core">
+              <b>{t.core}</b>
+              <span>{t.coreSub}</span>
+            </div>
+            {t.guards.map((g, i) => (
+              <div key={g.label} className="gr-guard" data-explain={`guard-${String(i)}`}>
+                <b>{g.label}</b> {g.body}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       <Caption text={t.caption} />
     </figure>

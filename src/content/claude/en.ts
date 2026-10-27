@@ -93,6 +93,7 @@ export const en: Content = {
       id: "ideas",
       part: 0,
       title: "Three ideas the whole thing rests on",
+      figure: "ideas",
       items: [
         {
           label: "Checks, not written rules:",
@@ -273,6 +274,7 @@ export const en: Content = {
       part: 1,
       title: "Guarding the guards",
       lead: "A quality system an agent can quietly switch off is decoration. So the rules protect themselves first.",
+      figure: "guards",
       items: [
         {
           label: "A seal on the control layer:",
@@ -575,6 +577,7 @@ export const en: Content = {
       part: 5,
       title: "Install it yourself",
       lead: "The whole system is a public repository, cleaned of private data. You need Node 20+, git and Claude Code.",
+      figure: "install",
       code: [
         "git clone " + REPO_URL + ".git",
         "node install.mjs --dry-run   # shows the plan, touches nothing",
@@ -1087,6 +1090,84 @@ export const en: Content = {
       ],
       caption:
         "The strip has one cell per day; a filled cell is a release, and a number means several that day.",
+    },
+    ideas: {
+      rows: [
+        {
+          idea: "Checks, not written rules",
+          before: "a rule written as text, which an agent can forget",
+          after: "a gate that runs by itself, with a test proving it blocks",
+          why: "with the rule only written down, 79 % of commits still went straight to the main branch",
+        },
+        {
+          idea: "Every failure becomes a check",
+          before: "a mistake, then a promise to be more careful",
+          after: "a scar written down with its cause, then a new gate or checklist item",
+          why: "170 real failures are catalogued as scars, and every checklist item cites one",
+        },
+        {
+          idea: "Proof, not claims",
+          before: "“done”, because the agent says so",
+          after:
+            "a command ran, its result was checked, and the report ends with VERIFIED, UNVERIFIED or FAILED",
+          why: "in one benchmark 75.8 % of the successes AI agents reported had no evidence",
+        },
+      ],
+      beforeLabel: "Instead of",
+      afterLabel: "Now",
+      whyLabel: "Why",
+      caption:
+        "Each idea swaps a habit for a mechanism; the reason is a measured number, not a preference.",
+    },
+    guards: {
+      core: "THE RULES",
+      coreSub: "hooks, git gates, settings and gate tools",
+      guardsTitle: "What stops them being switched off",
+      guards: [
+        {
+          label: "Seal:",
+          body: "checksums on the control layer; a change outside a window I opened shows up at the next session and in the weekly audit",
+        },
+        {
+          label: "Extensions:",
+          body: "installing, enabling or updating a mod needs my phrase; turning one off is always allowed",
+        },
+        {
+          label: "Database target:",
+          body: "destructive SQL is blocked unless the target is provably on my machine",
+        },
+        {
+          label: "Patches:",
+          body: "patching or unpacking an archive is blocked in PG's folder and every folder above it",
+        },
+      ],
+      outer: "The operating system's sandbox:",
+      outerSub:
+        "the line against an agent determined to get around the guard. PG does not claim to hold it.",
+      caption:
+        "Built against mistakes and instructions smuggled in from outside, not against a determined agent.",
+    },
+    install: {
+      steps: [
+        {
+          title: "copy the repository",
+          detail: "git clone; needs Node 20+, git and Claude Code",
+          tone: "a",
+        },
+        { title: "dry run", detail: "shows the plan and touches nothing", tone: "a" },
+        {
+          title: "install",
+          detail: "copies into ~/.claude and never overwrites a file you changed",
+          tone: "a",
+        },
+        {
+          title: "self-test, by itself",
+          detail: "the installer ends with it; the green output is the proof, not its word",
+          tone: "a",
+        },
+      ],
+      rollback: "an uninstaller comes in the same repository",
+      caption: "The public 1.8.0: 409 files, cleaned of private data.",
     },
   },
   explain: explainEn,

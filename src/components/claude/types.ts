@@ -184,6 +184,27 @@ export type LimitsLabels = {
 export type WaffleGroup = { label: string; count: number; tone: Tone };
 export type WaffleLabels = { groups: WaffleGroup[]; facts: Stat[]; caption: string };
 
+/** One idea as the habit it replaces: `before` (gray) turns into `after` (teal); `why` is the measured reason. */
+export type IdeaRow = { idea: string; before: string; after: string; why: string };
+export type IdeaLabels = {
+  rows: IdeaRow[];
+  beforeLabel: string;
+  afterLabel: string;
+  whyLabel: string;
+  caption: string;
+};
+
+/** The rules in the middle, the guards around them, and the line PG does not claim to hold (the outer box). */
+export type GuardLabels = {
+  core: string;
+  coreSub: string;
+  guardsTitle: string;
+  guards: Item[];
+  outer: string;
+  outerSub: string;
+  caption: string;
+};
+
 /** Every figure the page can place, by key. */
 export type Figures = {
   arch: ArchLabels;
@@ -204,6 +225,9 @@ export type Figures = {
   cadence: CadenceLabels;
   waffle: WaffleLabels;
   versions: VersionLabels;
+  ideas: IdeaLabels;
+  guards: GuardLabels;
+  install: ReleaseLabels;
 };
 export type FigureKey = keyof Figures;
 

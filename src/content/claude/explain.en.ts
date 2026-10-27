@@ -354,4 +354,53 @@ export const explainEn: Explains = {
       body: 'Logins, payments, migrations, dependencies, CI settings and instructions for AI agents never merge on their own. They wait until I type "pozwol ALLOW_MERGE" (pozwol means allow).',
     },
   ],
+  ideas: [
+    {
+      id: "idea-0",
+      term: "Gate",
+      body: "A gate is a check that runs by itself at a fixed moment, for example before a commit or a push, so nobody has to remember it. Example: skipping the checks with --no-verify is blocked, whatever the agent was told. Every gate has a test proving that it really blocks.",
+    },
+    {
+      id: "idea-1",
+      term: "Scar",
+      body: "A scar is a real failure written down with its cause and a rule id, like an accident report. The fix is never a promise to be careful: a postmortem ends with a new gate or a new scar, and every checklist item points to the scar it came from.",
+    },
+    {
+      id: "idea-2",
+      term: "Status word",
+      body: "Every report ends with one word. VERIFIED means the proof is quoted, UNVERIFIED says what is missing and how to check it, FAILED says what happened, word for word. AI agents tend to report success they did not check; the word makes the difference visible.",
+    },
+  ],
+  guards: [
+    {
+      id: "core",
+      term: "The rules",
+      body: "The hooks, git gates, settings and gate tools are the system itself. If an agent could quietly edit them, every other check on this page would be decoration, so they are guarded first.",
+    },
+    {
+      id: "guard-0",
+      term: "Seal",
+      body: "Each file of the control layer has a checksum, like the seal on a meter. A change made outside a window I opened breaks the seal, and it shows up at the start of the next session and in the weekly audit.",
+    },
+    {
+      id: "guard-1",
+      term: "Extensions",
+      body: "Claude Code mods run inside the tool and skip the hooks. So installing, enabling or updating one needs my phrase, while turning one off is always allowed: the safe direction never waits.",
+    },
+    {
+      id: "guard-2",
+      term: "Database target",
+      body: "Every command that talks to a database is traced to where it points, including connection strings and wrappers such as docker exec or ssh. Destructive SQL runs only when the target is provably on my machine; SQL the guard cannot see counts as destructive.",
+    },
+    {
+      id: "guard-3",
+      term: "Patches",
+      body: "A patch or an unpacked archive could rewrite the rules without any editor the guard watches. So both are blocked in PG's folder and every folder above it, and in any repository a patch that touches .git/config or .claude/ is blocked.",
+    },
+    {
+      id: "outer",
+      term: "The honest line",
+      body: "The guard is built against mistakes and against instructions smuggled in from outside, for example from a web page an agent reads. An agent set on getting around it can run any script; only the operating system's sandbox and permissions stop that.",
+    },
+  ],
 };

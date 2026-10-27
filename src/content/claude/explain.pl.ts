@@ -354,4 +354,53 @@ export const explainPl: Explains = {
       body: "Logowanie, płatności, migracje, zależności, ustawienia CI i instrukcje dla agentów AI nigdy nie scalają się same. Czekają, aż wpiszę „pozwol ALLOW_MERGE” (pozwol znaczy: zezwalam).",
     },
   ],
+  ideas: [
+    {
+      id: "idea-0",
+      term: "Bramka",
+      body: "Bramka to kontrola, która uruchamia się sama w ustalonym momencie, na przykład przed commitem albo pushem, więc nikt nie musi o niej pamiętać. Przykład: pominięcie kontroli przez --no-verify jest blokowane, cokolwiek agent usłyszał. Każda bramka ma test dowodzący, że naprawdę blokuje.",
+    },
+    {
+      id: "idea-1",
+      term: "Blizna",
+      body: "Blizna to prawdziwa awaria zapisana z przyczyną i numerem reguły, jak protokół z wypadku. Naprawą nigdy nie jest obietnica ostrożności: analiza incydentu kończy się nową bramką albo nową blizną, a każdy punkt listy kontrolnej wskazuje bliznę, z której powstał.",
+    },
+    {
+      id: "idea-2",
+      term: "Słowo statusu",
+      body: "Każdy raport kończy się jednym słowem. VERIFIED znaczy, że dowód jest zacytowany, UNVERIFIED mówi, czego brakuje i jak to sprawdzić, FAILED mówi, co się stało, słowo w słowo. Agenci AI zgłaszają sukces, którego nie sprawdzili; słowo pokazuje tę różnicę.",
+    },
+  ],
+  guards: [
+    {
+      id: "core",
+      term: "Reguły",
+      body: "Hooki, bramki gita, ustawienia i narzędzia bramek to sam system. Gdyby agent mógł je po cichu zmienić, każda inna kontrola na tej stronie byłaby dekoracją, więc są chronione najpierw.",
+    },
+    {
+      id: "guard-0",
+      term: "Pieczęć",
+      body: "Każdy plik warstwy kontrolnej ma sumę kontrolną, jak plomba na liczniku. Zmiana zrobiona poza oknem, które otworzyłem, zrywa plombę i pokazuje się na starcie następnej sesji i w cotygodniowym audycie.",
+    },
+    {
+      id: "guard-1",
+      term: "Rozszerzenia",
+      body: "Mody Claude Code działają wewnątrz narzędzia i omijają hooki. Dlatego instalacja, włączenie albo aktualizacja moda wymaga mojej frazy, a wyłączenie jest zawsze dozwolone: bezpieczny kierunek nigdy nie czeka.",
+    },
+    {
+      id: "guard-2",
+      term: "Cel bazy danych",
+      body: "Każda komenda, która rozmawia z bazą danych, jest śledzona do miejsca, w które celuje, łącznie z adresami połączeń i nakładkami typu docker exec albo ssh. Niszczący SQL przechodzi tylko, gdy cel jest dowodnie na moim komputerze; SQL, którego strażnik nie widzi, liczy się jako niszczący.",
+    },
+    {
+      id: "guard-3",
+      term: "Łatki",
+      body: "Łatka albo rozpakowane archiwum mogłyby przepisać reguły bez edytora, którego pilnuje strażnik. Dlatego jedno i drugie jest zablokowane w folderze PG i w każdym folderze nad nim, a w każdym repozytorium łatka dotykająca .git/config albo .claude/ jest blokowana.",
+    },
+    {
+      id: "outer",
+      term: "Uczciwa granica",
+      body: "Strażnik jest zbudowany przeciw pomyłkom i instrukcjom przemyconym z zewnątrz, na przykład ze strony, którą agent czyta. Agent zdeterminowany, żeby go obejść, może uruchomić dowolny skrypt; zatrzymają go tylko piaskownica i uprawnienia systemu operacyjnego.",
+    },
+  ],
 };

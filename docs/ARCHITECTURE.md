@@ -64,6 +64,15 @@ in that language's article. `src/routes/claude.tsx` wraps a figure in `Explained
 so a figure without them renders exactly as before. Texts that describe state (a routine "is off", "due to
 return") must change together with the figure when that state changes.
 
+### /claude: which sections have a figure
+
+A section gets a figure only when a picture shows something the list next to it cannot: a flow, a
+before-and-after, what surrounds what. "Three ideas", "Guarding the guards" and "Install it yourself" got one
+in October 2026; "VERIFIED · UNVERIFIED · FAILED", "Memory", "Does it hold at scale?" and "Honest limits" stay
+text on purpose, because their points are separate facts and a figure there would only repeat the list. The
+last part ("In short, and questions") is text by design: it retells the figures above. A figure that retells its section
+carries only numbers the article states (`content.test.ts`).
+
 ### /claude: the short versions and the questions
 
 The last part of `/claude` retells the article: `src/content/claude/tell.en.ts` and `tell.pl.ts` export the part
@@ -71,7 +80,8 @@ and its sections, which `en.ts`/`pl.ts` append to `parts` and `sections`. A sect
 `label`, answer = `body`), rendered by `src/components/claude/Faq.tsx` as native `<details>`; before printing it
 opens every answer and folds the ones the reader had not opened afterwards. The part adds no facts of its own:
 `content.test.ts` fails when a number written in digits does not stand in the rest of the article in the same
-language, when the languages ask a different number of questions, when a question repeats or does not end with
+language, when the languages ask a different number of questions, when there are not exactly 25 questions (the
+count the part was built with; adding or removing a question means changing the test on purpose), when a question repeats or does not end with
 "?", or when an answer is longer than 480 characters (it has to read on a phone). Numbers written as words are
 not checked, so read them against the article by hand. Change a fact in the article, and change it here too.
 

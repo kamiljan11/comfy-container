@@ -89,6 +89,7 @@ export const pl: Content = {
       id: "ideas",
       part: 0,
       title: "Trzy idee, na których stoi całość",
+      figure: "ideas",
       items: [
         {
           label: "Kontrole, nie spisane reguły:",
@@ -269,6 +270,7 @@ export const pl: Content = {
       part: 1,
       title: "Pilnowanie strażników",
       lead: "System jakości, który agent może po cichu wyłączyć, jest dekoracją. Dlatego reguły najpierw chronią same siebie.",
+      figure: "guards",
       items: [
         {
           label: "Pieczęć na warstwie kontrolnej:",
@@ -571,6 +573,7 @@ export const pl: Content = {
       part: 5,
       title: "Zainstaluj u siebie",
       lead: "Cały system to publiczne repozytorium oczyszczone z prywatnych danych. Potrzebujesz Node 20+, gita i Claude Code.",
+      figure: "install",
       code: [
         "git clone " + REPO_URL + ".git",
         "node install.mjs --dry-run   # pokazuje plan, niczego nie rusza",
@@ -1097,6 +1100,84 @@ export const pl: Content = {
       ],
       caption:
         "Pasek ma jedną komórkę na dzień; wypełniona komórka to wydanie, a liczba oznacza kilka wydań tego dnia.",
+    },
+    ideas: {
+      rows: [
+        {
+          idea: "Kontrole, nie spisane reguły",
+          before: "reguła zapisana jako tekst, którą agent może zapomnieć",
+          after: "bramka, która uruchamia się sama, z testem dowodzącym, że blokuje",
+          why: "gdy reguła była tylko spisana, 79% commitów i tak szło prosto na główną gałąź",
+        },
+        {
+          idea: "Każda awaria staje się kontrolą",
+          before: "pomyłka, a potem obietnica, że będziemy ostrożniejsi",
+          after: "blizna zapisana z przyczyną, a potem nowa bramka albo punkt listy kontrolnej",
+          why: "170 prawdziwych awarii jest skatalogowanych jako blizny, a każdy punkt listy kontrolnej wskazuje jedną z nich",
+        },
+        {
+          idea: "Dowód, nie deklaracja",
+          before: "„gotowe”, bo agent tak mówi",
+          after:
+            "komenda się wykonała, wynik sprawdzono, a raport kończy się słowem VERIFIED, UNVERIFIED albo FAILED",
+          why: "w jednym benchmarku 75,8% sukcesów zgłoszonych przez agentów AI nie miało dowodu",
+        },
+      ],
+      beforeLabel: "Zamiast",
+      afterLabel: "Teraz",
+      whyLabel: "Dlaczego",
+      caption:
+        "Każda idea zamienia nawyk na mechanizm; powodem jest zmierzona liczba, nie upodobanie.",
+    },
+    guards: {
+      core: "REGUŁY",
+      coreSub: "hooki, bramki gita, ustawienia i narzędzia bramek",
+      guardsTitle: "Co nie pozwala ich wyłączyć",
+      guards: [
+        {
+          label: "Pieczęć:",
+          body: "sumy kontrolne na warstwie kontrolnej; zmiana poza oknem, które otworzyłem, pokazuje się w następnej sesji i w cotygodniowym audycie",
+        },
+        {
+          label: "Rozszerzenia:",
+          body: "instalacja, włączenie albo aktualizacja moda wymaga mojej frazy; wyłączenie jest zawsze dozwolone",
+        },
+        {
+          label: "Cel bazy danych:",
+          body: "niszczący SQL jest blokowany, chyba że cel jest dowodnie na moim komputerze",
+        },
+        {
+          label: "Łatki:",
+          body: "nakładanie łatek i rozpakowywanie archiwów jest zablokowane w folderze PG i w każdym folderze nad nim",
+        },
+      ],
+      outer: "Piaskownica systemu operacyjnego:",
+      outerSub:
+        "granica przeciw agentowi zdeterminowanemu, żeby obejść strażnika. PG nie twierdzi, że ją trzyma.",
+      caption:
+        "Zbudowane przeciw pomyłkom i instrukcjom przemyconym z zewnątrz, nie przeciw zdeterminowanemu agentowi.",
+    },
+    install: {
+      steps: [
+        {
+          title: "skopiuj repozytorium",
+          detail: "git clone; potrzebne Node 20+, git i Claude Code",
+          tone: "a",
+        },
+        { title: "próba na sucho", detail: "pokazuje plan i niczego nie rusza", tone: "a" },
+        {
+          title: "instalacja",
+          detail: "kopiuje do ~/.claude i nigdy nie nadpisze pliku, który zmieniłeś",
+          tone: "a",
+        },
+        {
+          title: "autotest, sam",
+          detail: "instalator kończy się nim; dowodem jest zielony wynik, nie jego słowo",
+          tone: "a",
+        },
+      ],
+      rollback: "deinstalator jest w tym samym repozytorium",
+      caption: "Publiczne 1.8.0: 409 plików oczyszczonych z prywatnych danych.",
     },
   },
   explain: explainPl,
