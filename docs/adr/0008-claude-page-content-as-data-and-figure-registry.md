@@ -15,7 +15,7 @@ sentence by sentence, with many more charts, so a reader can navigate without re
 
 - The article is data: `src/content/claude/en.ts` and `pl.ts`, typed by `src/components/claude/types.ts`
   (`Content`, `Section`, `Figures`). A section has a stable English `id` (the same anchor in both
-  languages), a `part` (one of six) and an optional `figure` key.
+  languages), a `part` (one of seven) and an optional `figure` key.
 - Figures are components in `src/components/claude/` (`diagrams.tsx` for the SVG diagrams,
   `charts.tsx` for the HTML/SVG charts). `src/components/claude/Figure.tsx` maps a key to a component in one exhaustive
   `switch`, so a key without a component fails `tsc`.

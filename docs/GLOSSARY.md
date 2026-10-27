@@ -25,4 +25,6 @@ concept. The terms below are the ones that actually recur in this codebase.
 | page map | The overview at the top of `/claude` (`#page-map`): a card per part with a link to every section. It replaced the old collapsed table of contents. |
 | scar | In PG: a past failure written down in `pg/cases.md` together with the check that now catches it. |
 | gate | In PG: an automatic check that can stop a step (a hook, a pre-commit check, CI). |
+| seal | In PG: checksums over the control layer (hooks, git gates, settings, gate tools); a change made outside an opened window shows up at the next session start and in the weekly audit. Drawn in the "Guarding the guards" figure on `/claude`. |
+| status word | In PG: the last word of every report, VERIFIED (proof quoted), UNVERIFIED (what is missing) or FAILED (what happened). |
 | tier (T0-T3) | In PG: the risk level of a change, taken from its diff. It sets how many AI reviewers look at it (`pg.tier_floor` in `CLAUDE.md`). |

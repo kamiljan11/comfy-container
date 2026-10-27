@@ -12,11 +12,13 @@ export function Faq({ items }: { items: Item[] }) {
 
   useEffect(() => {
     let opened: HTMLDetailsElement[] = [];
+    // appends, so a second beforeprint without an afterprint in between keeps the first list
     const before = () => {
-      opened = [...(list.current?.querySelectorAll("details:not([open])") ?? [])].filter(
+      const closed = [...(list.current?.querySelectorAll("details:not([open])") ?? [])].filter(
         (d): d is HTMLDetailsElement => d instanceof HTMLDetailsElement,
       );
-      for (const d of opened) d.open = true;
+      for (const d of closed) d.open = true;
+      opened = [...opened, ...closed];
     };
     const after = () => {
       for (const d of opened) d.open = false;

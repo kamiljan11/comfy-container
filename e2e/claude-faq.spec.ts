@@ -8,7 +8,7 @@ test("a question opens its answer with a click and with the keyboard", async ({ 
   await page.waitForLoadState("networkidle");
   await expect(page.locator("#in-30-seconds")).toHaveText("In 30 seconds");
   const items = page.locator(".faq-item");
-  expect(await items.count()).toBeGreaterThanOrEqual(20);
+  await expect(items).toHaveCount(25);
 
   const first = items.first();
   await expect(first.locator(".faq-a")).toBeHidden();
@@ -44,6 +44,8 @@ test("on paper every answer prints, and only an opened explanation panel prints"
 
   // emulateMedia changes the CSS only; the print events are what a real print dialog sends
   await page.emulateMedia({ media: "print" });
+  // twice: some browsers send beforeprint again (print preview re-renders) before one afterprint
+  await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
   await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
   const items = page.locator(".faq-item");
   await expect(page.locator(".faq-item:not([open])")).toHaveCount(0);
