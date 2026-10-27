@@ -7549,6 +7549,36 @@ header[id] {
   outline-offset: 2px;
   border-radius: 6px;
 }
+/* a chart bar keeps its colour when explained; the outline is dark, because a teal one vanishes on a teal bar */
+.ax-wrap [data-explain].ax-on rect.ch-svg-a {
+  fill: #0a7d8c;
+  stroke: #23272d;
+}
+.ax-wrap [data-explain].ax-on rect.ch-svg-b {
+  fill: #b4442e;
+  stroke: #23272d;
+}
+/* a table row: tint its cells (an outline on <tr> is not drawn the same in every browser) */
+.ax-wrap tr[data-explain] {
+  cursor: pointer;
+}
+.ax-wrap tr[data-explain].ax-on > * {
+  background: rgba(10, 125, 140, 0.1);
+}
+.ax-wrap tr[data-explain].ax-on > th {
+  box-shadow: inset 3px 0 0 #0a7d8c;
+}
+/* the tint drops the grey "before" text below 4.5:1, so it darkens while the row is chosen (5:1 on paper) */
+.ax-wrap tr[data-explain].ax-on > .ct-before {
+  color: #5f646b;
+}
+/* waffle squares sit 3 px apart: a tight dark outline (teal would vanish on the teal squares), or the
+   highlighted group would blur into one block */
+.ax-wrap .wf-cell[data-explain].ax-on {
+  outline-color: #23272d;
+  outline-offset: 0;
+  border-radius: 4px;
+}
 .ax-chips {
   display: flex;
   flex-wrap: wrap;

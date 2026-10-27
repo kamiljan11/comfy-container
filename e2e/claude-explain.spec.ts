@@ -34,8 +34,10 @@ test("keyboard: focusing a button explains it, Esc hides it", async ({ page }) =
   await expect(panelOf(page).locator(".ax-term")).toHaveText((await chip.textContent()) ?? "");
   await page.keyboard.press("Escape");
   await expect(panelOf(page).locator(".ax-hint")).toBeVisible();
-  // "Hide" keeps keyboard focus in the panel instead of dropping it to <body>
-  await chip.click();
+  // "Hide" keeps keyboard focus in the panel instead of dropping it to <body>. Keys only: a mouse left on the
+  // chip would sit over a chart part once focusing "Hide" scrolls the page, and hovering it picks that part.
+  await chip.focus();
+  await page.keyboard.press("Enter");
   await panelOf(page).locator(".ax-close").focus();
   await page.keyboard.press("Enter");
   await expect(panelOf(page)).toBeFocused();
@@ -66,4 +68,39 @@ test.describe("phone", () => {
     );
     expect(overflow).toBe(false);
   });
+});
+
+test("every chart explains its parts, and a table row, a group of squares and a bar show they are chosen", async ({
+  page,
+}) => {
+  await page.goto("/claude?lang=en");
+  await page.waitForLoadState("networkidle");
+  // no chart is left as the one figure a reader cannot ask about
+  expect(await page.locator(".ch-fig").count()).toBe(
+    await page.locator(".ax-wrap .ch-fig").count(),
+  );
+
+  const calib = page.locator(".ax-wrap", { has: page.locator('tr[data-explain="row-5"]') });
+  await calib.locator('tr[data-explain="row-5"] th').click();
+  await expect(calib.locator(".ax-term")).toHaveText("Routines' scope");
+  const tint = await calib
+    .locator('tr[data-explain="row-5"] td')
+    .first()
+    .evaluate((e) => getComputedStyle(e).backgroundColor);
+  expect(tint).not.toBe("rgba(0, 0, 0, 0)");
+
+  // a group lights up all of its squares, not only its line in the key
+  const waffle = page.locator(".ax-wrap", { has: page.locator(".wf-grid") });
+  await waffle.locator(".ax-chip", { hasText: "Active" }).click();
+  const active = Number(await waffle.locator('li[data-explain="group-0"] b').textContent());
+  expect(active).toBeGreaterThan(0);
+  await expect(waffle.locator(".wf-cell.ax-on")).toHaveCount(active);
+
+  // an explained bar keeps its colour (the panel's teal tint must not wash a red bar out)
+  const rounds = page.locator(".ax-wrap", { has: page.locator('g[data-explain="final"]') });
+  await rounds.locator(".ax-chip", { hasText: "Final checks" }).click();
+  const fill = await rounds
+    .locator('g[data-explain="final"] rect.ch-svg-b')
+    .evaluate((e) => getComputedStyle(e).fill);
+  expect(fill).toBe("rgb(180, 68, 46)");
 });

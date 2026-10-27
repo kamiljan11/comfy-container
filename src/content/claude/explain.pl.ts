@@ -403,4 +403,237 @@ export const explainPl: Explains = {
       body: "Strażnik jest zbudowany przeciw pomyłkom i instrukcjom przemyconym z zewnątrz, na przykład ze strony, którą agent czyta. Agent zdeterminowany, żeby go obejść, może uruchomić dowolny skrypt; zatrzymają go tylko piaskownica i uprawnienia systemu operacyjnego.",
     },
   ],
+  matrix: [
+    {
+      id: "row-0",
+      term: "Macierz projektu",
+      body: "Każdy projekt dostaje tabelę z 62 wierszami: 37 obszarów projektowania systemów, takich jak dane, kolejki czy logowanie, i 25 warstw narzędzi od frontendu po płatności. Każdy wiersz musi mieć decyzję z dowodem, powód, dla którego nie dotyczy, albo mierzalny sygnał, kiedy do niego wrócić.",
+    },
+    {
+      id: "row-1",
+      term: "Opcje z kursu",
+      body: "Audyt z 6 października wziął 437 nazwanych opcji z kursu projektowania systemów. Przy 46 % z nich PG wiedział, kiedy je wybrać; 26 % znał tylko z nazwy, a 28 % nie znał wcale. Ten pasek to właśnie ta luka, zmierzona przed wersją 1.5.0, która dodała macierz.",
+    },
+    {
+      id: "row-2",
+      term: "Decyzje w obszarach, przedtem",
+      body: "Z 37 obszarów stary krok projektowania zmuszał AI do decyzji w 15, częściowo w 11, a w 11 wcale. Nic nie kazało mu przejść przez każdy obszar.",
+    },
+    {
+      id: "row-3",
+      term: "Pierwszy prawdziwy przebieg",
+      body: "Tego samego dnia macierz przeszła przez aplikację klienta: 31 wierszy dostało decyzję, 5 nie dotyczyło, a 1 czeka na mierzalny sygnał. Wszystkie 37 wierszy zostało wypełnionych, a około 60 luk wypisanych z dowodami do przejrzenia przez człowieka.",
+    },
+  ],
+  release: [
+    {
+      id: "step-0",
+      term: "Build i testy",
+      body: "Te same automatyczne kontrole, które przechodzi już każda zmiana: kod się buduje, typy się zgadzają, testy są zielone. Cały potok jest zaprojektowany i zrecenzowany, ale nie działał jeszcze na żywym projekcie.",
+    },
+    {
+      id: "step-1",
+      term: "Sondowanie podglądu",
+      body: "Nowa wersja najpierw działa jako podgląd, zanim wskaże na nią prawdziwy adres. Skrypt otwiera strony, które nie mogą się zepsuć, i sprawdza, czy każda odpowiada poprawnie; czerwony wynik ma nie dopuścić nowej wersji do domeny.",
+    },
+    {
+      id: "step-2",
+      term: "10 minut czekania",
+      body: "Nowy build jest testowany przez dziesięć minut z dala od prawdziwych odwiedzających, zanim domena zacznie na niego wskazywać, więc problem wychodzi na jaw, zanim ktokolwiek z niego skorzysta.",
+    },
+    {
+      id: "step-3",
+      term: "15 minut obserwacji",
+      body: "Po przełączeniu skrypt sprawdza żywą stronę co 30 sekund przez 15 minut. Robi to, co robiłby dyżurny inżynier, którego jednoosobowa firma nie ma.",
+    },
+    {
+      id: "back",
+      term: "Droga powrotna",
+      body: "Trzy nieudane sprawdzenia z rzędu, czyli około minuty błędów, same przywracają ostatnią dobrą wersję, raz. Jeśli wydanie zmieniło strukturę bazy danych albo funkcje serwerowe, potok staje i pyta mnie: stary kod na nowej strukturze tylko by pogorszył sprawę.",
+    },
+  ],
+  rounds: [
+    {
+      id: "blocking",
+      term: "Uwaga blokująca",
+      body: "Problem na tyle poważny, że zatrzymuje wydanie. Trzeba go naprawić, zanim cokolwiek wyjdzie. Pełne rundy znalazły dwie dziury w bezpieczeństwie, na przykład tajny klucz dostępu (token), który dyżurne AI mogło wkleić do komentarza; kontrole końcowe znalazły regułę bezpieczeństwa bez testu.",
+    },
+    {
+      id: "major",
+      term: "Uwaga poważna",
+      body: "Prawdziwa usterka, która sama nie zatrzymuje wydania, ale jest naprawiana w tej samej rundzie, zanim zacznie się następna. Każdy turkusowy słupek pokazuje, ile takich uwag dała jedna runda.",
+    },
+    {
+      id: "round",
+      term: "Runda recenzji",
+      body: "Jedno pełne przejście przez wydanie 1.7.0: trzech albo czterech recenzentów AI, każdy z własną listą kontrolną, czyta całą zmianę osobno. Skrypt łączy ich uwagi, uwagi są naprawiane, a następna runda zaczyna się na poprawionym kodzie.",
+    },
+    {
+      id: "final",
+      term: "Kontrole końcowe",
+      body: "Dwie mniejsze kontrole z dwoma recenzentami, które czytają tylko ostatnie poprawki. I tak znalazły problem blokujący: regułę bezpieczeństwa bez testu. Naprawiono ją przed wydaniem, jak pozostałe.",
+    },
+  ],
+  context: [
+    {
+      id: "row-0",
+      term: "Zasady w kolejnym poleceniu",
+      body: "Każda wiadomość do modelu niesie tekst w tle, który model czyta najpierw, a za ten tekst się płaci. Kolejne polecenie o kodzie niosło 4,9 KB zasad; teraz pełny protokół idzie raz na sesję, a następne wiadomości dostają jednolinijkowe przypomnienie, 0,9 KB.",
+    },
+    {
+      id: "row-1",
+      term: "Pamięć na starcie",
+      body: "Notatki ładowane na starcie sesji zeszły z 35 KB do 25 KB. Najnowsze punkty kontrolne idą pierwsze, każdy skrócony plik ma listę tego, co pominął, a kontrola budżetu robi się czerwona, jeśli tekst startowy znów urośnie.",
+    },
+    {
+      id: "row-2",
+      term: "Okno kontekstu",
+      body: "Okno to ilość tekstu, którą model trzyma naraz. Milion tokenów brzmi lepiej, ale każda wiadomość wysyła wszystko od nowa: w moich zapisach pracy okno 1M zużywało około 2,3 razy więcej tygodniowego limitu niż 400k, więc okno zostaje na 400k.",
+    },
+  ],
+  calib: [
+    {
+      id: "row-0",
+      term: "Rozmiar zmiany",
+      body: "Zmiana zbyt duża, żeby ją dobrze zrecenzować, musi zostać podzielona. Próg przestrojono według dziennika bramek: z 400 linii zrobiło się 1500, a zmiana obejmująca jeden temat może zostać w jednym kawałku.",
+    },
+    {
+      id: "row-1",
+      term: "Powtórzony tekst",
+      body: "Bramka szuka tego samego tekstu wklejanego raz po raz zamiast napisanego raz. Kiedyś reagowała na 3 kopie w 2 plikach; teraz na 6 kopii w 3 plikach, a dane startowe, które powtarzają się celowo, są pomijane.",
+    },
+    {
+      id: "row-2",
+      term: "Kasowanie cache builda",
+      body: "Cache builda to folder plików, które narzędzie może w każdej chwili odtworzyć. Kasowanie go było blokowane jak każde inne; teraz jest dozwolone, a ścieżki z .. i linki dalej są blokowane, bo mogą wskazywać poza folder.",
+    },
+    {
+      id: "row-3",
+      term: "Lint po edycji",
+      body: "Lint to automatyczna kontrola stylu i typowych błędów, która rusza po każdej edycji. Jednorazowe skrypty poza projektem są teraz pomijane, bo nigdy nie trafiają do produkcji.",
+    },
+    {
+      id: "row-4",
+      term: "Changelog",
+      body: "Changelog to lista tego, co zmieniło się w każdym wydaniu. Zamiast linii dopisywanej w każdym pull requeście lista jest teraz zbierana z tytułów pull requestów w chwili wydania.",
+    },
+    {
+      id: "row-5",
+      term: "Zasięg rutyn",
+      body: "Rutyny to kontrole uruchamiane według harmonogramu. Gdy działają, patrzą tylko na 12 z 47 repozytoriów, w których była prawdziwa praca w ostatnich 30 dniach. Teraz są wyłączone do czasu naprawy ustawień.",
+    },
+  ],
+  limits: [
+    {
+      id: "trigger-0",
+      term: "Incydent",
+      body: "Prawdziwa awaria, którą bramka powinna była złapać, a nie złapała. To zmierzona luka, więc jej naprawa jest warta swojej ceny; ryzyko, które tylko mogłoby się zdarzyć, nie wystarcza.",
+    },
+    {
+      id: "trigger-1",
+      term: "Aktualizacja narzędzia albo modelu",
+      body: "Gdy zmienia się Claude Code albo model, hook (kontrola wpięta w narzędzie) może się zepsuć, a agent zacząć zachowywać się inaczej. Wtedy PG jest dopasowywany do nowego narzędzia; nie dostaje z tego powodu nowego mechanizmu.",
+    },
+    {
+      id: "trigger-2",
+      term: "Świadoma prośba",
+      body: "Sam decyduję, że coś ma się zmienić. Nie liczy się już rutyna, która szuka sobie roboty: przez tygodnie każde ryzyko, które zauważyłem, dostawało nową bramkę, i dopiero ta zasada to zakończyła.",
+    },
+    {
+      id: "wall-0",
+      term: "Zdeterminowany atakujący",
+      body: "Strażnik czyta komendy jako tekst. Ktoś, kto chce go obejść, może zapisać skrypt do pliku i go uruchomić, a żadna reguła tekstowa nie zajrzy do środka. Zatrzymanie tego to zadanie systemu operacyjnego: jego piaskownicy, czyli wydzielonej przestrzeni dla programów, i uprawnień.",
+    },
+    {
+      id: "wall-1",
+      term: "Sens kodu",
+      body: "Sprawdzanie wzorców widzi, jak kod wygląda, a nie czy jego logika jest dobra: dwie linie mogą wyglądać podobnie i robić coś przeciwnego. Dlatego są recenzenci, którzy czytają zmianę, i testy, które ją uruchamiają.",
+    },
+    {
+      id: "wall-2",
+      term: "Miara, która stała się celem",
+      body: "Gdy liczba staje się celem, przestaje mierzyć to, co miała mierzyć (prawo Goodharta). Więcej bramek albo więcej zielonych przebiegów samo nie znaczy, że praca jest lepsza; dobra ma być praca.",
+    },
+    {
+      id: "signal",
+      term: "Sygnał stopu",
+      body: "Moment, w którym więcej wysiłku przestaje dawać więcej ochrony: dwie rundy z rzędu, które znajdują tylko przypadki brzegowe niewidziane w prawdziwej pracy. Przepisywanie części strażnika, która czyta komendy, trafiło na niego po dziewięciu rundach i zostało zamknięte.",
+    },
+  ],
+  waffle: [
+    {
+      id: "group-0",
+      term: "Aktywne",
+      body: "W 12 repozytoriach była prawdziwa praca w ostatnich 30 dniach. Gdy rutyny działają, poświęcają czas tylko im, a dni, w których PG przeszedł naraz przez wszystkie repozytoria albo ta sama zmiana trafiła wszędzie, nie liczą się jako praca.",
+    },
+    {
+      id: "group-1",
+      term: "Skończone albo w spoczynku",
+      body: "Większość projektów jest skończona albo wstrzymana. PG dalej pilnuje ich wszystkich, ale rutyny poświęcają czas tylko tam, gdzie trwa praca.",
+    },
+    {
+      id: "group-2",
+      term: "Nigdy nie sprawdzane przez rutyny",
+      body: "Jedno repozytorium nigdy nie bierze udziału w przebiegach rutyn. Dalej jest tu policzone, więc suma to 47.",
+    },
+    {
+      id: "fact-0",
+      term: "Ochrona gałęzi",
+      body: "Ustawienie GitHuba, które nie wpuszcza zmiany do głównej gałęzi bez przejścia jej kontroli. Mają ją 33 repozytoria, w tym 31 ścisłą: kontrole muszą przejść na najnowszym kodzie, a nie na starszej kopii.",
+    },
+    {
+      id: "fact-1",
+      term: "Alerty podatności",
+      body: "GitHub ostrzega, gdy biblioteka używana przez projekt ma znaną dziurę w bezpieczeństwie. Te alerty mają włączone 44 repozytoria.",
+    },
+  ],
+  versions: [
+    {
+      id: "strip",
+      term: "Pasek kalendarza",
+      body: "Jedna komórka na dzień, od 12 września do 14 października. Wypełniona komórka to dzień z wydaniem, liczba w niej oznacza kilka wydań tego dnia, a odstępy między nimi zachowują prawdziwą skalę.",
+    },
+    {
+      id: "number",
+      term: "Numer wersji",
+      body: "Trzy liczby: pierwsza zmienia się, gdy coś przestaje działać po staremu, środkowa, gdy dochodzi coś nowego, ostatnia przy poprawce. Więc 1.2.6 to szósta poprawka po 1.2.0.",
+    },
+    {
+      id: "compare",
+      term: "Porównanie z innymi",
+      body: "Agenci przeszli przez 35 publicznych projektów o podobnym pomyśle i wypisali 23 rzeczy, które inni robili lepiej, każdą z plikiem i linią. Projekt zmian przeszedł przegląd bezpieczeństwa, zanim powstała jakakolwiek linia kodu.",
+    },
+    {
+      id: "patches",
+      term: "Sześć poprawek jednego dnia",
+      body: "Bramka końca sesji wierzyła temu, co wypisały testy, a nie ich kodowi wyjścia, czyli liczbie, którą program zwraca na koniec, więc zepsuta konfiguracja testów mogła przejść jako pominięta. Sześć wydań później werdykt pochodzi tylko z kodu wyjścia.",
+    },
+  ],
+  install: [
+    {
+      id: "step-0",
+      term: "Skopiuj repozytorium",
+      body: "git clone pobiera publiczne repozytorium na twój komputer. Potrzebne są Node 20 albo nowszy, git i Claude Code; na tym kroku nic się jeszcze nie instaluje.",
+    },
+    {
+      id: "step-1",
+      term: "Próba na sucho",
+      body: "Instalator wypisuje, co by skopiował, scalił i dodał, i niczego nie zmienia. Najpierw czytasz plan, jak kosztorys przed rozpoczęciem pracy.",
+    },
+    {
+      id: "step-2",
+      term: "Instalacja",
+      body: "Pliki trafiają do ~/.claude, folderu, z którego Claude Code czyta ustawienia. Plik, który zmieniłeś, nigdy nie jest nadpisywany: nowa wersja ląduje obok twojej, ustawienia są scalane, a reguły stoją między znacznikami, więc aktualizacja wymienia tylko ten blok.",
+    },
+    {
+      id: "step-3",
+      term: "Autotest",
+      body: "Instalator kończy się uruchomieniem testów samego systemu na twoim komputerze. Zielony wynik jest dowodem, że kontrole tam działają, a nie zapewnieniem instalatora, że wszystko poszło dobrze.",
+    },
+    {
+      id: "back",
+      term: "Deinstalator",
+      body: "W tym samym repozytorium jest deinstalator, więc wypróbowanie systemu do niczego nie zobowiązuje. Publiczne 1.8.0 ma 409 plików, oczyszczonych z prywatnych danych.",
+    },
+  ],
 };

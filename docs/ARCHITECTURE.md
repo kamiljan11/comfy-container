@@ -55,13 +55,13 @@ _result_, not which adapter produced it.
 
 ### /claude: explaining a figure in plain words
 
-Each key figure on `/claude` can explain its elements. To add one: give the element a stable
+Every figure on `/claude` explains its elements (`Explain.test.ts` fails when a figure has none). To add one: give the element a stable
 `data-explain="<id>"` in `src/components/claude/diagrams.tsx` or `charts.tsx` (on the SVG `rect`/`g` or the
 HTML card), then add `{ id, term, body }` for that id under the figure's key in **both**
 `src/content/claude/explain.en.ts` and `explain.pl.ts`. `Explain.test.ts` fails until every marked element has
 a text, every text has an element, the two languages list the same ids, and every number in a text also appears
-in that language's article. `src/routes/claude.tsx` wraps a figure in `ExplainedFigure` only when it has entries,
-so a figure without them renders exactly as before. Texts that describe state (a routine "is off", "due to
+in that language's article. `src/routes/claude.tsx` wraps a figure in `ExplainedFigure` when it has entries; since every figure must have
+them, a figure without entries is a failing test, not a plain figure. Texts that describe state (a routine "is off", "due to
 return") must change together with the figure when that state changes.
 
 ### /claude: which sections have a figure

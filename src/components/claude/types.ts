@@ -87,6 +87,8 @@ export type VersionPoint = {
   day: number;
   theme: string;
   patches?: number;
+  /** `data-explain` id of this release's row, for the few releases the article explains. */
+  explainId?: string;
 };
 export type VersionLabels = {
   points: VersionPoint[];
@@ -131,7 +133,8 @@ export type MergeLabels = {
   caption: string;
 };
 
-export type RoundBar = { label: string; blocking: number; major: number };
+/** `final`: a check of the last fixes, not a full review round (explained apart from the rounds). */
+export type RoundBar = { label: string; blocking: number; major: number; final?: boolean };
 export type RoundsLabels = {
   rounds: RoundBar[];
   blockingLabel: string;
@@ -237,7 +240,10 @@ export type FigureKey = keyof Figures;
  * PG: what the thing does, when it acts, and one real example.
  */
 export type Explain = { id: string; term: string; body: string };
-/** Explanations per figure. Partial: a figure without an entry renders exactly as before. */
+/**
+ * Explanations per figure. Partial only so the type allows a figure that is not finished yet; every figure on
+ * the page must have entries, and `Explain.test.ts` fails when one has none.
+ */
 export type Explains = Partial<Record<FigureKey, Explain[]>>;
 export type ExplainUi = { hint: string; pick: string; close: string };
 

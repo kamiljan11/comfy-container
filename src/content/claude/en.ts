@@ -828,7 +828,7 @@ export const en: Content = {
         { label: "round 4", blocking: 0, major: 8 },
         { label: "round 5", blocking: 0, major: 9 },
         { label: "round 6", blocking: 0, major: 8 },
-        { label: "final checks", blocking: 1, major: 2 },
+        { label: "final checks", blocking: 1, major: 2, final: true },
       ],
       caption:
         "Release 1.7.0: findings per review round. Rounds 1 to 6 used three or four reviewers; the two final checks of the fixes used two.",
@@ -1063,12 +1063,14 @@ export const en: Content = {
           date: "Sep 27",
           day: 15,
           theme: "rebuilt after comparing 35 open-source projects",
+          explainId: "compare",
         },
         {
           v: "1.2.1–1.2.6",
           date: "Sep 28",
           day: 16,
           patches: 6,
+          explainId: "patches",
           theme: "six fixes: test verdicts only from exit codes",
         },
         { v: "1.3.0", date: "Oct 5", day: 23, theme: "pull requests merge with proof of review" },
