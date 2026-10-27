@@ -1,5 +1,6 @@
 import { REPO_URL } from "../../lib/skillsCatalog";
 import type { Content } from "../../components/claude/types";
+import { explainPl, explainUiPl } from "./explain.pl";
 
 // Każdą liczbę na tej stronie przeliczyłem 14 października 2026 (źródła i komendy: docs/CLAUDE-PAGE-NUMBERS.md). Liczba, której nie przeliczałem, mówi to wprost i ma własną datę.
 
@@ -1095,6 +1096,8 @@ export const pl: Content = {
         "Pasek ma jedną komórkę na dzień; wypełniona komórka to wydanie, a liczba oznacza kilka wydań tego dnia.",
     },
   },
+  explain: explainPl,
+  explainUi: explainUiPl,
   colophon:
     "Ta strona przeszła przez proces, który opisuje: szkic napisał agent, tekst przeszedł przez opisane wyżej bramki i recenzję AI, a ja go zrecenzowałem i opublikowałem. Liczby pochodzą z komend uruchomionych w dniu publikacji, nie z pamięci.",
 };

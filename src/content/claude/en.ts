@@ -1,5 +1,6 @@
 import { REPO_URL } from "../../lib/skillsCatalog";
 import type { Content } from "../../components/claude/types";
+import { explainEn, explainUiEn } from "./explain.en";
 
 // Every number on this page was recounted on 2026-10-14 (sources and commands: docs/CLAUDE-PAGE-NUMBERS.md). A number that was not recounted says so and carries its own date.
 
@@ -1085,6 +1086,8 @@ export const en: Content = {
         "The strip has one cell per day; a filled cell is a release, and a number means several that day.",
     },
   },
+  explain: explainEn,
+  explainUi: explainUiEn,
   colophon:
     "This page went through the process it describes: an agent drafted it, it passed the gates above and an AI review, and I reviewed and published it. The numbers came from commands run on the day it shipped, not from memory.",
 };

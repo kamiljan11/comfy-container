@@ -1,6 +1,8 @@
 # Liczby na /claude: skad sa i jak je przeliczyc
 
 Kazda liczba na kamiljan.com/claude (pliki `src/content/claude/en.ts` i `pl.ts`) ma tu zrodlo i komende.
+Objasnienia elementow rysunkow (`explain.en.ts` / `explain.pl.ts`) nie wprowadzaja wlasnych liczb: kazda liczba z nich
+musi juz stac w artykule w tym samym jezyku (pilnuje `src/components/claude/Explain.test.ts`). Przeliczasz artykul -> sprawdz tez je.
 Stan: 14 pazdziernika 2026, PG 1.8.0. Liczby w obu jezykach musza byc identyczne — pilnuje tego
 `src/content/claude/content.test.ts`. Kiedy przeliczasz: po wydaniu `kamiljan11/coding-higher-mind`
 albo gdy zdanie w artykule przestaje byc prawda (PG jest w trybie utrzymania, wiec rzadko).

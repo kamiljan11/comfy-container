@@ -7350,3 +7350,119 @@ header[id] {
     -webkit-print-color-adjust: exact;
   }
 }
+
+/* /claude — plain-language explanations under a figure (components/claude/Explain.tsx).
+   Paper colours like .aid; the highlighted element gets the same teal as labels. */
+.ax-wrap [data-explain] {
+  cursor: pointer;
+}
+.ax-wrap [data-explain].ax-on rect,
+.ax-wrap rect[data-explain].ax-on {
+  stroke: #0a7d8c;
+  stroke-width: 2.4;
+  fill: rgba(10, 125, 140, 0.08);
+}
+.ax-wrap .aid text:not([data-explain]) {
+  pointer-events: none; /* labels sit on top of their box: let the pointer reach the box */
+}
+.ax-wrap .aid g[data-explain] text {
+  pointer-events: auto; /* a label inside an explained group (pipeline stage names) is itself a target */
+}
+.ax-panel:focus {
+  outline: none;
+}
+.ax-panel:focus-visible {
+  outline: 2px solid #0a7d8c;
+}
+.ax-wrap g[data-explain].ax-on circle,
+.ax-wrap circle[data-explain].ax-on {
+  stroke: #0a7d8c;
+  stroke-width: 2.4;
+}
+.ax-wrap text[data-explain].ax-on {
+  text-decoration: underline;
+}
+.ax-wrap :is(li, div, span)[data-explain].ax-on {
+  outline: 2px solid #0a7d8c;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+.ax-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 8px;
+}
+.ax-chip {
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.2;
+  padding: 6px 10px;
+  min-height: 32px;
+  border: 1px solid #868b92; /* 3:1 against the page, WCAG 1.4.11 */
+  border-radius: 999px;
+  background: #fafaf8;
+  color: #23272d;
+  cursor: pointer;
+}
+@media (max-width: 768px), (pointer: coarse) {
+  /* every tap target on a phone or touch screen is at least 44 px (e2e/mobile.spec.ts) */
+  .ax-chip,
+  .ax-close {
+    min-height: 44px;
+  }
+}
+.ax-chip[aria-pressed="true"] {
+  border-color: #0a7d8c;
+  background: rgba(10, 125, 140, 0.1);
+  color: #075a65;
+  font-weight: 600;
+}
+.ax-chip:focus-visible,
+.ax-close:focus-visible {
+  outline: 2px solid #0a7d8c;
+  outline-offset: 2px;
+}
+.ax-panel {
+  border-left: 3px solid #0a7d8c;
+  background: #f4f4f0;
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  min-height: 3em;
+}
+.ax-panel p {
+  margin: 0;
+}
+.ax-term {
+  font-weight: 700;
+  color: #23272d;
+  margin-bottom: 4px !important;
+}
+.ax-body {
+  color: #2f343a;
+  line-height: 1.55;
+}
+.ax-hint {
+  color: #6a6f76;
+  font-style: italic;
+}
+.ax-close {
+  margin-top: 8px;
+  font: inherit;
+  font-size: 12px;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  color: #075a65; /* #0a7d8c on the panel grey is 4.4:1, under AA for 12 px text */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* paper has no pointer: drop the buttons and the "point at a part" hint, keep an opened explanation */
+@media print {
+  .ax-chips,
+  .ax-close,
+  .ax-panel:not(:has(.ax-term)) {
+    display: none !important;
+  }
+}
