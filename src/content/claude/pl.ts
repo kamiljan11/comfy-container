@@ -1,6 +1,7 @@
 import { REPO_URL } from "../../lib/skillsCatalog";
 import type { Content } from "../../components/claude/types";
 import { explainPl, explainUiPl } from "./explain.pl";
+import { tellPartPl, tellSectionsPl } from "./tell.pl";
 
 // Każdą liczbę na tej stronie przeliczyłem 14 października 2026 (źródła i komendy: docs/CLAUDE-PAGE-NUMBERS.md). Liczba, której nie przeliczałem, mówi to wprost i ma własną datę.
 
@@ -10,7 +11,7 @@ export const pl: Content = {
   tocLabel: "Spis treści",
   mapTitle: "Jak ułożona jest ta strona",
   mapLead:
-    "Sześć części. Wybierz tę, której szukasz; każda sekcja ma własny link, a mały kwadrat oznacza te z wykresem.",
+    "Siedem części. Wybierz tę, której szukasz; każda sekcja ma własny link, a mały kwadrat oznacza te z wykresem. Mało czasu? Ostatnia część opowiada cały system w 30 sekund.",
   versionLine:
     "PG v1.8.0, stan na 14 października 2026. Piętnaście wersji publicznych w 33 dni i od tego dnia system jest skończony: przeszedł w tryb utrzymania, a sekcja „Gdzie kończy się ulepszanie” wyjaśnia, co to znaczy i dlaczego.",
   intro:
@@ -48,6 +49,7 @@ export const pl: Content = {
       blurb: "Słowa statusu, sekrety, rutyny, pamięć i to, czy całość wytrzymuje skalę.",
     },
     { title: "Historia i użycie", blurb: "Piętnaście wersji, instalacja i uczciwe granice." },
+    tellPartPl,
   ],
   sections: [
     /* ── Część 1: czym to jest ── */
@@ -599,6 +601,7 @@ export const pl: Content = {
         "Dwie części są zaprojektowane, ale jeszcze nie przećwiczone: potok wydań nie miał ćwiczenia na żywym projekcie, a rutyny są wyłączone do czasu naprawy ustawień. Strażnik zatrzymuje pomyłki, nie zdeterminowanego atakującego. Sens tej strony nie polega na tym, że nic nie może pójść źle. Polega na tym, że sposoby, w jakie praca z AI idzie źle, są rozbrajane jawnie, i na tym, że wiem, gdzie dokładanie reguł przestaje się opłacać.",
       ],
     },
+    ...tellSectionsPl,
   ],
   figures: {
     arch: {

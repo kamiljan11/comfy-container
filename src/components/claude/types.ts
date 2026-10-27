@@ -230,6 +230,8 @@ export type Section = {
   paragraphs?: string[];
   figure?: FigureKey;
   items?: Item[];
+  /** Questions and answers, shown folded: `label` is the question, `body` the answer. */
+  faq?: Item[];
   code?: string[];
   link?: LinkRef;
 };

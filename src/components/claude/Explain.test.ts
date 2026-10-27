@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import { en } from "../../content/claude/en";
 import { pl } from "../../content/claude/pl";
 import { explainIdAt } from "../../lib/explainTarget";
+import { hasWholeNumber, numbersIn, stringsIn } from "../../lib/wholeNumber";
 import { ExplainedFigure } from "./Explain";
 import { Figure } from "./Figure";
 import type { Content, FigureKey } from "./types";
@@ -17,17 +18,6 @@ const drawnIds = (c: Content, k: FigureKey) =>
       /data-explain="([^"]+)"/g,
     ),
   ].map((m) => m[1]);
-
-// A whole number, not a piece of a longer one: "15" must not pass because the article says "150" or "1.15".
-// Plain index search instead of a RegExp built from the number (Semgrep: non-literal RegExp).
-const hasWholeNumber = (text: string, n: string) => {
-  for (let at = text.indexOf(n); at !== -1; at = text.indexOf(n, at + 1)) {
-    const before = text[at - 1] ?? "";
-    const after = text[at + n.length] ?? "";
-    if (!/[\d.,]/.test(before) && !/\d/.test(after)) return true;
-  }
-  return false;
-};
 
 describe.each([
   ["en", en],
@@ -47,10 +37,10 @@ describe.each([
 
   it("every number in an explanation already stands in the article in the same language", () => {
     const { explain: _e, explainUi: _u, ...article } = c;
-    const text = JSON.stringify(article);
+    const text = stringsIn(article);
     for (const k of keys) {
       for (const e of c.explain[k] ?? []) {
-        for (const n of `${e.term} ${e.body}`.match(/\d[\d,. ]*\d|\d/g) ?? []) {
+        for (const n of numbersIn(`${e.term} ${e.body}`)) {
           expect(hasWholeNumber(text, n), `${k}/${e.id}: ${n}`).toBe(true);
         }
       }
@@ -90,13 +80,6 @@ it("renders the hint, one button per element and no open explanation before any 
 });
 
 // Node has no DOM: the pointer path itself (closest() on SVG and HTML elements) is covered by e2e/claude-explain.spec.ts.
-it("hasWholeNumber accepts a whole number and rejects a piece of a longer one", () => {
-  expect(hasWholeNumber("at 15 minutes", "15")).toBe(true);
-  expect(hasWholeNumber("150 rows", "15")).toBe(false);
-  expect(hasWholeNumber("version 1.15", "15")).toBe(false);
-  expect(hasWholeNumber("12 of 47", "12 of 47")).toBe(true);
-});
-
 it("explainIdAt is null for anything that is not an element", () => {
   expect(explainIdAt(null)).toBeNull();
   expect(explainIdAt({} as EventTarget)).toBeNull();

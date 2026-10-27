@@ -76,9 +76,11 @@ PG jest w trybie utrzymania od 2026-10-14 (ADR 0008), wiec artykul nie dostaje j
    Objasnienia elementow rysunkow (`src/content/claude/explain.en.ts` i `explain.pl.ts`) powtarzaja stan z artykulu
    (rutyna "wylaczona"/"wraca", "od 4 pazdziernika", liczby): zmieniasz fakt w artykule -> zmien go tez tam, w obu jezykach.
    `Explain.test.ts` pilnuje id i liczb, nie slow o stanie. Test e2e: `e2e/claude-explain.spec.ts`.
+   To samo dotyczy ostatniej czesci (wersje 30 s / 3 min / 15 min i pytania: `src/content/claude/tell.en.ts` i `tell.pl.ts`):
+   opowiada artykul, wiec zmiana faktu albo stanu idzie tez tam. `content.test.ts` pilnuje liczb, nie slow. Test e2e: `e2e/claude-faq.spec.ts`.
 4. `CHANGELOG.md` strony: wpis w `[Unreleased]`.
 5. Gdy wydanie zmienilo skille lub agentow: odswiez migawke (sekcja wyzej) w tym samym PR, po merge'u PR eksportu.
-6. Bramki: `npm run lint`, `npx tsc --noEmit`, `npm test`, `npm run build`, `npx playwright test e2e/page-map.spec.ts e2e/mobile.spec.ts e2e/claude-explain.spec.ts`, podglad PL i EN na desktopie i telefonie (`npx vite dev`), pg-review (code, ops, ux, product), merge przez `pg-merge-bezpieczny.py`.
+6. Bramki: `npm run lint`, `npx tsc --noEmit`, `npm test`, `npm run build`, `npx playwright test e2e/page-map.spec.ts e2e/mobile.spec.ts e2e/claude-explain.spec.ts e2e/claude-faq.spec.ts`, podglad PL i EN na desktopie i telefonie (`npx vite dev`), pg-review (code, ops, ux, product), merge przez `pg-merge-bezpieczny.py`.
 
 ## Monitoring
 

@@ -37,7 +37,7 @@ _result_, not which adapter produced it.
 | `src/routes/`                                                         | Pages (file-based routing): `/`, `/case-studies`, `/cv`, `/claude`, `/uslugi/*`                                                                                                                                                    | `createFileRoute(...)` per file                                      | T1        |
 | `src/routeTree.gen.ts`                                                | **Generated** by the TanStack router plugin on every build/dev run. Never hand-edit; that's why it carries `as any` and a file-level `eslint-disable` — those are not hand-written debt                                            | —                                                                    | generated |
 | `src/data/caseStudies.ts`, `src/data/services.ts`                     | All case-study and service copy, as data (not hardcoded in JSX) — this is what Kamil edits when a case study changes                                                                                                               | typed arrays                                                         | T1        |
-| `src/content/claude/en.ts`, `pl.ts`                                   | The /claude article as typed data: six parts, sections with stable ids, and the data of every chart. Both languages are kept in step by `content.test.ts` (ADR 0008); sources of every number in `docs/CLAUDE-PAGE-NUMBERS.md`     | `en`, `pl` (`Content`)                                               | T1        |
+| `src/content/claude/en.ts`, `pl.ts`                                   | The /claude article as typed data: seven parts, sections with stable ids, and the data of every chart. Both languages are kept in step by `content.test.ts` (ADR 0008); sources of every number in `docs/CLAUDE-PAGE-NUMBERS.md`   | `en`, `pl` (`Content`)                                               | T1        |
 | `src/components/claude/`, `src/lib/chartMath.ts`                      | The /claude diagrams (SVG) and charts (HTML/SVG), the content types and the figure registry; chart arithmetic is pure and tested                                                                                                   | `Figure` in `src/components/claude/Figure.tsx`                       | T1        |
 | `src/i18n.ts`                                                         | EN/PL copy dictionary for the site chrome (nav, hero, footer)                                                                                                                                                                      | `type SiteTranslation`                                               | T1        |
 | `src/data/siteMap.ts`                                                 | The About menu's items: one list read by the header menus and the command palette                                                                                                                                                  | `ABOUT_ITEMS[lang]`                                                  | T1        |
@@ -63,6 +63,17 @@ a text, every text has an element, the two languages list the same ids, and ever
 in that language's article. `src/routes/claude.tsx` wraps a figure in `ExplainedFigure` only when it has entries,
 so a figure without them renders exactly as before. Texts that describe state (a routine "is off", "due to
 return") must change together with the figure when that state changes.
+
+### /claude: the short versions and the questions
+
+The last part of `/claude` retells the article: `src/content/claude/tell.en.ts` and `tell.pl.ts` export the part
+and its sections, which `en.ts`/`pl.ts` append to `parts` and `sections`. A section may carry `faq` (question =
+`label`, answer = `body`), rendered by `src/components/claude/Faq.tsx` as native `<details>`; before printing it
+opens every answer and folds the ones the reader had not opened afterwards. The part adds no facts of its own:
+`content.test.ts` fails when a number written in digits does not stand in the rest of the article in the same
+language, when the languages ask a different number of questions, when a question repeats or does not end with
+"?", or when an answer is longer than 480 characters (it has to read on a phone). Numbers written as words are
+not checked, so read them against the article by hand. Change a fact in the article, and change it here too.
 
 ## Data flow — a chat message that becomes a lead
 

@@ -1,6 +1,7 @@
 import { REPO_URL } from "../../lib/skillsCatalog";
 import type { Content } from "../../components/claude/types";
 import { explainEn, explainUiEn } from "./explain.en";
+import { tellPartEn, tellSectionsEn } from "./tell.en";
 
 // Every number on this page was recounted on 2026-10-14 (sources and commands: docs/CLAUDE-PAGE-NUMBERS.md). A number that was not recounted says so and carries its own date.
 
@@ -10,7 +11,7 @@ export const en: Content = {
   tocLabel: "On this page",
   mapTitle: "How this page is laid out",
   mapLead:
-    "Six parts. Pick the one you came for; every section has its own link, and a small square marks the ones with a chart.",
+    "Seven parts. Pick the one you came for; every section has its own link, and a small square marks the ones with a chart. In a hurry? The last part tells the whole system in 30 seconds.",
   versionLine:
     "PG v1.8.0, as of October 14, 2026. Fifteen public versions in 33 days, and as of that date the system is complete: it is now in maintenance mode, and the section “Where improving stops” explains what that means and why.",
   intro:
@@ -52,6 +53,7 @@ export const en: Content = {
       title: "History and use",
       blurb: "Fifteen versions, how to install it, and the honest limits.",
     },
+    tellPartEn,
   ],
   sections: [
     /* ── Part 1: what it is ── */
@@ -603,6 +605,7 @@ export const en: Content = {
         "Two parts are designed but not yet exercised: the release pipeline has had no drill on a live project, and the routines are off until their setup is fixed. The guard stops mistakes, not a determined attacker. The point of this page is not that nothing can go wrong. It is that the ways AI work goes wrong are engineered against in the open, and that I know where adding more rules stops paying.",
       ],
     },
+    ...tellSectionsEn,
   ],
   figures: {
     arch: {

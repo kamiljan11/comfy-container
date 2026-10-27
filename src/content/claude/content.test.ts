@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 import type { Content, FigureKey } from "../../components/claude/types";
 import { releasesPerDay, stackPercents, timelineSpan } from "../../lib/chartMath";
+import { hasWholeNumber, numbersIn, stringsIn } from "../../lib/wholeNumber";
 import { en } from "./en";
 import { pl } from "./pl";
+import { tellSectionsEn } from "./tell.en";
 
 // The two languages are one article. Anything a reader could compare across them (anchors, structure,
 // the numbers in the charts) must be identical; only the words may differ.
@@ -39,6 +41,12 @@ describe("/claude content", () => {
     expect(pl.parts.length).toBe(en.parts.length);
   });
 
+  it("asks the same number of questions in every section in both languages", () => {
+    const faq = (c: Content) =>
+      c.sections.map((s) => [s.id, s.faq?.length ?? 0, s.items?.length ?? 0]);
+    expect(faq(pl)).toEqual(faq(en));
+  });
+
   it("puts the same numbers in every chart in both languages", () => {
     expect(numbers(pl)).toEqual(numbers(en));
   });
@@ -72,7 +80,11 @@ describe("/claude content", () => {
 
       it("gives every section something to read", () => {
         for (const s of c.sections) {
-          const body = (s.lead ? 1 : 0) + (s.paragraphs?.length ?? 0) + (s.items?.length ?? 0);
+          const body =
+            (s.lead ? 1 : 0) +
+            (s.paragraphs?.length ?? 0) +
+            (s.items?.length ?? 0) +
+            (s.faq?.length ?? 0);
           expect(body + (s.figure ? 1 : 0), s.id).toBeGreaterThan(0);
         }
       });
@@ -115,6 +127,39 @@ describe("/claude content", () => {
         for (const r of c.figures.context.rows) {
           expect(tokens(r.beforeText), r.beforeText).toContain(r.before);
           expect(tokens(r.afterText), r.afterText).toContain(r.after);
+        }
+      });
+
+      it("tells the short versions and answers only with numbers the article already states", () => {
+        // the last part retells the article; a number that stands only there would be a second, unchecked source
+        const tell = new Set(tellSectionsEn.map((s) => s.id));
+        // the map lead and the part's own blurb point at the last part, so they are not the article either
+        const tellPart = tellSectionsEn[0].part;
+        const { explain: _e, explainUi: _u, mapLead: _m, parts, sections, ...rest } = c;
+        const article = stringsIn({
+          ...rest,
+          parts: parts.filter((_, i) => i !== tellPart),
+          sections: sections.filter((s) => !tell.has(s.id)),
+        });
+        const told = sections.filter((s) => tell.has(s.id));
+        expect(told.length, "the short versions are in this language too").toBe(tell.size);
+        for (const s of told) {
+          const text = [s.title, s.lead ?? "", ...(s.paragraphs ?? [])]
+            .concat((s.items ?? []).concat(s.faq ?? []).flatMap((i) => [i.label, i.body]))
+            .join(" ");
+          for (const n of numbersIn(text)) {
+            expect(hasWholeNumber(article, n), `${s.id}: ${n}`).toBe(true);
+          }
+        }
+      });
+
+      it("keeps every question unique and every answer short enough to read on a phone", () => {
+        const faq = c.sections.flatMap((s) => s.faq ?? []);
+        expect(faq.length).toBeGreaterThanOrEqual(20);
+        expect(new Set(faq.map((q) => q.label)).size).toBe(faq.length);
+        for (const q of faq) {
+          expect(q.label.trim().endsWith("?"), q.label).toBe(true);
+          expect(q.body.length, q.label).toBeLessThanOrEqual(480);
         }
       });
 
