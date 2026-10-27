@@ -7405,8 +7405,8 @@ header[id] {
   color: #23272d;
   cursor: pointer;
 }
-@media (max-width: 768px) {
-  /* every tap target on a phone is at least 44 px (e2e/mobile.spec.ts) */
+@media (max-width: 768px), (pointer: coarse) {
+  /* every tap target on a phone or touch screen is at least 44 px (e2e/mobile.spec.ts) */
   .ax-chip,
   .ax-close {
     min-height: 44px;
@@ -7461,8 +7461,8 @@ header[id] {
 /* paper has no pointer: drop the buttons and the "point at a part" hint, keep an opened explanation */
 @media print {
   .ax-chips,
-  .ax-hint,
-  .ax-close {
+  .ax-close,
+  .ax-panel:not(:has(.ax-term)) {
     display: none !important;
   }
 }
