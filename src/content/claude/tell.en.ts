@@ -1,13 +1,13 @@
 import type { Part, Section } from "../../components/claude/types";
 
-// The last part of /claude: the same system told in three lengths, and the questions people ask about it.
-// Built only from facts the article above already states: every number written in digits here also stands in the article
+// The last part of /claude: the same system told as a pitch, as rules and at two longer lengths, and the questions people ask about it.
+// Built from facts the article above states (the rules also from PG's own files: pg/design.md, bin/plan-refs-check.js, the gate metrics): every number written in digits here also stands in the article
 // (src/content/claude/content.test.ts checks it), so a change to a fact means a change in two places.
 
 export const tellPartEn: Part = {
   title: "In short, and questions",
   blurb:
-    "The whole system in 30 seconds, 3 minutes or 15, and answers to what clients, recruiters and developers ask.",
+    "The whole system in 30 seconds, as rules in a minute, in 3 minutes or in 15, and answers to what clients, recruiters and developers ask.",
 };
 
 export const tellSectionsEn: Section[] = [
@@ -17,6 +17,58 @@ export const tellSectionsEn: Section[] = [
     title: "In 30 seconds",
     paragraphs: [
       "I build software with AI coding agents, and anyone who does knows the catch: the AI can be wrong and still say it is done. So I built Higher Mind, a quality system that sits under every project. Checks run by themselves at every step, from the prompt to production. On risky changes, separate AI reviewers each check one speciality with a clean slate. Anything that cannot be undone, like payments, logins or keys, waits for me. Every check comes from a real failure in my own projects: 170 so far. It is open source, and it says plainly where it stops.",
+    ],
+  },
+  {
+    id: "rules-in-a-minute",
+    part: 6,
+    title: "The rules in a minute",
+    lead: "The same rules the article above unpacks, written as points you can tell someone in about a minute.",
+    items: [
+      {
+        label: "People own it, agents write it.",
+        body: "AI agents write the code, while a person owns the goal, the review and the release. The system does not replace that person; it makes sure good intentions are never the only safeguard.",
+      },
+      {
+        label: "A rule is a mechanism, not text.",
+        body: "Every rule that once lived only as prose, and was broken because of it, is now a hook: a small program that runs on its own at every edit, command, commit and push, so nobody can forget it.",
+      },
+      {
+        label: "Risk comes from the diff.",
+        body: "The risk tier follows from what actually changed, not from what the author claims: docs, copy and styles are T0, one isolated component T1, shared logic, APIs, dependencies, CI or more than 150 lines T2, and login, permissions, payments, secrets, migrations, scheduled jobs or more than 600 lines T3. The tier decides how many checks the change has to pass.",
+      },
+      {
+        label: "Independent reviewers.",
+        body: "The higher the tier, the more reviewers: separate agents for code, security, data, operations, interface and product read the change in parallel, each from a clean slate, without knowing what the others wrote, and none of them can edit anything.",
+      },
+      {
+        label: "No evidence, no finding.",
+        body: "A reviewer’s finding without a concrete place in the code and a command anyone can re-run is rejected automatically. A blocking finding, and a serious one raised by only one reviewer, goes to a separate verifier who tries to refute it, and until it rules, the review cannot end in approval.",
+      },
+      {
+        label: "Plan first, code second.",
+        body: "A larger change starts with a design file before the first line of code: the problem, goals with a way to check each one, what we are deliberately not doing, a plan for every file, risks, and the assumptions the change invalidates. A script then checks that every file and function the plan names actually exists, so a plan written from memory instead of from the code shows up before any work starts.",
+      },
+      {
+        label: "“Done” has to be proven.",
+        body: "Done means only what can be shown: a test exit code, an inspected result or a server response. Every report ends with VERIFIED, UNVERIFIED or FAILED, never with a bare “it works”.",
+      },
+      {
+        label: "A person grants the big exceptions.",
+        body: "Exceptions to the blocks exist, but the agent cannot grant itself the important ones. It may step past minor quality gates on its own, with a log entry, some only after its own review, while changes to the system itself, secrets and merging risky changes need a phrase typed by a person, valid for a limited time and number of uses.",
+      },
+      {
+        label: "No incident, no block.",
+        body: "Every block has a scar: the real incident it was created from. A new rule starts by only watching and logging what it would have blocked, and it may start blocking only after a real incident, which then becomes its scar.",
+      },
+      {
+        label: "The system measures itself.",
+        body: "It counts how often each gate stopped work and how many of those blocks ended in a bypass, what share of reviewer findings turned out to be useless, and how many defects slipped through the checks and had to be fixed later. Gates are tuned by these numbers, not by anyone’s impression of them.",
+      },
+      {
+        label: "The guards are guarded too.",
+        body: "The system itself is protected like production code: its hooks, gates and settings carry a seal of checksums, a change to them needs a phrase typed by a person and then goes through the same review and tests as any code, and a change made outside such a window shows up at the start of the next session and in the weekly audit.",
+      },
     ],
   },
   {
