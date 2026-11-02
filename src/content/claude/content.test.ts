@@ -56,7 +56,8 @@ describe("/claude content", () => {
       const items = c.sections.find((s) => s.id === "rules-in-a-minute")?.items ?? [];
       expect(items).toHaveLength(11);
       const words = items.flatMap((i) => i.label.split(/\s+/).filter(Boolean)).length;
-      expect(words).toBeLessThanOrEqual(150); // about a minute of speech
+      // 52 words EN / 44 PL today, about 20-25 s read aloud; the cap leaves the rest of the minute for a word of context each.
+      expect(words).toBeLessThanOrEqual(75);
     }
   });
 

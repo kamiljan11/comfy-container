@@ -81,7 +81,7 @@ and its sections, which `en.ts`/`pl.ts` append to `parts` and `sections`. A sect
 opens every answer and folds the ones the reader had not opened afterwards. The part adds no facts of its own, with one
 exception: the section `rules-in-a-minute` also states rules from PG's own files (planning first: `pg/design.md`,
 `bin/plan-refs-check.js`; reviewers: `hooks/lib/risk-tier.js`, `bin/pg-aggregate.js`; metrics: `hooks/gate_effectiveness.py`,
-`bin/pg-outcome.js`, `bin/pg-escapes.py`); `content.test.ts` keeps it at 11 bold lines short enough to say in a minute, named in the header comment of `tell.*.ts`. In every case,
+`bin/pg-outcome.js`, `bin/pg-escapes.py`); `content.test.ts` keeps it at 11 bold lines of at most 75 words, short enough to say in a minute, named in the header comment of `tell.*.ts`. In every case,
 `content.test.ts` fails when a number written in digits does not stand in the rest of the article in the same
 language, when the languages ask a different number of questions, when there are not exactly 25 questions (the
 count the part was built with; adding or removing a question means changing the test on purpose), when a question repeats or does not end with
