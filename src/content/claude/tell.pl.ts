@@ -39,7 +39,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Niezależni recenzenci.",
-        body: "Im wyższy poziom, tym więcej recenzentów: przy zwykłej zmianie sam kod, przy wspólnym kodzie dochodzi utrzymanie, przy najbardziej ryzykownych bezpieczeństwo i dane; interfejs, produkt i QA dołączają, gdy zmiana ich dotyczy. Każdy czyta zmianę równolegle, każdy od czystej karty, bez wiedzy o tym, co napisali pozostali. Recenzenci tylko czytają; poprawki robi główna sesja.",
+        body: "Im wyższy poziom, tym więcej recenzentów: przy zwykłej zmianie sam kod, przy wspólnym kodzie dochodzi utrzymanie, przy najbardziej ryzykownych bezpieczeństwo i dane; interfejs dołącza, gdy zmiana dotyka ekranu, produkt przy wspólnym i ryzykownym kodzie, a QA na życzenie. Każdy czyta zmianę równolegle, każdy od czystej karty, bez wiedzy o tym, co napisali pozostali. Recenzenci tylko czytają; poprawki robi główna sesja.",
       },
       {
         label: "Uwaga bez dowodu odpada.",

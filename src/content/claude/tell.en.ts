@@ -39,7 +39,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "Independent reviewers.",
-        body: "The higher the tier, the more reviewers: code alone on an ordinary change, operations added on shared code, security and data on the riskiest; interface, product and QA join when the change touches them. Each reads the change in parallel, each from a clean slate, without knowing what the others wrote. Reviewers only read; the main session makes the fixes.",
+        body: "The higher the tier, the more reviewers: code alone on an ordinary change, operations added on shared code, security and data on the riskiest; interface joins when the change touches the screen, product on shared and risky code, and QA on request. Each reads the change in parallel, each from a clean slate, without knowing what the others wrote. Reviewers only read; the main session makes the fixes.",
       },
       {
         label: "No evidence, no finding.",
