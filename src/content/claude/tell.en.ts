@@ -23,7 +23,7 @@ export const tellSectionsEn: Section[] = [
     id: "rules-in-a-minute",
     part: 6,
     title: "The rules in a minute",
-    lead: "The same rules the article above unpacks, written as points you can tell someone in about a minute.",
+    lead: "The same rules the article above unpacks. The eleven bold lines alone tell the whole system in about a minute; the sentences under them say what each rule means in practice, for when someone asks.",
     items: [
       {
         label: "People own it, agents write it.",
@@ -39,7 +39,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "Independent reviewers.",
-        body: "The higher the tier, the more reviewers: separate agents for code, security, data, operations, interface and product read the change in parallel, each from a clean slate, without knowing what the others wrote, and none of them can edit anything.",
+        body: "The higher the tier, the more reviewers: separate agents for code, security, data, operations, interface and product, plus QA on request, read the change in parallel, each from a clean slate, without knowing what the others wrote. Reviewers only read; the main session makes the fixes.",
       },
       {
         label: "No evidence, no finding.",
@@ -47,7 +47,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "Plan first, code second.",
-        body: "A larger change starts with a design file before the first line of code: the problem, goals with a way to check each one, what we are deliberately not doing, a plan for every file, risks, and the assumptions the change invalidates. A script then checks that every file and function the plan names actually exists, so a plan written from memory instead of from the code shows up before any work starts.",
+        body: "A larger change starts with a design file before the first line of code: the problem, goals with a way to check each one, what we are deliberately not doing, a plan for every file, risks, and the assumptions the change invalidates. A review tool then checks that every file and function the plan names actually exists. It reports rather than blocks, so a plan written from memory instead of from the code gets caught when the plan is reviewed.",
       },
       {
         label: "“Done” has to be proven.",
@@ -63,7 +63,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "The system measures itself.",
-        body: "It counts how often each gate stopped work and how many of those blocks ended in a bypass, what share of reviewer findings turned out to be useless, and how many defects slipped through the checks and had to be fixed later. Gates are tuned by these numbers, not by anyone’s impression of them.",
+        body: "Every skipped check is logged with a reason, every block that ended in a bypass is counted, and every reviewer finding is recorded as fixed or dropped, so a reviewer that mostly raises noise shows up. Scripts also count corrections and fixes made soon after a commit. The numbers decide what becomes a gate, not anyone’s impression.",
       },
       {
         label: "The guards are guarded too.",

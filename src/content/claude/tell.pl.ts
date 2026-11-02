@@ -23,7 +23,7 @@ export const tellSectionsPl: Section[] = [
     id: "rules-in-a-minute",
     part: 6,
     title: "Zasady w minutę",
-    lead: "Te same zasady, które artykuł wyżej rozwija, spisane w punktach, tak żeby dało się je komuś opowiedzieć w minutę.",
+    lead: "Te same zasady, które artykuł wyżej rozwija. Same pogrubione zdania opowiadają cały system w mniej więcej minutę; tekst pod nimi mówi, co każda zasada znaczy w praktyce, gdy ktoś dopyta.",
     items: [
       {
         label: "Ludzie odpowiadają, agenci piszą.",
@@ -39,7 +39,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Niezależni recenzenci.",
-        body: "Im wyższy poziom, tym więcej recenzentów: osobni agenci od kodu, bezpieczeństwa, danych, utrzymania, interfejsu i produktu czytają zmianę równolegle, każdy od czystej karty, bez wiedzy o tym, co napisali pozostali, i żaden z nich nie może niczego edytować.",
+        body: "Im wyższy poziom, tym więcej recenzentów: osobni agenci od kodu, bezpieczeństwa, danych, utrzymania, interfejsu i produktu, a na życzenie też QA, czytają zmianę równolegle, każdy od czystej karty, bez wiedzy o tym, co napisali pozostali. Recenzenci tylko czytają; poprawki robi główna sesja.",
       },
       {
         label: "Uwaga bez dowodu odpada.",
@@ -47,7 +47,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Najpierw plan, potem kod.",
-        body: "Większa zmiana zaczyna się od pliku z projektem, zanim powstanie pierwsza linia kodu: problem, cele ze sposobem sprawdzenia, czego nie robimy, plan dla każdego pliku, ryzyka i założenia, które zmiana unieważnia. Potem skrypt sprawdza, czy każdy plik i funkcja wymieniona w planie naprawdę istnieje, więc plan pisany z pamięci zamiast z kodu wychodzi, zanim ruszy praca.",
+        body: "Większa zmiana zaczyna się od pliku z projektem, zanim powstanie pierwsza linia kodu: problem, cele ze sposobem sprawdzenia, czego nie robimy, plan dla każdego pliku, ryzyka i założenia, które zmiana unieważnia. Potem narzędzie recenzji sprawdza, czy każdy plik i funkcja wymieniona w planie naprawdę istnieje. Zgłasza, a nie blokuje, więc plan pisany z pamięci zamiast z kodu wychodzi przy recenzji planu.",
       },
       {
         label: "„Gotowe” trzeba udowodnić.",
@@ -63,7 +63,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "System mierzy sam siebie.",
-        body: "Liczy, ile razy każda bramka zatrzymała pracę i ile z tych blokad skończyło się obejściem, jaka część uwag recenzentów okazała się nieprzydatna i ile błędów przeszło przez kontrole i trzeba je było poprawiać później. Bramki stroi się według tych liczb, a nie według czyjegoś wrażenia.",
+        body: "Każda pominięta kontrola jest zapisana z powodem, każda blokada zakończona obejściem jest liczona, a każda uwaga recenzenta ma zapisany los: naprawiona albo odrzucona, więc recenzent, który głównie szumi, wychodzi na jaw. Skrypty liczą też korekty i poprawki zaraz po commicie. To liczby decydują, co staje się bramką, a nie czyjeś wrażenie.",
       },
       {
         label: "Strażnicy też są pilnowani.",
