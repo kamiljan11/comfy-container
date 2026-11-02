@@ -23,7 +23,7 @@ export const tellSectionsPl: Section[] = [
     id: "rules-in-a-minute",
     part: 6,
     title: "Zasady w minutę",
-    lead: "Te same zasady, które artykuł wyżej rozwija. Same pogrubione zdania opowiadają cały system w mniej więcej minutę; tekst pod nimi mówi, co każda zasada znaczy w praktyce, gdy ktoś dopyta.",
+    lead: "Zasady, które artykuł wyżej rozwija, plus planowanie przed kodem i kilka szczegółów wziętych wprost z plików PG. Same pogrubione zdania opowiadają cały system w mniej więcej minutę; tekst pod nimi mówi, co każda zasada znaczy w praktyce, gdy ktoś dopyta.",
     items: [
       {
         label: "Ludzie odpowiadają, agenci piszą.",
@@ -39,11 +39,11 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Niezależni recenzenci.",
-        body: "Im wyższy poziom, tym więcej recenzentów: osobni agenci od kodu, bezpieczeństwa, danych, utrzymania, interfejsu i produktu, a na życzenie też QA, czytają zmianę równolegle, każdy od czystej karty, bez wiedzy o tym, co napisali pozostali. Recenzenci tylko czytają; poprawki robi główna sesja.",
+        body: "Im wyższy poziom, tym więcej recenzentów: przy zwykłej zmianie sam kod, przy wspólnym kodzie dochodzi utrzymanie, przy najbardziej ryzykownych bezpieczeństwo i dane; interfejs, produkt i QA dołączają, gdy zmiana ich dotyczy. Każdy czyta zmianę równolegle, każdy od czystej karty, bez wiedzy o tym, co napisali pozostali. Recenzenci tylko czytają; poprawki robi główna sesja.",
       },
       {
         label: "Uwaga bez dowodu odpada.",
-        body: "Uwaga recenzenta bez wskazanego miejsca w kodzie i komendy, którą da się powtórzyć, jest odrzucana automatycznie. Uwagę blokującą i poważną uwagę zgłoszoną tylko przez jeden dział sprawdza osobny weryfikator, który próbuje ją obalić, a dopóki nie wyda werdyktu, recenzja nie kończy się zatwierdzeniem.",
+        body: "Uwaga recenzenta bez wskazanego miejsca w kodzie i komendy, którą da się powtórzyć, jest odrzucana automatycznie. Uwagę blokującą albo poważną, zgłoszoną tylko przez jeden dział, sprawdza osobny weryfikator, który próbuje ją obalić, a dopóki nie wyda werdyktu, recenzja nie kończy się zatwierdzeniem; gdy kilka działów zgłosi ją niezależnie, liczy się od razu.",
       },
       {
         label: "Najpierw plan, potem kod.",

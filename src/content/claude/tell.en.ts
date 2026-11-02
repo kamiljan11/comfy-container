@@ -23,7 +23,7 @@ export const tellSectionsEn: Section[] = [
     id: "rules-in-a-minute",
     part: 6,
     title: "The rules in a minute",
-    lead: "The same rules the article above unpacks. The eleven bold lines alone tell the whole system in about a minute; the sentences under them say what each rule means in practice, for when someone asks.",
+    lead: "The rules the article above unpacks, plus planning first and a few details taken from PG’s own files. The bold lines alone tell the whole system in about a minute; the sentences under them say what each rule means in practice, for when someone asks.",
     items: [
       {
         label: "People own it, agents write it.",
@@ -39,11 +39,11 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "Independent reviewers.",
-        body: "The higher the tier, the more reviewers: separate agents for code, security, data, operations, interface and product, plus QA on request, read the change in parallel, each from a clean slate, without knowing what the others wrote. Reviewers only read; the main session makes the fixes.",
+        body: "The higher the tier, the more reviewers: code alone on an ordinary change, operations added on shared code, security and data on the riskiest; interface, product and QA join when the change touches them. Each reads the change in parallel, each from a clean slate, without knowing what the others wrote. Reviewers only read; the main session makes the fixes.",
       },
       {
         label: "No evidence, no finding.",
-        body: "A reviewer’s finding without a concrete place in the code and a command anyone can re-run is rejected automatically. A blocking finding, and a serious one raised by only one reviewer, goes to a separate verifier who tries to refute it, and until it rules, the review cannot end in approval.",
+        body: "A reviewer’s finding without a concrete place in the code and a command anyone can re-run is rejected automatically. A blocking or serious finding raised by only one reviewer goes to a separate verifier who tries to refute it, and until it rules, the review cannot end in approval; when several reviewers raise it independently, it counts straight away.",
       },
       {
         label: "Plan first, code second.",
