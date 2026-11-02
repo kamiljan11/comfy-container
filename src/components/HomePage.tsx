@@ -354,6 +354,22 @@ export function HomePage({ variant }: { variant: "offer" | "about" }) {
           {/* ── Offer: the problem first, then the ways it gets solved ── */}
           <PainGrid lang={lang} />
           <SolutionTabs lang={lang} />
+
+          {/* ── The difference: business context, building what pays off ── */}
+          <section className="about difference" id="difference">
+            <div className="container">
+              <span className="section-label">{t.difference.label}</span>
+              <h2 className="offer-title">{t.difference.title}</h2>
+              <div className="about-inner">
+                <p className="about-p">{t.difference.p1}</p>
+                <p className="about-p">
+                  {t.difference.p2a}
+                  <strong>{t.difference.p2b}</strong>
+                  {t.difference.p2c}
+                </p>
+              </div>
+            </div>
+          </section>
         </>
       )}
 
