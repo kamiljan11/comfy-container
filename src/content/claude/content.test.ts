@@ -50,6 +50,16 @@ describe("/claude content", () => {
     expect(pl.parts.length).toBe(en.parts.length);
   });
 
+  it("tells the rules in a minute: 11 bold lines in both languages, short enough to say in a minute", () => {
+    // Owner's decision (PR #102): the minute is the bold labels alone; the sentences under them are for questions.
+    for (const c of [en, pl]) {
+      const items = c.sections.find((s) => s.id === "rules-in-a-minute")?.items ?? [];
+      expect(items).toHaveLength(11);
+      const words = items.flatMap((i) => i.label.split(/\s+/).filter(Boolean)).length;
+      expect(words).toBeLessThanOrEqual(150); // about a minute of speech
+    }
+  });
+
   it("asks the same number of questions in every section in both languages", () => {
     const faq = (c: Content) =>
       c.sections.map((s) => [s.id, s.faq?.length ?? 0, s.items?.length ?? 0]);

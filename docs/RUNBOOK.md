@@ -78,7 +78,8 @@ PG jest w trybie utrzymania od 2026-10-14 (ADR 0008), wiec artykul nie dostaje j
    `Explain.test.ts` pilnuje id i liczb, nie slow o stanie. Test e2e: `e2e/claude-explain.spec.ts`.
    To samo dotyczy ostatniej czesci (wersje 30 s / 3 min / 15 min, zasady w minute i pytania: `src/content/claude/tell.en.ts` i `tell.pl.ts`):
    opowiada artykul, wiec zmiana faktu albo stanu idzie tez tam. Wyjatek: sekcja `rules-in-a-minute` bierze tez reguly z plikow PG
-   (planowanie: `pg/design.md`, `bin/plan-refs-check.js`; pomiar bramek), zrodla stoja w komentarzu naglowka `tell.*.ts`. `content.test.ts` pilnuje liczb, nie slow. Test e2e: `e2e/claude-faq.spec.ts`.
+   (planowanie: `pg/design.md`, `bin/plan-refs-check.js`; recenzenci: `hooks/lib/risk-tier.js`, `bin/pg-aggregate.js`;
+   pomiar: `hooks/gate_effectiveness.py`, `bin/pg-outcome.js`, `bin/pg-escapes.py`), zrodla stoja w komentarzu naglowka `tell.*.ts`. `content.test.ts` pilnuje liczb, nie slow. Test e2e: `e2e/claude-faq.spec.ts`.
    Rysunki sekcji `ideas`, `guarding-the-guards` i `install` (`figures.ideas`, `.guards`, `.install`) powtarzaja tekst swojej sekcji:
    zmiana w liscie sekcji idzie tez do rysunku. `content.test.ts` pilnuje, ze ich liczby stoja w artykule. Test e2e: `e2e/claude-figures.spec.ts`.
 4. `CHANGELOG.md` strony: wpis w `[Unreleased]`.

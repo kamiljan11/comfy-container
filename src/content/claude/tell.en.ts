@@ -1,7 +1,8 @@
 import type { Part, Section } from "../../components/claude/types";
 
 // The last part of /claude: the same system told as a pitch, as rules and at two longer lengths, and the questions people ask about it.
-// Built from facts the article above states (the rules also from PG's own files: pg/design.md, bin/plan-refs-check.js, the gate metrics): every number written in digits here also stands in the article
+// Built from facts the article above states (the rules also from PG's own files: pg/design.md, bin/plan-refs-check.js, hooks/lib/risk-tier.js, bin/pg-aggregate.js,
+// hooks/gate_effectiveness.py, bin/pg-outcome.js, bin/pg-escapes.py): every number written in digits here also stands in the article
 // (src/content/claude/content.test.ts checks it), so a change to a fact means a change in two places.
 
 export const tellPartEn: Part = {
@@ -43,7 +44,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "No evidence, no finding.",
-        body: "A reviewer’s finding without a concrete place in the code and a command anyone can re-run is rejected automatically. A blocking or serious finding raised by only one reviewer goes to a separate verifier who tries to refute it, and until it rules, the review cannot end in approval; when several reviewers raise it independently, it counts straight away.",
+        body: "A reviewer’s finding without a concrete place in the code and a command anyone can re-run is rejected automatically. A blocking or serious finding raised by only one reviewer goes to a separate verifier who tries to refute it, and until it rules, the review cannot end in approval.",
       },
       {
         label: "Plan first, code second.",
@@ -63,7 +64,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "The system measures itself.",
-        body: "Every skipped check is logged with a reason, every block that ended in a bypass is counted, and every reviewer finding is recorded as fixed or dropped, so a reviewer that mostly raises noise shows up. Scripts also count corrections and fixes made soon after a commit. The numbers decide what becomes a gate, not anyone’s impression.",
+        body: "Every skipped check is logged with a reason, every block that ended in a bypass is counted, and every reviewer finding is recorded as fixed, dropped with a reason or kept as a note, so a reviewer that mostly raises noise shows up. Scripts also count corrections and fixes made soon after a commit. The numbers decide what becomes a gate, not anyone’s impression.",
       },
       {
         label: "The guards are guarded too.",

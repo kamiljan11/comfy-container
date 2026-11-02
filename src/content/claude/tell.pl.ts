@@ -1,7 +1,8 @@
 import type { Part, Section } from "../../components/claude/types";
 
 // Ostatnia część /claude: ten sam system opowiedziany jako pitch, jako zasady i w dwóch dłuższych wersjach, oraz pytania, które ludzie o niego zadają.
-// Fakty, które artykuł wyżej podaje (zasady także z plików PG: pg/design.md, bin/plan-refs-check.js, metryki bramek): każda liczba zapisana cyframi stoi też w artykule (sprawdza to
+// Fakty, które artykuł wyżej podaje (zasady także z plików PG: pg/design.md, bin/plan-refs-check.js, hooks/lib/risk-tier.js, bin/pg-aggregate.js,
+// hooks/gate_effectiveness.py, bin/pg-outcome.js, bin/pg-escapes.py): każda liczba zapisana cyframi stoi też w artykule (sprawdza to
 // src/content/claude/content.test.ts), więc zmiana faktu oznacza zmianę w dwóch miejscach.
 
 export const tellPartPl: Part = {
@@ -43,7 +44,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Uwaga bez dowodu odpada.",
-        body: "Uwaga recenzenta bez wskazanego miejsca w kodzie i komendy, którą da się powtórzyć, jest odrzucana automatycznie. Uwagę blokującą albo poważną, zgłoszoną tylko przez jeden dział, sprawdza osobny weryfikator, który próbuje ją obalić, a dopóki nie wyda werdyktu, recenzja nie kończy się zatwierdzeniem; gdy kilka działów zgłosi ją niezależnie, liczy się od razu.",
+        body: "Uwaga recenzenta bez wskazanego miejsca w kodzie i komendy, którą da się powtórzyć, jest odrzucana automatycznie. Uwagę blokującą albo poważną, zgłoszoną tylko przez jeden dział, sprawdza osobny weryfikator, który próbuje ją obalić, a dopóki nie wyda werdyktu, recenzja nie kończy się zatwierdzeniem.",
       },
       {
         label: "Najpierw plan, potem kod.",
@@ -63,7 +64,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "System mierzy sam siebie.",
-        body: "Każda pominięta kontrola jest zapisana z powodem, każda blokada zakończona obejściem jest liczona, a każda uwaga recenzenta ma zapisany los: naprawiona albo odrzucona, więc recenzent, który głównie szumi, wychodzi na jaw. Skrypty liczą też korekty i poprawki zaraz po commicie. To liczby decydują, co staje się bramką, a nie czyjeś wrażenie.",
+        body: "Każda pominięta kontrola jest zapisana z powodem, każda blokada zakończona obejściem jest liczona, a każda uwaga recenzenta ma zapisany los: naprawiona, odrzucona z powodem albo zostawiona jako notatka, więc recenzent, który głównie szumi, wychodzi na jaw. Skrypty liczą też korekty i poprawki zaraz po commicie. To liczby decydują, co staje się bramką, a nie czyjeś wrażenie.",
       },
       {
         label: "Strażnicy też są pilnowani.",
