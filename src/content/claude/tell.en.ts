@@ -32,7 +32,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "A rule is a mechanism, not text.",
-        body: "Every rule that once lived only as prose, and was broken because of it, is now a hook: a small program that runs on its own at every edit, command, commit and push, so nobody can forget it.",
+        body: "Every rule that once lived only as prose, and was broken because of it, is now a hook: a small program that runs on its own at every edit, command, commit and push, so nobody can forget it. Cowork has no hooks, so there the rules still travel as text in every prompt.",
       },
       {
         label: "Risk comes from the diff.",
@@ -44,7 +44,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "No evidence, no finding.",
-        body: "A reviewer’s finding without a concrete place in the code and a command anyone can re-run is rejected automatically. A blocking or serious finding raised by only one reviewer goes to a separate verifier who tries to refute it, and until it rules, the review cannot end in approval.",
+        body: "A reviewer’s finding without a concrete place in the code and a command anyone can re-run is rejected automatically. Every blocking finding, and a serious one raised by only one reviewer, goes to a separate verifier who tries to refute it, and until it rules, the review cannot end in approval.",
       },
       {
         label: "Plan first, code second.",

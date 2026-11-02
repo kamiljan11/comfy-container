@@ -32,7 +32,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Reguła to automat, nie tekst.",
-        body: "Każda reguła, która kiedyś była spisana tylko prozą i dlatego była łamana, jest teraz hookiem: małym programem, który uruchamia się sam przy każdej edycji, komendzie, commicie i pushu, więc nie da się o nim zapomnieć.",
+        body: "Każda reguła, która kiedyś była spisana tylko prozą i dlatego była łamana, jest teraz hookiem: małym programem, który uruchamia się sam przy każdej edycji, komendzie, commicie i pushu, więc nie da się o nim zapomnieć. Cowork nie ma hooków, więc tam zasady dalej jadą jako tekst w każdym prompcie.",
       },
       {
         label: "Ryzyko liczy się z diffu.",
@@ -44,7 +44,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Uwaga bez dowodu odpada.",
-        body: "Uwaga recenzenta bez wskazanego miejsca w kodzie i komendy, którą da się powtórzyć, jest odrzucana automatycznie. Uwagę blokującą albo poważną, zgłoszoną tylko przez jeden dział, sprawdza osobny weryfikator, który próbuje ją obalić, a dopóki nie wyda werdyktu, recenzja nie kończy się zatwierdzeniem.",
+        body: "Uwaga recenzenta bez wskazanego miejsca w kodzie i komendy, którą da się powtórzyć, jest odrzucana automatycznie. Każdą uwagę blokującą, a także poważną zgłoszoną tylko przez jeden dział, sprawdza osobny weryfikator, który próbuje ją obalić, a dopóki nie wyda werdyktu, recenzja nie kończy się zatwierdzeniem.",
       },
       {
         label: "Najpierw plan, potem kod.",
