@@ -1,13 +1,14 @@
 import type { Part, Section } from "../../components/claude/types";
 
-// Ostatnia część /claude: ten sam system opowiedziany w trzech długościach i pytania, które ludzie o niego zadają.
-// Tylko fakty, które artykuł wyżej już podaje: każda liczba zapisana cyframi stoi też w artykule (sprawdza to
+// Ostatnia część /claude: ten sam system opowiedziany jako pitch, jako zasady i w dwóch dłuższych wersjach, oraz pytania, które ludzie o niego zadają.
+// Fakty, które artykuł wyżej podaje (zasady także z plików PG: pg/design.md, bin/plan-refs-check.js, hooks/lib/risk-tier.js, bin/pg-aggregate.js,
+// hooks/gate_effectiveness.py, bin/pg-outcome.js, bin/pg-escapes.py): każda liczba zapisana cyframi stoi też w artykule (sprawdza to
 // src/content/claude/content.test.ts), więc zmiana faktu oznacza zmianę w dwóch miejscach.
 
 export const tellPartPl: Part = {
   title: "W skrócie i pytania",
   blurb:
-    "Cały system w 30 sekund, 3 minuty albo 15, i odpowiedzi na to, o co pytają klienci, rekruterzy i programiści.",
+    "Cały system w 30 sekund, jako zasady w minutę, w 3 minuty albo w 15, i odpowiedzi na to, o co pytają klienci, rekruterzy i programiści.",
 };
 
 export const tellSectionsPl: Section[] = [
@@ -17,6 +18,58 @@ export const tellSectionsPl: Section[] = [
     title: "W 30 sekund",
     paragraphs: [
       "Piszę oprogramowanie z agentami AI, a każdy, kto to robi, zna haczyk: AI potrafi się pomylić i mimo to napisać, że skończyło. Dlatego zbudowałem Higher Mind, system jakości, który leży pod każdym projektem. Kontrole uruchamiają się same na każdym kroku, od polecenia do produkcji. Przy ryzykownych zmianach osobni recenzenci AI sprawdzają każdy jedną specjalność, od czystej karty. Wszystko, czego nie da się cofnąć, jak płatności, logowanie czy klucze, czeka na mnie. Każda kontrola wzięła się z prawdziwej wpadki w moich projektach: na razie 170. Kod jest otwarty, a system mówi wprost, gdzie się kończy.",
+    ],
+  },
+  {
+    id: "rules-in-a-minute",
+    part: 6,
+    title: "Zasady w minutę",
+    lead: "Zasady, które artykuł wyżej rozwija, plus planowanie przed kodem i kilka szczegółów wziętych wprost z plików PG. Same pogrubione zdania opowiadają cały system w mniej więcej minutę; tekst pod nimi mówi, co każda zasada znaczy w praktyce, gdy ktoś dopyta.",
+    items: [
+      {
+        label: "Ludzie odpowiadają, agenci piszą.",
+        body: "Kod piszą agenci AI, a człowiek odpowiada za cel, za przegląd i za wdrożenie. System nie zastępuje człowieka, tylko pilnuje, żeby dobra intencja nigdy nie była jedynym zabezpieczeniem.",
+      },
+      {
+        label: "Reguła to automat, nie tekst.",
+        body: "Każda reguła, która kiedyś była spisana tylko prozą i dlatego była łamana, jest teraz hookiem: małym programem, który uruchamia się sam przy każdej edycji, komendzie, commicie i pushu, więc nie da się o nim zapomnieć. Cowork nie ma hooków, więc tam zasady dalej jadą jako tekst w każdym prompcie.",
+      },
+      {
+        label: "Ryzyko liczy się z diffu.",
+        body: "Poziom ryzyka wynika z tego, co naprawdę się zmieniło, a nie z deklaracji autora: dokumentacja, teksty i style to T0, jeden izolowany komponent T1, wspólna logika, API, zależności, CI albo ponad 150 linii T2, a logowanie, uprawnienia, płatności, sekrety, migracje, zadania cykliczne albo ponad 600 linii T3. Od poziomu zależy, ile kontroli zmiana musi przejść.",
+      },
+      {
+        label: "Niezależni recenzenci.",
+        body: "Im wyższy poziom, tym więcej recenzentów: przy zwykłej zmianie sam kod, przy wspólnym kodzie dochodzi utrzymanie, przy najbardziej ryzykownych bezpieczeństwo i dane; interfejs dołącza, gdy zmiana dotyka ekranu, produkt przy wspólnym i ryzykownym kodzie, a QA na życzenie. Każdy czyta zmianę równolegle, każdy od czystej karty, bez wiedzy o tym, co napisali pozostali. Recenzenci tylko czytają; poprawki robi główna sesja.",
+      },
+      {
+        label: "Uwaga bez dowodu odpada.",
+        body: "Uwaga recenzenta bez wskazanego miejsca w kodzie i komendy, którą da się powtórzyć, jest odrzucana automatycznie. Każdą uwagę blokującą, a także poważną zgłoszoną tylko przez jeden dział, sprawdza osobny weryfikator, który próbuje ją obalić, a dopóki nie wyda werdyktu, recenzja nie kończy się zatwierdzeniem.",
+      },
+      {
+        label: "Najpierw plan, potem kod.",
+        body: "Większa zmiana zaczyna się od pliku z projektem, zanim powstanie pierwsza linia kodu: problem, cele ze sposobem sprawdzenia, czego nie robimy, plan dla każdego pliku, ryzyka i założenia, które zmiana unieważnia. Potem narzędzie recenzji sprawdza, czy każdy plik i funkcja wymieniona w planie naprawdę istnieje. Zgłasza, a nie blokuje, więc plan pisany z pamięci zamiast z kodu wychodzi przy recenzji planu.",
+      },
+      {
+        label: "„Gotowe” trzeba udowodnić.",
+        body: "Gotowe znaczy tyle, ile da się pokazać: kod wyjścia testów, obejrzany wynik albo odpowiedź serwera. Raport kończy się słowem VERIFIED, UNVERIFIED albo FAILED, nigdy samym „działa”.",
+      },
+      {
+        label: "Ważne wyjątki daje człowiek.",
+        body: "Wyjątki od blokad istnieją, ale agent nie przyzna ich sobie w ważnych sprawach. Drobne bramki jakości obejdzie sam, z wpisem do logu, część dopiero po własnej recenzji, a zmiany samego systemu, sekrety i scalanie ryzykownych zmian wymagają frazy wpisanej przez człowieka, ważnej przez ograniczony czas i liczbę użyć.",
+      },
+      {
+        label: "Bez incydentu nie ma blokady.",
+        body: "Każda blokada ma bliznę, czyli zapisaną prawdziwą wpadkę, z której powstała. Nowa reguła zaczyna od obserwacji i tylko zapisuje, co by zablokowała, a blokować może dopiero po prawdziwym incydencie, który staje się wtedy jej blizną.",
+      },
+      {
+        label: "System mierzy sam siebie.",
+        body: "Każda pominięta kontrola jest zapisana z powodem, każda blokada zakończona obejściem jest liczona, a każda uwaga recenzenta ma zapisany los: naprawiona, odrzucona z powodem albo zostawiona jako notatka, więc recenzent, który głównie szumi, wychodzi na jaw. Skrypty liczą też korekty i poprawki zaraz po commicie. To liczby decydują, co staje się bramką, a nie czyjeś wrażenie.",
+      },
+      {
+        label: "Strażnicy też są pilnowani.",
+        body: "Sam system jest chroniony jak kod produkcyjny: hooki, bramki i ustawienia mają pieczęć z sumami kontrolnymi, ich zmiana wymaga frazy wpisanej przez człowieka, a potem przechodzi tę samą recenzję i testy co każdy kod, a zmiana zrobiona poza takim oknem wychodzi przy starcie następnej sesji i w cotygodniowym audycie.",
+      },
     ],
   },
   {
