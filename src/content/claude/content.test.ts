@@ -146,14 +146,14 @@ describe("/claude content", () => {
           expect(s, "a whole number").toMatch(/^\d+$/);
           return Number(s);
         };
-        // "31 / 47" in the stats = the waffle's repositories
+        // "31 / 50" in the stats = the waffle's repositories
         const fleet = int(
           only(/^\d+ \/ \d+$/)
             .n.split("/")[1]
             .trim(),
         );
         expect(c.figures.waffle.groups.reduce((a, g) => a + g.count, 0)).toBe(fleet);
-        // "15" public versions in 33 days = the releases on the timeline, patch bundles counted one by one
+        // "16" public versions in 54 days = the releases on the timeline, patch bundles counted one by one
         const span = c.figures.versions.ticks.at(-1)?.day ?? 0;
         const releases = c.figures.versions.points.reduce((a, p) => a + (p.patches ?? 1), 0);
         expect(int(only(new RegExp(`\\b${String(span + 1)}\\b`)).n)).toBe(releases);

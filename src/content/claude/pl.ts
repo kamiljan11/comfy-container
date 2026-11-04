@@ -3,7 +3,7 @@ import type { Content } from "../../components/claude/types";
 import { explainPl, explainUiPl } from "./explain.pl";
 import { tellPartPl, tellSectionsPl } from "./tell.pl";
 
-// Każdą liczbę na tej stronie przeliczyłem 14 października 2026 (źródła i komendy: docs/CLAUDE-PAGE-NUMBERS.md). Liczba, której nie przeliczałem, mówi to wprost i ma własną datę.
+// Każdą liczbę na tej stronie przeliczyłem 4 listopada 2026 (źródła i komendy: docs/CLAUDE-PAGE-NUMBERS.md). Liczba, której nie przeliczałem, mówi to wprost i ma własną datę.
 
 export const pl: Content = {
   title: "Coding Higher Mind: system AI, na którym stoi ta praca",
@@ -13,22 +13,22 @@ export const pl: Content = {
   mapLead:
     "Siedem części. Wybierz tę, której szukasz; każda sekcja ma własny link, a mały kwadrat oznacza te z wykresem. Mało czasu? Ostatnia część opowiada cały system w 30 sekund.",
   versionLine:
-    "PG v1.8.0, stan na 14 października 2026. Piętnaście wersji publicznych w 33 dni i od tego dnia system jest skończony: przeszedł w tryb utrzymania, a sekcja „Gdzie kończy się ulepszanie” wyjaśnia, co to znaczy i dlaczego.",
+    "PG v1.9.0, stan na 4 listopada 2026. Szesnaście wersji publicznych w 54 dni. 14 października uznałem system za skończony i przeszedł w tryb utrzymania; 1.9.0 zbiera trzy tygodnie zmian zrobionych według tej reguły, a sekcja „Gdzie kończy się ulepszanie” wyjaśnia, co to znaczy i dlaczego.",
   intro:
     "Moje CV mówi, że kod piszą agenci AI, a ja odpowiadam za specyfikację, recenzję i wdrożenie. Takie twierdzenie wymaga dowodu, więc ta strona pokazuje sam system: co działa w tle, czego pilnuje, jak uczy się na własnych błędach i gdzie się kończy. PG (Prompt-Guard) nie jest projektem; leży pod wszystkimi projektami. Jakiekolwiek repozytorium otworzy agent na moim komputerze, obowiązują te same zasady: zmiana napisana przez AI nie trafi do produktu bez automatycznych kontroli, AI pokazuje dowód, zanim powie „gotowe”, a z haseł i kluczy korzysta, nigdy ich nie widząc. Wszystko poniżej działa dziś, chyba że sekcja mówi inaczej. Dwie rzeczy nie działają: potok wydań z wersji 1.7.0 nie miał jeszcze pierwszego ćwiczenia na projekcie testowym, a zaplanowane rutyny są wyłączone, dopóki nie naprawię ich ustawień po przeprowadzce na nowy komputer. Cały system to publiczne repozytorium, które zainstalujesz w pięć minut.",
   repoCta: "github.com/kamiljan11/coding-higher-mind →",
   stats: [
-    { n: "170", label: "awarii zamienionych w kontrole" },
-    { n: "11", label: "hooków na 7 rodzajach zdarzeń" },
+    { n: "185", label: "awarii zamienionych w kontrole" },
+    { n: "14", label: "hooków na 8 rodzajach zdarzeń" },
     { n: "9", label: "wyspecjalizowanych recenzentów AI" },
-    { n: "51", label: "narzędzi bez tokenów AI" },
-    { n: "606", label: "sprawdzeń w testach bramek" },
-    { n: "15", label: "wersji publicznych w 33 dni" },
-    { n: "31 / 47", label: "repo pod ścisłą ochroną gałęzi" },
-    { n: "157", label: "kluczy i haseł, których AI nie widzi" },
+    { n: "61", label: "narzędzi bez tokenów AI" },
+    { n: "730", label: "sprawdzeń w testach bramek" },
+    { n: "16", label: "wersji publicznych w 54 dni" },
+    { n: "31 / 50", label: "repo pod ścisłą ochroną gałęzi" },
+    { n: "165", label: "kluczy i haseł, których AI nie widzi" },
   ],
   statsNote:
-    "Policzone 14 października 2026: hooki, narzędzia, recenzenci i blizny w publicznym repozytorium; testy, ochrona gałęzi i sekrety na moim komputerze i na GitHubie.",
+    "Policzone 4 listopada 2026: hooki, narzędzia, recenzenci i blizny w publicznym repozytorium; testy, ochrona gałęzi i sekrety na moim komputerze i na GitHubie.",
   parts: [
     { title: "Czym to jest", blurb: "System na jednej mapie i trzy idee, na których stoi." },
     {
@@ -48,7 +48,7 @@ export const pl: Content = {
       title: "Zaufanie i codzienna praca",
       blurb: "Słowa statusu, sekrety, rutyny, pamięć i to, czy całość wytrzymuje skalę.",
     },
-    { title: "Historia i użycie", blurb: "Piętnaście wersji, instalacja i uczciwe granice." },
+    { title: "Historia i użycie", blurb: "Szesnaście wersji, instalacja i uczciwe granice." },
     tellPartPl,
   ],
   sections: [
@@ -69,8 +69,8 @@ export const pl: Content = {
           body: "narzędzie do operacji: poczta, dokumenty, research, outreach i projektowanie. Nie ma hooków, więc zasady pracy jadą jako tekst w każdym poleceniu, a słowo statusu na końcu raportu jest główną ochroną.",
         },
         {
-          label: "73 skille:",
-          body: "wersjonowane pakiety instrukcji, do których trafiają zadania: 56 w narzędziu do kodu i 58 na pulpicie, z czego 41 zainstalowanych w obu. Router dopasowuje zadanie według stałych reguł i przed startem ogłasza, jakie kroki uruchomi.",
+          label: "78 skilli:",
+          body: "wersjonowane pakiety instrukcji, do których trafiają zadania: 61 w narzędziu do kodu i 58 na pulpicie, z czego 41 zainstalowanych w obu. Router dopasowuje zadanie według stałych reguł i przed startem ogłasza, jakie kroki uruchomi.",
         },
         {
           label: "Właściwy model do zadania:",
@@ -97,7 +97,7 @@ export const pl: Content = {
         },
         {
           label: "Każda awaria staje się kontrolą (blizna → bramka):",
-          body: "170 prawdziwych awarii z moich projektów jest skatalogowanych, każda z numerem reguły. Nazywam je bliznami. Każdy punkt listy kontrolnej wskazuje bliznę, z której powstał; ten nawyk wziąłem z Google SRE. Analiza incydentu kończy się nową bramką albo nową blizną, nigdy „bądźmy ostrożniejsi”.",
+          body: "185 prawdziwych awarii z moich projektów jest skatalogowanych, każda z numerem reguły. Nazywam je bliznami. Każdy punkt listy kontrolnej wskazuje bliznę, z której powstał; ten nawyk wziąłem z Google SRE. Analiza incydentu kończy się nową bramką albo nową blizną, nigdy „bądźmy ostrożniejsi”.",
         },
         {
           label: "Dowód, nie deklaracja:",
@@ -140,7 +140,7 @@ export const pl: Content = {
         },
         {
           label: "W CI i przy scalaniu:",
-          body: "te same kontrole idą jeszcze raz, do tego skaner sekretów (gitleaks) i testy mutacyjne na zmienionych plikach: narzędzie celowo podsadza drobne błędy, a test, który nie łapie żadnego, jest teatrem. 31 z moich 47 repozytoriów ma ścisłą ochronę gałęzi wygenerowaną z nazw zadań CI. Pull request scala się tylko wtedy, gdy jego kontrole przeszły na aktualnym wyniku scalenia: raz zielone kontrole na nieaktualnej bazie zepsuły główną gałąź.",
+          body: "te same kontrole idą jeszcze raz, do tego skaner sekretów (gitleaks) i testy mutacyjne na zmienionych plikach: narzędzie celowo podsadza drobne błędy, a test, który nie łapie żadnego, jest teatrem. 31 z moich 50 repozytoriów ma ścisłą ochronę gałęzi wygenerowaną z nazw zadań CI. Pull request scala się tylko wtedy, gdy jego kontrole przeszły na aktualnym wyniku scalenia: raz zielone kontrole na nieaktualnej bazie zepsuły główną gałąź.",
         },
       ],
     },
@@ -399,7 +399,7 @@ export const pl: Content = {
         },
         {
           label: "Rutyny patrzą tylko na żywą pracę:",
-          body: "skrypt czyta historię GitHuba i zostawia repozytoria z prawdziwą pracą w ostatnich 30 dniach, pomijając dni, w których PG przeczesywał całą flotę, tę samą zmianę rozesłaną wszędzie i boty od zależności. Dziś to 12 z 47.",
+          body: "skrypt czyta historię GitHuba i zostawia repozytoria z prawdziwą pracą w ostatnich 30 dniach, pomijając dni, w których PG przeczesywał całą flotę, tę samą zmianę rozesłaną wszędzie i boty od zależności. Dziś to 13 z 50.",
         },
         {
           label: "Czystsze liczby:",
@@ -471,7 +471,7 @@ export const pl: Content = {
       items: [
         {
           label: "Sejf na moim własnym sprzęcie:",
-          body: "157 kluczy API, tokenów i loginów leży w sejfie, który sam hostuję. Pośrednik przekazuje wartość prosto do procesu, który jej potrzebuje, jako zmienną środowiska, więc nigdy nie pojawia się w czacie, w kodzie ani w logach. Strażnik komend blokuje sekret wpisany w komendę, a skany przy commicie i w CI pilnują, żeby tak zostało.",
+          body: "165 kluczy API, tokenów i loginów leży w sejfie, który sam hostuję. Pośrednik przekazuje wartość prosto do procesu, który jej potrzebuje, jako zmienną środowiska, więc nigdy nie pojawia się w czacie, w kodzie ani w logach. Strażnik komend blokuje sekret wpisany w komendę, a skany przy commicie i w CI pilnują, żeby tak zostało.",
         },
       ],
     },
@@ -496,14 +496,14 @@ export const pl: Content = {
         },
         {
           label: "Nadzór podatności (co miesiąc):",
-          body: "skrypt czyta alerty podatności z samego GitHuba (włączone w 44 z 47 repozytoriów) i audytuje plik blokady zależności. Odróżnia „brak skanu” od „brak znalezisk”, więc pusty albo nieudany odczyt nigdy nie liczy się jako spokojny miesiąc. Poprawki to aktualizacje patch albo minor, zawsze jako pull request z dowodem.",
+          body: "skrypt czyta alerty podatności z samego GitHuba (włączone w 44 z 50 repozytoriów) i audytuje plik blokady zależności. Odróżnia „brak skanu” od „brak znalezisk”, więc pusty albo nieudany odczyt nigdy nie liczy się jako spokojny miesiąc. Poprawki to aktualizacje patch albo minor, zawsze jako pull request z dowodem.",
         },
       ],
     },
     {
       id: "fleet",
       part: 4,
-      title: "47 repozytoriów i 12, które żyją",
+      title: "50 repozytoriów i 13, które żyją",
       lead: "Większość moich projektów jest skończona. PG dalej pilnuje wszystkich, ale rutyny poświęcają czas tylko tam, gdzie dzieje się praca.",
       figure: "waffle",
     },
@@ -514,7 +514,7 @@ export const pl: Content = {
       items: [
         {
           label: "Trwała pamięć:",
-          body: "lokalna baza ponad 2300 notatek; potrzebna część ładuje się na starcie każdej sesji, a każda sesja zapisuje notatkę na koniec, więc następna zaczyna od punktu kontrolnego, a nie od zera. Jedna uczciwa luka: sesje uruchomione w tymczasowym folderze roboczym nie zawsze zostawiają zapis pracy dla tej notatki, a kontrola zdrowia to zgłasza.",
+          body: "lokalna baza ponad 2600 notatek; potrzebna część ładuje się na starcie każdej sesji, a każda sesja zapisuje notatkę na koniec, więc następna zaczyna od punktu kontrolnego, a nie od zera. Jedna uczciwa luka: sesje uruchomione w tymczasowym folderze roboczym nie zawsze zostawiają zapis pracy dla tej notatki, a kontrola zdrowia to zgłasza.",
         },
         {
           label: "Telemetria, nie odczucia:",
@@ -554,7 +554,7 @@ export const pl: Content = {
     {
       id: "history",
       part: 5,
-      title: "Piętnaście wersji w 33 dni",
+      title: "Szesnaście wersji w 54 dni",
       lead: "Każde wydanie odpowiadało na coś prawdziwego: audyt, porównanie z innymi projektami, awarię albo tarcie w mojej własnej pracy. Szczegóły każdej wersji są w publicznym changelogu.",
       figure: "versions",
       items: [
@@ -565,6 +565,10 @@ export const pl: Content = {
         {
           label: "Sześć poprawek jednego dnia (28 września):",
           body: "bramka stop ufała wynikom testów zamiast kodom wyjścia, więc zepsuta konfiguracja testów mogła przejść jako „pominięte”. Sześć wydań później werdykt pochodzi wyłącznie z kodu wyjścia.",
+        },
+        {
+          label: "Trzy tygodnie w trybie utrzymania (4 listopada):",
+          body: "1.9.0 zbiera to, co zmieniło się według reguły utrzymania: bramki mierzą same siebie, większe zmiany dostają plan przed kodem, więcej języków jest sprawdzanych po każdej edycji, a to, co agent wysyła po przeczytaniu treści z zewnątrz, trafia do dziennika. Większość działa w trybie obserwacji: liczy, nie blokuje.",
         },
       ],
     },
@@ -585,8 +589,8 @@ export const pl: Content = {
           body: "nigdy nie nadpisze pliku, który zmieniłeś (druga wersja ląduje obok twojej), scala twoje ustawienia zamiast je zastępować i dopisuje swoje reguły między znacznikami, więc aktualizacja wymienia tylko ten blok. Hooki gita są opcjonalne. Na koniec uruchamia autotest, a dowodem jest zielony wynik, nie słowo instalatora.",
         },
         {
-          label: "Co zawiera publiczne 1.8.0:",
-          body: "11 hooków, 3 bramki gita, 51 narzędzi bez tokenów z 28 zestawami testów, 9 działów recenzentów, doktrynę ze 170 bliznami, szablon repozytorium z CI i parsowanymi blokami granic, definicje rutyn dla obu narzędzi, 18 skilli, deinstalator i dokumentację z diagramami z tej strony: 409 plików.",
+          label: "Co zawiera publiczne 1.9.0:",
+          body: "14 hooków, 3 bramki gita, 61 narzędzi bez tokenów z 46 zestawami testów, 9 działów recenzentów, doktrynę ze 185 bliznami, szablon repozytorium z CI i parsowanymi blokami granic, definicje rutyn dla obu narzędzi, 19 skilli, deinstalator i dokumentację z diagramami z tej strony: 464 pliki.",
         },
         {
           label: "Język:",
@@ -618,18 +622,18 @@ export const pl: Content = {
       coworkSub2: "outreach · design · operacje",
       shared: "te same reguły · ta sama pamięć",
       vault: "SEJF",
-      vaultSub: "157 sekretów",
+      vaultSub: "165 sekretów",
       vaultNote1: "klucze trafiają do procesu,",
       vaultNote2: "nigdy do czatu",
       memory: "PAMIĘĆ",
-      memorySub: "2300+ notatek",
+      memorySub: "2600+ notatek",
       memoryNote1: "ładowana na starcie sesji,",
       memoryNote2: "sesje same się opisują",
       gates: "PG · BRAMKI",
       gatesList:
         "prompt · edycja · komenda · stop · commit · push · CI · review · dowód z produkcji",
       projects: "KAŻDY PROJEKT",
-      projectsSub: "47 repozytoriów: aplikacje, strony, automatyzacje",
+      projectsSub: "50 repozytoriów: aplikacje, strony, automatyzacje",
       caption:
         "PG to warstwa meta: te same bramki leżą pod każdym projektem, jakikolwiek by był. Ja wyznaczam kierunek; dowody wracają w górę.",
     },
@@ -663,7 +667,7 @@ export const pl: Content = {
         },
         {
           title: "Doktryna",
-          leaves: ["projekt przed kodem", "„gotowe” wg poziomu ryzyka", "170 blizn"],
+          leaves: ["projekt przed kodem", "„gotowe” wg poziomu ryzyka", "185 blizn"],
         },
         {
           title: "Szablon repo",
@@ -969,7 +973,7 @@ export const pl: Content = {
           before: "linia w każdym pull requeście",
           after: "zbierany z tytułów przy wydaniu",
         },
-        { gate: "zasięg rutyn", before: "każde repozytorium", after: "tylko aktywne: 12 z 47" },
+        { gate: "zasięg rutyn", before: "każde repozytorium", after: "tylko aktywne: 13 z 50" },
       ],
       caption:
         "Progi przestrojone według dziennika bramek, z odsianymi przebiegami testów. Każda zmiana mówi, jak ją cofnąć.",
@@ -1010,7 +1014,7 @@ export const pl: Content = {
     },
     vault: {
       vault: "SEJF",
-      vaultSub: "157 sekretów · self-hosted",
+      vaultSub: "165 sekretów · self-hosted",
       bridge: "POŚREDNIK",
       bridgeSub: "przekazuje do procesu",
       target: "PROCES DOCELOWY",
@@ -1034,21 +1038,22 @@ export const pl: Content = {
     },
     waffle: {
       groups: [
-        { label: "aktywne w ostatnich 30 dniach", count: 12, tone: "a" },
-        { label: "skończone albo w spoczynku", count: 34, tone: "n" },
+        { label: "aktywne w ostatnich 30 dniach", count: 13, tone: "a" },
+        { label: "skończone albo w spoczynku", count: 36, tone: "n" },
         { label: "nigdy nie sprawdzane przez rutyny", count: 1, tone: "b" },
       ],
       facts: [
         { n: "33", label: "z ochroną gałęzi, w tym 31 ścisłą" },
         { n: "44", label: "z włączonymi alertami podatności GitHuba" },
       ],
-      caption: "Jeden kwadrat to jedno repozytorium; policzone z GitHuba 14 października 2026.",
+      caption: "Jeden kwadrat to jedno repozytorium; policzone z GitHuba 4 listopada 2026.",
     },
     versions: {
       ticks: [
         { day: 0, label: "12 wrz" },
         { day: 19, label: "1 paź" },
         { day: 32, label: "14 paź" },
+        { day: 53, label: "4 lis" },
       ],
       points: [
         { v: "1.0.0", date: "12 wrz", day: 0, theme: "pierwszy publiczny eksport Prompt-Guard" },
@@ -1099,6 +1104,7 @@ export const pl: Content = {
           theme: "architektura podjęta na stałe, potok wydań",
         },
         { v: "1.8.0", date: "14 paź", day: 32, theme: "proporcjonalność, potem tryb utrzymania" },
+        { v: "1.9.0", date: "4 lis", day: 53, theme: "pomiar w trybie utrzymania" },
       ],
       caption:
         "Pasek ma jedną komórkę na dzień; wypełniona komórka to wydanie, a liczba oznacza kilka wydań tego dnia.",
@@ -1115,7 +1121,7 @@ export const pl: Content = {
           idea: "Każda awaria staje się kontrolą",
           before: "pomyłka, a potem obietnica, że będziemy ostrożniejsi",
           after: "blizna zapisana z przyczyną, a potem nowa bramka albo punkt listy kontrolnej",
-          why: "170 prawdziwych awarii jest skatalogowanych jako blizny, a każdy punkt listy kontrolnej wskazuje jedną z nich",
+          why: "185 prawdziwych awarii jest skatalogowanych jako blizny, a każdy punkt listy kontrolnej wskazuje jedną z nich",
         },
         {
           idea: "Dowód, nie deklaracja",
@@ -1179,7 +1185,7 @@ export const pl: Content = {
         },
       ],
       rollback: "deinstalator jest w tym samym repozytorium",
-      caption: "Publiczne 1.8.0: 409 plików oczyszczonych z prywatnych danych.",
+      caption: "Publiczne 1.9.0: 464 pliki oczyszczone z prywatnych danych.",
     },
   },
   explain: explainPl,

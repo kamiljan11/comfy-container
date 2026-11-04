@@ -17,7 +17,7 @@ export const tellSectionsEn: Section[] = [
     part: 6,
     title: "In 30 seconds",
     paragraphs: [
-      "I build software with AI coding agents, and anyone who does knows the catch: the AI can be wrong and still say it is done. So I built Higher Mind, a quality system that sits under every project. Checks run by themselves at every step, from the prompt to production. On risky changes, separate AI reviewers each check one speciality with a clean slate. Anything that cannot be undone, like payments, logins or keys, waits for me. Every check comes from a real failure in my own projects: 170 so far. It is open source, and it says plainly where it stops.",
+      "I build software with AI coding agents, and anyone who does knows the catch: the AI can be wrong and still say it is done. So I built Higher Mind, a quality system that sits under every project. Checks run by themselves at every step, from the prompt to production. On risky changes, separate AI reviewers each check one speciality with a clean slate. Anything that cannot be undone, like payments, logins or keys, waits for me. Every check comes from a real failure in my own projects: 185 so far. It is open source, and it says plainly where it stops.",
     ],
   },
   {
@@ -78,7 +78,7 @@ export const tellSectionsEn: Section[] = [
     title: "In 3 minutes",
     paragraphs: [
       "The problem first. AI coding agents are fast, but they overstate success: in one benchmark 75.8 % of the successes they reported had no evidence. When I audited my own projects, every rule I had written down was broken at scale: 6 of 7 repositories had no architecture decision records, the changelog was 105 commits behind, and 79 % of commits went straight to the main branch.",
-      "So I stopped writing rules and turned them into mechanisms. Three ideas carry the whole thing. Checks, not written rules: whatever matters runs by itself when something happens; I call such a check a gate. Every failure becomes a check: 170 real failures are catalogued as scars, my name for a failure written down with its cause, and every gate points to the one it came from. Proof, not claims: “done” means a command ran and its result was checked, and every report ends with VERIFIED, UNVERIFIED or FAILED.",
+      "So I stopped writing rules and turned them into mechanisms. Three ideas carry the whole thing. Checks, not written rules: whatever matters runs by itself when something happens; I call such a check a gate. Every failure becomes a check: 185 real failures are catalogued as scars, my name for a failure written down with its cause, and every gate points to the one it came from. Proof, not claims: “done” means a command ran and its result was checked, and every report ends with VERIFIED, UNVERIFIED or FAILED.",
       "In practice every change gets a risk tier measured from what actually changed, never from how the request was worded. Documentation is low; payments and logins are high; the higher the tier, the more checking. On a risky change several AI reviewers read it independently, each from its own angle: code, security, data, operations. A script, not a model, combines what they found, and a separate verifier tries to disprove it. A change joins the main code without me only with proof of review, and logins, payments, changes to the database structure and dependencies still wait for my phrase.",
       "And honestly: it is proven at the scale of one owner and dozens of repositories, not a large company. Reviewers cost tokens, eight to ten times one review on the riskiest changes, so the free script checks run first. The release pipeline has not had its drill on a live project yet, and the scheduled routines are switched off until I fix their setup.",
     ],
@@ -95,7 +95,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "What it is.",
-        body: "PG, short for Prompt-Guard, began as rules added to every prompt and grew into the whole quality system. The name Higher Mind comes from my other project, a guidebook on practical spirituality: a rule you intend to follow is a belief, a check that runs on its own is a practice. It has 11 hooks, small programs that fire at fixed moments, git gates at commit and push, 9 specialist AI reviewers, 51 tools that use no AI tokens and a catalogue of 170 scars. It is a public repository you can install in five minutes.",
+        body: "PG, short for Prompt-Guard, began as rules added to every prompt and grew into the whole quality system. The name Higher Mind comes from my other project, a guidebook on practical spirituality: a rule you intend to follow is a belief, a check that runs on its own is a practice. It has 14 hooks, small programs that fire at fixed moments, git gates at commit and push, 9 specialist AI reviewers, 61 tools that use no AI tokens and a catalogue of 185 scars. It is a public repository you can install in five minutes.",
       },
       {
         label: "One change, start to finish.",
@@ -111,7 +111,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "Where it is going.",
-        body: "Proportion. The routines look only at repositories with real work in the last 30 days: 12 of 47 today. Changes to PG reach new repositories through the template, and old project repositories stay untouched unless I ask. PG itself now changes only after an incident that slipped through, when a tool or model update breaks a hook, or when I ask.",
+        body: "Proportion. The routines look only at repositories with real work in the last 30 days: 13 of 50 today. Changes to PG reach new repositories through the template, and old project repositories stay untouched unless I ask. PG itself now changes only after an incident that slipped through, when a tool or model update breaks a hook, or when I ask.",
       },
     ],
   },
@@ -142,7 +142,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "Where do passwords and keys live?",
-        body: "In a vault on my own hardware: 157 keys, tokens and logins. A bridge passes a value straight into the process that needs it, so it never appears in the chat, the code or the logs. A secret typed into a command is blocked, and automatic scans keep secrets out of the code.",
+        body: "In a vault on my own hardware: 165 keys, tokens and logins. A bridge passes a value straight into the process that needs it, so it never appears in the chat, the code or the logs. A secret typed into a command is blocked, and automatic scans keep secrets out of the code.",
       },
       {
         label: "Could someone else take over my project?",
@@ -173,7 +173,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "How do you know it works?",
-        body: "Every gate has a test proving it blocks, and the whole test suite has 606 checks. Mutation testing plants small bugs to prove the tests catch them. Before a new guard rule could block anything, it ran against 40,824 real commands.",
+        body: "Every gate has a test proving it blocks, and the whole test suite has 730 checks. Mutation testing plants small bugs to prove the tests catch them. Before a new guard rule could block anything, it ran against 40,824 real commands.",
       },
       {
         label: "What would you do differently?",
@@ -189,7 +189,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "How fast does it change?",
-        body: "Fifteen public versions in 33 days, each answering something real: an audit, a comparison with 35 open-source projects, a failure, or friction in my own work. Since October 14 it is in maintenance mode: it changes after an incident, a broken hook or my request, not for its own sake.",
+        body: "Sixteen public versions in 54 days, each answering something real: an audit, a comparison with 35 open-source projects, a failure, or friction in my own work. Since October 14 it is in maintenance mode: it changes after an incident, a broken hook or my request, not for its own sake.",
       },
     ],
   },

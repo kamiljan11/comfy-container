@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /claude: PG 1.9.0 (2026-11-04). The version line, the key numbers and the figures are recounted against the public 1.9.0 (commit `7c26d75`) and the owner's machine: 14 hooks on 8 events, 185 scars, 61 tools with 46 test suites, 19 exported skills, 464 files, 16 versions in 54 days, 730 gate checks, 165 secrets, 78 skills, 2,600+ notes, 50 repositories (13 active, 36 dormant, 1 excluded). The release timeline gets the 1.9.0 point, the history gets one item on three weeks in maintenance mode; the maintenance-mode text stays. Explanations and the short tellings carry the same numbers (EN and PL), figure snapshots updated, sources and commands in `docs/CLAUDE-PAGE-NUMBERS.md`.
+
 - /claude Skills tab: snapshot refreshed from coding-higher-mind (export PR #30): 19 skills, new card `pg-maintain` (how to work on the quality system itself) in "Review i jakosc" / review and quality. Data only, `src/data/higher-mind-skills.json`.
 
 - Homepage: new section "The difference" / "Różnica" after the six ways to help: business context, not just code. Kamil starts from the business because he has run companies, builds solutions that work with the people and processes a company really has, and builds only what pays off (saves time, money and chaos). Texts in `src/i18n.ts` (`difference`), section in `src/components/HomePage.tsx`.
