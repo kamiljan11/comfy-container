@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import type { Content, FigureKey } from "../../components/claude/types";
 import { releasesPerDay, stackPercents, timelineSpan } from "../../lib/chartMath";
@@ -206,4 +207,15 @@ describe("/claude content", () => {
       });
     });
   }
+
+  it("names the same PG version in the page description as in the version line", () => {
+    // the route meta (search results, link previews) is outside the content files, so a recount can miss it
+    const route = readFileSync(new URL("../../routes/claude.tsx", import.meta.url), "utf8");
+    const version = (s: string) => s.match(/PG v?(\d+\.\d+\.\d+)/)?.[1];
+    const meta = [...route.matchAll(/PG v?\d+\.\d+\.\d+/g)].map((m) => version(m[0]));
+    expect(meta.length).toBeGreaterThan(0);
+    for (const c of [en, pl]) {
+      for (const v of meta) expect(v).toBe(version(c.versionLine));
+    }
+  });
 });

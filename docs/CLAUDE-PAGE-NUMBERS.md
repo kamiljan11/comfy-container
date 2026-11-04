@@ -7,7 +7,10 @@ czesci (`tell.en.ts` / `tell.pl.ts`: wersje skrocone i pytania; pilnuje `src/con
 Rysunki `ideas`, `guards` i `install` tez nie maja wlasnych liczb (79 %, 185, 75.8 %, Node 20+, 464 pliki, 1.9.0 pochodza z
 sekcji obok; pilnuje `content.test.ts`).
 Stan: 4 listopada 2026, PG 1.9.0. Liczby w obu jezykach musza byc identyczne — pilnuje tego
-`src/content/claude/content.test.ts`. Kiedy przeliczasz: po wydaniu `kamiljan11/coding-higher-mind`
+`src/content/claude/content.test.ts`. Wersja PG stoi tez poza plikami tresci: opis strony w `src/routes/claude.tsx`
+(meta `description`, wyniki wyszukiwania i podglady linkow); ten sam test pilnuje, ze ma te sama wersje co `versionLine`.
+Data konca paska wersji stoi slownie w objasnieniu paska (`explain.*.ts`, klucz `strip`) i w statusie rysunku rutyn
+(`figures.cadence.status`); to sprawdzasz recznie. Kiedy przeliczasz: po wydaniu `kamiljan11/coding-higher-mind`
 albo gdy zdanie w artykule przestaje byc prawda (PG jest w trybie utrzymania, wiec rzadko).
 
 Komendy z GitHubem potrzebuja tokenu z dostepem do konta w `GH_TOKEN`. Token bierzesz z sejfu sekretow

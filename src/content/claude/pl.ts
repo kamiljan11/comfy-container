@@ -1023,7 +1023,7 @@ export const pl: Content = {
       caption: "Agent może użyć hasła lub klucza, którego nigdy nie zobaczy.",
     },
     cadence: {
-      status: "Stan na 14 października: wszystkie rutyny PG wyłączone do czasu naprawy ustawień.",
+      status: "Stan na 4 listopada: wszystkie rutyny PG wyłączone do czasu naprawy ustawień.",
       rows: [
         { name: "Recenzja pull requestów", dots: 5, freq: "dni robocze · wraca" },
         { name: "Kontrola zdrowia", dots: 1, freq: "co tydzień · wraca" },

@@ -591,7 +591,7 @@ export const explainPl: Explains = {
     {
       id: "strip",
       term: "Pasek kalendarza",
-      body: "Jedna komórka na dzień, od 12 września do 14 października. Wypełniona komórka to dzień z wydaniem, liczba w niej oznacza kilka wydań tego dnia, a odstępy między nimi zachowują prawdziwą skalę.",
+      body: "Jedna komórka na dzień, od 12 września do 4 listopada. Wypełniona komórka to dzień z wydaniem, liczba w niej oznacza kilka wydań tego dnia, a odstępy między nimi zachowują prawdziwą skalę.",
     },
     {
       id: "number",

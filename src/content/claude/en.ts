@@ -1023,7 +1023,7 @@ export const en: Content = {
       caption: "The agent can use a password or key it can never read.",
     },
     cadence: {
-      status: "Status on October 14: all PG routines switched off until their setup is fixed.",
+      status: "Status on November 4: all PG routines switched off until their setup is fixed.",
       rows: [
         { name: "Pull request review", dots: 5, freq: "weekdays · returns" },
         { name: "Health check", dots: 1, freq: "weekly · returns" },

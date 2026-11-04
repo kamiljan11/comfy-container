@@ -591,7 +591,7 @@ export const explainEn: Explains = {
     {
       id: "strip",
       term: "The calendar strip",
-      body: "One cell per day, from September 12 to October 14. A filled cell is a day with a release, and a number in it means several releases that day; the gaps between them are true to scale.",
+      body: "One cell per day, from September 12 to November 4. A filled cell is a day with a release, and a number in it means several releases that day; the gaps between them are true to scale.",
     },
     {
       id: "number",
