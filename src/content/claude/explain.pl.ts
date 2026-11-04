@@ -28,12 +28,12 @@ export const explainPl: Explains = {
     {
       id: "vault",
       term: "Sejf na hasła",
-      body: "157 haseł i kluczy API (kodów, którymi programy się ze sobą dogadują) leży w jednym miejscu. Program dostaje klucz tylko w chwili, gdy go potrzebuje, jak od recepcjonisty klucz do pokoju. W czacie klucz nie pojawia się nigdy.",
+      body: "165 haseł i kluczy API (kodów, którymi programy się ze sobą dogadują) leży w jednym miejscu. Program dostaje klucz tylko w chwili, gdy go potrzebuje, jak od recepcjonisty klucz do pokoju. W czacie klucz nie pojawia się nigdy.",
     },
     {
       id: "memory",
       term: "Wspólny notatnik",
-      body: "Ponad 2300 notatek, które AI czyta na początku sesji, żeby pamiętać decyzje sprzed tygodni. Po sesji samo dopisuje krótkie podsumowanie, jak dziennik zmiany w fabryce.",
+      body: "Ponad 2600 notatek, które AI czyta na początku sesji, żeby pamiętać decyzje sprzed tygodni. Po sesji samo dopisuje krótkie podsumowanie, jak dziennik zmiany w fabryce.",
     },
     {
       id: "gates",
@@ -42,8 +42,8 @@ export const explainPl: Explains = {
     },
     {
       id: "projects",
-      term: "Wszystkie 47 projektów",
-      body: "47 repozytoriów (folderów z kodem pod kontrolą wersji): aplikacje, strony i automatyzacje. Te same kontrole obejmują sklep klienta i małe narzędzie, więc jakość nie zależy od tego, który to projekt.",
+      term: "Wszystkie 50 projektów",
+      body: "50 repozytoriów (folderów z kodem pod kontrolą wersji): aplikacje, strony i automatyzacje. Te same kontrole obejmują sklep klienta i małe narzędzie, więc jakość nie zależy od tego, który to projekt.",
     },
   ],
   mind: [
@@ -75,7 +75,7 @@ export const explainPl: Explains = {
     {
       id: "branch-4",
       term: "Spisane zasady",
-      body: "Krótkie dokumenty czytane wtedy, gdy są potrzebne: projekt przed kodem, co znaczy „gotowe” przy danym poziomie ryzyka, oraz 170 „blizn”, czyli prawdziwych porażek z przeszłości. Każda reguła wskazuje błąd, z którego powstała.",
+      body: "Krótkie dokumenty czytane wtedy, gdy są potrzebne: projekt przed kodem, co znaczy „gotowe” przy danym poziomie ryzyka, oraz 185 „blizn”, czyli prawdziwych porażek z przeszłości. Każda reguła wskazuje błąd, z którego powstała.",
     },
     {
       id: "branch-5",
@@ -206,7 +206,7 @@ export const explainPl: Explains = {
     {
       id: "step-2",
       term: "Zapisanie blizny",
-      body: "Porażka trafia do rejestru jako „blizna” z numerem: co się stało, jaki jest dowód i jaką regułę wywołała. Blizn jest 170. Każda reguła niesie numer błędu, z którego powstała, więc nikt nie musi zgadywać, po co istnieje.",
+      body: "Porażka trafia do rejestru jako „blizna” z numerem: co się stało, jaki jest dowód i jaką regułę wywołała. Blizn jest 185. Każda reguła niesie numer błędu, z którego powstała, więc nikt nie musi zgadywać, po co istnieje.",
     },
     {
       id: "step-3",
@@ -228,7 +228,7 @@ export const explainPl: Explains = {
     {
       id: "vault",
       term: "Własny sejf na hasła",
-      body: "157 haseł i kluczy leży na moim własnym serwerze, nie w cudzej chmurze. AI nie może ich przeglądać.",
+      body: "165 haseł i kluczy leży na moim własnym serwerze, nie w cudzej chmurze. AI nie może ich przeglądać.",
     },
     {
       id: "bridge",
@@ -250,7 +250,7 @@ export const explainPl: Explains = {
     {
       id: "row-0",
       term: "Codzienny przegląd pull requestów",
-      body: "W dni robocze AI czyta otwarte pull requesty (propozycje zmian) w aktywnych projektach i zgłasza problemy. Aktywny znaczy ruszany w ostatnich 30 dniach: przy pierwszym liczeniu 12 z 47. Jedna z trzech rutyn, które mają wrócić.",
+      body: "W dni robocze AI czyta otwarte pull requesty (propozycje zmian) w aktywnych projektach i zgłasza problemy. Aktywny znaczy ruszany w ostatnich 30 dniach: dziś 13 z 50. Jedna z trzech rutyn, które mają wrócić.",
     },
     {
       id: "row-1",
@@ -520,7 +520,7 @@ export const explainPl: Explains = {
     {
       id: "row-5",
       term: "Zasięg rutyn",
-      body: "Rutyny to kontrole uruchamiane według harmonogramu. Gdy działają, patrzą tylko na 12 z 47 repozytoriów, w których była prawdziwa praca w ostatnich 30 dniach. Teraz są wyłączone do czasu naprawy ustawień.",
+      body: "Rutyny to kontrole uruchamiane według harmonogramu. Gdy działają, patrzą tylko na 13 z 50 repozytoriów, w których była prawdziwa praca w ostatnich 30 dniach. Teraz są wyłączone do czasu naprawy ustawień.",
     },
   ],
   limits: [
@@ -574,7 +574,7 @@ export const explainPl: Explains = {
     {
       id: "group-2",
       term: "Nigdy nie sprawdzane przez rutyny",
-      body: "Jedno repozytorium nigdy nie bierze udziału w przebiegach rutyn. Dalej jest tu policzone, więc suma to 47.",
+      body: "Jedno repozytorium nigdy nie bierze udziału w przebiegach rutyn. Dalej jest tu policzone, więc suma to 50.",
     },
     {
       id: "fact-0",
@@ -591,7 +591,7 @@ export const explainPl: Explains = {
     {
       id: "strip",
       term: "Pasek kalendarza",
-      body: "Jedna komórka na dzień, od 12 września do 14 października. Wypełniona komórka to dzień z wydaniem, liczba w niej oznacza kilka wydań tego dnia, a odstępy między nimi zachowują prawdziwą skalę.",
+      body: "Jedna komórka na dzień, od 12 września do 4 listopada. Wypełniona komórka to dzień z wydaniem, liczba w niej oznacza kilka wydań tego dnia, a odstępy między nimi zachowują prawdziwą skalę.",
     },
     {
       id: "number",
@@ -633,7 +633,7 @@ export const explainPl: Explains = {
     {
       id: "back",
       term: "Deinstalator",
-      body: "W tym samym repozytorium jest deinstalator, więc wypróbowanie systemu do niczego nie zobowiązuje. Publiczne 1.8.0 ma 409 plików, oczyszczonych z prywatnych danych.",
+      body: "W tym samym repozytorium jest deinstalator, więc wypróbowanie systemu do niczego nie zobowiązuje. Publiczne 1.9.0 ma 464 pliki, oczyszczone z prywatnych danych.",
     },
   ],
 };

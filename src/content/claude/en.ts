@@ -3,7 +3,7 @@ import type { Content } from "../../components/claude/types";
 import { explainEn, explainUiEn } from "./explain.en";
 import { tellPartEn, tellSectionsEn } from "./tell.en";
 
-// Every number on this page was recounted on 2026-10-14 (sources and commands: docs/CLAUDE-PAGE-NUMBERS.md). A number that was not recounted says so and carries its own date.
+// Every number on this page was recounted on 2026-11-04 (sources and commands: docs/CLAUDE-PAGE-NUMBERS.md). A number that was not recounted says so and carries its own date.
 
 export const en: Content = {
   title: "Coding Higher Mind: the AI system behind the work",
@@ -13,22 +13,22 @@ export const en: Content = {
   mapLead:
     "Seven parts. Pick the one you came for; every section has its own link, and a small square marks the ones with a chart. In a hurry? The last part tells the whole system in 30 seconds.",
   versionLine:
-    "PG v1.8.0, as of October 14, 2026. Fifteen public versions in 33 days, and as of that date the system is complete: it is now in maintenance mode, and the section “Where improving stops” explains what that means and why.",
+    "PG v1.9.0, as of November 4, 2026. Sixteen public versions in 54 days. On October 14 the system was declared complete and moved to maintenance mode; 1.9.0 collects three weeks of changes made under that rule, and the section “Where improving stops” explains what that means and why.",
   intro:
     "My CV says AI coding agents write the code, while I own the specification, the review and the deploy. A claim like that needs evidence, so this page shows the system itself: what runs in the background, what it enforces, how it learns from its own failures, and where it stops. PG (Prompt-Guard) is not a project; it sits under all of them. Whatever repository an agent opens on my machine, the same rules apply: a change written by AI does not reach a product without passing automatic checks, the AI shows proof before it says “done”, and it uses passwords and keys without ever seeing them. Everything below runs today unless a section says otherwise. Two things do not: the release pipeline from version 1.7.0 has not had its first drill on a test project yet, and the scheduled routines are switched off until I fix their setup after a computer move. The whole system is a public repository you can install in five minutes.",
   repoCta: "github.com/kamiljan11/coding-higher-mind →",
   stats: [
-    { n: "170", label: "past failures turned into checks" },
-    { n: "11", label: "hooks on 7 kinds of event" },
+    { n: "185", label: "past failures turned into checks" },
+    { n: "14", label: "hooks on 8 kinds of event" },
     { n: "9", label: "specialist AI reviewers" },
-    { n: "51", label: "tools that use no AI tokens" },
-    { n: "606", label: "checks in the gate test battery" },
-    { n: "15", label: "public versions in 33 days" },
-    { n: "31 / 47", label: "repos under strict branch protection" },
-    { n: "157", label: "keys and passwords the AI never sees" },
+    { n: "61", label: "tools that use no AI tokens" },
+    { n: "730", label: "checks in the gate test battery" },
+    { n: "16", label: "public versions in 54 days" },
+    { n: "31 / 50", label: "repos under strict branch protection" },
+    { n: "165", label: "keys and passwords the AI never sees" },
   ],
   statsNote:
-    "Counted on October 14, 2026: hooks, tools, reviewers and scars in the public repository; tests, protection and secrets on my machine and on GitHub.",
+    "Counted on November 4, 2026: hooks, tools, reviewers and scars in the public repository; tests, protection and secrets on my machine and on GitHub.",
   parts: [
     { title: "What it is", blurb: "The system on one map, and the three ideas it rests on." },
     {
@@ -51,7 +51,7 @@ export const en: Content = {
     },
     {
       title: "History and use",
-      blurb: "Fifteen versions, how to install it, and the honest limits.",
+      blurb: "Sixteen versions, how to install it, and the honest limits.",
     },
     tellPartEn,
   ],
@@ -73,8 +73,8 @@ export const en: Content = {
           body: "the tool for operations: mail, documents, research, outreach and design. It has no hooks, so the working rules travel as text inside every prompt, and the status word at the end of each report is the main protection.",
         },
         {
-          label: "73 skills:",
-          body: "versioned instruction packages that tasks are routed to, 56 in the coding tool and 58 on the desktop, 41 of them installed in both. A router matches each task by fixed rules and announces which steps it will run before the work starts.",
+          label: "78 skills:",
+          body: "versioned instruction packages that tasks are routed to, 61 in the coding tool and 58 on the desktop, 41 of them installed in both. A router matches each task by fixed rules and announces which steps it will run before the work starts.",
         },
         {
           label: "The right model for the job:",
@@ -101,7 +101,7 @@ export const en: Content = {
         },
         {
           label: "Every failure becomes a check (scar → gate):",
-          body: "170 real failures from my projects are catalogued, each with a rule id. I call them scars. Every checklist item cites the scar it came from, a habit taken from Google SRE. A postmortem ends with a new gate or a new scar, never with “be more careful”.",
+          body: "185 real failures from my projects are catalogued, each with a rule id. I call them scars. Every checklist item cites the scar it came from, a habit taken from Google SRE. A postmortem ends with a new gate or a new scar, never with “be more careful”.",
         },
         {
           label: "Proof, not claims:",
@@ -144,7 +144,7 @@ export const en: Content = {
         },
         {
           label: "In CI and at merge:",
-          body: "the same checks run again, plus a secret scanner (gitleaks) and mutation testing on the changed files: the tool plants small bugs on purpose, and a test that catches none of them is theatre. 31 of my 47 repositories have strict branch protection generated from the names of their CI jobs. A pull request merges only if its checks ran on the current merge result: once, green checks on an outdated base broke main.",
+          body: "the same checks run again, plus a secret scanner (gitleaks) and mutation testing on the changed files: the tool plants small bugs on purpose, and a test that catches none of them is theatre. 31 of my 50 repositories have strict branch protection generated from the names of their CI jobs. A pull request merges only if its checks ran on the current merge result: once, green checks on an outdated base broke main.",
         },
       ],
     },
@@ -403,7 +403,7 @@ export const en: Content = {
         },
         {
           label: "Routines look only at live work:",
-          body: "a script reads GitHub history and keeps repositories with real work in the last 30 days, ignoring days when PG swept the whole fleet, the same change rolled out everywhere, and dependency bots. Today that is 12 of 47.",
+          body: "a script reads GitHub history and keeps repositories with real work in the last 30 days, ignoring days when PG swept the whole fleet, the same change rolled out everywhere, and dependency bots. Today that is 13 of 50.",
         },
         {
           label: "Cleaner numbers:",
@@ -475,7 +475,7 @@ export const en: Content = {
       items: [
         {
           label: "A vault on my own hardware:",
-          body: "157 API keys, tokens and logins live in a self-hosted vault. A bridge passes a value straight into the process that needs it, as an environment variable, so it never appears in the chat, the code or the logs. The command guard blocks a secret typed into a command, and the scans at commit time and in CI keep it that way.",
+          body: "165 API keys, tokens and logins live in a self-hosted vault. A bridge passes a value straight into the process that needs it, as an environment variable, so it never appears in the chat, the code or the logs. The command guard blocks a secret typed into a command, and the scans at commit time and in CI keep it that way.",
         },
       ],
     },
@@ -500,14 +500,14 @@ export const en: Content = {
         },
         {
           label: "Vulnerability watch (monthly):",
-          body: "a script reads GitHub's own vulnerability alerts (on in 44 of 47 repositories) and audits the lockfile. It tells “no scan” from “no findings”, so an empty or failed read never counts as a quiet month. Fixes are patch or minor updates, always as pull requests with evidence.",
+          body: "a script reads GitHub's own vulnerability alerts (on in 44 of 50 repositories) and audits the lockfile. It tells “no scan” from “no findings”, so an empty or failed read never counts as a quiet month. Fixes are patch or minor updates, always as pull requests with evidence.",
         },
       ],
     },
     {
       id: "fleet",
       part: 4,
-      title: "47 repositories, and the 12 that are alive",
+      title: "50 repositories, and the 13 that are alive",
       lead: "Most of my projects are finished. PG still guards all of them, but the routines spend their time only where work is happening.",
       figure: "waffle",
     },
@@ -518,7 +518,7 @@ export const en: Content = {
       items: [
         {
           label: "Persistent memory:",
-          body: "a local base of more than 2,300 notes; the relevant part loads at the start of every session, and each session writes a note when it ends, so the next one starts from a checkpoint instead of from scratch. One honest gap: sessions started in a temporary workspace do not always leave a transcript for that note, and the health check flags it.",
+          body: "a local base of more than 2,600 notes; the relevant part loads at the start of every session, and each session writes a note when it ends, so the next one starts from a checkpoint instead of from scratch. One honest gap: sessions started in a temporary workspace do not always leave a transcript for that note, and the health check flags it.",
         },
         {
           label: "Telemetry, not feelings:",
@@ -558,7 +558,7 @@ export const en: Content = {
     {
       id: "history",
       part: 5,
-      title: "Fifteen versions in 33 days",
+      title: "Sixteen versions in 54 days",
       lead: "Each release answered something real: an audit, a comparison with other projects, a failure, or friction in my own work. The details of every version are in the public changelog.",
       figure: "versions",
       items: [
@@ -569,6 +569,10 @@ export const en: Content = {
         {
           label: "Six patches in one day (September 28):",
           body: "the stop gate trusted test output instead of exit codes, so a broken test setup could pass as “skipped”. Six releases later, a verdict comes only from the exit code.",
+        },
+        {
+          label: "Three weeks in maintenance mode (November 4):",
+          body: "1.9.0 collects what changed under the maintenance rule: the gates measure themselves, larger changes get a plan before code, more languages are checked after every edit, and what the agent sends after reading outside content is logged. Most of it runs in observe mode: it counts, it does not block.",
         },
       ],
     },
@@ -589,8 +593,8 @@ export const en: Content = {
           body: "it never overwrites a file you changed (the other version lands next to yours), merges your settings instead of replacing them, and adds its rules between markers so an update replaces only that block. Git hooks are optional. It ends with a self-test, and the green output is the proof, not the installer's word.",
         },
         {
-          label: "What the public 1.8.0 contains:",
-          body: "11 hooks, 3 git gates, 51 zero-token tools with 28 test suites, 9 reviewer departments, the doctrine with 170 scars, a repository template with CI and parsed boundary blocks, routine definitions for both tools, 18 skills, an uninstaller, and docs with the diagrams from this page: 409 files.",
+          label: "What the public 1.9.0 contains:",
+          body: "14 hooks, 3 git gates, 61 zero-token tools with 46 test suites, 9 reviewer departments, the doctrine with 185 scars, a repository template with CI and parsed boundary blocks, routine definitions for both tools, 19 skills, an uninstaller, and docs with the diagrams from this page: 464 files.",
         },
         {
           label: "Language:",
@@ -622,17 +626,17 @@ export const en: Content = {
       coworkSub2: "outreach · design · ops",
       shared: "same rules · same memory",
       vault: "VAULT",
-      vaultSub: "157 secrets",
+      vaultSub: "165 secrets",
       vaultNote1: "keys go to the process,",
       vaultNote2: "never to the chat",
       memory: "MEMORY",
-      memorySub: "2,300+ notes",
+      memorySub: "2,600+ notes",
       memoryNote1: "loaded at session start,",
       memoryNote2: "sessions self-document",
       gates: "PG · GATES",
       gatesList: "prompt · edit · command · stop · commit · push · CI · review · production proof",
       projects: "EVERY PROJECT",
-      projectsSub: "47 repositories: apps, websites, automations",
+      projectsSub: "50 repositories: apps, websites, automations",
       caption:
         "PG is a meta layer: the same gates sit under every project, whichever it is. I set the direction; proof comes back up.",
     },
@@ -664,7 +668,7 @@ export const en: Content = {
             "verifier · devil's advocate",
           ],
         },
-        { title: "Doctrine", leaves: ["design before code", "“done” per risk tier", "170 scars"] },
+        { title: "Doctrine", leaves: ["design before code", "“done” per risk tier", "185 scars"] },
         {
           title: "Repo template",
           leaves: ["CI + mutation testing", "parsed boundaries", "QA matrix · privacy · runbook"],
@@ -969,7 +973,7 @@ export const en: Content = {
           before: "a line in every pull request",
           after: "collected from titles at release",
         },
-        { gate: "routines' scope", before: "every repository", after: "active ones: 12 of 47" },
+        { gate: "routines' scope", before: "every repository", after: "active ones: 13 of 50" },
       ],
       caption:
         "Thresholds recalibrated from the gate log, with test runs filtered out. Each change says how to roll it back.",
@@ -1010,7 +1014,7 @@ export const en: Content = {
     },
     vault: {
       vault: "VAULT",
-      vaultSub: "157 secrets · self-hosted",
+      vaultSub: "165 secrets · self-hosted",
       bridge: "BRIDGE",
       bridgeSub: "passes to the process",
       target: "TARGET PROCESS",
@@ -1019,7 +1023,7 @@ export const en: Content = {
       caption: "The agent can use a password or key it can never read.",
     },
     cadence: {
-      status: "Status on October 14: all PG routines switched off until their setup is fixed.",
+      status: "Status on November 4: all PG routines switched off until their setup is fixed.",
       rows: [
         { name: "Pull request review", dots: 5, freq: "weekdays · returns" },
         { name: "Health check", dots: 1, freq: "weekly · returns" },
@@ -1034,21 +1038,22 @@ export const en: Content = {
     },
     waffle: {
       groups: [
-        { label: "active in the last 30 days", count: 12, tone: "a" },
-        { label: "finished or resting", count: 34, tone: "n" },
+        { label: "active in the last 30 days", count: 13, tone: "a" },
+        { label: "finished or resting", count: 36, tone: "n" },
         { label: "never checked by routines", count: 1, tone: "b" },
       ],
       facts: [
         { n: "33", label: "with branch protection, 31 of them strict" },
         { n: "44", label: "with GitHub vulnerability alerts on" },
       ],
-      caption: "One square per repository, counted from GitHub on October 14, 2026.",
+      caption: "One square per repository, counted from GitHub on November 4, 2026.",
     },
     versions: {
       ticks: [
         { day: 0, label: "Sep 12" },
         { day: 19, label: "Oct 1" },
         { day: 32, label: "Oct 14" },
+        { day: 53, label: "Nov 4" },
       ],
       points: [
         { v: "1.0.0", date: "Sep 12", day: 0, theme: "first public export of Prompt-Guard" },
@@ -1089,6 +1094,7 @@ export const en: Content = {
           theme: "architecture that stays decided, release pipeline",
         },
         { v: "1.8.0", date: "Oct 14", day: 32, theme: "proportionality, then maintenance mode" },
+        { v: "1.9.0", date: "Nov 4", day: 53, theme: "measurement in maintenance mode" },
       ],
       caption:
         "The strip has one cell per day; a filled cell is a release, and a number means several that day.",
@@ -1105,7 +1111,7 @@ export const en: Content = {
           idea: "Every failure becomes a check",
           before: "a mistake, then a promise to be more careful",
           after: "a scar written down with its cause, then a new gate or checklist item",
-          why: "170 real failures are catalogued as scars, and every checklist item cites one",
+          why: "185 real failures are catalogued as scars, and every checklist item cites one",
         },
         {
           idea: "Proof, not claims",
@@ -1169,7 +1175,7 @@ export const en: Content = {
         },
       ],
       rollback: "an uninstaller comes in the same repository",
-      caption: "The public 1.8.0: 409 files, cleaned of private data.",
+      caption: "The public 1.9.0: 464 files, cleaned of private data.",
     },
   },
   explain: explainEn,

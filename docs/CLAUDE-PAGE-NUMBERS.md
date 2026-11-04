@@ -4,10 +4,13 @@ Kazda liczba na kamiljan.com/claude (pliki `src/content/claude/en.ts` i `pl.ts`)
 Objasnienia elementow rysunkow (`explain.en.ts` / `explain.pl.ts`) nie wprowadzaja wlasnych liczb: kazda liczba z nich
 musi juz stac w artykule w tym samym jezyku (pilnuje `src/components/claude/Explain.test.ts`). To samo dla ostatniej
 czesci (`tell.en.ts` / `tell.pl.ts`: wersje skrocone i pytania; pilnuje `src/content/claude/content.test.ts`). Test widzi tylko liczby zapisane cyframi; slowne ("piec minut", "osiem do dziesieciu") sprawdzasz recznie. Przeliczasz artykul -> sprawdz tez je.
-Rysunki `ideas`, `guards` i `install` tez nie maja wlasnych liczb (79 %, 170, 75.8 %, Node 20+, 409 plikow, 1.8.0 pochodza z
+Rysunki `ideas`, `guards` i `install` tez nie maja wlasnych liczb (79 %, 185, 75.8 %, Node 20+, 464 pliki, 1.9.0 pochodza z
 sekcji obok; pilnuje `content.test.ts`).
-Stan: 14 pazdziernika 2026, PG 1.8.0. Liczby w obu jezykach musza byc identyczne — pilnuje tego
-`src/content/claude/content.test.ts`. Kiedy przeliczasz: po wydaniu `kamiljan11/coding-higher-mind`
+Stan: 4 listopada 2026, PG 1.9.0. Liczby w obu jezykach musza byc identyczne — pilnuje tego
+`src/content/claude/content.test.ts`. Wersja PG stoi tez poza plikami tresci: opis strony w `src/routes/claude.tsx`
+(meta `description`, wyniki wyszukiwania i podglady linkow); ten sam test pilnuje, ze ma te sama wersje co `versionLine`.
+Data konca paska wersji stoi slownie w objasnieniu paska (`explain.*.ts`, klucz `strip`) i w statusie rysunku rutyn
+(`figures.cadence.status`); to sprawdzasz recznie. Kiedy przeliczasz: po wydaniu `kamiljan11/coding-higher-mind`
 albo gdy zdanie w artykule przestaje byc prawda (PG jest w trybie utrzymania, wiec rzadko).
 
 Komendy z GitHubem potrzebuja tokenu z dostepem do konta w `GH_TOKEN`. Token bierzesz z sejfu sekretow
@@ -16,39 +19,39 @@ tu jest tylko, co liczy dana komenda, bez prywatnych sciezek.
 
 ## Publiczne repo (kazdy moze przeliczyc)
 
-Checkout `kamiljan11/coding-higher-mind`, commit `8b5d960` (PG 1.8.0).
+Checkout `kamiljan11/coding-higher-mind`, commit `7c26d75` (PG 1.9.0).
 
-| liczba na stronie                                                   | komenda                                                                                                                                                                                                     | wynik 14.10             |
+| liczba na stronie                                                   | komenda                                                                                                                                                                                                     | wynik 4.11              |
 | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| 11 hookow na 7 zdarzeniach                                          | `python3 -c "import json;h=json.load(open('settings.pg-hooks.json'))['hooks'];print(len(h), len({c['command'].split('/')[-1].split()[0].strip('\"') for e in h.values() for m in e for c in m['hooks']}))"` | `7 11`                  |
-| 170 blizn                                                           | `grep -cE '^\| [A-Z][A-Z0-9-]+ \|' pg/cases.md`                                                                                                                                                             | 170                     |
-| 51 narzedzi, 28 zestawow testow                                     | `ls bin \| grep -v '^test_' \| grep -vc '^lib$'` ; `ls bin \| grep -c '^test_'`                                                                                                                             | 51 ; 28                 |
+| 14 hookow na 8 zdarzeniach                                          | `python3 -c "import json;h=json.load(open('settings.pg-hooks.json'))['hooks'];print(len(h), len({c['command'].split('/')[-1].split()[0].strip('\"') for e in h.values() for m in e for c in m['hooks']}))"` | `8 14`                  |
+| 185 blizn                                                           | `grep -cE '^\| [A-Z][A-Z0-9-]+ \|' pg/cases.md`                                                                                                                                                             | 185                     |
+| 61 narzedzi, 46 zestawow testow                                     | `ls bin \| grep -v '^test_' \| grep -vc '^lib$'` ; `ls bin \| grep -c '^test_'`                                                                                                                             | 61 ; 46                 |
 | 9 recenzentow (7 dzialow + weryfikator + adwokat diabla `catfish`)  | `ls agents \| grep -vc landscape-reader` (`landscape-reader` to czytnik obcych repo, nie recenzent)                                                                                                         | 9                       |
-| 18 skilli w eksporcie                                               | `python3 -c "import json;print(len(json.load(open('skills.json'))['skills']))"`                                                                                                                             | 18                      |
-| 409 plikow                                                          | `git ls-tree -r --name-only HEAD \| wc -l`                                                                                                                                                                  | 409                     |
-| 15 wersji w 33 dni                                                  | `grep -E '^## \[?[0-9]' CHANGELOG.md` (1.0.0 = 2026-09-12 ... 1.8.0 = 2026-10-14)                                                                                                                           | 15                      |
+| 19 skilli w eksporcie                                               | `python3 -c "import json;print(len(json.load(open('skills.json'))['skills']))"`                                                                                                                             | 19                      |
+| 464 pliki                                                           | `git ls-tree -r --name-only HEAD \| wc -l`                                                                                                                                                                  | 464                     |
+| 16 wersji w 54 dni (z dniem wydania 1.0.0)                          | `grep -E '^## \[?[0-9]' CHANGELOG.md` (1.0.0 = 2026-09-12 ... 1.9.0 = 2026-11-04)                                                                                                                           | 16                      |
 | rundy recenzji 1.7.0 (1+11, 1+13, 0+11, 0+8, 0+9, 0+8, koncowe 1+2) | `pg/adr/0004-bramki-wdrozenia-bake-watch-rollback.md`, akapity "Aktualizacja v2" ... "v7-v8" (koncowe = r7 1 blocker + 1 major, r8 1 major)                                                                 | jak obok                |
 | progi 1.8.0 (400 -> 1500 linii, 6x w 3 plikach, ...)                | wpis `[1.8.0]` w `CHANGELOG.md`                                                                                                                                                                             | jak w tabeli kalibracji |
 
 ## Prywatne (maszyna wlasciciela)
 
-| liczba na stronie                                            | komenda                                                                                                                               | wynik 14.10                      |
+| liczba na stronie                                            | komenda                                                                                                                               | wynik 4.11                       |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| 606 sprawdzen w testach bramek                               | `node bin/test_hooks_v3.js 2>&1 \| grep -c '^ok'` w katalogu `~/.claude`                                                              | 606                              |
-| 157 sekretow                                                 | polecenie `check` mostu do sejfu sekretow, liczba wypisanych NAZW (wartosci nigdy)                                                    | 157                              |
-| 73 skille (56 w narzedziu do kodu, 58 na pulpicie, 41 w obu) | `ls -d ~/.claude/skills/*/` ; katalog skilli aplikacji desktopowej, nazwy unikalne; czesc wspolna = `comm -12` obu posortowanych list | 56 ; 58 ; 41 wspolnych, 73 rozne |
-| 2300+ notatek                                                | `find <vault> -name '*.md'` bez katalogow `.stversions`, `.trash`, `.obsidian`                                                        | > 2300                           |
+| 730 sprawdzen w testach bramek                               | `node bin/test_hooks_v3.js 2>&1 \| grep -c '^ok'` w katalogu `~/.claude`                                                              | 730                              |
+| 165 sekretow                                                 | polecenie `check` mostu do sejfu sekretow, liczba wypisanych NAZW (wartosci nigdy)                                                    | 165                              |
+| 78 skilli (61 w narzedziu do kodu, 58 na pulpicie, 41 w obu) | `ls -d ~/.claude/skills/*/` ; katalog skilli aplikacji desktopowej, nazwy unikalne; czesc wspolna = `comm -12` obu posortowanych list | 61 ; 58 ; 41 wspolnych, 78 rozne |
+| 2600+ notatek                                                | `find <vault> -name '*.md'` bez katalogow `.stversions`, `.trash`, `.obsidian`                                                        | > 2600                           |
 | okno 1M = ok. 2,3x limitu vs 400k                            | szacunek z transkryptow sesji (globalne instrukcje agenta, sekcja o higienie kontekstu)                                               | szacunek, tak opisany na stronie |
 | 4,9 -> 0,9 KB, 35 -> 25 KB                                   | wpisy `[1.4.0]` i `[1.8.0]` w publicznym `CHANGELOG.md`                                                                               | jak obok                         |
 
 ## GitHub (konto kamiljan11)
 
-| liczba na stronie                            | komenda                                                                                                                       | wynik 14.10 |
+| liczba na stronie                            | komenda                                                                                                                       | wynik 4.11  |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| 47 repozytoriow                              | `gh repo list kamiljan11 --limit 200 --no-archived --json name --jq length`                                                   | 47          |
+| 50 repozytoriow                              | `gh repo list kamiljan11 --limit 200 --no-archived --json name --jq length`                                                   | 50          |
 | 33 z ochrona galezi, 31 scisla               | dla kazdego repo `gh api repos/kamiljan11/<repo>/branches/<domyslna>/protection` (jest = chroniona; `"strict":true` = scisla) | 33 / 31     |
 | 44 z alertami Dependabot                     | dla kazdego repo `gh api repos/kamiljan11/<repo>/vulnerability-alerts` (204 = wlaczone)                                       | 44          |
-| 12 aktywnych / 34 w spoczynku / 1 wykluczone | `python3 bin/fleet-active-repos.py --json` (klucze `active`, `dormant`, `excluded`)                                           | 12 / 34 / 1 |
+| 13 aktywnych / 36 w spoczynku / 1 wykluczone | `python3 bin/fleet-active-repos.py --json` (klucze `active`, `dormant`, `excluded`)                                           | 13 / 36 / 1 |
 
 ## Audyty (zrodlo = zapis audytu, nie komenda)
 

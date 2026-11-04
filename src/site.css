@@ -6855,6 +6855,21 @@ header[id] {
   color: #2a2e34;
 }
 @media (max-width: 560px) {
+  /* a day cell is about 4 px wide on a phone: the release count sits above its cell instead of inside it */
+  .vt-strip {
+    margin-top: 14px;
+  }
+  .vt-day {
+    position: relative;
+  }
+  .vt-day b {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #0a7d8c;
+    line-height: 14px;
+  }
   .vt-list li {
     grid-template-columns: 52px 1fr;
   }

@@ -42,7 +42,7 @@ export function VersionTimeline({ t }: { t: VersionLabels }) {
       >
         {perDay.map((n, day) => (
           <span key={day} className={n ? "vt-day on" : "vt-day"} title={n ? String(n) : undefined}>
-            {n > 1 ? n : ""}
+            {n > 1 ? <b>{n}</b> : ""}
           </span>
         ))}
       </div>

@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import type { Content, FigureKey } from "../../components/claude/types";
 import { releasesPerDay, stackPercents, timelineSpan } from "../../lib/chartMath";
@@ -146,14 +147,14 @@ describe("/claude content", () => {
           expect(s, "a whole number").toMatch(/^\d+$/);
           return Number(s);
         };
-        // "31 / 47" in the stats = the waffle's repositories
+        // "31 / 50" in the stats = the waffle's repositories
         const fleet = int(
           only(/^\d+ \/ \d+$/)
             .n.split("/")[1]
             .trim(),
         );
         expect(c.figures.waffle.groups.reduce((a, g) => a + g.count, 0)).toBe(fleet);
-        // "15" public versions in 33 days = the releases on the timeline, patch bundles counted one by one
+        // "16" public versions in 54 days = the releases on the timeline, patch bundles counted one by one
         const span = c.figures.versions.ticks.at(-1)?.day ?? 0;
         const releases = c.figures.versions.points.reduce((a, p) => a + (p.patches ?? 1), 0);
         expect(int(only(new RegExp(`\\b${String(span + 1)}\\b`)).n)).toBe(releases);
@@ -206,4 +207,15 @@ describe("/claude content", () => {
       });
     });
   }
+
+  it("names the same PG version in the page description as in the version line", () => {
+    // the route meta (search results, link previews) is outside the content files, so a recount can miss it
+    const route = readFileSync(new URL("../../routes/claude.tsx", import.meta.url), "utf8");
+    const version = (s: string) => s.match(/PG v?(\d+\.\d+\.\d+)/)?.[1];
+    const meta = [...route.matchAll(/PG v?\d+\.\d+\.\d+/g)].map((m) => version(m[0]));
+    expect(meta.length).toBeGreaterThan(0);
+    for (const c of [en, pl]) {
+      for (const v of meta) expect(v).toBe(version(c.versionLine));
+    }
+  });
 });

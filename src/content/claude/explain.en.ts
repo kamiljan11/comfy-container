@@ -28,12 +28,12 @@ export const explainEn: Explains = {
     {
       id: "vault",
       term: "Safe for passwords",
-      body: "157 passwords and API keys (the codes programs use to talk to each other) are kept in one place. A program receives a key only at the moment it needs it, like a hotel desk handing over a room key. The key never appears in the chat.",
+      body: "165 passwords and API keys (the codes programs use to talk to each other) are kept in one place. A program receives a key only at the moment it needs it, like a hotel desk handing over a room key. The key never appears in the chat.",
     },
     {
       id: "memory",
       term: "Shared notebook",
-      body: "More than 2,300 notes that the AI reads when a session starts, so it remembers decisions from weeks ago. After each session it writes a short summary of what happened, like a shift log in a factory.",
+      body: "More than 2,600 notes that the AI reads when a session starts, so it remembers decisions from weeks ago. After each session it writes a short summary of what happened, like a shift log in a factory.",
     },
     {
       id: "gates",
@@ -42,8 +42,8 @@ export const explainEn: Explains = {
     },
     {
       id: "projects",
-      term: "All 47 projects",
-      body: "47 repositories (folders of code kept under version control): apps, websites and automations. The same checks cover a client's shop and a small tool, so quality does not depend on which project it is.",
+      term: "All 50 projects",
+      body: "50 repositories (folders of code kept under version control): apps, websites and automations. The same checks cover a client's shop and a small tool, so quality does not depend on which project it is.",
     },
   ],
   mind: [
@@ -75,7 +75,7 @@ export const explainEn: Explains = {
     {
       id: "branch-4",
       term: "The written playbook",
-      body: 'Short documents read when they are needed: design before code, what "done" means at each risk level, and 170 "scars", real failures from the past. Every rule points to the mistake it came from.',
+      body: 'Short documents read when they are needed: design before code, what "done" means at each risk level, and 185 "scars", real failures from the past. Every rule points to the mistake it came from.',
     },
     {
       id: "branch-5",
@@ -206,7 +206,7 @@ export const explainEn: Explains = {
     {
       id: "step-2",
       term: "Write the scar down",
-      body: 'The failure goes into a register as a "scar" with an ID: what happened, the proof and the rule it produced. There are 170. Each rule carries the ID of the failure behind it, so nobody has to guess why it exists.',
+      body: 'The failure goes into a register as a "scar" with an ID: what happened, the proof and the rule it produced. There are 185. Each rule carries the ID of the failure behind it, so nobody has to guess why it exists.',
     },
     {
       id: "step-3",
@@ -228,7 +228,7 @@ export const explainEn: Explains = {
     {
       id: "vault",
       term: "Self-hosted password safe",
-      body: "157 passwords and keys sit on my own server, not in someone else's cloud. The AI cannot browse them.",
+      body: "165 passwords and keys sit on my own server, not in someone else's cloud. The AI cannot browse them.",
     },
     {
       id: "bridge",
@@ -250,7 +250,7 @@ export const explainEn: Explains = {
     {
       id: "row-0",
       term: "Daily pull request review",
-      body: "On weekdays an AI reads open pull requests (proposed changes) in active projects and reports problems. Active means touched in the last 30 days: 12 of 47 at the first count. One of three routines due to return.",
+      body: "On weekdays an AI reads open pull requests (proposed changes) in active projects and reports problems. Active means touched in the last 30 days: 13 of 50 today. One of three routines due to return.",
     },
     {
       id: "row-1",
@@ -520,7 +520,7 @@ export const explainEn: Explains = {
     {
       id: "row-5",
       term: "Routines' scope",
-      body: "Routines are checks that run on a schedule. When they run, they look only at the 12 of 47 repositories with real work in the last 30 days. Right now they are switched off until their setup is fixed.",
+      body: "Routines are checks that run on a schedule. When they run, they look only at the 13 of 50 repositories with real work in the last 30 days. Right now they are switched off until their setup is fixed.",
     },
   ],
   limits: [
@@ -574,7 +574,7 @@ export const explainEn: Explains = {
     {
       id: "group-2",
       term: "Never checked by routines",
-      body: "One repository is never part of the routines' runs. It is still counted here, so the total stays 47.",
+      body: "One repository is never part of the routines' runs. It is still counted here, so the total stays 50.",
     },
     {
       id: "fact-0",
@@ -591,7 +591,7 @@ export const explainEn: Explains = {
     {
       id: "strip",
       term: "The calendar strip",
-      body: "One cell per day, from September 12 to October 14. A filled cell is a day with a release, and a number in it means several releases that day; the gaps between them are true to scale.",
+      body: "One cell per day, from September 12 to November 4. A filled cell is a day with a release, and a number in it means several releases that day; the gaps between them are true to scale.",
     },
     {
       id: "number",
@@ -633,7 +633,7 @@ export const explainEn: Explains = {
     {
       id: "back",
       term: "Uninstaller",
-      body: "The same repository has an uninstaller, so trying the system does not lock you in. The public 1.8.0 has 409 files, cleaned of private data.",
+      body: "The same repository has an uninstaller, so trying the system does not lock you in. The public 1.9.0 has 464 files, cleaned of private data.",
     },
   ],
 };
