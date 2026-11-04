@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /claude Skills tab: snapshot refreshed from coding-higher-mind (export PR #30): 19 skills, new card `pg-maintain` (how to work on the quality system itself) in "Review i jakosc" / review and quality. Data only, `src/data/higher-mind-skills.json`.
+
 - Homepage: new section "The difference" / "Różnica" after the six ways to help: business context, not just code. Kamil starts from the business because he has run companies, builds solutions that work with the people and processes a company really has, and builds only what pays off (saves time, money and chaos). Texts in `src/i18n.ts` (`difference`), section in `src/components/HomePage.tsx`.
 
 - /claude: part seven gets "The rules in a minute" / "Zasady w minutę", between the 30-second and the 3-minute telling: eleven rules of how the system works, each a full sentence or two, so the whole idea can be told to someone in about a minute (who owns what, prose rules turned into hooks, risk tier from the diff, independent reviewers, findings need evidence and a verifier, design before code, "done" only with proof, exceptions the agent cannot grant itself, scars and observe mode, the system measuring itself, and the seal on its own files). Texts in `src/content/claude/tell.{en,pl}.ts`, the part blurb names the new format.
