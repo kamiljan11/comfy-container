@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "generated_by": "bin/pg-export-public.py",
-  "count": 18,
+  "count": 19,
   "skills": [
     {
       "name": "pg-review",
@@ -182,6 +182,16 @@
       "files": 1,
       "summary_pl": "Wstawia do promptów zadań szablony wznawiania po limicie, z punktami kontrolnymi i logiką powrotu.",
       "summary_en": "Adds rate-limit recovery templates, with checkpoints and resume logic, to task prompts."
+    },
+    {
+      "name": "pg-maintain",
+      "category": "Review i jakosc",
+      "summary": "Tryb pracy NAD SAMYM PG (~/.claude: hooks, git-hooks, bin, agents, skills, pg/, templates, CLAUDE.md).",
+      "plugin": true,
+      "path": "skills/pg-maintain",
+      "files": 1,
+      "summary_pl": "Tryb pracy nad samym systemem jakości: najpierw indeks właścicieli, zmiana tylko u właściciela reguły, jedna komenda sprawdzająca przed commitem, potem recenzja. Do tego katalog błędów podejścia z prawdziwych sesji.",
+      "summary_en": "How to work on the quality system itself: start from the owner index, change a rule only where it is owned, run one self-check command before committing, then review. Comes with a catalogue of approach errors taken from real sessions."
     }
   ],
   "agents_count": 10,
