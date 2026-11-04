@@ -18,7 +18,7 @@ export const Route = createFileRoute("/claude")({
       ...pageMeta({
         title: "Kamil Jan | Coding Higher Mind: the AI system behind the work",
         description:
-          "The meta layer under every project Kamil Jan builds with AI: hardened prompts, automatic checks at every step, reviewer departments with fresh context, and a loop that turns failures into checks. PG 1.8.0, counted rather than estimated, with charts. Open source.",
+          "The meta layer under every project Kamil Jan builds with AI: hardened prompts, automatic checks at every step, reviewer departments with fresh context, and a loop that turns failures into checks. PG 1.9.0, counted rather than estimated, with charts. Open source.",
         url: "https://kamiljan.com/claude",
       }),
     ],
