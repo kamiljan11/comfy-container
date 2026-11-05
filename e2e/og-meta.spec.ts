@@ -23,6 +23,7 @@ const PAGES = [
   "/blog/czatbot-musi-powiedziec-ze-nie-jest-czlowiekiem",
   "/blog/lekarz-sprawdzal-diagnoze-w-chatgpt",
   "/blog/anna-z-116-117-to-automat",
+  "/blog/szkola-750-tys-na-cyberbezpieczenstwo",
 ];
 
 // one literal pattern over all meta tags; a later tag with the same key wins,

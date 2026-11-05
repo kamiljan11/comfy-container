@@ -92,6 +92,9 @@ describe("posts", () => {
     expect(findPost("anna-z-116-117-to-automat")?.external?.url).toBe(
       "https://torzeszow.pl/news/przed-wizyta-u-kardiologa-dzwoni-anna-z-116-117-to-automat-ktory-nie-zapyta-o-pesel",
     );
+    expect(findPost("szkola-750-tys-na-cyberbezpieczenstwo")?.external?.url).toBe(
+      "https://torzeszow.pl/news/szkola-moze-dostac-do-750-tys-zl-na-lekcje-o-cyberbezpieczenstwie-wnioski-do-10-listopada",
+    );
   });
 
   it("findPost returns undefined for an unknown slug", () => {
