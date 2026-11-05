@@ -46,6 +46,8 @@ const LEKARZ =
   "https://torzeszow.pl/news/lekarz-rodzinny-sprawdzal-diagnoze-w-chatgpt-przepisy-czy-tak-wolno";
 const ANNA =
   "https://torzeszow.pl/news/przed-wizyta-u-kardiologa-dzwoni-anna-z-116-117-to-automat-ktory-nie-zapyta-o-pesel";
+const SZKOLY =
+  "https://torzeszow.pl/news/szkola-moze-dostac-do-750-tys-zl-na-lekcje-o-cyberbezpieczenstwie-wnioski-do-10-listopada";
 
 const MONITOR = {
   t: "img",
@@ -55,6 +57,76 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-10-25 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-11-05, not the draft)
+    slug: "szkola-750-tys-na-cyberbezpieczenstwo",
+    date: "2026-10-25",
+    external: { url: SZKOLY, source: "toRzeszów.pl" },
+    // the article's main picture is our own AI illustration (laptop file
+    // foto/szkoly/szkoly_a2.png, pixel-matched to the portal image), not a portal
+    // or agency photo, with the title on it
+    cover: {
+      src: "/blog/szkola-750-tys-na-cyberbezpieczenstwo/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Czworo nastolatków i nauczycielka w klasie pochylają się nad smartfonem, z napisem: Szkoła może dostać do 750 tys. zł na lekcje o cyberbezpieczeństwie.",
+        en: "Four teenagers and a teacher in a classroom leaning over a smartphone, with the Polish title: a school can get up to 750,000 PLN for cybersecurity lessons.",
+      },
+    },
+    body: {
+      pl: {
+        title:
+          "Szkoła może dostać do 750 tys. zł na lekcje o cyberbezpieczeństwie. Mój tekst na toRzeszów.pl",
+        description:
+          "Szkoły z Podkarpacia mogą dostać do 750 tys. zł na zajęcia o bezpieczeństwie w sieci, także o oszustach, którzy używają AI. Wnioski do 10 listopada. Napisałem dla toRzeszów.pl, jak nie odpaść na starcie.",
+        lead: "Napisałem dla toRzeszów.pl tekst o naborze, w którym szkoły z Podkarpacia mogą dostać pieniądze na lekcje o cyberbezpieczeństwie. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Wojewódzki Urząd Pracy w Rzeszowie ma w puli **20 mln zł** dla szkół podstawowych i ponadpodstawowych. Jeden projekt może być wart **od 200 tys. do 750 tys. zł**, dofinansowanie wynosi do 100 proc., a wnioski urząd przyjmuje **do 10 listopada**. Wśród 11 obszarów tematycznych są bezpieczne korzystanie z AI, AI jako narzędzie cyberprzestępców i dezinformacja, w tym deepfake'i.",
+          },
+          {
+            t: "p",
+            text: "Sam potrafię zbudować asystenta, który mówi ludzkim głosem. Dlatego uważam, że uczniowie nie powinni się uczyć rozpoznawania fałszywego nagrania po brzmieniu albo wyglądzie, tylko prostych nawyków: rozłączyć się i oddzwonić, sprawdzić u źródła, nie udostępniać dalej.",
+          },
+          { t: "h2", id: "co-radze", text: "Co radzę w tekście" },
+          {
+            t: "list",
+            items: [
+              "**Ustal z gminą albo starostwem, kto składa wniosek.** Jeśli szkoła i jej organ prowadzący złożą osobne wnioski obejmujące tę samą szkołę, odrzucone zostaną wszystkie.",
+              "**Wybierz obszary tematyczne**: w szkole podstawowej co najmniej dwa, w ponadpodstawowej co najmniej trzy.",
+              "**Policz uczestników.** Na jedną osobę może przypadać średnio najwyżej 7 500 zł, więc projekt za 750 tys. zł musi objąć co najmniej 100 uczniów i nauczycieli.",
+              "**Zaplanuj szkolenie nauczycieli.** Jest obowiązkowe w każdym projekcie.",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście jest też, kto może złożyć wniosek, za co projekt dostanie dodatkowe punkty i dlaczego partnerstwo z firmą albo fundacją jest w tym naborze praktycznie niemożliwe. Najlepiej przesłać go dyrektorowi szkoły albo wychowawcy, bo na wniosek zostało niewiele czasu.",
+          },
+        ],
+      },
+      en: {
+        title:
+          "A school can get up to 750,000 PLN for cybersecurity lessons. My article on toRzeszów.pl",
+        description:
+          "Schools in the Podkarpacie region can apply for up to 750,000 PLN for lessons on online safety, including scams that use AI. Applications close on 10 November. I wrote for toRzeszów.pl how not to be rejected at the start. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, about a funding call for cybersecurity lessons in schools in the Podkarpacie region. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "The regional labour office in Rzeszów has **20 million PLN** for primary and secondary schools. One project can be worth **200,000 to 750,000 PLN**, funded up to 100 percent, and applications close on **10 November**. The topics include AI used by scammers and deepfakes.",
+          },
+          {
+            t: "p",
+            text: "The biggest trap: **each school can be funded only once in this call**. If the municipality and the school both apply for the same school, every application covering it is rejected, so agree first who applies.",
+          },
+        ],
+      },
+    },
+  },
   {
     // every fact below is from the article as published on toRzeszów.pl on
     // 2026-10-18 (published blocks via the read-only panel client, checked
