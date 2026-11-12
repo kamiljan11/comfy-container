@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /cv: categorisation fixed against Kamil's LinkedIn (experience and projects pages, 2026-11-12). MAS Warsztat was shown as a job ("Technical Lead · MAS Warsztat"); it is a project, so it moves to Selected projects and the real role "Technical Lead · Mountain Car Rental" returns to Experience. Mountain Car no longer appears twice (it was also in "Other ventures"). Higher Mind moves from a bullet under Independent to Selected projects. The fleet manager is titled as an app, not a job title, and claude-autoshutdown no longer repeats "open source" twice and says it is a Windows tool. Flyt is described as a venture Kamil founded.
+
 - /cv: new "Selected projects" / "Wybrane projekty" section (Mountain Car fleet manager, claude-autoshutdown) split out of Experience, as in the PDF CV. `projects` added to the CV type and the tests (same order in both languages, same bullet rules).
 
 - /cv: designed layout matching the PDF CV: navy header with round photo (`public/kamil-cv.webp`), summary box, skills grid, year column for experience, GitHub link in the contact block. Scoped with `.cv-pro` in `src/site.css` so /claude (same `.cv-paper` shell) is unchanged; print keeps the colours.
