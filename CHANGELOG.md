@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /cv: designed layout matching the PDF CV: navy header with round photo (`public/kamil-cv.webp`), summary box, skills grid, year column for experience, GitHub link in the contact block. Scoped with `.cv-pro` in `src/site.css` so /claude (same `.cv-paper` shell) is unchanged; print keeps the colours.
+
 - /cv: content replaced with the refreshed CV (EN + PL), 2026-11-12: role "AI Automation & Implementation Engineer", CetusPro first, MAS Warsztat / MAS Parts, Higher Mind, Mountain Car fleet manager, claude-autoshutdown, dates as start years (AI-coded systems from 2025), no OpenAI claims, no Learning section; education block hidden when empty. NextCar.is deliberately not listed (retracted claim, `claims.test.ts`). `src/data/cv.ts`, `src/routes/cv.tsx`, `src/data/cv.test.ts`.
 
 - Blog: new teaser post "Szkoła może dostać do 750 tys. zł na lekcje o cyberbezpieczeństwie. Mój tekst na toRzeszów.pl" (`/blog/szkola-750-tys-na-cyberbezpieczenstwo`, PL + short EN saying the article is in Polish), pointing to the article published on toRzeszów.pl on 2026-10-25. Every fact is taken from the published version of the article (not the draft). Same pattern as the other toRzeszów posts (ADR 0007), no iframe (`X-Frame-Options: SAMEORIGIN`, checked 2026-11-05). Thumbnail: the article's main picture, which is our own AI illustration (pixel-matched to the portal image), with the title on it (`public/blog/szkola-750-tys-na-cyberbezpieczenstwo/cover.webp`, 1200x630), nothing taken from the portal. Sitemap, the chat assistant's blog line (6 posts) and the tests updated.

@@ -32,92 +32,107 @@ function CVPage() {
         </button>
       </div>
 
-      <article className="cv-paper">
+      <article className="cv-paper cv-pro">
         <header className="cv-head">
-          <h1>Kamil Jan Włodarczyk</h1>
-          <p className="cv-role">{cv.role}</p>
-          <p className="cv-contact">
-            {cv.contact}
-            <br />
-            <a href="mailto:hello@kamiljan.com">hello@kamiljan.com</a> ·{" "}
-            <a href="https://wa.me/3548888901" target="_blank" rel="noreferrer">
-              WhatsApp +354 8888901
-            </a>{" "}
-            ·{" "}
-            <a href="https://linkedin.com/in/kamiljan11" target="_blank" rel="noreferrer">
-              linkedin.com/in/kamiljan11
-            </a>{" "}
-            ·{" "}
-            <a href="https://kamiljan.com" target="_blank" rel="noreferrer">
-              kamiljan.com
-            </a>
-          </p>
+          <img
+            className="cv-photo"
+            src="/kamil-cv.webp"
+            alt="Kamil Jan Włodarczyk"
+            width={132}
+            height={132}
+          />
+          <div className="cv-head-text">
+            <h1>Kamil Jan Włodarczyk</h1>
+            <p className="cv-role">{cv.role}</p>
+            <p className="cv-contact">
+              {cv.contact}
+              <br />
+              <a href="mailto:hello@kamiljan.com">hello@kamiljan.com</a> ·{" "}
+              <a href="https://wa.me/3548888901" target="_blank" rel="noreferrer">
+                WhatsApp +354 8888901
+              </a>
+              <br />
+              <a href="https://kamiljan.com" target="_blank" rel="noreferrer">
+                kamiljan.com
+              </a>{" "}
+              ·{" "}
+              <a href="https://linkedin.com/in/kamiljan11" target="_blank" rel="noreferrer">
+                linkedin.com/in/kamiljan11
+              </a>{" "}
+              ·{" "}
+              <a href="https://github.com/kamiljan11" target="_blank" rel="noreferrer">
+                github.com/kamiljan11
+              </a>
+            </p>
+          </div>
         </header>
 
-        <section className="cv-sec">
-          <h2>{cv.sec.summary}</h2>
-          <p>{cv.summary}</p>
-        </section>
-
-        <section className="cv-sec">
-          <h2>{cv.sec.skills}</h2>
-          <ul className="cv-skills">
-            {cv.skills.map((s, i) => (
-              <li key={i}>
-                <b>{s.label}</b> {s.body}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="cv-sec">
-          <h2>{cv.sec.experience}</h2>
-          {cv.experience.map((e) => (
-            <div key={e.role + e.org} className="cv-job">
-              <div className="cv-job-head">
-                <h3>
-                  {e.role} <span>· {e.org}</span>
-                </h3>
-                <span className="cv-job-dates">{e.dates}</span>
-              </div>
-              {e.loc && <p className="cv-job-loc">{e.loc}</p>}
-              <ul className="cv-bullets">
-                {e.bullets.map((b, i) => (
-                  <li key={i}>{b}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </section>
-
-        {cv.education.length > 0 && (
+        <div className="cv-body">
           <section className="cv-sec">
-            <h2>{cv.sec.education}</h2>
-            <ul className="cv-list">
-              {cv.education.map((s, i) => (
+            <h2>{cv.sec.summary}</h2>
+            <p className="cv-summary">{cv.summary}</p>
+          </section>
+
+          <section className="cv-sec">
+            <h2>{cv.sec.skills}</h2>
+            <ul className="cv-skills">
+              {cv.skills.map((s, i) => (
                 <li key={i}>
                   <b>{s.label}</b> {s.body}
                 </li>
               ))}
             </ul>
           </section>
-        )}
 
-        <section className="cv-sec">
-          <h2>{cv.sec.languages}</h2>
-          <ul className="cv-list">
-            {cv.languages.map((s, i) => (
-              <li key={i}>
-                <b>{s.label}</b> {s.body}
-              </li>
+          <section className="cv-sec">
+            <h2>{cv.sec.experience}</h2>
+            {cv.experience.map((e) => (
+              <div key={e.role + e.org} className="cv-job">
+                <div className="cv-job-dates">{e.dates}</div>
+                <div className="cv-job-main">
+                  <h3>
+                    {e.role} <span>· {e.org}</span>
+                  </h3>
+                  {e.loc && <p className="cv-job-loc">{e.loc}</p>}
+                  <ul className="cv-bullets">
+                    {e.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ))}
-          </ul>
-        </section>
+          </section>
 
-        <section className="cv-sec">
-          <h2>{cv.sec.openTo}</h2>
-          <p>{cv.openTo}</p>
-        </section>
+          {cv.education.length > 0 && (
+            <section className="cv-sec">
+              <h2>{cv.sec.education}</h2>
+              <ul className="cv-list">
+                {cv.education.map((s, i) => (
+                  <li key={i}>
+                    <b>{s.label}</b> {s.body}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          <section className="cv-sec">
+            <h2>{cv.sec.languages}</h2>
+            <ul className="cv-list">
+              {cv.languages.map((s, i) => (
+                <li key={i}>
+                  <b>{s.label}</b> {s.body}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="cv-sec">
+            <h2>{cv.sec.openTo}</h2>
+            <p>{cv.openTo}</p>
+          </section>
+        </div>
       </article>
     </div>
   );
