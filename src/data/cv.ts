@@ -163,7 +163,6 @@ export const CV_CONTENT: Record<Lang, CV> = {
           "MAS Prints (2026): print brokerage; brand, website and Meta Ads lead generation.",
           "PK Campers (2025): brand, website and Meta and Google Ads for a camper-rental company.",
           "[Afengisstofnun.is](https://afengisstofnun.is) (2025): brand, website, ads and go-to-market for a whisky-sampling business in Iceland.",
-          "Flyt (2023): founder of [flyt.is](https://flyt.is), a freight and group-import marketplace for Iceland.",
           "[QuickFix Iceland](https://quickfix.is) (2022): multilingual site and lead funnel for a handyman brand, live in 72 hours.",
           "Krónan (2018): shift manager.",
           "mobilUP (2015): marketing agency in Rzeszów, owner.",
@@ -209,6 +208,18 @@ export const CV_CONTENT: Record<Lang, CV> = {
         dates: "2026",
         bullets: [
           "Shuts the computer down only after every Claude Code session and its subagents have finished, reading each agent's real state instead of guessing from idle time. [Code on GitHub](https://github.com/kamiljan11/claude-autoshutdown), [write-up](https://kamiljan.com/blog/claude-autoshutdown).",
+        ],
+      },
+      {
+        role: "Flyt, freight exchange and group-import marketplace",
+        org: "own venture, flyt.is",
+        url: "https://flyt.is",
+        loc: "Live, built solo",
+        dates: "2023",
+        bullets: [
+          "Freight exchange: a customer posts a delivery, verified carriers bid, the customer picks an offer. Real competing prices instead of one fixed rate card.",
+          "Group import: buyers pool into one shared container under a deposit-and-refund rule modelled as a Postgres state machine (campaign, slot, deposit); a campaign that does not fill refunds every deposit automatically, with no double charge.",
+          "Landed cost (item, shipping, customs, VAT) quoted from per-category rules; admin dashboard with live campaign and revenue state. React, Supabase. [Case study](https://kamiljan.com/case-studies#flyt-pooled-container-money-state-machine).",
         ],
       },
     ],
@@ -337,7 +348,6 @@ export const CV_CONTENT: Record<Lang, CV> = {
           "MAS Prints (2026): pośrednik druku; marka, strona i kampanie Meta Ads pozyskujące leady.",
           "PK Campers (2025): marka, strona i kampanie Meta i Google Ads dla wypożyczalni kamperów.",
           "[Afengisstofnun.is](https://afengisstofnun.is) (2025): marka, strona, reklamy i strategia wejścia na rynek dla firmy degustacji whisky na Islandii.",
-          "Flyt (2023): założyciel [flyt.is](https://flyt.is), marketplace'u frachtu i importu grupowego dla Islandii.",
           "[QuickFix Iceland](https://quickfix.is) (2022): wielojęzyczna strona i lejek leadów dla marki usług „złotej rączki”, gotowe w 72 godziny.",
           "Krónan (2018): kierownik zmiany.",
           "mobilUP (2015): agencja marketingowa w Rzeszowie, właściciel.",
@@ -383,6 +393,18 @@ export const CV_CONTENT: Record<Lang, CV> = {
         dates: "2026",
         bullets: [
           "Wyłączanie komputera dopiero po zakończeniu każdej sesji Claude Code i jej subagentów, na podstawie rzeczywistego stanu agentów, a nie czasu bezczynności. [Kod na GitHubie](https://github.com/kamiljan11/claude-autoshutdown), [opis](https://kamiljan.com/blog/claude-autoshutdown).",
+        ],
+      },
+      {
+        role: "Flyt, giełda transportowa i marketplace importu grupowego",
+        org: "własne przedsięwzięcie, flyt.is",
+        url: "https://flyt.is",
+        loc: "Działa, zbudowany samodzielnie",
+        dates: "2023",
+        bullets: [
+          "Giełda transportowa: klient publikuje przesyłkę, zweryfikowani przewoźnicy licytują, klient wybiera ofertę. Realne, konkurencyjne ceny zamiast jednego sztywnego cennika.",
+          "Import grupowy: kupujący łączą się w jeden kontener na zasadzie depozytu ze zwrotem, zapisanej jako maszyna stanów w Postgresie (kampania, miejsce, depozyt); niezapełniona kampania automatycznie zwraca każdy depozyt, bez podwójnego obciążenia.",
+          "Cena końcowa (towar, transport, cło, VAT) liczona z reguł per kategoria; panel admina z bieżącym stanem kampanii i przychodów. React, Supabase. [Opis przypadku](https://kamiljan.com/case-studies#flyt-pooled-container-money-state-machine).",
         ],
       },
     ],
