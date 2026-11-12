@@ -4,6 +4,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), wersjonowanie:
 Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wersji z data.
 
 ## [Unreleased]
+- /cv: removed "voice agents (Twilio)" from Core skills (replaced with "Twilio (SMS)"); the phone-answering voice line is planned, not built, so it must not be claimed. Same fix in the PDF CV and cover letter.
+
 - /cv: Flyt is dated 2024 instead of 2023 (EN, PL and the PDF CV).
 
 

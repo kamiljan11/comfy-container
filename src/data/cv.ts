@@ -75,7 +75,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
     skills: [
       {
         label: "AI & automation:",
-        body: "LLM APIs (Claude), structured outputs, AI agents and multi-agent workflows, MCP servers, RAG, n8n, REST APIs and webhooks, OAuth2, voice agents (Twilio).",
+        body: "LLM APIs (Claude), structured outputs, AI agents and multi-agent workflows, MCP servers, RAG, n8n, REST APIs and webhooks, OAuth2, Twilio (SMS).",
       },
       {
         label: "Engineering:",
@@ -260,7 +260,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
     skills: [
       {
         label: "AI i automatyzacja:",
-        body: "API LLM (Claude), structured outputs, agenty AI i workflowy wieloagentowe, serwery MCP, RAG, n8n, REST API i webhooki, OAuth2, agenty głosowe (Twilio).",
+        body: "API LLM (Claude), structured outputs, agenty AI i workflowy wieloagentowe, serwery MCP, RAG, n8n, REST API i webhooki, OAuth2, Twilio (SMS).",
       },
       {
         label: "Inżynieria:",
