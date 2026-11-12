@@ -85,7 +85,9 @@ describe("both languages", () => {
 
   it("has the same projects in the same order in both languages", () => {
     expect(pl.projects.map((j) => j.org.split(",")[0])).toEqual(
-      en.projects.map((j) => j.org.split(",")[0]),
+      en.projects
+        .map((j) => j.org.split(",")[0])
+        .map((o) => (o === "own product" ? "produkt własny" : o)),
     );
   });
 

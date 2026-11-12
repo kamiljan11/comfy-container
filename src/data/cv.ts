@@ -94,12 +94,12 @@ export const CV_CONTENT: Record<Lang, CV> = {
       },
       {
         role: "Technical Lead",
-        org: "MAS Warsztat, workshop management app",
-        loc: "Iceland / Poland",
+        org: "Mountain Car Rental",
+        loc: "Iceland · hybrid",
         dates: "2026",
         bullets: [
-          "Built a workshop management app that runs in production: repair quotes built on the shop's own labor-time history, vehicle lookup by plate, calendar, customer approval of repairs with photos and SMS notifications, and roles for owner, mechanic and client.",
-          "AI assistant that answers from the shop's own data (RAG). TypeScript, React, Supabase.",
+          "Own the technical side of a car and van rental: rebuilt the mountaincar.is front end and built the fleet manager app the rental runs on (see Selected projects).",
+          "Set up a network of 9 local partner businesses with reciprocal discounts.",
         ],
       },
       {
@@ -118,8 +118,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
         loc: "Remote",
         dates: "2025",
         bullets: [
-          "Built Higher Mind (kamiljan.com/claude), an open-source meta-system for building software with AI. It runs AI coding agents like a small team, with quality gates, reviewer agents and checks that block a bad change before it ships.",
-          "Build production systems with AI coding agents writing the code; own the spec, architecture, review, deployment and upkeep.",
+          "Build production systems with AI coding agents writing the code, for own companies and for clients; own the spec, architecture, review, deployment and upkeep.",
         ],
       },
       {
@@ -159,10 +158,9 @@ export const CV_CONTENT: Record<Lang, CV> = {
         dates: "2010–2026",
         bullets: [
           "MAS Prints (2026): print brokerage; brand, website and Meta Ads lead generation.",
-          "Mountain Car Rental (2026): front-end rebuild of mountaincar.is and a network of 9 local partner businesses.",
           "PK Campers (2025): brand, website and Meta and Google Ads for a camper-rental company.",
           "Afengisstofnun.is (2025): brand, website, ads and go-to-market for a whisky-sampling business in Iceland.",
-          "Flyt (2023): freight and group-import marketplace.",
+          "Flyt (2023): founder of flyt.is, a freight and group-import marketplace for Iceland.",
           "QuickFix Iceland (2022): multilingual site and lead funnel for a handyman brand, live in 72 hours.",
           "Krónan (2018): shift manager.",
           "mobilUP (2015): marketing agency in Rzeszów, owner.",
@@ -172,9 +170,27 @@ export const CV_CONTENT: Record<Lang, CV> = {
     ],
     projects: [
       {
-        role: "Fleet manager",
+        role: "Higher Mind",
+        org: "open source, quality system for AI coding agents",
+        dates: "2026",
+        bullets: [
+          "Open-source meta-system for building software with AI (Claude Code): coding agents work like a small team behind quality gates, git hooks, CI and reviewer agents that block a bad change before it ships.",
+          "Every gate has a test proving it blocks the case it was built for. Code: github.com/kamiljan11/coding-higher-mind, write-up: kamiljan.com/claude.",
+        ],
+      },
+      {
+        role: "MAS Warsztat, workshop management app",
+        org: "own product",
+        loc: "In production at a working repair shop",
+        dates: "2026",
+        bullets: [
+          "Quotes, calendar, SMS and customer approval of repairs with photos in one app, used from a phone on the shop floor; separate roles for owner, admin, mechanic and client.",
+          "AI assistant answers from the shop's own data: labour times come from its closed jobs, and a bare fault code or plate is answered from a 12,857-code table without calling the model. React, TypeScript, Supabase, Claude, Twilio.",
+        ],
+      },
+      {
+        role: "Fleet manager app",
         org: "Mountain Car Rental",
-        loc: "Iceland",
         dates: "2026",
         bullets: [
           "Booking, contract and alert system for a rental fleet in Iceland, replacing a paid system that had no export and no API. React, TypeScript, Supabase, Vercel.",
@@ -183,11 +199,10 @@ export const CV_CONTENT: Record<Lang, CV> = {
       },
       {
         role: "claude-autoshutdown",
-        org: "open source, MIT licence",
-        loc: "Open-source tool",
+        org: "open source, Windows tool, MIT licence",
         dates: "2026",
         bullets: [
-          "Tool that shuts a computer down only after every Claude Code session and its subagents have finished, by reading each agent's real state instead of guessing from idle time.",
+          "Shuts the computer down only after every Claude Code session and its subagents have finished, reading each agent's real state instead of guessing from idle time. Code: github.com/kamiljan11/claude-autoshutdown.",
         ],
       },
     ],
@@ -252,12 +267,12 @@ export const CV_CONTENT: Record<Lang, CV> = {
       },
       {
         role: "Technical Lead",
-        org: "MAS Warsztat, aplikacja do zarządzania warsztatem",
-        loc: "Islandia / Polska",
+        org: "Mountain Car Rental",
+        loc: "Islandia · hybrydowo",
         dates: "2026",
         bullets: [
-          "Budowa aplikacji do zarządzania warsztatem, działającej produkcyjnie: wyceny napraw z historii czasów pracy warsztatu, wyszukiwanie pojazdu po numerze rejestracyjnym, kalendarz, akceptacja napraw przez klienta ze zdjęciami i powiadomieniami SMS.",
-          "Asystent AI odpowiadający na podstawie danych warsztatu (RAG). TypeScript, React, Supabase.",
+          "Odpowiedzialność za technologię wypożyczalni aut i dostawczaków: przebudowa frontendu mountaincar.is i system zarządzania flotą, z którego korzysta wypożyczalnia (zob. Wybrane projekty).",
+          "Sieć 9 lokalnych firm partnerskich z wzajemnymi zniżkami.",
         ],
       },
       {
@@ -276,8 +291,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
         loc: "Zdalnie",
         dates: "2025",
         bullets: [
-          "Budowa Higher Mind (kamiljan.com/claude), otwartego meta-systemu do tworzenia oprogramowania z AI: agenci AI do kodowania pracują jak niewielki zespół, z bramkami jakości, agentami recenzującymi i kontrolami blokującymi złą zmianę przed wdrożeniem.",
-          "Budowa systemów produkcyjnych z agentami AI piszącymi kod: specyfikacja, architektura, review, wdrożenie i utrzymanie.",
+          "Budowa systemów produkcyjnych z agentami AI piszącymi kod, dla własnych firm i dla klientów: specyfikacja, architektura, review, wdrożenie i utrzymanie.",
         ],
       },
       {
@@ -317,10 +331,9 @@ export const CV_CONTENT: Record<Lang, CV> = {
         dates: "2010–2026",
         bullets: [
           "MAS Prints (2026): pośrednik druku; marka, strona i kampanie Meta Ads pozyskujące leady.",
-          "Mountain Car Rental (2026): przebudowa frontendu mountaincar.is i sieć 9 lokalnych firm partnerskich.",
           "PK Campers (2025): marka, strona i kampanie Meta i Google Ads dla wypożyczalni kamperów.",
           "Afengisstofnun.is (2025): marka, strona, reklamy i strategia wejścia na rynek dla firmy degustacji whisky na Islandii.",
-          "Flyt (2023): marketplace transportu i importu grupowego.",
+          "Flyt (2023): założyciel flyt.is, marketplace'u frachtu i importu grupowego dla Islandii.",
           "QuickFix Iceland (2022): wielojęzyczna strona i lejek leadów dla marki usług „złotej rączki”, gotowe w 72 godziny.",
           "Krónan (2018): kierownik zmiany.",
           "mobilUP (2015): agencja marketingowa w Rzeszowie, właściciel.",
@@ -330,9 +343,27 @@ export const CV_CONTENT: Record<Lang, CV> = {
     ],
     projects: [
       {
+        role: "Higher Mind",
+        org: "open source, system jakości dla agentów AI piszących kod",
+        dates: "2026",
+        bullets: [
+          "Otwarty meta-system do tworzenia oprogramowania z AI (Claude Code): agenci AI piszący kod pracują jak niewielki zespół za bramkami jakości, hookami git, CI i agentami recenzującymi, które blokują złą zmianę przed wdrożeniem.",
+          "Każda bramka ma test dowodzący, że blokuje przypadek, przed którym ma chronić. Kod: github.com/kamiljan11/coding-higher-mind, opis: kamiljan.com/claude.",
+        ],
+      },
+      {
+        role: "MAS Warsztat, aplikacja do zarządzania warsztatem",
+        org: "produkt własny",
+        loc: "Na produkcji w działającym warsztacie",
+        dates: "2026",
+        bullets: [
+          "Wyceny, kalendarz, SMS i akceptacja napraw przez klienta ze zdjęciami w jednej aplikacji, obsługiwanej z telefonu przy aucie; osobne role dla właściciela, admina, mechanika i klienta.",
+          "Asystent AI odpowiada na podstawie danych warsztatu: czasy pracy z zamkniętych zleceń, a sam kod błędu lub numer rejestracyjny trafia do bazy 12 857 kodów bez wywołania modelu. React, TypeScript, Supabase, Claude, Twilio.",
+        ],
+      },
+      {
         role: "System zarządzania flotą",
         org: "Mountain Car Rental",
-        loc: "Islandia",
         dates: "2026",
         bullets: [
           "System rezerwacji, umów i alertów dla floty wypożyczalni na Islandii, zastępujący płatny system bez eksportu i API. React, TypeScript, Supabase, Vercel.",
@@ -341,11 +372,10 @@ export const CV_CONTENT: Record<Lang, CV> = {
       },
       {
         role: "claude-autoshutdown",
-        org: "open source, licencja MIT",
-        loc: "Narzędzie open source",
+        org: "open source, narzędzie na Windows, licencja MIT",
         dates: "2026",
         bullets: [
-          "Narzędzie wyłączające komputer dopiero po zakończeniu każdej sesji Claude Code i jej subagentów, na podstawie rzeczywistego stanu agentów, a nie czasu bezczynności.",
+          "Wyłączanie komputera dopiero po zakończeniu każdej sesji Claude Code i jej subagentów, na podstawie rzeczywistego stanu agentów, a nie czasu bezczynności. Kod: github.com/kamiljan11/claude-autoshutdown.",
         ],
       },
     ],
