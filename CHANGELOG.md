@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /cv: the generic "Applied AI Engineer · Independent" entry is removed. It listed methods (Claude API, n8n, MCP, Twilio) without saying for whom or what was built, and every concrete fact in it already sits in a named entry (MAS Parts, MAS Warsztat, Higher Mind, Ekomoc); the methods stay in Core skills. Same change in the PDF CV.
+
 - /cv: one "Interests" / "Zainteresowania" line under Languages & other: author of the guidebook The Simplified Practical Spirituality, certified 200-hour yoga teacher (YogaRenew, certificate confirmed by Kamil 2026-11-12), developed the Dynamic Meditation Technique drawing on traditional practices (a technique, not a therapy), philosophy and healthy living.
 
 - /cv: links. Company names (CetusPro, Mountain Car Rental, MAS Parts, Reykjawwwik) and project names (Higher Mind, MAS Warsztat, claude-autoshutdown) link to their sites or public repos (`url` on `Job`); text uses the blog inline syntax `[label](https://…)` from `src/lib/inline.ts` for mountaincar.is, flyt.is, QuickFix, Afengisstofnun.is, GitHub and write-ups. Private repos (mountain-car-rental, ekomoc) are not linked. The summary now says Kamil created Higher Mind. `cv.test.ts` measures the visible text, so link markup does not count towards length.
