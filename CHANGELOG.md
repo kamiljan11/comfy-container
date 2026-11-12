@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /cv: new "Selected projects" / "Wybrane projekty" section (Mountain Car fleet manager, claude-autoshutdown) split out of Experience, as in the PDF CV. `projects` added to the CV type and the tests (same order in both languages, same bullet rules).
+
 - /cv: designed layout matching the PDF CV: navy header with round photo (`public/kamil-cv.webp`), summary box, skills grid, year column for experience, GitHub link in the contact block. Scoped with `.cv-pro` in `src/site.css` so /claude (same `.cv-paper` shell) is unchanged; print keeps the colours.
 
 - /cv: content replaced with the refreshed CV (EN + PL), 2026-11-12: role "AI Automation & Implementation Engineer", CetusPro first, MAS Warsztat / MAS Parts, Higher Mind, Mountain Car fleet manager, claude-autoshutdown, dates as start years (AI-coded systems from 2025), no OpenAI claims, no Learning section; education block hidden when empty. NextCar.is deliberately not listed (retracted claim, `claims.test.ts`). `src/data/cv.ts`, `src/routes/cv.tsx`, `src/data/cv.test.ts`.

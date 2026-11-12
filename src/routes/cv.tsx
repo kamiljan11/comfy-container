@@ -104,6 +104,26 @@ function CVPage() {
             ))}
           </section>
 
+          <section className="cv-sec">
+            <h2>{cv.sec.projects}</h2>
+            {cv.projects.map((e) => (
+              <div key={e.role + e.org} className="cv-job">
+                <div className="cv-job-dates">{e.dates}</div>
+                <div className="cv-job-main">
+                  <h3>
+                    {e.role} <span>· {e.org}</span>
+                  </h3>
+                  {e.loc && <p className="cv-job-loc">{e.loc}</p>}
+                  <ul className="cv-bullets">
+                    {e.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </section>
+
           {cv.education.length > 0 && (
             <section className="cv-sec">
               <h2>{cv.sec.education}</h2>
