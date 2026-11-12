@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /cv: links. Company names (CetusPro, Mountain Car Rental, MAS Parts, Reykjawwwik) and project names (Higher Mind, MAS Warsztat, claude-autoshutdown) link to their sites or public repos (`url` on `Job`); text uses the blog inline syntax `[label](https://…)` from `src/lib/inline.ts` for mountaincar.is, flyt.is, QuickFix, Afengisstofnun.is, GitHub and write-ups. Private repos (mountain-car-rental, ekomoc) are not linked. The summary now says Kamil created Higher Mind. `cv.test.ts` measures the visible text, so link markup does not count towards length.
+
 - /cv: categorisation fixed against Kamil's LinkedIn (experience and projects pages, 2026-11-12). MAS Warsztat was shown as a job ("Technical Lead · MAS Warsztat"); it is a project, so it moves to Selected projects and the real role "Technical Lead · Mountain Car Rental" returns to Experience. Mountain Car no longer appears twice (it was also in "Other ventures"). Higher Mind moves from a bullet under Independent to Selected projects. The fleet manager is titled as an app, not a job title, and claude-autoshutdown no longer repeats "open source" twice and says it is a Windows tool. Flyt is described as a venture Kamil founded.
 
 - /cv: new "Selected projects" / "Wybrane projekty" section (Mountain Car fleet manager, claude-autoshutdown) split out of Experience, as in the PDF CV. `projects` added to the CV type and the tests (same order in both languages, same bullet rules).

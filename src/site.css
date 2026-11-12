@@ -7901,3 +7901,15 @@ header[id] {
     color: #fff;
   }
 }
+.cv-pro .cv-body a {
+  color: var(--cv-blue);
+  text-decoration: underline;
+  text-decoration-color: rgba(10, 108, 214, 0.35);
+  text-underline-offset: 2px;
+}
+.cv-pro .cv-body a:hover {
+  text-decoration-color: currentColor;
+}
+.cv-pro .cv-job-main h3 a {
+  color: inherit;
+}
