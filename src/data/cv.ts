@@ -110,7 +110,6 @@ export const CV_CONTENT: Record<Lang, CV> = {
         dates: "2026",
         bullets: [
           "Own the technical side of a car and van rental: rebuilt the [mountaincar.is](https://mountaincar.is) front end and built the fleet manager app the rental runs on (see Selected projects).",
-          "Set up a network of 9 local partner businesses with reciprocal discounts.",
         ],
       },
       {
@@ -130,7 +129,9 @@ export const CV_CONTENT: Record<Lang, CV> = {
         loc: "Remote",
         dates: "2025",
         bullets: [
-          "Build production systems with AI coding agents writing the code, for own companies and for clients; own the spec, architecture, review, deployment and upkeep.",
+          "Put AI into the daily operations of own companies: order pipelines, lead handling and reporting, using the Claude API, n8n workflows and custom MCP servers.",
+          "Twilio status calls and SMS reminders running from live order and repair systems.",
+          "Document each system and train the non-technical team that runs it after handover.",
         ],
       },
       {
@@ -290,7 +291,6 @@ export const CV_CONTENT: Record<Lang, CV> = {
         dates: "2026",
         bullets: [
           "Odpowiedzialność za technologię wypożyczalni aut i dostawczaków: przebudowa frontendu [mountaincar.is](https://mountaincar.is) i system zarządzania flotą, z którego korzysta wypożyczalnia (zob. Wybrane projekty).",
-          "Sieć 9 lokalnych firm partnerskich z wzajemnymi zniżkami.",
         ],
       },
       {
@@ -310,7 +310,9 @@ export const CV_CONTENT: Record<Lang, CV> = {
         loc: "Zdalnie",
         dates: "2025",
         bullets: [
-          "Budowa systemów produkcyjnych z agentami AI piszącymi kod, dla własnych firm i dla klientów: specyfikacja, architektura, review, wdrożenie i utrzymanie.",
+          "Wdrażanie AI w codziennej pracy własnych firm: procesy zamówień, obsługa leadów i raportowanie, na API Claude, workflowach n8n i własnych serwerach MCP.",
+          "Połączenia statusowe i przypomnienia SMS przez Twilio, uruchamiane z działających systemów zamówień i napraw.",
+          "Dokumentacja każdego systemu i szkolenie nietechnicznego zespołu, który go obsługuje po przekazaniu.",
         ],
       },
       {
