@@ -28,6 +28,7 @@ export type CV = {
     summary: string;
     skills: string;
     experience: string;
+    projects: string;
     education: string;
     languages: string;
     openTo: string;
@@ -35,6 +36,7 @@ export type CV = {
   summary: string;
   skills: Labeled[];
   experience: Job[];
+  projects: Job[];
   education: Labeled[];
   languages: Labeled[];
   openTo: string;
@@ -49,6 +51,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
       summary: "Summary",
       skills: "Core skills",
       experience: "Experience",
+      projects: "Selected projects",
       education: "Learning & certifications",
       languages: "Languages & other",
       openTo: "Open to",
@@ -110,25 +113,6 @@ export const CV_CONTENT: Record<Lang, CV> = {
         ],
       },
       {
-        role: "Fleet manager",
-        org: "Mountain Car Rental",
-        loc: "Iceland",
-        dates: "2026",
-        bullets: [
-          "Booking, contract and alert system for a rental fleet in Iceland, replacing a paid system that had no export and no API. React, TypeScript, Supabase, Vercel.",
-          "Audited the data migration before go-live and found 32 of 82 calendar entries silently dropped, five of them live bookings. In daily use since July 2026.",
-        ],
-      },
-      {
-        role: "claude-autoshutdown",
-        org: "open source, MIT licence",
-        loc: "Open-source tool",
-        dates: "2026",
-        bullets: [
-          "Tool that shuts a computer down only after every Claude Code session and its subagents have finished, by reading each agent's real state instead of guessing from idle time.",
-        ],
-      },
-      {
         role: "Applied AI Engineer",
         org: "Independent",
         loc: "Remote",
@@ -186,6 +170,27 @@ export const CV_CONTENT: Record<Lang, CV> = {
         ],
       },
     ],
+    projects: [
+      {
+        role: "Fleet manager",
+        org: "Mountain Car Rental",
+        loc: "Iceland",
+        dates: "2026",
+        bullets: [
+          "Booking, contract and alert system for a rental fleet in Iceland, replacing a paid system that had no export and no API. React, TypeScript, Supabase, Vercel.",
+          "Audited the data migration before go-live and found 32 of 82 calendar entries silently dropped, five of them live bookings. In daily use since July 2026.",
+        ],
+      },
+      {
+        role: "claude-autoshutdown",
+        org: "open source, MIT licence",
+        loc: "Open-source tool",
+        dates: "2026",
+        bullets: [
+          "Tool that shuts a computer down only after every Claude Code session and its subagents have finished, by reading each agent's real state instead of guessing from idle time.",
+        ],
+      },
+    ],
     education: [],
     languages: [
       { label: "Languages:", body: "Polish (native); English (C1)." },
@@ -204,6 +209,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
       summary: "Podsumowanie",
       skills: "Kluczowe umiejętności",
       experience: "Doświadczenie",
+      projects: "Wybrane projekty",
       education: "Nauka i certyfikaty",
       languages: "Języki i inne",
       openTo: "Otwarty na",
@@ -265,25 +271,6 @@ export const CV_CONTENT: Record<Lang, CV> = {
         ],
       },
       {
-        role: "System zarządzania flotą",
-        org: "Mountain Car Rental",
-        loc: "Islandia",
-        dates: "2026",
-        bullets: [
-          "System rezerwacji, umów i alertów dla floty wypożyczalni na Islandii, zastępujący płatny system bez eksportu i API. React, TypeScript, Supabase, Vercel.",
-          "Audyt migracji danych przed uruchomieniem: wykrycie 32 z 82 wpisów kalendarza utraconych po cichu, w tym pięciu realnych rezerwacji. W codziennym użyciu od lipca 2026.",
-        ],
-      },
-      {
-        role: "claude-autoshutdown",
-        org: "open source, licencja MIT",
-        loc: "Narzędzie open source",
-        dates: "2026",
-        bullets: [
-          "Narzędzie wyłączające komputer dopiero po zakończeniu każdej sesji Claude Code i jej subagentów, na podstawie rzeczywistego stanu agentów, a nie czasu bezczynności.",
-        ],
-      },
-      {
         role: "Applied AI Engineer",
         org: "Działalność własna",
         loc: "Zdalnie",
@@ -338,6 +325,27 @@ export const CV_CONTENT: Record<Lang, CV> = {
           "Krónan (2018): kierownik zmiany.",
           "mobilUP (2015): agencja marketingowa w Rzeszowie, właściciel.",
           "MySpiritWay (2010): marka contentowa i społeczność, dwie wydane książki i wydarzenia na żywo dla grup 100+.",
+        ],
+      },
+    ],
+    projects: [
+      {
+        role: "System zarządzania flotą",
+        org: "Mountain Car Rental",
+        loc: "Islandia",
+        dates: "2026",
+        bullets: [
+          "System rezerwacji, umów i alertów dla floty wypożyczalni na Islandii, zastępujący płatny system bez eksportu i API. React, TypeScript, Supabase, Vercel.",
+          "Audyt migracji danych przed uruchomieniem: wykrycie 32 z 82 wpisów kalendarza utraconych po cichu, w tym pięciu realnych rezerwacji. W codziennym użyciu od lipca 2026.",
+        ],
+      },
+      {
+        role: "claude-autoshutdown",
+        org: "open source, licencja MIT",
+        loc: "Narzędzie open source",
+        dates: "2026",
+        bullets: [
+          "Narzędzie wyłączające komputer dopiero po zakończeniu każdej sesji Claude Code i jej subagentów, na podstawie rzeczywistego stanu agentów, a nie czasu bezczynności.",
         ],
       },
     ],

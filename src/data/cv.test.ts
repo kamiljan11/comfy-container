@@ -7,7 +7,8 @@ import { CV_CONTENT } from "./cv";
 const pl = CV_CONTENT.pl;
 const en = CV_CONTENT.en;
 
-const bullets = (lang: "pl" | "en") => CV_CONTENT[lang].experience.flatMap((j) => j.bullets);
+const bullets = (lang: "pl" | "en") =>
+  [...CV_CONTENT[lang].experience, ...CV_CONTENT[lang].projects].flatMap((j) => j.bullets);
 const allText = (lang: "pl" | "en") => {
   const c = CV_CONTENT[lang];
   return [
@@ -81,6 +82,12 @@ describe("both languages", () => {
       expect(c.experience[0]?.org).toBe("CetusPro");
     });
   }
+
+  it("has the same projects in the same order in both languages", () => {
+    expect(pl.projects.map((j) => j.org.split(",")[0])).toEqual(
+      en.projects.map((j) => j.org.split(",")[0]),
+    );
+  });
 
   it("has the same roles in the same order in both languages", () => {
     expect(pl.experience.map((j) => j.org.split(",")[0])).toEqual(
