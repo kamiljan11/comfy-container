@@ -40,6 +40,8 @@ const PL_NOT_VERBS = new Set([
   "zespół",
   "wokół",
   "skilli",
+  "cło",
+  "reguł",
 ]);
 
 describe("Polish CV", () => {
@@ -96,7 +98,13 @@ describe("both languages", () => {
     expect(pl.projects.map((j) => j.org.split(",")[0])).toEqual(
       en.projects
         .map((j) => j.org.split(",")[0])
-        .map((o) => (o === "own product" ? "produkt własny" : o)),
+        .map((o) =>
+          o === "own product"
+            ? "produkt własny"
+            : o === "own venture"
+              ? "własne przedsięwzięcie"
+              : o,
+        ),
     );
   });
 

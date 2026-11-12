@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- /cv: Flyt moves from a one-line bullet in "Other ventures" to a Selected project that says what is technical about it: the freight exchange (carriers bid on a posted delivery), group import with deposit-and-refund rules modelled as a Postgres state machine, per-category landed-cost quoting and the admin dashboard, with a link to the case study. Facts taken from the Flyt case study on this site and LinkedIn. The CV photo is cut from the full-resolution portrait (`kamil-suit.png`) instead of an upscaled small file, so it is sharp.
+
 - /cv: the generic "Applied AI Engineer · Independent" entry is removed. It listed methods (Claude API, n8n, MCP, Twilio) without saying for whom or what was built, and every concrete fact in it already sits in a named entry (MAS Parts, MAS Warsztat, Higher Mind, Ekomoc); the methods stay in Core skills. Same change in the PDF CV.
 
 - /cv: one "Interests" / "Zainteresowania" line under Languages & other: author of the guidebook The Simplified Practical Spirituality, certified 200-hour yoga teacher (YogaRenew, certificate confirmed by Kamil 2026-11-12), developed the Dynamic Meditation Technique drawing on traditional practices (a technique, not a therapy), philosophy and healthy living.
