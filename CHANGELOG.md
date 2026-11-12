@@ -4,6 +4,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), wersjonowanie:
 Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wersji z data.
 
 ## [Unreleased]
+- /cv: Flyt is dated 2024 instead of 2023 (EN, PL and the PDF CV).
+
 
 - /cv: Flyt moves from a one-line bullet in "Other ventures" to a Selected project that says what is technical about it: the freight exchange (carriers bid on a posted delivery), group import with deposit-and-refund rules modelled as a Postgres state machine, per-category landed-cost quoting and the admin dashboard, with a link to the case study. Facts taken from the Flyt case study on this site and LinkedIn. The CV photo is cut from the full-resolution portrait (`kamil-suit.png`) instead of an upscaled small file, so it is sharp.
 

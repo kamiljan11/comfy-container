@@ -215,7 +215,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
         org: "own venture, flyt.is",
         url: "https://flyt.is",
         loc: "Live, built solo",
-        dates: "2023",
+        dates: "2024",
         bullets: [
           "Freight exchange: a customer posts a delivery, verified carriers bid, the customer picks an offer. Real competing prices instead of one fixed rate card.",
           "Group import: buyers pool into one shared container under a deposit-and-refund rule modelled as a Postgres state machine (campaign, slot, deposit); a campaign that does not fill refunds every deposit automatically, with no double charge.",
@@ -400,7 +400,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
         org: "własne przedsięwzięcie, flyt.is",
         url: "https://flyt.is",
         loc: "Działa, zbudowany samodzielnie",
-        dates: "2023",
+        dates: "2024",
         bullets: [
           "Giełda transportowa: klient publikuje przesyłkę, zweryfikowani przewoźnicy licytują, klient wybiera ofertę. Realne, konkurencyjne ceny zamiast jednego sztywnego cennika.",
           "Import grupowy: kupujący łączą się w jeden kontener na zasadzie depozytu ze zwrotem, zapisanej jako maszyna stanów w Postgresie (kampania, miejsce, depozyt); niezapełniona kampania automatycznie zwraca każdy depozyt, bez podwójnego obciążenia.",
