@@ -226,7 +226,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
     education: [],
     languages: [
       { label: "Languages:", body: "Polish (native); English (C1)." },
-      { label: "Work eligibility:", body: "Polish citizen living in Iceland." },
+      { label: "Citizenship:", body: "Polish, living in Iceland." },
       { label: "Driving licence:", body: "B." },
     ],
     openTo:
@@ -408,8 +408,8 @@ export const CV_CONTENT: Record<Lang, CV> = {
     languages: [
       { label: "Języki:", body: "polski (ojczysty); angielski (C1)." },
       {
-        label: "Prawo do pracy:",
-        body: "obywatel Polski mieszkający na Islandii.",
+        label: "Obywatelstwo:",
+        body: "polskie, zamieszkanie na Islandii.",
       },
       { label: "Prawo jazdy:", body: "kat. B." },
     ],
