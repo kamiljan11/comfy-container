@@ -17,7 +17,15 @@ import { type Lang } from "../i18n";
  * years only. Refreshed 2026-11-12 from the CV he sent out (projects from LinkedIn).
  */
 
-export type Job = { role: string; org: string; loc?: string; dates: string; bullets: string[] };
+/** `url` links the entry title; text may use the blog inline syntax [label](https://…) (src/lib/inline.ts). */
+export type Job = {
+  role: string;
+  org: string;
+  url?: string;
+  loc?: string;
+  dates: string;
+  bullets: string[];
+};
 export type Labeled = { label: string; body: string };
 
 export type CV = {
@@ -58,11 +66,12 @@ export const CV_CONTENT: Record<Lang, CV> = {
     },
     summary:
       "AI automation and implementation engineer. Ships AI systems into production for small and " +
-      "mid-sized companies, then trains the team that runs them. Works with AI coding agents through " +
-      "Higher Mind, an open-source meta-system for building software with AI (quality gates and reviewer " +
-      "agents that check the agents' work), while owning the spec, architecture, review, deployment and " +
-      "client support. Background in sales and marketing: ran a marketing agency in Poland, then moved to " +
-      "Iceland, where the systems below run in real businesses. Looking for a full-time role in a team.",
+      "mid-sized companies, then trains the team that runs them. Created [Higher Mind](https://kamiljan.com/claude), " +
+      "an open-source meta-system for building software with AI (quality gates and reviewer agents " +
+      "check the agents' work), and works with AI coding agents through it, owning the spec, " +
+      "architecture, review, deployment and client support. Background in sales and marketing: ran a " +
+      "marketing agency in Poland, then moved to Iceland, where the systems below run in real " +
+      "businesses. Looking for a full-time role in a team.",
     skills: [
       {
         label: "AI & automation:",
@@ -85,6 +94,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "AI Automation Engineer",
         org: "CetusPro",
+        url: "https://cetuspro.com",
         loc: "Rzeszów, Poland · hybrid, contract",
         dates: "2026",
         bullets: [
@@ -95,16 +105,17 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "Technical Lead",
         org: "Mountain Car Rental",
+        url: "https://mountaincar.is",
         loc: "Iceland · hybrid",
         dates: "2026",
         bullets: [
-          "Own the technical side of a car and van rental: rebuilt the mountaincar.is front end and built the fleet manager app the rental runs on (see Selected projects).",
-          "Set up a network of 9 local partner businesses with reciprocal discounts.",
+          "Own the technical side of a car and van rental: rebuilt the [mountaincar.is](https://mountaincar.is) front end and built the fleet manager app the rental runs on (see Selected projects).",
         ],
       },
       {
         role: "Systems Architect",
         org: "MAS Parts",
+        url: "https://masparts.is",
         loc: "Iceland · hybrid",
         dates: "2026",
         bullets: [
@@ -118,7 +129,9 @@ export const CV_CONTENT: Record<Lang, CV> = {
         loc: "Remote",
         dates: "2025",
         bullets: [
-          "Build production systems with AI coding agents writing the code, for own companies and for clients; own the spec, architecture, review, deployment and upkeep.",
+          "Put AI into the daily operations of own companies: order pipelines, lead handling and reporting, using the Claude API, n8n workflows and custom MCP servers.",
+          "Twilio status calls and SMS reminders running from live order and repair systems.",
+          "Document each system and train the non-technical team that runs it after handover.",
         ],
       },
       {
@@ -134,6 +147,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "Product Lead",
         org: "Reykjawwwik, web & design agency",
+        url: "https://reykjawwwik.is",
         loc: "Remote / Iceland",
         dates: "2023",
         bullets: [
@@ -159,9 +173,9 @@ export const CV_CONTENT: Record<Lang, CV> = {
         bullets: [
           "MAS Prints (2026): print brokerage; brand, website and Meta Ads lead generation.",
           "PK Campers (2025): brand, website and Meta and Google Ads for a camper-rental company.",
-          "Afengisstofnun.is (2025): brand, website, ads and go-to-market for a whisky-sampling business in Iceland.",
-          "Flyt (2023): founder of flyt.is, a freight and group-import marketplace for Iceland.",
-          "QuickFix Iceland (2022): multilingual site and lead funnel for a handyman brand, live in 72 hours.",
+          "[Afengisstofnun.is](https://afengisstofnun.is) (2025): brand, website, ads and go-to-market for a whisky-sampling business in Iceland.",
+          "Flyt (2023): founder of [flyt.is](https://flyt.is), a freight and group-import marketplace for Iceland.",
+          "[QuickFix Iceland](https://quickfix.is) (2022): multilingual site and lead funnel for a handyman brand, live in 72 hours.",
           "Krónan (2018): shift manager.",
           "mobilUP (2015): marketing agency in Rzeszów, owner.",
           "MySpiritWay (2010): content and community brand with two published books and live events for groups of 100+.",
@@ -172,15 +186,17 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "Higher Mind",
         org: "open source, quality system for AI coding agents",
+        url: "https://kamiljan.com/claude",
         dates: "2026",
         bullets: [
           "Open-source meta-system for building software with AI (Claude Code): coding agents work like a small team behind quality gates, git hooks, CI and reviewer agents that block a bad change before it ships.",
-          "Every gate has a test proving it blocks the case it was built for. Code: github.com/kamiljan11/coding-higher-mind, write-up: kamiljan.com/claude.",
+          "Every gate has a test proving it blocks the case it was built for. [Code on GitHub](https://github.com/kamiljan11/coding-higher-mind), [write-up](https://kamiljan.com/claude).",
         ],
       },
       {
         role: "MAS Warsztat, workshop management app",
         org: "own product",
+        url: "https://github.com/kamiljan11/mas-warsztat",
         loc: "In production at a working repair shop",
         dates: "2026",
         bullets: [
@@ -200,16 +216,17 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "claude-autoshutdown",
         org: "open source, Windows tool, MIT licence",
+        url: "https://github.com/kamiljan11/claude-autoshutdown",
         dates: "2026",
         bullets: [
-          "Shuts the computer down only after every Claude Code session and its subagents have finished, reading each agent's real state instead of guessing from idle time. Code: github.com/kamiljan11/claude-autoshutdown.",
+          "Shuts the computer down only after every Claude Code session and its subagents have finished, reading each agent's real state instead of guessing from idle time. [Code on GitHub](https://github.com/kamiljan11/claude-autoshutdown), [write-up](https://kamiljan.com/blog/claude-autoshutdown).",
         ],
       },
     ],
     education: [],
     languages: [
       { label: "Languages:", body: "Polish (native); English (C1)." },
-      { label: "Work eligibility:", body: "Polish citizen living in Iceland, EEA right to work." },
+      { label: "Citizenship:", body: "Polish, living in Iceland." },
       { label: "Driving licence:", body: "B." },
     ],
     openTo:
@@ -232,7 +249,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
     summary:
       "Inżynier automatyzacji i wdrożeń AI. Wdrażanie systemów AI na produkcję w niewielkich i średnich " +
       "firmach, a potem szkolenie zespołu, który je obsługuje. Praca z agentami AI piszącymi kod przez " +
-      "Higher Mind, otwarty meta-system do tworzenia oprogramowania z AI (bramki jakości i agenci " +
+      "[Higher Mind](https://kamiljan.com/claude), otwarty meta-system własnego autorstwa do tworzenia oprogramowania z AI (bramki jakości i agenci " +
       "recenzujący sprawdzają pracę agentów), przy pełnej odpowiedzialności za specyfikację, architekturę, " +
       "review, wdrożenie i wsparcie klienta. Doświadczenie w sprzedaży i marketingu: własna agencja " +
       "marketingowa w Polsce, potem Islandia. Cel: praca na etacie w zespole.",
@@ -258,6 +275,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "AI Automation Engineer",
         org: "CetusPro",
+        url: "https://cetuspro.com",
         loc: "Rzeszów · hybrydowo, kontrakt",
         dates: "2026",
         bullets: [
@@ -268,16 +286,17 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "Technical Lead",
         org: "Mountain Car Rental",
+        url: "https://mountaincar.is",
         loc: "Islandia · hybrydowo",
         dates: "2026",
         bullets: [
-          "Odpowiedzialność za technologię wypożyczalni aut i dostawczaków: przebudowa frontendu mountaincar.is i system zarządzania flotą, z którego korzysta wypożyczalnia (zob. Wybrane projekty).",
-          "Sieć 9 lokalnych firm partnerskich z wzajemnymi zniżkami.",
+          "Odpowiedzialność za technologię wypożyczalni aut i dostawczaków: przebudowa frontendu [mountaincar.is](https://mountaincar.is) i system zarządzania flotą, z którego korzysta wypożyczalnia (zob. Wybrane projekty).",
         ],
       },
       {
         role: "Systems Architect",
         org: "MAS Parts",
+        url: "https://masparts.is",
         loc: "Islandia · hybrydowo",
         dates: "2026",
         bullets: [
@@ -291,7 +310,9 @@ export const CV_CONTENT: Record<Lang, CV> = {
         loc: "Zdalnie",
         dates: "2025",
         bullets: [
-          "Budowa systemów produkcyjnych z agentami AI piszącymi kod, dla własnych firm i dla klientów: specyfikacja, architektura, review, wdrożenie i utrzymanie.",
+          "Wdrażanie AI w codziennej pracy własnych firm: procesy zamówień, obsługa leadów i raportowanie, na API Claude, workflowach n8n i własnych serwerach MCP.",
+          "Połączenia statusowe i przypomnienia SMS przez Twilio, uruchamiane z działających systemów zamówień i napraw.",
+          "Dokumentacja każdego systemu i szkolenie nietechnicznego zespołu, który go obsługuje po przekazaniu.",
         ],
       },
       {
@@ -307,6 +328,7 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "Product Lead",
         org: "Reykjawwwik, agencja web & design",
+        url: "https://reykjawwwik.is",
         loc: "Zdalnie / Islandia",
         dates: "2023",
         bullets: [
@@ -332,9 +354,9 @@ export const CV_CONTENT: Record<Lang, CV> = {
         bullets: [
           "MAS Prints (2026): pośrednik druku; marka, strona i kampanie Meta Ads pozyskujące leady.",
           "PK Campers (2025): marka, strona i kampanie Meta i Google Ads dla wypożyczalni kamperów.",
-          "Afengisstofnun.is (2025): marka, strona, reklamy i strategia wejścia na rynek dla firmy degustacji whisky na Islandii.",
-          "Flyt (2023): założyciel flyt.is, marketplace'u frachtu i importu grupowego dla Islandii.",
-          "QuickFix Iceland (2022): wielojęzyczna strona i lejek leadów dla marki usług „złotej rączki”, gotowe w 72 godziny.",
+          "[Afengisstofnun.is](https://afengisstofnun.is) (2025): marka, strona, reklamy i strategia wejścia na rynek dla firmy degustacji whisky na Islandii.",
+          "Flyt (2023): założyciel [flyt.is](https://flyt.is), marketplace'u frachtu i importu grupowego dla Islandii.",
+          "[QuickFix Iceland](https://quickfix.is) (2022): wielojęzyczna strona i lejek leadów dla marki usług „złotej rączki”, gotowe w 72 godziny.",
           "Krónan (2018): kierownik zmiany.",
           "mobilUP (2015): agencja marketingowa w Rzeszowie, właściciel.",
           "MySpiritWay (2010): marka contentowa i społeczność, dwie wydane książki i wydarzenia na żywo dla grup 100+.",
@@ -345,15 +367,17 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "Higher Mind",
         org: "open source, system jakości dla agentów AI piszących kod",
+        url: "https://kamiljan.com/claude",
         dates: "2026",
         bullets: [
           "Otwarty meta-system do tworzenia oprogramowania z AI (Claude Code): agenci AI piszący kod pracują jak niewielki zespół za bramkami jakości, hookami git, CI i agentami recenzującymi, które blokują złą zmianę przed wdrożeniem.",
-          "Każda bramka ma test dowodzący, że blokuje przypadek, przed którym ma chronić. Kod: github.com/kamiljan11/coding-higher-mind, opis: kamiljan.com/claude.",
+          "Każda bramka ma test dowodzący, że blokuje przypadek, przed którym ma chronić. [Kod na GitHubie](https://github.com/kamiljan11/coding-higher-mind), [opis](https://kamiljan.com/claude).",
         ],
       },
       {
         role: "MAS Warsztat, aplikacja do zarządzania warsztatem",
         org: "produkt własny",
+        url: "https://github.com/kamiljan11/mas-warsztat",
         loc: "Na produkcji w działającym warsztacie",
         dates: "2026",
         bullets: [
@@ -373,9 +397,10 @@ export const CV_CONTENT: Record<Lang, CV> = {
       {
         role: "claude-autoshutdown",
         org: "open source, narzędzie na Windows, licencja MIT",
+        url: "https://github.com/kamiljan11/claude-autoshutdown",
         dates: "2026",
         bullets: [
-          "Wyłączanie komputera dopiero po zakończeniu każdej sesji Claude Code i jej subagentów, na podstawie rzeczywistego stanu agentów, a nie czasu bezczynności. Kod: github.com/kamiljan11/claude-autoshutdown.",
+          "Wyłączanie komputera dopiero po zakończeniu każdej sesji Claude Code i jej subagentów, na podstawie rzeczywistego stanu agentów, a nie czasu bezczynności. [Kod na GitHubie](https://github.com/kamiljan11/claude-autoshutdown), [opis](https://kamiljan.com/blog/claude-autoshutdown).",
         ],
       },
     ],
@@ -383,8 +408,8 @@ export const CV_CONTENT: Record<Lang, CV> = {
     languages: [
       { label: "Języki:", body: "polski (ojczysty); angielski (C1)." },
       {
-        label: "Prawo do pracy:",
-        body: "obywatel Polski mieszkający na Islandii, prawo do pracy w EOG.",
+        label: "Obywatelstwo:",
+        body: "polskie, zamieszkanie na Islandii.",
       },
       { label: "Prawo jazdy:", body: "kat. B." },
     ],

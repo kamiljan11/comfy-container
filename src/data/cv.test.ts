@@ -3,16 +3,25 @@
 // keyword soup in skills, or lines Kamil asked to drop.
 import { describe, expect, it } from "vitest";
 import { CV_CONTENT } from "./cv";
+import { inlineSegments } from "../lib/inline";
+
+/** What a reader sees: link markup [label](url) counts as its label only. */
+const visible = (t: string) =>
+  inlineSegments(t)
+    .map((s) => s.text)
+    .join("");
 
 const pl = CV_CONTENT.pl;
 const en = CV_CONTENT.en;
 
 const bullets = (lang: "pl" | "en") =>
-  [...CV_CONTENT[lang].experience, ...CV_CONTENT[lang].projects].flatMap((j) => j.bullets);
+  [...CV_CONTENT[lang].experience, ...CV_CONTENT[lang].projects]
+    .flatMap((j) => j.bullets)
+    .map(visible);
 const allText = (lang: "pl" | "en") => {
   const c = CV_CONTENT[lang];
   return [
-    c.summary,
+    visible(c.summary),
     ...c.skills.map((s) => s.body),
     ...bullets(lang),
     ...c.education.map((s) => s.body),
@@ -42,7 +51,7 @@ describe("Polish CV", () => {
   });
 
   it("keeps the summary short", () => {
-    const words = pl.summary.split(/\s+/).length;
+    const words = visible(pl.summary).split(/\s+/).length;
     expect(words).toBeGreaterThanOrEqual(40);
     expect(words).toBeLessThanOrEqual(90);
   });
@@ -54,7 +63,7 @@ describe("English CV", () => {
   });
 
   it("keeps the summary short", () => {
-    const words = en.summary.split(/\s+/).length;
+    const words = visible(en.summary).split(/\s+/).length;
     expect(words).toBeGreaterThanOrEqual(40);
     expect(words).toBeLessThanOrEqual(90);
   });

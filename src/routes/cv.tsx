@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useLang } from "../hooks/useLang";
-import { CV_CONTENT } from "../data/cv";
+import { CV_CONTENT, type Job } from "../data/cv";
+import { inlineSegments } from "../lib/inline";
 import { pageMeta } from "../lib/seo";
 
 export const Route = createFileRoute("/cv")({
@@ -17,6 +18,43 @@ export const Route = createFileRoute("/cv")({
   }),
   component: CVPage,
 });
+
+/** CV text with [label](https://…) links rendered as anchors (src/lib/inline.ts). */
+function Inline({ text }: { text: string }) {
+  return (
+    <>
+      {inlineSegments(text).map((s, i) =>
+        s.kind === "link" ? (
+          <a key={i} href={s.href} target="_blank" rel="noreferrer">
+            {s.text}
+          </a>
+        ) : s.kind === "bold" ? (
+          <b key={i}>{s.text}</b>
+        ) : (
+          <span key={i}>{s.text}</span>
+        ),
+      )}
+    </>
+  );
+}
+
+/** Links the job title: the org for a role, the name for a project. */
+function JobTitle({ job, linkOn }: { job: Job; linkOn: "org" | "role" }) {
+  const link = (t: string) =>
+    job.url ? (
+      <a href={job.url} target="_blank" rel="noreferrer">
+        {t}
+      </a>
+    ) : (
+      t
+    );
+  return (
+    <h3>
+      {linkOn === "role" ? link(job.role) : job.role}{" "}
+      <span>· {linkOn === "org" ? link(job.org) : job.org}</span>
+    </h3>
+  );
+}
 
 function CVPage() {
   const [lang] = useLang("en");
@@ -70,7 +108,9 @@ function CVPage() {
         <div className="cv-body">
           <section className="cv-sec">
             <h2>{cv.sec.summary}</h2>
-            <p className="cv-summary">{cv.summary}</p>
+            <p className="cv-summary">
+              <Inline text={cv.summary} />
+            </p>
           </section>
 
           <section className="cv-sec">
@@ -90,13 +130,13 @@ function CVPage() {
               <div key={e.role + e.org} className="cv-job">
                 <div className="cv-job-dates">{e.dates}</div>
                 <div className="cv-job-main">
-                  <h3>
-                    {e.role} <span>· {e.org}</span>
-                  </h3>
+                  <JobTitle job={e} linkOn="org" />
                   {e.loc && <p className="cv-job-loc">{e.loc}</p>}
                   <ul className="cv-bullets">
                     {e.bullets.map((b, i) => (
-                      <li key={i}>{b}</li>
+                      <li key={i}>
+                        <Inline text={b} />
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -110,13 +150,13 @@ function CVPage() {
               <div key={e.role + e.org} className="cv-job">
                 <div className="cv-job-dates">{e.dates}</div>
                 <div className="cv-job-main">
-                  <h3>
-                    {e.role} <span>· {e.org}</span>
-                  </h3>
+                  <JobTitle job={e} linkOn="role" />
                   {e.loc && <p className="cv-job-loc">{e.loc}</p>}
                   <ul className="cv-bullets">
                     {e.bullets.map((b, i) => (
-                      <li key={i}>{b}</li>
+                      <li key={i}>
+                        <Inline text={b} />
+                      </li>
                     ))}
                   </ul>
                 </div>
