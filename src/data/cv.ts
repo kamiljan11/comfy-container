@@ -124,17 +124,6 @@ export const CV_CONTENT: Record<Lang, CV> = {
         ],
       },
       {
-        role: "Applied AI Engineer",
-        org: "Independent",
-        loc: "Remote",
-        dates: "2025",
-        bullets: [
-          "Put AI into the daily operations of own companies: order pipelines, lead handling and reporting, using the Claude API, n8n workflows and custom MCP servers.",
-          "Twilio status calls and SMS reminders running from live order and repair systems.",
-          "Document each system and train the non-technical team that runs it after handover.",
-        ],
-      },
-      {
         role: "Full-Stack Developer",
         org: "Ekomoc, freelance",
         loc: "Remote",
@@ -306,17 +295,6 @@ export const CV_CONTENT: Record<Lang, CV> = {
         bullets: [
           "Budowa platformy operacyjnej B2B: kalkulatory cen dla linii produktów, 13-etapowy proces od oferty do zamówienia, prowizje, dostęp według ról. Zespół sprzedaży korzysta z niej w terenie jako z aplikacji mobilnej.",
           "System zamówień (Google Apps Script, Twilio, e-mail) prowadzący 16-etapowy proces logistyczny: przypomnienia SMS, śledzenie statusu, powiadomienia zespołów w Polsce i na Islandii.",
-        ],
-      },
-      {
-        role: "Applied AI Engineer",
-        org: "Działalność własna",
-        loc: "Zdalnie",
-        dates: "2025",
-        bullets: [
-          "Wdrażanie AI w codziennej pracy własnych firm: procesy zamówień, obsługa leadów i raportowanie, na API Claude, workflowach n8n i własnych serwerach MCP.",
-          "Połączenia statusowe i przypomnienia SMS przez Twilio, uruchamiane z działających systemów zamówień i napraw.",
-          "Dokumentacja każdego systemu i szkolenie nietechnicznego zespołu, który go obsługuje po przekazaniu.",
         ],
       },
       {

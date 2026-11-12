@@ -104,13 +104,7 @@ describe("both languages", () => {
     expect(pl.experience.map((j) => j.org.split(",")[0])).toEqual(
       en.experience
         .map((j) => j.org.split(",")[0])
-        .map((o) =>
-          o === "Independent"
-            ? "Działalność własna"
-            : o === "Poland & Iceland"
-              ? "Polska i Islandia"
-              : o,
-        ),
+        .map((o) => (o === "Poland & Iceland" ? "Polska i Islandia" : o)),
     );
   });
 });
