@@ -228,6 +228,10 @@ export const CV_CONTENT: Record<Lang, CV> = {
       { label: "Languages:", body: "Polish (native); English (C1)." },
       { label: "Citizenship:", body: "Polish, living in Iceland." },
       { label: "Driving licence:", body: "B." },
+      {
+        label: "Interests:",
+        body: "author of the guidebook The Simplified Practical Spirituality; certified 200-hour yoga teacher (YogaRenew); developed the Dynamic Meditation Technique, drawing on traditional practices; philosophy and healthy living.",
+      },
     ],
     openTo:
       "AI automation & implementation engineer · AI integration engineer · AI engineer · AI solutions engineer.",
@@ -412,6 +416,10 @@ export const CV_CONTENT: Record<Lang, CV> = {
         body: "polskie, zamieszkanie na Islandii.",
       },
       { label: "Prawo jazdy:", body: "kat. B." },
+      {
+        label: "Zainteresowania:",
+        body: "autor poradnika The Simplified Practical Spirituality; certyfikowany nauczyciel jogi (200 godzin, YogaRenew); autor Dynamic Meditation Technique, opartej na tradycyjnych praktykach; filozofia i zdrowy styl życia.",
+      },
     ],
     openTo:
       "Inżynier automatyzacji i wdrożeń AI · inżynier integracji AI · inżynier AI · inżynier rozwiązań AI.",
