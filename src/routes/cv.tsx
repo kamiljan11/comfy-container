@@ -9,7 +9,7 @@ export const Route = createFileRoute("/cv")({
       ...pageMeta({
         title: "Kamil Jan Włodarczyk | CV",
         description:
-          "CV of Kamil Jan Włodarczyk, AI automation & implementation engineer, builder and operator. Reykjavík, remote-first.",
+          "CV of Kamil Jan Włodarczyk, AI automation & implementation engineer. Reykjavík, Iceland.",
         url: "https://kamiljan.com/cv",
       }),
     ],
@@ -90,16 +90,18 @@ function CVPage() {
           ))}
         </section>
 
-        <section className="cv-sec">
-          <h2>{cv.sec.education}</h2>
-          <ul className="cv-list">
-            {cv.education.map((s, i) => (
-              <li key={i}>
-                <b>{s.label}</b> {s.body}
-              </li>
-            ))}
-          </ul>
-        </section>
+        {cv.education.length > 0 && (
+          <section className="cv-sec">
+            <h2>{cv.sec.education}</h2>
+            <ul className="cv-list">
+              {cv.education.map((s, i) => (
+                <li key={i}>
+                  <b>{s.label}</b> {s.body}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section className="cv-sec">
           <h2>{cv.sec.languages}</h2>

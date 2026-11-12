@@ -77,8 +77,8 @@ describe("both languages", () => {
       );
     });
 
-    it(`${lang}: lists Cetus Pro first, as the current role`, () => {
-      expect(c.experience[0]?.org).toBe("Cetus Pro");
+    it(`${lang}: lists CetusPro first, as the current role`, () => {
+      expect(c.experience[0]?.org).toBe("CetusPro");
     });
   }
 
