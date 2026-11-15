@@ -386,7 +386,7 @@ export const en: Content = {
         },
         {
           label: "A context window chosen on purpose:",
-          body: "Claude can hold a million tokens, but every message resends all of it. In my transcripts a 1M window used about 2.3 times more of the weekly limit than 400k, so the window stays at 400k. A 600k trial got its rule in advance: it stays if the week ends under 90 % of the limit and nothing gets blocked. I have not recorded the result of that trial yet.",
+          body: "Claude can hold a million tokens, but every message resends all of it. In my transcripts a 1M window used about 2.3 times more of the weekly limit than 400k, so the window stays at 400k. A 600k trial has a rule fixed in advance: it stays if the week ends under 90 % of the limit and nothing gets blocked. I have not recorded the result of that trial yet.",
         },
       ],
     },
@@ -566,7 +566,7 @@ export const en: Content = {
         },
         {
           label: "What it does each cycle:",
-          body: "it checks that the sessions are alive and that none sits idle with open work. It checks every claim in a report at the source: the pull request state, the git history, the file on disk. Every task ever reported must be in one state: done with evidence, in progress with an owner, waiting for me, parked, or dropped with a reason. A row without an owner is a lost task.",
+          body: "it checks that the sessions are alive and that none sits idle with open work when it is not waiting for me. It checks every claim in a report at the source: the state of the pull request, the git history, the file on disk. Every task ever reported must be in one state: done with evidence, in progress with an owner, waiting for me, parked, or dropped with a reason. A row without an owner is a lost task.",
         },
         {
           label: "The session report:",
@@ -574,11 +574,11 @@ export const en: Content = {
         },
         {
           label: "When to stop:",
-          body: "a session with an empty queue runs one fresh-eyes pass. Two passes in a row with no serious finding mean further passes add little, and the stream stops. Not every project gets the same loop: I set it per project before the work starts.",
+          body: "a session with an empty queue runs one fresh-eyes pass. With the full loop, two passes in a row with no serious finding mean further passes add little, and work on that project stops. Not every project gets the same loop or the same threshold: I set them per project before the work starts.",
         },
         {
           label: "What the first day taught:",
-          body: "19 lessons, each from a failure I saw. Three sessions acted as the coordinator at once. A pull request list given from memory was out of date. A session stopped at 82 % of its context window and nothing restarted it. A lenient verifier hid a source that did much worse under a stricter one. The computer went to sleep because the sleep lock was held by a session I had archived.",
+          body: "19 lessons, each from a failure I saw. A few of them: three sessions acted as the coordinator at once. A pull request list given from memory was out of date. A session stopped at 82 % of its context window and nothing restarted it. A lenient verifier hid a failing source: 10 % with it, 36 % with a stricter one. The computer went to sleep because the sleep lock was held by a session I had archived.",
         },
         {
           label: "What it is not:",

@@ -562,7 +562,7 @@ export const pl: Content = {
         },
         {
           label: "Co robi w każdym obiegu:",
-          body: "sprawdza, czy sesje żyją i czy żadna nie stoi z otwartą pracą. Każde twierdzenie z raportu sprawdza u źródła: w stanie pull requesta, w historii gita, w pliku na dysku. Każde zgłoszone kiedykolwiek zadanie musi być w jednym stanie: zrobione z dowodem, w toku z właścicielem, czeka na mnie, odłożone albo porzucone z powodem. Wiersz bez właściciela to zgubione zadanie.",
+          body: "sprawdza, czy sesje żyją i czy żadna nie stoi z otwartą pracą, choć nie czeka na mnie. Każde twierdzenie z raportu sprawdza u źródła: w stanie pull requesta, w historii gita, w pliku na dysku. Każde zgłoszone kiedykolwiek zadanie musi być w jednym stanie: zrobione z dowodem, w toku z właścicielem, czeka na mnie, odłożone albo porzucone z powodem. Wiersz bez właściciela to zgubione zadanie.",
         },
         {
           label: "Raport sesji:",
@@ -570,11 +570,11 @@ export const pl: Content = {
         },
         {
           label: "Kiedy przestać:",
-          body: "sesja z pustą kolejką robi jeden przegląd świeżym okiem. Dwa przeglądy z rzędu bez poważnego znaleziska znaczą, że dalsze przebiegi niewiele dają, i strumień się zatrzymuje. Nie każdy projekt dostaje tę samą pętlę: ustalam ją dla każdego z osobna, zanim praca ruszy.",
+          body: "sesja z pustą kolejką robi jeden przegląd świeżym okiem. Przy pełnej pętli dwa przeglądy z rzędu bez poważnego znaleziska znaczą, że dalsze przebiegi niewiele dają, i praca nad tym projektem się kończy. Nie każdy projekt dostaje tę samą pętlę i ten sam próg: ustalam je dla każdego z osobna, zanim praca ruszy.",
         },
         {
           label: "Czego nauczył pierwszy dzień:",
-          body: "19 lekcji, każda z zaobserwowanej awarii. Trzy sesje naraz uważały się za koordynatora. Lista pull requestów podawana z pamięci była nieaktualna. Sesja stanęła przy 82% okna kontekstu i nic jej nie wznowiło. Pobłażliwy weryfikator ukrył źródło, które przy surowszym wypadło dużo gorzej. Komputer zasnął, bo blokadę uśpienia trzymała sesja, którą zarchiwizowałem.",
+          body: "19 lekcji, każda z zaobserwowanej awarii. Kilka z nich: trzy sesje naraz uważały się za koordynatora. Lista pull requestów podawana z pamięci była nieaktualna. Sesja stanęła przy 82% okna kontekstu i nic jej nie wznowiło. Pobłażliwy weryfikator ukrył źródło, które zawodziło: u niego 10%, u surowszego 36%. Komputer zasnął, bo blokadę uśpienia trzymała sesja, którą zarchiwizowałem.",
         },
         {
           label: "Czym to nie jest:",
