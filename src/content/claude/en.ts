@@ -432,7 +432,7 @@ export const en: Content = {
         },
         {
           label: "What maintenance mode means:",
-          body: "PG changes only after an incident that slipped through, when a tool or model update breaks a hook, or when I ask. Since November 15 the health-check script runs weekly again, as a plain system timer that calls no model, while its old routine stays off with the others; no new mechanism is added for its own sake. The quality of the work should come from the checks that exist, not from the number of checks.",
+          body: "PG changes only after an incident that slipped through, when a tool or model update breaks a hook, or when I ask. On November 15 I switched the health-check script back on as a weekly system timer that calls no model, while its old routine stays off with the others; no new mechanism is added for its own sake. The quality of the work should come from the checks that exist, not from the number of checks.",
         },
       ],
     },
@@ -495,7 +495,7 @@ export const en: Content = {
           body: "reviews open pull requests in the active repositories the way a senior engineer would. Mechanical fixes land as separate commits with proof; design and security findings stay as comments for me.",
         },
         {
-          label: "Health check (weekly, a system timer since November 15):",
+          label: "Health check (weekly system timer, switched on November 15):",
           body: "script checks that the quality system is still wired in: hooks registered, gates still blocking, which escape hatches were used, and which routine started but never finished. A failed or interrupted run of any routine is red.",
         },
         {
@@ -599,7 +599,7 @@ export const en: Content = {
         },
         {
           label: "The first report on real data:",
-          body: "eight candidates, of which the report shows at most five a week. I bypassed the change-size gate after a block 13 times out of 13. Within 28 days reviewers got a missing failure-path test fixed 36 times in 14 repositories, a silent fallback 22 times in 9, an unrecorded architecture decision 21 times in 9 and data hardcoded in code 12 times in 8.",
+          body: "eight candidates, of which the report shows at most five a week. I bypassed the change-size gate after a block 14 times out of 14. Within 28 days reviewers got a missing failure-path test fixed 36 times in 14 repositories, a silent fallback 22 times in 9, an unrecorded architecture decision 21 times in 9 and data hardcoded in code 12 times in 8.",
         },
         {
           label: "The decision stays with me:",
@@ -909,7 +909,7 @@ export const en: Content = {
         "health audit",
       ],
       caption:
-        "The loop feeds itself: the health audit (weekly since November 15) finds checks that stopped working, and each becomes a new scar.",
+        "The loop feeds itself: the health audit (a weekly timer, switched on November 15) finds checks that stopped working, and each becomes a new scar.",
     },
     matrix: {
       rows: [
@@ -1085,10 +1085,11 @@ export const en: Content = {
       caption: "The agent can use a password or key it can never read.",
     },
     cadence: {
-      status: "Status on November 4: all PG routines switched off until their setup is fixed.",
+      status:
+        "Status on November 15: PG routines switched off until their setup is fixed; the health check runs as a system timer instead.",
       rows: [
         { name: "Pull request review", dots: 5, freq: "weekdays · returns" },
-        { name: "Health check", dots: 1, freq: "weekly · on again (timer)" },
+        { name: "Health check", dots: 1, freq: "weekly · timer since Nov 15" },
         { name: "Vulnerability watch", dots: 1, freq: "monthly · returns" },
         { name: "Reviewer calibration", dots: 1, freq: "monthly · stays off" },
         { name: "Look at similar projects", dots: 1, freq: "monthly · stays off" },

@@ -428,7 +428,7 @@ export const pl: Content = {
         },
         {
           label: "Co znaczy tryb utrzymania:",
-          body: "PG zmienia się tylko po incydencie, który przeszedł mimo bramek, gdy aktualizacja narzędzia albo modelu zepsuje hook, albo gdy o to poproszę. Od 15 listopada skrypt kontroli zdrowia znowu działa co tydzień, jako zwykły zegar systemowy bez wywołań modelu, a jego dawna rutyna zostaje wyłączona razem z pozostałymi; żaden nowy mechanizm nie powstaje dla samego siebie. Jakość pracy ma wynikać z kontroli, które istnieją, a nie z ich liczby.",
+          body: "PG zmienia się tylko po incydencie, który przeszedł mimo bramek, gdy aktualizacja narzędzia albo modelu zepsuje hook, albo gdy o to poproszę. 15 listopada włączyłem z powrotem skrypt kontroli zdrowia jako cotygodniowy zegar systemowy bez wywołań modelu, a jego dawna rutyna zostaje wyłączona razem z pozostałymi; żaden nowy mechanizm nie powstaje dla samego siebie. Jakość pracy ma wynikać z kontroli, które istnieją, a nie z ich liczby.",
         },
       ],
     },
@@ -491,7 +491,7 @@ export const pl: Content = {
           body: "przegląda otwarte pull requesty w aktywnych repozytoriach tak, jak zrobiłby to starszy inżynier. Mechaniczne poprawki lądują jako osobne commity z dowodem; uwagi o projekcie i bezpieczeństwie zostają komentarzami do mojej decyzji.",
         },
         {
-          label: "Kontrola zdrowia (co tydzień, zegar systemowy od 15 listopada):",
+          label: "Kontrola zdrowia (cotygodniowy zegar systemowy, włączony 15 listopada):",
           body: "skrypty sprawdzają, czy system jakości jest dalej wpięty: hooki zarejestrowane, bramki dalej blokują, które wyjątki były użyte i która rutyna zaczęła, ale nie skończyła. Nieudany albo przerwany przebieg dowolnej rutyny to czerwień.",
         },
         {
@@ -595,7 +595,7 @@ export const pl: Content = {
         },
         {
           label: "Pierwszy raport na prawdziwych danych:",
-          body: "ośmiu kandydatów, z których raport pokazuje najwyżej pięciu na tydzień. Bramkę wielkości zmiany ominąłem po blokadzie 13 razy na 13. W ciągu 28 dni recenzenci doprowadzili do naprawy braku testu ścieżki błędu 36 razy w 14 repozytoriach, cichego fallbacku 22 razy w 9, niezapisanej decyzji architektonicznej 21 razy w 9 i danych wpisanych w kod 12 razy w 8.",
+          body: "ośmiu kandydatów, z których raport pokazuje najwyżej pięciu na tydzień. Bramkę wielkości zmiany ominąłem po blokadzie 14 razy na 14. W ciągu 28 dni recenzenci doprowadzili do naprawy braku testu ścieżki błędu 36 razy w 14 repozytoriach, cichego fallbacku 22 razy w 9, niezapisanej decyzji architektonicznej 21 razy w 9 i danych wpisanych w kod 12 razy w 8.",
         },
         {
           label: "Decyzja zostaje u mnie:",
@@ -909,7 +909,7 @@ export const pl: Content = {
         "audyt zdrowia",
       ],
       caption:
-        "Pętla napędza się sama: audyt zdrowia (co tydzień od 15 listopada) wyłapuje kontrole, które przestały działać, i każda z nich staje się nową blizną.",
+        "Pętla napędza się sama: audyt zdrowia (cotygodniowy zegar, włączony 15 listopada) wyłapuje kontrole, które przestały działać, i każda z nich staje się nową blizną.",
     },
     matrix: {
       rows: [
@@ -1085,10 +1085,11 @@ export const pl: Content = {
       caption: "Agent może użyć hasła lub klucza, którego nigdy nie zobaczy.",
     },
     cadence: {
-      status: "Stan na 4 listopada: wszystkie rutyny PG wyłączone do czasu naprawy ustawień.",
+      status:
+        "Stan na 15 listopada: rutyny PG wyłączone do czasu naprawy ustawień; kontrola zdrowia działa zamiast tego jako zegar systemowy.",
       rows: [
         { name: "Recenzja pull requestów", dots: 5, freq: "dni robocze · wraca" },
-        { name: "Kontrola zdrowia", dots: 1, freq: "co tydzień · znowu działa (zegar)" },
+        { name: "Kontrola zdrowia", dots: 1, freq: "co tydzień · zegar od 15 listopada" },
         { name: "Nadzór podatności", dots: 1, freq: "co miesiąc · wraca" },
         { name: "Kalibracja recenzentów", dots: 1, freq: "co miesiąc · zostaje wył." },
         { name: "Przegląd podobnych projektów", dots: 1, freq: "co miesiąc · zostaje wył." },

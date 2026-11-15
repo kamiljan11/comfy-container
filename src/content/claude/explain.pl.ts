@@ -90,7 +90,7 @@ export const explainPl: Explains = {
     {
       id: "branch-7",
       term: "System testuje sam siebie",
-      body: "Każda kontrola ma test dowodzący, że naprawdę blokuje swój przypadek. Skrypt sprawdza, czy do każdej spisanej reguły jest kontrola, a audyt zdrowia (co tydzień od 15 listopada) szuka tych, które przestały działać. Jak przycisk testowy w czujniku dymu.",
+      body: "Każda kontrola ma test dowodzący, że naprawdę blokuje swój przypadek. Skrypt sprawdza, czy do każdej spisanej reguły jest kontrola, a audyt zdrowia (cotygodniowy zegar, włączony 15 listopada) szuka tych, które przestały działać. Jak przycisk testowy w czujniku dymu.",
     },
   ],
   pipe: [
