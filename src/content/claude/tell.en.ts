@@ -185,7 +185,7 @@ export const tellSectionsEn: Section[] = [
       },
       {
         label: "Can others use it?",
-        body: "Yes. The whole system is a public repository, cleaned of private data, which you can install in five minutes with Node 20+, git and Claude Code. The installer never overwrites a file you changed and ends with a self-test, and the green output is the proof.",
+        body: "Yes. The whole system is a public repository, cleaned of private data, which you can install in five minutes with Node 20+, git and Claude Code. Without --force the installer does not overwrite a file you changed, and it ends with a self-test, and the green output is the proof.",
       },
       {
         label: "How fast does it change?",

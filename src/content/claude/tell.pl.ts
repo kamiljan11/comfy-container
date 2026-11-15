@@ -185,7 +185,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Czy inni mogą tego używać?",
-        body: "Tak. Cały system to publiczne repozytorium oczyszczone z prywatnych danych, które zainstalujesz w pięć minut z Node 20+, gitem i Claude Code. Instalator nigdy nie nadpisuje zmienionego przez ciebie pliku i kończy się samotestem, a zielony wynik jest dowodem.",
+        body: "Tak. Cały system to publiczne repozytorium oczyszczone z prywatnych danych, które zainstalujesz w pięć minut z Node 20+, gitem i Claude Code. Bez --force instalator nie nadpisze zmienionego przez ciebie pliku i kończy się samotestem, a zielony wynik jest dowodem.",
       },
       {
         label: "Jak szybko to się zmienia?",
