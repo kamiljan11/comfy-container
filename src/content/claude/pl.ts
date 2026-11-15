@@ -583,6 +583,35 @@ export const pl: Content = {
       ],
     },
 
+    {
+      id: "usage-loop",
+      part: 4,
+      title: "Poprawki z użycia zamiast z nowości",
+      lead: "Przez dwa miesiące dokładałem do systemu reguły z kursów, cudzych repozytoriów i własnych awarii. 15 listopada odwróciłem kierunek: raz w tygodniu skrypt liczy z logów samego systemu, które reguły warto zmienić. Nie wywołuje modelu, więc taki tydzień kosztuje zero tokenów.",
+      items: [
+        {
+          label: "Trzy pytania do logów:",
+          body: "która reguła nie zadziałała ani razu przez sześć tygodni pracy, którą bramkę omijam częściej, niż jej słucham, i który błąd recenzenci naprawiają w kółko w różnych repozytoriach. Pierwsza to kandydat do usunięcia, druga do poluzowania albo naprawy, trzeci do zamiany w automatyczne sprawdzenie.",
+        },
+        {
+          label: "Pierwszy raport na prawdziwych danych:",
+          body: "ośmiu kandydatów, z których raport pokazuje najwyżej pięciu na tydzień. Bramkę wielkości zmiany ominąłem po blokadzie 13 razy na 13. W ciągu 28 dni recenzenci doprowadzili do naprawy braku testu ścieżki błędu 36 razy w 14 repozytoriach, cichego fallbacku 22 razy w 9, niezapisanej decyzji architektonicznej 21 razy w 9 i danych wpisanych w kod 12 razy w 8.",
+        },
+        {
+          label: "Decyzja zostaje u mnie:",
+          body: "raport niczego nie blokuje, nie usuwa i nie zmienia. Przy kandydacie wpisuję „przyjęte” albo „odrzucone”, a kandydat bez decyzji wraca za tydzień. Przyjęta zmiana idzie potem zwykłą drogą: gałąź, recenzja, moja zgoda.",
+        },
+        {
+          label: "Nowe reguły tylko tam, gdzie była awaria i luka:",
+          body: "tego samego dnia zestawiłem 188 zapisanych awarii z tym, co bramki naprawdę widzą, i dopisałem wykrywacze tam, gdzie awaria się zdarzyła, a nic jej nie łapało. Każdy zaczyna w trybie obserwacji: zapisuje, co by zablokował, i niczego nie blokuje. Sprawdziłem je na historii. Reguła na komendy kasujące wolumeny Dockera: 0 trafień w około 5300 komendach. Hurtowe nadawanie uprawnień w migracjach: 2 pliki na 2964. Jeden wykrywacz po recenzji wyrzuciłem, bo nie miał dziś czego wykrywać.",
+        },
+        {
+          label: "Czego jeszcze nie ma:",
+          body: "pętla i wykrywacze są zbudowane i przetestowane, ale czekają na gałęziach na moje scalenie, a tygodniowe uruchamianie nie jest włączone. Martwych reguł raport na razie nie wskaże, bo potrzebuje sześciu tygodniowych migawek, a nie ma jeszcze żadnej. Czy system rzeczywiście poprawia się od samego używania, będzie widać po kilku tygodniach decyzji. Dziś tego nie wiem.",
+        },
+      ],
+    },
+
     /* ── Część 6: historia i użycie ── */
     {
       id: "history",

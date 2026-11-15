@@ -587,6 +587,35 @@ export const en: Content = {
       ],
     },
 
+    {
+      id: "usage-loop",
+      part: 4,
+      title: "Fixes from use, not from news",
+      lead: "For two months I kept adding rules from courses, other people's repositories and my own failures. On 15 November I turned that around: once a week a script works out from the system's own logs which rules are worth changing. It never calls a model, so such a week costs zero tokens.",
+      items: [
+        {
+          label: "Three questions to the logs:",
+          body: "which rule has not fired once in six weeks of work, which gate I bypass more often than I obey, and which mistake reviewers keep getting fixed across different repositories. The first is a candidate to remove, the second to relax or repair, the third to turn into an automatic check.",
+        },
+        {
+          label: "The first report on real data:",
+          body: "eight candidates, of which the report shows at most five a week. I bypassed the change-size gate after a block 13 times out of 13. Within 28 days reviewers got a missing failure-path test fixed 36 times in 14 repositories, a silent fallback 22 times in 9, an unrecorded architecture decision 21 times in 9 and data hardcoded in code 12 times in 8.",
+        },
+        {
+          label: "The decision stays with me:",
+          body: "the report blocks nothing, removes nothing and changes nothing. Next to a candidate I write “accepted” or “rejected”, and a candidate without a decision comes back the next week. An accepted change then takes the usual route: a branch, a review, my approval.",
+        },
+        {
+          label: "New rules only where there was a failure and a gap:",
+          body: "the same day I compared 188 recorded failures with what the gates actually see, and added detectors where a failure had happened and nothing caught it. Each one starts in observe mode: it records what it would have blocked and blocks nothing. I ran them against history. The rule for commands that delete Docker volumes: 0 hits in about 5,300 commands. Bulk permission grants in migrations: 2 files out of 2,964. I threw one detector out after review, because today it had nothing to detect.",
+        },
+        {
+          label: "What is not there yet:",
+          body: "the loop and the detectors are built and tested, but they sit on branches waiting for my merge, and the weekly run is not switched on. The report cannot point at dead rules yet, because it needs six weekly snapshots and has none. Whether the system really improves just from being used will show after a few weeks of decisions. Today I do not know.",
+        },
+      ],
+    },
+
     /* ── Part 6: history and use ── */
     {
       id: "history",
