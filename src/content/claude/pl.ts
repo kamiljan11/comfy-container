@@ -101,7 +101,7 @@ export const pl: Content = {
         },
         {
           label: "Dowód, nie deklaracja:",
-          body: "„gotowe” znaczy, że komenda się wykonała, zwróciła kod wyjścia, a stan po niej został sprawdzony. Każdy raport kończy się jednym słowem: VERIFIED, UNVERIFIED albo FAILED. Agenci AI mierzalnie zawyżają sukces (w jednym benchmarku 75,8% zgłoszonych sukcesów nie miało dowodu) i ustępują pod naciskiem. Słowo statusu to przeciwwaga.",
+          body: "„gotowe” znaczy, że komenda się wykonała, zwróciła kod wyjścia, a stan po niej został sprawdzony. Każdy raport kończy się jednym słowem: VERIFIED, UNVERIFIED albo FAILED. Agenci AI mierzalnie zawyżają sukces (w jednym benchmarku 75,8% ich porażek zostało zgłoszonych jako sukces) i ustępują pod naciskiem. Słowo statusu to przeciwwaga.",
         },
       ],
     },

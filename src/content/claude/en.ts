@@ -105,7 +105,7 @@ export const en: Content = {
         },
         {
           label: "Proof, not claims:",
-          body: "“done” means a command ran, it returned an exit code, and the state afterwards was checked. Every report ends with one word: VERIFIED, UNVERIFIED or FAILED. AI agents measurably overstate success (in one benchmark 75.8 % of reported successes had no evidence) and they give in when pushed. The status word is the counterweight.",
+          body: "“done” means a command ran, it returned an exit code, and the state afterwards was checked. Every report ends with one word: VERIFIED, UNVERIFIED or FAILED. AI agents measurably overstate success (in one benchmark 75.8 % of their failures were reported as success) and they give in when pushed. The status word is the counterweight.",
         },
       ],
     },
