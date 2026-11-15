@@ -8,7 +8,7 @@ test("/blog lists the posts newest first and links to them", async ({ page }) =>
   await page.goto("/blog?lang=pl");
   await page.waitForLoadState("networkidle");
   const first = page.locator(".blog-item h2 a").first();
-  await expect(first).toHaveAttribute("href", "/blog/95-procent-firm-bez-zwrotu-z-ai");
+  await expect(first).toHaveAttribute("href", "/blog/ai-gotowe-bez-dowodu");
   // it was noindex while empty; with a post it must be indexable
   await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(0);
   // every card opens with a thumbnail that actually loaded
