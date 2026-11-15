@@ -6,3 +6,4 @@ src/routes/claude.tsx # strona /claude: uklad i nawigacja (mapa strony, separato
 src/content/claude/en.ts # tresc artykulu /claude jako dane (EN), bez logiki; liczby pilnuje src/content/claude/content.test.ts
 src/content/claude/pl.ts # tresc artykulu /claude jako dane (PL), bez logiki; liczby pilnuje src/content/claude/content.test.ts
 src/routes/blog.$slug.tsx # strona wpisu: tylko uklad blokow z src/data/posts.ts (logika w src/lib/youtube.ts, src/lib/inline.ts, YouTubeFacade z testami); zachowanie sprawdza e2e/blog.spec.ts, bez unit testow — PR #117: 103 mutanty "no coverage" zbijaly wynik do 14 %
+src/server/bot.prompt.ts # tekst promptu czatbota (baza wiedzy), bez logiki; nadazanie za strona (uslugi, obszary, case studies, wpisy bloga) pilnuje src/server/bot.prompt.test.ts; logika (plain, runBot) zostaje w bot.server.ts
