@@ -5,6 +5,10 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- Blog: the post about the first film (`/blog/95-procent-firm-bez-zwrotu-z-ai`) grows from a ~500-word summary into the full write-up, PL and EN, chapter by chapter: why the back office pays back faster, how to find the process that hurts (with a worked hours example), what is not worth automating, the 64-screen app, the rollout panel and AI assistant, one process at a time, one environment instead of scattered spreadsheets, and the 5 questions with the reason for each. Every fact re-read from the video's description and Polish captions on 2026-11-15.
+
+- Blog: the post about the second film (`/blog/ai-gotowe-bez-dowodu`) gets a clearer cover and player poster: thumbnail variant B from the film's render ("3 pomysły": Szlaban, Blizna, Dowód), 1280x720, instead of the terminal screenshot.
+
 - Blog: new post "3 pomysły, żeby AI nie mówiło „gotowe” bez dowodu" (`/blog/ai-gotowe-bez-dowodu`, PL + EN, dated 2026-11-09) made from Kamil's YouTube video (VeM1WTRy8nA), with the `youtube` block after the first paragraph (poster until the click), a cover and six illustrations under `public/blog/ai-gotowe-bez-dowodu/`. Sitemap, the chat assistant's blog line (8 posts, `src/server/bot.prompt.ts`) and the tests updated (`e2e/blog.spec.ts` newest-first href, `e2e/og-meta.spec.ts`).
 
 - Blog: new post "95% firm nie widzi zysku z AI. Byłem w tych 95%" (`/blog/95-procent-firm-bez-zwrotu-z-ai`, PL + short EN saying the video is in Polish) with Kamil's YouTube video (DogPvuwTPBI, published 2026-10-25), shown with the `youtube` block from #117 (poster until the click). Every fact is taken from the video's description and Polish captions. Thumbnail: the video's own thumbnail copied locally (`public/blog/95-procent-firm-bez-zwrotu-z-ai/cover.webp`, 1280x720). Sitemap, the chat assistant's blog line (7 posts) and the tests updated (`posts.test.ts`, `e2e/blog.spec.ts`, `e2e/og-meta.spec.ts`).
