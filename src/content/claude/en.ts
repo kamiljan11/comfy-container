@@ -101,11 +101,11 @@ export const en: Content = {
         },
         {
           label: "Every failure becomes a check (scar → gate):",
-          body: "185 real failures from my projects are catalogued, each with a rule id. I call them scars. Every checklist item cites the scar it came from, a habit taken from Google SRE. A postmortem ends with a new gate or a new scar, never with “be more careful”.",
+          body: "185 real failures from my projects are catalogued, each with a rule id. I call them scars. Every checklist item cites the incident or source it came from, a habit taken from Google SRE. A postmortem ends with a new gate or a new scar, never with “be more careful”.",
         },
         {
           label: "Proof, not claims:",
-          body: "“done” means a command ran, it returned an exit code, and the state afterwards was checked. Every report ends with one word: VERIFIED, UNVERIFIED or FAILED. AI agents measurably overstate success (in one benchmark 75.8 % of reported successes had no evidence) and they give in when pushed. The status word is the counterweight.",
+          body: "“done” means a command ran, it returned an exit code, and the state afterwards was checked. Every report ends with one word: VERIFIED, UNVERIFIED or FAILED. AI agents measurably overstate success (in one benchmark 75.8 % of their failures were reported as success) and they give in when pushed. The status word is the counterweight.",
         },
       ],
     },
@@ -128,11 +128,11 @@ export const en: Content = {
         },
         {
           label: "At every terminal command:",
-          body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging from a script other than the one that demands proof of review, secrets typed into a command, and a downloaded script run straight in the shell (curl | sh). It reads a command the way the shell would, so it also sees commands hidden inside sh -c, $(…), heredocs whose text the shell will execute, encoded PowerShell, or tricks like rm${IFS}-rf.",
+          body: "a guard blocks the dangerous ones: skipping the checks (--no-verify), rewriting or throwing away history (force-push, hard reset), recursive deletes outside build folders, merging from a script other than the one that demands proof of review, secrets typed into a command, and a downloaded script run straight in the shell (curl | sh). It reads a command the way the shell would, so it also sees commands hidden inside sh -c, $(…), heredocs whose text the shell will execute, or tricks like rm${IFS}-rf. Encoded PowerShell is only logged for now.",
         },
         {
           label: "When a session ends:",
-          body: "the stop gate measures the risk tier from what actually changed (paths and size, never the wording of the prompt), runs lint, types and tests on everything that changed, and keeps a session at tier T2 or above open until the required reviewers have checked it. The test verdict comes from the exit code: an import error or zero tests run is red, not “skipped”.",
+          body: "the stop gate measures the risk tier from what actually changed (paths and size, never the wording of the prompt), runs lint, types and tests in the changed repositories that have them set up, and keeps a session at tier T2 or above open until the required reviewers have checked it. The test verdict comes from the exit code: an import error or zero tests run is red, not “skipped”.",
         },
         {
           label: "On every commit:",
@@ -228,7 +228,7 @@ export const en: Content = {
         },
         {
           label: "Each reviewer reads its own slice:",
-          body: "one audit found that reviewers given a 9,799-line diff read about 10 to 30 % of it, and a broken CSS block went past three of them. Now a script cuts the diff by department, and a second script runs 21 mechanical search rules and hands the hits to the reviewer to judge.",
+          body: "one audit found that reviewers given a 9,799-line diff read about 10 to 30 % of it, and a broken CSS block went past three of them. Now a script cuts the diff by department, and a second script runs 27 mechanical search rules and hands the hits to the reviewer to judge.",
         },
         {
           label: "Why a clean slate:",
@@ -386,7 +386,7 @@ export const en: Content = {
         },
         {
           label: "A context window chosen on purpose:",
-          body: "Claude can hold a million tokens, but every message resends all of it. In my transcripts a 1M window used about 2.3 times more of the weekly limit than 400k, so the window stays at 400k. A 600k trial starts on October 17 with its rule decided in advance: it stays if the week ends under 90 % of the limit and nothing gets blocked.",
+          body: "Claude can hold a million tokens, but every message resends all of it. In my transcripts a 1M window used about 2.3 times more of the weekly limit than 400k, so the window stays at 400k. A 600k trial has a rule fixed in advance: it stays if the week ends under 90 % of the limit and nothing gets blocked. I have not recorded the result of that trial yet.",
         },
       ],
     },
@@ -403,7 +403,7 @@ export const en: Content = {
         },
         {
           label: "Routines look only at live work:",
-          body: "a script reads GitHub history and keeps repositories with real work in the last 30 days, ignoring days when PG swept the whole fleet, the same change rolled out everywhere, and dependency bots. Today that is 13 of 50.",
+          body: "a script reads GitHub history and keeps repositories with real work in the last 30 days, ignoring days when PG swept the whole fleet, the same change rolled out everywhere, and dependency bots. On November 4 that was 13 of 50.",
         },
         {
           label: "Cleaner numbers:",
@@ -411,7 +411,7 @@ export const en: Content = {
         },
         {
           label: "Reviewed before release:",
-          body: "four rounds of independent reviewers. Among other things they caught that one GitHub hiccup could silently cost a month of vulnerability checks, and that an empty answer from GitHub would look like a quiet month; both now end as a visible failure.",
+          body: "several rounds of independent reviewers. Among other things they caught that one GitHub hiccup could silently cost a month of vulnerability checks, and that an empty answer from GitHub would look like a quiet month; both now end as a visible failure.",
         },
       ],
     },
@@ -432,7 +432,7 @@ export const en: Content = {
         },
         {
           label: "What maintenance mode means:",
-          body: "PG changes only after an incident that slipped through, when a tool or model update breaks a hook, or when I ask. The weekly health check still runs its scripts; no new mechanism is added for its own sake. The quality of the work should come from the checks that exist, not from the number of checks.",
+          body: "PG changes only after an incident that slipped through, when a tool or model update breaks a hook, or when I ask. On November 15 I switched the health-check script back on as a weekly system timer that calls no model, while its old routine stays off with the others; no new mechanism is added for its own sake. The quality of the work should come from the checks that exist, not from the number of checks.",
         },
       ],
     },
@@ -459,7 +459,7 @@ export const en: Content = {
         },
         {
           label: "Why it exists:",
-          body: "when a user pushes back with a wrong claim, models agree in about 58 % of cases, and they predict 61–77 % success while achieving 22–35 %. The status word forces every claim to show evidence or admit it has none, and “are you sure?” makes the model re-check the evidence instead of politely changing its answer.",
+          body: "when a user pushes back with a wrong claim, models in published studies give in about 58 % of the time, and in one benchmark agents predicted 61–77 % success while achieving 22–35 %. The status word forces every claim to show evidence or admit it has none, and “are you sure?” makes the model re-check the evidence instead of politely changing its answer.",
         },
         {
           label: "In Claude Desktop and scheduled tasks:",
@@ -495,7 +495,7 @@ export const en: Content = {
           body: "reviews open pull requests in the active repositories the way a senior engineer would. Mechanical fixes land as separate commits with proof; design and security findings stay as comments for me.",
         },
         {
-          label: "Health check (weekly):",
+          label: "Health check (weekly system timer, switched on November 15):",
           body: "script checks that the quality system is still wired in: hooks registered, gates still blocking, which escape hatches were used, and which routine started but never finished. A failed or interrupted run of any routine is red.",
         },
         {
@@ -541,7 +541,7 @@ export const en: Content = {
       items: [
         {
           label: "The honest answer:",
-          body: "one function is easy. A 200,000-line system with unwritten assumptions about its architecture is where consistency drifts. So the assumptions are written where a script can read them: each repository's architecture document has a machine-readable block of layers and forbidden imports, and the push gate blocks a new import cycle or a broken layer. Old cycles only warn, and historical debt is never cleaned up automatically.",
+          body: "one function is easy. A 200,000-line system with unwritten assumptions about its architecture is where consistency drifts. So the assumptions are written where a script can read them: the architecture document in repositories built from the template has a machine-readable block of layers and forbidden imports, and the push gate blocks a new import cycle or a broken layer. Old cycles only warn, and historical debt is never cleaned up automatically.",
         },
         {
           label: "Checking the impact before an edit:",
@@ -550,6 +550,68 @@ export const en: Content = {
         {
           label: "Readable by a person:",
           body: "the tool index is generated from each tool's own header, and a tool without a description shows up as debt. Every style decision answers one question: can a senior engineer who has never seen the repository run it in 15 minutes, find the place to change in 15 more, and understand why?",
+        },
+      ],
+    },
+
+    {
+      id: "many-sessions",
+      part: 4,
+      title: "Several sessions at once, one coordinator",
+      lead: "On November 14 I ran five projects in parallel, each in its own Claude Code session. One more session watched the whole thing and wrote no code itself. It is a protocol and templates from one day of work (v0), not a platform.",
+      items: [
+        {
+          label: "Who does what:",
+          body: "there is exactly one coordinator. It keeps the task ledger and collects the decisions only I can make. Every project has its own session and its own working copy of the repository, and every file has one writer. The coordinator does not edit project files, does not merge and does not spend money.",
+        },
+        {
+          label: "What it does each cycle:",
+          body: "it checks that the sessions are alive and that none sits idle with open work when it is not waiting for me. It checks every claim in a report at the source: the state of the pull request, the git history, the file on disk. Every task ever reported must be in one state: done with evidence, in progress with an owner, waiting for me, parked, or dropped with a reason. A row without an owner is a lost task.",
+        },
+        {
+          label: "The session report:",
+          body: "four lines: done with evidence, in progress, next, parked or dropped with a reason. The last one is mandatory, because that is where quietly dropped tasks show up.",
+        },
+        {
+          label: "When to stop:",
+          body: "a session with an empty queue runs one fresh-eyes pass. With the full loop, two passes in a row with no serious finding mean further passes add little, and work on that project stops. Not every project gets the same loop or the same threshold: I set them per project before the work starts.",
+        },
+        {
+          label: "What the first day taught:",
+          body: "19 lessons, each from a failure I saw. A few of them: three sessions acted as the coordinator at once. A pull request list given from memory was out of date. A session stopped at 82 % of its context window and nothing restarted it. A lenient verifier hid a failing source: 10 % with it, 36 % with a stricter one. The computer went to sleep because the sleep lock was held by a session I had archived.",
+        },
+        {
+          label: "What it is not:",
+          body: "nothing here is automated: the ledger is a table in a file edited by hand, and I start the coordinator myself. There is no interface, daemon or database, and for now none is planned. It counts as switched on after one day in which no row is left without an owner at any check and no claim reaches me unchecked. I have not measured such a day yet. The repository with the protocol is private.",
+        },
+      ],
+    },
+
+    {
+      id: "usage-loop",
+      part: 4,
+      title: "Fixes from use, not from news",
+      lead: "For two months I kept adding rules from courses, other people's repositories and my own failures. On 15 November I turned that around: once a week a script works out from the system's own logs which rules are worth changing. It never calls a model, so such a week costs zero tokens.",
+      items: [
+        {
+          label: "Three questions to the logs:",
+          body: "which rule has not fired once in six weeks of work, which gate I bypass more often than I obey, and which mistake reviewers keep getting fixed across different repositories. The first is a candidate to remove, the second to relax or repair, the third to turn into an automatic check.",
+        },
+        {
+          label: "The first report on real data:",
+          body: "eight candidates, of which the report shows at most five a week. I bypassed the change-size gate after a block 14 times out of 14. Within 28 days reviewers got a missing failure-path test fixed 36 times in 14 repositories, a silent fallback 22 times in 9, an unrecorded architecture decision 21 times in 9 and data hardcoded in code 12 times in 8.",
+        },
+        {
+          label: "The decision stays with me:",
+          body: "the report blocks nothing, removes nothing and changes nothing. Next to a candidate I write “accepted” or “rejected”, and a candidate without a decision comes back the next week. An accepted change then takes the usual route: a branch, a review, my approval.",
+        },
+        {
+          label: "New rules only where there was a failure and a gap:",
+          body: "the same day I compared the 188 failures recorded by then (185 on November 4) with what the gates actually see, and added detectors where a failure had happened and nothing caught it. Each one starts in observe mode: it records what it would have blocked and blocks nothing. I ran them against history. The rule for commands that delete Docker volumes: 0 hits in about 5,300 commands. Bulk permission grants in migrations: 2 files out of 2,964. I threw one detector out after review, because today it had nothing to detect.",
+        },
+        {
+          label: "What is not there yet:",
+          body: "the loop and the detectors were merged on November 15 and the weekly run is switched on. The report cannot point at dead rules yet, because it needs six weeks of weekly snapshots and has only the first. Whether the system really improves just from being used will show after a few weeks of decisions. Today I do not know.",
         },
       ],
     },
@@ -564,11 +626,11 @@ export const en: Content = {
       items: [
         {
           label: "Compared with 35 open-source projects (September 26):",
-          body: "agents went through 35 public repositories with a similar idea and listed 23 things others did better, each with a file and line. The design of the changes was reviewed for security before any code (15 problems, 3 of which would have broken the review itself), and every new guard rule ran against 40,824 real commands from 2,853 transcript files before it could block anything.",
+          body: "agents went through 35 public repositories with a similar idea and the comparison produced a plan of 23 items, each with a file and line. The design of the changes was reviewed for security before any code, and every new guard rule was replayed against real commands from my transcripts before it could block anything.",
         },
         {
           label: "Six patches in one day (September 28):",
-          body: "the stop gate trusted test output instead of exit codes, so a broken test setup could pass as “skipped”. Six releases later, a verdict comes only from the exit code.",
+          body: "the stop gate trusted test output instead of exit codes, so a broken test setup could pass as “skipped”. Since version 1.2.2 a verdict comes only from the exit code.",
         },
         {
           label: "Three weeks in maintenance mode (November 4):",
@@ -590,7 +652,7 @@ export const en: Content = {
       items: [
         {
           label: "What the installer promises:",
-          body: "it never overwrites a file you changed (the other version lands next to yours), merges your settings instead of replacing them, and adds its rules between markers so an update replaces only that block. Git hooks are optional. It ends with a self-test, and the green output is the proof, not the installer's word.",
+          body: "without --force it does not overwrite a file you changed (the other version lands next to yours; with --force it makes a backup first), merges your settings instead of replacing them, and adds its rules between markers so an update replaces only that block. Git hooks are optional. It ends with a self-test, and the green output is the proof, not the installer's word.",
         },
         {
           label: "What the public 1.9.0 contains:",
@@ -683,7 +745,7 @@ export const en: Content = {
         },
         {
           title: "Self-tests",
-          leaves: ["every gate has a test", "rule → gate coverage", "weekly audit"],
+          leaves: ["every gate has a test", "rule → gate coverage", "health audit"],
         },
       ],
       caption:
@@ -751,7 +813,7 @@ export const en: Content = {
         },
       ],
       caption:
-        "The tier comes from the paths and size of the change, never from the prompt. The strongest model reviews security, data and verification at T3.",
+        "The tier comes from the paths and size of the change, never from the prompt. At T3 the strongest model reviews security, and data too when the change touches the schema or migrations.",
     },
     exceptions: {
       whoLabel: "who decides",
@@ -777,7 +839,7 @@ export const en: Content = {
         {
           level: "C · only me",
           who: "me, by typing the phrase in the chat",
-          window: "30 minutes, 3 uses (60 minutes for work on PG itself)",
+          window: "30 minutes, 3 uses (60 minutes and up to 200 uses for work on PG itself)",
           examples:
             "changes to the gates, push to main, secrets in a commit, weaker CI, force-push, deleting a repository",
           tone: "b",
@@ -843,11 +905,11 @@ export const en: Content = {
         "root cause: five whys",
         "scar + rule id",
         "gate + test that it blocks",
-        "every rule has a gate",
-        "weekly audit",
+        "a script counts rules without a gate",
+        "health audit",
       ],
       caption:
-        "The loop feeds itself: the weekly audit finds checks that stopped working, and each becomes a new scar.",
+        "The loop feeds itself: the health audit (a weekly timer, switched on November 15) finds checks that stopped working, and each becomes a new scar.",
     },
     matrix: {
       rows: [
@@ -1023,10 +1085,11 @@ export const en: Content = {
       caption: "The agent can use a password or key it can never read.",
     },
     cadence: {
-      status: "Status on November 4: all PG routines switched off until their setup is fixed.",
+      status:
+        "Status on November 15: PG routines switched off until their setup is fixed; the health check runs as a system timer instead.",
       rows: [
         { name: "Pull request review", dots: 5, freq: "weekdays · returns" },
-        { name: "Health check", dots: 1, freq: "weekly · returns" },
+        { name: "Health check", dots: 1, freq: "weekly · timer since Nov 15" },
         { name: "Vulnerability watch", dots: 1, freq: "monthly · returns" },
         { name: "Reviewer calibration", dots: 1, freq: "monthly · stays off" },
         { name: "Look at similar projects", dots: 1, freq: "monthly · stays off" },
@@ -1111,14 +1174,14 @@ export const en: Content = {
           idea: "Every failure becomes a check",
           before: "a mistake, then a promise to be more careful",
           after: "a scar written down with its cause, then a new gate or checklist item",
-          why: "185 real failures are catalogued as scars, and every checklist item cites one",
+          why: "185 real failures are catalogued as scars, and every checklist item cites an incident or a source",
         },
         {
           idea: "Proof, not claims",
           before: "“done”, because the agent says so",
           after:
             "a command ran, its result was checked, and the report ends with VERIFIED, UNVERIFIED or FAILED",
-          why: "in one benchmark 75.8 % of the successes AI agents reported had no evidence",
+          why: "in one benchmark 75.8 % of the failures of self-assessing coding agents were reported as success",
         },
       ],
       beforeLabel: "Instead of",
@@ -1134,7 +1197,7 @@ export const en: Content = {
       guards: [
         {
           label: "Seal:",
-          body: "checksums on the control layer; a change outside a window I opened shows up at the next session and in the weekly audit",
+          body: "checksums on the control layer; a change outside a window I opened shows up at the next session and in the health audit",
         },
         {
           label: "Extensions:",
@@ -1165,7 +1228,7 @@ export const en: Content = {
         { title: "dry run", detail: "shows the plan and touches nothing", tone: "a" },
         {
           title: "install",
-          detail: "copies into ~/.claude and never overwrites a file you changed",
+          detail: "copies into ~/.claude and without --force does not overwrite a file you changed",
           tone: "a",
         },
         {

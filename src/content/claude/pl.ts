@@ -97,11 +97,11 @@ export const pl: Content = {
         },
         {
           label: "Każda awaria staje się kontrolą (blizna → bramka):",
-          body: "185 prawdziwych awarii z moich projektów jest skatalogowanych, każda z numerem reguły. Nazywam je bliznami. Każdy punkt listy kontrolnej wskazuje bliznę, z której powstał; ten nawyk wziąłem z Google SRE. Analiza incydentu kończy się nową bramką albo nową blizną, nigdy „bądźmy ostrożniejsi”.",
+          body: "185 prawdziwych awarii z moich projektów jest skatalogowanych, każda z numerem reguły. Nazywam je bliznami. Każdy punkt listy kontrolnej wskazuje incydent albo źródło, z którego powstał; ten nawyk wziąłem z Google SRE. Analiza incydentu kończy się nową bramką albo nową blizną, nigdy „bądźmy ostrożniejsi”.",
         },
         {
           label: "Dowód, nie deklaracja:",
-          body: "„gotowe” znaczy, że komenda się wykonała, zwróciła kod wyjścia, a stan po niej został sprawdzony. Każdy raport kończy się jednym słowem: VERIFIED, UNVERIFIED albo FAILED. Agenci AI mierzalnie zawyżają sukces (w jednym benchmarku 75,8% zgłoszonych sukcesów nie miało dowodu) i ustępują pod naciskiem. Słowo statusu to przeciwwaga.",
+          body: "„gotowe” znaczy, że komenda się wykonała, zwróciła kod wyjścia, a stan po niej został sprawdzony. Każdy raport kończy się jednym słowem: VERIFIED, UNVERIFIED albo FAILED. Agenci AI mierzalnie zawyżają sukces (w jednym benchmarku 75,8% ich porażek zostało zgłoszonych jako sukces) i ustępują pod naciskiem. Słowo statusu to przeciwwaga.",
         },
       ],
     },
@@ -124,11 +124,11 @@ export const pl: Content = {
         },
         {
           label: "Przy każdej komendzie w terminalu:",
-          body: "strażnik blokuje te groźne: pomijanie kontroli (--no-verify), przepisywanie albo wyrzucanie historii (force-push, twardy reset), rekursywne kasowanie poza folderami builda, scalanie innym skryptem niż ten, który żąda dowodu recenzji, sekrety wpisane w komendę i pobrany skrypt uruchomiony prosto w powłoce (curl | sh). Czyta komendę tak, jak przeczyta ją powłoka, więc widzi też komendy schowane w sh -c, $(…), w heredocach, których treść powłoka wykona, w zakodowanym PowerShellu albo w sztuczkach typu rm${IFS}-rf.",
+          body: "strażnik blokuje te groźne: pomijanie kontroli (--no-verify), przepisywanie albo wyrzucanie historii (force-push, twardy reset), rekursywne kasowanie poza folderami builda, scalanie innym skryptem niż ten, który żąda dowodu recenzji, sekrety wpisane w komendę i pobrany skrypt uruchomiony prosto w powłoce (curl | sh). Czyta komendę tak, jak przeczyta ją powłoka, więc widzi też komendy schowane w sh -c, $(…), w heredocach, których treść powłoka wykona, albo w sztuczkach typu rm${IFS}-rf. Zakodowany PowerShell na razie tylko zapisuje do dziennika.",
         },
         {
           label: "Gdy sesja się kończy:",
-          body: "bramka stop mierzy poziom ryzyka z tego, co się faktycznie zmieniło (ścieżki i rozmiar, nigdy treść polecenia), uruchamia lint, typy i testy na wszystkim, co się zmieniło, i nie zamyka sesji na poziomie T2 lub wyższym, dopóki wymagani recenzenci jej nie sprawdzą. Werdykt testów pochodzi z kodu wyjścia: błąd importu albo zero uruchomionych testów to czerwień, nie „pominięte”.",
+          body: "bramka stop mierzy poziom ryzyka z tego, co się faktycznie zmieniło (ścieżki i rozmiar, nigdy treść polecenia), uruchamia lint, typy i testy w zmienionych repozytoriach, które mają je skonfigurowane, i nie zamyka sesji na poziomie T2 lub wyższym, dopóki wymagani recenzenci jej nie sprawdzą. Werdykt testów pochodzi z kodu wyjścia: błąd importu albo zero uruchomionych testów to czerwień, nie „pominięte”.",
         },
         {
           label: "Przy każdym commicie:",
@@ -224,7 +224,7 @@ export const pl: Content = {
         },
         {
           label: "Każdy recenzent czyta swój wycinek:",
-          body: "jeden audyt pokazał, że recenzenci z diffem na 9799 linii czytali z niego około 10–30%, a zepsuty blok CSS przeszedł obok trzech z nich. Teraz skrypt tnie diff według działów, a drugi skrypt uruchamia 21 mechanicznych reguł wyszukiwania i oddaje trafienia recenzentowi do oceny.",
+          body: "jeden audyt pokazał, że recenzenci z diffem na 9799 linii czytali z niego około 10–30%, a zepsuty blok CSS przeszedł obok trzech z nich. Teraz skrypt tnie diff według działów, a drugi skrypt uruchamia 27 mechanicznych reguł wyszukiwania i oddaje trafienia recenzentowi do oceny.",
         },
         {
           label: "Dlaczego czysta karta:",
@@ -382,7 +382,7 @@ export const pl: Content = {
         },
         {
           label: "Okno kontekstu wybrane świadomie:",
-          body: "Claude mieści milion tokenów, ale każda wiadomość wysyła całość od nowa. W moich zapisach pracy okno 1M zużywało około 2,3 razy więcej tygodniowego limitu niż 400k, więc okno zostaje na 400k. Próba z 600k rusza 17 października z regułą ustaloną z góry: zostaje, jeśli tydzień skończy się poniżej 90% limitu i nic się nie zablokuje.",
+          body: "Claude mieści milion tokenów, ale każda wiadomość wysyła całość od nowa. W moich zapisach pracy okno 1M zużywało około 2,3 razy więcej tygodniowego limitu niż 400k, więc okno zostaje na 400k. Próba z 600k dostała regułę ustaloną z góry: zostaje, jeśli tydzień skończy się poniżej 90% limitu i nic się nie zablokuje. Wyniku tej próby jeszcze nie zapisałem.",
         },
       ],
     },
@@ -399,7 +399,7 @@ export const pl: Content = {
         },
         {
           label: "Rutyny patrzą tylko na żywą pracę:",
-          body: "skrypt czyta historię GitHuba i zostawia repozytoria z prawdziwą pracą w ostatnich 30 dniach, pomijając dni, w których PG przeczesywał całą flotę, tę samą zmianę rozesłaną wszędzie i boty od zależności. Dziś to 13 z 50.",
+          body: "skrypt czyta historię GitHuba i zostawia repozytoria z prawdziwą pracą w ostatnich 30 dniach, pomijając dni, w których PG przeczesywał całą flotę, tę samą zmianę rozesłaną wszędzie i boty od zależności. Na 4 listopada to 13 z 50.",
         },
         {
           label: "Czystsze liczby:",
@@ -407,7 +407,7 @@ export const pl: Content = {
         },
         {
           label: "Zrecenzowane przed wydaniem:",
-          body: "cztery rundy niezależnych recenzentów. Wyłapali między innymi, że jedna czkawka GitHuba mogła po cichu kosztować miesiąc kontroli podatności, a pusta odpowiedź GitHuba wyglądałaby jak spokojny miesiąc; oba przypadki kończą się teraz widoczną porażką.",
+          body: "kilka rund niezależnych recenzentów. Wyłapali między innymi, że jedna czkawka GitHuba mogła po cichu kosztować miesiąc kontroli podatności, a pusta odpowiedź GitHuba wyglądałaby jak spokojny miesiąc; oba przypadki kończą się teraz widoczną porażką.",
         },
       ],
     },
@@ -428,7 +428,7 @@ export const pl: Content = {
         },
         {
           label: "Co znaczy tryb utrzymania:",
-          body: "PG zmienia się tylko po incydencie, który przeszedł mimo bramek, gdy aktualizacja narzędzia albo modelu zepsuje hook, albo gdy o to poproszę. Cotygodniowa kontrola zdrowia dalej uruchamia swoje skrypty; żaden nowy mechanizm nie powstaje dla samego siebie. Jakość pracy ma wynikać z kontroli, które istnieją, a nie z ich liczby.",
+          body: "PG zmienia się tylko po incydencie, który przeszedł mimo bramek, gdy aktualizacja narzędzia albo modelu zepsuje hook, albo gdy o to poproszę. 15 listopada włączyłem z powrotem skrypt kontroli zdrowia jako cotygodniowy zegar systemowy bez wywołań modelu, a jego dawna rutyna zostaje wyłączona razem z pozostałymi; żaden nowy mechanizm nie powstaje dla samego siebie. Jakość pracy ma wynikać z kontroli, które istnieją, a nie z ich liczby.",
         },
       ],
     },
@@ -455,7 +455,7 @@ export const pl: Content = {
         },
         {
           label: "Po co to jest:",
-          body: "gdy użytkownik naciska błędnym twierdzeniem, modele zgadzają się w około 58% przypadków, a przewidują 61–77% sukcesu przy osiąganych 22–35%. Słowo statusu zmusza każde twierdzenie do pokazania dowodu albo przyznania, że go nie ma, a „jesteś pewien?” każe modelowi jeszcze raz sprawdzić dowody, zamiast grzecznie zmienić odpowiedź.",
+          body: "gdy użytkownik naciska błędnym twierdzeniem, modele w badaniach ustępują w około 58% przypadków, a w jednym benchmarku agenci przewidywali 61–77% sukcesu przy osiąganych 22–35%. Słowo statusu zmusza każde twierdzenie do pokazania dowodu albo przyznania, że go nie ma, a „jesteś pewien?” każe modelowi jeszcze raz sprawdzić dowody, zamiast grzecznie zmienić odpowiedź.",
         },
         {
           label: "W Claude Desktop i zadaniach w tle:",
@@ -491,7 +491,7 @@ export const pl: Content = {
           body: "przegląda otwarte pull requesty w aktywnych repozytoriach tak, jak zrobiłby to starszy inżynier. Mechaniczne poprawki lądują jako osobne commity z dowodem; uwagi o projekcie i bezpieczeństwie zostają komentarzami do mojej decyzji.",
         },
         {
-          label: "Kontrola zdrowia (co tydzień):",
+          label: "Kontrola zdrowia (cotygodniowy zegar systemowy, włączony 15 listopada):",
           body: "skrypty sprawdzają, czy system jakości jest dalej wpięty: hooki zarejestrowane, bramki dalej blokują, które wyjątki były użyte i która rutyna zaczęła, ale nie skończyła. Nieudany albo przerwany przebieg dowolnej rutyny to czerwień.",
         },
         {
@@ -537,7 +537,7 @@ export const pl: Content = {
       items: [
         {
           label: "Uczciwa odpowiedź:",
-          body: "jedna funkcja jest łatwa. System na 200 tysięcy linii z niespisanymi założeniami o architekturze to miejsce, gdzie spójność się rozjeżdża. Dlatego założenia są zapisane tam, gdzie skrypt może je przeczytać: dokument architektury każdego repozytorium ma czytelny dla maszyny blok warstw i zakazanych importów, a bramka pusha blokuje nowy cykl importów albo złamaną warstwę. Stare cykle tylko ostrzegają, a historycznego długu nikt nie sprząta automatycznie.",
+          body: "jedna funkcja jest łatwa. System na 200 tysięcy linii z niespisanymi założeniami o architekturze to miejsce, gdzie spójność się rozjeżdża. Dlatego założenia są zapisane tam, gdzie skrypt może je przeczytać: dokument architektury w repozytoriach z szablonu ma czytelny dla maszyny blok warstw i zakazanych importów, a bramka pusha blokuje nowy cykl importów albo złamaną warstwę. Stare cykle tylko ostrzegają, a historycznego długu nikt nie sprząta automatycznie.",
         },
         {
           label: "Sprawdzenie zasięgu przed edycją:",
@@ -546,6 +546,68 @@ export const pl: Content = {
         {
           label: "Czytelne dla człowieka:",
           body: "indeks narzędzi generuje się z nagłówków samych narzędzi, a narzędzie bez opisu pokazuje się jako dług. Każda decyzja o stylu odpowiada na jedno pytanie: czy starszy inżynier, który nigdy nie widział repozytorium, uruchomi je w 15 minut, w kolejne 15 znajdzie miejsce do zmiany i zrozumie dlaczego?",
+        },
+      ],
+    },
+
+    {
+      id: "many-sessions",
+      part: 4,
+      title: "Kilka sesji naraz, jeden koordynator",
+      lead: "14 listopada prowadziłem pięć projektów równolegle, każdy we własnej sesji Claude Code. Do pilnowania całości wyznaczyłem jedną sesję, która sama nie pisze kodu. To protokół i szablony z jednego dnia pracy (v0), nie platforma.",
+      items: [
+        {
+          label: "Podział ról:",
+          body: "koordynator jest dokładnie jeden. Prowadzi rejestr zadań i zbiera decyzje, które mogę podjąć tylko ja. Każdy projekt ma własną sesję i własną kopię roboczą repozytorium, a każdy plik ma jednego piszącego. Koordynator nie edytuje plików projektów, nie scala i nie wydaje pieniędzy.",
+        },
+        {
+          label: "Co robi w każdym obiegu:",
+          body: "sprawdza, czy sesje żyją i czy żadna nie stoi z otwartą pracą, choć nie czeka na mnie. Każde twierdzenie z raportu sprawdza u źródła: w stanie pull requesta, w historii gita, w pliku na dysku. Każde zgłoszone kiedykolwiek zadanie musi być w jednym stanie: zrobione z dowodem, w toku z właścicielem, czeka na mnie, odłożone albo porzucone z powodem. Wiersz bez właściciela to zgubione zadanie.",
+        },
+        {
+          label: "Raport sesji:",
+          body: "cztery linie: zrobione z dowodem, w toku, następne, odłożone albo porzucone z powodem. Ostatnia jest obowiązkowa, bo właśnie tam wychodzą na jaw zadania, które po cichu wypadły.",
+        },
+        {
+          label: "Kiedy przestać:",
+          body: "sesja z pustą kolejką robi jeden przegląd świeżym okiem. Przy pełnej pętli dwa przeglądy z rzędu bez poważnego znaleziska znaczą, że dalsze przebiegi niewiele dają, i praca nad tym projektem się kończy. Nie każdy projekt dostaje tę samą pętlę i ten sam próg: ustalam je dla każdego z osobna, zanim praca ruszy.",
+        },
+        {
+          label: "Czego nauczył pierwszy dzień:",
+          body: "19 lekcji, każda z zaobserwowanej awarii. Kilka z nich: trzy sesje naraz uważały się za koordynatora. Lista pull requestów podawana z pamięci była nieaktualna. Sesja stanęła przy 82% okna kontekstu i nic jej nie wznowiło. Pobłażliwy weryfikator ukrył źródło, które zawodziło: u niego 10%, u surowszego 36%. Komputer zasnął, bo blokadę uśpienia trzymała sesja, którą zarchiwizowałem.",
+        },
+        {
+          label: "Czym to nie jest:",
+          body: "nic tu nie jest zautomatyzowane: rejestr to tabela w pliku edytowana ręcznie, a koordynatora uruchamiam sam. Nie ma interfejsu, demona ani bazy danych i na razie mają nie powstać. Miarą włączenia będzie dzień, w którym przy każdym sprawdzeniu żaden wiersz nie zostaje bez właściciela i żadne twierdzenie nie trafia do mnie niesprawdzone. Takiego dnia jeszcze nie zmierzyłem. Repozytorium z protokołem jest prywatne.",
+        },
+      ],
+    },
+
+    {
+      id: "usage-loop",
+      part: 4,
+      title: "Poprawki z użycia zamiast z nowości",
+      lead: "Przez dwa miesiące dokładałem do systemu reguły z kursów, cudzych repozytoriów i własnych awarii. 15 listopada odwróciłem kierunek: raz w tygodniu skrypt liczy z logów samego systemu, które reguły warto zmienić. Nie wywołuje modelu, więc taki tydzień kosztuje zero tokenów.",
+      items: [
+        {
+          label: "Trzy pytania do logów:",
+          body: "która reguła nie zadziałała ani razu przez sześć tygodni pracy, którą bramkę omijam częściej, niż jej słucham, i który błąd recenzenci naprawiają w kółko w różnych repozytoriach. Pierwsza to kandydat do usunięcia, druga do poluzowania albo naprawy, trzeci do zamiany w automatyczne sprawdzenie.",
+        },
+        {
+          label: "Pierwszy raport na prawdziwych danych:",
+          body: "ośmiu kandydatów, z których raport pokazuje najwyżej pięciu na tydzień. Bramkę wielkości zmiany ominąłem po blokadzie 14 razy na 14. W ciągu 28 dni recenzenci doprowadzili do naprawy braku testu ścieżki błędu 36 razy w 14 repozytoriach, cichego fallbacku 22 razy w 9, niezapisanej decyzji architektonicznej 21 razy w 9 i danych wpisanych w kod 12 razy w 8.",
+        },
+        {
+          label: "Decyzja zostaje u mnie:",
+          body: "raport niczego nie blokuje, nie usuwa i nie zmienia. Przy kandydacie wpisuję „przyjęte” albo „odrzucone”, a kandydat bez decyzji wraca za tydzień. Przyjęta zmiana idzie potem zwykłą drogą: gałąź, recenzja, moja zgoda.",
+        },
+        {
+          label: "Nowe reguły tylko tam, gdzie była awaria i luka:",
+          body: "tego samego dnia zestawiłem 188 zapisanych do tego czasu awarii (4 listopada było ich 185) z tym, co bramki naprawdę widzą, i dopisałem wykrywacze tam, gdzie awaria się zdarzyła, a nic jej nie łapało. Każdy zaczyna w trybie obserwacji: zapisuje, co by zablokował, i niczego nie blokuje. Sprawdziłem je na historii. Reguła na komendy kasujące wolumeny Dockera: 0 trafień w około 5300 komendach. Hurtowe nadawanie uprawnień w migracjach: 2 pliki na 2964. Jeden wykrywacz po recenzji wyrzuciłem, bo nie miał dziś czego wykrywać.",
+        },
+        {
+          label: "Czego jeszcze nie ma:",
+          body: "pętla i wykrywacze zostały scalone 15 listopada, a tygodniowe uruchamianie jest włączone. Martwych reguł raport na razie nie wskaże, bo potrzebuje sześciu tygodni cotygodniowych migawek, a ma dopiero pierwszą. Czy system rzeczywiście poprawia się od samego używania, będzie widać po kilku tygodniach decyzji. Dziś tego nie wiem.",
         },
       ],
     },
@@ -560,11 +622,11 @@ export const pl: Content = {
       items: [
         {
           label: "Porównanie z 35 projektami open source (26 września):",
-          body: "agenci przeszli przez 35 publicznych repozytoriów z podobnym pomysłem i wypisali 23 rzeczy, które inni zrobili lepiej, każdą z plikiem i linią. Projekt zmian przeszedł recenzję bezpieczeństwa przed pierwszą linią kodu (15 problemów, z czego 3 zepsułyby samą recenzję), a każda nowa reguła strażnika przeszła przez 40 824 prawdziwe komendy z 2853 plików zapisów pracy, zanim mogła cokolwiek zablokować.",
+          body: "agenci przeszli przez 35 publicznych repozytoriów z podobnym pomysłem i z porównania wyszedł plan z 23 pozycjami, każda z plikiem i linią. Projekt zmian przeszedł recenzję bezpieczeństwa przed pierwszą linią kodu, a każda nowa reguła strażnika była odtwarzana na prawdziwych komendach z zapisów pracy, zanim mogła cokolwiek zablokować.",
         },
         {
           label: "Sześć poprawek jednego dnia (28 września):",
-          body: "bramka stop ufała wynikom testów zamiast kodom wyjścia, więc zepsuta konfiguracja testów mogła przejść jako „pominięte”. Sześć wydań później werdykt pochodzi wyłącznie z kodu wyjścia.",
+          body: "bramka stop ufała wynikom testów zamiast kodom wyjścia, więc zepsuta konfiguracja testów mogła przejść jako „pominięte”. Od wersji 1.2.2 werdykt pochodzi wyłącznie z kodu wyjścia.",
         },
         {
           label: "Trzy tygodnie w trybie utrzymania (4 listopada):",
@@ -586,7 +648,7 @@ export const pl: Content = {
       items: [
         {
           label: "Co obiecuje instalator:",
-          body: "nigdy nie nadpisze pliku, który zmieniłeś (druga wersja ląduje obok twojej), scala twoje ustawienia zamiast je zastępować i dopisuje swoje reguły między znacznikami, więc aktualizacja wymienia tylko ten blok. Hooki gita są opcjonalne. Na koniec uruchamia autotest, a dowodem jest zielony wynik, nie słowo instalatora.",
+          body: "bez --force nie nadpisze pliku, który zmieniłeś (druga wersja ląduje obok twojej; z --force najpierw robi kopię), scala twoje ustawienia zamiast je zastępować i dopisuje swoje reguły między znacznikami, więc aktualizacja wymienia tylko ten blok. Hooki gita są opcjonalne. Na koniec uruchamia autotest, a dowodem jest zielony wynik, nie słowo instalatora.",
         },
         {
           label: "Co zawiera publiczne 1.9.0:",
@@ -683,7 +745,7 @@ export const pl: Content = {
         },
         {
           title: "Samotesty",
-          leaves: ["każda bramka ma test", "pokrycie reguła → bramka", "cotygodniowy audyt"],
+          leaves: ["każda bramka ma test", "pokrycie reguła → bramka", "audyt zdrowia"],
         },
       ],
       caption:
@@ -751,7 +813,7 @@ export const pl: Content = {
         },
       ],
       caption:
-        "Poziom wynika ze ścieżek i rozmiaru zmiany, nigdy z polecenia. Bezpieczeństwo, dane i weryfikację przy T3 recenzuje najmocniejszy model.",
+        "Poziom wynika ze ścieżek i rozmiaru zmiany, nigdy z polecenia. Bezpieczeństwo przy T3 recenzuje najmocniejszy model; dane też, gdy zmiana dotyka schematu albo migracji.",
     },
     exceptions: {
       whoLabel: "kto decyduje",
@@ -777,7 +839,7 @@ export const pl: Content = {
         {
           level: "C · tylko ja",
           who: "ja, frazą wpisaną w czacie",
-          window: "30 minut, 3 użycia (60 minut przy pracy nad samym PG)",
+          window: "30 minut, 3 użycia (60 minut i do 200 użyć przy pracy nad samym PG)",
           examples:
             "zmiany w bramkach, push na main, sekrety w commicie, osłabione CI, force-push, usunięcie repozytorium",
           tone: "b",
@@ -843,11 +905,11 @@ export const pl: Content = {
         "analiza przyczyn: pięć „dlaczego”",
         "blizna + numer reguły",
         "bramka + test, że blokuje",
-        "każda reguła ma bramkę",
-        "cotygodniowy audyt",
+        "skrypt liczy reguły bez bramki",
+        "audyt zdrowia",
       ],
       caption:
-        "Pętla napędza się sama: cotygodniowy audyt wyłapuje kontrole, które przestały działać, i każda z nich staje się nową blizną.",
+        "Pętla napędza się sama: audyt zdrowia (cotygodniowy zegar, włączony 15 listopada) wyłapuje kontrole, które przestały działać, i każda z nich staje się nową blizną.",
     },
     matrix: {
       rows: [
@@ -1023,10 +1085,11 @@ export const pl: Content = {
       caption: "Agent może użyć hasła lub klucza, którego nigdy nie zobaczy.",
     },
     cadence: {
-      status: "Stan na 4 listopada: wszystkie rutyny PG wyłączone do czasu naprawy ustawień.",
+      status:
+        "Stan na 15 listopada: rutyny PG wyłączone do czasu naprawy ustawień; kontrola zdrowia działa zamiast tego jako zegar systemowy.",
       rows: [
         { name: "Recenzja pull requestów", dots: 5, freq: "dni robocze · wraca" },
-        { name: "Kontrola zdrowia", dots: 1, freq: "co tydzień · wraca" },
+        { name: "Kontrola zdrowia", dots: 1, freq: "co tydzień · zegar od 15 listopada" },
         { name: "Nadzór podatności", dots: 1, freq: "co miesiąc · wraca" },
         { name: "Kalibracja recenzentów", dots: 1, freq: "co miesiąc · zostaje wył." },
         { name: "Przegląd podobnych projektów", dots: 1, freq: "co miesiąc · zostaje wył." },
@@ -1121,14 +1184,14 @@ export const pl: Content = {
           idea: "Każda awaria staje się kontrolą",
           before: "pomyłka, a potem obietnica, że będziemy ostrożniejsi",
           after: "blizna zapisana z przyczyną, a potem nowa bramka albo punkt listy kontrolnej",
-          why: "185 prawdziwych awarii jest skatalogowanych jako blizny, a każdy punkt listy kontrolnej wskazuje jedną z nich",
+          why: "185 prawdziwych awarii jest skatalogowanych jako blizny, a każdy punkt listy kontrolnej wskazuje incydent albo źródło",
         },
         {
           idea: "Dowód, nie deklaracja",
           before: "„gotowe”, bo agent tak mówi",
           after:
             "komenda się wykonała, wynik sprawdzono, a raport kończy się słowem VERIFIED, UNVERIFIED albo FAILED",
-          why: "w jednym benchmarku 75,8% sukcesów zgłoszonych przez agentów AI nie miało dowodu",
+          why: "w jednym benchmarku 75,8% porażek agentów kodujących, którzy sami oceniali wynik, zostało zgłoszonych jako sukces",
         },
       ],
       beforeLabel: "Zamiast",
@@ -1144,7 +1207,7 @@ export const pl: Content = {
       guards: [
         {
           label: "Pieczęć:",
-          body: "sumy kontrolne na warstwie kontrolnej; zmiana poza oknem, które otworzyłem, pokazuje się w następnej sesji i w cotygodniowym audycie",
+          body: "sumy kontrolne na warstwie kontrolnej; zmiana poza oknem, które otworzyłem, pokazuje się w następnej sesji i w audycie zdrowia",
         },
         {
           label: "Rozszerzenia:",
@@ -1175,7 +1238,7 @@ export const pl: Content = {
         { title: "próba na sucho", detail: "pokazuje plan i niczego nie rusza", tone: "a" },
         {
           title: "instalacja",
-          detail: "kopiuje do ~/.claude i nigdy nie nadpisze pliku, który zmieniłeś",
+          detail: "kopiuje do ~/.claude i bez --force nie nadpisze pliku, który zmieniłeś",
           tone: "a",
         },
         {

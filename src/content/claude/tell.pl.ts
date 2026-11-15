@@ -77,7 +77,7 @@ export const tellSectionsPl: Section[] = [
     part: 6,
     title: "W 3 minuty",
     paragraphs: [
-      "Najpierw problem. Agenci AI piszą kod szybko, ale zawyżają sukces: w jednym badaniu 75,8% zgłoszonych przez nich sukcesów nie miało dowodu. Kiedy zrobiłem audyt własnych projektów, każda reguła zapisana tylko tekstem była łamana na dużą skalę: 6 z 7 repozytoriów nie miało zapisów decyzji architektonicznych, dziennik zmian był 105 commitów w tyle, a 79% commitów szło prosto na gałąź główną.",
+      "Najpierw problem. Agenci AI piszą kod szybko, ale zawyżają sukces: w jednym badaniu 75,8% ich porażek zostało zgłoszonych jako sukces. Kiedy zrobiłem audyt własnych projektów, każda reguła zapisana tylko tekstem była łamana na dużą skalę: 6 z 7 repozytoriów nie miało zapisów decyzji architektonicznych, dziennik zmian był 105 commitów w tyle, a 79% commitów szło prosto na gałąź główną.",
       "Przestałem więc pisać reguły i zamieniłem je w mechanizmy. Całość niosą trzy idee. Kontrole zamiast spisanych reguł: wszystko, co ważne, uruchamia się samo, gdy coś się dzieje; taką kontrolę nazywam bramką. Każda wpadka staje się kontrolą: 185 prawdziwych wpadek jest zapisanych jako blizny, czyli wpadki spisane razem z przyczyną, a każda bramka wskazuje tę, z której się wzięła. Dowód zamiast deklaracji: „gotowe” znaczy, że komenda się wykonała i jej wynik sprawdzono, a każdy raport kończy się słowem VERIFIED, UNVERIFIED albo FAILED.",
       "W praktyce każda zmiana dostaje poziom ryzyka liczony z tego, co naprawdę się zmieniło, nigdy z tego, jak brzmiała prośba. Dokumentacja jest nisko, płatności i logowanie wysoko, a im wyższy poziom, tym więcej sprawdzania. Ryzykowną zmianę czyta kilku recenzentów AI, niezależnie, każdy pod swoim kątem: kod, bezpieczeństwo, dane, utrzymanie. Ich uwagi łączy skrypt, nie model, a osobny weryfikator próbuje je obalić. Zmiana wchodzi do głównego kodu beze mnie tylko z dowodem recenzji, a logowanie, płatności, zmiany struktury bazy danych i zależności dalej czekają na moją frazę.",
       "I uczciwie: system jest sprawdzony w skali jednego właściciela i kilkudziesięciu repozytoriów, nie dużej firmy. Recenzenci kosztują tokeny, przy najbardziej ryzykownych zmianach osiem do dziesięciu razy tyle co jedna recenzja, więc darmowe kontrole skryptów idą pierwsze. Potok wydań nie miał jeszcze próby na żywym projekcie, a zaplanowane rutyny są wyłączone, dopóki nie naprawię ich konfiguracji.",
@@ -111,7 +111,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Dokąd zmierza.",
-        body: "Proporcja. Rutyny patrzą tylko na repozytoria z prawdziwą pracą w ostatnich 30 dniach: dziś 13 z 50. Zmiany w PG trafiają do nowych repozytoriów przez szablon, a stare repozytoria projektów zostają nietknięte, chyba że poproszę. Samo PG zmienia się teraz tylko po incydencie, który się prześlizgnął, gdy aktualizacja narzędzia albo modelu zepsuje hook, albo gdy poproszę.",
+        body: "Proporcja. Rutyny patrzą tylko na repozytoria z prawdziwą pracą w ostatnich 30 dniach: na 4 listopada 13 z 50. Zmiany w PG trafiają do nowych repozytoriów przez szablon, a stare repozytoria projektów zostają nietknięte, chyba że poproszę. Samo PG zmienia się teraz tylko po incydencie, który się prześlizgnął, gdy aktualizacja narzędzia albo modelu zepsuje hook, albo gdy poproszę.",
       },
     ],
   },
@@ -173,7 +173,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Skąd wiesz, że to działa?",
-        body: "Każda bramka ma test dowodzący, że blokuje, a cały zestaw testów ma 730 sprawdzeń. Testy mutacyjne podkładają małe błędy, żeby dowieść, że testy je łapią. Zanim nowa reguła strażnika mogła cokolwiek zablokować, przeszła przez 40 824 prawdziwe komendy.",
+        body: "Każda bramka ma test dowodzący, że blokuje, a cały zestaw testów ma 730 sprawdzeń. Testy mutacyjne podkładają małe błędy, żeby dowieść, że testy je łapią. Zanim nowa reguła strażnika mogła cokolwiek zablokować, była odtwarzana na prawdziwych komendach z zapisów pracy.",
       },
       {
         label: "Co zrobiłbyś inaczej?",
@@ -185,7 +185,7 @@ export const tellSectionsPl: Section[] = [
       },
       {
         label: "Czy inni mogą tego używać?",
-        body: "Tak. Cały system to publiczne repozytorium oczyszczone z prywatnych danych, które zainstalujesz w pięć minut z Node 20+, gitem i Claude Code. Instalator nigdy nie nadpisuje zmienionego przez ciebie pliku i kończy się samotestem, a zielony wynik jest dowodem.",
+        body: "Tak. Cały system to publiczne repozytorium oczyszczone z prywatnych danych, które zainstalujesz w pięć minut z Node 20+, gitem i Claude Code. Bez --force instalator nie nadpisze zmienionego przez ciebie pliku i kończy się samotestem, a zielony wynik jest dowodem.",
       },
       {
         label: "Jak szybko to się zmienia?",

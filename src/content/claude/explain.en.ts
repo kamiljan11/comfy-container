@@ -90,7 +90,7 @@ export const explainEn: Explains = {
     {
       id: "branch-7",
       term: "The system tests itself",
-      body: "Every check has a test proving that it blocks its own case. A script verifies that each written rule has a matching check, and a weekly audit looks for checks that stopped working. Like the test button on a smoke alarm.",
+      body: "Every check has a test proving that it blocks its own case. A script verifies that each written rule has a matching check, and a health audit (a weekly timer, switched on November 15) looks for checks that stopped working. Like the test button on a smoke alarm.",
     },
   ],
   pipe: [
@@ -250,7 +250,7 @@ export const explainEn: Explains = {
     {
       id: "row-0",
       term: "Daily pull request review",
-      body: "On weekdays an AI reads open pull requests (proposed changes) in active projects and reports problems. Active means touched in the last 30 days: 13 of 50 today. One of three routines due to return.",
+      body: "On weekdays an AI reads open pull requests (proposed changes) in active projects and reports problems. Active means touched in the last 30 days: 13 of 50 on November 4. One of three routines due to return.",
     },
     {
       id: "row-1",
@@ -601,12 +601,12 @@ export const explainEn: Explains = {
     {
       id: "compare",
       term: "Compared with others",
-      body: "Agents went through 35 public projects with a similar idea and listed 23 things they did better, each with a file and line. The design of the changes was reviewed for security before any code was written.",
+      body: "Agents went through 35 public projects with a similar idea and the comparison produced a plan of 23 items, each with a file and line. The design of the changes was reviewed for security before any code was written.",
     },
     {
       id: "patches",
       term: "Six fixes in one day",
-      body: "The stop gate believed what the tests printed instead of their exit code, the number a program returns when it ends, so a broken test setup could pass as skipped. Six patch releases later, a verdict comes only from the exit code.",
+      body: "The stop gate believed what the tests printed instead of their exit code, the number a program returns when it ends, so a broken test setup could pass as skipped. Since version 1.2.2 a verdict comes only from the exit code.",
     },
   ],
   install: [
@@ -623,7 +623,7 @@ export const explainEn: Explains = {
     {
       id: "step-2",
       term: "Install",
-      body: "Files go into ~/.claude, the folder Claude Code reads its settings from. A file you changed is never overwritten: the new version lands next to yours, settings are merged, and the rules sit between markers so an update replaces only that block.",
+      body: "Files go into ~/.claude, the folder Claude Code reads its settings from. A file you changed is not overwritten without --force: the new version lands next to yours, settings are merged, and the rules sit between markers so an update replaces only that block.",
     },
     {
       id: "step-3",

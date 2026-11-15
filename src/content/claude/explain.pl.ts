@@ -90,7 +90,7 @@ export const explainPl: Explains = {
     {
       id: "branch-7",
       term: "System testuje sam siebie",
-      body: "Każda kontrola ma test dowodzący, że naprawdę blokuje swój przypadek. Skrypt sprawdza, czy do każdej spisanej reguły jest kontrola, a cotygodniowy audyt szuka tych, które przestały działać. Jak przycisk testowy w czujniku dymu.",
+      body: "Każda kontrola ma test dowodzący, że naprawdę blokuje swój przypadek. Skrypt sprawdza, czy do każdej spisanej reguły jest kontrola, a audyt zdrowia (cotygodniowy zegar, włączony 15 listopada) szuka tych, które przestały działać. Jak przycisk testowy w czujniku dymu.",
     },
   ],
   pipe: [
@@ -250,7 +250,7 @@ export const explainPl: Explains = {
     {
       id: "row-0",
       term: "Codzienny przegląd pull requestów",
-      body: "W dni robocze AI czyta otwarte pull requesty (propozycje zmian) w aktywnych projektach i zgłasza problemy. Aktywny znaczy ruszany w ostatnich 30 dniach: dziś 13 z 50. Jedna z trzech rutyn, które mają wrócić.",
+      body: "W dni robocze AI czyta otwarte pull requesty (propozycje zmian) w aktywnych projektach i zgłasza problemy. Aktywny znaczy ruszany w ostatnich 30 dniach: na 4 listopada 13 z 50. Jedna z trzech rutyn, które mają wrócić.",
     },
     {
       id: "row-1",
@@ -601,12 +601,12 @@ export const explainPl: Explains = {
     {
       id: "compare",
       term: "Porównanie z innymi",
-      body: "Agenci przeszli przez 35 publicznych projektów o podobnym pomyśle i wypisali 23 rzeczy, które inni robili lepiej, każdą z plikiem i linią. Projekt zmian przeszedł przegląd bezpieczeństwa, zanim powstała jakakolwiek linia kodu.",
+      body: "Agenci przeszli przez 35 publicznych projektów o podobnym pomyśle i z porównania wyszedł plan z 23 pozycjami, każda z plikiem i linią. Projekt zmian przeszedł przegląd bezpieczeństwa, zanim powstała jakakolwiek linia kodu.",
     },
     {
       id: "patches",
       term: "Sześć poprawek jednego dnia",
-      body: "Bramka końca sesji wierzyła temu, co wypisały testy, a nie ich kodowi wyjścia, czyli liczbie, którą program zwraca na koniec, więc zepsuta konfiguracja testów mogła przejść jako pominięta. Sześć wydań później werdykt pochodzi tylko z kodu wyjścia.",
+      body: "Bramka końca sesji wierzyła temu, co wypisały testy, a nie ich kodowi wyjścia, czyli liczbie, którą program zwraca na koniec, więc zepsuta konfiguracja testów mogła przejść jako pominięta. Od wersji 1.2.2 werdykt pochodzi tylko z kodu wyjścia.",
     },
   ],
   install: [
@@ -623,7 +623,7 @@ export const explainPl: Explains = {
     {
       id: "step-2",
       term: "Instalacja",
-      body: "Pliki trafiają do ~/.claude, folderu, z którego Claude Code czyta ustawienia. Plik, który zmieniłeś, nigdy nie jest nadpisywany: nowa wersja ląduje obok twojej, ustawienia są scalane, a reguły stoją między znacznikami, więc aktualizacja wymienia tylko ten blok.",
+      body: "Pliki trafiają do ~/.claude, folderu, z którego Claude Code czyta ustawienia. Plik, który zmieniłeś, nie jest nadpisywany bez --force: nowa wersja ląduje obok twojej, ustawienia są scalane, a reguły stoją między znacznikami, więc aktualizacja wymienia tylko ten blok.",
     },
     {
       id: "step-3",
