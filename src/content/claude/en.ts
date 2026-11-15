@@ -228,7 +228,7 @@ export const en: Content = {
         },
         {
           label: "Each reviewer reads its own slice:",
-          body: "one audit found that reviewers given a 9,799-line diff read about 10 to 30 % of it, and a broken CSS block went past three of them. Now a script cuts the diff by department, and a second script runs 23 mechanical search rules and hands the hits to the reviewer to judge.",
+          body: "one audit found that reviewers given a 9,799-line diff read about 10 to 30 % of it, and a broken CSS block went past three of them. Now a script cuts the diff by department, and a second script runs 27 mechanical search rules and hands the hits to the reviewer to judge.",
         },
         {
           label: "Why a clean slate:",
@@ -432,7 +432,7 @@ export const en: Content = {
         },
         {
           label: "What maintenance mode means:",
-          body: "PG changes only after an incident that slipped through, when a tool or model update breaks a hook, or when I ask. The health-check script still exists, but I run it by hand, because its weekly routine is switched off with the others; no new mechanism is added for its own sake. The quality of the work should come from the checks that exist, not from the number of checks.",
+          body: "PG changes only after an incident that slipped through, when a tool or model update breaks a hook, or when I ask. Since November 15 the health-check script runs weekly again, as a plain system timer that calls no model, while its old routine stays off with the others; no new mechanism is added for its own sake. The quality of the work should come from the checks that exist, not from the number of checks.",
         },
       ],
     },
@@ -495,7 +495,7 @@ export const en: Content = {
           body: "reviews open pull requests in the active repositories the way a senior engineer would. Mechanical fixes land as separate commits with proof; design and security findings stay as comments for me.",
         },
         {
-          label: "Health check (meant to be weekly, by hand for now):",
+          label: "Health check (weekly, a system timer since November 15):",
           body: "script checks that the quality system is still wired in: hooks registered, gates still blocking, which escape hatches were used, and which routine started but never finished. A failed or interrupted run of any routine is red.",
         },
         {
@@ -607,11 +607,11 @@ export const en: Content = {
         },
         {
           label: "New rules only where there was a failure and a gap:",
-          body: "the same day I compared 188 recorded failures with what the gates actually see, and added detectors where a failure had happened and nothing caught it. Each one starts in observe mode: it records what it would have blocked and blocks nothing. I ran them against history. The rule for commands that delete Docker volumes: 0 hits in about 5,300 commands. Bulk permission grants in migrations: 2 files out of 2,964. I threw one detector out after review, because today it had nothing to detect.",
+          body: "the same day I compared the 188 failures recorded by then (185 on November 4) with what the gates actually see, and added detectors where a failure had happened and nothing caught it. Each one starts in observe mode: it records what it would have blocked and blocks nothing. I ran them against history. The rule for commands that delete Docker volumes: 0 hits in about 5,300 commands. Bulk permission grants in migrations: 2 files out of 2,964. I threw one detector out after review, because today it had nothing to detect.",
         },
         {
           label: "What is not there yet:",
-          body: "the loop and the detectors are built and tested, but they sit on branches waiting for my merge, and the weekly run is not switched on. The report cannot point at dead rules yet, because it needs six weekly snapshots and has none. Whether the system really improves just from being used will show after a few weeks of decisions. Today I do not know.",
+          body: "the loop and the detectors were merged on November 15 and the weekly run is switched on. The report cannot point at dead rules yet, because it needs six weeks of weekly snapshots and has only the first. Whether the system really improves just from being used will show after a few weeks of decisions. Today I do not know.",
         },
       ],
     },
@@ -909,7 +909,7 @@ export const en: Content = {
         "health audit",
       ],
       caption:
-        "The loop feeds itself: the health audit (run by hand for now) finds checks that stopped working, and each becomes a new scar.",
+        "The loop feeds itself: the health audit (weekly since November 15) finds checks that stopped working, and each becomes a new scar.",
     },
     matrix: {
       rows: [
@@ -1088,7 +1088,7 @@ export const en: Content = {
       status: "Status on November 4: all PG routines switched off until their setup is fixed.",
       rows: [
         { name: "Pull request review", dots: 5, freq: "weekdays · returns" },
-        { name: "Health check", dots: 1, freq: "weekly · returns" },
+        { name: "Health check", dots: 1, freq: "weekly · on again (timer)" },
         { name: "Vulnerability watch", dots: 1, freq: "monthly · returns" },
         { name: "Reviewer calibration", dots: 1, freq: "monthly · stays off" },
         { name: "Look at similar projects", dots: 1, freq: "monthly · stays off" },

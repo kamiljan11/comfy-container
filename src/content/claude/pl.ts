@@ -224,7 +224,7 @@ export const pl: Content = {
         },
         {
           label: "Każdy recenzent czyta swój wycinek:",
-          body: "jeden audyt pokazał, że recenzenci z diffem na 9799 linii czytali z niego około 10–30%, a zepsuty blok CSS przeszedł obok trzech z nich. Teraz skrypt tnie diff według działów, a drugi skrypt uruchamia 23 mechaniczne reguły wyszukiwania i oddaje trafienia recenzentowi do oceny.",
+          body: "jeden audyt pokazał, że recenzenci z diffem na 9799 linii czytali z niego około 10–30%, a zepsuty blok CSS przeszedł obok trzech z nich. Teraz skrypt tnie diff według działów, a drugi skrypt uruchamia 27 mechanicznych reguł wyszukiwania i oddaje trafienia recenzentowi do oceny.",
         },
         {
           label: "Dlaczego czysta karta:",
@@ -428,7 +428,7 @@ export const pl: Content = {
         },
         {
           label: "Co znaczy tryb utrzymania:",
-          body: "PG zmienia się tylko po incydencie, który przeszedł mimo bramek, gdy aktualizacja narzędzia albo modelu zepsuje hook, albo gdy o to poproszę. Skrypt kontroli zdrowia dalej istnieje, ale uruchamiam go ręcznie, bo jego cotygodniowa rutyna jest wyłączona razem z pozostałymi; żaden nowy mechanizm nie powstaje dla samego siebie. Jakość pracy ma wynikać z kontroli, które istnieją, a nie z ich liczby.",
+          body: "PG zmienia się tylko po incydencie, który przeszedł mimo bramek, gdy aktualizacja narzędzia albo modelu zepsuje hook, albo gdy o to poproszę. Od 15 listopada skrypt kontroli zdrowia znowu działa co tydzień, jako zwykły zegar systemowy bez wywołań modelu, a jego dawna rutyna zostaje wyłączona razem z pozostałymi; żaden nowy mechanizm nie powstaje dla samego siebie. Jakość pracy ma wynikać z kontroli, które istnieją, a nie z ich liczby.",
         },
       ],
     },
@@ -491,7 +491,7 @@ export const pl: Content = {
           body: "przegląda otwarte pull requesty w aktywnych repozytoriach tak, jak zrobiłby to starszy inżynier. Mechaniczne poprawki lądują jako osobne commity z dowodem; uwagi o projekcie i bezpieczeństwie zostają komentarzami do mojej decyzji.",
         },
         {
-          label: "Kontrola zdrowia (docelowo co tydzień, dziś ręcznie):",
+          label: "Kontrola zdrowia (co tydzień, zegar systemowy od 15 listopada):",
           body: "skrypty sprawdzają, czy system jakości jest dalej wpięty: hooki zarejestrowane, bramki dalej blokują, które wyjątki były użyte i która rutyna zaczęła, ale nie skończyła. Nieudany albo przerwany przebieg dowolnej rutyny to czerwień.",
         },
         {
@@ -603,11 +603,11 @@ export const pl: Content = {
         },
         {
           label: "Nowe reguły tylko tam, gdzie była awaria i luka:",
-          body: "tego samego dnia zestawiłem 188 zapisanych awarii z tym, co bramki naprawdę widzą, i dopisałem wykrywacze tam, gdzie awaria się zdarzyła, a nic jej nie łapało. Każdy zaczyna w trybie obserwacji: zapisuje, co by zablokował, i niczego nie blokuje. Sprawdziłem je na historii. Reguła na komendy kasujące wolumeny Dockera: 0 trafień w około 5300 komendach. Hurtowe nadawanie uprawnień w migracjach: 2 pliki na 2964. Jeden wykrywacz po recenzji wyrzuciłem, bo nie miał dziś czego wykrywać.",
+          body: "tego samego dnia zestawiłem 188 zapisanych do tego czasu awarii (4 listopada było ich 185) z tym, co bramki naprawdę widzą, i dopisałem wykrywacze tam, gdzie awaria się zdarzyła, a nic jej nie łapało. Każdy zaczyna w trybie obserwacji: zapisuje, co by zablokował, i niczego nie blokuje. Sprawdziłem je na historii. Reguła na komendy kasujące wolumeny Dockera: 0 trafień w około 5300 komendach. Hurtowe nadawanie uprawnień w migracjach: 2 pliki na 2964. Jeden wykrywacz po recenzji wyrzuciłem, bo nie miał dziś czego wykrywać.",
         },
         {
           label: "Czego jeszcze nie ma:",
-          body: "pętla i wykrywacze są zbudowane i przetestowane, ale czekają na gałęziach na moje scalenie, a tygodniowe uruchamianie nie jest włączone. Martwych reguł raport na razie nie wskaże, bo potrzebuje sześciu tygodniowych migawek, a nie ma jeszcze żadnej. Czy system rzeczywiście poprawia się od samego używania, będzie widać po kilku tygodniach decyzji. Dziś tego nie wiem.",
+          body: "pętla i wykrywacze zostały scalone 15 listopada, a tygodniowe uruchamianie jest włączone. Martwych reguł raport na razie nie wskaże, bo potrzebuje sześciu tygodni cotygodniowych migawek, a ma dopiero pierwszą. Czy system rzeczywiście poprawia się od samego używania, będzie widać po kilku tygodniach decyzji. Dziś tego nie wiem.",
         },
       ],
     },
@@ -909,7 +909,7 @@ export const pl: Content = {
         "audyt zdrowia",
       ],
       caption:
-        "Pętla napędza się sama: audyt zdrowia (dziś uruchamiany ręcznie) wyłapuje kontrole, które przestały działać, i każda z nich staje się nową blizną.",
+        "Pętla napędza się sama: audyt zdrowia (co tydzień od 15 listopada) wyłapuje kontrole, które przestały działać, i każda z nich staje się nową blizną.",
     },
     matrix: {
       rows: [
@@ -1088,7 +1088,7 @@ export const pl: Content = {
       status: "Stan na 4 listopada: wszystkie rutyny PG wyłączone do czasu naprawy ustawień.",
       rows: [
         { name: "Recenzja pull requestów", dots: 5, freq: "dni robocze · wraca" },
-        { name: "Kontrola zdrowia", dots: 1, freq: "co tydzień · wraca" },
+        { name: "Kontrola zdrowia", dots: 1, freq: "co tydzień · znowu działa (zegar)" },
         { name: "Nadzór podatności", dots: 1, freq: "co miesiąc · wraca" },
         { name: "Kalibracja recenzentów", dots: 1, freq: "co miesiąc · zostaje wył." },
         { name: "Przegląd podobnych projektów", dots: 1, freq: "co miesiąc · zostaje wył." },

@@ -44,6 +44,25 @@ Checkout `kamiljan11/coding-higher-mind`, commit `7c26d75` (PG 1.9.0).
 | okno 1M = ok. 2,3x limitu vs 400k                            | szacunek z transkryptow sesji (globalne instrukcje agenta, sekcja o higienie kontekstu)                                               | szacunek, tak opisany na stronie |
 | 4,9 -> 0,9 KB, 35 -> 25 KB                                   | wpisy `[1.4.0]` i `[1.8.0]` w publicznym `CHANGELOG.md`                                                                               | jak obok                         |
 
+## Sekcje dopisane 15 listopada (koordynator wielu sesji, petla uzycia)
+
+Stan tych liczb: 15 listopada 2026, `~/.claude` main `f404c63` (reszta strony nadal ma stan z 4 listopada). Kiedy przeliczac:
+po kazdym tygodniowym przebiegu petli zmieniaja sie liczby z "pierwszego raportu" — strona podaje pierwszy raport z data, wiec
+przeliczasz dopiero, gdy zdanie przestaje byc prawda (np. raport zacznie wskazywac martwe reguly).
+
+| liczba na stronie                                                         | komenda / zrodlo                                                                                                                                                                                  | wynik 15.11              |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| 27 mechanicznych regul wyszukiwania                                       | `grep -c "^\s*{ *id:" bin/pg-prechecks.js` w `~/.claude` (przed 15.11: 23)                                                                                                                        | 27                       |
+| 60 minut i do 200 uzyc frazy dla pracy nad PG (zwykle 30 minut, 3 uzycia) | `hooks/lib/overrides.js`, wpis `ALLOW_CONTROL_PLANE: { ttlMin: 60, uses: 200 }` i wartosci domyslne w tym pliku                                                                                   | 60 / 200                 |
+| 8 kandydatow, max 5 tygodniowo                                            | sekcja `PETLA UZYCIA` w logu `hooks/guard_health.py` (pierwszy przebieg 15.11); limit 5 = `pg/usage-loop.json`                                                                                    | 8 ; 5                    |
+| bramka rozmiaru zmiany obejsciem 13 z 13                                  | ta sama sekcja, kandydat `noisy-hook:LARGE_DIFF` (pierwszy raport rano 15.11; kolejne przebiegi licza dalej)                                                                                      | 13/13                    |
+| 36 w 14 repo, 22 w 9, 21 w 9, 12 w 8 (okno 28 dni)                        | sekcja `PETLA UZYCIA` (kandydaci `recurring:*`: naprawione w oknie 28 dni + liczba repo); sam `grep -c` na `logs/review-outcomes.jsonl` liczy cala historie, wiec daje wiecej (np. 43 zamiast 36) | jak obok                 |
+| 6 tygodni migawek przed wskazaniem martwych regul                         | `pg/usage-loop.json` (okno) i `pg/adr/0013-petla-uzycia-raport-kandydatow.md`                                                                                                                     | 6 tygodni                |
+| 188 zapisanych awarii (185 na 4 listopada)                                | `pg/adr/0014-wyzwalacze-z-blizn-observe.md`, akapit "Kontekst"; `grep -cE '^\| [A-Z][A-Z0-9-]+ \|' pg/cases.md` w dniu pomiaru                                                                    | 188                      |
+| 0 trafien w ok. 5300 komendach Dockera                                    | ADR-0014, wiersz 1 tabeli (replay na 8778 transkryptach)                                                                                                                                          | 0 / ok. 5300             |
+| 2 pliki na 2964 migracje                                                  | ADR-0014, wiersz 3 tabeli (26 repo)                                                                                                                                                               | 2 / 2964                 |
+| 19 lekcji, 82 % okna, 10 % -> 36 %                                        | `LESSONS.md` w prywatnym repo `claude-orchestrator` (wiersze 3 i 8; liczba wierszy tabeli = 19)                                                                                                   | 19 ; 82 % ; 10 % -> 36 % |
+
 ## GitHub (konto kamiljan11)
 
 | liczba na stronie                            | komenda                                                                                                                       | wynik 4.11  |

@@ -90,7 +90,7 @@ export const explainEn: Explains = {
     {
       id: "branch-7",
       term: "The system tests itself",
-      body: "Every check has a test proving that it blocks its own case. A script verifies that each written rule has a matching check, and a health audit (run by hand for now) looks for checks that stopped working. Like the test button on a smoke alarm.",
+      body: "Every check has a test proving that it blocks its own case. A script verifies that each written rule has a matching check, and a health audit (weekly since November 15) looks for checks that stopped working. Like the test button on a smoke alarm.",
     },
   ],
   pipe: [
