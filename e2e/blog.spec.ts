@@ -1,5 +1,6 @@
 // The blog: a list at /blog and one page per post from src/data/posts.ts.
 import { test, expect } from "@playwright/test";
+import { POSTS } from "../src/data/posts";
 
 const EXTERNAL = "https://torzeszow.pl/news/oszusci-moga-podrobic-glos-wnuczka";
 
@@ -37,7 +38,7 @@ test("a post published elsewhere is labelled on the list and opens out in a new 
   });
   await expect(card.locator(".blog-source")).toContainText("toRzeszów.pl");
   // only the external posts carry the label
-  await expect(page.locator(".blog-source")).toHaveCount(4);
+  await expect(page.locator(".blog-source")).toHaveCount(5);
 
   await card.locator("h2 a").click();
   await expect(page).toHaveURL(/\/blog\/oszusci-moga-podrobic-glos-wnuczka/);
@@ -78,12 +79,17 @@ test("an unknown post is a 404, not an empty page", async ({ page }) => {
   expect(res?.status()).toBe(404);
 });
 
+// The first post made from a film (video-pipeline adds a `youtube` block after the
+// first paragraph); skipped until one is published.
+const FILM = POSTS.find((p) => p.body.pl.blocks.some((x) => x.t === "youtube"));
+
 test("a video post contacts YouTube only after the reader clicks play", async ({ page }) => {
+  test.skip(!FILM, "no post with a youtube block yet");
   const youtube: string[] = [];
   page.on("request", (r) => {
     if (/youtube|ytimg|googlevideo/.test(r.url())) youtube.push(r.url());
   });
-  await page.goto("/blog/95-procent-firm-bez-zwrotu-z-ai?lang=pl");
+  await page.goto(`/blog/${FILM?.slug}?lang=pl`);
   await page.waitForLoadState("networkidle");
   const play = page.getByRole("button", { name: /Odtwórz film/ });
   await play.scrollIntoViewIfNeeded();
@@ -95,10 +101,14 @@ test("a video post contacts YouTube only after the reader clicks play", async ({
   await expect(frame).toBeFocused();
   await expect(frame).toHaveAttribute(
     "src",
-    "https://www.youtube-nocookie.com/embed/DogPvuwTPBI?autoplay=1&rel=0",
+    /^https:\/\/www\.youtube-nocookie\.com\/embed\/[\w-]{11}\?autoplay=1&rel=0$/,
   );
-  await expect(page.locator(".post-video figcaption a")).toHaveAttribute(
-    "href",
-    "https://www.youtube.com/watch?v=DogPvuwTPBI",
+  await expect(frame).toHaveAttribute("allowfullscreen", "");
+  // 16:9 box that never runs wider than the page
+  const box = await frame.boundingBox();
+  expect(box && Math.abs(box.width / box.height - 16 / 9)).toBeLessThan(0.02);
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
   );
+  expect(overflow).toBeLessThanOrEqual(1);
 });

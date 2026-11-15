@@ -30,7 +30,15 @@ export function AiArch({ t }: { t: ArchLabels }) {
           </marker>
         </defs>
 
-        <rect x="270" y="10" width="220" height="48" rx="9" className="aid-box aid-strong" />
+        <rect
+          data-explain="kamil"
+          x="270"
+          y="10"
+          width="220"
+          height="48"
+          rx="9"
+          className="aid-box aid-strong"
+        />
         <text x="380" y="31" textAnchor="middle" className="aid-t">
           {t.kamil}
         </text>
@@ -41,7 +49,15 @@ export function AiArch({ t }: { t: ArchLabels }) {
         <path d="M340 58 L275 92" className="aid-ln" markerEnd="url(#aiar)" />
         <path d="M420 58 L485 92" className="aid-ln" markerEnd="url(#aiar)" />
 
-        <rect x="150" y="96" width="210" height="76" rx="9" className="aid-box" />
+        <rect
+          data-explain="code"
+          x="150"
+          y="96"
+          width="210"
+          height="76"
+          rx="9"
+          className="aid-box"
+        />
         <text x="255" y="119" textAnchor="middle" className="aid-t">
           {t.code}
         </text>
@@ -52,7 +68,15 @@ export function AiArch({ t }: { t: ArchLabels }) {
           {t.codeSub2}
         </text>
 
-        <rect x="400" y="96" width="210" height="76" rx="9" className="aid-box" />
+        <rect
+          data-explain="cowork"
+          x="400"
+          y="96"
+          width="210"
+          height="76"
+          rx="9"
+          className="aid-box"
+        />
         <text x="505" y="119" textAnchor="middle" className="aid-t">
           {t.cowork}
         </text>
@@ -73,7 +97,15 @@ export function AiArch({ t }: { t: ArchLabels }) {
           {t.shared}
         </text>
 
-        <rect x="16" y="96" width="108" height="56" rx="9" className="aid-box aid-side" />
+        <rect
+          data-explain="vault"
+          x="16"
+          y="96"
+          width="108"
+          height="56"
+          rx="9"
+          className="aid-box aid-side"
+        />
         <text x="70" y="119" textAnchor="middle" className="aid-t">
           {t.vault}
         </text>
@@ -88,7 +120,15 @@ export function AiArch({ t }: { t: ArchLabels }) {
           {t.vaultNote2}
         </text>
 
-        <rect x="636" y="96" width="108" height="56" rx="9" className="aid-box aid-side" />
+        <rect
+          data-explain="memory"
+          x="636"
+          y="96"
+          width="108"
+          height="56"
+          rx="9"
+          className="aid-box aid-side"
+        />
         <text x="690" y="119" textAnchor="middle" className="aid-t">
           {t.memory}
         </text>
@@ -110,7 +150,15 @@ export function AiArch({ t }: { t: ArchLabels }) {
 
         <path d="M255 172 L255 208" className="aid-ln" markerEnd="url(#aiar)" />
         <path d="M505 172 L505 208" className="aid-ln" markerEnd="url(#aiar)" />
-        <rect x="150" y="212" width="460" height="42" rx="9" className="aid-band" />
+        <rect
+          data-explain="gates"
+          x="150"
+          y="212"
+          width="460"
+          height="42"
+          rx="9"
+          className="aid-band"
+        />
         <text x="380" y="230" textAnchor="middle" className="aid-t aid-accent">
           {t.gates}
         </text>
@@ -120,7 +168,15 @@ export function AiArch({ t }: { t: ArchLabels }) {
 
         <path d="M380 254 L380 290" className="aid-ln" markerEnd="url(#aiar)" />
         {/* one band, not a row of project names: PG is the layer under every project, whichever it is */}
-        <rect x="150" y="294" width="460" height="44" rx="9" className="aid-box aid-prod" />
+        <rect
+          data-explain="projects"
+          x="150"
+          y="294"
+          width="460"
+          height="44"
+          rx="9"
+          className="aid-box aid-prod"
+        />
         <text x="380" y="313" textAnchor="middle" className="aid-t">
           {t.projects}
         </text>
@@ -168,7 +224,7 @@ export function AiMindMap({ t }: { t: MindLabels }) {
           const c1x = left ? ax + 70 : ax - 70;
           const c2x = left ? cx - 90 : cx + 90;
           return (
-            <g key={b.title}>
+            <g key={b.title} data-explain={`branch-${String(i)}`}>
               <path
                 d={`M${ax} ${ay} C ${c1x} ${ay}, ${c2x} ${cy}, ${cx} ${cy}`}
                 className="aid-ln aid-thin"
@@ -193,7 +249,7 @@ export function AiMindMap({ t }: { t: MindLabels }) {
             </g>
           );
         })}
-        <circle cx={cx} cy={cy} r="64" className="aid-box aid-strong" />
+        <circle data-explain="center" cx={cx} cy={cy} r="64" className="aid-box aid-strong" />
         <text x={cx} y={cy - 4} textAnchor="middle" className="aid-t aid-accent">
           {t.center}
         </text>
@@ -252,7 +308,15 @@ export function AiPipeline({ t }: { t: PipeLabels }) {
           </marker>
         </defs>
         <path d={`M${x0 - 20} 62 L${x1 + 20} 62`} className="aid-ln" markerEnd="url(#aipr)" />
-        <rect x="690" y="45" width="60" height="34" rx="8" className="aid-box aid-strong" />
+        <rect
+          data-explain="live"
+          x="690"
+          y="45"
+          width="60"
+          height="34"
+          rx="8"
+          className="aid-box aid-strong"
+        />
         <text x="720" y="66" textAnchor="middle" className="aid-t aid-accent">
           {t.live}
         </text>
@@ -263,7 +327,7 @@ export function AiPipeline({ t }: { t: PipeLabels }) {
           // vertically centre however many lines this chip has
           const firstLine = y + chipH / 2 - ((lines.length - 1) * CHIP_LINE) / 2 + 3.5;
           return (
-            <g key={i}>
+            <g key={i} data-explain={`stage-${String(i)}`}>
               <circle cx={x} cy="62" r="5" className="aid-node" />
               <text x={x} y={i % 2 === 0 ? 42 : 28} textAnchor="middle" className="aid-s aid-stage">
                 {t.stages[i]}
@@ -341,13 +405,29 @@ export function AiReview({ t }: { t: ReviewLabels }) {
             <path d="M0 0 L8 4 L0 8 Z" className="aid-arrowhead" />
           </marker>
         </defs>
-        <rect x="16" y="70" width="128" height="48" rx="9" className="aid-box aid-strong" />
+        <rect
+          data-explain="orchestrator"
+          x="16"
+          y="70"
+          width="128"
+          height="48"
+          rx="9"
+          className="aid-box aid-strong"
+        />
         <text x="80" y="98" textAnchor="middle" className="aid-t">
           {t.orchestrator}
         </text>
 
         <path d="M144 94 L176 94" className="aid-ln" markerEnd="url(#airv)" />
-        <rect x="180" y={bandY} width="130" height={bandH} rx="9" className="aid-band" />
+        <rect
+          data-explain="gates"
+          x="180"
+          y={bandY}
+          width="130"
+          height={bandH}
+          rx="9"
+          className="aid-band"
+        />
         {gateLines.map((line, j) => (
           <text
             key={j}
@@ -369,7 +449,7 @@ export function AiReview({ t }: { t: ReviewLabels }) {
         </text>
 
         {t.finders.map((f, i) => (
-          <g key={f}>
+          <g key={f} data-explain={`finder-${String(i)}`}>
             <path
               d={`M310 94 L346 ${34 + i * 40}`}
               className="aid-ln aid-thin"
@@ -394,7 +474,15 @@ export function AiReview({ t }: { t: ReviewLabels }) {
           </g>
         ))}
 
-        <rect x="508" y={aggY} width="112" height={aggH} rx="9" className="aid-box" />
+        <rect
+          data-explain="aggregate"
+          x="508"
+          y={aggY}
+          width="112"
+          height={aggH}
+          rx="9"
+          className="aid-box"
+        />
         <text x="564" y={aggY + 22} textAnchor="middle" className="aid-t">
           {t.aggregate}
         </text>
@@ -409,7 +497,15 @@ export function AiReview({ t }: { t: ReviewLabels }) {
           className="aid-ln"
           markerEnd="url(#airv)"
         />
-        <rect x="508" y="152" width="112" height="48" rx="9" className="aid-box aid-strong" />
+        <rect
+          data-explain="verifier"
+          x="508"
+          y="152"
+          width="112"
+          height="48"
+          rx="9"
+          className="aid-box aid-strong"
+        />
         <text x="564" y="172" textAnchor="middle" className="aid-t">
           {t.verifier}
         </text>
@@ -418,7 +514,15 @@ export function AiReview({ t }: { t: ReviewLabels }) {
         </text>
 
         <path d="M620 94 L654 94" className="aid-ln" markerEnd="url(#airv)" />
-        <rect x="658" y="70" width="92" height="48" rx="9" className="aid-box aid-prod" />
+        <rect
+          data-explain="fixer"
+          x="658"
+          y="70"
+          width="92"
+          height="48"
+          rx="9"
+          className="aid-box aid-prod"
+        />
         <text x="704" y="98" textAnchor="middle" className="aid-s aid-prod-t">
           {t.fixer}
         </text>
@@ -486,7 +590,7 @@ export function AiLoop({ t }: { t: LoopLabels }) {
           const l1 = words.slice(0, mid).join(" ");
           const l2 = words.slice(mid).join(" ");
           return (
-            <g key={i}>
+            <g key={i} data-explain={`step-${String(i)}`}>
               <rect
                 x={p.x - 64}
                 y={p.y - 20}
@@ -530,7 +634,15 @@ export function AiVaultFlow({ t }: { t: VaultLabels }) {
             <path d="M0 0 L8 4 L0 8 Z" className="aid-arrowhead" />
           </marker>
         </defs>
-        <rect x="40" y="24" width="160" height="52" rx="9" className="aid-box aid-strong" />
+        <rect
+          data-explain="vault"
+          x="40"
+          y="24"
+          width="160"
+          height="52"
+          rx="9"
+          className="aid-box aid-strong"
+        />
         <text x="120" y="46" textAnchor="middle" className="aid-t">
           {t.vault}
         </text>
@@ -538,7 +650,15 @@ export function AiVaultFlow({ t }: { t: VaultLabels }) {
           {t.vaultSub}
         </text>
         <path d="M200 50 L296 50" className="aid-ln" markerEnd="url(#aivr)" />
-        <rect x="300" y="24" width="150" height="52" rx="9" className="aid-box" />
+        <rect
+          data-explain="bridge"
+          x="300"
+          y="24"
+          width="150"
+          height="52"
+          rx="9"
+          className="aid-box"
+        />
         <text x="375" y="46" textAnchor="middle" className="aid-t">
           {t.bridge}
         </text>
@@ -546,7 +666,15 @@ export function AiVaultFlow({ t }: { t: VaultLabels }) {
           {t.bridgeSub}
         </text>
         <path d="M450 50 L546 50" className="aid-ln" markerEnd="url(#aivr)" />
-        <rect x="550" y="24" width="172" height="52" rx="9" className="aid-box" />
+        <rect
+          data-explain="target"
+          x="550"
+          y="24"
+          width="172"
+          height="52"
+          rx="9"
+          className="aid-box"
+        />
         <text x="636" y="46" textAnchor="middle" className="aid-t">
           {t.target}
         </text>
@@ -555,6 +683,7 @@ export function AiVaultFlow({ t }: { t: VaultLabels }) {
         </text>
         {t.never.map((n, i) => (
           <text
+            data-explain="never"
             key={n}
             x={380 + (i - 1) * 110}
             y="106"
@@ -580,8 +709,8 @@ export function AiCadence({ t }: { t: CadenceLabels }) {
     <figure className="cad-fig">
       <p className="cad-status">{t.status}</p>
       <ul className="cad-grid">
-        {t.rows.map((r) => (
-          <li className="cad-row" key={r.name}>
+        {t.rows.map((r, i) => (
+          <li className="cad-row" key={r.name} data-explain={`row-${String(i)}`}>
             <span className="cad-name">{r.name}</span>
             <span className="cad-dots" aria-hidden="true">
               {r.manual ? (

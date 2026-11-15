@@ -30,4 +30,6 @@ never press play, and the privacy policy says the site uses no third-party cooki
 
 - Poster must be refreshed by hand if the YouTube thumbnail changes.
 - Tests check the id, the title and that the poster exists on disk.
+- Recurring cost: none (YouTube embeds are free; no new dependency or service).
+- Posts made by video-pipeline (`publish_post.py`) get the block after their first paragraph, with the post's cover as the poster (2026-11-15, PR #117).
 - Changing the player provider (or loading it before the click) means updating the privacy policy (`src/data/privacy.ts`) in the same PR.

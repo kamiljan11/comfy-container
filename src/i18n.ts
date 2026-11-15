@@ -12,6 +12,8 @@ interface SiteTranslation {
     partner: string;
   };
   pains: { label: string; title: string; lead: string };
+  // What sets Kamil apart from other engineers: business context and building only what pays off.
+  difference: { label: string; title: string; p1: string; p2a: string; p2b: string; p2c: string };
   solutions: { label: string; title: string; lead: string; more: string; proofLabel: string };
   stats: string[];
   about: {
@@ -61,6 +63,14 @@ export const T: Record<Lang, SiteTranslation> = {
       label: "Sound familiar?",
       title: "Problems I get called in for",
       lead: "Sometimes one order is enough for it to hurt, and every next one makes it worse.",
+    },
+    difference: {
+      label: "The difference",
+      title: "Business context, not just code",
+      p1: "Most engineers start from the technology. I start from the business, because I have run companies myself: six of my own, and twelve-plus years on the side that pays for software. I know how a solution has to be built to really work inside a company, with the people, the processes and the mess that are actually there, not the ones on a slide.",
+      p2a: "And I build only what pays off: ",
+      p2b: "what saves time, saves money and cuts the chaos",
+      p2c: ". If something will not earn back its cost, I will tell you before you pay for it.",
     },
     solutions: {
       label: "How I can help",
@@ -221,6 +231,14 @@ export const T: Record<Lang, SiteTranslation> = {
       label: "Znasz to?",
       title: "Problemy, do których mnie wzywają",
       lead: "Czasem boli już przy jednym zamówieniu, a z każdym kolejnym bardziej.",
+    },
+    difference: {
+      label: "Różnica",
+      title: "Kontekst biznesowy, nie tylko kod",
+      p1: "Większość inżynierów zaczyna od technologii. Ja zaczynam od biznesu, bo sam prowadziłem firmy: sześć własnych i ponad dwanaście lat po stronie, która za oprogramowanie płaci. Wiem, jak zbudować rozwiązanie, żeby naprawdę działało w firmie, z ludźmi, procesami i bałaganem, które są tam naprawdę, a nie na slajdzie.",
+      p2a: "I buduję tylko to, co się opłaca: ",
+      p2b: "co oszczędza czas, pieniądze i zmniejsza chaos",
+      p2c: ". Jeśli coś nie zarobi na siebie, powiem to, zanim za to zapłacisz.",
     },
     solutions: {
       label: "Jak mogę pomóc",

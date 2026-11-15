@@ -73,9 +73,18 @@ PG jest w trybie utrzymania od 2026-10-14 (ADR 0008), wiec artykul nie dostaje j
 1. Zrodla i komendy liczace kazdej liczby: `docs/CLAUDE-PAGE-NUMBERS.md` (publiczne repo `kamiljan11/coding-higher-mind`, laptop, GitHub, audyty). Po przeliczeniu zaktualizuj tam kolumne z wynikiem i date.
 2. Tekst: `src/content/claude/en.ts` i `pl.ts` (ten sam uklad: `sections` z `id`, `part`, `figure`), dane wykresow w `figures` obu plikow. Liczby w wykresach musza byc identyczne w obu jezykach — pilnuje tego `src/content/claude/content.test.ts`. `versionLine` w obu jezykach.
 3. Nowy wykres: komponent w `src/components/claude/charts.tsx`, typ i klucz w `types.ts` (`Figures`), galaz w `Figure` w `src/components/claude/Figure.tsx` (switch jest wyczerpujacy — brak galezi = blad tsc; `Figure.test.ts` renderuje kazdy wykres w obu jezykach), style w `src/site.css` (sekcja "/claude — page map"). Arytmetyke trzymaj w `src/lib/chartMath.ts` z testem. Zmiana tresci albo ukladu wykresu zmienia snapshot w `src/components/claude/__snapshots__/`: `npx vitest run -u`, przejrzyj diff `.snap` i commituj razem ze zmiana. Do `.github/mutation-exclude.txt` trafia tylko plik bez logiki (sama tresc), z powodem.
+   Objasnienia elementow rysunkow (`src/content/claude/explain.en.ts` i `explain.pl.ts`) powtarzaja stan z artykulu
+   (rutyna "wylaczona"/"wraca", "od 4 pazdziernika", liczby): zmieniasz fakt w artykule -> zmien go tez tam, w obu jezykach.
+   `Explain.test.ts` pilnuje id i liczb, nie slow o stanie. Test e2e: `e2e/claude-explain.spec.ts`.
+   To samo dotyczy ostatniej czesci (wersje 30 s / 3 min / 15 min, zasady w minute i pytania: `src/content/claude/tell.en.ts` i `tell.pl.ts`):
+   opowiada artykul, wiec zmiana faktu albo stanu idzie tez tam. Wyjatek: sekcja `rules-in-a-minute` bierze tez reguly z plikow PG
+   (planowanie: `pg/design.md`, `bin/plan-refs-check.js`; recenzenci: `hooks/lib/risk-tier.js`, `bin/pg-aggregate.js`;
+   pomiar: `hooks/gate_effectiveness.py`, `bin/pg-outcome.js`, `bin/pg-escapes.py`), zrodla stoja w komentarzu naglowka `tell.*.ts`. `content.test.ts` pilnuje liczb, nie slow. Test e2e: `e2e/claude-faq.spec.ts`.
+   Rysunki sekcji `ideas`, `guarding-the-guards` i `install` (`figures.ideas`, `.guards`, `.install`) powtarzaja tekst swojej sekcji:
+   zmiana w liscie sekcji idzie tez do rysunku. `content.test.ts` pilnuje, ze ich liczby stoja w artykule. Test e2e: `e2e/claude-figures.spec.ts`.
 4. `CHANGELOG.md` strony: wpis w `[Unreleased]`.
 5. Gdy wydanie zmienilo skille lub agentow: odswiez migawke (sekcja wyzej) w tym samym PR, po merge'u PR eksportu.
-6. Bramki: `npm run lint`, `npx tsc --noEmit`, `npm test`, `npm run build`, `npx playwright test e2e/page-map.spec.ts e2e/mobile.spec.ts`, podglad PL i EN na desktopie i telefonie (`npx vite dev`), pg-review (code, ops, ux, product), merge przez `pg-merge-bezpieczny.py`.
+6. Bramki: `npm run lint`, `npx tsc --noEmit`, `npm test`, `npm run build`, `npx playwright test e2e/page-map.spec.ts e2e/mobile.spec.ts e2e/claude-explain.spec.ts e2e/claude-faq.spec.ts e2e/claude-figures.spec.ts`, podglad PL i EN na desktopie i telefonie (`npx vite dev`), pg-review (code, ops, ux, product), merge przez `pg-merge-bezpieczny.py`.
 
 ## Monitoring
 

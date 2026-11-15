@@ -4,7 +4,7 @@ import { type Lang } from "../i18n";
  * The privacy policy (/polityka-prywatnosci), as data.
  *
  * Written from what the code actually does, checked on 2026-09-21 (YouTube
- * player after a click added 2026-10-25, ADR 0009):
+ * player after a click added 2026-11-15, ADR 0009):
  * - the consultation form and the chat's lead step send name, email, company
  *   and message to the server, which asks Anthropic for a short summary and
  *   emails both to Kamil through Resend (src/server/lead.server.ts); nothing
@@ -32,7 +32,7 @@ export type PrivacyDoc = {
 };
 
 /** The one place the policy date lives; the page formats it per language. */
-export const PRIVACY_UPDATED = "2026-10-25";
+export const PRIVACY_UPDATED = "2026-11-15";
 
 export const PRIVACY: Record<Lang, PrivacyDoc> = {
   pl: {

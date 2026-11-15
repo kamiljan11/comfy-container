@@ -37,6 +37,9 @@ const KEYS: FigureKey[] = [
   "cadence",
   "waffle",
   "versions",
+  "ideas",
+  "guards",
+  "install",
 ];
 
 describe("/claude figures", () => {

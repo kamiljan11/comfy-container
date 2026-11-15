@@ -3,15 +3,25 @@
 // keyword soup in skills, or lines Kamil asked to drop.
 import { describe, expect, it } from "vitest";
 import { CV_CONTENT } from "./cv";
+import { inlineSegments } from "../lib/inline";
+
+/** What a reader sees: link markup [label](url) counts as its label only. */
+const visible = (t: string) =>
+  inlineSegments(t)
+    .map((s) => s.text)
+    .join("");
 
 const pl = CV_CONTENT.pl;
 const en = CV_CONTENT.en;
 
-const bullets = (lang: "pl" | "en") => CV_CONTENT[lang].experience.flatMap((j) => j.bullets);
+const bullets = (lang: "pl" | "en") =>
+  [...CV_CONTENT[lang].experience, ...CV_CONTENT[lang].projects]
+    .flatMap((j) => j.bullets)
+    .map(visible);
 const allText = (lang: "pl" | "en") => {
   const c = CV_CONTENT[lang];
   return [
-    c.summary,
+    visible(c.summary),
     ...c.skills.map((s) => s.body),
     ...bullets(lang),
     ...c.education.map((s) => s.body),
@@ -30,6 +40,8 @@ const PL_NOT_VERBS = new Set([
   "zespół",
   "wokół",
   "skilli",
+  "cło",
+  "reguł",
 ]);
 
 describe("Polish CV", () => {
@@ -41,7 +53,7 @@ describe("Polish CV", () => {
   });
 
   it("keeps the summary short", () => {
-    const words = pl.summary.split(/\s+/).length;
+    const words = visible(pl.summary).split(/\s+/).length;
     expect(words).toBeGreaterThanOrEqual(40);
     expect(words).toBeLessThanOrEqual(90);
   });
@@ -53,7 +65,7 @@ describe("English CV", () => {
   });
 
   it("keeps the summary short", () => {
-    const words = en.summary.split(/\s+/).length;
+    const words = visible(en.summary).split(/\s+/).length;
     expect(words).toBeGreaterThanOrEqual(40);
     expect(words).toBeLessThanOrEqual(90);
   });
@@ -77,22 +89,30 @@ describe("both languages", () => {
       );
     });
 
-    it(`${lang}: lists Cetus Pro first, as the current role`, () => {
-      expect(c.experience[0]?.org).toBe("Cetus Pro");
+    it(`${lang}: lists CetusPro first, as the current role`, () => {
+      expect(c.experience[0]?.org).toBe("CetusPro");
     });
   }
+
+  it("has the same projects in the same order in both languages", () => {
+    expect(pl.projects.map((j) => j.org.split(",")[0])).toEqual(
+      en.projects
+        .map((j) => j.org.split(",")[0])
+        .map((o) =>
+          o === "own product"
+            ? "produkt własny"
+            : o === "own venture"
+              ? "własne przedsięwzięcie"
+              : o,
+        ),
+    );
+  });
 
   it("has the same roles in the same order in both languages", () => {
     expect(pl.experience.map((j) => j.org.split(",")[0])).toEqual(
       en.experience
         .map((j) => j.org.split(",")[0])
-        .map((o) =>
-          o === "Independent"
-            ? "Działalność własna"
-            : o === "Poland & Iceland"
-              ? "Polska i Islandia"
-              : o,
-        ),
+        .map((o) => (o === "Poland & Iceland" ? "Polska i Islandia" : o)),
     );
   });
 });

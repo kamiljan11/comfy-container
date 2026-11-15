@@ -113,6 +113,34 @@ test("the /claude page map is a set of 44 px targets", async ({ page }) => {
   for (const h of heights) expect(h).toBeGreaterThanOrEqual(44);
 });
 
+test("the /claude release strip shows each day's release count whole above its cell", async ({
+  page,
+}) => {
+  // at 54 days a cell is about 4 px wide on a phone, so the count stands above it (src/site.css, 560 px)
+  await load(page, "/claude?lang=pl");
+  const counts = page.locator(".vt-strip .vt-day b");
+  expect(await counts.count()).toBeGreaterThan(0);
+  await counts.first().scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollBy(0, -200));
+  const seen = await counts.evaluateAll((els) =>
+    els.map((el) => {
+      const r = el.getBoundingClientRect();
+      const cell = el.parentElement!.getBoundingClientRect();
+      const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+      return {
+        above: r.bottom <= cell.top + 0.5,
+        visible: hit === el || el.contains(hit),
+        w: r.width,
+      };
+    }),
+  );
+  for (const c of seen) {
+    expect(c.above).toBe(true);
+    expect(c.visible).toBe(true);
+    expect(c.w).toBeGreaterThan(4);
+  }
+});
+
 test("service headings keep every word on one line on a phone", async ({ page }) => {
   // at 390 the column is ~358 px; "automatyzację," split mid-word before the
   // heading moved above the columns and its phone size came down to 1.7rem

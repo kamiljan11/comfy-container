@@ -22,7 +22,7 @@ describe("youtube", () => {
   });
 
   it("refuses anything that is not a video id instead of building a URL from it", () => {
-    expect(() => embedUrl('x" onload="')).toThrow();
-    expect(() => watchUrl("../../evil")).toThrow();
+    expect(() => embedUrl('x" onload="')).toThrow(/not a YouTube video id/);
+    expect(() => watchUrl("../../evil")).toThrow(/not a YouTube video id: ..\/..\/evil/);
   });
 });

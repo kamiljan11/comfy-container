@@ -24,6 +24,7 @@ const PAGES = [
   "/blog/lekarz-sprawdzal-diagnoze-w-chatgpt",
   "/blog/95-procent-firm-bez-zwrotu-z-ai",
   "/blog/anna-z-116-117-to-automat",
+  "/blog/szkola-750-tys-na-cyberbezpieczenstwo",
 ];
 
 // one literal pattern over all meta tags; a later tag with the same key wins,

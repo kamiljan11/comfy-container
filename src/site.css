@@ -6925,6 +6925,21 @@ header[id] {
   color: #2a2e34;
 }
 @media (max-width: 560px) {
+  /* a day cell is about 4 px wide on a phone: the release count sits above its cell instead of inside it */
+  .vt-strip {
+    margin-top: 14px;
+  }
+  .vt-day {
+    position: relative;
+  }
+  .vt-day b {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #0a7d8c;
+    line-height: 14px;
+  }
   .vt-list li {
     grid-template-columns: 52px 1fr;
   }
@@ -7204,6 +7219,168 @@ header[id] {
   }
 }
 
+/* three ideas: the habit each one replaces */
+.is-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.is-row {
+  border: 1px solid #e3e3df;
+  border-radius: 8px;
+  background: #fafaf8;
+  padding: 10px 12px;
+}
+.is-idea {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+.is-shift {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
+}
+.is-box {
+  margin: 0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.is-before {
+  border: 1px dashed #868b92; /* 3:1 on the paper, like .ax-chip (WCAG 1.4.11) */
+  color: #4c5158;
+  background: #fff;
+}
+.is-after {
+  border: 1px solid #0a7d8c;
+  border-left-width: 4px;
+  color: #2a2e34;
+  background: #eef7f8;
+}
+.is-arrow {
+  align-self: center;
+  font-size: 18px;
+  color: #0a7d8c;
+}
+.is-tag {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6a6f76;
+  margin-bottom: 2px;
+}
+.is-why {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #2a2e34;
+}
+.is-why .is-tag {
+  display: inline;
+  margin-right: 4px;
+}
+@media (max-width: 560px) {
+  .is-shift {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .is-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+}
+
+/* guarding the guards: rules in the middle, guards around, the sandbox outside */
+.gr-outer {
+  border: 2px dashed #868b92;
+  border-radius: 12px;
+  padding: 10px;
+}
+.gr-outer-h {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #4c5158;
+}
+.gr-ring {
+  border: 2px solid #0a7d8c;
+  border-radius: 10px;
+  background: #f4fafb;
+  padding: 10px;
+}
+.gr-ring-h {
+  margin: 0 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #075a65;
+}
+.gr-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1fr);
+  grid-template-areas:
+    "g0 core g1"
+    "g2 core g3";
+  gap: 8px;
+}
+.gr-core {
+  grid-area: core;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 8px;
+  background: #0a7d8c;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.gr-core b {
+  font-family: var(--font-head);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+.gr-guard {
+  border: 1px solid #e3e3df;
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #2a2e34;
+}
+.gr-guard:nth-of-type(2) {
+  grid-area: g0;
+}
+.gr-guard:nth-of-type(3) {
+  grid-area: g1;
+}
+.gr-guard:nth-of-type(4) {
+  grid-area: g2;
+}
+.gr-guard:nth-of-type(5) {
+  grid-area: g3;
+}
+@media (max-width: 560px) {
+  .gr-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: none;
+  }
+  .gr-core,
+  .gr-guard:nth-of-type(n) {
+    grid-area: auto;
+  }
+}
+
 /* before / after */
 .ba-row {
   margin-bottom: 12px;
@@ -7419,4 +7596,390 @@ header[id] {
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
+}
+
+/* /claude — plain-language explanations under a figure (components/claude/Explain.tsx).
+   Paper colours like .aid; the highlighted element gets the same teal as labels. */
+.ax-wrap [data-explain] {
+  cursor: pointer;
+}
+.ax-wrap [data-explain].ax-on rect,
+.ax-wrap rect[data-explain].ax-on {
+  stroke: #0a7d8c;
+  stroke-width: 2.4;
+  fill: rgba(10, 125, 140, 0.08);
+}
+.ax-wrap .aid text:not([data-explain]) {
+  pointer-events: none; /* labels sit on top of their box: let the pointer reach the box */
+}
+.ax-wrap .aid g[data-explain] text {
+  pointer-events: auto; /* a label inside an explained group (pipeline stage names) is itself a target */
+}
+.ax-panel:focus {
+  outline: none;
+}
+.ax-panel:focus-visible {
+  outline: 2px solid #0a7d8c;
+}
+.ax-wrap g[data-explain].ax-on circle,
+.ax-wrap circle[data-explain].ax-on {
+  stroke: #0a7d8c;
+  stroke-width: 2.4;
+}
+.ax-wrap text[data-explain].ax-on {
+  text-decoration: underline;
+}
+.ax-wrap :is(li, div, span, p)[data-explain].ax-on {
+  outline: 2px solid #0a7d8c;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+/* a chart bar keeps its colour when explained; the outline is dark, because a teal one vanishes on a teal bar */
+.ax-wrap [data-explain].ax-on rect.ch-svg-a {
+  fill: #0a7d8c;
+  stroke: #23272d;
+}
+.ax-wrap [data-explain].ax-on rect.ch-svg-b {
+  fill: #b4442e;
+  stroke: #23272d;
+}
+/* a table row: tint its cells (an outline on <tr> is not drawn the same in every browser) */
+.ax-wrap tr[data-explain] {
+  cursor: pointer;
+}
+.ax-wrap tr[data-explain].ax-on > * {
+  background: rgba(10, 125, 140, 0.1);
+}
+.ax-wrap tr[data-explain].ax-on > th {
+  box-shadow: inset 3px 0 0 #0a7d8c;
+}
+/* the tint drops the grey "before" text below 4.5:1, so it darkens while the row is chosen (5:1 on paper) */
+.ax-wrap tr[data-explain].ax-on > .ct-before {
+  color: #5f646b;
+}
+/* waffle squares sit 3 px apart: a tight dark outline (teal would vanish on the teal squares), or the
+   highlighted group would blur into one block */
+.ax-wrap .wf-cell[data-explain].ax-on {
+  outline-color: #23272d;
+  outline-offset: 0;
+  border-radius: 4px;
+}
+.ax-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 8px;
+}
+.ax-chip {
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.2;
+  padding: 6px 10px;
+  min-height: 32px;
+  border: 1px solid #868b92; /* 3:1 against the page, WCAG 1.4.11 */
+  border-radius: 999px;
+  background: #fafaf8;
+  color: #23272d;
+  cursor: pointer;
+}
+@media (max-width: 768px), (pointer: coarse) {
+  /* every tap target on a phone or touch screen is at least 44 px (e2e/mobile.spec.ts) */
+  .ax-chip,
+  .ax-close {
+    min-height: 44px;
+  }
+}
+.ax-chip[aria-pressed="true"] {
+  border-color: #0a7d8c;
+  background: rgba(10, 125, 140, 0.1);
+  color: #075a65;
+  font-weight: 600;
+}
+.ax-chip:focus-visible,
+.ax-close:focus-visible {
+  outline: 2px solid #0a7d8c;
+  outline-offset: 2px;
+}
+.ax-panel {
+  border-left: 3px solid #0a7d8c;
+  background: #f4f4f0;
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  min-height: 3em;
+}
+.ax-panel p {
+  margin: 0;
+}
+.ax-term {
+  font-weight: 700;
+  color: #23272d;
+  margin-bottom: 4px !important;
+}
+.ax-body {
+  color: #2f343a;
+  line-height: 1.55;
+}
+.ax-hint {
+  color: #6a6f76;
+  font-style: italic;
+}
+.ax-close {
+  margin-top: 8px;
+  font: inherit;
+  font-size: 12px;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  min-width: 44px; /* a tap target, not only a word wide */
+  text-align: left;
+  color: #075a65; /* #0a7d8c on the panel grey is 4.4:1, under AA for 12 px text */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* paper has no pointer: drop the buttons and the "point at a part" hint, keep an opened explanation.
+   :has() sits in its own rule: a browser without it drops only that rule, not the whole list. */
+@media print {
+  .ax-chips,
+  .ax-close,
+  .ax-hint {
+    display: none !important;
+  }
+  .ax-panel:not(:has(.ax-term)) {
+    display: none !important;
+  }
+}
+
+/* ── /claude: questions and answers (Faq.tsx) ── */
+.faq {
+  margin-top: 4px; /* the section heading already draws the line above the first question */
+}
+.faq-item {
+  border-bottom: 1px solid #d9d9d4;
+  break-inside: avoid; /* on paper a question stays with its answer */
+}
+.faq-q {
+  cursor: pointer;
+  padding: 12px 28px 12px 0;
+  min-height: 44px;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: #111;
+  list-style: none;
+  position: relative;
+}
+.faq-q-text {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+.faq-q::after {
+  content: "+"; /* fallback for browsers without alt text in content */
+  content: "+" / ""; /* decoration: <details> already tells a screen reader open or closed */
+  position: absolute;
+  right: 4px;
+  top: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #075a65;
+}
+.faq-item[open] > .faq-q::after {
+  content: "−";
+  content: "−" / "";
+}
+.faq-q:focus-visible {
+  outline: 2px solid #0a7d8c;
+  outline-offset: 2px;
+}
+.faq-a {
+  /* the same size and colour as the article's paragraphs (.cv-sec > p) */
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2a2e34;
+  margin: 0 0 14px;
+  padding-left: 14px;
+  border-left: 3px solid #0a7d8c;
+}
+@media print {
+  .faq-q::after {
+    content: none;
+  }
+}
+
+/* ── /cv — designed layout (navy header with photo, year column), scoped to
+   .cv-pro so /claude, which shares the .cv-paper shell, is unchanged ── */
+.cv-paper.cv-pro {
+  --cv-navy: #0e1625;
+  --cv-blue: #0a6cd6;
+  --cv-soft: #eef3fc;
+  --cv-grey: #5b6575;
+  --cv-line: #d9e1ef;
+  padding: 0;
+  overflow: hidden;
+  border-top: none;
+  color: #1d2433;
+}
+.cv-pro .cv-head {
+  background: var(--cv-navy);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 40px 48px 34px;
+  border-bottom: none;
+  margin: 0;
+}
+.cv-pro .cv-photo {
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--cv-blue);
+  flex: none;
+}
+.cv-pro .cv-paper h1,
+.cv-paper.cv-pro h1 {
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 800;
+  margin: 0;
+}
+.cv-pro .cv-role {
+  color: #7fb6f5;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 6px 0 10px;
+}
+.cv-pro .cv-contact {
+  color: #c9d3e6;
+  font-size: 13px;
+  line-height: 1.75;
+  margin: 0;
+}
+.cv-pro .cv-contact a {
+  color: #fff;
+  font-weight: 600;
+}
+.cv-pro .cv-body {
+  padding: 18px 48px 44px;
+}
+.cv-pro .cv-sec {
+  margin-bottom: 8px;
+}
+.cv-pro .cv-sec h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--cv-blue);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 22px 0 10px;
+}
+.cv-pro .cv-sec h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--cv-line);
+}
+.cv-pro .cv-summary {
+  border-left: 4px solid var(--cv-blue);
+  background: var(--cv-soft);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.cv-pro .cv-skills li {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  column-gap: 14px;
+}
+.cv-pro .cv-skills b {
+  color: var(--cv-navy);
+}
+.cv-pro .cv-job {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  column-gap: 18px;
+  margin-bottom: 16px;
+}
+.cv-pro .cv-job-dates {
+  color: var(--cv-blue);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
+  padding-top: 2px;
+  white-space: normal;
+}
+.cv-pro .cv-job-main h3 {
+  color: var(--cv-navy);
+  font-size: 15px;
+  font-weight: 700;
+}
+.cv-pro .cv-job-main h3 span {
+  font-weight: 500;
+}
+.cv-pro .cv-job-main h3 span {
+  color: var(--cv-grey);
+}
+.cv-pro .cv-job-loc {
+  color: var(--cv-grey);
+}
+.cv-pro .cv-bullets li::marker,
+.cv-pro .cv-list li::marker {
+  color: var(--cv-blue);
+}
+@media (max-width: 768px) {
+  .cv-paper.cv-pro {
+    padding: 0;
+  }
+  .cv-pro .cv-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 28px 22px 24px;
+  }
+  .cv-pro .cv-body {
+    padding: 10px 22px 32px;
+  }
+  .cv-pro .cv-skills li {
+    grid-template-columns: 1fr;
+  }
+  .cv-pro .cv-job {
+    grid-template-columns: 1fr;
+  }
+}
+@media print {
+  .cv-paper.cv-pro {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #fff;
+  }
+  .cv-pro .cv-head {
+    padding: 8mm 10mm;
+  }
+  .cv-pro .cv-body {
+    padding: 4mm 10mm;
+  }
+  .cv-pro .cv-contact a {
+    color: #fff;
+  }
+}
+.cv-pro .cv-body a {
+  color: var(--cv-blue);
+  text-decoration: underline;
+  text-decoration-color: rgba(10, 108, 214, 0.35);
+  text-underline-offset: 2px;
+}
+.cv-pro .cv-body a:hover {
+  text-decoration-color: currentColor;
+}
+.cv-pro .cv-job-main h3 a {
+  color: inherit;
 }

@@ -12,6 +12,8 @@ import {
   BeforeAfter,
   CalibTable,
   ExceptionCards,
+  GuardRing,
+  IdeaShifts,
   LimitsBoard,
   MergeFlow,
   ReleaseSteps,
@@ -65,6 +67,12 @@ export function Figure({ k, f }: { k: FigureKey; f: Figures }): ReactNode {
       return <Waffle t={f.waffle} />;
     case "versions":
       return <VersionTimeline t={f.versions} />;
+    case "ideas":
+      return <IdeaShifts t={f.ideas} />;
+    case "guards":
+      return <GuardRing t={f.guards} />;
+    case "install":
+      return <ReleaseSteps t={f.install} />;
     default: {
       const never: never = k;
       return never;

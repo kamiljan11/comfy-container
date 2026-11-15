@@ -8,6 +8,8 @@ import type {
   BeforeAfterLabels,
   CalibLabels,
   ExceptionLabels,
+  GuardLabels,
+  IdeaLabels,
   LimitsLabels,
   MergeLabels,
   ReleaseLabels,
@@ -35,11 +37,12 @@ export function VersionTimeline({ t }: { t: VersionLabels }) {
       <div
         className="vt-strip"
         aria-hidden="true"
+        data-explain="strip"
         style={{ gridTemplateColumns: `repeat(${String(span + 1)}, minmax(0, 1fr))` }}
       >
         {perDay.map((n, day) => (
           <span key={day} className={n ? "vt-day on" : "vt-day"} title={n ? String(n) : undefined}>
-            {n > 1 ? n : ""}
+            {n > 1 ? <b>{n}</b> : ""}
           </span>
         ))}
       </div>
@@ -52,9 +55,11 @@ export function VersionTimeline({ t }: { t: VersionLabels }) {
       </div>
       <ol className="vt-list">
         {t.points.map((p) => (
-          <li key={p.v}>
+          <li key={p.v} data-explain={p.explainId}>
             <span className="vt-date">{p.date}</span>
-            <span className="vt-v">{p.v}</span>
+            <span className="vt-v" data-explain="number">
+              {p.v}
+            </span>
             <span className="vt-theme">{p.theme}</span>
           </li>
         ))}
@@ -70,8 +75,8 @@ export function TierLadder({ t }: { t: TierLabels }) {
   return (
     <figure className="ch-fig">
       <ol className="tl-list">
-        {t.rungs.map((r) => (
-          <li key={r.tier} className="tl-rung">
+        {t.rungs.map((r, i) => (
+          <li key={r.tier} className="tl-rung" data-explain={`rung-${String(i)}`}>
             <span className="tl-tier">{r.tier}</span>
             <span className="tl-trigger">{r.trigger}</span>
             <span className="tl-rev">{r.reviewers}</span>
@@ -98,8 +103,12 @@ export function ExceptionCards({ t }: { t: ExceptionLabels }) {
   return (
     <figure className="ch-fig">
       <div className="ex-grid">
-        {t.levels.map((l) => (
-          <div key={l.level} className={`ex-card ${toneClass(l.tone)}`}>
+        {t.levels.map((l, i) => (
+          <div
+            key={l.level}
+            className={`ex-card ${toneClass(l.tone)}`}
+            data-explain={`level-${String(i)}`}
+          >
             <p className="ex-level">{l.level}</p>
             <dl>
               <dt>{t.whoLabel}</dt>
@@ -122,15 +131,23 @@ export function MergeFlow({ t }: { t: MergeLabels }) {
   return (
     <figure className="ch-fig">
       <div className="mf-head">
-        <span className="mf-pill">{t.start}</span>
+        <span className="mf-pill" data-explain="start">
+          {t.start}
+        </span>
         <span className="mf-arrow" aria-hidden="true">
           →
         </span>
-        <span className="mf-pill mf-strong">{t.checks}</span>
+        <span className="mf-pill mf-strong" data-explain="checks">
+          {t.checks}
+        </span>
       </div>
       <ul className="mf-grid">
-        {t.branches.map((b) => (
-          <li key={b.when} className={b.auto ? "mf-card" : "mf-card mf-human"}>
+        {t.branches.map((b, i) => (
+          <li
+            key={b.when}
+            className={b.auto ? "mf-card" : "mf-card mf-human"}
+            data-explain={`branch-${String(i)}`}
+          >
             <span className="mf-when">{b.when}</span>
             <span className="mf-needs">{b.needs}</span>
             <span className={b.auto ? "mf-chip ch-tone-a" : "mf-chip ch-tone-b"}>
@@ -158,10 +175,10 @@ export function RoundsChart({ t }: { t: RoundsLabels }) {
   return (
     <figure className="ch-fig">
       <div className="ch-legend">
-        <span>
+        <span data-explain="blocking">
           <i className="ch-key ch-tone-b" /> {t.blockingLabel}
         </span>
-        <span>
+        <span data-explain="major">
           <i className="ch-key ch-tone-a" /> {t.majorLabel}
         </span>
       </div>
@@ -184,7 +201,7 @@ export function RoundsChart({ t }: { t: RoundsLabels }) {
             const hm = y(r.major);
             const total = r.blocking + r.major;
             return (
-              <g key={r.label}>
+              <g key={r.label} data-explain={r.final ? "final" : "round"}>
                 <title>{`${r.label}: ${String(r.blocking)} ${t.blockingLabel}, ${String(r.major)} ${t.majorLabel}`}</title>
                 {r.major > 0 && (
                   <rect
@@ -224,11 +241,11 @@ export function RoundsChart({ t }: { t: RoundsLabels }) {
 export function StackBars({ t }: { t: StackLabels }) {
   return (
     <figure className="ch-fig">
-      {t.rows.map((row) => {
+      {t.rows.map((row, ri) => {
         const pct = stackPercents(row.segments.map((s) => s.value));
         const unit = row.unit ? `\u00a0${row.unit}` : "";
         return (
-          <div key={row.title} className="sb-row">
+          <div key={row.title} className="sb-row" data-explain={`row-${String(ri)}`}>
             <p className="sb-title">
               {row.title} <span className="sb-total">{row.total}</span>
             </p>
@@ -273,14 +290,20 @@ export function ReleaseSteps({ t }: { t: ReleaseLabels }) {
     <figure className="ch-fig">
       <ol className="rs-list">
         {t.steps.map((s, i) => (
-          <li key={s.title} className={`rs-step ${toneClass(s.tone)}`}>
+          <li
+            key={s.title}
+            className={`rs-step ${toneClass(s.tone)}`}
+            data-explain={`step-${String(i)}`}
+          >
             <span className="rs-n">{i + 1}</span>
             <span className="rs-title">{s.title}</span>
             <span className="rs-detail">{s.detail}</span>
           </li>
         ))}
       </ol>
-      <p className="rs-back">↺ {t.rollback}</p>
+      <p className="rs-back" data-explain="back">
+        ↺ {t.rollback}
+      </p>
       <Caption text={t.caption} />
     </figure>
   );
@@ -298,10 +321,10 @@ export function BeforeAfter({ t }: { t: BeforeAfterLabels }) {
           <i className="ch-key ch-tone-a" /> {t.afterLabel}
         </span>
       </div>
-      {t.rows.map((r) => {
+      {t.rows.map((r, i) => {
         const max = Math.max(r.before, r.after) || 1;
         return (
-          <div key={r.label} className="ba-row">
+          <div key={r.label} className="ba-row" data-explain={`row-${String(i)}`}>
             <p className="ba-label">{r.label}</p>
             <div className="ba-bars">
               <span className="ch-track">
@@ -345,8 +368,8 @@ export function CalibTable({ t }: { t: CalibLabels }) {
             </tr>
           </thead>
           <tbody>
-            {t.rows.map((r) => (
-              <tr key={r.gate}>
+            {t.rows.map((r, i) => (
+              <tr key={r.gate} data-explain={`row-${String(i)}`}>
                 <th scope="row">{r.gate}</th>
                 <td className="ct-before">{r.before}</td>
                 <td className="ct-after">{r.after}</td>
@@ -368,8 +391,8 @@ export function LimitsBoard({ t }: { t: LimitsLabels }) {
         <div className="lb-col ch-tone-a">
           <p className="lb-h">{t.triggersTitle}</p>
           <ol>
-            {t.triggers.map((i) => (
-              <li key={i.label}>
+            {t.triggers.map((i, n) => (
+              <li key={i.label} data-explain={`trigger-${String(n)}`}>
                 <b>{i.label}</b> {i.body}
               </li>
             ))}
@@ -378,15 +401,15 @@ export function LimitsBoard({ t }: { t: LimitsLabels }) {
         <div className="lb-col ch-tone-b">
           <p className="lb-h">{t.wallsTitle}</p>
           <ol>
-            {t.walls.map((i) => (
-              <li key={i.label}>
+            {t.walls.map((i, n) => (
+              <li key={i.label} data-explain={`wall-${String(n)}`}>
                 <b>{i.label}</b> {i.body}
               </li>
             ))}
           </ol>
         </div>
       </div>
-      <p className="lb-signal">
+      <p className="lb-signal" data-explain="signal">
         <b>{t.signalTitle}</b> {t.signal}
       </p>
       <Caption text={t.caption} />
@@ -396,7 +419,10 @@ export function LimitsBoard({ t }: { t: LimitsLabels }) {
 
 /* ── Waffle: one square per repository ── */
 export function Waffle({ t }: { t: WaffleLabels }) {
-  const cells = t.groups.flatMap((g) => Array.from({ length: g.count }, () => g.tone));
+  // each square carries its group's id, so explaining a group lights up all of its squares
+  const cells = t.groups.flatMap((g, gi) =>
+    Array.from({ length: g.count }, () => ({ tone: g.tone, id: `group-${String(gi)}` })),
+  );
   return (
     <figure className="ch-fig">
       <div
@@ -404,23 +430,82 @@ export function Waffle({ t }: { t: WaffleLabels }) {
         role="img"
         aria-label={t.groups.map((g) => `${g.label}: ${String(g.count)}`).join(", ")}
       >
-        {cells.map((tone, i) => (
-          <span key={i} className={`wf-cell ${toneClass(tone)}`} />
+        {cells.map((c, i) => (
+          <span key={i} className={`wf-cell ${toneClass(c.tone)}`} data-explain={c.id} />
         ))}
       </div>
       <ul className="sb-keys">
-        {t.groups.map((g) => (
-          <li key={g.label}>
+        {t.groups.map((g, gi) => (
+          <li key={g.label} data-explain={`group-${String(gi)}`}>
             <i className={`ch-key ${toneClass(g.tone)}`} /> {g.label} <b>{g.count}</b>
           </li>
         ))}
       </ul>
       <div className="wf-facts">
-        {t.facts.map((f) => (
-          <span key={f.label} className="wf-fact">
+        {t.facts.map((f, i) => (
+          <span key={f.label} className="wf-fact" data-explain={`fact-${String(i)}`}>
             <b>{f.n}</b> {f.label}
           </span>
         ))}
+      </div>
+      <Caption text={t.caption} />
+    </figure>
+  );
+}
+
+/* ── Three ideas: each one as the habit it replaces, with the measured reason ── */
+export function IdeaShifts({ t }: { t: IdeaLabels }) {
+  return (
+    <figure className="ch-fig">
+      <ol className="is-list">
+        {t.rows.map((r, i) => (
+          <li key={r.idea} className="is-row" data-explain={`idea-${String(i)}`}>
+            <p className="is-idea">{r.idea}</p>
+            <div className="is-shift">
+              <p className="is-box is-before">
+                <span className="is-tag">{t.beforeLabel}</span> {r.before}
+              </p>
+              <span className="is-arrow" aria-hidden="true">
+                →
+              </span>
+              <p className="is-box is-after">
+                <span className="is-tag">{t.afterLabel}</span> {r.after}
+              </p>
+            </div>
+            <p className="is-why">
+              <span className="is-tag">{t.whyLabel}</span> {r.why}
+            </p>
+          </li>
+        ))}
+      </ol>
+      <Caption text={t.caption} />
+    </figure>
+  );
+}
+
+/* ── Guarding the guards: the rules in the middle, four guards around, the sandbox as the outer line ── */
+export function GuardRing({ t }: { t: GuardLabels }) {
+  return (
+    <figure className="ch-fig">
+      <div className="gr-outer">
+        {/* only the heading explains the outer line; on the wrapper every gap between guards would point at it */}
+        <p className="gr-outer-h" data-explain="outer">
+          <b>{t.outer}</b> {t.outerSub}
+        </p>
+        <div className="gr-ring">
+          <p className="gr-ring-h">{t.guardsTitle}</p>
+          <div className="gr-grid">
+            <div className="gr-core" data-explain="core">
+              <b>{t.core}</b>
+              <span>{t.coreSub}</span>
+            </div>
+            {t.guards.map((g, i) => (
+              <div key={g.label} className="gr-guard" data-explain={`guard-${String(i)}`}>
+                <b>{g.label}</b> {g.body}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       <Caption text={t.caption} />
     </figure>

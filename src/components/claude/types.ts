@@ -87,6 +87,8 @@ export type VersionPoint = {
   day: number;
   theme: string;
   patches?: number;
+  /** `data-explain` id of this release's row, for the few releases the article explains. */
+  explainId?: string;
 };
 export type VersionLabels = {
   points: VersionPoint[];
@@ -131,7 +133,8 @@ export type MergeLabels = {
   caption: string;
 };
 
-export type RoundBar = { label: string; blocking: number; major: number };
+/** `final`: a check of the last fixes, not a full review round (explained apart from the rounds). */
+export type RoundBar = { label: string; blocking: number; major: number; final?: boolean };
 export type RoundsLabels = {
   rounds: RoundBar[];
   blockingLabel: string;
@@ -184,6 +187,27 @@ export type LimitsLabels = {
 export type WaffleGroup = { label: string; count: number; tone: Tone };
 export type WaffleLabels = { groups: WaffleGroup[]; facts: Stat[]; caption: string };
 
+/** One idea as the habit it replaces: `before` (gray) turns into `after` (teal); `why` is the measured reason. */
+export type IdeaRow = { idea: string; before: string; after: string; why: string };
+export type IdeaLabels = {
+  rows: IdeaRow[];
+  beforeLabel: string;
+  afterLabel: string;
+  whyLabel: string;
+  caption: string;
+};
+
+/** The rules in the middle, the guards around them, and the line PG does not claim to hold (the outer box). */
+export type GuardLabels = {
+  core: string;
+  coreSub: string;
+  guardsTitle: string;
+  guards: Item[];
+  outer: string;
+  outerSub: string;
+  caption: string;
+};
+
 /** Every figure the page can place, by key. */
 export type Figures = {
   arch: ArchLabels;
@@ -204,8 +228,24 @@ export type Figures = {
   cadence: CadenceLabels;
   waffle: WaffleLabels;
   versions: VersionLabels;
+  ideas: IdeaLabels;
+  guards: GuardLabels;
+  install: ReleaseLabels;
 };
 export type FigureKey = keyof Figures;
+
+/**
+ * Plain-language explanation of one element of a figure. `id` matches a `data-explain` attribute the figure
+ * draws, so pointing at (or tapping) that element shows `body`. Written for a reader who has never heard of
+ * PG: what the thing does, when it acts, and one real example.
+ */
+export type Explain = { id: string; term: string; body: string };
+/**
+ * Explanations per figure. Partial only so the type allows a figure that is not finished yet; every figure on
+ * the page must have entries, and `Explain.test.ts` fails when one has none.
+ */
+export type Explains = Partial<Record<FigureKey, Explain[]>>;
+export type ExplainUi = { hint: string; pick: string; close: string };
 
 /**
  * One section of the article. `id` is the same in both languages (an English slug), so a shared link like
@@ -220,6 +260,8 @@ export type Section = {
   paragraphs?: string[];
   figure?: FigureKey;
   items?: Item[];
+  /** Questions and answers, shown folded: `label` is the question, `body` the answer. */
+  faq?: Item[];
   code?: string[];
   link?: LinkRef;
 };
@@ -240,5 +282,7 @@ export type Content = {
   parts: Part[];
   sections: Section[];
   figures: Figures;
+  explain: Explains;
+  explainUi: ExplainUi;
   colophon: string;
 };

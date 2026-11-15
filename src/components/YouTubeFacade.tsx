@@ -23,6 +23,29 @@ const COPY: Record<Lang, { play: string; note: string; open: string }> = {
   },
 };
 
+/**
+ * The player itself, mounted only after the click (so it may autoplay). Focus
+ * moves into it on mount so a keyboard or screen reader user is not thrown back
+ * to the top of the page. Separate from the facade so the after-click markup is
+ * unit-tested without a browser.
+ */
+export function YouTubePlayer({ id, title }: { id: string; title: string }) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  useEffect(() => {
+    frame.current?.focus();
+  }, []);
+  return (
+    <iframe
+      ref={frame}
+      src={embedUrl(id)}
+      title={title}
+      allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+      allowFullScreen
+      referrerPolicy="strict-origin-when-cross-origin"
+    />
+  );
+}
+
 export function YouTubeFacade({
   id,
   title,
@@ -35,23 +58,12 @@ export function YouTubeFacade({
   lang: Lang;
 }) {
   const [playing, setPlaying] = useState(false);
-  const frame = useRef<HTMLIFrameElement>(null);
-  useEffect(() => {
-    if (playing) frame.current?.focus();
-  }, [playing]);
   const c = COPY[lang];
   return (
     <figure className="post-video">
       <div className="post-video-frame">
         {playing ? (
-          <iframe
-            ref={frame}
-            src={embedUrl(id)}
-            title={title}
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
+          <YouTubePlayer id={id} title={title} />
         ) : (
           <button
             type="button"
