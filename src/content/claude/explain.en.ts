@@ -90,7 +90,7 @@ export const explainEn: Explains = {
     {
       id: "branch-7",
       term: "The system tests itself",
-      body: "Every check has a test proving that it blocks its own case. A script verifies that each written rule has a matching check, and a weekly audit looks for checks that stopped working. Like the test button on a smoke alarm.",
+      body: "Every check has a test proving that it blocks its own case. A script verifies that each written rule has a matching check, and a health audit (run by hand for now) looks for checks that stopped working. Like the test button on a smoke alarm.",
     },
   ],
   pipe: [
@@ -601,7 +601,7 @@ export const explainEn: Explains = {
     {
       id: "compare",
       term: "Compared with others",
-      body: "Agents went through 35 public projects with a similar idea and listed 23 things they did better, each with a file and line. The design of the changes was reviewed for security before any code was written.",
+      body: "Agents went through 35 public projects with a similar idea and the comparison produced a plan of 23 items, each with a file and line. The design of the changes was reviewed for security before any code was written.",
     },
     {
       id: "patches",
@@ -623,7 +623,7 @@ export const explainEn: Explains = {
     {
       id: "step-2",
       term: "Install",
-      body: "Files go into ~/.claude, the folder Claude Code reads its settings from. A file you changed is never overwritten: the new version lands next to yours, settings are merged, and the rules sit between markers so an update replaces only that block.",
+      body: "Files go into ~/.claude, the folder Claude Code reads its settings from. A file you changed is not overwritten without --force: the new version lands next to yours, settings are merged, and the rules sit between markers so an update replaces only that block.",
     },
     {
       id: "step-3",

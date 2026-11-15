@@ -90,7 +90,7 @@ export const explainPl: Explains = {
     {
       id: "branch-7",
       term: "System testuje sam siebie",
-      body: "Każda kontrola ma test dowodzący, że naprawdę blokuje swój przypadek. Skrypt sprawdza, czy do każdej spisanej reguły jest kontrola, a cotygodniowy audyt szuka tych, które przestały działać. Jak przycisk testowy w czujniku dymu.",
+      body: "Każda kontrola ma test dowodzący, że naprawdę blokuje swój przypadek. Skrypt sprawdza, czy do każdej spisanej reguły jest kontrola, a audyt zdrowia (dziś uruchamiany ręcznie) szuka tych, które przestały działać. Jak przycisk testowy w czujniku dymu.",
     },
   ],
   pipe: [
@@ -601,7 +601,7 @@ export const explainPl: Explains = {
     {
       id: "compare",
       term: "Porównanie z innymi",
-      body: "Agenci przeszli przez 35 publicznych projektów o podobnym pomyśle i wypisali 23 rzeczy, które inni robili lepiej, każdą z plikiem i linią. Projekt zmian przeszedł przegląd bezpieczeństwa, zanim powstała jakakolwiek linia kodu.",
+      body: "Agenci przeszli przez 35 publicznych projektów o podobnym pomyśle i z porównania wyszedł plan z 23 pozycjami, każda z plikiem i linią. Projekt zmian przeszedł przegląd bezpieczeństwa, zanim powstała jakakolwiek linia kodu.",
     },
     {
       id: "patches",
@@ -623,7 +623,7 @@ export const explainPl: Explains = {
     {
       id: "step-2",
       term: "Instalacja",
-      body: "Pliki trafiają do ~/.claude, folderu, z którego Claude Code czyta ustawienia. Plik, który zmieniłeś, nigdy nie jest nadpisywany: nowa wersja ląduje obok twojej, ustawienia są scalane, a reguły stoją między znacznikami, więc aktualizacja wymienia tylko ten blok.",
+      body: "Pliki trafiają do ~/.claude, folderu, z którego Claude Code czyta ustawienia. Plik, który zmieniłeś, nie jest nadpisywany bez --force: nowa wersja ląduje obok twojej, ustawienia są scalane, a reguły stoją między znacznikami, więc aktualizacja wymienia tylko ten blok.",
     },
     {
       id: "step-3",
