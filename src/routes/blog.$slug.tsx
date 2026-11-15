@@ -5,6 +5,7 @@ import { findPost, type Block } from "../data/posts";
 import { formatDate } from "../lib/formatDate";
 import { inlineSegments } from "../lib/inline";
 import { pageMeta } from "../lib/seo";
+import { YouTubeFacade } from "../components/YouTubeFacade";
 
 /**
  * One blog post. Content comes from src/data/posts.ts; this file only lays it
@@ -119,7 +120,7 @@ function Inline({ text }: { text: string }) {
   );
 }
 
-function PostBlock({ b }: { b: Block }) {
+function PostBlock({ b, lang }: { b: Block; lang: Lang }) {
   switch (b.t) {
     case "h2":
       return (
@@ -163,6 +164,8 @@ function PostBlock({ b }: { b: Block }) {
           <figcaption>{b.caption}</figcaption>
         </figure>
       );
+    case "youtube":
+      return <YouTubeFacade id={b.id} title={b.title} poster={b.poster} lang={lang} />;
   }
 }
 
@@ -192,7 +195,7 @@ function PostPage() {
         {post.external && <ExternalRead {...post.external} lang={lang} />}
         <div className="post-body">
           {b.blocks.map((x, i) => (
-            <PostBlock key={i} b={x} />
+            <PostBlock key={i} b={x} lang={lang} />
           ))}
         </div>
         {post.external && <ExternalRead {...post.external} lang={lang} />}

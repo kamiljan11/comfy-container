@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- Blog: a post made from a film can embed it so the reader watches it on the page. New `youtube` block (`{ t: "youtube"; id; title; poster }`, ADR 0009) shows the post's own poster with a play button; only the click loads the `youtube-nocookie.com` player (16:9, fullscreen), so the page makes no request to YouTube before it. The 11-character id is validated (`src/lib/youtube.ts`, content tests). The privacy policy names YouTube after a click. The player infrastructure is taken from the open PR #96 without its post; video-pipeline's `publish_post.py` inserts the block after the first paragraph.
+
 - /cv: Flyt moves from a one-line bullet in "Other ventures" to a Selected project that says what is technical about it: the freight exchange (carriers bid on a posted delivery), group import with deposit-and-refund rules modelled as a Postgres state machine, per-category landed-cost quoting and the admin dashboard, with a link to the case study. Facts taken from the Flyt case study on this site and LinkedIn. The CV photo is cut from the full-resolution portrait (`kamil-suit.png`) instead of an upscaled small file, so it is sharp.
 
 - /cv: the generic "Applied AI Engineer · Independent" entry is removed. It listed methods (Claude API, n8n, MCP, Twilio) without saying for whom or what was built, and every concrete fact in it already sits in a named entry (MAS Parts, MAS Warsztat, Higher Mind, Ekomoc); the methods stay in Core skills. Same change in the PDF CV.

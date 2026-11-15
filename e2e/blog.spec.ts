@@ -1,5 +1,6 @@
 // The blog: a list at /blog and one page per post from src/data/posts.ts.
 import { test, expect } from "@playwright/test";
+import { POSTS } from "../src/data/posts";
 
 const EXTERNAL = "https://torzeszow.pl/news/oszusci-moga-podrobic-glos-wnuczka";
 
@@ -76,4 +77,38 @@ test("a post renders headings, screenshot, code and the repo link", async ({ pag
 test("an unknown post is a 404, not an empty page", async ({ page }) => {
   const res = await page.goto("/blog/nie-ma-takiego-wpisu");
   expect(res?.status()).toBe(404);
+});
+
+// The first post made from a film (video-pipeline adds a `youtube` block after the
+// first paragraph); skipped until one is published.
+const FILM = POSTS.find((p) => p.body.pl.blocks.some((x) => x.t === "youtube"));
+
+test("a video post contacts YouTube only after the reader clicks play", async ({ page }) => {
+  test.skip(!FILM, "no post with a youtube block yet");
+  const youtube: string[] = [];
+  page.on("request", (r) => {
+    if (/youtube|ytimg|googlevideo/.test(r.url())) youtube.push(r.url());
+  });
+  await page.goto(`/blog/${FILM?.slug}?lang=pl`);
+  await page.waitForLoadState("networkidle");
+  const play = page.getByRole("button", { name: /Odtwórz film/ });
+  await play.scrollIntoViewIfNeeded();
+  await expect(play.locator("img")).toBeVisible();
+  expect(youtube).toEqual([]);
+  await play.click();
+  const frame = page.locator(".post-video iframe");
+  // keyboard and screen reader users land in the player, not back at the top
+  await expect(frame).toBeFocused();
+  await expect(frame).toHaveAttribute(
+    "src",
+    /^https:\/\/www\.youtube-nocookie\.com\/embed\/[\w-]{11}\?autoplay=1&rel=0$/,
+  );
+  await expect(frame).toHaveAttribute("allowfullscreen", "");
+  // 16:9 box that never runs wider than the page
+  const box = await frame.boundingBox();
+  expect(box && Math.abs(box.width / box.height - 16 / 9)).toBeLessThan(0.02);
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(1);
 });

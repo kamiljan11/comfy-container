@@ -4,6 +4,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { isVideoId } from "../lib/youtube";
 import { POSTS, findPost } from "./posts";
 
 describe("posts", () => {
@@ -45,6 +46,17 @@ describe("posts", () => {
           if (x.t !== "img") continue;
           expect(existsSync(join(process.cwd(), "public", x.src)), x.src).toBe(true);
           expect(x.alt.length).toBeGreaterThan(20);
+        }
+      });
+
+      it(`${post.slug} (${lang}) videos have a valid id, a title and a local poster`, () => {
+        for (const x of b.blocks) {
+          if (x.t !== "youtube") continue;
+          expect(isVideoId(x.id), x.id).toBe(true);
+          expect(x.title.length).toBeGreaterThan(10);
+          // a local copy, so the page makes no request to YouTube before the click
+          expect(x.poster.startsWith("/blog/"), x.poster).toBe(true);
+          expect(existsSync(join(process.cwd(), "public", x.poster)), x.poster).toBe(true);
         }
       });
 

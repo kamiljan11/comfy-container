@@ -5,3 +5,4 @@
 src/routes/claude.tsx # strona /claude: uklad i nawigacja (mapa strony, separatory czesci); zachowanie sprawdzaja e2e/page-map.spec.ts i e2e/mobile.spec.ts, nie unit testy — PR #37, #49, #69 konczyly sie bledem Strykera zamiast wyniku
 src/content/claude/en.ts # tresc artykulu /claude jako dane (EN), bez logiki; liczby pilnuje src/content/claude/content.test.ts
 src/content/claude/pl.ts # tresc artykulu /claude jako dane (PL), bez logiki; liczby pilnuje src/content/claude/content.test.ts
+src/routes/blog.$slug.tsx # strona wpisu: tylko uklad blokow z src/data/posts.ts (logika w src/lib/youtube.ts, src/lib/inline.ts, YouTubeFacade z testami); zachowanie sprawdza e2e/blog.spec.ts, bez unit testow — PR #117: 103 mutanty "no coverage" zbijaly wynik do 14 %

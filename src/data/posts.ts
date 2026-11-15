@@ -15,7 +15,9 @@ export type Block =
   | { t: "h2"; id: string; text: string }
   | { t: "list"; items: string[] }
   | { t: "code"; code: string }
-  | { t: "img"; src: string; alt: string; caption: string; width: number; height: number };
+  | { t: "img"; src: string; alt: string; caption: string; width: number; height: number }
+  /** one of Kamil's own videos; `poster` is a local image, e.g. the post's cover (ADR 0009) */
+  | { t: "youtube"; id: string; title: string; poster: string };
 
 export type PostBody = {
   title: string;
