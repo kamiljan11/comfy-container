@@ -250,7 +250,7 @@ export const explainEn: Explains = {
     {
       id: "row-0",
       term: "Daily pull request review",
-      body: "On weekdays an AI reads open pull requests (proposed changes) in active projects and reports problems. Active means touched in the last 30 days: 13 of 50 today. One of three routines due to return.",
+      body: "On weekdays an AI reads open pull requests (proposed changes) in active projects and reports problems. Active means touched in the last 30 days: 13 of 50 on November 4. One of three routines due to return.",
     },
     {
       id: "row-1",
@@ -606,7 +606,7 @@ export const explainEn: Explains = {
     {
       id: "patches",
       term: "Six fixes in one day",
-      body: "The stop gate believed what the tests printed instead of their exit code, the number a program returns when it ends, so a broken test setup could pass as skipped. Six patch releases later, a verdict comes only from the exit code.",
+      body: "The stop gate believed what the tests printed instead of their exit code, the number a program returns when it ends, so a broken test setup could pass as skipped. Since version 1.2.2 a verdict comes only from the exit code.",
     },
   ],
   install: [

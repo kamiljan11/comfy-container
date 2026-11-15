@@ -250,7 +250,7 @@ export const explainPl: Explains = {
     {
       id: "row-0",
       term: "Codzienny przegląd pull requestów",
-      body: "W dni robocze AI czyta otwarte pull requesty (propozycje zmian) w aktywnych projektach i zgłasza problemy. Aktywny znaczy ruszany w ostatnich 30 dniach: dziś 13 z 50. Jedna z trzech rutyn, które mają wrócić.",
+      body: "W dni robocze AI czyta otwarte pull requesty (propozycje zmian) w aktywnych projektach i zgłasza problemy. Aktywny znaczy ruszany w ostatnich 30 dniach: na 4 listopada 13 z 50. Jedna z trzech rutyn, które mają wrócić.",
     },
     {
       id: "row-1",
@@ -606,7 +606,7 @@ export const explainPl: Explains = {
     {
       id: "patches",
       term: "Sześć poprawek jednego dnia",
-      body: "Bramka końca sesji wierzyła temu, co wypisały testy, a nie ich kodowi wyjścia, czyli liczbie, którą program zwraca na koniec, więc zepsuta konfiguracja testów mogła przejść jako pominięta. Sześć wydań później werdykt pochodzi tylko z kodu wyjścia.",
+      body: "Bramka końca sesji wierzyła temu, co wypisały testy, a nie ich kodowi wyjścia, czyli liczbie, którą program zwraca na koniec, więc zepsuta konfiguracja testów mogła przejść jako pominięta. Od wersji 1.2.2 werdykt pochodzi tylko z kodu wyjścia.",
     },
   ],
   install: [
