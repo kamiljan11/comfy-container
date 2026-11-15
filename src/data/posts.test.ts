@@ -109,6 +109,14 @@ describe("posts", () => {
     );
   });
 
+  it("the video post embeds its video in both languages", () => {
+    const p = findPost("95-procent-firm-bez-zwrotu-z-ai");
+    for (const lang of ["pl", "en"] as const) {
+      const videos = p?.body[lang].blocks.filter((x) => x.t === "youtube") ?? [];
+      expect(videos.map((v) => (v.t === "youtube" ? v.id : ""))).toEqual(["DogPvuwTPBI"]);
+    }
+  });
+
   it("findPost returns undefined for an unknown slug", () => {
     expect(findPost("nie-ma")).toBeUndefined();
     expect(findPost("claude-autoshutdown")?.repo).toContain("github.com/kamiljan11");

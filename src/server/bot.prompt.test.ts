@@ -8,7 +8,7 @@ import { AREAS } from "../data/areas";
 import { CASE_STUDIES } from "../data/caseStudies";
 import { POSTS } from "../data/posts";
 
-const PROMPT = readFileSync(new URL("./bot.server.ts", import.meta.url), "utf8");
+const PROMPT = readFileSync(new URL("./bot.prompt.ts", import.meta.url), "utf8");
 
 describe("the bot's prompt knows the site", () => {
   it("names every service page", () => {
