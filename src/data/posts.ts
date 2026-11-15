@@ -71,12 +71,15 @@ export const POSTS: Post[] = [
     slug: "ai-gotowe-bez-dowodu",
     date: "2026-11-09",
     cover: {
+      // thumbnail variant B from the film's render (video-pipeline
+      // render/montaz/2026-11-04-v5/out/thumbnails/long_B), picked by Kamil's
+      // request on 2026-11-15 because it names the post's three ideas
       src: "/blog/ai-gotowe-bez-dowodu/cover.webp",
-      width: 1200,
-      height: 630,
+      width: 1280,
+      height: 720,
       alt: {
-        pl: "Terminal z zablokowanym poleceniem git push --force: szlaban zatrzymuje AI przed nadpisaniem historii",
-        en: "A terminal with a blocked git push --force command: the barrier stops the AI from overwriting history",
+        pl: "Napis „3 pomysły” i trzy kafelki ze strzałkami: 1 Szlaban, 2 Blizna, 3 Dowód",
+        en: "The Polish caption “3 pomysły” (3 ideas) and three tiles with arrows: 1 Barrier, 2 Scar, 3 Proof",
       },
     },
     body: {
@@ -652,7 +655,8 @@ export const POSTS: Post[] = [
   },
   {
     // every fact below is from the video as published on YouTube on 2026-10-25
-    // (its description and the Polish captions, checked on 2026-10-25)
+    // (its description and the Polish captions, re-read in full on 2026-11-15
+    // for the full write-up)
     slug: "95-procent-firm-bez-zwrotu-z-ai",
     date: "2026-10-25",
     // the video's own thumbnail (our design), copied locally, never hotlinked
@@ -669,51 +673,150 @@ export const POSTS: Post[] = [
       pl: {
         title: "95% firm nie widzi zysku z AI. Byłem w tych 95%",
         description:
-          "Nowy film: trzy zasady, których trzymam się przy wdrożeniach AI w firmach, historia aplikacji z 64 ekranami i jednym zleceniem oraz 5 pytań, które zadaję, zanim cokolwiek zbuduję.",
-        lead: "Według badania MIT 95% firm, które inwestują w AI, nie widzi z tego zwrotu. Przez długi czas sam byłem w tych 95%: budowałem narzędzia, które nie zarobiły ani złotówki. Nagrałem o tym film.",
+          "Trzy zasady, których trzymam się przy wdrożeniach AI w firmach, rozpisane krok po kroku: jak znaleźć proces, który boli, jak sprawdzić, czy ludzie dalej z tego korzystają, i 5 pytań przed budowaniem.",
+        lead: "Według badania MIT 95% firm, które inwestują w AI, nie widzi z tego zwrotu. Przez długi czas sam byłem w tych 95%: budowałem narzędzia, które wydawały mi się świetne, a żadne nie zarobiło ani złotówki. Poniżej rozpisuję film krok po kroku, z przykładem do policzenia i pytaniami, które możesz zadać u siebie.",
         blocks: [
           { ...VIDEO_95, title: "95% firm nie widzi zysku z AI. Byłem w tych 95%" },
           {
             t: "p",
-            text: "To 95% nie znaczy, że AI nie działa. W tym samym badaniu w ponad 90% firm pracownicy używają AI na własną rękę, z prywatnych kont. Kłopot zaczyna się wtedy, gdy AI ma obsługiwać codzienne procesy całej firmy: zamówienia, faktury, obieg dokumentów. Tym kawałkiem się zajmuję.",
+            text: "Dziś trzymam się trzech zasad. Buduję tylko tam, gdzie coś mocno boli. Wdrażam tak, żeby po miesiącu ludzie dalej z tego korzystali. I biorę jeden proces na raz, a nie całą firmę. Na końcu jest 5 pytań, które zadaję, zanim cokolwiek zbuduję.",
           },
-          { t: "h2", id: "trzy-zasady", text: "Trzy zasady" },
+          { t: "h2", id: "ai-dziala", text: "AI działa. Problem zaczyna się w procesach" },
           {
-            t: "list",
-            items: [
-              "**Buduję tylko tam, gdzie coś mocno boli.** Firma zapłaci za rozwiązanie, gdy umie policzyć, ile dziś kosztuje ją problem. Głośne nie znaczy drogie, a prawdziwy ból bywa cichy: ktoś od lat robi nudną rzecz i przestał ją zauważać.",
-              "**Wdrażam tak, żeby po miesiącu ludzie dalej z tego korzystali.** Większość projektów nie umiera przy budowaniu, tylko między próbnym wdrożeniem a zwykłym poniedziałkiem.",
-              "**Biorę jeden proces na raz, a nie całą firmę.** Wpadkę przy jednym procesie i jednej osobie poprawia się w dzień albo dwa. Wpadka w całej firmie dotyka wszystkich i projekt ląduje w szufladzie.",
-            ],
+            t: "p",
+            text: "Te 95% nie znaczy, że AI nie działa. W tym samym badaniu w ponad 90% firm pracownicy używają AI na własną rękę, tylko że z prywatnych kont. Do prostych zadań czat sprawdza się świetnie. Kłopot zaczyna się wtedy, gdy AI ma obsługiwać codzienne procesy całej firmy: zamówienia, faktury, obieg dokumentów. Tym kawałkiem się zajmuję.",
+          },
+          {
+            t: "p",
+            text: "Kiedy razem z partnerem otworzyliśmy bezpłatny pilotaż, pierwsza grupa zapełniła się w półtora tygodnia. Pilotaż był darmowy, więc to jeszcze niczego nie dowodzi. Pokazuje tylko, że firmy chcą spróbować. Sztuką jest zrobić coś, co przetrwa pierwszy miesiąc.",
+          },
+          { t: "h2", id: "zasada-1", text: "Zasada 1: buduj tam, gdzie mocno boli" },
+          {
+            t: "p",
+            text: "Firma zapłaci za rozwiązanie wtedy, gdy dostaje z niego więcej, niż na nie wydaje. Żeby to wiedzieć, musi umieć policzyć, ile dziś kosztuje ją problem. Dlatego szukam miejsca, przez które ktoś codziennie traci czas i pieniądze, i da się to pokazać na liczbach. Za ból, którego nie da się policzyć, nikt nie zapłaci. A jeśli nawet zapłaci, po miesiącu nikt nie będzie wiedział, czy było warto.",
+          },
+          {
+            t: "p",
+            text: "Uważaj na problemy, które tylko wydają się duże, bo głośne nie znaczy drogie. W każdej firmie ktoś na coś narzeka, a kiedy policzysz godziny, wychodzi na przykład 20 minut w tygodniu. Prawdziwy ból często jest cichy: ktoś od lat robi nudną rzecz i przestał ją zauważać.",
+          },
+          { t: "h2", id: "zaplecze", text: "Dlaczego zaplecze daje szybszy zwrot niż marketing" },
+          {
+            t: "p",
+            text: "Według badania MIT od połowy do 70% budżetów na AI idzie w sprzedaż i marketing. To wygląda logicznie, bo sprzedaż to pieniądze, a efekt łatwo pokazać zarządowi. A jednak zaplecze, czyli faktury, zamówienia i dokumenty, częściej daje szybszy zwrot. Marketing też da się zmierzyć, i to całkiem dobrze. Różnica jest w pewności: oszczędność na zapleczu masz od pierwszego miesiąca, bo to mniej godzin, mniej błędów i mniej płacenia na zewnątrz. Wzrost sprzedaży to często obietnica, która musi się dopiero sprawdzić.",
+          },
+          {
+            t: "p",
+            text: "Autorzy badania piszą wprost, że najwyższy zwrot czeka w działach, które firmy często pomijają. Kiedy firma mówi, że chce zacząć z AI, ale nie wie od czego, zaczynamy od zaplecza. Pierwszy projekt ma dać pewny, policzalny wynik i zbudować zaufanie. Kiedy ludzie zobaczą, że to działa, z resztą idzie dużo łatwiej i chętniej z tego korzystają.",
+          },
+          { t: "h2", id: "jak-znalezc", text: "Jak znaleźć proces, który najbardziej boli" },
+          {
+            t: "p",
+            text: "Weź kartkę i wypisz rzeczy, które ktoś u Ciebie robi ręcznie co tydzień: przepisywanie zamówień, pilnowanie terminów płatności, szukanie dokumentów, raporty w Excelu. Przy każdej dopisz dwie liczby: ile godzin tygodniowo to zajmuje i ile kosztuje jeden błąd.",
+          },
+          {
+            t: "p",
+            text: "**Przykład:** ktoś przepisuje zamówienia 5 godzin tygodniowo. To 20 godzin w miesiącu, czyli dwa i pół dnia pracy. Dodaj do tego jedną pomyłkę: zły towar u klienta, reklamację i drugi transport. Masz świetnego kandydata.",
+          },
+          {
+            t: "p",
+            text: "Taka lista pokaże Ci tylko to, co ludzie pamiętają, że robią. Najwięcej widać dopiero wtedy, gdy prześledzisz jeden zwykły dzień jednej osoby od rana do wieczora: skąd bierze się zamówienie, gdzie je wpisuje, komu wysyła, na co czeka, co sprawdza dwa razy. Krok po kroku, bez pomijania nudnych fragmentów.",
+          },
+          {
+            t: "p",
+            text: "Tak pracujemy z moim partnerem. Arek jedzie do firmy, spędza czas z konkretną osobą i mapuje jej procesy. Ja pomagam od strony technicznej, zwykle przez kamerę. Potem bierzemy kolejną osobę i powtarzamy to samo, aż mamy zmapowaną całą firmę razem z zależnościami między ludźmi. Sama rozmowa pokazuje, jak ludzie myślą, że pracują. Dopiero bycie na miejscu pokazuje, jak pracują naprawdę.",
+          },
+          { t: "h2", id: "czego-nie", text: "Czego nie opłaca się automatyzować" },
+          {
+            t: "p",
+            text: "Są też procesy, których po prostu nie opłaca się automatyzować, i często doradzamy, żeby czegoś nie robić. Na początku nowe narzędzie spowalnia ludzi, bo muszą się go nauczyć i zmienić nawyki, a to nie jest łatwe. Jeśli coś zajmuje pół godziny w miesiącu i rzadko się sypie, porównaj to z kosztem wdrożenia i przestawienia się. Często bardziej opłaca się żyć z małym problemem. Takie rzeczy zostaw w spokoju, przynajmniej na początku.",
           },
           { t: "h2", id: "64-ekrany", text: "Aplikacja z 64 ekranami i jednym zleceniem" },
           {
             t: "p",
-            text: "W filmie opowiadam o własnej wpadce. Aplikacja do prowadzenia warsztatu samochodowego miała około 64 ekranów. Kiedy zajrzałem do niej po jakimś czasie, było w niej jedno zlecenie. Funkcji nie brakowało. Brakowało zmiany sposobu pracy, bo ludzie dalej robili wszystko po staremu. Ta aplikacja przeszła od tamtej pory dużą zmianę, opisałem ją w [case studies](/case-studies#ai-native-workshop-management).",
-          },
-          { t: "h2", id: "po-oddaniu", text: "Co robię po oddaniu narzędzia" },
-          {
-            t: "p",
-            text: "Siadam z ludźmi, którzy będą z niego korzystać, i patrzę, gdzie się potykają. W aplikacji buduję panel wdrożeniowca: kto w tym tygodniu się logował, ile zamówień przeszło przez system w porównaniu ze zwykłym tygodniem firmy i na którym kroku ludzie najczęściej przerywają. Dzięki temu ciche wracanie do starego sposobu widać po kilku dniach, a nie po kilku miesiącach.",
+            text: "Teraz moja wpadka. Zbudowałem aplikację do prowadzenia warsztatu samochodowego. Miała około 64 ekranów i byłem z niej bardzo zadowolony. Po oddaniu zajrzałem do niej po jakimś czasie i znalazłem w niej jedno zlecenie. Praktycznie nikt jej nie używał.",
           },
           {
             t: "p",
-            text: "Jeśli ktoś sprzedaje Ci wdrożenie, zapytaj, co robi w drugim tygodniu po oddaniu.",
+            text: "Funkcji nie brakowało. Brakowało zmiany sposobu pracy: ludzie dalej robili wszystko po staremu, więc aplikacja nie miała czego obsługiwać. Nauka kosztowała mnie około 40 repozytoriów na GitHubie, z czego może 10 to naprawdę mocne rozwiązania. To, co jest mocne technicznie, nie znaczy, że ktoś tego używa. Ta droga nauczyła mnie rzeczy, których nie wyczytasz w dokumentacji: jak prowadzić ludzi, żeby zobaczyli sens w nowym narzędziu, i jak budować na tyle prosto, żeby używanie ich nie męczyło. Aplikacja przeszła od tamtej pory dużą zmianę, opisałem ją w [case studies](/case-studies#ai-native-workshop-management).",
+          },
+          {
+            t: "h2",
+            id: "zasada-2",
+            text: "Zasada 2: wdrożenie, które przetrwa zwykły poniedziałek",
+          },
+          {
+            t: "p",
+            text: "Większość projektów nie umiera przy budowaniu. Umiera między próbnym wdrożeniem a zwykłym dniem pracy. W pierwszym tygodniu wszyscy są podekscytowani i skupieni, więc wszystko działa. Potem przychodzi zwykły poniedziałek: zamówienie z błędem, ktoś na urlopie, ktoś zrobił coś po swojemu. Jeśli system nie ma na to odpowiedzi, ludzie po cichu wracają do starego sposobu i nikt się o tym nie dowie.",
+          },
+          {
+            t: "p",
+            text: "Dlatego u mnie projekt nie kończy się na oddaniu narzędzia. Siadamy z ludźmi, którzy będą z niego korzystać, i sprawdzamy, gdzie się potykają. Trzeba to zrobić wcześnie, zanim się zniechęcą, bo potem trudno to odkręcić.",
+          },
+          { t: "h2", id: "panel", text: "Panel wdrożeniowca i asystent AI w systemie" },
+          {
+            t: "p",
+            text: "Żeby nie polegać na własnych oczach, buduję w aplikacji panel wdrożeniowca. Pokazuje on:",
+          },
+          {
+            t: "list",
+            items: [
+              "kto w tym tygodniu się logował, a kto ani razu,",
+              "ile zamówień przeszło przez system w porównaniu z tym, ile firma ma w zwykłym tygodniu,",
+              "na którym kroku ludzie najczęściej przerywają.",
+            ],
+          },
+          {
+            t: "p",
+            text: "Do tego dobudowuję asystenta AI, czyli czat, do którego ludzie są już przyzwyczajeni. Ten jest połączony z całym systemem. Patrzę, jakie pytania w nim padają. Jeśli jakieś się powtarza, to znak, że coś jest niedopracowane albo źle zaprojektowane. Raz w miesiącu Arek jedzie na miejsce i rozmawia z ludźmi, bo tego nic nie zastąpi. Dzięki temu ciche wracanie do starego sposobu widać po kilku dniach, a nie po kilku miesiącach.",
+          },
+          {
+            t: "p",
+            text: "**Rada:** jeśli ktoś sprzedaje Ci wdrożenie, zapytaj, co robi w drugim tygodniu po oddaniu. Jeśli nic, czyli nie sprawdza, czy narzędzie jest używane, i nie poprawia go, wiesz, w której grupie wylądujesz: w tej, która wydała dużo pieniędzy na rozwiązanie, którego nikt nie używa.",
+          },
+          { t: "h2", id: "zasada-3", text: "Zasada 3: jeden proces na raz" },
+          {
+            t: "p",
+            text: "Skoro wdrożenie to najtrudniejszy etap, warto zrobić je jak najmniejszym. Kusi, żeby objąć systemem całą firmę albo od razu zbudować rozwiązanie, w którym działa wszystko. Z doświadczenia wiem, że to nigdy nie wyszło nam na dobre. W pierwszych tygodniach zawsze wychodzą rzeczy, których nie dało się wcześniej wiedzieć: źle nazwane pole, brakujący krok, proces, który na mapie wyglądał inaczej niż w praktyce. Ludzie rzadko myślą o tym, jak wygląda ich dzień pracy, więc to wychodzi w praniu.",
+          },
+          {
+            t: "p",
+            text: "Przy jednym procesie i jednej osobie wpadkę poprawia się w dzień albo dwa i jedzie się dalej. Równolegle zostaje stary sposób, papier albo Excel, jako zabezpieczenie, więc firma się nie sypie. Gdy bierzesz całą firmę na raz, wpadka dotyka wszystkich, nikt nie wie, skąd się wzięła, ludzie się irytują i trudno im potem znowu zaufać. Projekt ląduje w szufladzie.",
+          },
+          {
+            t: "h2",
+            id: "jedno-srodowisko",
+            text: "Jedno środowisko zamiast porozrzucanych Exceli",
+          },
+          {
+            t: "p",
+            text: "Jeden proces na raz nie znaczy osobnego narzędzia do każdego procesu. W firmach, do których wchodzimy, dane są zwykle porozrzucane między Excelami, skrzynkami mailowymi i starymi systemami, których nikt nie chce ruszać, bo boi się, że wszystko się rozsypie. Dlatego buduję jedno środowisko i wpinam do niego proces po procesie, moduł po module. To, co dotąd żyło w kilku miejscach, żyje w jednym.",
+          },
+          {
+            t: "p",
+            text: "Takie środowisko robi dwie rzeczy. Porządkuje chaos, bo dane z różnych miejsc lądują w jednym. I przyzwyczaja ludzi do jednej aplikacji, więc każdy kolejny proces wchodzi łatwiej niż poprzedni. Ludzie nie uczą się nowego narzędzia, tylko dostają nową zakładkę w tym, które już znają.",
+          },
+          {
+            t: "p",
+            text: "Zgadza się to z tym, co badanie widzi u firm, którym AI się opłaciło. Wybierały narzędzie dopasowane do konkretnego procesu, a nie ogólny system do wszystkiego. Traktowały wdrożenie jak wspólną pracę z wykonawcą i przechodziły przez pierwsze błędy, zamiast rezygnować po pierwszym.",
           },
           { t: "h2", id: "5-pytan", text: "5 pytań przed wdrożeniem AI" },
           {
             t: "list",
             items: [
-              "Kto dziś robi to ręcznie i ile godzin tygodniowo na to idzie?",
-              "Ile kosztuje jeden błąd w tym procesie?",
-              "Kto będzie z tego korzystał w poniedziałek o 8 rano?",
-              "Kto w firmie będzie tego pilnował na co dzień?",
-              "Po jakiej jednej liczbie poznamy za 30 dni, że to działa?",
+              "**Kto dziś robi to ręcznie i ile godzin tygodniowo na to idzie?** To koszt, który da się policzyć.",
+              "**Ile kosztuje jeden błąd w tym procesie?** Czasem jedna pomyłka kosztuje więcej niż miesiąc ręcznej pracy.",
+              "**Kto będzie z tego korzystał w poniedziałek o 8 rano?** Jeśli nie ma konkretnej osoby, skończysz jak ja z aplikacją z jednym zleceniem.",
+              "**Kto w firmie będzie tego pilnował na co dzień?** Bez osoby, która przypomina, zachęca i pierwsza zauważa powrót do Excela, nawet dobre narzędzie powoli umiera.",
+              "**Po jakiej jednej liczbie poznamy za 30 dni, że to działa?** Bez niej nie wiesz, czy się udało.",
             ],
           },
           {
             t: "p",
-            text: "Jeśli na któreś nie umiesz odpowiedzieć, jeszcze nie czas na budowanie. Każde z tych pytań dotyczy jednego procesu, a nie całej firmy.",
+            text: "Jeśli na któreś nie umiesz odpowiedzieć, jeszcze nie czas na budowanie. Najpierw trzeba to poukładać. Zauważ, że każde z tych pytań dotyczy jednego procesu, a nie całej firmy.",
+          },
+          {
+            t: "p",
+            text: "Chcesz przejść przez jeden proces ze mną? Napisz przez formularz albo mailem na [kamiljan.com](/). Nie obiecuję, że odpiszę szybko, ale odpiszę osobiście.",
           },
           { t: "h2", id: "zrodla", text: "Źródła i kulisy" },
           {
@@ -729,42 +832,155 @@ export const POSTS: Post[] = [
       en: {
         title: "95% of companies see no return from AI. I was one of them",
         description:
-          "A new video (in Polish): the three rules I follow when bringing AI into a company, the story of an app with 64 screens and one job order, and the 5 questions I ask before I build anything.",
-        lead: "According to an MIT study, 95% of companies investing in AI see no return from it. For a long time I was one of them: I built tools that never earned a single złoty. I made a video about it. It is in Polish, so here is the short version.",
+          "The three rules I follow when bringing AI into a company, step by step: how to find the process that hurts, how to check people still use the tool a month later, and 5 questions to ask before building.",
+        lead: "According to an MIT study, 95% of companies investing in AI see no return from it. For a long time I was one of them: I built tools that seemed great to me, and none of them earned a single złoty. The video is in Polish, so below I lay it out step by step, with an example you can count and questions you can ask in your own company.",
         blocks: [
           { ...VIDEO_95, title: "95% of companies see no return from AI. I was one of them" },
           {
             t: "p",
-            text: "The 95% does not mean AI does not work. In the same study, employees in over 90% of companies use AI on their own, from private accounts. The trouble starts when AI has to run a whole company's daily processes: orders, invoices, document flow. That is the part I work on.",
+            text: "Today I follow three rules. I build only where something really hurts. I roll out so that people still use it a month later. And I take one process at a time, not the whole company. At the end are 5 questions I ask before I build anything.",
           },
-          { t: "h2", id: "three-rules", text: "Three rules" },
+          { t: "h2", id: "ai-works", text: "AI works. The trouble starts in the processes" },
           {
-            t: "list",
-            items: [
-              "**Build only where it really hurts.** A company pays for a solution when it can count what the problem costs today. Loud is not the same as expensive, and the real pain is often quiet.",
-              "**Roll out so people still use it a month later.** Most projects do not die while being built. They die between the pilot and an ordinary Monday.",
-              "**One process at a time, not the whole company.** A slip in one process for one person takes a day or two to fix. A slip across the company hits everyone and the project ends up in a drawer.",
-            ],
+            t: "p",
+            text: "The 95% does not mean AI does not work. In the same study, employees in over 90% of companies use AI on their own, from private accounts. For simple tasks a chat works great. The trouble starts when AI has to run a whole company's daily processes: orders, invoices, document flow. That is the part I work on.",
+          },
+          {
+            t: "p",
+            text: "When my partner and I opened a free pilot, the first group filled up in a week and a half. The pilot was free, so that proves nothing yet. It only shows that companies want to try. The hard part is building something that survives the first month.",
+          },
+          { t: "h2", id: "rule-1", text: "Rule 1: build where it really hurts" },
+          {
+            t: "p",
+            text: "A company pays for a solution when it gets more out of it than it spends. To know that, it has to be able to count what the problem costs today. So I look for the place where someone loses time and money every day, in a way you can show in numbers. Nobody pays for pain you cannot count. And even if they do, a month later nobody knows whether it was worth it.",
+          },
+          {
+            t: "p",
+            text: "Watch out for problems that only look big: loud is not the same as expensive. In every company someone complains about something, and when you count the hours it comes to, say, 20 minutes a week. The real pain is often quiet: someone has done a boring task for years and stopped noticing it.",
+          },
+          {
+            t: "h2",
+            id: "back-office",
+            text: "Why the back office pays back faster than marketing",
+          },
+          {
+            t: "p",
+            text: "According to the MIT study, half to 70% of AI budgets go to sales and marketing. That looks logical: sales is money, and the effect is easy to show the board. Yet the back office, meaning invoices, orders and documents, more often pays back faster. Marketing can be measured too, and quite well. The difference is certainty: back-office savings are there from the first month, as fewer hours, fewer mistakes and less paid to outside firms. Sales growth is often a promise that still has to prove itself.",
+          },
+          {
+            t: "p",
+            text: "The study's authors say outright that the highest return waits in the departments companies often skip. When a company says it wants to start with AI but does not know where, we start with the back office. The first project should deliver a sure, countable result and build trust. Once people see it works, the rest goes much more easily and they use it more willingly.",
+          },
+          { t: "h2", id: "find-the-pain", text: "How to find the process that hurts most" },
+          {
+            t: "p",
+            text: "Take a sheet of paper and list the things someone in your company does by hand every week: retyping orders, chasing payment dates, looking for documents, Excel reports. Next to each, write two numbers: how many hours a week it takes and what one mistake costs.",
+          },
+          {
+            t: "p",
+            text: "**Example:** someone retypes orders 5 hours a week. That is 20 hours a month, two and a half working days. Add one mistake: the wrong goods at a customer's, a complaint and a second delivery. You have a great candidate.",
+          },
+          {
+            t: "p",
+            text: "Such a list shows only what people remember doing. You see the most when you follow one ordinary day of one person from morning to evening: where an order comes from, where they enter it, who they send it to, what they wait for, what they check twice. Step by step, without skipping the boring parts.",
+          },
+          {
+            t: "p",
+            text: "That is how my partner and I work. Arek goes to the company, spends time with one specific person and maps their processes. I help on the technical side, usually over a camera. Then we take the next person and repeat, until the whole company is mapped, including the dependencies between people. A conversation alone shows how people think they work. Only being there shows how they really work.",
+          },
+          { t: "h2", id: "not-worth-it", text: "What is not worth automating" },
+          {
+            t: "p",
+            text: "Some processes are simply not worth automating, and we often advise against doing something. At first a new tool slows people down, because they have to learn it and change habits, which is not easy. If something takes half an hour a month and rarely breaks, weigh it against the cost of rolling out and switching. Often it pays more to live with a small problem. Leave those alone, at least at the start.",
           },
           { t: "h2", id: "64-screens", text: "An app with 64 screens and one job order" },
           {
             t: "p",
-            text: "My own failure: a car workshop app with about 64 screens. When I looked at it some time after handing it over, it held one job order. No feature was missing. What was missing was a change in how people worked. The app has changed a lot since, see the [case studies](/case-studies#ai-native-workshop-management).",
+            text: "Now my own failure. I built an app for running a car workshop. It had about 64 screens and I was very pleased with it. Some time after handing it over I looked inside and found one job order. Practically nobody used it.",
+          },
+          {
+            t: "p",
+            text: "No feature was missing. What was missing was a change in how people worked: they kept doing everything the old way, so the app had nothing to handle. The lesson cost me about 40 repositories on GitHub, maybe 10 of them truly solid. Technically strong does not mean anyone uses it. That road taught me what no documentation will: how to guide people so they see the point of a new tool, and how to build it simply enough that using it does not wear them out. The app has changed a lot since, see the [case studies](/case-studies#ai-native-workshop-management).",
+          },
+          { t: "h2", id: "rule-2", text: "Rule 2: a rollout that survives an ordinary Monday" },
+          {
+            t: "p",
+            text: "Most projects do not die while being built. They die between the pilot and an ordinary working day. In the first week everyone is excited and focused, so everything works. Then an ordinary Monday comes: an order with a mistake, someone on holiday, someone doing it their own way. If the system has no answer to that, people quietly go back to the old way and nobody finds out.",
+          },
+          {
+            t: "p",
+            text: "So for me a project does not end when the tool is handed over. We sit down with the people who will use it and check where they stumble. It has to happen early, before they lose heart, because afterwards it is hard to undo.",
+          },
+          { t: "h2", id: "panel", text: "A rollout panel and an AI assistant in the system" },
+          {
+            t: "p",
+            text: "So I do not rely on my own eyes, I build a rollout panel into the app. It shows:",
+          },
+          {
+            t: "list",
+            items: [
+              "who logged in this week and who did not log in once,",
+              "how many orders went through the system compared with a normal week for the company,",
+              "at which step people most often give up.",
+            ],
+          },
+          {
+            t: "p",
+            text: "On top of that I add an AI assistant, a chat people are already used to, connected to the whole system. I look at the questions people ask it. If one keeps coming back, something is unfinished or badly designed. Once a month Arek goes on site and talks to people, because nothing replaces that. This way a quiet return to the old way shows up after a few days, not a few months.",
+          },
+          {
+            t: "p",
+            text: "**Tip:** if someone sells you a rollout, ask what they do in the second week after handover. If the answer is nothing, no checking whether the tool is used and no fixes, you know which group you will end up in: the one that spent a lot of money on a solution nobody uses.",
+          },
+          { t: "h2", id: "rule-3", text: "Rule 3: one process at a time" },
+          {
+            t: "p",
+            text: "Since the rollout is the hardest stage, it is worth keeping it as small as possible. It is tempting to cover the whole company, or to build a solution where everything works from day one. From experience, that never ended well for us. The first weeks always bring things nobody could know earlier: a badly named field, a missing step, a process that looked different on the map than in practice. People rarely think about what their working day looks like, so it comes out in the wash.",
+          },
+          {
+            t: "p",
+            text: "With one process and one person, a slip takes a day or two to fix and you move on. The old way, paper or Excel, stays in parallel as a safety net, so the company does not fall over. Take the whole company at once and a slip hits everyone, nobody knows where it came from, people get irritated and find it hard to trust the tool again. The project ends up in a drawer.",
+          },
+          { t: "h2", id: "one-place", text: "One environment instead of scattered spreadsheets" },
+          {
+            t: "p",
+            text: "One process at a time does not mean a separate tool for each process. In the companies we work with, data usually sits scattered across spreadsheets, mailboxes and old systems nobody wants to touch for fear everything will fall apart. So I build one environment and plug processes into it one by one, module by module. What used to live in several places lives in one.",
+          },
+          {
+            t: "p",
+            text: "That environment does two things. It tidies up the chaos, because data from different places lands in one. And it gets people used to one app, so each new process goes in more easily than the last. People do not learn a new tool, they get a new tab in one they already know.",
+          },
+          {
+            t: "p",
+            text: "This matches what the study sees in companies where AI paid off. They chose tools fitted to a specific process, not a general system for everything. They treated the rollout as joint work with the vendor and got through the first mistakes instead of giving up after the first one.",
           },
           { t: "h2", id: "five-questions", text: "5 questions before an AI rollout" },
           {
             t: "list",
             items: [
-              "Who does this by hand today, and how many hours a week does it take?",
-              "What does one mistake in this process cost?",
-              "Who will use it on Monday at 8 a.m.?",
-              "Who in the company will look after it day to day?",
-              "Which one number will tell us in 30 days that it works?",
+              "**Who does this by hand today, and how many hours a week does it take?** That is a cost you can count.",
+              "**What does one mistake in this process cost?** Sometimes one slip costs more than a month of manual work.",
+              "**Who will use it on Monday at 8 a.m.?** Without a specific person, you end up like me with the one-job-order app.",
+              "**Who in the company will look after it day to day?** Without someone who reminds, encourages and is first to spot the return to Excel, even a good tool slowly dies.",
+              "**Which one number will tell us in 30 days that it works?** Without it you do not know whether it worked.",
             ],
           },
           {
             t: "p",
-            text: `If you cannot answer one of them, it is not time to build yet. Source: MIT NANDA, "The GenAI Divide: State of AI in Business 2025" (July 2025), via the [project page](${MIT_NANDA}); coverage in [Fortune](${FORTUNE}). The findings are preliminary, which I say in the video. I do these rollouts together with [Cetus Automation](https://automation.cetuspro.com), whose logo is on the thumbnail.`,
+            text: "If you cannot answer one of them, it is not time to build yet. Sort that out first. Note that every question is about one process, not the whole company.",
+          },
+          {
+            t: "p",
+            text: "Want to go through one process with me? Write through the form or by email at [kamiljan.com](/). I cannot promise a fast reply, but I reply personally.",
+          },
+          { t: "h2", id: "sources", text: "Sources and behind the scenes" },
+          {
+            t: "p",
+            text: `Study: MIT NANDA, "The GenAI Divide: State of AI in Business 2025" (July 2025), via the [project page](${MIT_NANDA}); coverage in [Fortune](${FORTUNE}). The findings are preliminary and the study has weak points, which I say in the video. Check them yourself before you quote them.`,
+          },
+          {
+            t: "p",
+            text: "The video was edited by AI (Claude Code) on my Linux laptop, with free open-source tools. The tool is on GitHub: [video-pipeline](https://github.com/kamiljan11/video-pipeline). I do these rollouts together with [Cetus Automation](https://automation.cetuspro.com), whose logo is on the thumbnail.",
           },
         ],
       },
