@@ -58,6 +58,8 @@ const VIDEO_95 = {
 } as const;
 const SZKOLY =
   "https://torzeszow.pl/news/szkola-moze-dostac-do-750-tys-zl-na-lekcje-o-cyberbezpieczenstwie-wnioski-do-10-listopada";
+const CZAT_AGENT =
+  "https://torzeszow.pl/news/czat-ai-odpowiada-agent-ai-wykonuje-prace-czym-sie-roznia-i-kiedy-ten-drugi-przyda-sie-firmie";
 
 const MONITOR = {
   t: "img",
@@ -67,6 +69,74 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-11-12 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-11-19, not the draft)
+    slug: "czat-ai-a-agent-ai",
+    date: "2026-11-12",
+    external: { url: CZAT_AGENT, source: "toRzeszów.pl" },
+    // the article's main picture is a Pexels photo by Nataliya Vaitkevich (laptop
+    // file zdjecia/2026-11-07-czat-agent/hero.jpg, pixel-matched to the portal
+    // image), with the title on it; nothing taken from the portal
+    cover: {
+      src: "/blog/czat-ai-a-agent-ai/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Młoda kobieta przy biurku pełnym dokumentów przepisuje dane do laptopa, z napisem: Czat AI odpowiada, agent AI wykonuje pracę.",
+        en: "A young woman at a desk full of documents typing data into a laptop, with the Polish title: a chat AI answers, an AI agent does the work.",
+      },
+    },
+    body: {
+      pl: {
+        title: "Czat AI odpowiada, agent AI wykonuje pracę. Mój tekst na toRzeszów.pl",
+        description:
+          "Czat AI napisze maila, ale zamówienie i tak trzeba potem przepisać samemu. Agent AI dostaje cel i dostęp do narzędzi. Napisałem dla toRzeszów.pl, czym się różnią, gdzie agent się myli i od czego zacząć w firmie.",
+        lead: "Napisałem dla toRzeszów.pl tekst o tym, czym agent AI różni się od czatu, który już znasz, i kiedy naprawdę przydaje się firmie. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Z czatów AI korzysta już sporo osób, do maili, ogłoszeń czy streszczeń. Czat oszczędza kilka minut na pisaniu, ale **zamówienie i tak trzeba potem samemu przepisać do programu**. Agent AI dostaje dwie dodatkowe rzeczy: **cel i dostęp do narzędzi**, takich jak skrzynka mailowa, arkusz czy program do zamówień, a kolejne kroki wykonuje sam. W tekście pokazuję to na przykładzie jednego zamówienia w hurtowni.",
+          },
+          {
+            t: "p",
+            text: "Agent nie jest nieomylny. Może źle zrozumieć maila, a ktoś może ukryć na stronie albo w mailu polecenie, które ma go zmusić do działania na cudzą korzyść (**prompt injection**). Gartner przewiduje, że **ponad 40 proc. projektów z agentami AI zostanie przerwanych do końca 2027 roku**. Dlatego zasada z tekstu brzmi: agent proponuje, człowiek decyduje.",
+          },
+          { t: "h2", id: "co-radze", text: "Co radzę w tekście" },
+          {
+            t: "list",
+            items: [
+              "**Wypisz jedną czynność, która codziennie wraca**, na przykład przepisywanie zamówień z maili.",
+              "**Sprawdź, czy nie wystarczy sam czat.** Agent ma sens dopiero wtedy, gdy po napisaniu tekstu ktoś jeszcze musi coś przepisać, sprawdzić albo kliknąć w innym programie.",
+              "**Zacznij od agenta, który tylko czyta i proponuje**, bez prawa do wysyłania, płacenia i kasowania.",
+              "**Ustal, kto zatwierdza, i policz, czy to się opłaca.**",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście jest też prosty test, po którym poznasz, czy pracował czat, czy coś więcej, i wyjaśnienie, dlaczego agent nie naprawi bałaganu w firmie. Przyda się każdemu, kto widzi słowo „agent” w ofercie i chce wiedzieć, co się za nim kryje.",
+          },
+        ],
+      },
+      en: {
+        title: "A chat AI answers, an AI agent does the work. My article on toRzeszów.pl",
+        description:
+          "A chat AI writes the email, but someone still has to type the order into the system. An AI agent gets a goal and access to tools. I wrote for toRzeszów.pl how they differ, where agents go wrong and where to start. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, on how an AI agent differs from the chat you already know and when a company really needs one. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "A chat saves a few minutes of writing, but **the order still has to be typed into the system by hand**. An agent gets **a goal and access to tools** such as the mailbox, a spreadsheet or the order system, and does the next steps itself.",
+          },
+          {
+            t: "p",
+            text: "Agents make mistakes and can be tricked by instructions hidden in a web page or an email (**prompt injection**). Gartner expects **over 40% of agentic AI projects to be cancelled by the end of 2027**. The rule from the article: the agent proposes, a person decides.",
+          },
+        ],
+      },
+    },
+  },
   {
     slug: "ai-gotowe-bez-dowodu",
     date: "2026-11-09",

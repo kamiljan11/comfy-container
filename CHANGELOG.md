@@ -5,6 +5,8 @@ Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wers
 
 ## [Unreleased]
 
+- Blog: new teaser post "Czat AI odpowiada, agent AI wykonuje pracę. Mój tekst na toRzeszów.pl" (`/blog/czat-ai-a-agent-ai`, PL + short EN saying the article is in Polish), pointing to the article published on toRzeszów.pl on 2026-11-12. Every fact is taken from the published version of the article (not the draft). Same pattern as the other toRzeszów posts (ADR 0007), no iframe (`X-Frame-Options: SAMEORIGIN`, checked 2026-11-19). Thumbnail: the article's main picture, a Pexels photo by Nataliya Vaitkevich (pixel-matched to the portal image), with the title on it (`public/blog/czat-ai-a-agent-ai/cover.webp`, 1200x630), nothing taken from the portal. Sitemap, the chat assistant's blog line (9 posts, `src/server/bot.prompt.ts`) and the tests updated.
+
 - Blog: the post about the first film (`/blog/95-procent-firm-bez-zwrotu-z-ai`) grows from a ~500-word summary into the full write-up, PL and EN, chapter by chapter: why the back office pays back faster, how to find the process that hurts (with a worked hours example), what is not worth automating, the 64-screen app, the rollout panel and AI assistant, one process at a time, one environment instead of scattered spreadsheets, and the 5 questions with the reason for each. Every fact re-read from the video's description and Polish captions on 2026-11-15.
 
 - Blog: the post about the second film (`/blog/ai-gotowe-bez-dowodu`) gets a clearer cover and player poster: thumbnail variant B from the film's render ("3 pomysły": Szlaban, Blizna, Dowód), 1280x720, instead of the terminal screenshot.

@@ -107,6 +107,9 @@ describe("posts", () => {
     expect(findPost("szkola-750-tys-na-cyberbezpieczenstwo")?.external?.url).toBe(
       "https://torzeszow.pl/news/szkola-moze-dostac-do-750-tys-zl-na-lekcje-o-cyberbezpieczenstwie-wnioski-do-10-listopada",
     );
+    expect(findPost("czat-ai-a-agent-ai")?.external?.url).toBe(
+      "https://torzeszow.pl/news/czat-ai-odpowiada-agent-ai-wykonuje-prace-czym-sie-roznia-i-kiedy-ten-drugi-przyda-sie-firmie",
+    );
   });
 
   it("the video post embeds its video in both languages", () => {
