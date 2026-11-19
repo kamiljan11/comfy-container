@@ -27,6 +27,7 @@ const PAGES = [
   "/blog/szkola-750-tys-na-cyberbezpieczenstwo",
   "/blog/ai-gotowe-bez-dowodu",
   "/blog/czat-ai-a-agent-ai",
+  "/blog/orzeczenia-ktore-mowily-co-innego",
 ];
 
 // one literal pattern over all meta tags; a later tag with the same key wins,

@@ -110,6 +110,9 @@ describe("posts", () => {
     expect(findPost("czat-ai-a-agent-ai")?.external?.url).toBe(
       "https://torzeszow.pl/news/czat-ai-odpowiada-agent-ai-wykonuje-prace-czym-sie-roznia-i-kiedy-ten-drugi-przyda-sie-firmie",
     );
+    expect(findPost("orzeczenia-ktore-mowily-co-innego")?.external?.url).toBe(
+      "https://torzeszow.pl/news/pelnomocnik-powolal-sie-w-sadzie-na-orzeczenia-ktore-mowily-co-innego-sad-to-slady-ai",
+    );
   });
 
   it("the video post embeds its video in both languages", () => {
