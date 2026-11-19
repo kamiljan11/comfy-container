@@ -80,8 +80,9 @@ export const POSTS: Post[] = [
     external: { url: HALUCYNACJE_NSA, source: "toRzeszów.pl" },
     // the article's main picture is a Wikimedia Commons photo of the NSA building
     // by Adrian Grycuk, CC BY-SA 3.0 PL (vault file Makiety/siedziba-nsa-warszawa.jpg,
-    // pixel-matched to the portal image), with the title on it and the licence
-    // in the credit; nothing taken from the portal
+    // pixel-matched to the portal image), with the title on it; the credit on the
+    // image names the licence and says it was modified, as CC BY-SA requires
+    // (https://creativecommons.org/licenses/by-sa/3.0/pl/); nothing taken from the portal
     cover: {
       src: "/blog/orzeczenia-ktore-mowily-co-innego/cover.webp",
       width: 1200,
