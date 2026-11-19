@@ -140,8 +140,14 @@
   </url>
   <url>
     <loc>https://kamiljan.com/blog</loc>
-    <lastmod>2026-11-12</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kamiljan.com/blog/orzeczenia-ktore-mowily-co-innego</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>

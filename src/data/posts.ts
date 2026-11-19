@@ -60,6 +60,8 @@ const SZKOLY =
   "https://torzeszow.pl/news/szkola-moze-dostac-do-750-tys-zl-na-lekcje-o-cyberbezpieczenstwie-wnioski-do-10-listopada";
 const CZAT_AGENT =
   "https://torzeszow.pl/news/czat-ai-odpowiada-agent-ai-wykonuje-prace-czym-sie-roznia-i-kiedy-ten-drugi-przyda-sie-firmie";
+const HALUCYNACJE_NSA =
+  "https://torzeszow.pl/news/pelnomocnik-powolal-sie-w-sadzie-na-orzeczenia-ktore-mowily-co-innego-sad-to-slady-ai";
 
 const MONITOR = {
   t: "img",
@@ -69,6 +71,77 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-11-15 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-11-19, not the draft)
+    slug: "orzeczenia-ktore-mowily-co-innego",
+    date: "2026-11-15",
+    external: { url: HALUCYNACJE_NSA, source: "toRzeszów.pl" },
+    // the article's main picture is a Wikimedia Commons photo of the NSA building
+    // by Adrian Grycuk, CC BY-SA 3.0 PL (vault file Makiety/siedziba-nsa-warszawa.jpg,
+    // pixel-matched to the portal image), with the title on it and the licence
+    // in the credit; nothing taken from the portal
+    cover: {
+      src: "/blog/orzeczenia-ktore-mowily-co-innego/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Budynek Naczelnego Sądu Administracyjnego w Warszawie, z napisem: Orzeczenia w piśmie do NSA mówiły co innego. Sąd: to ślady AI.",
+        en: "The Supreme Administrative Court building in Warsaw, with the Polish title: the rulings cited in a brief said something else, the court calls it traces of AI.",
+      },
+    },
+    body: {
+      pl: {
+        title:
+          "Pełnomocnik powołał się w sądzie na orzeczenia, które mówiły co innego. Mój tekst na toRzeszów.pl",
+        description:
+          "Pełnomocnik powołał się w NSA na trzy orzeczenia, które mówiły co innego. Sąd: to ślady halucynacji AI. Napisałem dla toRzeszów.pl, skąd czat zmyśla i jak w dziesięć minut sprawdzić, czy Twój zgaduje.",
+        lead: "Napisałem dla toRzeszów.pl tekst o tym, dlaczego czat AI potrafi podać źródło, które nie mówi tego, co twierdzi, i jak to sprawdzić u siebie. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "W czerwcu 2026 r. do Naczelnego Sądu Administracyjnego trafiło zażalenie w sprawie o VAT. Pełnomocnik powołał się w nim na **trzy postanowienia NSA**, ale **żadne z nich nie mówiło tego, co napisano w piśmie**: zapadły w innych datach i dotyczyły innych zagadnień. Sąd uznał, że widać w tym **„ślady tzw. halucynacji AI”**.",
+          },
+          {
+            t: "p",
+            text: "To nie dotyczy tylko prawników. OpenAI samo przyznaje, że czat potrafi wymyślić cytaty albo powołania na źródła. W teście tej firmy nowszy model nie odpowiedział na **52 proc.** pytań, ale z odpowiedzi, których udzielił, **ponad połowa była błędna**. Po samym tonie nie poznasz, kiedy czat zgaduje.",
+          },
+          { t: "h2", id: "co-radze", text: "Co radzę w tekście" },
+          {
+            t: "list",
+            items: [
+              "**Zadaj czatowi trzy pytania, na które znasz odpowiedź**: o przepis z Twojej pracy, o liczbę z branży i o firmę albo instytucję z Rzeszowa.",
+              "**Poproś o źródło do każdej odpowiedzi i otwórz każdy link.**",
+              "**Oznacz odpowiedzi** jako „sprawdzone”, „niesprawdzone” albo „błędne”, a potem zadaj te same pytania z dopiskiem „Jeśli nie wiesz, napisz, że nie wiesz”.",
+              "**Każdy konkret z czatu wysyłaj dalej dopiero ze statusem „sprawdzone”.** Ten status stawia człowiek, który otworzył źródło, nie czat.",
+            ],
+          },
+          {
+            t: "p",
+            text: "W tekście wyjaśniam też, skąd się bierze zmyślanie i dlaczego model woli zgadywać, niż powiedzieć „nie wiem”. Test zajmuje dziesięć minut i warto go zrobić, zanim następnym razem wkleisz odpowiedź czatu do maila.",
+          },
+        ],
+      },
+      en: {
+        title:
+          "A legal representative cited rulings that said something else. My article on toRzeszów.pl",
+        description:
+          "A legal representative cited three rulings of Poland's Supreme Administrative Court that said something else, and the court saw traces of AI hallucination. I wrote for toRzeszów.pl why chat AI makes things up and how to test yours in ten minutes. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, on why a chat AI can cite a source that does not say what it claims, and how to check your own. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "In June 2026 an appeal in a VAT case, written by the taxpayer's representative, cited **three rulings of the Supreme Administrative Court (NSA)**. None of them said what the brief claimed. The court wrote that it showed **traces of so-called AI hallucinations**.",
+          },
+          {
+            t: "p",
+            text: 'The article explains why language models guess instead of saying "I don\'t know" and gives a ten-minute test: ask three questions you know the answer to, ask for sources, open every link, and pass on a fact from a chat only once a person has checked it.',
+          },
+        ],
+      },
+    },
+  },
   {
     // every fact below is from the article as published on toRzeszów.pl on
     // 2026-11-12 (published blocks via the read-only panel client, checked
