@@ -4,6 +4,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), wersjonowanie:
 Kazdy PR dopisuje zmiany do [Unreleased]; przy release przenosimy pod numer wersji z data.
 
 ## [Unreleased]
+- /cv: removed "voice agents (Twilio)" from Core skills (replaced with "Twilio (SMS)"); the phone-answering voice line is planned, not built, so it must not be claimed. Same fix in the PDF CV and cover letter.
+
+- /cv: Flyt is dated 2024 instead of 2023 (EN, PL and the PDF CV).
+
 
 - Blog: new teaser post "Pełnomocnik powołał się w sądzie na orzeczenia, które mówiły co innego. Mój tekst na toRzeszów.pl" (`/blog/orzeczenia-ktore-mowily-co-innego`, PL + short EN saying the article is in Polish), pointing to the article published on toRzeszów.pl on 2026-11-15. Every fact is taken from the published version of the article (not the draft). Same pattern as the other toRzeszów posts (ADR 0007), no iframe (`X-Frame-Options: SAMEORIGIN`, checked 2026-11-19). Thumbnail: the article's main picture, a Wikimedia Commons photo of the NSA building by Adrian Grycuk (CC BY-SA 3.0 PL, https://creativecommons.org/licenses/by-sa/3.0/pl/, credited on the image and marked as modified; pixel-matched to the portal image), with the title on it (`public/blog/orzeczenia-ktore-mowily-co-innego/cover.webp`, 1200x630), nothing taken from the portal. Sitemap, the chat assistant's blog line (10 posts, `src/server/bot.prompt.ts`) and the tests updated.
 
