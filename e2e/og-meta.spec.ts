@@ -28,6 +28,7 @@ const PAGES = [
   "/blog/ai-gotowe-bez-dowodu",
   "/blog/czat-ai-a-agent-ai",
   "/blog/orzeczenia-ktore-mowily-co-innego",
+  "/blog/dane-klienta-w-czacie-ai",
 ];
 
 // one literal pattern over all meta tags; a later tag with the same key wins,
