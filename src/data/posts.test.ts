@@ -113,6 +113,9 @@ describe("posts", () => {
     expect(findPost("orzeczenia-ktore-mowily-co-innego")?.external?.url).toBe(
       "https://torzeszow.pl/news/pelnomocnik-powolal-sie-w-sadzie-na-orzeczenia-ktore-mowily-co-innego-sad-to-slady-ai",
     );
+    expect(findPost("dane-klienta-w-czacie-ai")?.external?.url).toBe(
+      "https://torzeszow.pl/news/wklejasz-do-czatu-ai-maila-od-klienta-najpierw-usun-z-niego-nazwisko-adres-i-numery",
+    );
   });
 
   it("the video post embeds its video in both languages", () => {

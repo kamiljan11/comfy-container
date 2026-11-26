@@ -62,6 +62,8 @@ const CZAT_AGENT =
   "https://torzeszow.pl/news/czat-ai-odpowiada-agent-ai-wykonuje-prace-czym-sie-roznia-i-kiedy-ten-drugi-przyda-sie-firmie";
 const HALUCYNACJE_NSA =
   "https://torzeszow.pl/news/pelnomocnik-powolal-sie-w-sadzie-na-orzeczenia-ktore-mowily-co-innego-sad-to-slady-ai";
+const DANE_KLIENTA =
+  "https://torzeszow.pl/news/wklejasz-do-czatu-ai-maila-od-klienta-najpierw-usun-z-niego-nazwisko-adres-i-numery";
 
 const MONITOR = {
   t: "img",
@@ -71,6 +73,75 @@ const MONITOR = {
 } as const;
 
 export const POSTS: Post[] = [
+  {
+    // every fact below is from the article as published on toRzeszów.pl on
+    // 2026-11-22 (published blocks via the read-only panel client, checked
+    // against the live page on 2026-11-26, not the draft)
+    slug: "dane-klienta-w-czacie-ai",
+    date: "2026-11-22",
+    external: { url: DANE_KLIENTA, source: "toRzeszów.pl" },
+    // the article's main picture is a Pexels photo by MART PRODUCTION (Pexels id 7222858,
+    // pixel-matched to the portal image), with the title on it; nothing taken from the portal
+    cover: {
+      src: "/blog/dane-klienta-w-czacie-ai/cover.webp",
+      width: 1200,
+      height: 630,
+      alt: {
+        pl: "Kobieta w biurze czyta dokument przy stole, z napisem: Mail od klienta w czacie AI? Najpierw usuń nazwisko i numery.",
+        en: "A woman in an office reading a document at a table, with the Polish title: a client's email in a chat AI? Remove the name and numbers first.",
+      },
+    },
+    body: {
+      pl: {
+        title:
+          "Wklejasz do czatu AI maila od klienta? Najpierw usuń z niego nazwisko, adres i numery. Mój tekst na toRzeszów.pl",
+        description:
+          "Prawie 40 proc. osób w Polsce w wieku 16-74 lata używało ostatnio narzędzi AI. Napisałem dla toRzeszów.pl, co się dzieje z danymi klienta wklejonymi do czatu i co zrobić dziś, a co w tym tygodniu.",
+        lead: "Napisałem dla toRzeszów.pl tekst o tym, co się dzieje z mailem, umową albo fakturą klienta, gdy wkleisz je do czatu AI. Tu krótko, co w nim jest.",
+        blocks: [
+          {
+            t: "p",
+            text: "Według GUS w 2026 r. z narzędzi AI w ciągu trzech miesięcy przed badaniem korzystało **39,8 proc. osób w wieku 16-74 lata**, rok wcześniej 22,7 proc. Tekst wklejony do popularnego czatu **trafia na serwery dostawcy**, a rządowy serwis pacjent.gov.pl ostrzega, że może zostać zapisany, powielony albo wykorzystany do uczenia modelu.",
+          },
+          {
+            t: "p",
+            text: "Wyłączenie uczenia to za mało, bo dane klienta i tak trafiają do zewnętrznej firmy. Lista pytań UODO dla małych i średnich firm pyta, czy firma ma z dostawcą AI **umowę powierzenia przetwarzania danych** (art. 28 RODO). Gdy pracownik korzysta z darmowego czatu na **prywatnym koncie**, firma **takiej umowy z dostawcą nie ma**.",
+          },
+          { t: "h2", id: "co-radze", text: "Co możesz zrobić dziś i w tym tygodniu" },
+          {
+            t: "list",
+            items: [
+              "**Usuń z tekstu wszystko, po czym da się rozpoznać klienta**: nazwiska, NIP, adresy, numery kont i telefonów. Zamiast nazwiska wpisz „Klient A”, zamiast kwoty „X zł”.",
+              "**Wyłącz używanie rozmów do uczenia modelu** w ustawieniach czatu. W ChatGPT to opcja w kontroli danych (Data Controls).",
+              "**Przejrzyj historię rozmów** i usuń te, w których są dane klientów.",
+              "**Spisz zasady na jednej kartce** i sprawdź, czy dostawca oferuje umowę powierzenia, gdzie przechowuje dane i jak długo je trzyma.",
+            ],
+          },
+          {
+            t: "p",
+            text: "Według badania przy Prezesie UODO **95,9 proc.** badanych podmiotów nie uważa się za przygotowane do wdrożenia AI zgodnie z RODO. W tekście piszę też, dlaczego moim zdaniem AI powinna działać wewnątrz firmowego systemu, a nie na prywatnym koncie pracownika.",
+          },
+        ],
+      },
+      en: {
+        title:
+          "Pasting a client's email into a chat AI? Remove the name, address and numbers first. My article on toRzeszów.pl",
+        description:
+          "Almost 40% of people in Poland aged 16-74 recently used AI tools. I wrote for toRzeszów.pl what happens to client data pasted into a chat AI and what to do today and this week. The article is in Polish.",
+        lead: "I wrote an article for toRzeszów.pl, a local news site in Rzeszów, on what happens to a client's email, contract or invoice when you paste it into a chat AI. The article is in Polish, so here is the short version.",
+        blocks: [
+          {
+            t: "p",
+            text: "Text pasted into a popular chat AI goes to the provider's servers. Turning off model training helps, but the client's data still reaches an outside company, and when an employee uses a free chat on a **private account**, the company has no data processing agreement with that provider (Article 28 GDPR).",
+          },
+          {
+            t: "p",
+            text: 'The article gives simple steps: replace names and numbers with "Client A" and "X PLN" before pasting, turn off training in the settings, clear old conversations with client data, and write the company\'s rules on one page.',
+          },
+        ],
+      },
+    },
+  },
   {
     // every fact below is from the article as published on toRzeszów.pl on
     // 2026-11-15 (published blocks via the read-only panel client, checked
